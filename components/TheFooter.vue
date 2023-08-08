@@ -4,7 +4,7 @@
       <div class="footer__box">
         <img src="@/assets/images/icons/logo.svg" alt="logo">
       </div>
-      <div class="footer__box p-bt-40">
+      <div class="footer__box">
         <div class="footer-menu">
           <h3 class="footer-subtitle">Меню</h3>
           <div class="footer-menu-container">
@@ -24,7 +24,7 @@
           <h3 class="footer-subtitle">Контакты</h3>
           <div class="footer-text">+7 (999) 888 - 77 - 66</div>
           <div class="footer-text">stamus-med@info.ru</div>
-          <div>
+          <div class="">
             <a href="/">
               <img class="footer-img" src="@/assets/images/icons/YouTube-fill.svg" alt="Social icon">
             </a>
@@ -46,18 +46,24 @@
               <p class="footer-text">ул. Черкасская 17</p>
             </div>
             <div class="footer-address__container-link">
-            <p class="footer-text">ул. Гимназическая 85</p>
-            <p class="footer-text">Платановый бульвар 19/3</p>
-            <p class="footer-text">ул. Средняя 1/3</p>
-          </div>
+              <p class="footer-text">ул. Гимназическая 85</p>
+              <p class="footer-text">Платановый бульвар 19/3</p>
+              <p class="footer-text">ул. Средняя 1/3</p>
+            </div>
           </div>
         </div>
+        <div>
+          <div class="footer-text">Политика конфидециальности</div>
+          <div class="footer-text">Лицензия</div>
+          <div class="footer-text">Версия для слабовидящих</div>
+       </div>
+   
       </div>
-      <div class="footer__box width">
+      <!-- <div class="footer__box width">
         <p class="footer-text">Политика конфидециальности</p>
         <p class="footer-text">Лицензия</p>
         <p class="footer-text">Версия для слабовидящих</p>
-      </div>
+      </div> -->
     </div>
   </footer>
 </template>
@@ -110,8 +116,9 @@ export default {
     }
 
     .footer__box {
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
       width: 100%;
       height: 100%;
     }

@@ -3,10 +3,10 @@
     <div class="banner-wrap" :class="bgColor">
       <div class="banner-container">
         <div class="banner-box">
-          <h2 class="banner-title" v-html="title"></h2>
+          <div class="title-dark-blue p-bt-20 banner-title " v-html="title"></div>
           <p class="banner-text" v-html="text"></p>
           <elements-link-with-arrow :type="type" :title="titleLink" :href="link"/>
-          <p class="banner-additional-text" v-html="additionalText"></p>
+          <div class="banner-additional-text" v-html="additionalText"></div>
         </div>
         <div class="banner-images">
           <img class="banner-img" :src="assetsStore.useAsset(`images/img-banner/${img}`)" :alt="alt"/>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import { useAssets } from '@/stores/useAsset'
+  import { useAssets } from '../../../stores/useAsset'
   export default {
     props: {
       type: {
@@ -74,20 +74,19 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding: 60px 0;
+    margin: 0 auto 100px;
     box-sizing: border-box;
 
     .banner-wrap {
       width: 1280px;
-      max-width: 95%;
+      max-width: 100%;
       border-radius: 45px;
 
       .banner-container {
         display: flex;
         justify-content: space-between;
-        width: 1220px;
-        max-width: 100%;
-        margin: 0 auto;
+        align-items: center;
+        gap: 9px;
 
         @media screen and (max-width: 1060px) {
           flex-direction: column;
@@ -95,12 +94,7 @@
         }
 
         .banner-box {
-          padding: 123px 0 20px 60px;
-        
-          .banner-title {
-            @include body-40-medium;
-            padding-bottom: 20px;
-          }
+            padding: 123px 0 0px 60px;
 
           .banner-text {
             @include body-18-regular;
@@ -115,8 +109,13 @@
         }
 
         .banner-images {
+            max-width: 697px;
+
           .banner-img {
-            height: 420px;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
 
             @media screen and (max-width: 1060px) {
               height: 270px;

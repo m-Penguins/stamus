@@ -1,3 +1,237 @@
+@import 'mixins.scss';
+@import 'variables.scss';
+
 .p-bt-40 {
   padding-bottom: 40px;
+}
+
+.p-bt-14 {
+  padding-bottom: 14px;
+}
+
+.p-bt-75 {
+  padding-bottom: 75px;
+}
+
+.m-r-20 {
+  margin-right: 20px;
+}
+
+.p-bt-20 {
+  padding-bottom: 20px;
+}
+
+.p-bt-30 {
+  padding-bottom: 30px;
+}
+
+.p-bt-60 {
+  padding-bottom: 60px;
+}
+
+.p-t-112 {
+  padding-top: 112px;
+}
+
+.p-t-14 {
+  padding-top: 14px;
+}
+
+.p-bt-112 {
+  padding-bottom: 112px;
+}
+
+.bor-rad-25 {
+  border-radius: 25px;
+}
+
+.main-title-dark-blue {
+  @include body-60-medium;
+  color: $dark-blue-subtitle;
+}
+
+.title-dark-blue {
+  @include body-40-medium;
+  color: $dark-blue-subtitle;
+}
+
+.title-white {
+  @include body-40-medium;
+  color: $white;
+}
+
+// .title-white {
+//   @include body-40-medium;
+//   color: $dark-blue-subtitle;
+// }
+
+.subtitle-gray {
+  @include body-16-regular;
+  color: $gray-text;
+}
+
+.text-article {
+  @include body-14-regular;
+  color: $gray-text;
+  opacity: 0.7;
+}
+
+.text-gray-opacity {
+  @include body-12-regular;
+  color: $gray-text;
+  opacity: 0.7;
+}
+
+.block-size {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 100px;
+  width: 1280px;
+  max-width: 95%;
+  border-radius: 45px;
+}
+
+.container-size {
+  width: 1280px;
+  max-width: 100%;
+  margin: 0 auto 100px;
+}
+
+.header-nav-item {
+  @include body-14-regular;
+  color: $gray-text;
+  position: relative;
+  display: inline-block;
+  transition: all .3s ease-in-out, opacity .3s ease-in-out;
+
+    &:hover {
+      color: $hover;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background-color: $hover;
+          transition: all .3s ease;
+        }
+    }
+
+    &:active {
+      color: $gray-text;
+    }
+
+    &:focus {
+      color: $gray-text;
+      &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background-color: $hover;
+          transition: all .3s ease;
+        }
+    }
+}
+
+.button-base {
+  @include body-16-regular;
+  @include flex-center-center;
+  width: max-content;
+  height: 100%;
+  padding: 14px 30px;
+  box-sizing: border-box;
+  background-color: $hover;
+  border: none;
+  outline: none;
+  color: $white;
+  border-radius: 45px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+    &:hover {
+      border: 1px solid $hover;
+      background-color: $white;
+      color: $hover;
+    }
+
+    &:active {
+      border: 1px solid $click;
+      background-color: $white;
+      color: $click;
+    }
+
+    &:disabled {
+      background-color: $dissabled;
+      border: none;
+      color: $white;
+    }
+}
+
+.input {
+  outline:none;
+  width: 100%;
+  height: 56px;
+  padding: 14px 20px;
+  border-radius: 45px;
+  border: 1px solid $light-gray;
+  background: $light-gray;
+  color: $gray-text;
+  @include body-16-regular;
+
+    &::placeholder {
+      @include body-16-regular;
+      color: $placeholder;
+    }
+
+    &:hover {
+      border: 1px solid $dissabled;
+    }
+
+    &:disabled {
+      color: $dissabled-color;
+      border: 1px solid $border-card;
+      background: $light-gray;
+    }
+}
+
+.input:focus {
+  border: 1px solid $dissabled;
+  color: $gray-text;
+  }
+
+.input:valid {
+  color:  $placeholder;
+  border: 1px solid  $dissabled-color;
+}
+
+.input:valid:hover {
+  color: $placeholder;
+  border: 1px solid  $dissabled;
+}
+
+.grey-point-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.grey-point {
+  width: 4px;
+  height: 4px;
+  margin: 0 10px;
+  background-color: $gray-text;
+  border-radius: 50px;
+  opacity: 0.2;
+}
+
+.grey-point-text {
+  @include body-12-regular;
+  color: $gray-text;
+  opacity: 0.7;
 }

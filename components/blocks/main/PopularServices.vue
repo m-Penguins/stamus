@@ -1,0 +1,41 @@
+<template>
+  <div class="container-size popular-service">
+    <h2 class="popular-service__title">Популярные услуги</h2>
+    <div class="popular-service__list">
+      <div v-for="(item, index) in mockArray" :key="index">
+        <elements-service-card :service="item"/>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+  const mockArray = [
+    {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
+    {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
+    {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
+    {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
+    {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
+    ];
+</script>
+
+<style lang="scss" scoped>
+@import '/assets/styles/style.scss';
+
+  .popular-service {
+    padding: 40px 0;
+
+    &__title {
+      @include body-22-medium-Neue;
+      color: $dark-blue-subtitle;
+      padding-bottom: 40px;
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+</style>
