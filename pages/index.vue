@@ -18,7 +18,8 @@
     link="#"
     bgColor="light-blue"
     type="true"
-    img="cards.svg"
+    img="cards2.png"
+    bigImg=true
   />
   <blocks-main-popularServices />
   <BlocksMainBanner 
@@ -28,6 +29,7 @@
     link="#"
     bgColor="blue-gradient"
     img="mobile.svg"
+    bigImg=true
   />
   <blocks-main-feedback />
   <BlocksMainBanner 

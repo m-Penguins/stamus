@@ -17,6 +17,7 @@
 <style lang="scss" scoped>
 @import '/assets/styles/style.scss';
   .seo-block {
+    flex-wrap: wrap;
 
     .seo-block-img {
       margin-right: 16px;

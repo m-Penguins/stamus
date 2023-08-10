@@ -4,10 +4,10 @@
       <elements-title-text-button title="Оффер <br> в несколько строчек" text="Небольшое описание в несколько строчек"/>
       <div class="primary-banner-box">
         <div class="primary-banner-wrap">
-          <img class="primary-banner-img" src="@/assets/images/img-banner/card_main_kids.png" alt="Фотография матери и ребёнка">
-        </div>
-        <div class="primary-banner-wrap">
-          <img class="primary-banner-img" src="@/assets/images/img-banner/card_main.png" alt="Фотография зубного врача">
+          <img class="primary-banner-img desktop" src="@/assets/images/img-banner/card_main_kids.png" alt="Фотография матери и ребёнка">
+          <img class="primary-banner-img mobile" src="@/assets/images/img-banner/1.png" alt="Фотография матери и ребёнка">
+          <img class="primary-banner-img desktop" src="@/assets/images/img-banner/card_main.png" alt="Фотография зубного врача">
+          <img class="primary-banner-img mobile" src="@/assets/images/img-banner/2.png" alt="Фотография зубного врача">
         </div>
       </div>
     </div>
@@ -16,14 +16,14 @@
 
 <style scoped lang="scss">
 @import '/assets/styles/style.scss';
+
+.mobile {
+  display: none;
+}
+
 .primary-banner-wrap {
-  width: auto;
-  img {
-    height: 100%;
-    object-fit: cover;
-    object-position: 0 0;
-    width: 100%;
-  }
+  display: flex;
+  gap: 14px;
 }
   .primary-banner {
     @include flex-column-center;
@@ -47,10 +47,11 @@
       .primary-banner-img {
         // width: 390px;
         // height: 650px;
-        transition: width 0.5s cubic-bezier(0, 0, 1, 1) 0ms;
+        // transition: width 0.5s cubic-bezier(0, 0, 1, 1) 0ms;
       }
       .primary-banner-img:hover {
-        width: 420px;
+        // width: 420px;
+        // transition: width 0.5s cubic-bezier(0, 0, 1, 1) 0ms;
       }
     }
   }
@@ -61,11 +62,18 @@
     }
   }
   @media screen and (max-width: 1290px) {
-                  .s {
-        height: 450px;
-        width: 100%;
-      }
+    .mobile {
+      display: flex;
+      height: 280px;
+    }
+
+    .desktop {
+      display: none;
+    }
+
     .primary-banner {
+      margin: 118px auto 100px auto;
+
       .primary-banner-container {
         flex-wrap: wrap;
 
@@ -80,10 +88,23 @@
       }
     }
   }
-  @media screen and (max-width: 1040px) {
-    .primary-banner-wrap {
-      height: 300px;
-      width: 100%;
+  
+  @media screen and (max-width: 735px) {
+    primary-banner-box {
+      padding: 60px 0 80px;
+      .primary-banner-wrap {
+        flex-wrap: wrap;
+      }
     }
   } 
+
+  @media screen and (max-width: 735px) {
+  .primary-banner-box {
+    padding: 60px 0 100px;
+
+    .primary-banner-wrap {
+      flex-wrap: wrap;
+    }
+  }
+} 
 </style>

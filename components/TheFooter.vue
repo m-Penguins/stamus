@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="footer-wrap">
       <div class="footer__box">
-        <img src="@/assets/images/icons/logo.svg" alt="logo">
+        <img src="@/assets/images/icons/logo.svg" alt="logo" class="logo">
       </div>
       <div class="footer__box">
         <div class="footer-menu">
@@ -52,18 +52,15 @@
             </div>
           </div>
         </div>
-        <div>
-          <div class="footer-text">Политика конфидециальности</div>
-          <div class="footer-text">Лицензия</div>
-          <div class="footer-text">Версия для слабовидящих</div>
-       </div>
-   
+          <div class="footer-text display-block">Политика конфидециальности</div>
+          <div class="footer-text display-block">Лицензия</div>
+          <div class="footer-text display-block">Версия для слабовидящих</div>
+          <div class="display">
+            <p class="footer-text">Политика конфидециальности</p>
+            <p class="footer-text">Лицензия</p>
+            <p class="footer-text">Версия для слабовидящих</p>
+          </div>
       </div>
-      <!-- <div class="footer__box width">
-        <p class="footer-text">Политика конфидециальности</p>
-        <p class="footer-text">Лицензия</p>
-        <p class="footer-text">Версия для слабовидящих</p>
-      </div> -->
     </div>
   </footer>
 </template>
@@ -101,10 +98,23 @@ export default {
 <style lang="scss">
 @import '/assets/styles/style.scss';
 
+.display {
+  display: none;
+}
+
+.display-block {
+  display: block;
+}
+
+.logo {
+  margin-bottom: 60px;
+  height: 45px;
+}
+
   .footer {
     @include flex-column-center;
     width: 100%;
-    padding: 60px 0;
+    padding: 60px 0 40px;
     box-sizing: border-box;
     background: $light-gray;
 
@@ -117,10 +127,11 @@ export default {
 
     .footer__box {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 2fr;
       width: 100%;
       height: 100%;
+      grid-column-gap: 89px;
+      grid-row-gap: 36px;
     }
 
     .footer-menu {
@@ -162,6 +173,50 @@ export default {
 
     .width {
       width: 86.5%;
+    }
+  }
+
+  @media (max-width: 1110px) {
+    .display {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .display-block {
+      display: none;
+    }
+    .footer {
+      .footer__box {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        .footer-contacts {
+          margin-right: 500px;
+        }
+      }
+    }
+  }
+
+   @media (max-width: 900px) {
+    .footer {
+      padding: 40px 0 40px;
+      .footer__box {
+        .footer-contacts {
+          margin-right: 200px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer {
+      .footer__box {
+        .footer-contacts {
+          margin-right: 0px;
+        }
+      }
     }
   }
 </style>

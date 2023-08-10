@@ -2,7 +2,7 @@
   <header class="header">
     <div class="header-logo">
       <NuxtLink :to="'/'" :exact="true" active-class="active-link">
-        <img style="width: 115px; height: 60px;" :src="assetsStore.useAsset('images/icons/logo.svg')" alt="Logo">
+        <img style="width: 59px; height: 34px;" :src="assetsStore.useAsset('images/icons/logo.svg')" alt="Logo">
       </NuxtLink>
     </div>
     <div class="header-nav">
@@ -52,7 +52,7 @@ import ButtonBase from './elements/Button-base.vue';
     max-width: 95%;
     display: flex;
     align-items: center;
-    position: absolute;
+    position: fixed;
     left: calc(50% - 640px); 
     margin: 0 auto;
     top: 40px;

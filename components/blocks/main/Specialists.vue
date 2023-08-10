@@ -1,7 +1,7 @@
 <template>
   <div class="container-size">
-    <div>
-      <h2>Наши специалисты</h2>
+    <div class="specialists-subject">
+      <h2 class="specialists-heading">Наши специалисты</h2>
       <elements-link-with-arrow type="true" title="Смотреть всех специалистов"/>
     </div>
     <div class="specialists-container">
@@ -12,7 +12,7 @@
           :class="{ 'active': selectedButton === button.id }" 
           @click="selectButton(button.id)"
           class="specialists-btn">
-          <div>
+          <div class="specialists-btn__img">
             <img :src="assetsStore.useAsset(`${button.img}`)"/>
           </div>
           <div class="specialists-box">
@@ -27,21 +27,21 @@
         </div>
         <div class="specialists-inner__info">
           <div class="specialists-inner__info-name">
-            <h2>{{selectedName}}</h2>
-            <p>{{selectedSpeciality}}</p>
+            <h2 class="specialists-heading">{{selectedName}}</h2>
+            <p class="specialists-desc">{{selectedSpeciality}}</p>
           </div>
           <div class="specialists-inner__info-numbers">
             <div>
-              <p>6</p>
-              <p>лет опыта</p>
+              <p class="specialists-numbers">6</p>
+              <p class="specialists-box__spec">лет опыта</p>
             </div>
             <div>
-              <p>24</p>
-              <p>отзыва</p>
+              <p class="specialists-numbers">24</p>
+              <p class="specialists-box__spec">отзыва</p>
             </div>
             <div>
-              <p>667</p>
-              <p>консультаций</p>
+              <p class="specialists-numbers">667</p>
+              <p class="specialists-box__spec">консультаций</p>
             </div>
           </div>
           <div class="specialists-inner__info-btn">
@@ -97,8 +97,28 @@ export default {
 <style lang="scss" scoped>
 @import '/assets/styles/style.scss';
 
+  .specialists-subject {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 529px;
+    max-width: 100%;
+    padding: 40px 0;
+  }
+
+  .specialists-heading {
+    @include body-22-medium-Neue;
+    color: $dark-blue-subtitle;
+  }
+
+  .specialists-desc {
+    @include body-16-regular;
+    color: $placeholder;
+  }
+
   .specialists-container {
     display: flex;
+    flex-wrap: wrap;
     gap: 36px;
 
     .specialists-list {
@@ -114,6 +134,12 @@ export default {
         padding: 10px;
         border: 1px solid var(--stroke, #E9E9E9);
         background: white;
+
+          &__img {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+          }
       } 
     }
   }
@@ -168,6 +194,11 @@ export default {
           align-items: center;
           text-align: center;
           gap: 20px;
+
+          .specialists-numbers {
+            @include body-22-semi-bold;
+            color: $hover;
+          }
         }
 
         &-btn {
@@ -183,5 +214,59 @@ export default {
 //   background-color: blue;
 //   color: white;
 // }
+  @media (max-width: 1017px) {
+  .specialists-subject {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .specialists-container {
+    gap: 20px;
 
+    .specialists-list {
+      flex-direction: unset;
+      overflow-x: scroll;
+      white-space: nowrap;
+      gap: 10px;
+    }
+  }
+
+  .specialists-inner {
+      &__img {
+        width: 333px;
+        height: 333px;
+
+          img {
+            width: 333px;
+            height: 333px;
+          }
+      }
+
+      &__info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 20px;
+      }
+  }
+}
+
+  @media (max-width: 735px) {
+    .specialists-inner {
+      flex-wrap: wrap;
+      gap: 20px;
+
+       &__img {
+        width: 343px;
+        height: 343px;
+
+          img {
+            width: 343px;
+            height: 343px;
+          }
+      }
+    }
+}
 </style>

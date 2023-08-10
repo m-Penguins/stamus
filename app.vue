@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <TheHeader />
+    <!-- <TheHeader /> -->
       <main>
         <NuxtPage />
       </main>
@@ -74,5 +74,12 @@
     min-height: 100vh;
     height: 100vh;
     max-height: max-content;
+    padding: 0 31px;
   }
+
+  @media (max-width: 650px) {
+      .main {
+        padding: 0 16px;
+      }
+    }
 </style>

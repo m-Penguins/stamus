@@ -24,7 +24,6 @@
 @import '/assets/styles/style.scss';
 
   .feedback-card {
-    width: 416px;
     padding: 20px;
     border-radius: 10px;
     border: 1px solid $border-card;
@@ -66,4 +65,10 @@
       opacity: 0.7;
     }
   }
+
+  @media (max-width: 800px) {
+    .feedback-card {
+      padding: 14px;
+    }
+}
 </style>

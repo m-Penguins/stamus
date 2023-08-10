@@ -21,12 +21,12 @@
             '0': {
               slidesPerView: 1,
             },
-            '776': {
+            '650': {
               slidesPerView: 2,
             },
-            '1200': {
-              slidesPerView: 3,
-            }
+            '1327': {
+                slidesPerView: 3,
+              }
           }"
       :navigation="{
           prevEl: prev,
@@ -62,30 +62,30 @@
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation } from 'swiper/modules';
 
-  // Import Swiper styles
-  import 'swiper/css';
-  import 'swiper/css/navigation';
+ 
+import 'swiper/css';
+import 'swiper/css/navigation';
 
-  export default {
-    components: {
-      Swiper,
-      SwiperSlide
+export default {
+  components: {
+    Swiper,
+    SwiperSlide
+  },
+  props: {
+    programs: {
+      tpye: Array,
     },
-    props: {
-      programs: {
-        tpye: Array,
-      },
-    },
-    setup() {
-      const prev = ref(null);
-      const next = ref(null);
-      return {
-        modules: [Navigation],
-        prev,
-        next,
-      };
-    },
-  };
+  },
+  setup() {
+    const prev = ref(null);
+    const next = ref(null);
+    return {
+      modules: [Navigation],
+      prev,
+      next,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -119,9 +119,8 @@ import { Navigation } from 'swiper/modules';
       justify-content: space-between;
       gap: 40px;
       align-items: center;
-      height: 70px;
       position: absolute;
-      top: 0;
+      top: 38px;
       right: 0;
       
 
@@ -168,5 +167,24 @@ import { Navigation } from 'swiper/modules';
     flex-direction: column;
     position: relative;
   }
+
+  @media (max-width: 800px) {
+    .wrapper-btn {
+      position: unset;
+      div {
+          width: 24px;
+          height: 24px;
+      }
+      .swiper-button-next {
+        position: absolute;
+        right: -1%;
+      }
+
+      .swiper-button-prev {
+        position: absolute;
+        left: -10px;
+      }
+    }
+}
 
 </style>

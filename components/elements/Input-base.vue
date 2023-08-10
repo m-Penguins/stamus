@@ -18,7 +18,7 @@
 
 <style scoped lang="scss">
   .input-base {
-    width: 100%;
+    width: 300px;
   }
   
   .input-error {

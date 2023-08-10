@@ -1,7 +1,7 @@
 <template>
   <div class="article-card">
-    <div>
-      <img src="@/assets/images/articles/tablet.svg" alt="Articles"/>
+    <div class="article-card__box">
+      <img src="@/assets/images/articles/tablet.svg" alt="Articles" class="article-card__box-img"/>
     </div>
     <div class="article-card__category">
       {{ article.category }}
@@ -46,5 +46,17 @@
     }
  }
 
+@media (max-width: 1080px) {
+  .article-card {
+    width: 330px;
+    
+    &__box {
+      width: 330px;
 
+      &-img {
+        width: 100%;
+      }
+    }
+  }
+}
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div class="banner">
-    <div class="banner-wrap" :class="bgColor">
+    <div class="banner-wrap" :class="[bgColor, {'bigImg': bigImg}]">
       <div class="banner-container">
         <div class="banner-box">
-          <div class="title-dark-blue p-bt-20 banner-title " v-html="title"></div>
-          <p class="banner-text" v-html="text"></p>
+          <div class="title-dark-blue p-bt-20 banner-title" v-html="title"></div>
+          <div class="banner-text" v-html="text"></div>
           <elements-link-with-arrow :type="type" :title="titleLink" :href="link"/>
           <div class="banner-additional-text" v-html="additionalText"></div>
         </div>
@@ -49,17 +49,20 @@
         default: ''
       },
       bgColor: {
-        type: String,
-        default: ''
+        type: Boolean,
+        default: false
       },
       alt: { 
         type: String, 
         default: 'Image' 
+      },
+      bigImg: { 
+        type: String, 
+        default: '' 
       }
     },
     setup() {
       const assetsStore = useAssets();
-
       return {
         assetsStore
       }
@@ -69,6 +72,25 @@
 
 <style scoped lang="scss">
 @import '/assets/styles/style.scss';
+.bigImg {
+  height: 420px;
+  .banner-container {
+    .banner-box {
+      width: 50%;
+    }
+    .banner-images {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      .banner-img {
+        position: relative;
+        bottom: 20px;
+        height: 439px;
+        max-height: 439px;
+      }
+    }
+  }
+}
   .banner {
     display: flex;
     flex-direction: column;
@@ -76,6 +98,7 @@
     width: 100%;
     margin: 0 auto 100px;
     box-sizing: border-box;
+    position: relative;
 
     .banner-wrap {
       width: 1280px;
@@ -85,16 +108,15 @@
       .banner-container {
         display: flex;
         justify-content: space-between;
-        align-items: center;
         gap: 9px;
 
         @media screen and (max-width: 1060px) {
           flex-direction: column;
-          align-items: center;;
         }
 
         .banner-box {
             padding: 123px 0 0px 60px;
+            max-width: 675px;
 
           .banner-text {
             @include body-18-regular;
@@ -109,17 +131,17 @@
         }
 
         .banner-images {
-            max-width: 697px;
+          max-width: 697px;
+          background-image: url("@/assets/images/img-banner/vectors.png");
+          background-position: bottom;
+          background-repeat: no-repeat;
+          background-size: contain;
 
           .banner-img {
             width: auto;
             height: auto;
             max-width: 100%;
             max-height: 100%;
-
-            @media screen and (max-width: 1060px) {
-              height: 270px;
-            }
           }
         }
       }
@@ -166,4 +188,101 @@
       color: rgba(255, 255, 255, 0.7);
     }
   }
+
+  @media (max-width: 1280px) {
+  .banner {
+    .banner-wrap {
+      .banner-container {
+        .banner-box {
+            padding: 70px 0 0px 40px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1125px) {
+  .banner {
+    .banner-wrap {
+      .banner-container {
+        .banner-box {
+            padding: 40px 20px 0px 20px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1060px) {
+  .banner {
+    .banner-wrap {
+      .banner-container {
+        .banner-images {
+          width: 427px;
+          margin: 0 auto;
+        }
+        .banner-box {
+          .banner-additional-text {
+            padding: 5px 0 0px;
+          }
+
+          .banner-title {
+            width: 321px;
+            max-width: 100%;
+          }
+          .banner-text {
+            width: 514px;
+            max-width: 100%;
+            font-size: 16px;
+          }
+
+          .banner-additional-text {
+            width: 328px;
+            max-width: 100%;
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+
+    .bigImg {
+      height: 100% !important;
+      .banner-container {
+        .banner-box  {
+            width: 100%;
+          }
+          .banner-images {
+            width: 350px !important;
+            margin: 0 auto;
+            .banner-img {
+              top: 0;
+            }
+          }
+      }
+    }
+}
+
+@media (max-width: 600px) {
+  .banner {
+    .banner-wrap {
+      .banner-container {
+        .banner-images {
+          width: 343px;
+
+          .banner-img {
+            height: 231px;
+          }
+        }
+        .banner-box {
+          .banner-title {
+            width: 175px;
+            font-size: 22px;
+            line-height: 29px;
+          }
+        }
+      }
+    }
+  }
+}
 </style>

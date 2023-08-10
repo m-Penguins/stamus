@@ -36,7 +36,7 @@
 .service-card {
   display: flex;
   justify-content: space-between;
-  height: 68px;
+  flex-wrap: wrap;
   padding: 10px 20px;
   align-items: center;
   gap: 10px;
@@ -71,6 +71,7 @@
         background: rgba(23, 201, 137, 0.05);
         @include body-12-regular;
         color: $green;
+        width: max-content;
       }
     }
 
@@ -83,5 +84,24 @@
       color: $dark-blue-subtitle;
     }
 }
+
+  @media (max-width: 800px) {
+    .service-card {
+      display: block;
+
+        .service-card-container {
+          gap: 20px;
+          margin-bottom: 10px;
+        }
+
+        .service-card-box { 
+          display: block;
+
+            &__type {
+              margin-bottom: 10px;
+            }
+        }
+    }
+  }
 
 </style>
