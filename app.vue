@@ -9,27 +9,27 @@
 </template>
 
 <style lang="scss">
-  @import '/assets/styles/style.scss';
+  @import './assets/styles/style.scss';
   @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@1,700&family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@1,700&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 
   @font-face {
   font-family: 'Neue Machin';
-  src: url('@/assets/fonts/Neue Machina/NeueMachina-Regular.ttf') format('truetype');
+  src: url('./assets/fonts/NeueMachina-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 
   @font-face {
     font-family: 'Neue Machin';
-    src: url('@/assets/fonts/Neue Machina/NeueMachina-Medium.ttf') format('truetype');
+    src: url('./assets/fonts/NeueMachina-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
   }
 
   @font-face {
     font-family: 'Neue Machin';
-    src: url('@/assets/fonts/Neue Machina/NeueMachina-Bold.ttf') format('truetype');
+    src: url('./assets/fonts/NeueMachina-Bold.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
   }

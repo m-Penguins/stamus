@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="wrapper-swiper">
-    <swiper
+    <Swiper
       class="swiper"
       :slides-per-view="3"
       :space-between="16"
@@ -36,7 +36,7 @@
       <swiper-slide v-for="(item, index) in programs" :key="index" class="swiper-slide">
         <elements-element-feedback-card :data="item" />
       </swiper-slide>
-    </swiper>
+    </Swiper>
     <div class="wrapper-btn">
       <div ref="prev" class="swiper-button-prev">
         <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
