@@ -1,5 +1,5 @@
 <template>
-  <div class="container-size">
+  <div class="container-size specialists">
     <div class="specialists-subject">
       <h2 class="specialists-heading">Наши специалисты</h2>
       <elements-link-with-arrow type="true" title="Смотреть всех специалистов"/>
@@ -12,6 +12,7 @@
           :class="{ 'active': selectedButton === button.id }" 
           @click="selectButton(button.id)"
           class="specialists-btn">
+          <div class="div-with-line" v-if="selectedButton === button.id"></div>
           <div class="specialists-btn__img">
             <img :src="assetsStore.useAsset(`${button.img}`)"/>
           </div>
@@ -23,7 +24,7 @@
       </div>
       <div class="specialists-inner">
         <div class="specialists-inner__img">
-          <img :src="assetsStore.useAsset(`${selectedImg}`)"/>
+          <img :src="assetsStore.useAsset(`${selectedBigImg}`)"/>
         </div>
         <div class="specialists-inner__info">
           <div class="specialists-inner__info-name">
@@ -63,13 +64,13 @@ export default {
       selectedName: 'Унаньян Карина',
       selectedImg: 'images/specialists/avatar-1.png',
       selectedSpeciality: 'Челюстно-лицевой хирург',
+      selectedBigImg: 'images/specialists/avatar-7.png',
       buttons: [
-        { id: 1, name: 'Овсоян Григорий', speciality: 'Стоматолог-терапевт', img: 'images/specialists/avatar.png'},
-        { id: 2, name: 'Унаньян Карина', speciality: 'Челюстно-лицевой хирург', img: 'images/specialists/avatar-1.png'},
-        { id: 3, name: 'Маашев Магомед', speciality: 'Стоматолог-хирург', img: 'images/specialists/avatar-2.png'},
-        { id: 4, name: 'Шагалова Полина', speciality: 'Стоматолог', img: 'images/specialists/avatar-3.png'},
+        { id: 1, name: 'Овсоян Григорий', speciality: 'Стоматолог-терапевт', img: 'images/specialists/avatar.png', imgBig:'images/specialists/avatar-4.png'},
+        { id: 2, name: 'Унаньян Карина', speciality: 'Челюстно-лицевой хирург', img: 'images/specialists/avatar-1.png', imgBig:'images/specialists/avatar-7.png'},
+        { id: 3, name: 'Маашев Магомед', speciality: 'Стоматолог-хирург', img: 'images/specialists/avatar-2.png', imgBig:'images/specialists/avatar-6.png'},
+        { id: 4, name: 'Шагалова Полина', speciality: 'Стоматолог', img: 'images/specialists/avatar-3.png', imgBig:'images/specialists/avatar-5.png'},
       ],
-      s: []
     };
   },
   methods: {
@@ -77,26 +78,35 @@ export default {
       this.selectedButton = buttonId;
       this.buttons.map(item => {
         if (this.selectedButton === item.id) {
-          console.log(item.name);
           this.selectedName = item.name;
           this.selectedImg = item.img;
           this.selectedSpeciality = item.speciality;
+          this.selectedBigImg = item.imgBig;
         }
       });
     },
   },
   setup() {
-  const assetsStore = useAssets();
-  return {
-    assetsStore,
+    const assetsStore = useAssets();
+    return {
+      assetsStore,
+    }
   }
-}
 };
 </script>
 
 <style lang="scss" scoped>
 @import '/assets/styles/style.scss';
 
+.div-with-line {
+  border-radius: 0px 15px 16px 0px;
+  background: var(--accent, #232D5B);
+  width: 3px;
+  height: 24px;
+  position: absolute;
+  left: -1px;
+  top: 28px;
+}
   .specialists-subject {
     display: flex;
     align-items: center;
@@ -126,7 +136,12 @@ export default {
       flex-direction: column;
       gap: 14px;
 
-      .specialists-btn {
+        .active {
+          position: relative;
+        }
+    }
+
+          .specialists-btn {
         display: flex;
         align-items: center;
         gap: 10px;
@@ -135,13 +150,35 @@ export default {
         border: 1px solid var(--stroke, #E9E9E9);
         background: white;
 
+        &:hover {
+          border: 1px solid #D5D5D5;
+          cursor: pointer;
+          transition: all 0.3s ease-in-out;
+      }
+
+      .specialists-box__name {
+        &:hover {
+          color: $hover;
+        }
+      }
+
+      .specialists-box__name {
+        &:active  {
+          color: $dark-blue-subtitle;
+        }
+      }
+
+        &:active {
+          border: 1px solid var(--stroke, #E9E9E9);
+          color: $click;
+        }
+
           &__img {
             width: 60px;
             height: 60px;
             border-radius: 5px;
           }
       } 
-    }
   }
 
 
@@ -210,10 +247,6 @@ export default {
       }
   }
 
-// button.active {
-//   background-color: blue;
-//   color: white;
-// }
   @media (max-width: 1017px) {
   .specialists-subject {
     display: flex;
@@ -229,6 +262,9 @@ export default {
       overflow-x: scroll;
       white-space: nowrap;
       gap: 10px;
+    }
+    .specialists-list::-webkit-scrollbar {
+      display: none;
     }
   }
 

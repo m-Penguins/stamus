@@ -5,6 +5,14 @@
     src: url('../fonts/NeueMachina-Bold.ttf');
   }
 
+@mixin body-10-regular {
+  font-family: Manrope;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16.5px;
+}
+
 @mixin body-12-regular {
   font-family: Manrope;
   font-size: 12px;

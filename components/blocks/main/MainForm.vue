@@ -67,9 +67,14 @@
 
     &__box {
       flex-wrap: wrap;
+      width: 100%;
+
+      .form-input {
+        width: 46%;
+      }
 
       .form-btn {
-        flex-basis: 80%;
+        flex-basis: 94%;
       }
     }
 
@@ -97,18 +102,37 @@
 
     &__box {
       gap: 14px;
+      justify-content: space-between;
 
       .form-input {
-        width: 315px;
+        flex-basis: 48%;
       }
 
       .form-btn {
-        flex-basis: 95%;
+        flex-basis: 100%;
       }
     }
 
     &__text {
       padding-bottom: 20px;
+    }
+  }
+}
+
+@media (max-width: 560px) {
+  .form-wrapper {
+    margin: 0 auto 80px;
+    &__title {
+      line-height: 25px;
+    }
+
+    &__box {
+      gap: 14px;
+      justify-content: space-between;
+
+      .form-input {
+        flex-basis: 100%;
+      }
     }
   }
 }

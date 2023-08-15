@@ -84,7 +84,7 @@
       justify-content: center;
       .banner-img {
         position: relative;
-        bottom: 20px;
+        bottom: 19px;
         height: 439px;
         max-height: 439px;
       }
@@ -181,6 +181,16 @@
 
   .dark-red {
     background: $dark-red;
+    .banner-title {
+      color: $white;
+    }
+    .banner-text {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .dark-blue-gradient {
+    background: $dark-blue-gradient;
     .banner-title {
       color: $white;
     }

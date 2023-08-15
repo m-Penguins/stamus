@@ -75,10 +75,8 @@ export default {
 
 
 .areas-wrapper {
-  padding: 40px 0;
-
     h2 {
-      padding-bottom: 30px;
+      padding-bottom: 40px;
       @include body-22-medium-Neue;
       color: $dark-blue-subtitle;
     }
@@ -153,6 +151,7 @@ export default {
       width: 100%;
       height: 220px;
       @include backg-no-rep-center-cover;
+      background-position: 11% 66%;
 
       h3 {
         @include body-18-medium;
@@ -192,6 +191,9 @@ export default {
 }
 
   @media (max-width: 680px) {
+    .areas-wrapper {
+      margin-bottom: 80px;
+    }
    .areas-box-col {
       flex-wrap: wrap;
       width: 100%;

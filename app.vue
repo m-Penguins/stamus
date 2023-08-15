@@ -1,10 +1,12 @@
 <template>
   <div class="main">
-    <!-- <TheHeader /> -->
+    <TheHeader />
+    <div class="main2">
       <main>
         <NuxtPage />
       </main>
-    <TheFooter />
+    </div>
+    <TheFooter/>
   </div>
 </template>
 
@@ -74,11 +76,14 @@
     min-height: 100vh;
     height: 100vh;
     max-height: max-content;
+  }
+
+  main {
     padding: 0 31px;
   }
 
   @media (max-width: 650px) {
-      .main {
+      main {
         padding: 0 16px;
       }
     }

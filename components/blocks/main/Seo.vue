@@ -1,33 +1,57 @@
 <template>
-  <div class="seo-block block-size">
-    <div class="seo-block-img">
-      <img src="@/assets/images/blocks/rectangle.png" alt="rectangle"/>
-    </div>
+  <div class="seo-block">
+    <img class="image" :src="assetsStore.useAsset(`images/blocks/${img}`)" alt="rectangle"/>
     <div class="seo-block-text">
-      <h2 class="seo-block-text__title p-bt-14">СЕО текст, который описывает всю суть</h2>
-      <p class="seo-block-text__text">Как уже неоднократно упомянуто, непосредственные участники технического прогресса неоднозначны и будут разоблачены.
-          С учётом сложившейся международной обстановки, высококачественный прототип будущего проекта не даёт нам иного выбора, 
-          кроме определения приоретизации разума над эмоциями. Разнообразный и богатый опыт говорит нам, 
-          что укрепление и развитие внутренней структуры в значительной степени обусловливает важность системы массового участия. 
-      </p>
+     <h2 class="seo-block-text__title p-bt-14" v-html="title"></h2>
+      <p class="seo-block-text__text" v-html="text"></p>
     </div>
   </div>
 </template>
 
+<script>
+  import { useAssets } from '../../../stores/useAsset'
+  export default {
+    props: {
+      title: {
+        type: String,
+        default: ''
+      },
+      text: {
+        type: String,
+        default: ''
+      },
+      img: {
+        type: String,
+        default: ''
+      },
+    },
+    setup() {
+      const assetsStore = useAssets();
+      return {
+        assetsStore
+      }
+    }
+  }
+</script>
+
 <style lang="scss" scoped>
 @import '/assets/styles/style.scss';
   .seo-block {
-    flex-wrap: wrap;
-
+    display: flex;
+    margin: 0 auto;
+    max-width: 1280px;
+    gap: 14px;
+    margin-bottom: 100px;
+    
     .seo-block-img {
       margin-right: 16px;
     }
 
     .seo-block-text {
-      @include flex-column-center;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       justify-content: center;
-      width: 524px;
-      height: 494px;
       padding: 20px 40px;
       border-radius: 45px;
       background: #F9F9FA;
@@ -45,4 +69,49 @@
     }
     
   }
+
+.image, .seo-block-text {
+  flex: 1; 
+}
+
+.image {
+  width: 60%; 
+}
+
+.seo-block-text {
+  width: 40%; 
+}
+
+@media (max-width: 1100px) {
+  .image {
+    width: 50%;
+  }
+  .seo-block-text {
+    padding: 20px 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .image {
+    width: 50%;
+    object-fit: cover;
+    object-position: 21% 10%;
+    border-radius: 20px;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .seo-block {
+    display: block;
+
+    .image {
+      margin-bottom: 10px;
+    }
+
+    .image, .seo-block-text {
+      width: 100%;
+    }
+  }
+}
 </style>

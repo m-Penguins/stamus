@@ -17,6 +17,10 @@
         <button-base title="Записаться на прием"/>
       </div>
     </div>
+    <div class="header-menu">
+      <img src="../assets/images/icons/burger.svg" alt="">
+      <!-- <div>Меню</div> -->
+    </div>
   </header>
 </template>
 
@@ -27,6 +31,7 @@ import ButtonBase from './elements/Button-base.vue';
   components: { ButtonBase },
     setup() {
       const assetsStore = useAssets();
+      const route = useRoute();
       const navigation = [
         { id: 1, title: 'Услуги', path: '/services' },
         { id: 2, title: 'Специалисты', path: '/specialists' },
@@ -38,6 +43,7 @@ import ButtonBase from './elements/Button-base.vue';
       return {
         assetsStore,
         navigation,
+        route
       }
     }
   }
@@ -45,6 +51,9 @@ import ButtonBase from './elements/Button-base.vue';
 
 <style lang="scss">
 @import '/assets/styles/style.scss';
+.header-menu {
+  display: none;
+}
   .header {
     width: 1280px;
     height: 78px;
@@ -59,6 +68,7 @@ import ButtonBase from './elements/Button-base.vue';
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.95);
     box-shadow: 5px 5px 45px -5px rgba(30, 32, 40, 0.08);
+    z-index: 999;
 
     .header-logo {
       margin-right: 45px;
@@ -73,16 +83,24 @@ import ButtonBase from './elements/Button-base.vue';
 
       .header-nav-list {
         display: flex;
-
-        // .header-nav-item {
-        //   @include body-14-regular;
-        //   padding-right: 20px;
-        //   color: $gray-text;
-        // }
       }
     }
   }
-  .active-link {
-    color: red;
+
+  @media (max-width: 1357px) {
+  .header {
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+    position: sticky;
+    top: 0;
+    left: 0;
+    .header-nav {
+      display: none;
+    }
   }
+  .header-menu {
+    display: flex;
+  }
+}
 </style>
