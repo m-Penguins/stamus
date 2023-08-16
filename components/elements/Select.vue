@@ -19,11 +19,11 @@
             <div class="select-title">{{ option.name }}</div>
             <div class="select-text">{{ option.address }}</div>
           </div>
-          <div class="selected-item">
-            <!-- <img src="../../assets/images/icons/check.svg" alt="icon"> -->
+          <div  v-if="selected === option.name" class="selected-item">
+            <img src="../../assets/images/icons/check.svg" alt="icon">
           </div>
         </div>
-        <hr/>
+        <hr v-if="i !== options.length - 1"/>
       </div>
     </div>
   </div>
@@ -120,19 +120,14 @@ hr {
   &::before,
   &::after {
     content: "";
-
     position: absolute;
-    top: 50%;
-    right: 16px;
-
+    top: 57%;
+    right: 22px;
     display: block;
     width: 10px;
     height: 2px;
-
     transition: all 0.3s ease-out;
-
     background-color: #7F838C;
-
     transform: translate(-3px, -50%) rotate(45deg);
   }
   &::after {
@@ -147,19 +142,14 @@ hr {
     &::before,
     &::after {
     content: "";
-
     position: absolute;
-    top: 50%;
-    right: 16px;
-
+    top: 57%;
+    right: 22px;
     display: block;
     width: 10px;
     height: 2px;
-
     transition: all 0.3s ease-out;
-
     background-color: #7F838C;
-
     transform: translate(-3px, -50%) rotate(-45deg);
   }
   &::after {
@@ -176,7 +166,7 @@ hr {
   background-color: white;
   left: 0;
   right: 0;
-  top: 57px;
+  top: 62px;
   z-index: 1;
   overflow-y: scroll;
   height: 188px;

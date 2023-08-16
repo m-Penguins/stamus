@@ -1,17 +1,36 @@
 <template>
   <div class="tabs">
     <div class="tabs-title">Контакты</div>
-    <div class="tabs-container">
-      <button
-        v-for="(tab, index) in tabs"
-        :key="index"
-        :class="{ active: activeTab === index }"
-        @click="activeTab = index"
-        class="tabs-btn header-nav-item"
-      >
-        {{ tab.name }}
-      </button>
+    <div  class="tabs2">
+      <div class="tabs-wrapper">
+        <div class="tabs-container">
+          <button
+            v-for="(tab, index) in tabs"
+            :key="index"
+            :class="{ active: activeTab === index }"
+            @click="activeTab = index"
+            class="tabs-btn header-nav-item"
+          >
+            {{ tab.name }}
+          </button>
+        </div>
+      </div>
     </div>
+    <!-- <div class="tabs2">
+      <div class="tabs-wrapper" ref="tabsWrapper">
+        <div class="tabs-container tabs-list" :style="{ transform: `translateX(${scrollOffset}px)` }">
+          <button
+            v-for="(tab, index) in tabs"
+            :key="index"
+            :class="{ active: activeTab === index }"
+            @click="activeTab = index; scrollToTab(index)"
+            class="tabs-btn header-nav-item tab"
+          >
+            {{ tab.name }}
+          </button>
+        </div>
+      </div>
+    </div> -->
     <div class="tab-content">
       <div v-for="(tab, index) in tabs" :key="index" v-show="activeTab === index">
         <div v-if="activeTab === index">
@@ -39,6 +58,7 @@ export default {
   data() {
     return {
       activeTab: 0,
+      scrollOffset: 0,
       tabs: [
         {
           name: 'ул. Московская 140',
@@ -99,6 +119,17 @@ export default {
         ]
     }
   },
+  methods: {
+    scrollToTab(index) {
+      const tabWidth = this.getTabWidth();
+      this.scrollOffset = -index * tabWidth;
+    },
+    getTabWidth() {
+      const tabsWrapperWidth = this.$refs.tabsWrapper.offsetWidth;
+      const numTabs = this.tabs.length;
+      return tabsWrapperWidth / numTabs;
+    }
+  },
     setup() {
     const assetsStore = useAssets();
     return {
@@ -110,6 +141,24 @@ export default {
 
 <style lang="scss" scoped>
 @import '/assets/styles/style.scss';
+// .tabs2 {
+//   width: 100%;
+//   overflow-x: scroll;
+
+//   .tabs-wrapper {
+//     display: flex;
+//     overflow-x: auto;
+
+//     .tabs-list {
+//       display: flex;
+//       transition: transform 0.3s;
+//     }
+
+//     .tab {
+//       cursor: pointer;
+//     }
+//   }
+// }
 .tabs-btn-base {
   display: none;
 }
@@ -154,7 +203,7 @@ export default {
   background-position: center;
   background-size: cover;
   max-width: 1280px;
-  height: 40vh;
+  height: 500px;
   border-radius: 20px;
   background-image: url('../../assets/images/map.png');
   position: relative;

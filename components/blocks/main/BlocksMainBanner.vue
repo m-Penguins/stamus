@@ -3,7 +3,11 @@
     <div class="banner-wrap" :class="[bgColor, {'bigImg': bigImg}]">
       <div class="banner-container">
         <div class="banner-box">
-          <div class="title-dark-blue p-bt-20 banner-title" v-html="title"></div>
+          <div v-if="!selectedText" class="title-dark-blue p-bt-20 banner-title" v-html="title"></div>
+          <div v-else class="title-dark-blue p-bt-20 banner-title selected">
+            <div class="selected-word">Первое</div> 
+            <div>место в Краснодаре</div>
+            </div>
           <div class="banner-text" v-html="text"></div>
           <elements-link-with-arrow :type="type" :title="titleLink" :href="link"/>
           <div class="banner-additional-text" v-html="additionalText"></div>
@@ -20,6 +24,10 @@
   import { useAssets } from '../../../stores/useAsset'
   export default {
     props: {
+      selectedText: {
+        type: Boolean,
+        default: false
+      },
       type: {
         type: String,
         default: ''
@@ -72,6 +80,23 @@
 
 <style scoped lang="scss">
 @import '/assets/styles/style.scss';
+.selected {
+  width: 597px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.selected-word {
+  color: #232D5B;
+  display: flex;
+  padding: 12px 10px 10px 10px;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 10px;
+  background: var(--white, #FFF);
+}
+
 .bigImg {
   height: 420px;
   .banner-container {
@@ -110,10 +135,6 @@
         justify-content: space-between;
         gap: 9px;
 
-        @media screen and (max-width: 1060px) {
-          flex-direction: column;
-        }
-
         .banner-box {
             padding: 123px 0 0px 60px;
             max-width: 675px;
@@ -146,6 +167,30 @@
         }
       }
     }
+  }
+
+    .banner .dark-red .banner-container .banner-images {
+      height: 480px;
+      width: 68%;
+        .banner-img {
+          height: 100%;
+          height: 480px;
+        }
+  }
+
+    .banner 
+    .dark-red 
+    .banner-container 
+    .banner-box {
+      width: 50%;
+      .banner-additional-text {
+        padding: 72px 0 20px;
+      }
+    }
+
+
+  .banner .light-blue-gradient .banner-container .banner-images {
+    height: 420px;
   }
 
   .light-blue-gradient {
@@ -211,6 +256,17 @@
   }
 }
 
+  @media (max-width: 1158px) {
+  .banner .light-blue-gradient .banner-container .banner-images {
+    width: 69%;
+    height: 420px;
+  }
+  .banner .light-blue-gradient .banner-container .banner-images {
+    width: 69%;
+    height: 420px;
+  }
+}
+
 @media (max-width: 1125px) {
   .banner {
     .banner-wrap {
@@ -223,13 +279,17 @@
   }
 }
 
-@media (max-width: 1060px) {
+@media (max-width: 1087px) {
   .banner {
     .banner-wrap {
       .banner-container {
+        flex-direction: column;
+
         .banner-images {
           width: 427px;
           margin: 0 auto;
+          width: 100%;
+          height: 417px;
         }
         .banner-box {
           .banner-additional-text {
@@ -237,7 +297,6 @@
           }
 
           .banner-title {
-            width: 321px;
             max-width: 100%;
           }
           .banner-text {
@@ -255,6 +314,14 @@
       }
     }
   }
+      .banner .light-blue-gradient .banner-container .banner-images {
+        width: 51%;
+        height: 356px;
+      .banner-img {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
 
     .bigImg {
       height: 100% !important;
@@ -263,7 +330,6 @@
             width: 100%;
           }
           .banner-images {
-            width: 350px !important;
             margin: 0 auto;
             .banner-img {
               top: 0;
@@ -271,22 +337,45 @@
           }
       }
     }
+
+  .banner .light-blue .banner-container .banner-images {
+    width: 100%;
+    height: 315px;
+  }   
+  .banner .blue-gradient .banner-container .banner-images {
+    width: 100%;
+    height: 315px;
+  }
+
+  .banner .dark-red .banner-container .banner-images {
+    width: 100%;
+    height: 315px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .banner .dark-red .banner-container .banner-box {
+    width: 100%;
+  }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 690px) {
+  .selected {
+    justify-content: flex-start;
+    gap: 5px;
+  }
   .banner {
+    margin: 0 auto 80px;
     .banner-wrap {
       .banner-container {
         .banner-images {
           width: 343px;
-
-          .banner-img {
-            height: 231px;
-          }
+          height: 240px;
         }
         .banner-box {
+          margin-bottom: 57px;
           .banner-title {
-            width: 175px;
             font-size: 22px;
             line-height: 29px;
           }
@@ -294,5 +383,9 @@
       }
     }
   }
+
+    .banner .dark-blue-gradient .banner-container  .banner-images {
+      height: 280px;
+    }
 }
 </style>

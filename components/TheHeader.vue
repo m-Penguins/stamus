@@ -92,7 +92,7 @@ import ButtonBase from './elements/Button-base.vue';
     justify-content: space-between;
     width: 100%;
     max-width: 100%;
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     .header-nav {

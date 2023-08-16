@@ -98,7 +98,7 @@
       .primary-banner-container {
 
         .primary-banner-box {
-          padding: 60px 0;
+          padding: 60px 0 0;
         }
       }
     }
@@ -159,6 +159,9 @@
 }
 
 @media screen and (max-width: 480px) {
+  .primary-banner .primary-banner-container .primary-banner-box {
+    padding-bottom: 80px;
+  }
   .primary-banner {
     margin: 118px auto 20px auto;
   }

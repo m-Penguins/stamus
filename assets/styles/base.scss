@@ -231,6 +231,39 @@
   opacity: 0.7;
 }
 
+  ::-webkit-scrollbar {
+    width: 3px;
+    // height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    margin: 20px;
+    border-radius: 15px;
+    background: var(--light-bg, #F9F9FA);
+    display: flex;
+    width: 3px;
+  }
+
+  ::-webkit-scrollbar-track:hover {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-track:active {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    background-color: rgba(35,45,91, 0.4);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(35,45,91, 0.4);
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background-color: rgba(35,45,91, 0.4);
+  }
+
 .m-r-l-31 {
   margin: 0 31px;
 }

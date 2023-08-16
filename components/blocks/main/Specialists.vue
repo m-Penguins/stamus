@@ -46,7 +46,7 @@
             </div>
           </div>
           <div class="specialists-inner__info-btn">
-            <elements-button-base title="О докторе"/>
+            <elements-button-base title="О докторе" class="specialists-btn-base"/>
             <elements-link-with-arrow type="true" title="Смотреть портфолио"/>
           </div>
         </div>
@@ -113,7 +113,7 @@ export default {
     justify-content: space-between;
     width: 529px;
     max-width: 100%;
-    padding: 40px 0;
+    padding-bottom: 40px;
   }
 
   .specialists-heading {
@@ -205,9 +205,6 @@ export default {
       &__img {
         width: 308px;
         height: 308px;
-        border-radius: 15px;
-        border: 1px solid #EDEDED;
-
           img {
             width: 308px;
             height: 308px;
@@ -261,7 +258,6 @@ export default {
       flex-direction: unset;
       overflow-x: scroll;
       white-space: nowrap;
-      gap: 10px;
     }
     .specialists-list::-webkit-scrollbar {
       display: none;
@@ -269,8 +265,9 @@ export default {
   }
 
   .specialists-inner {
+    gap: 14px;
       &__img {
-        width: 333px;
+        width: 332px;;
         height: 333px;
 
           img {
@@ -289,20 +286,77 @@ export default {
   }
 }
 
-  @media (max-width: 735px) {
+  @media (max-width: 734px) {
     .specialists-inner {
-      flex-wrap: wrap;
-      gap: 20px;
+      width: 100%;
+      gap: 14px;
 
        &__img {
-        width: 343px;
-        height: 343px;
+        width: 38%;
+        height: 333px;
+        border-radius: 15px;
+        border-left: 1px solid  #EDEDED;
+        border-right: 1px solid  #EDEDED;
 
           img {
-            width: 343px;
-            height: 343px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 37% 74%;
           }
-      }
+        }
     }
+}
+
+  @media (max-width: 675px) {
+    .specialists {
+      margin: 0 auto 80px;;
+    }
+    .specialists-btn-base {
+      width: 80%;
+      height: auto;
+    }
+    .specialists-inner__info-btn {
+      flex-wrap: wrap;
+      padding-bottom: 0;
+    }
+    .specialists-inner {
+      width: 100%;
+      gap: 14px;
+
+       &__img {
+        width: 50%;
+       }
+    }
+}
+
+  @media (max-width: 585px) {
+    .specialists-btn-base {
+      width: 100%;
+    }
+
+    .specialists-inner {
+       &__img {
+        width: 67%;
+
+       }
+    }
+}
+  @media (max-width: 556px) {
+    .specialists-inner {
+      flex-wrap: wrap;
+
+      &__img {
+        width: 343px;
+        height: 343px;
+      }
+
+      &__info-btn {
+        flex-wrap: nowrap;
+      }
+  }
+  .specialists-btn-base {
+    width: max-content;
+  }
 }
 </style>

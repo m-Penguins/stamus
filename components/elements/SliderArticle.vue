@@ -88,7 +88,7 @@ export default {
 <style lang="scss" scoped>
 @import '/assets/styles/style.scss';
   .slider-title {
-    padding: 60px 0 40px 0;
+    padding: 0px 0 40px 0;
 
     &__box {
       display: flex;

@@ -23,7 +23,7 @@
   />
   <blocks-main-popularServices />
   <BlocksMainBanner 
-    :title="'Первое место в Краснодаре'"
+    :selectedText="true"
     :text="'Независимый всеройсийский портал Продокторов'"
     :titleLink="'Записаться онлайн'"
     link="#"
