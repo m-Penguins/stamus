@@ -17,10 +17,6 @@
 </script>
 
 <style scoped lang="scss">
-  .input-base {
-    width: 300px;
-  }
-  
   .input-error {
     border-color: red;
   }

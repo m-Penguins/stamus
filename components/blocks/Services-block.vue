@@ -1,7 +1,7 @@
 <template>
   <div class="container-size popular-service">
     <div class="service-title">
-      <h2 class="popular-service__title"> Услуги</h2>
+      <h2 class="popular-service__title">Услуги</h2>
       <elements-link-with-arrow type="true" title="Посмотреть все"/>
     </div>
     <div class="service-form">
@@ -124,6 +124,9 @@ import ElementsLinkWithArrow from '../elements/ElementsLinkWithArrow.vue';
   }
 
   @media (max-width: 740px) {
+    .popular-service {
+      margin: 0 auto 80px !important;
+    }
     .service-box {
       flex-wrap: wrap;
     }

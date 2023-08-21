@@ -25,7 +25,7 @@
         </div>
         <div class="areas-box__img img-fourth">
           <h3>Детская клиника</h3>
-          <elements-link-with-arrow :type="type" title="Перейти" href="#"/>
+          <elements-link-with-arrow :type="type" title="Перейти" href="/children-clinic"/>
         </div>
         <div class="areas-box__img img-fifth display">
           <h3>Лечение во сне</h3>
@@ -192,7 +192,7 @@ export default {
 
   @media (max-width: 680px) {
     .areas-wrapper {
-      margin-bottom: 80px;
+      margin-bottom: 80px !important;
     }
    .areas-box-col {
       flex-wrap: wrap;

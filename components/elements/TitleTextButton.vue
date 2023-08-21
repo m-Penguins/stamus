@@ -1,8 +1,8 @@
 <template>
-  <div class="container" :class="fontSize ? 'fontSize3' : 'container'">
+  <div class="container">
     <h1 v-html="title" :class="fontSize ? 'fontSize' : 'title'" class="main-title-dark-blue p-bt-30 title"></h1>
-    <p v-html="text" :class="fontSize ? 'fontSize1' : 'text'" class="container-text p-bt-30 text"></p>
-    <elements-button-base class="fontSize4" title="Записаться онлайн"/>
+    <p v-html="text" :class="!isButtonBase ? 'isButtonBase' : 'container-text'" class="container-text p-bt-30 text"></p>
+    <elements-button-base v-if="isButtonBase" class="fontSize4 container-btn" title="Записаться онлайн" />
   </div>
 </template>
 
@@ -20,6 +20,10 @@
       fontSize: {
         type: String,
         default: ''
+      },
+      isButtonBase: {
+        type: Boolean,
+        default: true
       }
     }
   }
@@ -42,43 +46,39 @@
     .title {
       font-size: 50px;
     }
-    .fontSize {
-      font-size: 40px;
-      line-height: 43px;
-      padding-bottom: 14px;
-    }
-    .fontSize1 {
-      font-size: 18px;
+  }
+
+  @media screen and (max-width: 1096px) {
+    .container-btn {
+      width: 100%;
     }
   }
+
   @media screen and (max-width: 900px) {
     .title {
       font-size: 40px;
       line-height: 42px;
     }
-    .text {
-      font-size: 16px;
-    }  
-
-    .fontSize3 {
-      width: 40%;
+    .container {
+      width: 50%;
+      .container-text {
+        font-size: 16px;
+      }
     }
 
     .fontSize {
       font-size: 22px;
       line-height: initial;
-    }
-    .fontSize1 {
-      font-size: 16px;
+      padding-bottom: 14px;
     }
 } 
 
-    @media (max-width: 600px) {
-      .fontSize3 {
-        width: 100%;
-     }
-     .fontSize4 {
+  @media (max-width: 600px) {
+    .container {
       width: 100%;
-     }
-  }
+    }
+    .isButtonBase {
+      padding-bottom: 0 !important;
+    }
+}
 </style>

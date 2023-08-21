@@ -14,7 +14,7 @@
         <img src="../../assets/images/icons/phone.svg" alt="icon"/>
         <div>
           <div class="map-nav-title">Номер телефона</div>
-          <div class="map-nav-info">{{ info.tel }}</div>
+          <a class="map-nav-info header-nav-item" href="tel:+79998887766">{{ info.tel }}</a>
         </div>
       </li>
       <hr/>
@@ -23,7 +23,7 @@
         <img src="../../assets/images/icons/email.svg" alt="icon" />
         <div>
           <div class="map-nav-title">E-mail</div>
-          <div class="map-nav-info">{{ info.email }}</div>
+          <a class="map-nav-info header-nav-item" href="mailto:hakurate@stamus-info.ru">{{ info.email }}</a>
         </div>
       </li>
       <hr/>
@@ -72,6 +72,12 @@
   gap: 10px;
   align-self: stretch;
   border-radius: 5px;
+}
+
+.map-nav-item:hover {
+  background-color: #F0F0F0;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .map-nav-title {

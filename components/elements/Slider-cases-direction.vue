@@ -118,7 +118,7 @@ export default {
   .wrapper-btn {
       display: flex;
       justify-content: space-between;
-      gap: 40px;
+      gap: 20px;
       align-items: center;
       position: absolute;
       top: 13px;

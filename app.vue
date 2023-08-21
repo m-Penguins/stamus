@@ -1,7 +1,7 @@
 <template>
-  <div class="main">
+  <div class="wrap">
     <TheHeader />
-    <div class="main2">
+    <div class="main">
       <main>
         <NuxtPage />
       </main>
@@ -71,7 +71,7 @@
     height: auto;
   }
 
-  .main {
+  .wrap {
     width: 100%;
     min-height: 100vh;
     height: 100vh;
@@ -79,9 +79,20 @@
   }
 
   main {
-    padding: 0 31px;
+    padding: 0 20px;
   }
 
+  .main {
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1400px) {
+      main {
+        padding: 0 31px;
+      }
+    }
+
+    
   @media (max-width: 650px) {
       main {
         padding: 0 16px;

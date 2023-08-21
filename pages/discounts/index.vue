@@ -1,0 +1,72 @@
+<template>
+<blocks-main-popap-modal-form @togglerPopup='togglerPopup' :isOpen="isOpenPopup" :isDiscounts="true"/>
+  <elements-main-info 
+    title="Акции и скидки" 
+    text="Небольшое описание в несколько строчек" 
+    imgBg="discounts.png" 
+    imgAdaptiv="discounts-adaptiv.png" 
+    :isButtonBase="false"
+    :breadcrumbs="[
+        {
+          title: 'Главная',
+          url: '/'
+        },
+        {
+          title: 'Акции и скидки',
+          url: '/discounts'
+        }
+        ]"
+  />
+  <BlocksMainBanner 
+    :title="'Счастливые часы'"
+    :text="'Скидки до 50%'"
+    :titleLink="'Воспользоваться акцией'"
+    link="#"
+    @click="isOpenPopup = true"
+    bgColor="dark-blue-gradient"
+    img="tooth.png"
+    bigImg=true
+  />
+  <BlocksMainBanner 
+    :title="'Выезд педиатра на дом'"
+    :text="'Скидка 25% в июне'"
+    :titleLink="'Воспользоваться акцией'"
+    link="#"
+    @click="isOpenPopup = true"
+    bgColor="dark-blue-gradient"
+    img="bag.png"
+    bigImg=true
+  />
+  <BlocksMainBanner 
+    :title="'Боитесь стоматологов?'"
+    :text="'В стоматологии Стамус есть оптимальное вариант для вас – лечение зубов во сне'"
+    :titleLink="'Воспользоваться акцией'"
+    link="#"
+    @click="isOpenPopup = true"
+    bgColor="dark-blue-gradient"
+    img="tooth.png"
+    bigImg=true
+  />
+  <blocks-main-form />
+</template>
+
+<script>
+export default {
+   props: {
+      isDiscounts: {
+        type: Boolean,
+        default: false
+      },
+   },
+  setup() {
+    const togglerPopup = (state) => {
+      isOpenPopup.value = state
+    }
+    const isOpenPopup = ref(false);
+    return {
+      isOpenPopup,
+      togglerPopup,
+    }
+  }
+}
+</script>

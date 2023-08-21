@@ -6,7 +6,7 @@
           v-for="(breadcrumb, index) in breadcrumbs"
           :key="index"
           :class="['breadcrumbs-text', {['pre']: index < breadcrumbs.length - 1} ]"
-          :to="route(breadcrumb.url)"
+          :to="breadcrumb.url"
           @click="index === 0 ? store.togglerLink(index) : null"
         >
           {{ breadcrumb.title }}
@@ -28,22 +28,19 @@ export default {
   },
    setup() {
     const store = useActuveLink();
-    const route = useRoute()
-
     return {
-      store,
-      route
+      store
     }
    }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '/assets/styles/style.scss';
 .breadcrumbs {
   position: relative;
   width: 100%;
-  margin-top: 150px;
-  margin-bottom: 78px;
+  margin-top: 138px;
 
   @media screen and (max-width: 600px) {
     margin-top: 50px;
@@ -54,17 +51,17 @@ export default {
 
   @media screen and (max-width: 1200px) {
     margin-bottom: 48px;
+    margin-top: 74px
   }
   .pre {
-    color: #000000;
+    color: $gray-text;
   }
   &-text {
     display: flex;
     position: relative;
-    color: #C4C4C4;
+    color: $placeholder;
+    @include body-12-regular;
     text-decoration: none;
-    font-size: 14px;
-    line-height: 140%;
     &:last-child {
       display: inline-block;
       text-overflow: ellipsis;
@@ -104,10 +101,9 @@ export default {
       font-size: 14px;
       line-height: 140%;
       content: "/";
-      padding-right: 3px;
-      padding-left: 3px;
-      color: #000000;
-      opacity: 0.6;
+      padding-right: 6px;
+      padding-left: 6px;
+      color: $placeholder;
       top: 2px;
 
       @media screen and (max-width: 680px), (max-width: 1000px) and (max-height: 500px) {
@@ -125,4 +121,10 @@ export default {
   }
 }
 }
+
+  @media (max-width: 650px) {
+    .breadcrumbs {
+      margin-bottom: 0px;
+    }
+  }
 </style>

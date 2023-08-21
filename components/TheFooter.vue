@@ -9,14 +9,14 @@
           <h3 class="footer-subtitle">Меню</h3>
           <div class="footer-menu-container">
             <div class="footer-menu-container__link">
-              <a class="footer-text" href="/">Пункт</a>
-              <a class="footer-text" href="/">Пункт</a>
-              <a class="footer-text" href="/">Пункт</a>
+              <a class="footer-text" href="/">Специалисты</a>
+              <a class="footer-text" href="/">Пациентам</a>
+              <a class="footer-text" href="/">Акции и скидки</a>
             </div>
             <div class="footer-menu-container__link">
-              <a class="footer-text" href="/">Пункт</a>
-              <a class="footer-text" href="/">Пункт</a>
-              <a class="footer-text" href="/">Пункт</a>
+              <a class="footer-text" href="/">Портфолио</a>
+              <a class="footer-text" href="/">Цены</a>
+              <a class="footer-text" href="/">Контакты</a>
             </div>
           </div>
         </div>
@@ -24,7 +24,7 @@
           <h3 class="footer-subtitle">Контакты</h3>
           <div class="footer-text">+7 (999) 888 - 77 - 66</div>
           <div class="footer-text">stamus-med@info.ru</div>
-          <div class="">
+          <div class="footer-social">
             <a href="/">
               <img class="footer-img" src="@/assets/images/icons/YouTube-fill.svg" alt="Social icon">
             </a>
@@ -45,7 +45,7 @@
               <p class="footer-text">ул. Мачуги 1/1</p>
               <p class="footer-text">ул. Черкасская 17</p>
             </div>
-            <div class="footer-address__container-link">
+            <div class="p-r-18">
               <p class="footer-text">ул. Гимназическая 85</p>
               <p class="footer-text">Платановый бульвар 19/3</p>
               <p class="footer-text">ул. Средняя 1/3</p>
@@ -106,6 +106,10 @@ export default {
   display: block;
 }
 
+.footer-social {
+  display: flex;
+}
+
 .logo {
   margin-bottom: 60px;
   height: 45px;
@@ -139,8 +143,8 @@ export default {
         display: flex;
 
         &__link {
-          @include flex-column-center;
-          padding-right: 40px
+          @include flex-column-start;
+          padding-right: 33px
         }
       }
     }
@@ -157,7 +161,7 @@ export default {
       }
 
       &__container-link {
-        padding-right: 40px
+        padding-right: 38px
       }
     }
 
@@ -205,6 +209,7 @@ export default {
       .footer__box {
         .footer-contacts {
           margin-right: 200px;
+          padding-bottom: 14px;
         }
       }
     }

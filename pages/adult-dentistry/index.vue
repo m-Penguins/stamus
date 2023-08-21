@@ -33,6 +33,16 @@
     :imgSeo="'block-adult-dent.png'"
     :data="mockArray"
     :dataDirection="mockArray"
+    :breadcrumbs="[
+        {
+          title: 'Главная',
+          url: '/'
+        },
+        {
+          title: 'Взрослая стоматология',
+          url: '/adult-dentistry'
+        }
+    ]"
   />
 </template>
   

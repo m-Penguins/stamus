@@ -74,6 +74,10 @@ export default {
   height: 56px;
 }
 
+.custom-select .selected:hover {
+  border: 1px solid var(--dissabled, #CFD5E1);
+}
+
 .select-box {
   display: flex;
   align-items: center;

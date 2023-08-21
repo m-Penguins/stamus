@@ -1,5 +1,5 @@
 <template>
-  <div class="container-size">
+  <div class="container-size wrapper-feedback">
     <elements-slider :programs="mockArray"/>
   </div>
 </template>
@@ -17,4 +17,9 @@
 <style lang="scss" scoped>
 @import '/assets/styles/style.scss';
 
+@media (max-width: 650px) {
+  .wrapper-feedback {
+    margin: 0 auto 80px !important;
+  }
+}
 </style>

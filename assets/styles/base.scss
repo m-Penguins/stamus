@@ -37,12 +37,29 @@
   padding-top: 14px;
 }
 
+.m-t-30 {
+  margin-top: 30px;
+}
+
+
 .p-bt-112 {
   padding-bottom: 112px;
 }
 
+.p-r-18 {
+  padding-right: 18px;
+}
+
 .bor-rad-25 {
   border-radius: 25px;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.height-50 {
+  height: 50px;
 }
 
 .main-title-dark-blue {
@@ -116,7 +133,18 @@
     }
 
     &:active {
-      color: $gray-text;
+      color: #101944;
+
+      &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background-color: $click;
+          transition: all .3s ease;
+        }
     }
 
     &:focus {
@@ -153,6 +181,12 @@
       border: 1px solid $hover;
       background-color: $white;
       color: $hover;
+        .svg {
+          fill: #232D5B;
+        }
+        .svg-stroke {
+          stroke: #232D5B;
+        }
     }
 
     &:active {
@@ -169,13 +203,13 @@
 }
 
 .input {
-  outline:none;
+  outline: none;
   width: 100%;
   height: 56px;
   padding: 14px 20px;
   border-radius: 45px;
   border: 1px solid $light-gray;
-  background: $light-gray;
+  background: transparent;
   color: $gray-text;
   @include body-16-regular;
 
@@ -202,12 +236,40 @@
 
 .input:valid {
   color:  $placeholder;
-  border: 1px solid  $dissabled-color;
+  border: 1px solid  #E9E9E9;
 }
 
 .input:valid:hover {
   color: $placeholder;
   border: 1px solid  $dissabled;
+}
+
+.textarea-base {
+  resize: none;
+  outline: none;
+  overflow: auto;
+  width: 100%;
+  height: 140px;
+  padding: 17px 20px;
+  border-radius: 25px;
+  @include body-16-regular;
+  color: $gray-text;
+  border: 1px solid #E9E9E9;
+
+  &::placeholder {
+      @include body-16-regular;
+      color: $placeholder;
+    }
+
+    &:hover {
+      border: 1px solid $dissabled;
+    }
+
+    &:disabled {
+      color: $dissabled-color;
+      border: 1px solid $border-card;
+      background: $light-gray;
+    }
 }
 
 .grey-point-container {

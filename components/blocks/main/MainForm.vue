@@ -13,7 +13,6 @@
 
 <style lang="scss" scoped>
 @import '/assets/styles/style.scss';
-
   .form-wrapper {
     width: 1280px;
     max-width: 100%;

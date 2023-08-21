@@ -15,15 +15,51 @@
     :imgSeo="'block1.png'"
     :data="mockArray"
     :addresData="mockArrayAddresSelect"
+    :breadcrumbs="[
+        {
+          title: 'Главная',
+          url: '/'
+        },
+        {
+          title: 'Детская стоматология',
+          url: '/children-dentistry'
+        }
+    ]"
   />
 </template>
 
 <script setup>
   const mockArray = [
-    {name: 'Овсоян Григорий', category: 'Челюстно-лицевой хирург', img:"avatar-4.png" },
-    {name: 'Унаньян Карина', category: 'Стоматолог-терапевт', img:"avatar-5.png" },
-    {name: 'Маашев Магомед', category: 'Стоматолог-хирург', img:"avatar-6.png"},
-    {name: 'Шагалова Полина', category: 'Стоматолог', img:"avatar-7.png"},
+    {
+      name: 'Овсоян Григорий',
+      category: 'Челюстно-лицевой хирург',
+      img:"avatar-4.png",
+      icon1:"icon-tool-1.svg",
+      icon2:"icons-badge.svg",
+      icon3:"icon-tool-2.svg",
+      icon4:"icon-tool-3.svg",
+      icon5:"icon-tool-4.svg",
+      iconInfo1:"Победитель Гран-при Продокторов «Лучший ортопед России» 2021",
+      iconInfo2:"2 место Премия Продокторов «Детский стоматолог» 2022 Краснодар", 
+      iconInfo3:"Врач высшей категории", 
+      iconInfo4:"Работает с эстетическими коронками", 
+      iconInfo5:"Работает под микроскопом",  
+    },
+    {
+      name: 'Унаньян Карина', 
+      category: 'Стоматолог-терапевт', 
+      img:"avatar-5.png" 
+    },
+    {
+      name: 'Маашев Магомед', 
+      category: 'Стоматолог-хирург', 
+      img:"avatar-6.png"
+    },
+    {
+      name: 'Шагалова Полина', 
+      category: 'Стоматолог', 
+      img:"avatar-7.png"
+    },
     ];
 
   const mockArrayAddresSelect = [

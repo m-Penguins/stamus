@@ -239,7 +239,7 @@ export default {
           display: flex;
           align-items: center;
           gap: 20px;
-          padding-bottom: 54px;
+          padding-bottom: 61px;
         }
       }
   }
@@ -310,7 +310,7 @@ export default {
 
   @media (max-width: 675px) {
     .specialists {
-      margin: 0 auto 80px;;
+      margin: 0 auto 80px !important;
     }
     .specialists-btn-base {
       width: 80%;

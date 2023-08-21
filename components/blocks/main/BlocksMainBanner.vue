@@ -57,8 +57,8 @@
         default: ''
       },
       bgColor: {
-        type: Boolean,
-        default: false
+        type: String,
+        default: ''
       },
       alt: { 
         type: String, 

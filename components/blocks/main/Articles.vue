@@ -1,6 +1,6 @@
 <template>
 <div class="article-wrap">
-  <div class="container-size">
+  <div class="container-size container-article">
     <elements-slider-article :programs="mockArray"/>
   </div>
 </div>
@@ -35,6 +35,11 @@
   @media (max-width: 1080px) {
   .article-wrap {
     padding: 0;
+  }
+}
+@media (max-width: 650px) {
+  .container-article {
+    margin: 0 auto 40px !important;
   }
 }
 </style>

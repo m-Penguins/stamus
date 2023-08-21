@@ -104,6 +104,7 @@
 @media (max-width: 700px) {
   .seo-block {
     display: block;
+    margin-bottom: 80px;
 
     .image {
       margin-bottom: 10px;

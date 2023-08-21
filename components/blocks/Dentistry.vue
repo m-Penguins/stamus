@@ -1,30 +1,16 @@
 <template>
-  <div class="dentistry-wrapper">
-    <div class="dentistry-container" :style="`background-image:url(${assetsStore.useAsset(`images/big-images/${imgBg}`)})`">
-      <div class="dentistry-box">
-      
-        <!-- <elements-bread-crumbs :breadcrumbs="[
-        {
-          title: 'Главная',
-          url: '/'
-        },
-        {
-          title: 'Детская стоматология',
-          url: '/children-dentistry'
-        }
-        ]"/> -->
-        <div class="mob">
-          <img :src="assetsStore.useAsset(`images/big-images/${imgAdaptiv}`)"/>
-        </div>
-        <elements-title-text-button :title="title" :text="text" fontSize="true"/>
-      </div>
-    </div>
-    <blocks-main-seo 
-      :title="titleSeo"
-      :text="textSeo"
-      :img="imgSeo"      
-    />
-  </div>
+  <elements-main-info 
+  :title="title" 
+  :text="text" 
+  :imgBg="imgBg" 
+  :imgAdaptiv="imgAdaptiv" 
+  :breadcrumbs="breadcrumbs"
+  />
+  <blocks-main-seo 
+    :title="titleSeo"
+    :text="textSeo"
+    :img="imgSeo"      
+  />
   <blocks-about-important 
     :arrayText="textAboutImportantArray"
   />
@@ -82,6 +68,9 @@ import { useAssets } from '../../stores/useAsset'
       addresData: {
         tpye: Array,
       },
+      breadcrumbs: {
+        tpye: Array,
+      },
       imgBg: {
         type: String,
         default: ''
@@ -113,86 +102,3 @@ import { useAssets } from '../../stores/useAsset'
     }
   }
 </script>
-
-<style scoped lang="scss">
-@import '/assets/styles/style.scss';
-
-.mob {
-  display: none;
-}
-
-.dentistry-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 1880px;
-    max-width: 95%;
-    margin: 20px auto 0 auto;
-    border-radius: 45px;
-}
-.dentistry-container {
-  width: 100%;
-  height: 920px;
-  border-radius: 45px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  margin-bottom: 100px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.dentistry-box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 1280px;
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-  @media (max-width: 1577px) {
-    .dentistry-box {
-      margin-left: 80px;
-    }
-  }
-
-  @media (max-width: 1920px) and (min-width: 1110px) {
-    .dentistry-container {
-      height: calc(500px + ((100vw - 1110px) * (420 / 810)));
-    }
-  }
-
-  @media (max-width: 1110px) {
-    .mob {
-      display: flex;
-      width: 60%;
-
-        img {
-          width: 100%;
-        }
-    }
-    .dentistry-container {
-      height: 100%;
-      background: none !important;
-    }
-
-    .dentistry-box {
-      margin-left: 0;
-      gap: 34px;
-    }
-  }
-
-    @media (max-width: 600px) {
-    .dentistry-box {
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .mob {
-      width: 100%;
-    }
-  }
-
-</style>
