@@ -4,7 +4,19 @@
       <div class="video-block-container">
         <div class="video-block-info">
           <h3 v-html="title" class="video-block-title"></h3>
-          <p v-html="text" class="video-block-text"></p>
+          <p v-if="!isContactsBlock" v-html="text" class="video-block-text"></p>
+          <div v-else class="video-block-contacts">
+            <div class="video-block-contacts-box grey">
+              <div>Номер телефона</div>
+              <div>Мессенджеры</div>
+              <div>Электронная почта</div>
+            </div>
+            <div class="video-block-contacts-box dark-grey">
+              <div>8 (861) 202-98-27</div>
+              <div>Написать в WhatsApp</div>
+              <div>stamus.dent@yandex.ru</div>
+            </div>
+          </div>
         </div>
         <div class="video-block-logo">
           <img src="../../assets/images/icons/video-logo-block.svg" alt="icon"/>
@@ -44,6 +56,10 @@
       text: {
         type: String,
         default: ''
+      },
+      isContactsBlock: {
+        type: Boolean,
+        default: false
       }
     }
   }
@@ -91,6 +107,30 @@
 .video-block-text {
   @include body-14-regular;
   color: $gray-text;
+}
+
+.video-block-contacts {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  padding-top: 10px;
+}
+
+.video-block-contacts-box {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.grey {
+  @include body-12-regular;
+  color: $placeholder;
+}
+
+.dark-grey {
+  @include body-14-regular;
+  color: $gray-text;
+  gap: 12px;
 }
 
 .video-block-inner {
@@ -157,6 +197,11 @@
     flex-direction: inherit;
     max-width: 100%;
     margin: 0;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .video-block-contacts {
+    padding-bottom: 30px;
   }
   .video-block-inner {
     width: 100%;

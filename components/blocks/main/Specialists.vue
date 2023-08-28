@@ -141,7 +141,7 @@ export default {
         }
     }
 
-          .specialists-btn {
+      .specialists-btn {
         display: flex;
         align-items: center;
         gap: 10px;

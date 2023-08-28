@@ -1,12 +1,36 @@
 <template>
   <form  class="input-base">
-    <input type="text" placeholder="Найти" class="input bg">
+    <input type="text" :placeholder="placeholder" v-model="searchTerm" class="input bg" @keyup.enter="search">
     <button type="submit">
       <img src="../../assets/images/icons/icon_search.svg" alt="icon search"/>
     </button>
   </form>
 </template>
 
+<script>
+  export default {
+    name: 'Input',
+    props: {
+      placeholder: String
+    },
+  data() {
+    return {
+      searchTerm: ''
+    }
+  },
+  methods: {
+    search() {
+      console.log(searchTerm)
+      if (this.searchTerm) {
+        this.$router.push({
+          path: '/search',
+          query: { term: this.searchTerm }
+        })
+      }
+    }
+  }
+  }
+</script>
 
 <style scoped lang="scss">
   .input-base {

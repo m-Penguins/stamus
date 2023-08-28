@@ -1,6 +1,6 @@
 <template>
   <div class="tabs">
-    <div class="tabs-title">Контакты</div>
+    <div class="tabs-title" v-html="text"></div>
     <div  class="tabs2">
       <div class="tabs-wrapper">
         <div class="tabs-container">
@@ -53,6 +53,10 @@ export default {
   props: {
       dataInfo: {
         tpye: Array,
+      },
+      text: {
+        type: String,
+        default: ''
       },
     },
   data() {

@@ -15,6 +15,7 @@
     :imgSeo="'block1.png'"
     :data="mockArray"
     :addresData="mockArrayAddresSelect"
+    :dataDirection="mockArrayDirection"
     :breadcrumbs="[
         {
           title: 'Главная',
@@ -29,6 +30,7 @@
 </template>
 
 <script setup>
+import {mockArrayDirection} from '../../stores/mockData'
   const mockArray = [
     {
       name: 'Овсоян Григорий',

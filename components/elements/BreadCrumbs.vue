@@ -62,6 +62,7 @@ export default {
     color: $placeholder;
     @include body-12-regular;
     text-decoration: none;
+    align-items: center;
     &:last-child {
       display: inline-block;
       text-overflow: ellipsis;

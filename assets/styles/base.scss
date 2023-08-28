@@ -62,6 +62,10 @@
   height: 50px;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .main-title-dark-blue {
   @include body-60-medium;
   color: $dark-blue-subtitle;

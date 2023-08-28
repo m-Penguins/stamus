@@ -21,7 +21,7 @@
         />
       </div>
       <div class="input-search">
-        <elements-input-search class="input-search"/>
+        <elements-input-search class="input-search" placeholder="Найти"/>
       </div>
     </div>
     <div>

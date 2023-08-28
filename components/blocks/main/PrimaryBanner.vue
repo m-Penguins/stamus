@@ -19,12 +19,12 @@
           </router-link>
           <router-link to="/adult-dentistry"  class="desktop-link">
             <div class="primary-banner-img desktop card_main">
-              <div class="primary-banner-btn">Детская стоматология</div>
+              <div class="primary-banner-btn">Взрослая стоматология</div>
             </div>
           </router-link>
           <router-link to="/adult-dentistry" class="tablet-link">
             <div class="primary-banner-img tablet card_main-tab">
-              <div class="primary-banner-btn">Детская стоматология</div>
+              <div class="primary-banner-btn">Взрослая стоматология</div>
             </div>
           </router-link>
           <router-link to="/adult-dentistry" class="mob-link">

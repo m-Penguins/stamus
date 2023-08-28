@@ -2,7 +2,7 @@
 <div class="main-events-block">
   <div class="slider-title">
     <div class="slider-title__box">
-      <h2 class="slider-title__box-title">Кейсы по направлению</h2>
+      <h2 class="slider-title__box-title" v-html="text"></h2>
     </div>
   </div>
   <div class="wrapper-swiper">
@@ -74,6 +74,10 @@ export default {
   props: {
     programs: {
       tpye: Array,
+    },
+    text: {
+        type: String,
+        default: ''
     },
   },
   setup() {

@@ -1,6 +1,6 @@
 <template>
   <div class="container-size">
-    <elements-slider-cases-direction :programs="dataDirection"/>
+    <elements-slider-cases-direction :text="text" :programs="dataDirection"/>
   </div>
 </template>
 
@@ -9,6 +9,10 @@ export default {
   props: {
     dataDirection: {
       tpye: Array,
+    },
+      text: {
+      type: String,
+      default: ''
     },
   },
 };
