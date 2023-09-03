@@ -16,6 +16,15 @@
 
 <style lang="scss" scoped>
 @import '/assets/styles/style.scss';
+.wrapper-feedback {
+  padding-top: 20px;
+}
+
+@media (max-width: 900px) {
+  .wrapper-feedback {
+     padding-top: 0;
+  }
+}
 
 @media (max-width: 650px) {
   .wrapper-feedback {

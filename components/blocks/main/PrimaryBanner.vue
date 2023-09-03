@@ -1,7 +1,7 @@
 <template>
   <div class="primary-banner">
     <div class="primary-banner-container">
-      <elements-title-text-button title="Оффер <br> в несколько строчек" text="Небольшое описание в несколько строчек"/>
+      <elements-title-text-button :fontSize="false" textButtonBase="Записаться онлайн" title="Оффер <br> в несколько строчек" text="Небольшое описание в несколько строчек"/>
       <div class="primary-banner-box">
         <div class="primary-banner-wrap">
           <router-link to="/children-dentistry" class="desktop-link">
@@ -119,7 +119,7 @@
     }
   }
 
-  @media screen and (max-width: 1400px) {
+  @media screen and (max-width: 1357px) {
     .primary-banner {
       background: none;
       margin: 20px auto 0px auto;
@@ -128,6 +128,7 @@
       }
     }
   }
+  
   @media screen and (max-width: 1290px) {
     .tablet {
       @include flex-column-end;

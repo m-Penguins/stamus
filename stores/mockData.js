@@ -13,6 +13,13 @@ export const mockArrayOurSpecialists = [
   {name: 'Шагалова Полина', category: 'Стоматолог', img:"avatar-7.png"},
 ];
 
+export const mockSpecialists = [
+  { id: 1, name: 'Овсоян Григорий', category: 'Стоматолог-терапевт', img: 'images/specialists/avatar.png', imgBig:'images/specialists/avatar-4.png'},
+  { id: 2, name: 'Унаньян Карина', category: 'Челюстно-лицевой хирург', img: 'images/specialists/avatar-1.png', imgBig:'images/specialists/avatar-7.png'},
+  { id: 3, name: 'Маашев Магомед', category: 'Стоматолог-хирург', img: 'images/specialists/avatar-2.png', imgBig:'images/specialists/avatar-6.png'},
+  { id: 4, name: 'Шагалова Полина', category: 'Стоматолог', img: 'images/specialists/avatar-3.png', imgBig:'images/specialists/avatar-5.png'}
+]
+
 export const textAboutImportantArray = [
   'Кариес не бывает «детским». Это инфекция, которая может распространиться на постоянные зубы, если не начать лечение молочных зубов',
   'Разрушенные зубы влияют на отношение детей в коллективе',
@@ -46,19 +53,19 @@ export const mockArrayServicesCard = [
   ];
 
 export const mockArrayDirection = [
-    {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar1.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
-    {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar2.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
-    {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar3.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
-    {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
-    {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
-    {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
-    {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
-    {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
-    {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
-    {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
-    {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
-    {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
-    {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+    {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar1.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+    {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar2.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+    {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar3.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+    {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+    {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+    {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+    {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+    {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+    {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+    {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+    {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+    {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+    {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
 ];
 
 export const mockArrayDocumentationCard = [

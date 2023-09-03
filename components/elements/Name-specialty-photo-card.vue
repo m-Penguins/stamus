@@ -17,7 +17,7 @@
         </div> -->
       </div>
     </div>
-    <elements-link-with-arrow type="true" title="Подробнее о враче"/>
+    <elements-link-with-arrow type="true" title="Подробнее о враче" :link="link"/>
     <!-- <elements-tool/> -->
   </div>
 </template>
@@ -29,6 +29,9 @@ export default {
     specialists: {
       type: Object
     },
+    link: {
+      type: String
+    }
   },
     methods: {
     selectButton() {

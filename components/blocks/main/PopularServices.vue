@@ -38,4 +38,17 @@
     }
   }
 
+  
+  @media (max-width: 900px) {
+    .popular-service {
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .popular-service {
+      margin: 0 auto 80px !important;
+    }
+  }
+
 </style>

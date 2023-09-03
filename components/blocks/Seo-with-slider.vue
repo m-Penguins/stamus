@@ -21,7 +21,7 @@
         default: ''
       },
       imagesScroll: {
-        tpye: Array,
+        type: Array,
       },
     },
     setup() {

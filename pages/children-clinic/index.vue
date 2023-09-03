@@ -38,7 +38,7 @@
       img="tooth.png"
       bigImg=true
   />
-  <blocks-our-specialists :data="mockArray"/>
+  <blocks-our-specialists title="Наши специалисты" :data="mockArray"/>
   <blocks-main-feedback />
   <blocks-map :dataInfo="infoData" text="Контакты"/>
   <blocks-gallery />
@@ -75,16 +75,16 @@ import { textAboutImportantArray } from '../../stores/mockData';
         default: 'Как уже неоднократно упомянуто, непосредственные участники технического прогресса неоднозначны и будут разоблачены. С учётом сложившейся международной обстановки, высококачественный прототип будущего проекта не даёт нам иного выбора, кроме определения приоретизации разума над эмоциями. Разнообразный и богатый опыт говорит нам, что укрепление и развитие внутренней структуры в значительной степени обусловливает важность системы массового участия. '
       },
       dataDirection: {
-        tpye: Array,
+        type: Array,
       },
       data: {
-        tpye: Array,
+        type: Array,
       },
       infoData: {
-        tpye: Array,
+        type: Array,
       },
       addresData: {
-        tpye: Array,
+        type: Array,
       },
       imgBg: {
         type: String,
@@ -100,10 +100,10 @@ import { textAboutImportantArray } from '../../stores/mockData';
       const imagesScroll = ['clinic.png', 'clinic.png', 'clinic.png'];
       const textAboutImportant = textAboutImportantArray;
     const mockArrayDirection = [
-      {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar1.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
-      {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar2.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
-      {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar3.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
-      {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+      {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar1.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+      {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar2.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+      {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar3.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
+      {name: 'Название кейса', category: 'Взрослая стоматология', img:"cases-direction/avatar4.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
       ];
     const mockArray = [
       {name: 'Овсоян Григорий', category: 'Челюстно-лицевой хирург', img:"avatar-4.png" },

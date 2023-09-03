@@ -76,7 +76,7 @@ export default {
 
 .areas-wrapper {
     h2 {
-      padding-bottom: 40px;
+      padding-bottom: 30px;
       @include body-22-medium-Neue;
       color: $dark-blue-subtitle;
     }
@@ -138,6 +138,11 @@ export default {
 }
 
   @media (max-width: 1000px) {
+    .areas-wrapper {
+      h2 {
+        padding-bottom: 40px;
+      }
+    }
     .display {
       display: none;
     }

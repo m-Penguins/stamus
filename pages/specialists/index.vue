@@ -31,7 +31,7 @@
       </div>
       <div class="spicialists-page-cards">
         <div  class="spicialists-page-card" v-for="item in mockArrayOurSpecialists" :key="item" >
-          <elements-name-specialty-photo-card :specialists="item" />
+          <elements-name-specialty-photo-card :specialists="item" link="specialists"/>
         </div>
       </div>
       <elements-pagination
@@ -49,16 +49,16 @@
 import {mockArrayOurSpecialists} from '../../stores/mockData';
   export default {
     data() {
-    return {
-      currentPage: 1,
-      totalPages: 10 
-    };
-  },
-  methods: {
-    setCurrentPage(pageNumber) {
-      this.currentPage = pageNumber;
-    }
-  },
+      return {
+        currentPage: 1,
+        totalPages: 10 
+      };
+    },
+    methods: {
+      setCurrentPage(pageNumber) {
+        this.currentPage = pageNumber;
+      }
+    },
     setup() {
       const breadcrumbs = [{
           title: 'Главная',
@@ -199,7 +199,7 @@ import {mockArrayOurSpecialists} from '../../stores/mockData';
 
 @media (max-width: 506px) {
   .spicialists-page-card {
-    max-width: 343px;
+    max-width: 100%;
   }
 }
 </style>

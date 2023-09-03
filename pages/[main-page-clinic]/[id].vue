@@ -49,7 +49,7 @@ const imagesScroll = ['video1.png', 'video2.png', 'video3.png','video3.png','vid
       </div>
     </div>
     <blocks-main-feedback />
-    <blocks-video-slider-block :imagesScroll="imagesScroll" />
+    <blocks-video-slider-block :imagesScroll="imagesScroll" title="Видео"/>
     <BlocksMainBanner 
       :title="'Акция связанная с услугой'"
       :text="'Описание может быть в несколько строчек'"
@@ -60,9 +60,9 @@ const imagesScroll = ['video1.png', 'video2.png', 'video3.png','video3.png','vid
       img="tooth.png"
       bigImg=true
     />
-    <blocks-our-specialists :data="mockArrayOurSpecialists"/>
+    <blocks-our-specialists title="Наши специалисты" :data="mockArrayOurSpecialists"/>
     <blocks-main-popularServices />
-    <blocks-main-articles />
+    <blocks-main-articles title="Статьи"/>
     <blocks-map :dataInfo="infoData" text="Контакты"/>
     <blocks-main-form />
   </div>

@@ -5,7 +5,7 @@
         <div class="video-block-info">
           <h3 v-html="title" class="video-block-title"></h3>
           <p v-if="!isContactsBlock" v-html="text" class="video-block-text"></p>
-          <div v-else class="video-block-contacts">
+          <div v-if="isContactsBlock" class="video-block-contacts">
             <div class="video-block-contacts-box grey">
               <div>Номер телефона</div>
               <div>Мессенджеры</div>
@@ -16,6 +16,9 @@
               <div>Написать в WhatsApp</div>
               <div>stamus.dent@yandex.ru</div>
             </div>
+          </div>
+          <div v-if="isAcquaintanceBlock" class="video-block-info-card">
+            <elements-specialists-info-card :info="info"/>
           </div>
         </div>
         <div class="video-block-logo">
@@ -60,6 +63,13 @@
       isContactsBlock: {
         type: Boolean,
         default: false
+      },
+      isAcquaintanceBlock: {
+        type: Boolean,
+        default: false
+      },
+      info: {
+        type: Object,
       }
     }
   }
@@ -67,6 +77,10 @@
 
 <style scoped lang="scss">
 @import '/assets/styles/style.scss';
+
+.video-block-info-card {
+  padding-top: 40px;
+}
 
 .mob {
   display: none;
@@ -189,6 +203,10 @@
 }
 
 @media (max-width: 1140px) {
+  .video-block-info-card {
+    padding: 0 0 30px;
+  }
+
   .video-block-wrap {
     flex-wrap: wrap;
   }

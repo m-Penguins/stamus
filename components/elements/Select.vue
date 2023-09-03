@@ -75,7 +75,7 @@ export default {
 }
 
 .custom-select .selected:hover {
-  border: 1px solid var(--dissabled, #CFD5E1);
+  border: 1px solid #CFD5E1;
 }
 
 .select-box {
@@ -111,8 +111,8 @@ hr {
 
 .custom-select .selected {
   border-radius: 45px;
-  border: 1px solid var(--stroke, #E9E9E9);
-  background: var(--white, #FFF);
+  border: 1px solid #E9E9E9;
+  background: #FFF;
   color: #525660;
   padding: 20px;
   cursor: pointer;

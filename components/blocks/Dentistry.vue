@@ -25,7 +25,7 @@
       img="tooth.png"
       bigImg=true
   />
-  <blocks-our-specialists :data="data"/>
+  <blocks-our-specialists title="Наши специалисты" :data="data"/>
   <blocks-main-feedback />
   <blocks-map :dataInfo="infoData" text="Контакты"/>
   <blocks-gallery />
@@ -58,19 +58,19 @@ import { textAboutImportantArray } from '../../stores/mockData';
         default: ''
       },
       dataDirection: {
-        tpye: Array,
+        type: Array,
       },
       data: {
-        tpye: Array,
+        type: Array,
       },
       infoData: {
-        tpye: Array,
+        type: Array,
       },
       addresData: {
-        tpye: Array,
+        type: Array,
       },
       breadcrumbs: {
-        tpye: Array,
+        type: Array,
       },
       imgBg: {
         type: String,
@@ -84,7 +84,7 @@ import { textAboutImportantArray } from '../../stores/mockData';
     setup() {
       const assetsStore = useAssets();
       const textAboutImportant = textAboutImportantArray;
-    const mockArrayDirection = [
+      const mockArrayDirection = [
     {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar1.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
     {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar2.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },
     {name: 'Название кейса', category: 'Взрослая стоматология', img:"avatar3.png", description:"Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись" },

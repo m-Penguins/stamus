@@ -2,7 +2,7 @@
 <div class="main-events-block">
   <div class="slider-title">
     <div class="slider-title__box">
-      <h2 class="slider-title__box-title">Видео</h2>
+      <h2 class="slider-title__box-title" v-html="title"></h2>
     </div>
   </div>
   <div class="wrapper-swiper">
@@ -28,7 +28,7 @@
       }"
     >
       <swiper-slide v-for="(item, index) in images" :key="index" class="swiper-slide">
-        <img :src="assetsStore.useAsset(`images/slider-video/${item}`)" alt="clinic" class="swiper-img">
+        <img :src="assetsStore.useAsset(`images/slider-video-documents/${item}`)" alt="clinic" class="swiper-img">
       </swiper-slide>
     </Swiper>
     <div class="wrapper-btn">
@@ -64,8 +64,12 @@ export default {
   },
   props: {
     images: {
-      tpye: Array,
+      type: Array,
     },
+    title: {
+      type: String,
+      default: ''
+    }
   },
   setup() {
     const assetsStore = useAssets();
@@ -84,7 +88,7 @@ export default {
 <style lang="scss" scoped>
 @import '/assets/styles/style.scss';
   .slider-title {
-    padding: 0px 0 40px 0;
+    padding: 0px 0 30px 0;
 
     &__box {
       display: flex;

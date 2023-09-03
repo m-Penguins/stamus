@@ -18,7 +18,7 @@
           </div>
           <div class="specialists-box">
             <div class="specialists-box__name">{{ button.name }}</div>
-            <div class="specialists-box__spec">{{ button.speciality }}</div>
+            <div class="specialists-box__spec">{{ button.category }}</div>
           </div>
         </button>
       </div>
@@ -31,17 +31,20 @@
             <h2 class="specialists-heading">{{selectedName}}</h2>
             <p class="specialists-desc">{{selectedSpeciality}}</p>
           </div>
+          <!-- <div v-for="button in buttons" :key="button.id" > -->
+            <!-- <elements-specialists-info-card :info="buttons"/> -->
+          <!-- </div> -->
           <div class="specialists-inner__info-numbers">
             <div>
-              <p class="specialists-numbers">6</p>
+              <p class="specialists-numbers">{{selectedExperience}}</p>
               <p class="specialists-box__spec">лет опыта</p>
             </div>
             <div>
-              <p class="specialists-numbers">24</p>
+              <p class="specialists-numbers">{{selectedReview}}</p>
               <p class="specialists-box__spec">отзыва</p>
             </div>
             <div>
-              <p class="specialists-numbers">667</p>
+              <p class="specialists-numbers">{{selectedConsultation}}</p>
               <p class="specialists-box__spec">консультаций</p>
             </div>
           </div>
@@ -65,11 +68,50 @@ export default {
       selectedImg: 'images/specialists/avatar-1.png',
       selectedSpeciality: 'Челюстно-лицевой хирург',
       selectedBigImg: 'images/specialists/avatar-7.png',
+      selectedExperience: 6,
+      selectedReview: 200,
+      selectedConsultation: 25,
       buttons: [
-        { id: 1, name: 'Овсоян Григорий', speciality: 'Стоматолог-терапевт', img: 'images/specialists/avatar.png', imgBig:'images/specialists/avatar-4.png'},
-        { id: 2, name: 'Унаньян Карина', speciality: 'Челюстно-лицевой хирург', img: 'images/specialists/avatar-1.png', imgBig:'images/specialists/avatar-7.png'},
-        { id: 3, name: 'Маашев Магомед', speciality: 'Стоматолог-хирург', img: 'images/specialists/avatar-2.png', imgBig:'images/specialists/avatar-6.png'},
-        { id: 4, name: 'Шагалова Полина', speciality: 'Стоматолог', img: 'images/specialists/avatar-3.png', imgBig:'images/specialists/avatar-5.png'},
+        { 
+          id: 1, 
+          name: 'Овсоян Григорий', 
+          category: 'Стоматолог-терапевт', 
+          img: 'images/specialists/avatar.png', 
+          imgBig:'images/specialists/avatar-4.png',
+          experience: 6,
+          review: 200,
+          consultation: 25,
+        },
+        { 
+          id: 2, 
+          name: 'Унаньян Карина', 
+          category: 'Челюстно-лицевой хирург', 
+          img: 'images/specialists/avatar-1.png', 
+          imgBig:'images/specialists/avatar-7.png',
+          experience: 6,
+          review: 200,
+          consultation: 25,
+        },
+        { 
+          id: 3, 
+          name: 'Маашев Магомед', 
+          category: 'Стоматолог-хирург', 
+          img: 'images/specialists/avatar-2.png', 
+          imgBig:'images/specialists/avatar-6.png',
+          experience: 6,
+          review: 200,
+          consultation: 25,
+        },
+        { 
+          id: 4, 
+          name: 'Шагалова Полина', 
+          category: 'Стоматолог', 
+          img: 'images/specialists/avatar-3.png', 
+          imgBig:'images/specialists/avatar-5.png',
+          experience: 6,
+          review: 200,
+          consultation: 25,
+        },
       ],
     };
   },
@@ -80,8 +122,11 @@ export default {
         if (this.selectedButton === item.id) {
           this.selectedName = item.name;
           this.selectedImg = item.img;
-          this.selectedSpeciality = item.speciality;
+          this.selectedSpeciality = item.category;
           this.selectedBigImg = item.imgBig;
+          this.selectedExperience = item.experience;
+          this.selectedReview = item.review;
+          this.selectedConsultation = item.consultation;
         }
       });
     },
@@ -97,6 +142,9 @@ export default {
 
 <style lang="scss" scoped>
 @import '/assets/styles/style.scss';
+.specialists {
+  padding-top: 80px;
+}
 
 .div-with-line {
   border-radius: 0px 15px 16px 0px;
@@ -245,6 +293,9 @@ export default {
   }
 
   @media (max-width: 1017px) {
+    .specialists {
+      padding-top: 0;
+    }
   .specialists-subject {
     display: flex;
     flex-direction: column;

@@ -2,12 +2,12 @@
   <div class="dentistry-wrapper">
     <div class="dentistry-container" :style="`background-image:url(${assetsStore.useAsset(`images/big-images/${imgBg}`)})`">
       <div class="dentistry-box">
-        <elements-bread-crumbs :breadcrumbs="breadcrumbs"/>
+        <elements-bread-crumbs :breadcrumbs="breadcrumbs" :typeColorWhite="typeColorWhite"/>
         <div class="mob">
           <img :src="assetsStore.useAsset(`images/big-images/${imgAdaptiv}`)"/>
-          <elements-title-text-button :isButtonBase="isButtonBase" :title="title" font-size="true" :text="text" class=""/>
+          <elements-title-text-button textButtonBase="Записаться онлайн" :isButtonBase="isButtonBase" :title="title" font-size="true" :text="text" class=""/>
         </div>
-        <elements-title-text-button :isButtonBase="isButtonBase" :title="title" :text="text" class="height-50 desktop"/>
+        <elements-title-text-button :typeColorWhiteText="typeColorWhiteText" textButtonBase="Записаться онлайн" :isButtonBase="isButtonBase" :title="title" :text="text" class="height-50 desktop"/>
       </div>
     </div>
   </div>
@@ -34,11 +34,19 @@ import { useAssets } from '../../stores/useAsset'
         default: ''
       },
       breadcrumbs: {
-        tpye: Array,
+        type: Array,
       },
       isButtonBase: {
         type: Boolean,
         default: true
+      },
+      typeColorWhite: {
+        type: Boolean,
+        default: false
+      },
+      typeColorWhiteText: {
+        type: Boolean,
+        default: false
       }
     },
     setup() {

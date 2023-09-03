@@ -1,6 +1,6 @@
 <template>
   <div class="container-size">
-    <elements-slider-our-specialists :programs="data"/>
+    <elements-slider-our-specialists :programs="data" :title="title"/>
   </div>
 </template>
 
@@ -10,7 +10,11 @@
 export default {
   props: {
     data: {
-      tpye: Array,
+      type: Array,
+    },
+    title: {
+      type: String,
+      default: ''
     },
   },
 };

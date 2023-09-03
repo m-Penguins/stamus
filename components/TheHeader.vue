@@ -19,8 +19,28 @@
                 </div>
               </li>
               <li v-for="item in navigation" :key="item.title">
-                <NuxtLink active-class="active-link" @click="showServices = false; showSearch = false" class="header-nav-item m-r-20" :to="item.path">
-                    {{ item.title }}
+                <NuxtLink 
+                  active-class="active-link" 
+                  @click="showServices = false; showSearch = false" 
+                  class="header-nav-item m-r-20" 
+                  :to="item.path">
+                  <div v-if="item.title !== 'Пациентам'">{{ item.title }}</div>
+                  <div v-else class="header-arrow-icon">
+                    <div>{{ item.title }}</div>
+                    <div v-if="item.title === 'Пациентам'" class="arrow-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M6 8L10 12L14 8" stroke="#7F838C" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                    <div class="menu-patients">
+                      <ul class="menu-patients-list">
+                        <li class="menu-patients-items" v-for="(elem, index) in navigationPatients" :key="elem" >
+                          {{elem}}
+                          <hr v-if="index !== navigationPatients.length - 1"/>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </NuxtLink>
               </li>
             </ul>
@@ -177,6 +197,9 @@ export default {
         categories: false,
         activeClass: "",
         showServicesAll: false,
+        navigationPatients: [
+          'Клиники', 'Наше приложение', 'Информация для пациентов', 'Налоговый вычет', 'До/после'
+        ],
         navigationServices2: [
         {
           id: 1,
@@ -362,6 +385,35 @@ export default {
 
 <style lang="scss">
 @import '/assets/styles/style.scss';
+
+.menu-patients {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  border-radius: 15px;
+  border: 1px solid var(--menu-burger-hover-bg, #F0F0F0);
+  background: var(--white, #FFF);
+  padding: 10px;
+  width: 243px;
+}
+
+.header-arrow-icon {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+    &:hover {
+      .menu-patients {
+        display: flex;
+      }
+  }
+}
+
+.arrow-icon {
+  width: 20px;
+  height: 20px;
+}
 
 .a2 {
   display: none;

@@ -37,7 +37,7 @@
   gap: 16px;
   width: 1280px;
   max-width: 100%;
-  margin: 50px auto;
+  margin: 0 auto 100px;
 }
 
 .gallery-title {
@@ -103,6 +103,9 @@
   }
   .gallery-inner {
     flex-wrap: wrap;
+  }
+  .gallery {
+    margin: 0 auto 80px;
   }
 }
 

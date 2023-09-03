@@ -13,7 +13,7 @@
 export default {
   props: {
       cards: {
-        tpye: Array,
+        type: Array,
       },
   }
 }

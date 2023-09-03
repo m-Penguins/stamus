@@ -41,7 +41,7 @@
       bgColor="dark-red"
       img="image.png"
     />
-    <blocks-main-articles />
+    <blocks-main-articles title="Статьи"/>
     <blocks-main-seo 
       title="СЕО текст"
       text="Как уже неоднократно упомянуто, непосредственные участники технического прогресса неоднозначны и будут разоблачены.

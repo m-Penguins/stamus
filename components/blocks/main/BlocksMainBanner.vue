@@ -234,6 +234,17 @@
     }
   }
 
+  .grey {
+    background: #F9F9FA;
+    height: 434px;
+    .banner-title {
+      color: $dark-blue-subtitle;
+    }
+    .banner-text {
+      color: $gray-text;
+    }
+  }
+
   .dark-blue-gradient {
     background: $dark-blue-gradient;
     .banner-title {
@@ -253,6 +264,9 @@
         }
       }
     }
+  }
+  .grey {
+    height: 420px;
   }
 }
 
@@ -363,7 +377,7 @@
 @media (max-width: 690px) {
   .selected {
     justify-content: flex-start;
-    gap: 5px;
+    gap: 14px
   }
   .banner {
     margin: 0 auto 80px;

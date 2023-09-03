@@ -114,6 +114,34 @@
   margin: 0 auto 100px;
 }
 
+.base-wrapper-grey {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  margin: 20px auto 100px auto;
+  border-radius: 45px;
+  background-color: #F9F9FA;
+}
+
+.base-container-grey {
+  width: 1280px;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 1400px) {
+  .base-wrapper-grey {
+    background: none;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .base-wrapper-grey {
+    margin: 20px auto 80px auto;
+  }
+}
+
 .header-nav-item {
   @include body-14-regular;
   color: $gray-text;

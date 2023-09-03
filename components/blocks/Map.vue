@@ -52,7 +52,7 @@ import { useAssets } from '../../stores/useAsset';
 export default {
   props: {
       dataInfo: {
-        tpye: Array,
+        type: Array,
       },
       text: {
         type: String,
@@ -169,8 +169,7 @@ export default {
 .tabs {
   width: 1280px;
   max-width: 100%;
-  margin: 0 auto;
-  padding: 50px 0;
+  margin: 0 auto 100px;
 }
 
 .tabs-title {
@@ -234,6 +233,10 @@ button.active::after {
       display: flex;
       justify-content: center;
       padding: 27px 0 100px 0;
+    }
+
+    .tabs {
+      margin: 0 auto;
     }
 }
 

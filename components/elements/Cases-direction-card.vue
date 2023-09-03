@@ -1,16 +1,19 @@
 <template>
   <div class="card-photo-name">
     <div class="card-photo-name-img">
-      <img :src="assetsStore.useAsset(`images/cases-direction/${direction.img}`)" :alt="alt"/>
+      <img :src="assetsStore.useAsset(`images/${direction.img}`)" :alt="alt"/>
     </div>
-    <div class="card-photo-name-container">
+    <div v-if="isCategoryAndDescription" class="card-photo-name-container">
       <div>
         <div class="card-photo-name-title">{{direction.name}}</div>
         <div class="card-photo-name-text">{{direction.category}}</div>
       </div>
     </div>
-    <div class="card-photo-name-description">
+    <div v-if="isCategoryAndDescription" class="card-photo-name-description">
       {{direction.description}}
+    </div>
+    <div v-else class="card-photo-name-title">
+      {{direction.name}}
     </div>
     <elements-link-with-arrow type="true" title="Смотреть кейс"/>
   </div>
@@ -22,6 +25,10 @@ export default {
   props: {
     direction: {
       type: Object
+    },
+    isCategoryAndDescription: {
+      type: Boolean,
+      default: true
     },
   },
   setup() {

@@ -1,6 +1,8 @@
 <template>
  <div class="container-size wrapper-feedback">
-  <elements-slider-video-elements :images="imagesScroll"/>
+  <elements-slider-video-elements 
+  :title="title"
+  :images="imagesScroll"/>
  </div>
 </template>
 
@@ -11,12 +13,8 @@
         type: String,
         default: ''
       },
-      text: {
-        type: String,
-        default: ''
-      },
       imagesScroll: {
-        tpye: Array,
+        type: Array,
       },
     }
   }
@@ -27,7 +25,7 @@
 
 @media (max-width: 650px) {
   .wrapper-feedback {
-    margin: 0 auto 80px !important;
+    margin: 0 auto 40px !important;
   }
 }
 </style>

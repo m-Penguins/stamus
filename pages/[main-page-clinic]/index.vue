@@ -49,9 +49,9 @@ let mockDate = mockArrayClinic[+route.params.mainpageclinic.charAt(route.params.
       img="tooth.png"
       bigImg=true
   />
-  <blocks-our-specialists :data="mockArray"/>
+  <blocks-our-specialists title="Наши специалисты" :data="mockArrayOurSpecialists"/>
   <blocks-main-feedback />
-  <blocks-map :dataInfo="infoData" title="Контакты"/>
+  <blocks-map :dataInfo="infoData" text="Контакты"/>
   <blocks-gallery />
   <blocks-main-form />
 </template>

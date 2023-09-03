@@ -34,7 +34,7 @@
       }"
     >
       <swiper-slide v-for="(item, index) in programs" :key="index" class="swiper-slide">
-        <elements-cases-direction-card :direction="item" />
+        <elements-cases-direction-card :direction="item" :isCategoryAndDescription="isCategoryAndDescription"/>
       </swiper-slide>
     </Swiper>
     <div class="wrapper-btn">
@@ -73,12 +73,16 @@ export default {
   },
   props: {
     programs: {
-      tpye: Array,
+      type: Array,
     },
     text: {
-        type: String,
-        default: ''
+      type: String,
+      default: ''
     },
+    isCategoryAndDescription: {
+      type: Boolean,
+      default: true
+    }
   },
   setup() {
     const prev = ref(null);

@@ -2,7 +2,7 @@
 <div class="main-events-block">
   <div class="slider-title">
     <div class="slider-title__box">
-      <h2 class="slider-title__box-title">Наши специалисты</h2>
+      <h2 class="slider-title__box-title" v-html="title"></h2>
     </div>
   </div>
   <div class="wrapper-swiper">
@@ -73,7 +73,11 @@ export default {
   },
   props: {
     programs: {
-      tpye: Array,
+      type: Array,
+    },
+    title: {
+      type: String,
+      default: ''
     },
   },
   setup() {

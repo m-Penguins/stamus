@@ -5,7 +5,7 @@
         <div class="mob">
           <img :src="assetsStore.useAsset(`images/big-images/${imgAdaptiv}`)"/>
         </div>
-        <elements-title-text-button :title="title" :text="text" fontSize="true"/>
+        <elements-title-text-button textButtonBase="Записаться онлайн" :title="title" :text="text" fontSize="true"/>
       </div>
     </div>
     <blocks-main-seo 

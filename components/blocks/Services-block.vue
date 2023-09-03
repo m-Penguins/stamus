@@ -1,8 +1,8 @@
 <template>
   <div class="container-size popular-service">
     <div class="service-title">
-      <h2 class="popular-service__title">Услуги</h2>
-      <elements-link-with-arrow type="true" title="Посмотреть все"/>
+      <h2 class="popular-service__title" v-html="title"></h2>
+      <elements-link-with-arrow v-if="isLink" type="true" title="Посмотреть все" :isLink="isLink"/>
     </div>
     <div class="service-form">
       <div class="service-box">
@@ -46,8 +46,16 @@ import ElementsLinkWithArrow from '../elements/ElementsLinkWithArrow.vue';
   components: { ElementsLinkWithArrow },
     props: {
       addresData: {
-        tpye: Array,
+        type: Array,
       },
+      title: {
+        type: String,
+        default: 'Услуги'
+      },
+      isLink: {
+        type: Boolean,
+        default: true
+      }
     },
     setup() {
        const mockArray = [

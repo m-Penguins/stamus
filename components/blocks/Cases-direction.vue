@@ -1,6 +1,6 @@
 <template>
   <div class="container-size">
-    <elements-slider-cases-direction :text="text" :programs="dataDirection"/>
+    <elements-slider-cases-direction :text="text" :isCategoryAndDescription="isCategoryAndDescription" :programs="dataDirection"/>
   </div>
 </template>
 
@@ -8,12 +8,16 @@
 export default {
   props: {
     dataDirection: {
-      tpye: Array,
+      type: Array,
     },
       text: {
       type: String,
       default: ''
     },
+    isCategoryAndDescription: {
+      type: Boolean,
+      default: true
+    }
   },
 };
 </script>

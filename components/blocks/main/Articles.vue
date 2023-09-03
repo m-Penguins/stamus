@@ -1,19 +1,34 @@
 <template>
 <div class="article-wrap">
   <div class="container-size container-article">
-    <elements-slider-article :programs="mockArray"/>
+    <elements-slider-article 
+    :title="title"
+    :programs="mockArray"/>
   </div>
 </div>
 </template>
 
-<script setup>
-  const mockArray = [
-    {name: 'Наименование статьи', category: 'Стоматология', description: 'Равным образом, реализация намеченных плановых '},
-    {name: 'Наименование статьи', category: 'Стоматология', description: 'Равным образом, реализация намеченных плановых '},
-    {name: 'Наименование статьи', category: 'Стоматология', description: 'Равным образом, реализация намеченных плановых '},
-    {name: 'Наименование статьи', category: 'Стоматология', description: 'Равным образом, реализация намеченных плановых '},
-    {name: 'Наименование статьи', category: 'Стоматология', description: 'Равным образом, реализация намеченных плановых '},
-    ];
+<script>
+  export default {
+    props: {
+      title: {
+        type: String,
+        default: ''
+      },
+    },
+    setup() {
+      const mockArray = [
+        {name: 'Наименование статьи', category: 'Стоматология', description: 'Равным образом, реализация намеченных плановых '},
+        {name: 'Наименование статьи', category: 'Стоматология', description: 'Равным образом, реализация намеченных плановых '},
+        {name: 'Наименование статьи', category: 'Стоматология', description: 'Равным образом, реализация намеченных плановых '},
+        {name: 'Наименование статьи', category: 'Стоматология', description: 'Равным образом, реализация намеченных плановых '},
+        {name: 'Наименование статьи', category: 'Стоматология', description: 'Равным образом, реализация намеченных плановых '},
+        ];
+      return {
+        mockArray
+      }
+    }
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -23,7 +38,7 @@
     width: 1400px;
     margin: 0 auto;
     max-width: 100%;
-    padding: 0 30px;
+    padding: 60px 30px;
 }
   .feedback-bloks {
       width: 1280px;

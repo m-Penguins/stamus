@@ -73,7 +73,7 @@ export default {
   },
   props: {
     programs: {
-      tpye: Array,
+      type: Array,
     },
   },
   setup() {

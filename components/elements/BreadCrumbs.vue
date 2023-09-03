@@ -1,7 +1,8 @@
 <template>
   <div class="breadcrumbs">
     <div class="container-crumb">
-      <div class="content">
+      <div class="content"
+      :class="typeColorWhite ? 'styleColor' : ''">
         <NuxtLink
           v-for="(breadcrumb, index) in breadcrumbs"
           :key="index"
@@ -24,6 +25,10 @@ export default {
     breadcrumbs: {
       type: Array,
       default: () => []
+    }, 
+    typeColorWhite: {
+      type: Boolean,
+      default: false
     }
   },
    setup() {
@@ -37,6 +42,21 @@ export default {
 
 <style lang="scss" scoped>
 @import '/assets/styles/style.scss';
+
+.styleColor  {
+  .breadcrumbs-text {
+    color: #CFD5E1;
+  }
+}
+
+.breadcrumbs {
+  .styleColor  {
+    .pre {
+      color: white;
+    }
+  }
+}
+
 .breadcrumbs {
   position: relative;
   width: 100%;

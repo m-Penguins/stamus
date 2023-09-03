@@ -1,5 +1,10 @@
 <template>
-  <NuxtLink v-if="type" target="_blank" :href="link" class="wrapper">
+  <NuxtLink 
+  v-if="type" 
+  :href="link" 
+  class="wrapper"
+  @click="$router.push(`/${link}/` + 1)" 
+  >
     <p v-html="title" class="text text-gray"></p>
     <div>
       <svg width="18" height="9" viewBox="0 0 18 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -7,7 +12,7 @@
       </svg>
     </div>
   </NuxtLink>
-  <NuxtLink v-else :href="link" class="wrapper">
+  <NuxtLink v-else :href="link" class="wrapper" @click="$router.push(`/specialists/` + 1)">
     <p v-html="title" class="text text-white"></p>
     <div class="arrow-white">
       <svg width="18" height="9" viewBox="0 0 18 9" fill="none" xmlns="http://www.w3.org/2000/svg">
