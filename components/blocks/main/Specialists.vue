@@ -2,7 +2,7 @@
   <div class="container-size specialists">
     <div class="specialists-subject">
       <h2 class="specialists-heading">Наши специалисты</h2>
-      <elements-link-with-arrow type="true" title="Смотреть всех специалистов"/>
+      <elements-link-with-arrow type="true" title="Смотреть всех специалистов" href="/specialists"/>
     </div>
     <div class="specialists-container">
       <div class="specialists-list">
@@ -296,24 +296,24 @@ export default {
     .specialists {
       padding-top: 0;
     }
-  .specialists-subject {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  .specialists-container {
-    gap: 20px;
+    .specialists-subject {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .specialists-container {
+      gap: 20px;
 
-    .specialists-list {
-      flex-direction: unset;
-      overflow-x: scroll;
-      white-space: nowrap;
+      .specialists-list {
+        flex-direction: unset;
+        overflow-x: scroll;
+        white-space: nowrap;
+      }
+      .specialists-list::-webkit-scrollbar {
+        display: none;
+      }
     }
-    .specialists-list::-webkit-scrollbar {
-      display: none;
-    }
-  }
 
   .specialists-inner {
     gap: 14px;

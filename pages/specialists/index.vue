@@ -31,7 +31,7 @@
       </div>
       <div class="spicialists-page-cards">
         <div  class="spicialists-page-card" v-for="item in mockArrayOurSpecialists" :key="item" >
-          <elements-name-specialty-photo-card :specialists="item" link="specialists"/>
+          <elements-name-specialty-photo-card :specialists="item" @click="$router.push(`/specialists/` + 1)"/>
         </div>
       </div>
       <elements-pagination

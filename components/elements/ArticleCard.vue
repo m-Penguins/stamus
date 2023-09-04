@@ -8,7 +8,7 @@
     </div>
     <h2 class="article-card__name">{{ article.name }}</h2>
     <p class="text-article">{{ article.description }}</p>
-    <elements-link-with-arrow type="type" title="Читать"/>
+    <elements-link-with-arrow type="type" title="Читать" @click="$router.push(`/articles/` + 1)"/>
   </div>
 </template>
 

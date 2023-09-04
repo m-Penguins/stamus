@@ -3,7 +3,7 @@
     <div class="slider-title">
       <div class="slider-title__box">
         <h2 class="slider-title__box-title" v-html="title"></h2>
-        <elements-link-with-arrow type="type" title="Все статьи"/>
+        <elements-link-with-arrow type="type" title="Все статьи"  href="/articles"/>
       </div>
     </div>
     <div class="wrapper-swiper">

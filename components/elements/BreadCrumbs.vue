@@ -57,6 +57,12 @@ export default {
   }
 }
 
+// .breadcrumbs {
+//   .styleColor:before {
+//     color: white;
+//   }
+// }
+
 .breadcrumbs {
   position: relative;
   width: 100%;

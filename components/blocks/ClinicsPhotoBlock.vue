@@ -6,35 +6,35 @@
         <div class="areas-box__img img-first">
           <h3>Клиника на Хакурате</h3>
           <p class="areas-box-text">Краснодар,ул. Хакурате 34</p>
-          <elements-link-with-arrow :type="type" title="Перейти" href="#"/>
+          <elements-link-with-arrow :type="type" title="Перейти" href="#" @click="$router.push(`/clinics/` + 1)"/>
         </div>
         <div class="areas-box__img img-second">
           <h3>Клиника на Гимназической</h3>
           <p class="areas-box-text">Краснодар, ул. Гимназическая 85</p>
-          <elements-link-with-arrow :type="type" title="Перейти" href="#"/>
+          <elements-link-with-arrow :type="type" title="Перейти" href="#" @click="$router.push(`/clinics/` + 1)"/>
         </div>
       </div>
       <div class="areas-box-col">
         <div class="areas-box__img img-third">
           <h3>Клиника на Московской</h3>
           <p class="areas-box-text">Краснодар, ул. Московская, 140</p>
-          <elements-link-with-arrow :type="type" title="Перейти" href="#"/>
+          <elements-link-with-arrow :type="type" title="Перейти" href="#" @click="$router.push(`/clinics/` + 1)"/>
         </div>
         <div class="areas-box__img img-fourth">
           <h3>Клиника на Платановом бульваре</h3>
           <p class="areas-box-text">Краснодар, Платановый бульвар 19/3</p>
-          <elements-link-with-arrow :type="type" title="Перейти" href="#"/>
+          <elements-link-with-arrow :type="type" title="Перейти" href="#" @click="$router.push(`/clinics/` + 1)"/>
         </div>
         <div class="areas-box__img img-fifth display">
           <h3>Клиника на Мачуги</h3>
           <p class="areas-box-text">Краснодар, ул. Мачуги 1/1</p>
-          <elements-link-with-arrow :type="type" title="Перейти" href="#"/>
+          <elements-link-with-arrow :type="type" title="Перейти" href="#" @click="$router.push(`/clinics/` + 1)"/>
         </div>
       </div>
       <div class="mob">
         <h3>Клиника на Мачуги</h3>
         <p class="areas-box-text">Краснодар, ул. Мачуги 1/1</p>
-        <elements-link-with-arrow :type="type" title="Перейти" href="#"/>
+        <elements-link-with-arrow :type="type" title="Перейти" href="#" @click="$router.push(`/clinics/` + 1)"/>
       </div>
     </div>  
   </div>

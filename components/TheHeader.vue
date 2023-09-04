@@ -1,6 +1,6 @@
 <template>
-  <blocks-main-popap-modal-form @togglerPopup='togglerPopup' :isOpen="isOpenPopup" />
-  <header :class="showServices || showSearch ? 'showServicesHeader' : ''">
+  <blocks-main-popap-modal-form @togglerPopup='togglerPopup' class="modal-menu" :isOpen="isOpenPopup" />
+  <header :class="showServices || showSearch ? 'showServicesHeader' : ''" @click="closeMenu" class="modal-menu">
     <div :class="showServices || showSearch ? 'header header-services' : 'header'">
       <div class="header-wrap">
         <div class="header-logo">
@@ -34,10 +34,12 @@
                     </div>
                     <div class="menu-patients">
                       <ul class="menu-patients-list">
-                        <li class="menu-patients-items" v-for="(elem, index) in navigationPatients" :key="elem" >
-                          {{elem}}
-                          <hr v-if="index !== navigationPatients.length - 1"/>
-                        </li>
+                        <NuxtLink v-for="(elem, index) in navigationPatients" :key="elem" :to="elem.path" class="menu-patients-items">
+                          <li>
+                            <div>{{elem.title}}</div>
+                            <hr class="menu-patients-line" v-if="index < navigationPatients.length - 1"/>
+                          </li>
+                        </NuxtLink>
                       </ul>
                     </div>
                   </div>
@@ -77,7 +79,7 @@
       </div>
 
       <!-- Услуги модалка-->
-      <div v-show="showServices" class="header-services-menu">
+      <div v-if="showServices" class="header-services-menu">
         <hr>
         <div class="header-services-menu-container">
           <div class="header-services-menu-list">
@@ -198,8 +200,12 @@ export default {
         activeClass: "",
         showServicesAll: false,
         navigationPatients: [
-          'Клиники', 'Наше приложение', 'Информация для пациентов', 'Налоговый вычет', 'До/после'
-        ],
+        { id: 1, title: 'Клиники', path: '/clinics' },
+        { id: 2, title: 'Наше приложение', path: 'stamusapp' },
+        { id: 3, title: 'Информация для пациентов', path: '/' },
+        { id: 4, title: 'Налоговый вычет', path: '/' },
+        { id: 5, title: 'До/после', path: '/' },
+      ],
         navigationServices2: [
         {
           id: 1,
@@ -341,6 +347,11 @@ export default {
            direction.showServices = true;
         });
     },
+    closeMenu(event) {
+      if (event.target.classList.contains("modal-menu")) {
+        this.showServices = false;
+      }
+    },
     changeActiveClass(cls) {
       this.activeClass = cls;
       console.log(cls)
@@ -356,7 +367,7 @@ export default {
       const isOpenPopup = ref(false);
       const navigation = [
         { title: 'Специалисты', path: '/specialists' },
-        { title: 'Пациентам', path: '/patients' },
+        { title: 'Пациентам', path: '' },
         { title: 'Акции и скидки', path: '/discounts' },
         { title: 'Портфолио', path: '/portfolio' },
         { title: 'Цены', path: '/prices' },
@@ -390,12 +401,39 @@ export default {
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
+  left: -76px;
   border-radius: 15px;
   border: 1px solid var(--menu-burger-hover-bg, #F0F0F0);
   background: var(--white, #FFF);
+  z-index: 999;
   padding: 10px;
   width: 243px;
+}
+
+.menu-patients-list {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.menu-patients-items {
+  width: 100%;
+  @include body-14-regular;
+  color: $gray-text;
+
+  div {
+    padding: 10px;
+    width: 100%;
+  }
+}
+
+.menu-patients-line {
+  margin: 4px 0 4px;
+  width: auto;
+  border: 0;
+  height: 0;
+  border-bottom: 1px solid #E9E9E9;
 }
 
 .header-arrow-icon {

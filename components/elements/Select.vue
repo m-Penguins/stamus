@@ -110,6 +110,8 @@ hr {
 }
 
 .custom-select .selected {
+  display: flex;
+  align-items: center;
   border-radius: 45px;
   border: 1px solid #E9E9E9;
   background: #FFF;
@@ -125,7 +127,7 @@ hr {
   &::after {
     content: "";
     position: absolute;
-    top: 57%;
+    top: 53%;
     right: 22px;
     display: block;
     width: 10px;

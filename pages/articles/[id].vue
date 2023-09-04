@@ -7,7 +7,7 @@ const breadcrumbs = [
         },
         {
           title: 'Статьи',
-          url: 'articles'
+          url: '/articles'
         },
           {
             title: `Наименование статьи`,

@@ -11,11 +11,11 @@
       <div class="areas-box-temp">
         <div class="areas-box__img img-first">
           <h3>Стоматологические услуги</h3>
-          <elements-link-with-arrow :type="type" title="Перейти" href="#"/>
+          <elements-link-with-arrow :type="type" title="Перейти" href="/adult-dentistry"/>
         </div>
         <div class="areas-box__img img-second">
           <h3>Детская стоматология</h3>
-          <elements-link-with-arrow :type="type" title="Перейти" href="#"/>
+          <elements-link-with-arrow :type="type" title="Перейти" href="/children-dentistry"/>
         </div>
       </div>
       <div class="areas-box-col">

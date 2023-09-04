@@ -106,7 +106,7 @@ export default {
         },
         {
           title: 'Специалисты',
-          url: 'specialists'
+          url: '/specialists'
         },
         {
           title: `${route.params.id}`,
