@@ -130,6 +130,22 @@
   max-width: 100%;
 }
 
+.base-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 100px;
+}
+
+.base-container  {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 1280px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
 @media screen and (max-width: 1400px) {
   .base-wrapper-grey {
     background: none;
@@ -148,6 +164,7 @@
   position: relative;
   display: inline-block;
   transition: all .3s ease-in-out, opacity .3s ease-in-out;
+  cursor: pointer;
 
     &:hover {
       color: $hover;

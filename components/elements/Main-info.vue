@@ -5,10 +5,37 @@
         <elements-bread-crumbs :breadcrumbs="breadcrumbs" :typeColorWhite="typeColorWhite"/>
         <div class="mob">
           <img :src="assetsStore.useAsset(`images/big-images/${imgAdaptiv}`)"/>
-          <elements-title-text-button textButtonBase="Записаться онлайн" :isButtonBase="isButtonBase" :title="title" font-size="true" :text="text" class=""/>
+          <div>
+            <elements-title-text-button 
+              textButtonBase="Записаться онлайн" 
+              :isButtonBase="isButtonBase" 
+              :title="title" 
+              font-size="true" 
+              :text="text"
+              :class="isTimeAndPriceCard ? 'main-info-width' : ''"
+            />
+            <elements-analitic-card   
+              :time="time"
+              :money="money" 
+              v-if="isTimeAndPriceCard"
+              class="elements-analitic-card-mob"
+            />
+          </div>
         </div>
-        <elements-title-text-button :typeColorWhiteText="typeColorWhiteText" textButtonBase="Записаться онлайн" :isButtonBase="isButtonBase" :title="title" :text="text" class="height-50 desktop"/>
+        <elements-title-text-button 
+          :typeColorWhiteText="typeColorWhiteText" 
+          textButtonBase="Записаться онлайн" 
+          :isButtonBase="isButtonBase" 
+          :title="title" :text="text" 
+          class="height-50 desktop"
+        />
       </div>
+      <elements-analitic-card   
+        :time="time"
+        :money="money" 
+        v-if="isTimeAndPriceCard"
+        class="desktop"
+      />
     </div>
   </div>
 </template>
@@ -47,7 +74,13 @@ import { useAssets } from '../../stores/useAsset'
       typeColorWhiteText: {
         type: Boolean,
         default: false
-      }
+      },
+      isTimeAndPriceCard: {
+        type: Boolean,
+        default: false
+      },
+      time: String,
+      money: String
     },
     setup() {
       const assetsStore = useAssets();
@@ -61,8 +94,16 @@ import { useAssets } from '../../stores/useAsset'
 <style scoped lang="scss">
 @import '/assets/styles/style.scss';
 
+.main-info-width {
+  width: 100% !important;
+}
+
 .mob {
   display: none;
+}
+
+.elements-analitic-card-mob {
+  position: static;
 }
 
 .dentistry-wrapper {
@@ -84,6 +125,7 @@ import { useAssets } from '../../stores/useAsset'
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  position: relative;
 }
 
 .dentistry-box {

@@ -25,7 +25,7 @@
           <img src="../../assets/images/icons/video-logo-block.svg" alt="icon"/>
         </div>
       </div>
-      <div class="video-block-inner">
+      <div class="video-block-inner" v-if="!isProblems">
         <div class="video-block-box">
           <img src="../../assets/images/video.png" alt="video"/>
         </div>
@@ -44,6 +44,11 @@
           </div>
           <div class="video-block-feedback">Читать отзывы</div>
         </div>
+      </div>
+      <div v-if="isProblems">
+          <div>
+            <img src="../../assets/images/problems/problem1.png" alt="problem"/>
+          </div>
       </div>
     </div>
   </div>
@@ -70,6 +75,10 @@
       },
       info: {
         type: Object,
+      },
+      isProblems: {
+        type: Boolean,
+        default: false
       }
     }
   }

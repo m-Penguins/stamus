@@ -29,7 +29,7 @@
       </div>
       <div class="portfolio-page-cards">
         <div  class="portfolio-page-card" v-for="item in mockArrayDirection" :key="item" >
-          <elements-cases-direction-card :direction="item" />
+          <elements-cases-direction-card :direction="item" @click="$router.push(`/portfolio/` + 1)"/>
         </div>
       </div>
       <elements-pagination

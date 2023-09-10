@@ -53,6 +53,8 @@
     :info="mockDataInfo"
   />
   <blocks-activities-block :activitiesCard="mockActivitiesCard"/>
+  <blocks-education-block :events="timelineEvents" title="Образование"/>
+  <blocks-education-block :events="timelineEventsAdditionally" title="Дополнительное образование"/>
   <blocks-video-slider-block :imagesScroll="imagesScroll" title="Сертификаты и документы"/>
   <div class="container-size popular-service">
     <div class="service-title">
@@ -94,7 +96,20 @@ export default {
         {id: 1, title: "Лечение кариеса", link: "#"},
         {id: 2, title: "Лечение кариеса", link: "#"},
         {id: 3, title: "Лечение кариеса", link: "#"}
-      ]
+      ],
+      timelineEvents: [
+        { id: 1, date: '2019', title: 'Специалитет “Название”', category: 'Врач-стоматолог' },
+        { id: 2, date: '2020', title: 'Ординатура “Название”', category: 'Врач-стоматолог-хирург' },
+        { id: 3, date: '2021', title: 'Курсы повышение квалификации “Название”', category: 'Врач-стоматолог-хирург' },
+        { id: 4, date: '2021', title: 'Проходит обучение по программе “Название”', category: 'Врач-стоматолог-хирург' },
+        { id: 5, date: 'н.в.', title: 'Проходит обучение по программе “Название”', category: 'Врач-стоматолог-хирург' },
+      ],
+      timelineEventsAdditionally: [
+        { id: 1, date: '2019', title: 'Специалитет “Название”', category: 'Врач-стоматолог' },
+        { id: 2, date: '2020', title: 'Ординатура “Название”', category: 'Врач-стоматолог-хирург' },
+        { id: 3, date: '2021', title: 'Курсы повышение квалификации “Название”', category: 'Врач-стоматолог-хирург' },
+        { id: 4, date: 'н.в.', title: 'Проходит обучение по программе “Название”', category: 'Врач-стоматолог-хирург' }
+      ],
     }
   },
   setup() {

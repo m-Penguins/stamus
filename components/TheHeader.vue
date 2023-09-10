@@ -4,7 +4,7 @@
     <div :class="showServices || showSearch ? 'header header-services' : 'header'">
       <div class="header-wrap">
         <div class="header-logo">
-          <NuxtLink :to="'/'" :exact="true" active-class="active" @click="showServices = false; showSearch = false">
+          <NuxtLink :to="'/'" :exact="true" active-class="active" @click="showServices = false; showSearch = false; showMenuPatients = false">
             <img style="width: 59px; height: 34px;" :src="assetsStore.useAsset('images/icons/logo.svg')" alt="Logo">
           </NuxtLink>
         </div>
@@ -12,7 +12,7 @@
           <nav>
             <ul class="header-nav-list">
               <li class="first-item">
-                <div class="header-services-img m-r-20" @click="showServices = !showServices; showSearch = false" :class="{'active-btn-services': showServices === true}">
+                <div class="header-services-img m-r-20" @click="showServices = !showServices; showSearch = false; showMenuPatients = false" :class="{'active-btn-services': showServices === true}">
                   <img v-if="!showServices" src="../assets/images/icons/burger.svg" alt="burger">
                   <img v-else src="../assets/images/icons/burger-close.svg" alt="burger-close">
                   <p>Услуги</p>
@@ -24,15 +24,22 @@
                   @click="showServices = false; showSearch = false" 
                   class="header-nav-item m-r-20" 
                   :to="item.path">
-                  <div v-if="item.title !== 'Пациентам'">{{ item.title }}</div>
-                  <div v-else class="header-arrow-icon">
+                  <div v-if="item.title !== 'Пациентам'" @click="showMenuPatients = false">{{ item.title }}</div>
+                  <div v-else class="header-arrow-icon" @click="showMenuPatients = !showMenuPatients; showSearch = false; showServices = false">
                     <div>{{ item.title }}</div>
                     <div v-if="item.title === 'Пациентам'" class="arrow-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <path d="M6 8L10 12L14 8" stroke="#7F838C" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
+                      <div v-if="!showMenuPatients" class="timeline-svg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M6 8L10 12L14 8" stroke="#7F838C" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </div>
+                      <div v-else class="timeline-svg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M6 12L10 8L14 12" stroke="#232D5B" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </div>
                     </div>
-                    <div class="menu-patients">
+                    <div v-if="showMenuPatients" class="menu-patients">
                       <ul class="menu-patients-list">
                         <NuxtLink v-for="(elem, index) in navigationPatients" :key="elem" :to="elem.path" class="menu-patients-items">
                           <li>
@@ -48,14 +55,14 @@
             </ul>
           </nav>
           <div class="header-btn-base">
-            <div class="header-search-img" @click="showSearch = !showSearch; showServices = false;">
+            <div class="header-search-img" @click="showSearch = !showSearch; showServices = false; showMenuPatients = false">
               <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect class="header-search-svg" width="30" height="30" rx="5" opacity="0.5"  fill="white"/>
               <path d="M14.3333 20.1667C17.555 20.1667 20.1667 17.555 20.1667 14.3333C20.1667 11.1117 17.555 8.5 14.3333 8.5C11.1117 8.5 8.5 11.1117 8.5 14.3333C8.5 17.555 11.1117 20.1667 14.3333 20.1667Z" stroke="#525660" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M21.5 21.5L18.5 18.5" stroke="#525660" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
-            <button-base @click="isOpenPopup = true" title="Записаться на прием"/>
+            <button-base @click="isOpenPopup = true; showSearch = false; showServices = false; showMenuPatients = false" title="Записаться на прием"/>
           </div>
         </div>
         <div class="header-menu">
@@ -131,15 +138,17 @@
           <elements-input-search class="elements-input-search" placeholder="Введите запрос"/>
         </div>
       </div>
-      <!-- Menu модалка-->
+      <!-- Menu модалка mob-->
       <div v-show="showMenuMob" class="header-services-menu">
         <hr>
         <ul class="header-nav-list">
-          <li v-for="item in navigation" :key="item.title">
-            <NuxtLink active-class="active-link" @click="showServices = false; showSearch = false" class="header-nav-item m-r-20" :to="item.path">
-                {{ item.title }}
-            </NuxtLink>
-          </li>
+          <div class="menu-mob-modal">
+            <li v-for="item in navigation" :key="item.title">
+              <NuxtLink active-class="active-link" @click="showServices = false; showSearch = false" class="header-nav-item m-r-20" :to="item.path">
+                  {{ item.title }}
+              </NuxtLink>
+            </li>
+          </div>
           <div 
               v-for="item in navigationServices2" 
               :key="item.id" 
@@ -197,12 +206,13 @@ export default {
         showSearch: false,
         showMenuMob: false,
         categories: false,
+        showMenuPatients: false,
         activeClass: "",
         showServicesAll: false,
         navigationPatients: [
         { id: 1, title: 'Клиники', path: '/clinics' },
-        { id: 2, title: 'Наше приложение', path: 'stamusapp' },
-        { id: 3, title: 'Информация для пациентов', path: '/' },
+        { id: 2, title: 'Наше приложение', path: '/stamusapp' },
+        { id: 3, title: 'Информация для пациентов', path: '/info' },
         { id: 4, title: 'Налоговый вычет', path: '/' },
         { id: 5, title: 'До/после', path: '/' },
       ],
@@ -350,7 +360,11 @@ export default {
     closeMenu(event) {
       if (event.target.classList.contains("modal-menu")) {
         this.showServices = false;
-      }
+        this.showMenuPatients = false;
+      } 
+      // if (event.target.classList.contains("modal-menu")) {
+      //   this.showMenuPatients = false;
+      // }
     },
     changeActiveClass(cls) {
       this.activeClass = cls;
@@ -397,10 +411,13 @@ export default {
 <style lang="scss">
 @import '/assets/styles/style.scss';
 
+.menu-mob-modal {
+  display: flex;
+}
+
 .menu-patients {
-  display: none;
   position: absolute;
-  top: 100%;
+  top: 54px;
   left: -76px;
   border-radius: 15px;
   border: 1px solid var(--menu-burger-hover-bg, #F0F0F0);

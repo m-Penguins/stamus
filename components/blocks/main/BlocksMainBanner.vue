@@ -9,7 +9,7 @@
             <div>место в Краснодаре</div>
             </div>
           <div class="banner-text" v-html="text"></div>
-          <elements-link-with-arrow :type="type" :title="titleLink" :href="link"/>
+          <elements-link-with-arrow :type="type" :title="titleLink" :href="link" :clickHandler="handleLinkClick"/>
           <div class="banner-additional-text" v-html="additionalText"></div>
         </div>
         <div class="banner-images">
@@ -67,7 +67,8 @@
       bigImg: { 
         type: String, 
         default: '' 
-      }
+      },
+      handleLinkClick: Function
     },
     setup() {
       const assetsStore = useAssets();

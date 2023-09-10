@@ -22,7 +22,7 @@
     :text="'Скидки до 50%'"
     :titleLink="'Воспользоваться акцией'"
     link="#"
-    @click="isOpenPopup = true"
+    :handleLinkClick="handleLinkClick"
     bgColor="dark-blue-gradient"
     img="tooth.png"
     bigImg=true
@@ -32,7 +32,7 @@
     :text="'Скидка 25% в июне'"
     :titleLink="'Воспользоваться акцией'"
     link="#"
-    @click="isOpenPopup = true"
+    :handleLinkClick="handleLinkClick"
     bgColor="dark-blue-gradient"
     img="bag.png"
     bigImg=true
@@ -42,7 +42,7 @@
     :text="'В стоматологии Стамус есть оптимальное вариант для вас – лечение зубов во сне'"
     :titleLink="'Воспользоваться акцией'"
     link="#"
-    @click="isOpenPopup = true"
+    :handleLinkClick="handleLinkClick"
     bgColor="dark-blue-gradient"
     img="tooth.png"
     bigImg=true
@@ -58,6 +58,11 @@ export default {
         default: false
       },
    },
+   methods: {
+    handleLinkClick() {
+      this.isOpenPopup = true
+    }
+  },
   setup() {
     const togglerPopup = (state) => {
       isOpenPopup.value = state

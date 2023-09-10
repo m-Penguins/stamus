@@ -40,7 +40,27 @@
           <path d="M6 6L14 14M14 6L6 14" class="close-reg" stroke="#33383A" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <div class="popup-container">
+      <!-- Прайс форма -->
+      <div v-if="isPriceForm" class="popup-container">
+        <div class="popup-title">
+          Записаться на прием
+        </div>
+        <div class="popup-inner price">
+          <div class="popup-input">
+            <elements-input-base placeholder="Введите имя" class="popup-form-input"/>
+            <elements-input-base placeholder="Укажите номер телефона" class="popup-form-input"/>
+          </div>
+          <elements-input-base placeholder="Укажите адрес электронной почты" class="popup-form-input"/>
+        </div>
+        <div :class="[isDiscounts ? 'popup-button-box-discounts' : 'popup-button-box']">
+          <elements-button-base title="Отправить" class="popup-btn"/>
+          <div class="popup-text">
+            Нажимая кнопку отправить, вы соглашаетесь с Политикой обработки персональных данных
+          </div>
+        </div>
+      </div>
+      <!-- Основная форма -->
+      <div v-else class="popup-container">
         <div class="popup-title">
           Записаться на прием
         </div>
@@ -80,6 +100,10 @@
       },
       isDiscounts: {
         type: Boolean,
+      },
+      isPriceForm: {
+        type: Boolean,
+        default: false
       }
     },
     methods: {
@@ -101,6 +125,10 @@
 
 <style lang="scss">
 @import '/assets/styles/style.scss';
+
+.price {
+  padding-bottom: 40px;
+}
 
 .expanded {
   display: none;
