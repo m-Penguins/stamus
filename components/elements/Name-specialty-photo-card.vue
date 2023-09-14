@@ -8,9 +8,31 @@
         <div class="card-photo-name-title">{{specialists.name}}</div>
         <div class="card-photo-name-text">{{specialists.category}}</div>
       </div>
-      <div>
+      <div class="tooltip">
       <!-- <div class="avatar" :data-tooltip="selectButton()"> -->
-        <img src="../../assets/images/icons/icons-badge.svg">
+        <img src="../../assets/images/icons/icons-badge.svg"/>
+        <span class="info">
+					<div class="tooltip-box">
+            <img src="../../assets/images/icons/tooltip/tool1.svg" alt="icon">
+            <p>Победитель Гран-при Продокторов «Лучший ортопед России» 2021</p>
+          </div>
+          <div class="tooltip-box">
+            <img src="../../assets/images/icons/tooltip/tool2.svg" alt="icon">
+            <p>2 место Премия Продокторов «Детский стоматолог» 2022 Краснодар</p>
+          </div>
+          <div class="tooltip-box">
+            <img src="../../assets/images/icons/tooltip/tool3.svg" alt="icon">
+            <p>Врач высшей категории</p>
+          </div>
+          <div class="tooltip-box">
+            <img src="../../assets/images/icons/tooltip/tool4.svg" alt="icon">
+            <p>Работает с эстетическими коронками</p>
+          </div>
+          <div class="tooltip-box">
+            <img src="../../assets/images/icons/tooltip/tool5.svg" alt="icon">
+            <p>Работает под микроскопом</p>
+          </div>
+				</span>
         <!-- <div class="s avatar2">
           {{specialists.name}}
           {{specialists.category}}
@@ -53,6 +75,58 @@ export default {
 
 <style scoped lang="scss">
 @import '/assets/styles/style.scss';
+.tooltip {
+  position: relative;
+  cursor: pointer;
+    &:hover .info,
+		&:focus .info {
+			visibility: visible;
+			opacity: 1;
+			transform: translate3d(0,0,0);
+		}
+}
+.info {
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 53px;
+  left: -85px;
+  display: block;
+  background: white;
+  width: 373px;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: text;
+  visibility: hidden;
+  opacity: 0;
+  transform: translate3d(0,-20px,0);
+  transition: all .5s ease-out;
+  
+  &:before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 14px;
+    bottom: -14px;
+    left: 0;
+  }
+        
+  &:after {
+    position: absolute;
+    content: '';
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+    bottom: -5px;
+    left: 50%;
+    margin-left: -5px;
+    background: #286F8A;
+  }
+}
+
+.tooltip-box {
+  display: flex;
+  align-items: center;
+}
 // .s {
 //   display: none;
 // }

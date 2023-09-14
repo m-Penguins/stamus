@@ -50,12 +50,19 @@ export default {
 }
 
 .breadcrumbs {
+  flex-direction: unset;
+  overflow-x: scroll;
+  white-space: nowrap;
   .styleColor  {
     .pre {
       color: white;
     }
   }
 }
+
+.breadcrumbs::-webkit-scrollbar {
+    display: none;
+  }
 
 // .breadcrumbs {
 //   .styleColor:before {
@@ -70,9 +77,6 @@ export default {
 
   @media screen and (max-width: 600px) {
     margin-top: 50px;
-  }
-  @media screen and (max-width: 680px), (max-width: 1000px) and (max-height: 500px) {
-    width: 300px;
   }
 
   @media screen and (max-width: 1200px) {
@@ -94,17 +98,6 @@ export default {
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
-      width: 1000px;
-    }
-    @media screen and (max-width: 1179px) {
-      &:last-child {
-        width: 500px;
-      }
-    }
-    @media screen and (max-width: 680px), (max-width: 1000px) and (max-height: 500px) {
-      &:last-child {
-        width: 200px;
-      }
     }
   }
 .container-crumb {
@@ -113,9 +106,6 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  @media screen and (max-width: 680px), (max-width: 1000px) and (max-height: 500px) {
-    width: 300px;
-  }
   .content {
     position: relative;
     display: flex;

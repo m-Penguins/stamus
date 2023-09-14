@@ -5,7 +5,7 @@ import { mockArrayClinic } from '../../stores/mockData';
 import { textAboutImportantArray } from '../../stores/mockData';
 
 const route = useRoute()
-let mockDate = mockArrayClinic[+route.params.mainpageclinic.charAt(route.params.mainpageclinic.length - 1)]
+let mockDate = mockArrayClinic[0]
 
 </script>
 
@@ -22,7 +22,7 @@ let mockDate = mockArrayClinic[+route.params.mainpageclinic.charAt(route.params.
         },
         {
           title: `${mockDate.title}`,
-          url: `${route.params.mainpageclinic}`
+          url: `${route.href}`
         }
         ]"
   />

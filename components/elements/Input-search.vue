@@ -1,10 +1,10 @@
 <template>
-  <form  class="input-base">
+  <div class="input-base">
     <input type="text" :placeholder="placeholder" v-model="searchTerm" class="input bg" @keyup.enter="search">
-    <button type="submit">
+    <button @click="search()">
       <img src="../../assets/images/icons/icon_search.svg" alt="icon search"/>
     </button>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -20,7 +20,6 @@
   },
   methods: {
     search() {
-      console.log(searchTerm)
       if (this.searchTerm) {
         this.$router.push({
           path: '/search',

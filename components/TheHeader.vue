@@ -1,10 +1,10 @@
 <template>
   <blocks-main-popap-modal-form @togglerPopup='togglerPopup' class="modal-menu" :isOpen="isOpenPopup" />
   <header :class="showServices || showSearch ? 'showServicesHeader' : ''" @click="closeMenu" class="modal-menu">
-    <div :class="showServices || showSearch ? 'header header-services' : 'header'">
+    <div :class="[(showServices || showSearch ? 'header-services' : ''), (showMenuMob ? 'header-menu-mob' : ''), 'header']">
       <div class="header-wrap">
         <div class="header-logo">
-          <NuxtLink :to="'/'" :exact="true" active-class="active" @click="showServices = false; showSearch = false; showMenuPatients = false">
+          <NuxtLink :to="'/'" :exact="true" active-class="active" @click="showServices = false; showSearch = false; showMenuPatients = false; showMenuMob = false">
             <img style="width: 59px; height: 34px;" :src="assetsStore.useAsset('images/icons/logo.svg')" alt="Logo">
           </NuxtLink>
         </div>
@@ -74,8 +74,8 @@
             </svg>
           </div>
           <div class="first-item">
-            <div class="header-services-img m-r-20" @click="showMenuMob = !showMenuMob; showSearch = false" :class="{'active-btn-services': showServices === true}">
-              <img v-if="!showServices" src="../assets/images/icons/burger.svg" alt="burger">
+            <div class="header-services-img m-r-20" @click="showMenuMob = !showMenuMob; showSearch = false" :class="{'active-btn-services': showMenuMob === true}">
+              <img v-if="!showMenuMob" src="../assets/images/icons/burger.svg" alt="burger">
               <img v-else src="../assets/images/icons/burger-close.svg" alt="burger-close">
               <p>Меню</p>
             </div>
@@ -97,7 +97,7 @@
               @mouseover="changeActiveClass(navigationService.id)"
               >
               <div :class="{'active-directions-line': navigationService.id === activeClass}" class="a2"></div>
-              <NuxtLink exact active-class="active-link" @click="showServices = false; showSearch = false" class="header-nav-item m-r-20" :to="`main-page-clinic-${navigationService.id - 1}`">
+              <NuxtLink exact active-class="active-link" @click="showServices = false; showSearch = false" class="header-nav-item m-r-20" :to="`${navigationService.path}`">
                   {{ navigationService.title }}
               </NuxtLink>
             </div>
@@ -119,7 +119,7 @@
                   <div class="header-services-menu-box-title">{{ direction.title }}:</div>
                   <div class="header-services-menu-box-items">
                     <li class="header-services-menu-text" v-for="(service, id) in direction.services" :key="service">
-                        <NuxtLink  @click="showServices = false; showSearch = false; $router.push(`/main-page-clinic/` + id)" class="header-services-menu-box-link" to="#">
+                        <NuxtLink  @click="showServices = false; showSearch = false; $router.push(`${item.path}/` + id)" class="header-services-menu-box-link" to="#">
                           {{ service }}
                         </NuxtLink>
                     </li>
@@ -141,54 +141,120 @@
       <!-- Menu модалка mob-->
       <div v-show="showMenuMob" class="header-services-menu">
         <hr>
-        <ul class="header-nav-list">
-          <div class="menu-mob-modal">
+        <!-- Первая страница-->
+        <ul class="header-nav-list" :class="{'display-none': !firstBlockMobMenu}"> 
+          <div :class="showMenuPatients ? 'menu-mob-modal-flex' : 'menu-mob-modal'">
             <li v-for="item in navigation" :key="item.title">
-              <NuxtLink active-class="active-link" @click="showServices = false; showSearch = false" class="header-nav-item m-r-20" :to="item.path">
-                  {{ item.title }}
+              <NuxtLink active-class="active-link" @click="showServices = false; showSearch = false" class="header-nav-item-mob m-r-20" :to="item.path">
+                  <div v-if="item.title !== 'Пациентам'" @click="showMenuPatients = false; showMenuMob = false">{{ item.title }}</div>
+                  <div v-else @click="showMenuPatients = !showMenuPatients; showSearch = false; showServices = false" class="menu-mob-first-block">
+                    <div class="menu-patients-container">
+                      <div class="p-bt-14">{{ item.title }}</div>
+                      <div v-if="item.title === 'Пациентам'" class="arrow-icon">
+                        <div v-if="!showMenuPatients" class="timeline-svg">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                          <path d="M6 8L10 12L14 8" stroke="#7F838C" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </div>
+                        <div v-else class="timeline-svg">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                          <path d="M6 12L10 8L14 12" stroke="#232D5B" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-if="showMenuPatients">
+                      <ul class="menu-patients-list-mob">
+                        <NuxtLink v-for="(elem) in navigationPatients" @click="showMenuMob = false; " :key="elem" :to="elem.path" class="menu-patients-items-mob">
+                          <li>
+                            <div>{{elem.title}}</div>
+                            <!-- <hr class="menu-patients-line" v-if="index < navigationPatients.length - 1"/> -->
+                          </li>
+                        </NuxtLink>
+                      </ul>
+                    </div>
+                  </div>
               </NuxtLink>
             </li>
           </div>
-          <div 
-              v-for="item in navigationServices2" 
-              :key="item.id" 
-              class="header-services-menu-item"
-              @click="changeActiveClass(item.id)" :class="{'display-none': categories}">
-              <!-- <div :class="{'active-directions-line': navigationService.id === activeClass}" class="a2">:class="{'display-none': categories}"</div> -->
-              <div @click="showServices = false; showSearch = false; categories = true" class="header-nav-item m-r-20">
-                  {{ item.title }}
-              </div>
-              <!-- <div :class="{'active-directions': item.id === activeClass}" 
-              class="a2" v-show="categories" v-for="direction in item.directions" :key="direction.id">
-                <div class="header-services-menu-text header-nav-item"  :class="{'active-serv': direction.showServices === true}" @click="toggleServices(direction)">
-                  {{ direction.title }}
-                  {{categories}}
-                </div>
-              </div> -->
-          </div>
-          <div v-show="categories" v-for="item in navigationServices2" 
-              :key="item.id" 
-              >
-              <div :class="{'active-directions': item.id === activeClass}" 
-                  class="a2" v-for="direction in item.directions" :key="direction.id">
-
-                <div class="header-services-menu-text header-nav-item"  
-                  :class="{'display-none': direction.showServices === true}" 
-                  @click="toggleServices(direction)">
-                  {{ direction.title }}
-                </div>
-                <div v-if="direction.showServices">
-                  <div v-for="service in direction.services" 
-                  :key="service" 
-                  class="header-services-menu-text header-nav-item"  
-                  :class="{'active-serv': direction.showServices === true}" 
-                  @click="toggleServices(direction)">
-                    {{ service }}
+          <div class="header-services-menu-mob">
+            <div class="header-services-menu-mob-title">Услуги</div>
+            <div class="header-services-menu-mob-container">
+              <div 
+                  v-for="item in navigationServices2" 
+                  :key="item.id" 
+                  class="header-services-menu-item-mob"
+                  @click="changeActiveClass(item.id, item.title); secondBlockMobMenu=true; firstBlockMobMenu=false" :class="{'display-none': secondBlockMobMenu}">
+                  <div class="header-nav-item-mob m-r-20">
+                      {{ item.title }}
                   </div>
-                </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M8 14L12 10L8 6" stroke="#7F838C" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
               </div>
+            </div>
+          </div>
+          <div class="header-services-menu-mob-btn">
+            <button-base 
+              @click="isOpenPopup = true; 
+              showSearch = false; 
+              showServices = false; 
+              showMenuPatients = false" 
+              title="Записаться на прием"
+              class="header-services-menu-mob-button"
+            />
           </div>
         </ul>
+        <!-- Вторая страница-->
+        <div v-show="secondBlockMobMenu">
+          <div class="header-services-menu-mob-breadCrumbs">
+            <p @click="secondBlockMobMenu=false; firstBlockMobMenu=true"  class="breadCrumbs-first-text">Услуги</p>
+            <p class="breadCrumbs-slash">/</p>
+            <p class="breadCrumbs-second-text">{{clinic}}</p>
+          </div>
+          <div class="menu-mob-second-block-title">{{clinic}}</div>
+          <div v-for="item in navigationServices2" :key="item.id"  class="menu-mob-second-block-container">
+              <div :class="{'active-directions': item.id === activeClass}" 
+                  class="a2" v-for="direction in item.directions" :key="direction.id">
+                <div class="header-services-menu-item-mob" @click="toggleServices(direction); thirdBlockMobMenu=true; secondBlockMobMenu=false; firstBlockMobMenu=false">
+                  <div class="header-services-menu-text header-nav-item-mob">
+                    {{ direction.title }}
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M8 14L12 10L8 6" stroke="#7F838C" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+          </div>
+          <div @click="showMenuMob = false;" class="header-menu-mob-second-link">
+            <elements-link-with-arrow  type="type" title="На страницу раздела" href="/vzroslaya-stomatologiya"/>
+          </div>
+        </div>
+        <!-- Третья страница-->
+        <div v-show="thirdBlockMobMenu">
+          <div class="header-services-menu-mob-breadCrumbs">
+            <p class="breadCrumbs-first-text" @click="firstBlockMobMenu=true; secondBlockMobMenu=false; thirdBlockMobMenu=false">Услуги</p>
+            <p class="breadCrumbs-slash">/</p>
+            <p class="breadCrumbs-first-text"  @click="secondBlockMobMenu=true; firstBlockMobMenu=false; thirdBlockMobMenu=false">{{clinic}}</p>
+            <p class="breadCrumbs-slash">/</p>
+            <p class="breadCrumbs-second-text">{{directionTitle}}</p>
+          </div>
+          <div class="menu-mob-second-block-title">{{directionTitle}}</div>
+          <div v-for="(item, id) in navigationServices2" :key="id">
+            <div :class="{'active-directions': item.id === activeClass}" 
+                class="a2" v-for="direction in item.directions" :key="direction.id">
+              <div v-if="direction.showServices" class="menu-mob-third-block">
+                <div v-for="(service, id) in direction.services" 
+                :key="service" 
+                class="header-services-menu-text header-nav-item">
+                <NuxtLink @click="showServices = false; showSearch = false; secondBlockMobMenu=false; showMenuMob = false;  thirdBlockMobMenu=false; firstBlockMobMenu = true; $router.push(`${item.path}/` + id)" class="header-services-menu-box-link" to="#">
+                      {{ service }}
+                </NuxtLink>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -198,15 +264,21 @@
 import { useAssets } from '../stores/useAsset';
 import ButtonBase from './elements/Button-base.vue';
 import { useActuveLink } from '../stores/activeLink'
+import ElementsLinkWithArrow from './elements/ElementsLinkWithArrow.vue';
 export default {
-  components: { ButtonBase },
+  components: { ButtonBase, ElementsLinkWithArrow },
     data() {
       return {
         showServices: false,
         showSearch: false,
         showMenuMob: false,
         categories: false,
+        firstBlockMobMenu: true,
+        secondBlockMobMenu: false,
+        thirdBlockMobMenu: false,
         showMenuPatients: false,
+        directionTitle: '',
+        clinic: '',
         activeClass: "",
         showServicesAll: false,
         navigationPatients: [
@@ -214,12 +286,12 @@ export default {
         { id: 2, title: 'Наше приложение', path: '/stamusapp' },
         { id: 3, title: 'Информация для пациентов', path: '/info' },
         { id: 4, title: 'Налоговый вычет', path: '/' },
-        { id: 5, title: 'До/после', path: '/' },
       ],
         navigationServices2: [
         {
           id: 1,
-          title: 'Взрослая стоматология',  
+          title: 'Взрослая стоматология',
+          path: 'vzroslaya-stomatologiya',  
           directions: [
             {
               id: 1,
@@ -245,7 +317,8 @@ export default {
         },
         {
           id: 2,
-          title: 'Детская стоматология',  
+          title: 'Детская стоматология', 
+          path: 'detskaya-stomatologiya', 
           directions: [
             {
               id: 1,
@@ -272,6 +345,7 @@ export default {
         {
           id: 3,
           title: 'Детская клиника',  
+          path: 'detskaya-klinika', 
           directions: [
             {
               id: 1,
@@ -287,7 +361,8 @@ export default {
         },
         {
           id: 4,
-          title: 'Челюстно-лицевая хирургия',  
+          title: 'Челюстно-лицевая хирургия',
+          path: 'chelestno-licevaya-hirurgiya',
           directions: [
             {
               id: 1,
@@ -318,7 +393,8 @@ export default {
         },
         {
           id: 5,
-          title: 'Лечение во сне',  
+          title: 'Лечение во сне',
+          path: 'lechenie-vo-sne',  
           directions: [
             {
               id: 1,
@@ -355,6 +431,7 @@ export default {
           dir2.showServices = false;
            });
            direction.showServices = true;
+           this.directionTitle = direction.title;
         });
     },
     closeMenu(event) {
@@ -366,9 +443,10 @@ export default {
       //   this.showMenuPatients = false;
       // }
     },
-    changeActiveClass(cls) {
+    changeActiveClass(cls, title) {
       this.activeClass = cls;
       console.log(cls)
+      this.clinic = title
     }
   },
     setup() {
@@ -412,7 +490,21 @@ export default {
 @import '/assets/styles/style.scss';
 
 .menu-mob-modal {
+  display: grid;
+  grid-gap: 18px;
+  grid-template-columns: repeat(2, 56%);
+  grid-template-rows: 15px 15px 15px;
+  grid-auto-flow: column;
+  padding: 20px 0 60px;
+}
+
+.menu-mob-modal-flex {
   display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 281px;
+  flex-wrap: wrap;
+  padding: 20px 0 60px;
 }
 
 .menu-patients {
@@ -425,6 +517,21 @@ export default {
   z-index: 999;
   padding: 10px;
   width: 243px;
+}
+
+.menu-patients-container {
+  display: flex;
+}
+
+.menu-patients-list-mob {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-patients-items-mob {
+  @include body-14-regular;
+  color: $placeholder;
 }
 
 .menu-patients-list {
@@ -451,6 +558,62 @@ export default {
   border: 0;
   height: 0;
   border-bottom: 1px solid #E9E9E9;
+}
+
+.header-services-menu-mob {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.header-services-menu-mob-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header-services-menu-mob-breadCrumbs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 0 40px;
+}
+
+.breadCrumbs-first-text {
+  @include body-12-regular;
+  color: $gray-text;
+  cursor: pointer;
+}
+
+.breadCrumbs-slash {
+  color: #7F838C;
+  opacity: 0.7;
+  font-size: 10px;
+}
+
+.breadCrumbs-second-text {
+  @include body-12-regular;
+  color: $placeholder;
+  cursor: pointer;
+}
+
+.menu-mob-second-block-title {
+  padding-bottom: 24px;
+  @include body-16-regular;
+  color: $dark-blue-subtitle;
+}
+
+.menu-mob-second-block-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header-menu-mob-second-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
 }
 
 .header-arrow-icon {
@@ -634,6 +797,17 @@ hr {
   display: flex;
 }
 
+.menu-mob-third-block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+    div {
+      color: #7F838C;
+      width: fit-content;
+    }
+}
+
 .header-services-menu-list {
   display: flex;
   align-items: flex-start;
@@ -662,6 +836,33 @@ hr {
       }
 }
 
+.header-services-menu-item-mob {
+  max-width: 100%;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--stroke, #F5F5F5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  cursor: pointer;
+
+      &:hover {
+        border: 1px solid var(--dissabled, #CFD5E1);
+    }
+      &:hover a {
+        color: $hover;
+      }
+}
+
+.header-services-menu-mob-title {
+  @include body-12-regular;
+  color: $placeholder;
+}
+
 .header-services-menu-box {
     position: absolute;
     top: 108px;
@@ -682,6 +883,14 @@ hr {
   gap: 12px;
   height: 255px;
   flex-wrap: wrap;
+}
+
+.header-services-menu-mob-btn {
+  padding: 40px;
+}
+
+.header-services-menu-mob-button {
+  margin: 0 auto;
 }
 
 .header-services-menu-text {
@@ -740,6 +949,9 @@ hr {
 }
 
 @media (max-width: 1357px) {
+  .header-menu-mob {
+    height: 100%;
+  }
   .header {
     justify-content: space-between;
     width: 100%;
@@ -747,6 +959,7 @@ hr {
     position: fixed;
     top: 0;
     left: 0;
+    background: white;
     .header-nav {
       display: none;
     }
@@ -762,6 +975,19 @@ hr {
 @media (max-width: 650px) {
   .header  {
     padding: 14px 16px;
+  }
+  .menu-mob-modal, .menu-mob-first-block { 
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .menu-mob-modal-flex {
+    height: auto;
+  }
+
+  .p-bt-14 {
+    padding-bottom: 0 !important;
   }
 }
 </style>

@@ -21,6 +21,10 @@
   padding-bottom: 20px;
 }
 
+.p-t-20 {
+  padding-top: 20px;
+}
+
 .p-bt-30 {
   padding-bottom: 30px;
 }
@@ -208,6 +212,19 @@
           background-color: $hover;
           transition: all .3s ease;
         }
+    }
+}
+
+.header-nav-item-mob {
+  @include body-14-regular;
+  color: $gray-text;
+  position: relative;
+  display: inline-block;
+  transition: all .3s ease-in-out, opacity .3s ease-in-out;
+  cursor: pointer;
+
+    &:hover {
+      color: $hover;
     }
 }
 

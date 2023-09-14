@@ -21,11 +21,11 @@ const imagesScroll = ['video1.png', 'video2.png', 'video3.png','video3.png','vid
         },
         {
           title: 'Взрослая стоматология',
-          url: '/adult-dentistry'
+          url: '/vzroslaya-stomatologiya'
         },
          {
             title: 'Удалить зуб без боли',
-            url: `/adult-dentistry/${route.params.id}`
+            url: `/vzroslaya-stomatologiya/${route.params.id}`
           }
     ]"
     />

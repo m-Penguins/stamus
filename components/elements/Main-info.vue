@@ -4,7 +4,7 @@
       <div class="dentistry-box">
         <elements-bread-crumbs :breadcrumbs="breadcrumbs" :typeColorWhite="typeColorWhite"/>
         <div class="mob">
-          <img :src="assetsStore.useAsset(`images/big-images/${imgAdaptiv}`)"/>
+          <img :src="assetsStore.useAsset(`images/big-images/${imgBg}`)" class="img"/>
           <div>
             <elements-title-text-button 
               textButtonBase="Записаться онлайн" 
@@ -94,6 +94,15 @@ import { useAssets } from '../../stores/useAsset'
 <style scoped lang="scss">
 @import '/assets/styles/style.scss';
 
+.img {
+  object-fit: cover;
+  width: 50%;
+  max-width: 100%;
+  height: 334px;
+  border-radius: 25px;
+  object-position: right;
+}
+
 .main-info-width {
   width: 100% !important;
 }
@@ -159,7 +168,7 @@ import { useAssets } from '../../stores/useAsset'
       align-items: center;
 
         img {
-          width: 51%;
+          // width: 51%;
         }
     }
     .dentistry-container {
@@ -191,6 +200,10 @@ import { useAssets } from '../../stores/useAsset'
       justify-content: flex-start;
 
       img {
+        // width: 100%;
+      }
+
+      .img {
         width: 100%;
       }
     }

@@ -110,7 +110,8 @@ import ElementsLinkWithArrow from './ElementsLinkWithArrow.vue'
     line-height: 42px;
   }
   .container {
-    width: 50%;
+    // width: 50%;
+    width: auto;
     .container-text {
       font-size: 16px;
     }

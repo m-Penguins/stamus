@@ -1,8 +1,8 @@
 <template>
-  <label class="checkbox">
+  <label class="checkbox" :class="{ 'checked': isChecked }">
     <input type="checkbox" v-model="isChecked" @change="toggleCheckbox" />
     <span class="checkmark"></span>
-     <span class="label-text">{{ label }}</span>
+    <span class="label-text">{{ label }}</span>
   </label>
 </template>
 
@@ -41,6 +41,7 @@ export default {
 .checkmark {
   width: 20px;
   height: 20px;
+  border-radius: 3px;
   border: 1px solid #7F838C;
   margin-right: 8px;
   display: inline-block;
@@ -58,7 +59,7 @@ export default {
 }
 
 .checkbox:hover .checkmark {
-  border-color: #555;
+  border-color: #525660;
 }
 
 .label-text {
@@ -72,10 +73,10 @@ export default {
 }
 
 .checkbox:hover .label-text {
-  color: #232D5B;
+  color: #525660;
 }
 
-.checkbox input[type="checkbox"]:checked + .label-text {
+.checkbox.checked .label-text {
   color: #232D5B;
 }
 

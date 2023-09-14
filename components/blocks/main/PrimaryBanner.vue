@@ -4,30 +4,30 @@
       <elements-title-text-button :fontSize="false" textButtonBase="Записаться онлайн" title="Оффер <br> в несколько строчек" text="Небольшое описание в несколько строчек"/>
       <div class="primary-banner-box">
         <div class="primary-banner-wrap">
-          <router-link to="/children-dentistry" class="desktop-link">
+          <router-link :to="assetsStorelinkTransform.linkTransform('Детская стоматология')" class="desktop-link">
             <div class="primary-banner-img desktop card_main_kids">
               <div class="primary-banner-btn">Детская стоматология</div>
             </div>
           </router-link>
-          <router-link to="/children-dentistry" class="tablet-link m-r-14 m-r-14-mob">
+          <router-link :to="assetsStorelinkTransform.linkTransform('Детская стоматология')" class="tablet-link m-r-14 m-r-14-mob">
             <div class="primary-banner-img tablet card_main_kids-tab">
               <div class="primary-banner-btn">Детская стоматология</div>
             </div>
           </router-link>
-           <router-link to="/children-dentistry" class="mob-link  m-r-14-mob">
+           <router-link :to="assetsStorelinkTransform.linkTransform('Детская стоматология')" class="mob-link  m-r-14-mob">
             <img class="primary-banner-img mob" src="@/assets/images/img-banner/card_main_kids-2.png" alt="Фотография матери и ребёнка">
           </router-link>
-          <router-link to="/adult-dentistry"  class="desktop-link">
+          <router-link :to="assetsStorelinkTransform.linkTransform('Взрослая стоматология')"  class="desktop-link">
             <div class="primary-banner-img desktop card_main">
               <div class="primary-banner-btn">Взрослая стоматология</div>
             </div>
           </router-link>
-          <router-link to="/adult-dentistry" class="tablet-link">
+          <router-link :to="assetsStorelinkTransform.linkTransform('Взрослая стоматология')" class="tablet-link">
             <div class="primary-banner-img tablet card_main-tab">
               <div class="primary-banner-btn">Взрослая стоматология</div>
             </div>
           </router-link>
-          <router-link to="/adult-dentistry" class="mob-link">
+          <router-link :to="assetsStorelinkTransform.linkTransform('Взрослая стоматология')" class="mob-link">
             <img class="primary-banner-img mob" src="@/assets/images/img-banner/card_main-2.png" alt="Фотография зубного врача">
           </router-link>
         </div>
@@ -35,6 +35,19 @@
     </div>
   </div>
 </template>
+
+<script>
+import { linkTransforms } from '../../../stores/linkTransform'
+export default {
+  setup() {
+      const assetsStorelinkTransform = linkTransforms();
+      return {
+        assetsStorelinkTransform,
+      }
+    }
+}
+
+</script>
 
 <style scoped lang="scss">
 @import '/assets/styles/style.scss';

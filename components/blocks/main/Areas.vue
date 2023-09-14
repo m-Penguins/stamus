@@ -1,60 +1,38 @@
 <template>
   <div class="container-size areas-wrapper">
     <h2>Направления работы</h2>
-    <!-- <div>
-      <div v-for="image in images" :key="image.id" :style="{ backgroundImage: `url(${image.url})` }">
-        <h3>{{images.title}}</h3>
-        <elements-link-with-arrow :type="type" title="Перейти" :href="link"/>
-      </div>
-    </div> -->
     <div class="areas-box">
       <div class="areas-box-temp">
         <div class="areas-box__img img-first">
           <h3>Стоматологические услуги</h3>
-          <elements-link-with-arrow :type="type" title="Перейти" href="/adult-dentistry"/>
+          <elements-link-with-arrow :type="type" title="Перейти" href="/vzroslaya-stomatologiya"/>
         </div>
         <div class="areas-box__img img-second">
           <h3>Детская стоматология</h3>
-          <elements-link-with-arrow :type="type" title="Перейти" href="/children-dentistry"/>
+          <elements-link-with-arrow :type="type" title="Перейти" href="/detskaya-stomatologiya"/>
         </div>
       </div>
       <div class="areas-box-col">
         <div class="areas-box__img img-third">
           <h3>Челестно-лицевая хирургия</h3>
-          <elements-link-with-arrow :type="type" title="Перейти" href="#"/>
+          <elements-link-with-arrow :type="type" title="Перейти" href="/chelestno-licevaya-hirurgiya"/>
         </div>
         <div class="areas-box__img img-fourth">
           <h3>Детская клиника</h3>
-          <elements-link-with-arrow :type="type" title="Перейти" href="/children-clinic"/>
+          <elements-link-with-arrow :type="type" title="Перейти" href="/detskaya-klinika"/>
         </div>
         <div class="areas-box__img img-fifth display">
           <h3>Лечение во сне</h3>
-          <elements-link-with-arrow :type="type" title="Перейти" href="#"/>
+          <elements-link-with-arrow :type="type" title="Перейти" href="/lechenie-vo-sne"/>
         </div>
       </div>
       <div class="mob">
         <h3>Лечение во сне</h3>
-        <elements-link-with-arrow :type="type" title="Перейти" href="#"/>
+        <elements-link-with-arrow :type="type" title="Перейти" href="/lechenie-vo-sne"/>
       </div>
     </div>  
   </div>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      images: [
-        { id: 1, url: '@/assets/images/areas/children-dentistry.png', title:"Стоматологические услуги" },
-        { id: 2, url: '@/assets/images/areas/children-dentistry.png', title:"Стоматологические услуги"  },
-        { id: 3, url: '@/assets/images/areas/children-dentistry.png', title:"Стоматологические услуги"  },
-        { id: 4, url: '@/assets/images/areas/children-dentistry.png', title:"Стоматологические услуги"  },
-        { id: 5, url: '@/assets/images/areas/children-dentistry.png', title:"Стоматологические услуги"  }
-      ]
-    };
-  }
-};
-</script>
 
 <style lang="scss" scoped>
 @import '/assets/styles/style.scss';

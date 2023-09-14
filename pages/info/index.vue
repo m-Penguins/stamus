@@ -21,7 +21,7 @@
   </div>
   <div class="info">
     <h2 class="info-title">Дополнительная информация</h2>
-    <blocks-info-dop-block/>
+    <blocks-info-dop-block :optionsData="options" :optionsDoc="optionsDoc"/>
   </div>
   <BlocksMainBanner 
     :title="'Наше приложение'"
@@ -51,8 +51,24 @@
 import { mockInfoMain } from '../../stores/mockData';
   export default {
     setup() {
+      const options = [
+        { name: 'Получаю справку за себя'},
+        { name: 'Получаю справку за ребенка'},
+        { name: 'Получаю справку за супруга(-и)'},
+        { name: 'Получаю справку за родителя'},
+      ]
+      const optionsDoc = [
+        { name: 'Заберу справку на Хакурате 34'},
+        { name: 'Заберу справку на Гимназическая 85'},
+        { name: 'Заберу справку на Московская 140'},
+        { name: 'Заберу справку на Мачуги 1/1'},
+        { name: 'Заберу справку на Платановом бульваре 19/3'},
+        { name: 'Прислать на почту'},
+      ]
       return {
-        mockInfoMain
+        mockInfoMain,
+        options,
+        optionsDoc
       }
     }
   }

@@ -11,8 +11,6 @@ export const useAssets = defineStore('assets', {
         eager: true,
         import: 'default',
       })
-      console.log(path)
-      console.log(assets['/assets/' + path]);
       return assets['/assets/' + path]
     }
   },
