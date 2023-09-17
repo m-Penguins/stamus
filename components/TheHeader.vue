@@ -12,7 +12,7 @@
           <nav>
             <ul class="header-nav-list">
               <li class="first-item">
-                <div class="header-services-img m-r-20" @click="showServices = !showServices; showSearch = false; showMenuPatients = false" :class="{'active-btn-services': showServices === true}">
+                <div class="header-services-img m-r-20" @click="showServices = !showServices; defaultServices(); showSearch = false; showMenuPatients = false" :class="{'active-btn-services': showServices === true}">
                   <img v-if="!showServices" src="../assets/images/icons/burger.svg" alt="burger">
                   <img v-else src="../assets/images/icons/burger-close.svg" alt="burger-close">
                   <p>Услуги</p>
@@ -87,11 +87,11 @@
 
       <!-- Услуги модалка-->
       <div v-if="showServices" class="header-services-menu">
-        <hr>
+        <hr class="hr-header">
         <div class="header-services-menu-container">
           <div class="header-services-menu-list">
             <div 
-              v-for="navigationService in navigationServices2" 
+              v-for="navigationService in storeServices.getStateService" 
               :key="navigationService.id" 
               class="header-services-menu-item"
               @mouseover="changeActiveClass(navigationService.id)"
@@ -104,7 +104,7 @@
           </div>
           <ul class="header-services-menu-inner">
             <div 
-              v-for="item in navigationServices2" 
+              v-for="item in storeServices.getStateService" 
               :key="item.id" 
               :class="{'active-directions': item.id === activeClass}" 
               class="a2"
@@ -120,7 +120,7 @@
                   <div class="header-services-menu-box-items">
                     <li class="header-services-menu-text" v-for="(service, id) in direction.services" :key="service">
                         <NuxtLink  @click="showServices = false; showSearch = false; $router.push(`${item.path}/` + id)" class="header-services-menu-box-link" to="#">
-                          {{ service }}
+                          {{ service.title }}
                         </NuxtLink>
                     </li>
                   </div>
@@ -133,14 +133,14 @@
       </div>
       <!-- Search модалка-->
       <div v-show="showSearch" class="header-services-menu">
-        <hr>
+        <hr class="hr-header">
         <div>
-          <elements-input-search class="elements-input-search" placeholder="Введите запрос"/>
+          <elements-input-search class="elements-input-search" placeholder="Введите запрос" @enterPressed="closeSearch"/>
         </div>
       </div>
       <!-- Menu модалка mob-->
       <div v-show="showMenuMob" class="header-services-menu">
-        <hr>
+        <hr class="hr-header">
         <!-- Первая страница-->
         <ul class="header-nav-list" :class="{'display-none': !firstBlockMobMenu}"> 
           <div :class="showMenuPatients ? 'menu-mob-modal-flex' : 'menu-mob-modal'">
@@ -181,7 +181,7 @@
             <div class="header-services-menu-mob-title">Услуги</div>
             <div class="header-services-menu-mob-container">
               <div 
-                  v-for="item in navigationServices2" 
+                  v-for="item in storeServices.getStateService" 
                   :key="item.id" 
                   class="header-services-menu-item-mob"
                   @click="changeActiveClass(item.id, item.title); secondBlockMobMenu=true; firstBlockMobMenu=false" :class="{'display-none': secondBlockMobMenu}">
@@ -213,7 +213,7 @@
             <p class="breadCrumbs-second-text">{{clinic}}</p>
           </div>
           <div class="menu-mob-second-block-title">{{clinic}}</div>
-          <div v-for="item in navigationServices2" :key="item.id"  class="menu-mob-second-block-container">
+          <div v-for="item in storeServices.getStateService" :key="item.id"  class="menu-mob-second-block-container">
               <div :class="{'active-directions': item.id === activeClass}" 
                   class="a2" v-for="direction in item.directions" :key="direction.id">
                 <div class="header-services-menu-item-mob" @click="toggleServices(direction); thirdBlockMobMenu=true; secondBlockMobMenu=false; firstBlockMobMenu=false">
@@ -240,7 +240,7 @@
             <p class="breadCrumbs-second-text">{{directionTitle}}</p>
           </div>
           <div class="menu-mob-second-block-title">{{directionTitle}}</div>
-          <div v-for="(item, id) in navigationServices2" :key="id">
+          <div v-for="(item, id) in storeServices.getStateService" :key="id">
             <div :class="{'active-directions': item.id === activeClass}" 
                 class="a2" v-for="direction in item.directions" :key="direction.id">
               <div v-if="direction.showServices" class="menu-mob-third-block">
@@ -248,7 +248,7 @@
                 :key="service" 
                 class="header-services-menu-text header-nav-item">
                 <NuxtLink @click="showServices = false; showSearch = false; secondBlockMobMenu=false; showMenuMob = false;  thirdBlockMobMenu=false; firstBlockMobMenu = true; $router.push(`${item.path}/` + id)" class="header-services-menu-box-link" to="#">
-                      {{ service }}
+                      {{ service.title }}
                 </NuxtLink>
                 </div>
               </div>
@@ -261,6 +261,7 @@
 </template>
 
 <script>
+import { useService } from '../stores/services.js';
 import { useAssets } from '../stores/useAsset';
 import ButtonBase from './elements/Button-base.vue';
 import { useActuveLink } from '../stores/activeLink'
@@ -277,7 +278,7 @@ export default {
         secondBlockMobMenu: false,
         thirdBlockMobMenu: false,
         showMenuPatients: false,
-        directionTitle: '',
+        // directionTitle: '',
         clinic: '',
         activeClass: "",
         showServicesAll: false,
@@ -287,153 +288,13 @@ export default {
         { id: 3, title: 'Информация для пациентов', path: '/info' },
         { id: 4, title: 'Налоговый вычет', path: '/' },
       ],
-        navigationServices2: [
-        {
-          id: 1,
-          title: 'Взрослая стоматология',
-          path: 'vzroslaya-stomatologiya',  
-          directions: [
-            {
-              id: 1,
-              title: 'Терапия. Лечение зубов',
-              services: ['Лечение кариеса', 'Лечение пульпита', 'Лечение периодонтита', 'Лечение каналов зуба', 'Лечение зубов под микроскопом', 'Лечение зубов под наркозом', 'Лечение зубов при беременности', 'Реставрация зуба'],
-            },
-            {
-              id: 2,
-              title: 'Диагностика',
-              services: ['Рентген зубов', 'Панорамный снимок зубов (ОПТГ)', 'Телерентгенограмма (ТРГ)', 'КЛКТ', 'Сканирование 3Shape'],
-            },
-            {
-              id: 3,
-              title: 'Гигиена и отбеливание',
-              services: ['Профессиональная гигиена полости рта', 'Проф гигиена при брекетах', 'Отбеливание ZOOM4', 'Капповое отбеливание', 'Внутрикоронковое отбеливание'],
-            },
-            {
-              id: 4,
-              title: 'Ортопедия. Коронки и протезы',
-              services: ['Протезирование зубов: вкладки, коронки, мосты', 'Керамические коронки', 'Коронки на имплантаты', 'Виниры', 'Съемные протезы', 'Несъемные протезы (All on 4)'],
-            },   
-          ],
-        },
-        {
-          id: 2,
-          title: 'Детская стоматология', 
-          path: 'detskaya-stomatologiya', 
-          directions: [
-            {
-              id: 1,
-              title: 'Терапия. Лечение зубов',
-              services: ['Лечение кариеса2', 'Лечение пульпита', 'Лечение периодонтита', 'Лечение каналов зуба', 'Лечение зубов под микроскопом', 'Лечение зубов под наркозом', 'Лечение зубов при беременности', 'Реставрация зуба'],
-            },
-            {
-              id: 2,
-              title: 'Консультация и профилактика ',
-              services: ['Лечение кариеса', 'Лечение пульпита', 'Лечение периодонтита', 'Лечение каналов зуба', 'Лечение зубов под микроскопом', 'Лечение зубов под наркозом', 'Лечение зубов при беременности', 'Реставрация зуба'],
-            },
-            {
-              id: 3,
-              title: 'Хирургия. Удаление зубов и др',
-              services: ['Лечение кариеса3', 'Лечение пульпита', 'Лечение периодонтита', 'Лечение каналов зуба', 'Лечение зубов под микроскопом', 'Лечение зубов под наркозом', 'Лечение зубов при беременности', 'Реставрация зуба'],
-            },
-            {
-              id: 4,
-              title: 'Адаптация',
-              services: ['Лечение кариеса4', 'Лечение пульпита', 'Лечение периодонтита', 'Лечение каналов зуба', 'Лечение зубов под микроскопом', 'Лечение зубов под наркозом', 'Лечение зубов при беременности', 'Реставрация зуба'],
-            },   
-          ],
-        },
-        {
-          id: 3,
-          title: 'Детская клиника',  
-          path: 'detskaya-klinika', 
-          directions: [
-            {
-              id: 1,
-              title: 'Услуги',
-              services: ['Лечение кариеса', 'Лечение пульпита', 'Лечение периодонтита', 'Лечение каналов зуба', 'Лечение зубов под микроскопом', 'Лечение зубов под наркозом', 'Лечение зубов при беременности', 'Реставрация зуба'],
-            },
-            {
-              id: 2,
-              title: 'Специалисты',
-              services: ['Педиатр', 'Аллерголог', 'Аллерголог', 'Дерматолог', 'Детский хирург', 'Уролог', 'Кардиолог', 'Функциональный диагност', 'Логопед', 'Невролог', 'Ортопед травматолог', 'ЛОР', 'Офтальмолог', 'Физиотерапевт', 'Эндокринолог'],
-            },
-          ],
-        },
-        {
-          id: 4,
-          title: 'Челюстно-лицевая хирургия',
-          path: 'chelestno-licevaya-hirurgiya',
-          directions: [
-            {
-              id: 1,
-              title: 'Травмы челюстно-лицевой области (переломы)',
-              services: ['Лечение кариеса', 'Лечение пульпита', 'Лечение периодонтита', 'Лечение каналов зуба', 'Лечение зубов под микроскопом', 'Лечение зубов под наркозом', 'Лечение зубов при беременности', 'Реставрация зуба'],
-            },
-            {
-              id: 2,
-              title: 'Скуловая имплантация',
-              services: ['Лечение кариеса2', 'Лечение пульпита', 'Лечение периодонтита', 'Лечение каналов зуба', 'Лечение зубов под микроскопом', 'Лечение зубов под наркозом', 'Лечение зубов при беременности', 'Реставрация зуба'],
-            },
-            {
-              id: 3,
-              title: 'Опухоли и новообразования',
-              services: ['Лечение кариеса3', 'Лечение пульпита', 'Лечение периодонтита', 'Лечение каналов зуба', 'Лечение зубов под микроскопом', 'Лечение зубов под наркозом', 'Лечение зубов при беременности', 'Реставрация зуба'],
-            },
-            {
-              id: 4,
-              title: 'Опухоли и новообразования',
-              services: ['Лечение кариеса4', 'Лечение пульпита', 'Лечение периодонтита', 'Лечение каналов зуба', 'Лечение зубов под микроскопом', 'Лечение зубов под наркозом', 'Лечение зубов при беременности', 'Реставрация зуба'],
-            }, 
-            {
-              id: 5,
-              title: 'Гайморотомия',
-              services: ['Лечение кариеса4', 'Лечение пульпита', 'Лечение периодонтита', 'Лечение каналов зуба', 'Лечение зубов под микроскопом', 'Лечение зубов под наркозом', 'Лечение зубов при беременности', 'Реставрация зуба'],
-            },   
-          ],
-        },
-        {
-          id: 5,
-          title: 'Лечение во сне',
-          path: 'lechenie-vo-sne',  
-          directions: [
-            {
-              id: 1,
-              title: 'Лечение зубов детям во сне',
-              services: ['Лечение кариеса', 'Лечение пульпита', 'Лечение периодонтита', 'Лечение каналов зуба', 'Лечение зубов под микроскопом', 'Лечение зубов под наркозом', 'Лечение зубов при беременности', 'Реставрация зуба'],
-            },
-            {
-              id: 2,
-              title: 'Масочный наркоз',
-              services: ['Лечение кариеса2', 'Лечение пульпита', 'Лечение периодонтита', 'Лечение каналов зуба', 'Лечение зубов под микроскопом', 'Лечение зубов под наркозом', 'Лечение зубов при беременности', 'Реставрация зуба'],
-            },
-            {
-              id: 3,
-              title: 'Лечение зубов взрослым во сне',
-              services: ['Лечение кариеса3', 'Лечение пульпита', 'Лечение периодонтита', 'Лечение каналов зуба', 'Лечение зубов под микроскопом', 'Лечение зубов под наркозом', 'Лечение зубов при беременности', 'Реставрация зуба'],
-            },
-            {
-              id: 4,
-              title: 'Удаление зубов под наркозом',
-              services: ['Лечение кариеса4', 'Лечение пульпита', 'Лечение периодонтита', 'Лечение каналов зуба', 'Лечение зубов под микроскопом', 'Лечение зубов под наркозом', 'Лечение зубов при беременности', 'Реставрация зуба'],
-            },   
-          ],
-        },
-      ]
-      };
+    };
   },
   methods: {
     openModal() {
       this.$refs.modal.openModal('Modal Title', 'Modal Message');
     },
-    toggleServices(direction) {
-      this.navigationServices2.forEach(dir => {
-        dir.directions.forEach(dir2 => {
-          dir2.showServices = false;
-           });
-           direction.showServices = true;
-           this.directionTitle = direction.title;
-        });
-    },
+
     closeMenu(event) {
       if (event.target.classList.contains("modal-menu")) {
         this.showServices = false;
@@ -447,14 +308,50 @@ export default {
       this.activeClass = cls;
       console.log(cls)
       this.clinic = title
+    },
+    closeSearch() {
+      this.showSearch = false;
     }
   },
     setup() {
       const assetsStore = useAssets();
+      const storeServices = useService();
+      const router = useRouter();
+      const route  = useRoute();
+      console.log(storeServices)
+      let directionTitle = '';
+      let activeClass2 = ''
       const togglerPopup = (state) => {
         isOpenPopup.value = state
       }
-      const route = useRoute();
+
+      onMounted(() => {
+        storeServices.fetchdataService()
+      })
+
+      const navigateToRoute = (serv, dir) => {
+        const newRoute = `/${serv}/${assetsStorelinkTransform.linkTransform(dir)}`;
+        router.replace(newRoute);
+        console.log(newRoute)
+      }
+
+      const defaultServices = () => {
+        activeClass2 = storeServices.getStateService[0];
+
+        console.log(activeClass2.title);
+      }
+
+      const toggleServices = (direction) => {
+        storeServices.getStateService.forEach(dir => {
+          console.log(dir.title)
+          dir.directions.forEach(dir2 => {
+            dir2.showServices = false;
+            });
+            direction.showServices = true;
+            directionTitle = direction.title;
+          });
+      }
+
       const store = useActuveLink();
       const isOpenPopup = ref(false);
       const navigation = [
@@ -481,6 +378,13 @@ export default {
         togglerPopup,
         store,
         navigationServices,
+        storeServices,
+        toggleServices,
+        directionTitle,
+        activeClass2,
+        defaultServices,
+        navigateToRoute,
+        route
       }
     }
   }
@@ -664,7 +568,7 @@ export default {
   margin: 30px 0 16px;
 }
 
-hr {
+.hr-header {
   margin-top: 20px;
   width: auto;
   border: 0;

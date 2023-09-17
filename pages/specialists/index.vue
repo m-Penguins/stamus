@@ -30,8 +30,8 @@
         </div> 
       </div>
       <div class="spicialists-page-cards">
-        <div  class="spicialists-page-card" v-for="item in mockArrayOurSpecialists" :key="item" >
-          <elements-name-specialty-photo-card :specialists="item" @click="$router.push(`/specialists/` + 1)"/>
+        <div class="spicialists-page-card" v-for="item in mockArrayOurSpecialists" :key="item" >
+          <elements-name-specialty-photo-card link="#" :handleLinkClick="handleLinkClick" :arrayTooltip="mockArrayTooltips" :specialists="item"/>
         </div>
       </div>
       <elements-pagination
@@ -57,6 +57,10 @@ import {mockArrayOurSpecialists} from '../../stores/mockData';
     methods: {
       setCurrentPage(pageNumber) {
         this.currentPage = pageNumber;
+      },
+
+      handleLinkClick() {
+        this.$router.push(`/specialists/` + 1)
       }
     },
     setup() {
@@ -75,10 +79,18 @@ import {mockArrayOurSpecialists} from '../../stores/mockData';
           {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
           {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
           ];
+          const mockArrayTooltips = [
+            {text: 'Победитель Гран-при Продокторов «Лучший ортопед России» 2021', img: 'tool1.svg'},
+            {text: '2 место Премия Продокторов «Детский стоматолог» 2022 Краснодар', img: 'tool2.svg'},
+            {text: 'Врач высшей категории', img: 'tool3.svg'},
+            {text: 'Работает с эстетическими коронками', img: 'tool4.svg'},
+            {text: 'Работает под микроскопом', img: 'tool5.svg'},
+          ];
       return {
         breadcrumbs,
         mockArray,
-        mockArrayOurSpecialists
+        mockArrayOurSpecialists,
+        mockArrayTooltips
       }
     }
   }

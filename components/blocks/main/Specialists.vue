@@ -76,7 +76,7 @@ export default {
           id: 1, 
           name: 'Овсоян Григорий', 
           category: 'Стоматолог-терапевт', 
-          img: 'images/specialists/avatar.png', 
+          img: 'images/specialists/avatar-4.png', 
           imgBig:'images/specialists/avatar-4.png',
           experience: 6,
           review: 200,
@@ -86,7 +86,7 @@ export default {
           id: 2, 
           name: 'Унаньян Карина', 
           category: 'Челюстно-лицевой хирург', 
-          img: 'images/specialists/avatar-1.png', 
+          img: 'images/specialists/avatar-7.png', 
           imgBig:'images/specialists/avatar-7.png',
           experience: 6,
           review: 200,
@@ -96,7 +96,7 @@ export default {
           id: 3, 
           name: 'Маашев Магомед', 
           category: 'Стоматолог-хирург', 
-          img: 'images/specialists/avatar-2.png', 
+          img: 'images/specialists/avatar-6.png', 
           imgBig:'images/specialists/avatar-6.png',
           experience: 6,
           review: 200,
@@ -106,7 +106,7 @@ export default {
           id: 4, 
           name: 'Шагалова Полина', 
           category: 'Стоматолог', 
-          img: 'images/specialists/avatar-3.png', 
+          img: 'images/specialists/avatar-5.png', 
           imgBig:'images/specialists/avatar-5.png',
           experience: 6,
           review: 200,
@@ -132,7 +132,7 @@ export default {
     },
   },
   setup() {
-    const assetsStore = useAssets();
+      const assetsStore = useAssets();
     return {
       assetsStore,
     }
@@ -225,6 +225,7 @@ export default {
             width: 60px;
             height: 60px;
             border-radius: 5px;
+            background: #E8E8E8;
           }
       } 
   }

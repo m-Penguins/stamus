@@ -104,7 +104,8 @@
       isPriceForm: {
         type: Boolean,
         default: false
-      }
+      },
+      addresData: Array,
     },
     methods: {
     toggleExpansion() {

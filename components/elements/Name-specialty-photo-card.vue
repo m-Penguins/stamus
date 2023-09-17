@@ -9,38 +9,16 @@
         <div class="card-photo-name-text">{{specialists.category}}</div>
       </div>
       <div class="tooltip">
-      <!-- <div class="avatar" :data-tooltip="selectButton()"> -->
         <img src="../../assets/images/icons/icons-badge.svg"/>
         <span class="info">
-					<div class="tooltip-box">
-            <img src="../../assets/images/icons/tooltip/tool1.svg" alt="icon">
-            <p>Победитель Гран-при Продокторов «Лучший ортопед России» 2021</p>
-          </div>
-          <div class="tooltip-box">
-            <img src="../../assets/images/icons/tooltip/tool2.svg" alt="icon">
-            <p>2 место Премия Продокторов «Детский стоматолог» 2022 Краснодар</p>
-          </div>
-          <div class="tooltip-box">
-            <img src="../../assets/images/icons/tooltip/tool3.svg" alt="icon">
-            <p>Врач высшей категории</p>
-          </div>
-          <div class="tooltip-box">
-            <img src="../../assets/images/icons/tooltip/tool4.svg" alt="icon">
-            <p>Работает с эстетическими коронками</p>
-          </div>
-          <div class="tooltip-box">
-            <img src="../../assets/images/icons/tooltip/tool5.svg" alt="icon">
-            <p>Работает под микроскопом</p>
+					<div class="tooltip-box" v-for="(item) in arrayTooltip" :key="item">
+            <img :src="assetsStore.useAsset(`images/icons/tooltip/${item.img}`)" alt="icon">
+            <p class="tooltip-text">{{item.text }}</p>
           </div>
 				</span>
-        <!-- <div class="s avatar2">
-          {{specialists.name}}
-          {{specialists.category}}
-        </div> -->
       </div>
     </div>
-    <elements-link-with-arrow type="true" title="Подробнее о враче" :link="link"/>
-    <!-- <elements-tool/> -->
+    <elements-link-with-arrow type="true" title="Подробнее о враче" :link="link" :clickHandler="handleLinkClick"/>
   </div>
 </template>
 
@@ -53,7 +31,11 @@ export default {
     },
     link: {
       type: String
-    }
+    },
+    arrayTooltip: {
+      type: Array
+    },
+    handleLinkClick: Function
   },
     methods: {
     selectButton() {
@@ -86,13 +68,21 @@ export default {
 		}
 }
 .info {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
   box-sizing: border-box;
   position: absolute;
-  bottom: 53px;
-  left: -85px;
-  display: block;
+  bottom: 64px;
+  bottom: 62px;
+  left: -272px;
+  padding: 14px 20px;
   background: white;
-  width: 373px;
+  -webkit-box-shadow: 2px 5px 45px -5px rgba(30, 32, 40, 0.08);
+  -moz-box-shadow: 2px 5px 45px -5px rgba(30, 32, 40, 0.08);
+  box-shadow: 2px 5px 45px -5px rgba(30, 32, 40, 0.08);
+  border-radius: 15px;
+  width: 297px;
   font-size: 16px;
   line-height: 24px;
   cursor: text;
@@ -116,116 +106,23 @@ export default {
     width: 10px;
     height: 10px;
     transform: rotate(45deg);
-    bottom: -5px;
+    bottom: -3px;
     left: 50%;
-    margin-left: -5px;
-    background: #286F8A;
+    margin-left: 130px;
+    background: white;
   }
 }
 
 .tooltip-box {
   display: flex;
   align-items: center;
+  gap: 10px
 }
-// .s {
-//   display: none;
-// }
-// .avatar:hover {
-//   .s {
-//     display: block;
-//   }
-// }
-// .avatar {
-//   width: 100px;
-//   height: 100px;
-//   border-radius: 50%;
-//   // background-image: url('https://source.unsplash.com/nKC772R_qog');
-//   background-size: cover;
-//   background-position: center;
-//   position: relative;
-// }
-// .avatar::before,
-// .avatar::after {
-//   --scale: 0;
-//   --arrow-size: 10px;
-//   --tooltip-color: #333;
 
-//   position: absolute;
-//   top: -.25rem;
-//   left: 50%;
-//   transform: translateX(-50%) translateY(var(--translate-y, 0)) scale(var(--scale));
-//   transition: 150ms transform;
-//   transform-origin: bottom center;
-// }
-
-// .avatar::before {
-//   --translate-y: calc(-100% - var(--arrow-size));
-
-//   content: attr(data-tooltip);
-//   color: white;
-//   padding: .5rem;
-//   border-radius: .3rem;
-//   text-align: center;
-//   width: max-content;
-//   max-width: 100%;
-//   background: var(--tooltip-color);
-// }
-
-// .avatar:hover::before,
-// .avatar:hover::after {
-//   --scale: 1;
-// }
-
-// .avatar::after {
-//   --translate-y: calc(-1 * var(--arrow-size));
-
-//   content: '';
-//   border: var(--arrow-size) solid transparent;
-//   border-top-color: var(--tooltip-color);
-//   transform-origin: top center;
-// }
-
-// //////////
-// .avatar2::before,
-// .avatar2::after {
-//   --scale: 0;
-//   --arrow-size: 10px;
-//   --tooltip-color: #333;
-
-//   position: absolute;
-//   top: -.25rem;
-//   left: 50%;
-//   transform: translateX(-50%) translateY(var(--translate-y, 0)) scale(var(--scale));
-//   transition: 150ms transform;
-//   transform-origin: bottom center;
-// }
-
-// .avatar2::before {
-//   --translate-y: calc(-100% - var(--arrow-size));
-
-//   content: attr(data-tooltip);
-//   color: white;
-//   padding: .5rem;
-//   border-radius: .3rem;
-//   text-align: center;
-//   width: max-content;
-//   max-width: 100%;
-//   background: var(--tooltip-color);
-// }
-
-// .avatar2:hover::before,
-// .avatar2:hover::after {
-//   --scale: 1;
-// }
-
-// .avatar2::after {
-//   --translate-y: calc(-1 * var(--arrow-size));
-
-//   content: '';
-//   border: var(--arrow-size) solid transparent;
-//   border-top-color: var(--tooltip-color);
-//   transform-origin: top center;
-// }
+.tooltip-text {
+  @include body-16-regular;
+  color: $gray-text;
+}
 
 .card-photo-name-img {
   padding-bottom: 30px;

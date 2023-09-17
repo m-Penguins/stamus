@@ -13,7 +13,8 @@ const imagesScroll = ['video1.png', 'video2.png', 'video3.png','video3.png','vid
       title="Удалить зуб без боли" 
       text="Небольшое описание в несколько строчек" 
       imgBg="removal-tooth.png" 
-      imgAdaptiv="removal-tooth-adaptiv.png" 
+      imgAdaptiv="removal-tooth.png"
+      :isDital=true 
       :breadcrumbs="[
         {
           title: 'Главная',
@@ -23,10 +24,10 @@ const imagesScroll = ['video1.png', 'video2.png', 'video3.png','video3.png','vid
           title: 'Детская стоматология',
           url: '/detskaya-stomatologiya'
         },
-         {
-            title: 'Удалить зуб без боли',
-            url: `/detskaya-stomatologiya/${route.params.id}`
-          }
+        {
+          title: 'Удалить зуб без боли',
+          url: `/detskaya-stomatologiya/${route.params.id}`
+        }
     ]"
     />
     <blocks-video-block 

@@ -4,7 +4,7 @@
       <div class="dentistry-box">
         <elements-bread-crumbs :breadcrumbs="breadcrumbs" :typeColorWhite="typeColorWhite"/>
         <div class="mob">
-          <img :src="assetsStore.useAsset(`images/big-images/${imgBg}`)" class="img"/>
+          <img :src="assetsStore.useAsset(`images/big-images/${imgAdaptiv}`)" :class="[isDital ? 'img-dital' : 'img']"/>
           <div>
             <elements-title-text-button 
               textButtonBase="Записаться онлайн" 
@@ -79,6 +79,10 @@ import { useAssets } from '../../stores/useAsset'
         type: Boolean,
         default: false
       },
+      isDital: {
+        type: Boolean,
+        default: false
+      },
       time: String,
       money: String
     },
@@ -95,6 +99,11 @@ import { useAssets } from '../../stores/useAsset'
 @import '/assets/styles/style.scss';
 
 .img {
+  width: 50%;
+  max-width: 100%;
+}
+
+.img-dital {
   object-fit: cover;
   width: 50%;
   max-width: 100%;
@@ -191,6 +200,10 @@ import { useAssets } from '../../stores/useAsset'
   }
 
     @media (max-width: 600px) {
+
+    .img-dital {
+      width: 100%;
+    }
     .dentistry-container {
       margin-bottom: 80px;
     }

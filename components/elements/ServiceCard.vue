@@ -3,16 +3,20 @@
     <nuxt-link to="#" class="link">
       <div class="service-card">
         <div class="service-card-container">
-          <div class="service-card-category grey-point-container">
-            <p class="grey-point-text">Стоматология</p>
-            <div class="grey-point"></div>
-            <p class="grey-point-text">Дети</p>
-          </div>
-          <div class="service-card-title">{{ service.name }}</div>
+          <div class="grey-point-container">
+            <div class="service-card-category grey-point-container" v-for="(item, index) in service.tags" :key="item">
+              <p class="grey-point-text">{{ item }}
+              </p>
+              <div class="grey-point" v-if="index < service.tags.length - 1"></div>
+            </div>
+        </div>
+          <div class="service-card-title">{{ service.heading }}</div>
         </div>
         <div class="service-card-box">
-          <div class="service-card-box__type">{{ service.type }}</div>
-          <div class="service-card-box__price">{{ service.price }}</div>
+          <div v-if="service.isRecommended" class="service-card-box__type-isRecommended">Рекомендуем</div>
+          <div v-if="service.isPopular" class="service-card-box__type-isPopular">Популярное</div>
+          <div v-if="service.isDemand"  class="service-card-box__type-isDemand">Высокий спрос</div>
+          <div class="service-card-box__price">от {{ service.price }} ₽</div>
         </div>
       </div>
     </nuxt-link>
@@ -63,7 +67,7 @@
         color: $hover;
       }
 
-      &__type {
+      &__type-isRecommended {
         display: flex;
         align-items: center;
         padding: 6px 10px 8px 10px;
@@ -73,10 +77,28 @@
         color: $green;
         width: max-content;
       }
-    }
 
-    .service-card-category {
+      &__type-isPopular {
+        display: flex;
+        align-items: center;
+        padding: 6px 10px 8px 10px;
+        border-radius: 5px;
+        background: rgba(220, 101, 15, 0.05);
+        @include body-12-regular;
+        color: #DC650F;
+        width: max-content;
+      }
 
+      &__type-isDemand {
+        display: flex;
+        align-items: center;
+        padding: 6px 10px 8px 10px;
+        border-radius: 5px;
+        background: rgba(244, 81, 81, 0.05);
+        @include body-12-regular;
+        color: #F45151;
+        width: max-content;
+      }
     }
 
     .service-card-title {

@@ -9,29 +9,29 @@
           <h3 class="footer-subtitle">Меню</h3>
           <div class="footer-menu-container">
             <div class="footer-menu-container__link">
-              <a class="footer-text" href="/">Специалисты</a>
-              <a class="footer-text" href="/">Пациентам</a>
-              <a class="footer-text" href="/">Акции и скидки</a>
+              <NuxtLink exact active-class="active-link" class="header-nav-item footer-text" to="/specialists">Специалисты</NuxtLink>
+              <NuxtLink exact active-class="active-link" class="header-nav-item footer-text" to="/info">Пациентам</NuxtLink>
+              <NuxtLink exact active-class="active-link" class="header-nav-item footer-text" to="/discounts">Акции и скидки</NuxtLink>
             </div>
             <div class="footer-menu-container__link">
-              <a class="footer-text" href="/">Портфолио</a>
-              <a class="footer-text" href="/">Цены</a>
-              <a class="footer-text" href="/">Контакты</a>
+              <NuxtLink exact active-class="active-link" class="header-nav-item footer-text" to="/portfolio">Портфолио</NuxtLink>
+              <NuxtLink exact active-class="active-link" class="header-nav-item footer-text" to="/prices">Цены</NuxtLink>
+              <NuxtLink exact active-class="active-link" class="header-nav-item footer-text" to="/contacts">Контакты</NuxtLink>
             </div>
           </div>
         </div>
         <div class="footer-contacts">
           <h3 class="footer-subtitle">Контакты</h3>
-          <div class="footer-text">+7 (999) 888 - 77 - 66</div>
-          <div class="footer-text">stamus-med@info.ru</div>
+          <a class="footer-text header-nav-item" href="tel:+79998887766">+7 (999) 888 - 77 - 66</a>
+          <a class="footer-text header-nav-item" href="mailto:stamus-med@info.ru">stamus-med@info.ru</a>
           <div class="footer-social">
-            <a href="/">
+            <a href="/" class="footer-social-link">
               <img class="footer-img" src="@/assets/images/icons/YouTube-fill.svg" alt="Social icon">
             </a>
-            <a href="/">
+            <a href="/" class="footer-social-link">
               <img class="footer-img" src="@/assets/images/icons/vk-fill.svg" alt="Social icon">
             </a>
-            <a href="/">
+            <a href="/" class="footer-social-link">
               <img class="footer-img" src="@/assets/images/icons/Telegram-fill.svg" alt="Social icon">
             </a>
           </div>
@@ -40,25 +40,41 @@
           <h3 class="footer-subtitle">Наши адреса</h3>
           <div class="footer-address__container">
             <div class="footer-address__container-link">
-              <p class="footer-text">ул. Московская 140</p>
-              <p class="footer-text">ул. Хакурате 34</p>
-              <p class="footer-text">ул. Мачуги 1/1</p>
-              <p class="footer-text">ул. Черкасская 17</p>
-            </div>
-            <div class="p-r-18">
-              <p class="footer-text">ул. Гимназическая 85</p>
-              <p class="footer-text">Платановый бульвар 19/3</p>
-              <p class="footer-text">ул. Средняя 1/3</p>
+              <NuxtLink @click="$router.push(`clinics/${assetsStorelinkTransform.linkTransform('ул. Московская 140')}`)" to="#">
+                <p class="footer-text">ул. Московская 140</p>
+              </NuxtLink>
+              <NuxtLink @click="$router.push(`clinics/${assetsStorelinkTransform.linkTransform('ул. Хакурате 34')}`)" class="footer-text" to="#">
+                <p class="footer-text">ул. Хакурате 34</p>
+              </NuxtLink>
+              <NuxtLink @click="$router.push(`clinics/${assetsStorelinkTransform.linkTransform('ул. Мачуги 1/1')}`)" class="footer-text" to="#">
+                <p class="footer-text">ул. Мачуги 1/1</p>
+              </NuxtLink>
+              <NuxtLink @click="$router.push(`clinics/${assetsStorelinkTransform.linkTransform('ул. Черкасская 17')}`)" class="footer-text" to="#">
+                <p class="footer-text">ул. Черкасская 17</p>
+              </NuxtLink>
             </div>
           </div>
+        </div>
+        <div class="p-r-18 address">
+          <NuxtLink @click="$router.push(`clinics/${assetsStorelinkTransform.linkTransform('ул. Гимназическая 85')}`)" class="footer-text" to="#">
+            <p class="footer-text">ул. Гимназическая 85</p>
+          </NuxtLink>
+          <NuxtLink @click="$router.push(`clinics/${assetsStorelinkTransform.linkTransform('Платановый бульвар 19/3')}`)" class="footer-text" to="#">
+            <p class="footer-text">Платановый бульвар 19/3</p>
+          </NuxtLink>
+          <NuxtLink @click="navigateToRoute('ул. Средняя 1-3')" class="footer-text" to="#">
+            <p class="footer-text">ул. Средняя 1/3</p>
+          </NuxtLink>
         </div>
           <div class="footer-text display-block">Политика конфидециальности</div>
           <div class="footer-text display-block">Лицензия</div>
           <div class="footer-text display-block">Версия для слабовидящих</div>
+          <div class="footer-text display-block">Бизнесу и корпоративным клиентам</div>
           <div class="display">
             <p class="footer-text">Политика конфидециальности</p>
             <p class="footer-text">Лицензия</p>
             <p class="footer-text">Версия для слабовидящих</p>
+            <p class="footer-text">Бизнесу и корпоративным клиентам</p>
           </div>
       </div>
     </div>
@@ -66,6 +82,8 @@
 </template>
 
 <script>
+import { linkTransforms } from '../stores/linkTransform';
+import { useRoute, useRouter } from 'vue-router'; 
 export default {
   data() {
     return {
@@ -83,23 +101,40 @@ export default {
           iconName: 'vk-fill'
         },
       },
-      setup() {
-        const localePath = useLocalePath();
+    }
+  },
+  setup() {
+        const assetsStorelinkTransform = linkTransforms();
+        const route  = useRoute();
+        const router = useRouter();
+        const navigateToRoute = (str) => {
+        const newRoute = `/clinics/${assetsStorelinkTransform.linkTransform(str)}`;
+          router.replace(newRoute);
+        }
 
         return {
-          localePath,
+          assetsStorelinkTransform,
+          route,
+          navigateToRoute
         }  
       } 
-    }
-  }
 }
 </script>
 
 <style lang="scss">
 @import '/assets/styles/style.scss';
 
+.footer-social-link {
+  transition: all .2s ease;
+}
+
+.footer-social-link:hover {
+  transform: scale(1.1);
+}
+
 .display {
   display: none;
+  padding-top: 45px;
 }
 
 .display-block {
@@ -131,7 +166,8 @@ export default {
 
     .footer__box {
       display: grid;
-      grid-template-columns: 1fr 1fr 2fr;
+      // grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 248px 200px 183px 261px;
       width: 100%;
       height: 100%;
       grid-column-gap: 89px;
@@ -166,7 +202,7 @@ export default {
     }
 
     .footer-text {
-      padding-bottom: 14px;
+      margin-bottom: 14px;
       @include body-14-regular;
       color: $gray-text;
     }
@@ -180,7 +216,11 @@ export default {
     }
   }
 
-  @media (max-width: 1110px) {
+  .address {
+    padding-top: 45px;
+  }
+
+  @media (max-width: 1200px) {
     .display {
       display: flex;
       flex-direction: column;
@@ -194,12 +234,14 @@ export default {
       .footer__box {
         display: flex;
         flex-wrap: wrap;
-        gap: 20px;
-
-        .footer-contacts {
-          margin-right: 500px;
-        }
+        gap: 40px;
       }
+    }
+  }
+
+  @media (max-width: 1190px) {
+    .display {
+      padding-top: 0px;
     }
   }
 
@@ -208,9 +250,34 @@ export default {
       padding: 40px 0 40px;
       .footer__box {
         .footer-contacts {
-          margin-right: 200px;
+          margin-right: 300px;
           padding-bottom: 14px;
         }
+      }
+    }
+    .display {
+      padding-top: 45px;
+    }
+  }
+
+  @media (max-width: 758px) {
+    .footer {
+      padding: 40px 0 40px;
+      .footer__box {
+        .footer-contacts {
+          margin-right: 100px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 707px) {
+    .display {
+      padding-top: 0px;
+    }
+    .footer {
+      .footer__box {
+        gap: 20px;
       }
     }
   }
@@ -222,6 +289,17 @@ export default {
           margin-right: 0px;
         }
       }
+    }
+  }
+
+  @media (max-width: 420px) {
+    .footer {
+      .footer__box {
+        gap: 20px 40px;
+      }
+    }
+    .address {
+      padding-top: 0px;
     }
   }
 </style>

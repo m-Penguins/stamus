@@ -13,7 +13,8 @@ const imagesScroll = ['video1.png', 'video2.png', 'video3.png','video3.png','vid
       title="Удалить зуб без боли" 
       text="Небольшое описание в несколько строчек" 
       imgBg="removal-tooth.png" 
-      imgAdaptiv="removal-tooth-adaptiv.png" 
+      imgAdaptiv="removal-tooth.png" 
+      :isDital=true
       :breadcrumbs="[
         {
           title: 'Главная',

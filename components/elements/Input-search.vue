@@ -25,6 +25,7 @@
           path: '/search',
           query: { term: this.searchTerm }
         })
+        this.$emit('enterPressed');
       }
     }
   }
