@@ -1,9 +1,9 @@
 @import "./variables.scss";
 
-  @font-face {
-    font-family: 'Neue Machin';
-    src: url('../fonts/NeueMachina-Bold.ttf');
-  }
+// @font-face {
+//   font-family: 'Neue Machin';
+//   src: url('./fonts/NeueMachina-Bold.ttf') format('truetype');
+// }
 
 @mixin body-10-regular {
   font-family: Manrope;

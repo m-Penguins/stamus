@@ -299,6 +299,7 @@ export default {
       if (event.target.classList.contains("modal-menu")) {
         this.showServices = false;
         this.showMenuPatients = false;
+        this.showSearch = false;
       } 
       // if (event.target.classList.contains("modal-menu")) {
       //   this.showMenuPatients = false;

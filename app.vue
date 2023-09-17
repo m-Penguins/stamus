@@ -17,21 +17,21 @@
 
   @font-face {
   font-family: 'Neue Machin';
-  src: url('./assets/fonts/NeueMachina-Regular.ttf') format('truetype');
+  src: url('./fonts/NeueMachina-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 
   @font-face {
     font-family: 'Neue Machin';
-    src: url('./assets/fonts/NeueMachina-Medium.ttf') format('truetype');
+    src: url('./fonts/NeueMachina-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
   }
 
   @font-face {
     font-family: 'Neue Machin';
-    src: url('./assets/fonts/NeueMachina-Bold.ttf') format('truetype');
+    src: url('./fonts/NeueMachina-Bold.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
   }
