@@ -21,7 +21,7 @@
     :title="'Счастливые часы'"
     :text="'Скидки до 50%'"
     :titleLink="'Воспользоваться акцией'"
-    :link="`/discounts/${assetsStorelinkTransform.linkTransform('Счастливые часы')}`"
+    :link="`/discounts/${linkTransform('Счастливые часы')}`"
     bgColor="dark-blue-gradient"
     img="tooth.png"
     bigImg=true
@@ -50,7 +50,6 @@
 </template>
 
 <script>
-import { linkTransforms } from '../../stores/linkTransform';
 export default {
    props: {
       isDiscounts: {
@@ -68,10 +67,8 @@ export default {
       isOpenPopup.value = state
     }
     const isOpenPopup = ref(false);
-    const assetsStorelinkTransform = linkTransforms();
     return {
       isOpenPopup,
-      assetsStorelinkTransform,
       togglerPopup
     }
   }
