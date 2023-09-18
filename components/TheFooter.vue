@@ -40,36 +40,37 @@
           <h3 class="footer-subtitle">Наши адреса</h3>
           <div class="footer-address__container">
             <div class="footer-address__container-link">
-              <NuxtLink @click="$router.push(`clinics/${assetsStorelinkTransform.linkTransform('ул. Московская 140')}`)" to="#">
+              <NuxtLink @click="$router.push(`/clinics/${assetsStorelinkTransform.linkTransform('ул. Московская 140')}`)" to="#">
                 <p class="footer-text">ул. Московская 140</p>
               </NuxtLink>
-              <NuxtLink @click="$router.push(`clinics/${assetsStorelinkTransform.linkTransform('ул. Хакурате 34')}`)" class="footer-text" to="#">
+              <NuxtLink @click="$router.push(`/clinics/${assetsStorelinkTransform.linkTransform('ул. Хакурате 34')}`)" class="footer-text" to="#">
                 <p class="footer-text">ул. Хакурате 34</p>
               </NuxtLink>
-              <NuxtLink @click="$router.push(`clinics/${assetsStorelinkTransform.linkTransform('ул. Мачуги 1/1')}`)" class="footer-text" to="#">
+              <NuxtLink @click="$router.push(`/clinics/${assetsStorelinkTransform.linkTransform('ул. Мачуги 1-1')}`)" class="footer-text" to="#">
                 <p class="footer-text">ул. Мачуги 1/1</p>
               </NuxtLink>
-              <NuxtLink @click="$router.push(`clinics/${assetsStorelinkTransform.linkTransform('ул. Черкасская 17')}`)" class="footer-text" to="#">
+              <!-- <NuxtLink @click="$router.push(`clinics/${assetsStorelinkTransform.linkTransform('ул. Черкасская 17')}`)" class="footer-text" to="#">
                 <p class="footer-text">ул. Черкасская 17</p>
-              </NuxtLink>
+              </NuxtLink> -->
             </div>
           </div>
         </div>
         <div class="p-r-18 address">
-          <NuxtLink @click="$router.push(`clinics/${assetsStorelinkTransform.linkTransform('ул. Гимназическая 85')}`)" class="footer-text" to="#">
+          <NuxtLink @click="$router.push(`/clinics/${assetsStorelinkTransform.linkTransform('ул. Гимназическая 85')}`)" class="footer-text" to="#">
             <p class="footer-text">ул. Гимназическая 85</p>
           </NuxtLink>
-          <NuxtLink @click="$router.push(`clinics/${assetsStorelinkTransform.linkTransform('Платановый бульвар 19/3')}`)" class="footer-text" to="#">
+          <NuxtLink @click="$router.push(`/clinics/${assetsStorelinkTransform.linkTransform('Платановый бульвар 19/3')}`)" class="footer-text" to="#">
             <p class="footer-text">Платановый бульвар 19/3</p>
           </NuxtLink>
-          <NuxtLink @click="navigateToRoute('ул. Средняя 1-3')" class="footer-text" to="#">
+          <!-- <NuxtLink @click="navigateToRoute('ул. Средняя 1-3')" class="footer-text" to="#">
             <p class="footer-text">ул. Средняя 1/3</p>
-          </NuxtLink>
+          </NuxtLink> -->
         </div>
           <div class="footer-text display-block">Политика конфидециальности</div>
           <div class="footer-text display-block">Лицензия</div>
           <div class="footer-text display-block">Версия для слабовидящих</div>
           <div class="footer-text display-block">Бизнесу и корпоративным клиентам</div>
+          <!-- <a href="#" class="bvi-open">Включить режим доступности</a> -->
           <div class="display">
             <p class="footer-text">Политика конфидециальности</p>
             <p class="footer-text">Лицензия</p>
@@ -103,6 +104,13 @@ export default {
       },
     }
   },
+  methods: {
+    activateBvi() {
+      // Здесь можно добавить дополнительный код, если необходимо
+      // Затем активируйте "bvi" при клике
+      // bvi.activate();
+    },
+  },
   setup() {
         const assetsStorelinkTransform = linkTransforms();
         const route  = useRoute();
@@ -123,6 +131,20 @@ export default {
 
 <style lang="scss" scoped>
 @import '/assets/styles/style.scss';
+
+.bvi-open {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.bvi-open:hover {
+  background-color: #0056b3;
+}
 
 .footer-social-link {
   transition: all .2s ease;
@@ -148,6 +170,11 @@ export default {
 .logo {
   margin-bottom: 60px;
   height: 45px;
+}
+
+.footer-contacts {
+  display: flex;
+  flex-direction: column
 }
 
   .footer {
@@ -205,6 +232,7 @@ export default {
       margin-bottom: 14px;
       @include body-14-regular;
       color: $gray-text;
+      width: fit-content;
     }
 
     .footer-img {

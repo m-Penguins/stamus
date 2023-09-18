@@ -12,7 +12,7 @@ export const useService = defineStore('useServices', {
     actions: {
         async fetchdataService() {
             try {
-                const res = await axios(`http://176.99.11.245:1338/api/services?populate=deep`)
+                const res = await axios(`http://176.99.11.245:7777/api/services?populate=deep`)
                 const data = await res.data;
                 const navigationServices = data.data.reduce((result, item) => {
                     const { category, direction, heading } = item.attributes;
