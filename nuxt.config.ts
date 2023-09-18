@@ -3,12 +3,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   // ... other options
   modules: [
-    // ...
     "@pinia/nuxt",
   ],
-  // plugins: [
-  //   { src: '~/plugins/bvi.js', ssr: false } // Указываем путь к вашему плагину и отключаем серверный рендеринг (SSR) если необходимо
-  // ],
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.API_BASE_URL,
