@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import { linkTransforms } from "./linkTransform";
 
 export const useService = defineStore("useServices", {
   state: () => ({
@@ -8,6 +7,13 @@ export const useService = defineStore("useServices", {
   }),
   getters: {
     getStateService: (state) => state.dataService,
+
+    getAllServicesArray: (state) => {
+      const services = state.dataService
+        .flatMap((el) => el.directions)
+        .flatMap((el) => el.services);
+      return services;
+    },
   },
   actions: {
     async fetchdataService(apiBaseUrl) {
@@ -18,13 +24,12 @@ export const useService = defineStore("useServices", {
           const { category, direction, heading } = item.attributes;
 
           let categoryIndex = result.findIndex((cat) => cat.title === category);
-          const assetsStorelinkTransform = linkTransforms();
           if (categoryIndex === -1) {
             categoryIndex = result.length;
             result.push({
               id: categoryIndex + 1,
               title: category,
-              path: `/${assetsStorelinkTransform.linkTransform(category)}`,
+              path: `/${linkTransform(category)}`,
               directions: [],
             });
           }
@@ -38,6 +43,7 @@ export const useService = defineStore("useServices", {
             result[categoryIndex].directions.push({
               id: directionIndex + 1,
               title: direction,
+              path: `/${linkTransform(direction)}`,
               services: [],
             });
           }
@@ -45,12 +51,12 @@ export const useService = defineStore("useServices", {
           result[categoryIndex].directions[directionIndex].services.push({
             id: item.id,
             title: heading,
+            path: `/${linkTransform(heading)}`,
           });
 
           return result;
         }, []);
 
-        console.log(navigationServices);
         this.dataService = navigationServices;
       } catch (error) {
         console.log(error);
