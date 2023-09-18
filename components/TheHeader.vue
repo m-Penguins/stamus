@@ -323,7 +323,7 @@
                         @click="
                           showServices = false;
                           showSearch = false;
-                          $router.push(`${item.path}/` + id);
+                          $router.push(item.path + service.path);
                         "
                         class="header-services-menu-box-link"
                         to="#"
@@ -703,14 +703,14 @@ export default {
       isOpenPopup.value = state;
     };
 
-    onMounted(() => {
-      storeServices.fetchdataService(baseUrl);
+    onMounted(async () => {
+      await storeServices.fetchdataService(baseUrl);
+      await console.log("STORE", storeServices.getStateService);
+      console.log("STORE GET", storeServices.getAllServicesArray);
     });
 
     const navigateToRoute = (serv, dir) => {
-      const newRoute = `/${serv}/${assetsStorelinkTransform.linkTransform(
-        dir,
-      )}`;
+      const newRoute = `/${serv}/${linkTransform(dir)}`;
       router.replace(newRoute);
       console.log(newRoute);
     };

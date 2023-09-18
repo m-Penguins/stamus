@@ -1,34 +1,65 @@
 <template>
   <div class="primary-banner">
     <div class="primary-banner-container">
-      <elements-title-text-button :fontSize="false" textButtonBase="Записаться онлайн" title="Оффер <br> в несколько строчек" text="Небольшое описание в несколько строчек"/>
+      <elements-title-text-button
+        :fontSize="false"
+        textButtonBase="Записаться онлайн"
+        title="Оффер <br> в несколько строчек"
+        text="Небольшое описание в несколько строчек"
+      />
       <div class="primary-banner-box">
         <div class="primary-banner-wrap">
-          <router-link :to="assetsStorelinkTransform.linkTransform('Детская стоматология')" class="desktop-link">
+          <router-link
+            :to="linkTransform('Детская стоматология')"
+            class="desktop-link"
+          >
             <div class="primary-banner-img desktop card_main_kids">
               <div class="primary-banner-btn">Детская стоматология</div>
             </div>
           </router-link>
-          <router-link :to="assetsStorelinkTransform.linkTransform('Детская стоматология')" class="tablet-link m-r-14 m-r-14-mob">
+          <router-link
+            :to="linkTransform('Детская стоматология')"
+            class="tablet-link m-r-14 m-r-14-mob"
+          >
             <div class="primary-banner-img tablet card_main_kids-tab">
               <div class="primary-banner-btn">Детская стоматология</div>
             </div>
           </router-link>
-           <router-link :to="assetsStorelinkTransform.linkTransform('Детская стоматология')" class="mob-link  m-r-14-mob">
-            <img class="primary-banner-img mob" src="@/assets/images/img-banner/card_main_kids-2.png" alt="Фотография матери и ребёнка">
+          <router-link
+            :to="linkTransform('Детская стоматология')"
+            class="mob-link m-r-14-mob"
+          >
+            <img
+              class="primary-banner-img mob"
+              src="@/assets/images/img-banner/card_main_kids-2.png"
+              alt="Фотография матери и ребёнка"
+            />
           </router-link>
-          <router-link :to="assetsStorelinkTransform.linkTransform('Взрослая стоматология')"  class="desktop-link">
+          <router-link
+            :to="linkTransform('Взрослая стоматология')"
+            class="desktop-link"
+          >
             <div class="primary-banner-img desktop card_main">
               <div class="primary-banner-btn">Взрослая стоматология</div>
             </div>
           </router-link>
-          <router-link :to="assetsStorelinkTransform.linkTransform('Взрослая стоматология')" class="tablet-link">
+          <router-link
+            :to="linkTransform('Взрослая стоматология')"
+            class="tablet-link"
+          >
             <div class="primary-banner-img tablet card_main-tab">
               <div class="primary-banner-btn">Взрослая стоматология</div>
             </div>
           </router-link>
-          <router-link :to="assetsStorelinkTransform.linkTransform('Взрослая стоматология')" class="mob-link">
-            <img class="primary-banner-img mob" src="@/assets/images/img-banner/card_main-2.png" alt="Фотография зубного врача">
+          <router-link
+            :to="linkTransform('Взрослая стоматология')"
+            class="mob-link"
+          >
+            <img
+              class="primary-banner-img mob"
+              src="@/assets/images/img-banner/card_main-2.png"
+              alt="Фотография зубного врача"
+            />
           </router-link>
         </div>
       </div>
@@ -36,38 +67,27 @@
   </div>
 </template>
 
-<script>
-import { linkTransforms } from '../../../stores/linkTransform'
-export default {
-  setup() {
-      const assetsStorelinkTransform = linkTransforms();
-      return {
-        assetsStorelinkTransform,
-      }
-    }
-}
-
-</script>
+<script></script>
 
 <style scoped lang="scss">
-@import '/assets/styles/style.scss';
+@import "/assets/styles/style.scss";
 
 .card_main_kids {
   margin-right: 14px;
-  background-image: url('../../../assets/images/img-banner/card_main_kids3.png');
+  background-image: url("../../../assets/images/img-banner/card_main_kids3.png");
 }
 
 .card_main {
-  background-image: url('../../../assets/images/img-banner/card_main3.png');
+  background-image: url("../../../assets/images/img-banner/card_main3.png");
 }
 
 .card_main_kids-tab {
   margin-right: 14px;
-  background-image: url('../../../assets/images/img-banner/card_main_kids4.png');
+  background-image: url("../../../assets/images/img-banner/card_main_kids4.png");
 }
 
 .card_main-tab {
- background-image: url('../../../assets/images/img-banner/card_main4.png');
+  background-image: url("../../../assets/images/img-banner/card_main4.png");
 }
 
 .primary-banner-btn {
@@ -101,124 +121,122 @@ export default {
 .primary-banner-wrap {
   display: flex;
 }
-  .primary-banner {
-    @include flex-column-center;
-    width: 100%;
+.primary-banner {
+  @include flex-column-center;
+  width: 100%;
+  max-width: 100%;
+  margin: 20px auto 100px auto;
+  border-radius: 45px;
+  background-color: $light-gray;
+
+  .primary-banner-container {
+    @include flex-between-center;
+    width: 1280px;
     max-width: 100%;
-    margin: 20px auto 100px auto;
-    border-radius: 45px;
-    background-color: $light-gray;
 
-    .primary-banner-container {
-      @include flex-between-center;
-      width: 1280px;
-      max-width: 100%;
-
-      .primary-banner-box {
-        display: flex;
-        gap: 14px;
-        padding: 195px 0;
-      }
-
-      .desktop {
-        width: 390px;
-        height: 650px;
-        transition: width 500ms cubic-bezier(1, 1, 0, 0) 0ms;
-      }
-        
-      .desktop:hover {
-        width: 440px;
-      }
-    }
-  }
-
-  @media screen and (max-width: 1357px) {
-    .primary-banner {
-      background: none;
-      margin: 20px auto 0px auto;
-      .primary-banner-container .primary-banner-box {
-        padding: 100px 0;
-      }
-    }
-  }
-  
-  @media screen and (max-width: 1290px) {
-    .tablet {
-      @include flex-column-end;
-      align-items: center;
-      width: 343px;
-      height: 280px;
-      padding-bottom: 20px;
-      border-radius: 20px;
-      background-size: cover;
-
-      .primary-banner-btn {
-        width: 229px;
-        height: 43px;
-        font-size: 16px;
-      }
+    .primary-banner-box {
+      display: flex;
+      gap: 14px;
+      padding: 195px 0;
     }
 
     .desktop {
-      display: none;
+      width: 390px;
+      height: 650px;
+      transition: width 500ms cubic-bezier(1, 1, 0, 0) 0ms;
     }
 
-    .primary-banner {
-      margin: 118px auto 100px auto;
+    .desktop:hover {
+      width: 440px;
+    }
+  }
+}
 
-      .primary-banner-container {
+@media screen and (max-width: 1357px) {
+  .primary-banner {
+    background: none;
+    margin: 20px auto 0px auto;
+    .primary-banner-container .primary-banner-box {
+      padding: 100px 0;
+    }
+  }
+}
 
-        .primary-banner-box {
-          padding: 60px 0 0;
-        }
-      }
+@media screen and (max-width: 1290px) {
+  .tablet {
+    @include flex-column-end;
+    align-items: center;
+    width: 343px;
+    height: 280px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    background-size: cover;
+
+    .primary-banner-btn {
+      width: 229px;
+      height: 43px;
+      font-size: 16px;
     }
   }
 
-  @media screen and (max-width: 1096px) {
-    .primary-banner-wrap {
-      width: 100%;
-      gap: 0;
-    }
+  .desktop {
+    display: none;
+  }
 
-    .primary-banner {
-      .primary-banner-container {
-        flex-wrap: wrap;
-        .primary-banner-box {
-          width: 850px;
-        }
+  .primary-banner {
+    margin: 118px auto 100px auto;
+
+    .primary-banner-container {
+      .primary-banner-box {
+        padding: 60px 0 0;
       }
     }
-    .m-r-14 {
-      margin-right: 14px;
-    }
-    .tablet-link {
-      width: 50%;
-    }
-    .tablet {
-      width: 100%;
-      background-position: 50%;
-    }
-  } 
-  
+  }
+}
 
-  @media screen and (max-width: 735px) {
+@media screen and (max-width: 1096px) {
+  .primary-banner-wrap {
+    width: 100%;
+    gap: 0;
+  }
+
+  .primary-banner {
+    .primary-banner-container {
+      flex-wrap: wrap;
+      .primary-banner-box {
+        width: 850px;
+      }
+    }
+  }
+  .m-r-14 {
+    margin-right: 14px;
+  }
+  .tablet-link {
+    width: 50%;
+  }
+  .tablet {
+    width: 100%;
+    background-position: 50%;
+  }
+}
+
+@media screen and (max-width: 735px) {
   .primary-banner-box {
     padding: 60px 0 100px;
   }
-} 
+}
 
 @media screen and (max-width: 570px) {
-    .tablet {
+  .tablet {
     width: 100%;
     height: 280px;
     padding-bottom: 16px;
 
     .primary-banner-btn {
-        width: 186px;
-        height: 34px;
-        font-size: 14px;
-      }
+      width: 186px;
+      height: 34px;
+      font-size: 14px;
+    }
   }
 }
 
@@ -233,7 +251,7 @@ export default {
     flex-wrap: wrap;
   }
 
-  .tablet-link  {
+  .tablet-link {
     display: flex;
     width: 100%;
   }
@@ -254,5 +272,5 @@ export default {
       font-size: 16px;
     }
   }
-} 
+}
 </style>

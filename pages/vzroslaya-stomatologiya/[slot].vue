@@ -14,11 +14,16 @@ const imagesScroll = [
 ];
 const baseUrl = useRuntimeConfig().public.apiBaseUrl;
 
+const storeServices = useService();
+const serviceId = storeServices.getAllServicesArray.find((el) =>
+  el.path.includes(route.params.slot),
+).id;
+
 const { data: serviceData, error } = await useFetch(
-  `${baseUrl}services/${route.params.id}?populate=deep`,
+  `${baseUrl}services/${serviceId}?populate=deep`,
 );
 
-const router = useRouter();
+console.log("srvice datta", serviceId);
 </script>
 
 <template>
