@@ -116,7 +116,7 @@ export default {
         const route  = useRoute();
         const router = useRouter();
         const navigateToRoute = (str) => {
-        const newRoute = `/clinics/${assetsStorelinkTransform.linkTransform(str)}`;
+          const newRoute = `/clinics/${assetsStorelinkTransform.linkTransform(str)}`;
           router.replace(newRoute);
         }
 

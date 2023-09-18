@@ -5,8 +5,5 @@ export default defineNuxtConfig({
   modules: [
     // ...
     '@pinia/nuxt',
-  ],
-  // plugins: [
-  //   { src: '~/plugins/bvi.js', ssr: false } // Указываем путь к вашему плагину и отключаем серверный рендеринг (SSR) если необходимо
-  // ],
+  ]
 })
