@@ -14,20 +14,9 @@
     <div class="wrapper-swiper">
       <Swiper
         class="swiper"
-        :slides-per-view="3"
+        :slides-per-view="'auto'"
         :space-between="16"
         :modules="modules"
-        :breakpoints="{
-              '0': {
-                slidesPerView: 1,
-              },
-              '650': {
-                slidesPerView: 2,
-              },
-              '1327': {
-                  slidesPerView: 3,
-                }
-            }"
         :navigation="{
             prevEl: prev,
             nextEl: next,
@@ -156,11 +145,12 @@ export default {
   }
 
   .wrapper-swiper {
-    overflow-x: hidden;
+    width: 100%;
   }
 
   .swiper-slide {
     margin-bottom: 40px;
+    width: 416px !important;
   }
 
   .main-events-block {
@@ -170,6 +160,10 @@ export default {
   }
 
   @media (max-width: 800px) {
+    .wrapper-swiper {
+      width: calc(100% + 31px);
+    }
+
     .wrapper-btn {
       position: unset;
       div {
@@ -189,6 +183,32 @@ export default {
     .slider-base-btn {
       padding-bottom: 0;
     }
+    .swiper-slide {
+      width: 334px !important;
+    }
 }
+
+@media (max-width: 650px) {
+  .wrapper-swiper {
+    width: calc(100% + 16px);
+  }
+}
+
+@media (max-width: 600px) {
+  .swiper-slide {
+      width: 330px !important;
+    }
+}
+
+// .swiper {
+//   @media screen and (max-width: 700px) {
+//     overflow: visible;
+//     width: 340px !important;
+//   }
+
+//   @media screen and (max-width: 400px) {
+//     margin: 0;
+//   }
+// }
 
 </style>

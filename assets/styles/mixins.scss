@@ -1,10 +1,5 @@
 @import "./variables.scss";
 
-// @font-face {
-//   font-family: 'Neue Machin';
-//   src: url('./fonts/NeueMachina-Bold.ttf') format('truetype');
-// }
-
 @mixin body-10-regular {
   font-family: Manrope;
   font-size: 10px;
@@ -111,6 +106,13 @@
   font-size: 60px;
   font-style: normal;
   line-height: 58px;
+  font-weight: 500;
+}
+
+@mixin body-160-medium {
+  font-size: 160px;
+  font-style: normal;
+  line-height: normal;
   font-weight: 500;
 }
 

@@ -62,7 +62,7 @@
       <elements-link-with-arrow type="true" title="Посмотреть все"/>
     </div>
     <div class="popular-service__list">
-      <div v-for="(item, index) in mockArrayServicesCard" :key="index">
+      <div v-for="(item, index) in mockArrayServices" :key="index">
         <elements-service-card :service="item"/>
       </div>
     </div>
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { mockArrayServicesCard } from '../../stores/mockData'
+import { mockArrayServices } from '../../stores/mockData'
 import { mockArrayOurSpecialists } from '../../stores/mockData'
 export default {
   data() {
@@ -133,7 +133,7 @@ export default {
         breadcrumbs,
         route,
         addresMock,
-        mockArrayServicesCard,
+        mockArrayServices,
         mockArrayOurSpecialists
       }
     }

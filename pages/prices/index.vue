@@ -35,7 +35,7 @@
       </div>
       <hr/>
       <div class="popular-service__list">
-        <div v-for="(item, index) in mockArray" :key="index">
+        <div v-for="(item, index) in mockArrayServices" :key="index">
           <elements-service-card :service="item"/>
         </div>
       </div>
@@ -51,7 +51,7 @@
       </div>
       <hr/>
       <div class="popular-service__list">
-        <div v-for="(item, index) in mockArray" :key="index">
+        <div v-for="(item, index) in mockArrayServices" :key="index">
           <elements-service-card :service="item"/>
         </div>
       </div>
@@ -67,7 +67,7 @@
       </div>
       <hr/>
       <div class="popular-service__list">
-        <div v-for="(item, index) in mockArray" :key="index">
+        <div v-for="(item, index) in mockArrayServices" :key="index">
           <elements-service-card :service="item"/>
         </div>
       </div>
@@ -77,6 +77,7 @@
 </template>
 
 <script>
+import {mockArrayServices} from '../../stores/mockData'
   export default {
     setup() {
       const breadcrumbs = [{
@@ -87,16 +88,9 @@
           title: 'Цены на услуги',
           url: '/prices'
         }]
-        const mockArray = [
-          {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-          {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-          {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-          {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-          {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-          ];
       return {
         breadcrumbs,
-        mockArray
+        mockArrayServices
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
-    <TheHeader />
-    <div class="main">
+    <TheHeader :showMenuPatients="showMenuPatients" @toggleMenu="toggleMenu" />
+    <div class="main" @click="closeMenu">
       <main>
         <NuxtPage />
       </main>
@@ -9,6 +9,26 @@
     <TheFooter />
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      showMenuPatients: false
+    };
+  },
+  methods: {
+    toggleMenu() {
+      this.showMenuPatients = !this.showMenuPatients;
+    },
+    closeMenu() {
+      if (this.showMenuPatients) {
+        this.showMenuPatients = false;
+      }
+    }
+  }
+};
+</script>
 
 <style lang="scss">
 @import "./assets/styles/style.scss";

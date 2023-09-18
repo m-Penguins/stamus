@@ -48,7 +48,7 @@
 
 @media (max-width: 1080px) {
   .article-card {
-    width: 330px;
+    width: 334px;
     
     &__box {
       width: 330px;

@@ -25,7 +25,7 @@
                   class="header-nav-item m-r-20" 
                   :to="item.path">
                   <div v-if="item.title !== 'Пациентам'" @click="showMenuPatients = false">{{ item.title }}</div>
-                  <div v-else class="header-arrow-icon" @click="showMenuPatients = !showMenuPatients; showSearch = false; showServices = false">
+                  <div v-else class="header-arrow-icon" @click=" showSearch = false; showServices = false; toggleMenu()">
                     <div>{{ item.title }}</div>
                     <div v-if="item.title === 'Пациентам'" class="arrow-icon">
                       <div v-if="!showMenuPatients" class="timeline-svg">
@@ -56,8 +56,12 @@
           </nav>
           <div class="header-btn-base">
             <div class="header-search-img" @click="showSearch = !showSearch; showServices = false; showMenuPatients = false">
-              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect class="header-search-svg" width="30" height="30" rx="5" opacity="0.5"  fill="white"/>
+              <!-- <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect class="header-search-svg" width="30" height="30" rx="5" opacity="0.95"/>
+              <path d="M14.3333 20.1667C17.555 20.1667 20.1667 17.555 20.1667 14.3333C20.1667 11.1117 17.555 8.5 14.3333 8.5C11.1117 8.5 8.5 11.1117 8.5 14.3333C8.5 17.555 11.1117 20.1667 14.3333 20.1667Z" stroke="#525660" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21.5 21.5L18.5 18.5" stroke="#525660" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg> -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
               <path d="M14.3333 20.1667C17.555 20.1667 20.1667 17.555 20.1667 14.3333C20.1667 11.1117 17.555 8.5 14.3333 8.5C11.1117 8.5 8.5 11.1117 8.5 14.3333C8.5 17.555 11.1117 20.1667 14.3333 20.1667Z" stroke="#525660" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M21.5 21.5L18.5 18.5" stroke="#525660" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -66,7 +70,7 @@
           </div>
         </div>
         <div class="header-menu">
-          <div class="header-search-img" @click="showSearch = !showSearch; showServices = false;">
+          <div class="header-search-img" @click="showSearch = !showSearch; showServices = false; showMenuMob = false">
             <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect class="header-search-svg" width="30" height="30" rx="5" opacity="0.5"  fill="white"/>
             <path d="M14.3333 20.1667C17.555 20.1667 20.1667 17.555 20.1667 14.3333C20.1667 11.1117 17.555 8.5 14.3333 8.5C11.1117 8.5 8.5 11.1117 8.5 14.3333C8.5 17.555 11.1117 20.1667 14.3333 20.1667Z" stroke="#525660" stroke-linecap="round" stroke-linejoin="round"/>
@@ -80,8 +84,6 @@
               <p>Меню</p>
             </div>
           </div>
-          <!-- <img src="../assets/images/icons/burger.svg" alt="">
-          <div>Меню</div> -->
         </div>
       </div>
 
@@ -268,6 +270,12 @@ import { useActuveLink } from '../stores/activeLink'
 import ElementsLinkWithArrow from './elements/ElementsLinkWithArrow.vue';
 export default {
   components: { ButtonBase, ElementsLinkWithArrow },
+  props: {
+    showMenuPatients: {
+      type: Boolean,
+      default: false
+    }
+  },
     data() {
       return {
         showServices: false,
@@ -277,7 +285,7 @@ export default {
         firstBlockMobMenu: true,
         secondBlockMobMenu: false,
         thirdBlockMobMenu: false,
-        showMenuPatients: false,
+        // showMenuPatients: false,
         // directionTitle: '',
         clinic: '',
         activeClass: "",
@@ -295,33 +303,42 @@ export default {
       this.$refs.modal.openModal('Modal Title', 'Modal Message');
     },
 
+    toggleMenu() {
+      this.$emit('toggleMenu');
+      console.log(this.showMenuPatients)
+    },
+
     closeMenu(event) {
       if (event.target.classList.contains("modal-menu")) {
         this.showServices = false;
-        this.showMenuPatients = false;
+        // this.showMenuPatients = false;
         this.showSearch = false;
       } 
-      // if (event.target.classList.contains("modal-menu")) {
-      //   this.showMenuPatients = false;
-      // }
+
     },
+    // closeMenuPatients() {
+    //   this.showMenuPatients = false;
+    //   this.$emit("menu-closed");
+    // },
     changeActiveClass(cls, title) {
       this.activeClass = cls;
       console.log(cls)
       this.clinic = title
     },
+
     closeSearch() {
       this.showSearch = false;
     }
+
   },
     setup() {
       const assetsStore = useAssets();
       const storeServices = useService();
       const router = useRouter();
       const route  = useRoute();
-      console.log(storeServices)
       let directionTitle = '';
       let activeClass2 = ''
+
       const togglerPopup = (state) => {
         isOpenPopup.value = state
       }
@@ -563,6 +580,7 @@ export default {
     opacity: 1;
   }
 }
+
 
 .elements-input-search {
   width: 100% !important;
@@ -865,6 +883,7 @@ export default {
     top: 0;
     left: 0;
     background: white;
+    border-radius: 0;
     .header-nav {
       display: none;
     }
@@ -875,6 +894,10 @@ export default {
     align-items: center;
     gap: 20px;
   }
+
+  // .header-services-menu {
+  //   background-color: salmon;
+  // }
 }
 
 @media (max-width: 650px) {

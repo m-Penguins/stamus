@@ -50,6 +50,17 @@ export default {
 }
 
 .breadcrumbs {
+  .container-crumb {
+    .styleColor {
+      :before {
+        color: white !important;
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+.breadcrumbs {
   flex-direction: unset;
   overflow-x: scroll;
   white-space: nowrap;

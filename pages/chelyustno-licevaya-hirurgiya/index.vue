@@ -13,8 +13,8 @@ let mockDate = mockArrayClinic[3]
   <elements-main-info 
     :title="mockDate.title" 
     :text="mockDate.titleDescription" 
-    :imgBg="mockDate.imgBgTitle" 
-    :imgAdaptiv="mockDate.imgAdaptivTitle" 
+    imgBg="chelyustno-licevaya-hirurgiya.png" 
+    imgAdaptiv="chelyustno-licevaya-hirurgiya-adaptiv.png" 
     :breadcrumbs="[
         {
           title: 'Главная',

@@ -40,7 +40,7 @@ let mockDate = mockArrayClinic[0]
   />
   <blocks-services-block :addresData="addresData"/>
   <blocks-cases-direction text="Кейсы по направлению" :dataDirection="mockArrayDirection"/>
-    <BlocksMainBanner 
+  <BlocksMainBanner 
       :title="'Счастливые часы'"
       :text="'Скидки до 50%'"
       :titleLink="'Воспользоваться акцией'"

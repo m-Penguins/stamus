@@ -22,26 +22,17 @@
       </div>
     </div>
     <div class="popular-service__list">
-      <div v-for="(item, index) in mockArray" :key="index">
+      <div v-for="(item, index) in mockArrayServices" :key="index">
         <elements-service-card :service="item"/>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import ElementsLinkWithArrow from '../elements/ElementsLinkWithArrow.vue';
-  const mockArray = [
-    {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-    {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-    {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-    {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-    {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-    ];
-</script>
-
 
 <script>
+import {mockArrayServices} from '../../stores/mockData'
+import ElementsLinkWithArrow from '../../components/elements/ElementsLinkWithArrow.vue';
   export default {
   components: { ElementsLinkWithArrow },
     props: {
@@ -67,6 +58,7 @@ import ElementsLinkWithArrow from '../elements/ElementsLinkWithArrow.vue';
         ];
       return {
         mockArray,
+        mockArrayServices
       }
     }
   }

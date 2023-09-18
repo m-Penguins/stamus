@@ -13,6 +13,14 @@ export const mockArrayOurSpecialists = [
   {name: 'Шагалова Полина', category: 'Стоматолог', img:"avatar-7.png"},
 ];
 
+export const mockArrayServices = [
+  {heading: 'Лечение во сне', price: '3 400', isRecommended: true, isPopular: null, isDemand: null, type: 'Рекомендуем', tags: ["Стоматология", "Дети", 'Седация']},
+  {heading: 'Профессиональная гигиена полости рта и зубов временный прикус', isRecommended: true, isPopular: null, isDemand: null, price: '5 400', type: 'Рекомендуем', tags: ["Стоматология", "Дети"]},
+  {heading: 'Удаление зубов мудрости', price: '3 400', isRecommended: null, isPopular: null, isDemand: true, type: 'Рекомендуем', tags: ["Стоматология", "Взрослые"]},
+  {heading: 'Скуловая имплантация', price: '3 800', isRecommended: null, isPopular: true, isDemand: null, type: 'Рекомендуем', tags: ["Стоматология", "Дети"]},
+  {heading: 'Профессиональная гигиена полости рта и зубов временный прикус', isRecommended: null, isPopular: null, isDemand: null, price: '1 400', type: 'Рекомендуем', tags: ["Стоматология"]},
+  ];
+
 export const mockArrayOurSpecialistsTwoDoctors = [
   {name: 'Овсоян Григорий', category: 'Челюстно-лицевой хирург', img:"avatar-4.png" },
   {name: 'Унаньян Карина', category: 'Стоматолог-терапевт', img:"avatar-5.png" },
@@ -251,11 +259,11 @@ export const mockArrayArticleCard = [
     ];
 
 export const mockArrayServicesCard = [
-    {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-    {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-    {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-    {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-    {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
+  {heading: 'Лечение во сне', price: '3 400', isRecommended: true, isPopular: null, isDemand: null, type: 'Рекомендуем', tags: ["Стоматология", "Дети", 'Седация']},
+  {heading: 'Профессиональная гигиена полости рта и зубов временный прикус', isRecommended: true, isPopular: null, isDemand: null, price: '5 400', type: 'Рекомендуем', tags: ["Стоматология", "Дети"]},
+  {heading: 'Удаление зубов мудрости', price: '3 400', isRecommended: null, isPopular: null, isDemand: true, type: 'Рекомендуем', tags: ["Стоматология", "Взрослые"]},
+  {heading: 'Скуловая имплантация', price: '3 800', isRecommended: null, isPopular: true, isDemand: null, type: 'Рекомендуем', tags: ["Стоматология", "Дети"]},
+  {heading: 'Профессиональная гигиена полости рта и зубов временный прикус', isRecommended: null, isPopular: null, isDemand: null, price: '1 400', type: 'Рекомендуем', tags: ["Стоматология"]},
   ];
 
 export const mockArrayDirection = [

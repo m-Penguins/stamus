@@ -8,26 +8,9 @@
   <div class="wrapper-swiper">
     <Swiper
       class="swiper"
-      :slides-per-view="3"
+      :slides-per-view="'auto'"
       :space-between="16"
       :modules="modules"
-      :breakpoints="{
-              '0': {
-                slidesPerView: 1,
-                spaceBetween: 14
-              },
-              '700': {
-                slidesPerView: 2,
-                spaceBetween: 14
-              },
-              '1080': {
-                slidesPerView: 3,
-                spaceBetween: 16
-              },
-              '1400': {
-                slidesPerView: 4,
-              }
-      }"
       :navigation="{
           prevEl: prev,
           nextEl: next,
@@ -169,6 +152,7 @@ export default {
 
   .swiper-slide {
     margin-bottom: 40px;
+    width: 308px !important;
   }
 
   .main-events-block {
@@ -196,7 +180,26 @@ export default {
     }
   .swiper-slide {
     margin-bottom: 30px;
+    width: 334px !important;
   }
+}
+
+@media (max-width: 800px) {
+    .wrapper-swiper {
+      width: calc(100% + 31px);
+    }
+  }
+
+@media (max-width: 650px) {
+  .wrapper-swiper {
+    width: calc(100% + 16px);
+  }
+}
+
+@media (max-width: 600px) {
+  .swiper-slide {
+      width: 330px !important;
+    }
 }
 
 </style>
