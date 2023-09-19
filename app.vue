@@ -14,7 +14,7 @@
 export default {
   data() {
     return {
-      showMenuPatients: false
+      showMenuPatients: false,
     };
   },
   methods: {
@@ -25,13 +25,12 @@ export default {
       if (this.showMenuPatients) {
         this.showMenuPatients = false;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-
 * {
   margin: 0;
   padding: 0;
