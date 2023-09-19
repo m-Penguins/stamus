@@ -1,0 +1,170 @@
+<template>
+  <div class="banner">
+    <div class="banner-wrap">
+      <div class="banner-inner">
+        <elements-bread-crumbs :breadcrumbs="breadcrumbs"/>
+        <div class="banner-box">
+          <div class="banner-container">
+            <h2 class="banner-title">Счастливые часы</h2>
+            <p class="banner-text">Каждый день скидки до 50%</p>
+            <elements-link-with-arrow type="true" title="Посмотреть акции"/>
+          </div>
+          <div class="banner-img">
+            <div class="banner-img-box">
+              <img src="../../assets/images/img-banner/tooth.png" alt="image">
+            </div>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { useAssets } from '../../stores/useAsset'
+export default {
+  props: {
+    breadcrumbs: {
+        type: Array,
+    }
+  },
+  setup() {
+    const assetsStore = useAssets();
+    return {
+      assetsStore
+    }
+  }
+}
+</script>
+
+<style scoped lang="scss">
+@import '/assets/styles/style.scss';
+.banner-img {
+  height: 100%;
+  width: 53%;
+}
+.banner-img-box {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  max-width: 697px;
+  background-image: url(/_nuxt/assets/images/img-banner/vectors.png);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.banner-title {
+  @include body-60-medium;
+  color: #1E2433;
+  padding-top: 60px;
+}
+
+.banner-text {
+  @include body-16-regular;
+  color: $gray-text;
+}
+.banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  margin: 20px auto 0 auto;
+}
+.banner-wrap {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 45px;
+  height: 630px;
+  background: $bright-blue-gradient;
+  margin-bottom: 100px;
+}
+
+.banner-inner {
+  width: 1280px;
+  max-width: 100%;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.banner-box {
+  display: flex;
+  height: 100%;
+}
+
+.banner-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 39%;
+  height: 100%;
+}
+
+@media (min-width: 1920px) {
+  .banner {
+    .banner-wrap {
+      background-size: contain;
+      width: 1880px;
+    }
+  }
+}
+
+@media (max-width: 1400px) {
+  .banner-inner {
+    padding-left: 50px;
+  }
+}
+
+@media (max-width: 950px) {
+  .banner-wrap {
+    background: none;
+    height: 100%;
+  }
+  .banner-box {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    gap: 34px;
+  }
+
+  .banner-img {
+    background: $bright-blue-gradient;
+    border-radius: 25px;
+    height: 342px;
+    width: 320px;
+  }
+
+  .banner-inner {
+    padding-left: 0;
+  }
+
+  .banner-title {
+    font-size: 50px;
+    padding-top: 0px;
+  }
+
+  .banner-container {
+    width: 50%;
+    padding-left: 0px;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 900px) {
+  .banner-title {
+    font-size: 22px;
+    line-height: normal;
+  }
+  .banner-text {
+    padding-bottom: 16px;
+  }
+}
+
+@media (max-width: 650px) {
+
+}
+
+</style>

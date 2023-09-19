@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   modules: [
     "@pinia/nuxt",
   ],
+  css: [
+    "@/assets/styles/global.scss",
+  ],
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.API_BASE_URL,
