@@ -173,6 +173,7 @@
 
 <script>
 import { useRoute, useRouter } from "vue-router";
+// import bvi from "bvi"
 export default {
   data() {
     return {
@@ -192,6 +193,9 @@ export default {
       },
     };
   },
+  // mounted() {
+  //   console.log("mounted", bvi);
+  // },
   methods: {
     activateBvi() {
       // Здесь можно добавить дополнительный код, если необходимо

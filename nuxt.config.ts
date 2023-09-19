@@ -16,4 +16,14 @@ export default defineNuxtConfig({
   imports: {
     dirs: ["stores", "utils"],
   },
+  // plugins: [
+  //   { src: '~/plugins/bvi.js', ssr: false },
+  // ]
 });
+
+
+// import { defineNuxtPlugin } from 'nuxt';
+
+// export default defineNuxtPlugin(function (nuxtApp) {
+//   // Your plugin code here
+// });
