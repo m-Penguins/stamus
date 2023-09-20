@@ -705,8 +705,6 @@ export default {
 
     onMounted(async () => {
       await storeServices.fetchdataService(baseUrl);
-      await console.log("STORE", storeServices.getStateService);
-      console.log("STORE GET", storeServices.getAllServicesArray);
     });
 
     const navigateToRoute = (serv, dir) => {
