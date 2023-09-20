@@ -232,7 +232,7 @@
           </div>
           <div class="first-item">
             <div
-              class="header-services-img m-r-20"
+              class="header-services-img"
               @click="
                 showMenuMob = !showMenuMob;
                 showSearch = false;
@@ -1256,9 +1256,15 @@ export default {
     left: 0;
     background: white;
     border-radius: 0;
+    padding: 22px 31px;
+    overflow-x: scroll;
+    white-space: nowrap;
     .header-nav {
       display: none;
     }
+  }
+  .header::-webkit-scrollbar {
+    display: none;
   }
   .header-menu {
     display: flex;
@@ -1274,7 +1280,7 @@ export default {
 
 @media (max-width: 650px) {
   .header {
-    padding: 14px 16px;
+    padding: 22px 16px;
   }
   .menu-mob-modal,
   .menu-mob-first-block {

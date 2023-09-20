@@ -9,6 +9,7 @@
             isCategory="true"
             category="Стоматолог-хирург"
             textButtonBase="Записаться онлайн" 
+            @click="redirectToExternalApp"
             title="Маашев Магомед" 
             text="Безусловно, новая модель организационной деятельности однозначно определяет каждого участника как способного принимать собственные решения касаемо переосмысления внешнеэкономических политик." 
             :isLinkWithArrow="true"
@@ -17,7 +18,7 @@
           />
           <div class="specialists-addres desktop">
             <div class="specialists-addres-box">
-              <img src="../../assets/images/icons/addres.svg" alt="icon">
+              <img src="../../assets/images/icons/addres.svg" alt="icon" class="stamus-app-img-box-picture">
             </div>
             <ul class="specialists-addres-list">
               <li class="specialists-addres-list__text">Принимает по адресу</li>
@@ -159,6 +160,10 @@ export default {
   width: 70%;
 }
 
+.stamus-app-img-box-picture {
+  height: 100%;
+}
+
 .service-title {
   display: flex;
   align-items: baseline;
@@ -224,6 +229,12 @@ export default {
       padding-top: 80px;
   }
   
+}
+
+@media screen and (max-width: 1388px) {
+  .stamus-app-img-box-picture {
+    height: auto;
+  }
 }
 
 

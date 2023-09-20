@@ -1,7 +1,7 @@
 <template>
   <div class="card-photo-name">
     <div class="card-photo-name-img">
-      <img :src="assetsStore.useAsset(`images/${direction.img}`)" :alt="alt"/>
+      <img :src="assetsStore.useAsset(`images/${direction.img}`)" alt="photo-name"/>
     </div>
     <div v-if="isCategoryAndDescription" class="card-photo-name-container">
       <div>

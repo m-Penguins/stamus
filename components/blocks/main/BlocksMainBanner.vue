@@ -13,7 +13,7 @@
           <div class="banner-additional-text" v-html="additionalText"></div>
         </div>
         <div class="banner-images">
-          <img class="banner-img" :src="assetsStore.useAsset(`images/img-banner/${img}`)" :alt="alt"/>
+          <img class="banner-img" :src="assetsStore.useAsset(`images/img-banner/${img}`)" alt="img"/>
         </div>
       </div>
     </div>
@@ -317,7 +317,7 @@
           .banner-text {
             width: 514px;
             max-width: 100%;
-            font-size: 16px;
+            font-size: 18px;
           }
 
           .banner-additional-text {

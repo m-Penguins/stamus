@@ -11,7 +11,7 @@
           </div>
           <div class="banner-img">
             <div class="banner-img-box">
-              <img src="../../assets/images/img-banner/tooth.png" alt="image">
+              <img src="../../assets/images/img-banner/tooth.png" alt="image" class="img">
             </div>
           </div>
       </div>
@@ -164,7 +164,29 @@ export default {
 }
 
 @media (max-width: 650px) {
+  .banner-wrap {
+    margin-bottom: 80px;
+  }
+  .banner-box {
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    margin-top: 14px;
+    gap: 31px;
+  }
+  .banner-container {
+    width: 100%;
+  }
 
+  .banner-img {
+    width: 100%;
+  }
+  .img {
+    height: 342px;
+  }
+
+  .banner-text {
+    padding-bottom: 4px;
+  }
 }
 
 </style>

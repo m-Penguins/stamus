@@ -7,7 +7,8 @@
           <img :src="assetsStore.useAsset(`images/big-images/${imgAdaptiv}`)" :class="[isDital ? 'img-dital' : 'img']"/>
           <div>
             <elements-title-text-button 
-              textButtonBase="Записаться онлайн" 
+              textButtonBase="Записаться онлайн"
+              @click="redirectToExternalApp"
               :isButtonBase="isButtonBase" 
               :title="title" 
               font-size="true" 
@@ -24,6 +25,7 @@
         </div>
         <elements-title-text-button 
           :typeColorWhiteText="typeColorWhiteText" 
+          @click="redirectToExternalApp"
           textButtonBase="Записаться онлайн" 
           :isButtonBase="isButtonBase" 
           :title="title" :text="text" 
@@ -85,6 +87,12 @@ import { useAssets } from '../../stores/useAsset'
       },
       time: String,
       money: String
+    },
+    methods: {
+      redirectToExternalApp() {
+        const externalAppLink = 'https://app.1denta.ru/booking/booking?orgid=11074&roistat_visit=282247#/main';
+        window.open(externalAppLink, '_blank');
+      }
     },
     setup() {
       const assetsStore = useAssets();
@@ -226,10 +234,10 @@ import { useAssets } from '../../stores/useAsset'
     }
   }
 
-  @media (min-width: 1920px) {
+  @media (min-width: 2560px) {
     .dentistry-container {
-      background-size: contain;
-      width: 1880px;
+      // background-size: contain;
+      width: 2520px;
     }
   }
 </style>

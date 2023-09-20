@@ -91,8 +91,8 @@ export default {
   }
 
   @media screen and (max-width: 1200px) {
-    margin-bottom: 48px;
-    margin-top: 74px
+    margin-bottom: 60px;
+    margin-top: 88px
   }
   .pre {
     color: $gray-text;

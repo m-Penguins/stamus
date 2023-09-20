@@ -6,13 +6,13 @@
     </div>
     <div class="mob-app-block-container">
       <div class="mob-app-block-inner first-block">
-        <img src="../../assets/images/mob/mob2.png" alt="" class="first-block-img"/>
+        <img src="../../assets/images/mob/mob2.png" alt="mob" class="first-block-img"/>
       </div>
       <div class="mob-app-block-inner second-block">
-        <img src="../../assets/images/mob/mob3.png" alt="" class="second-block-img"/>
+        <img src="../../assets/images/mob/mob3.png" alt="mob" class="second-block-img"/>
       </div>
       <div class="mob-app-block-inner third-block">
-        <img src="../../assets/images/mob/mob1.png" class="third-block-img" alt=""/>
+        <img src="../../assets/images/mob/mob1.png" class="third-block-img" alt="mob"/>
       </div>
     </div>
   </div>

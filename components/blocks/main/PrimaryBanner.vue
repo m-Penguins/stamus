@@ -4,6 +4,7 @@
       <elements-title-text-button
         :fontSize="false"
         textButtonBase="Записаться онлайн"
+        :ss="redirectToExternalApp"
         title="Оффер <br> в несколько строчек"
         text="Небольшое описание в несколько строчек"
       />
@@ -66,8 +67,6 @@
     </div>
   </div>
 </template>
-
-<script></script>
 
 <style scoped lang="scss">
 @import "/assets/styles/style.scss";
@@ -152,9 +151,14 @@
   }
 }
 
-@media screen and (max-width: 1357px) {
+@media screen and (max-width: 1400px) {
   .primary-banner {
     background: none;
+  }
+}
+
+@media screen and (max-width: 1357px) {
+  .primary-banner {
     margin: 20px auto 0px auto;
     .primary-banner-container .primary-banner-box {
       padding: 100px 0;
@@ -245,7 +249,7 @@
     padding-bottom: 80px;
   }
   .primary-banner {
-    margin: 118px auto 0px auto;
+    margin: 138px auto 0px auto;
   }
   .primary-banner-wrap {
     flex-wrap: wrap;

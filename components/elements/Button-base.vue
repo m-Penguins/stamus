@@ -2,7 +2,7 @@
     <button class="button-base" 
         :disabled="disabled"
         :class="{'disabled': disabled}"
-        @click="$emit('click')">
+        @click="sendCustomClickEvent">
         {{title}}
         <div v-if="arrow"  class="button__image">
           <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,7 +39,12 @@ export default {
           type: Boolean,
           default: false
       }
-    }
+    },
+    methods: {
+      sendCustomClickEvent() {
+        this.$emit('custom-click');
+      },
+  },
 }
 </script>
 

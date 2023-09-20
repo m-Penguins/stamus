@@ -4,7 +4,7 @@
     <p v-if="isCategory" v-html="category" class="title-text-btn-category"></p>
     <p v-html="text" :class="{'isButtonBase': !isButtonBase ? 'isButtonBase' : 'container-text', 'typeColorWhiteText': typeColorWhiteText ? 'typeColorWhiteText' : ''}" class="container-text p-bt-30 text"></p>
     <div class="title-text-btn-container">
-      <elements-button-base v-if="isButtonBase" class="fontSize4 container-btn" :title="textButtonBase" />
+      <elements-button-base v-if="isButtonBase" class="fontSize4 container-btn" :title="textButtonBase" @custom-click="ss"/>
       <elements-link-with-arrow v-if="isLinkWithArrow" type="true" :title="textLinkWithArrow"/>
     </div>
   </div>
@@ -54,7 +54,8 @@ import ElementsLinkWithArrow from './ElementsLinkWithArrow.vue'
       typeColorWhiteText: {
         type: Boolean,
         default: false
-      }
+      },
+      ss: Function
     }
   }
 </script>
@@ -80,12 +81,14 @@ import ElementsLinkWithArrow from './ElementsLinkWithArrow.vue'
 }
 
 .container {
-  width: 431px;
+  // width: 431px;
+  width: 481px;
 
   .container-text {
     @include body-20-regular;
     color: $gray-text;
     padding-bottom: 40px;
+    padding-right: 10px;
   }
 }
 

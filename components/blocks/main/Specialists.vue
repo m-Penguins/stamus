@@ -157,7 +157,7 @@ export default {
 }
   .specialists-subject {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
     width: 529px;
     max-width: 100%;
@@ -202,6 +202,7 @@ export default {
           border: 1px solid #D5D5D5;
           cursor: pointer;
           transition: all 0.3s ease-in-out;
+          color: var(--accent, #232D5B);
       }
 
       .specialists-box__name {
@@ -263,7 +264,8 @@ export default {
 
       &__info {
         @include flex-column-start;
-        justify-content: space-between;
+        // justify-content: space-between;
+        gap: 30px;
 
         &-name {
           display: flex;
@@ -288,7 +290,7 @@ export default {
           display: flex;
           align-items: center;
           gap: 20px;
-          padding-bottom: 61px;
+          margin-top: 77px;
         }
       }
   }

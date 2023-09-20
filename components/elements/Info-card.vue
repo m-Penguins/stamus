@@ -2,12 +2,11 @@
   <div class="info">
     <div 
       v-for="(item, index) in mockInfoMain" 
-      @click="toggleAccordion(index)" 
       :key="index"
       class="info-card"
       :class="{ 'open': item.isOpen }"
     >
-      <div class="info-card__box">
+      <div class="info-card__box" @click="toggleAccordion(index)" >
         <h3 class="accordion-title">{{ item.title }}</h3>
         <div v-if="!item.isOpen">
           <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">

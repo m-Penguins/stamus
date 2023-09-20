@@ -4,10 +4,9 @@
       v-for="(item, index) in mockInfoDop" 
       :key="index"
       class="info-card"
-      @click="toggleAccordion(index)"
       :class="{ 'open': item.isOpen }"
     >
-    <div class="info-card__box">
+    <div class="info-card__box" @click="toggleAccordion(index)">
       <h3 class="accordion-title">{{ item.title }}</h3>
       <div v-if="!item.isOpen">
         <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -177,7 +176,7 @@
           <NuxtLink :to="'#'" class="header-nav-item link-info-doc">{{ item.text2 }}</NuxtLink>
         </div>
       </div>
-      <div v-if="item.id === 7">
+      <div v-if="item.id === 7" class="a">
         <div>
           <p class="accordion-content-text">{{ item.text }}</p>
           <div class="accordion-content-inputs">
@@ -289,7 +288,7 @@ export default {
   &.open {
     .accordion-content {
       margin-top: 16px;
-      max-height: 300px;
+      max-height: 915px;
       opacity: 1;
       padding-right: 10px;
     }

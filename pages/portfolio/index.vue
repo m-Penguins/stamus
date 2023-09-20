@@ -23,7 +23,7 @@
         </div>
         <div class="portfolio-box-search">          
           <div class="input-search">
-            <elements-input-search class="input-search" placeholder="Найти"/>
+            <elements-input-search-components class="input-search" placeholder="Найти"/>
           </div>
         </div> 
       </div>

@@ -16,6 +16,9 @@ export default defineNuxtConfig({
   imports: {
     dirs: ["stores", "utils"],
   },
+  plugins: [
+    { src: '@/plugins/yandex-map.client', mode: 'client' },
+],
   // plugins: [
   //   { src: '~/plugins/bvi.js', ssr: false },
   // ]

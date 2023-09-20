@@ -53,6 +53,7 @@
   .wrapper {
     display: flex;
     align-items: center;
+    width: fit-content;
 
     .text {
       @include body-14-regular;

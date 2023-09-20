@@ -5,30 +5,30 @@
       <div class="areas-box-temp">
         <div class="areas-box__img img-first">
           <h3>Стоматологические услуги</h3>
-          <elements-link-with-arrow :type="false" title="Перейти" href="/vzroslaya-stomatologiya"/>
+          <elements-link-with-arrow type="" title="Перейти" href="/vzroslaya-stomatologiya"/>
         </div>
         <div class="areas-box__img img-second">
           <h3>Детская стоматология</h3>
-          <elements-link-with-arrow :type="false" title="Перейти" href="/detskaya-stomatologiya"/>
+          <elements-link-with-arrow type="" title="Перейти" href="/detskaya-stomatologiya"/>
         </div>
       </div>
       <div class="areas-box-col">
         <div class="areas-box__img img-third">
           <h3>Челестно-лицевая хирургия</h3>
-          <elements-link-with-arrow :type="false" title="Перейти" href="/chelyustno-licevaya-hirurgiya"/>
+          <elements-link-with-arrow type="" title="Перейти" href="/chelyustno-licevaya-hirurgiya"/>
         </div>
         <div class="areas-box__img img-fourth">
           <h3>Детская клиника</h3>
-          <elements-link-with-arrow :type="false" title="Перейти" href="/detskaya-klinika"/>
+          <elements-link-with-arrow type="" title="Перейти" href="/detskaya-klinika"/>
         </div>
         <div class="areas-box__img img-fifth display">
           <h3>Лечение во сне</h3>
-          <elements-link-with-arrow :type="false" title="Перейти" href="/lechenie-vo-sne"/>
+          <elements-link-with-arrow type="" title="Перейти" href="/lechenie-vo-sne"/>
         </div>
       </div>
       <div class="mob">
         <h3>Лечение во сне</h3>
-        <elements-link-with-arrow :type="false" title="Перейти" href="/lechenie-vo-sne"/>
+        <elements-link-with-arrow type="" title="Перейти" href="/lechenie-vo-sne"/>
       </div>
     </div>  
   </div>
@@ -102,9 +102,10 @@
 }
 
 .img-fourth {
-  background-image: url("@/assets/images/areas/children-clinic.png");
+  background-image: url("@/assets/images/areas/Frame-big.png");
   width: 416px;
   height: 380px;
+  background-size: cover;
   grid-area: '4'
 }
 
@@ -152,6 +153,7 @@
     }
 
     .areas-box {
+      gap: 14px;
       &__img {
         background-size: cover;
         height: 220px;
@@ -180,14 +182,15 @@
    .areas-box-col {
       flex-wrap: wrap;
       width: 100%;
-      gap: 14px;
+      gap: 10px;
     }
     .areas-box-temp {
       flex-wrap: wrap;
-      gap: 14px;
+      gap: 10px;
     }
 
     .areas-box {
+      gap: 10px;
       .img-third, .img-fourth {
       width: 100%;
     }

@@ -1,7 +1,7 @@
 <template>
   <div class="card-photo-name">
     <div class="card-photo-name-img">
-      <img :src="assetsStore.useAsset(`images/specialists/${specialists.img}`)" :alt="alt"/>
+      <img :src="assetsStore.useAsset(`images/specialists/${specialists.img}`)" alt="specialists"/>
     </div>
     <div class="card-photo-name-container">
       <div>
