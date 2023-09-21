@@ -1,7 +1,7 @@
 <template>
   <div class="container-size specialists">
     <div class="specialists-subject">
-      <h2 class="specialists-heading">Наши специалисты</h2>
+      <h2 class="specialists-heading-title">Наши специалисты</h2>
       <elements-link-with-arrow type="true" title="Смотреть всех специалистов" href="/specialists"/>
     </div>
     <div class="specialists-container">
@@ -169,6 +169,11 @@ export default {
     color: $dark-blue-subtitle;
   }
 
+  .specialists-heading-title {
+    @include body-22-medium-Neue;
+    color: $dark-blue-subtitle;
+  }
+
   .specialists-desc {
     @include body-16-regular;
     color: $placeholder;
@@ -295,7 +300,7 @@ export default {
       }
   }
 
-  @media (max-width: 1017px) {
+  @media (max-width: 1018px) {
     .specialists {
       padding-top: 0;
     }
@@ -305,6 +310,15 @@ export default {
       align-items: flex-start;
       gap: 10px;
     }
+
+    .specialists-inner__info-btn {
+      margin-top: 0;
+    }
+
+    .specialists-heading {
+      font-size: 20px;  
+    }
+
     .specialists-container {
       gap: 20px;
 
@@ -312,6 +326,7 @@ export default {
         flex-direction: unset;
         overflow-x: scroll;
         white-space: nowrap;
+        gap: 10px;
       }
       .specialists-list::-webkit-scrollbar {
         display: none;
@@ -362,7 +377,7 @@ export default {
     }
 }
 
-  @media (max-width: 675px) {
+  @media (max-width: 734px) {
     .specialists {
       margin: 0 auto 80px !important;
     }
@@ -376,7 +391,7 @@ export default {
     }
     .specialists-inner {
       width: 100%;
-      gap: 14px;
+      gap: 10px;
 
        &__img {
         width: 50%;

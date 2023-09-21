@@ -56,6 +56,7 @@
       &-date {
         @include body-12-regular;
         color: $gray-text;
+        opacity: 0.7;
       }
     }
 

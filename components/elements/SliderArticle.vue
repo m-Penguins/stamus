@@ -179,30 +179,10 @@ export default {
     top: 50%;
     right: -4%;
   }
-
-  .swiper-button-disabled {
-    background: rgba(217, 217, 217, 0.2);
-    svg {
-      path {
-        fill: black;
-      }
-    }
-  }
 }
 
 .wrapper-swiper {
   width: 100%;
-}
-
-@media (max-width: 744px) {
-  .wrapper-swiper {
-    width: calc(100% + 31px);
-  }
-}
-@media (max-width: 650px) {
-  .wrapper-swiper {
-    width: calc(100% + 16px);
-  }
 }
 
 .swiper {
@@ -212,12 +192,13 @@ export default {
 
 .swiper-slide {
   margin-bottom: 40px;
-  width: 308px !important;
+  width:  auto !important;
+  // width: 308px !important;
 }
 
-.custom-size {
-  width: 308px;
-}
+// .custom-size {
+//   width: 308px;
+// }
 
 .main-events-block {
   display: flex;
@@ -229,12 +210,9 @@ export default {
   width: 100%;
   height: 100%;
   border-radius: 20px;
-  @media screen and (max-width: 1200px) {
-    width: auto !important;
-  }
 }
 
-@media (max-width: 1277px) {
+@media screen and (max-width: 1277px) {
   .wrapper-btn {
     div {
       width: 24px;
@@ -251,14 +229,34 @@ export default {
   }
 }
 
-.swiper {
-  @media screen and (max-width: 700px) {
-    overflow: visible;
-    width: 340px !important;
-  }
-
-  @media screen and (max-width: 400px) {
-    margin: 0;
+@media screen and (max-width: 1276px) {
+  .wrapper-swiper {
+    width: calc(97% + 31px);
   }
 }
+
+@media screen and (max-width: 1200px) {
+  .swiper-slide {
+    width: auto !important;
+  }
+}
+
+  @media screen and (max-width: 744px) {
+    .swiper {
+      overflow: visible;
+      // width: 340px !important;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+  .wrapper-swiper {
+    width: calc(98% + 16px);
+  }
+}
+
+  @media screen and (max-width: 400px) {
+    .swiper {
+      margin: 0;
+    }
+  }
 </style>

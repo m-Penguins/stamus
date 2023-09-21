@@ -120,7 +120,6 @@ export default {
         align-items: center;
         justify-content: center;
         border-radius: 45px;
-        border: 1px solid $border-card;
 
         &::after {
           display: none;
@@ -138,15 +137,6 @@ export default {
         position: absolute;
         top: 50%;
         left: 1.5%;
-      }
-
-      .swiper-button-disabled {
-        background: rgba(217, 217, 217, .2);;
-        svg {
-          path {
-            fill: black
-          }
-        }
       }
   }
 

@@ -397,6 +397,43 @@
   margin: 0 31px;
 }
 
+.wrapper-btn {
+  .swiper-button-prev:hover {
+    svg {
+      path {
+        fill: #232D5B;
+      }
+      rect {
+        stroke: #CFD5E1;
+      }
+    }
+  }
+
+  .swiper-button-next:hover {
+    svg {
+      path {
+        fill: #232D5B;
+      }
+      rect {
+        stroke: #CFD5E1;
+      }
+    }
+  }
+
+  .swiper-button-disabled {
+        opacity: 1;
+    svg {
+      path {
+        fill: #E9E9E9;
+      }
+      rect {
+        stroke: #E9E9E9;
+      }
+    }
+  }
+
+}
+
 @media (max-width: 650px) {
   .m-r-l-31 {
     margin: 0 16px;

@@ -3,13 +3,27 @@
     <h2 class="form-wrapper__title title-dark-blue p-bt-30">Записаться на консультацию</h2>
     <p class="form-wrapper__subtitle subtitle-gray">Перезвоним в течении 15 минут и уточним <br> удобную для вас поликлинику и дату</p>
     <div class="form-wrapper__box">
-      <elements-input-base placeholder="Имя" class="form-input"/>
-      <elements-input-base placeholder="Номер телефона" class="form-input"/>
+      <elements-input-base tag-type="input" class="form-input" label="Имя" v-model="value"/>
+      <elements-input-base label="Номер телефона" tag-type="phoneMask" type="tel" v-model="valuePhone" class="form-input" mask="+{7}(000)000-00-00"/>
       <elements-button-base title="Записаться" class="form-btn"/>
     </div>
     <p class="form-wrapper__text text-gray-opacity p-bt-112 p-t-14">Нажимая кнопку отправить, вы соглашаетесь с Политикой обработки персональных данных</p>
   </div>
 </template>
+
+<script>
+  export default {
+    setup() {
+      const value = ref();
+      const valuePhone = ref();
+      return {
+        value,
+        valuePhone
+      }
+    }
+  }
+</script>
+
 
 <style lang="scss" scoped>
 @import '/assets/styles/style.scss';

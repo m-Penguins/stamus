@@ -117,7 +117,9 @@
         }
 
         .service-card-box { 
-          display: block;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
 
             &__type {
               margin-bottom: 10px;

@@ -96,6 +96,7 @@ export default {
     &__grade {
       display: flex;
       align-items: center;
+      gap: 10px;
     }
   }
 
@@ -123,7 +124,6 @@ export default {
         align-items: center;
         justify-content: center;
         border-radius: 45px;
-        border: 1px solid $border-card;
 
         &::after {
           display: none;
@@ -132,15 +132,6 @@ export default {
 
       .swiper-button-prev {
         transform: rotate(180deg);
-      }
-
-      .swiper-button-disabled {
-        background: rgba(217, 217, 217, .2);;
-        svg {
-          path {
-            fill: black
-          }
-        }
       }
   }
 
@@ -159,10 +150,16 @@ export default {
     position: relative;
   }
 
-  @media (max-width: 800px) {
+  @media screen and (max-width: 1342px) {
     .wrapper-swiper {
-      width: calc(100% + 31px);
+      width: calc(97% + 31px);
     }
+  }
+
+  @media screen and (max-width: 800px) {
+    // .wrapper-swiper {
+    //   width: calc(100% + 31px);
+    // }
 
     .wrapper-btn {
       position: unset;
@@ -188,27 +185,29 @@ export default {
     }
 }
 
-@media (max-width: 650px) {
-  .wrapper-swiper {
-    width: calc(100% + 16px);
+@media (max-width: 600px) {
+  // .swiper-slide {
+  //     width: 330px !important;
+  //   }
+}
+
+@media screen and (max-width: 745px) {
+  .swiper {
+    overflow: visible;
+    width: auto !important;
   }
 }
 
-@media (max-width: 600px) {
-  .swiper-slide {
-      width: 330px !important;
-    }
+@media screen and (max-width: 650px) {
+  .wrapper-swiper {
+    width: calc(98% + 16px);
+  }
 }
 
-// .swiper {
-//   @media screen and (max-width: 700px) {
-//     overflow: visible;
-//     width: 340px !important;
-//   }
-
-//   @media screen and (max-width: 400px) {
-//     margin: 0;
-//   }
-// }
+@media screen and (max-width: 400px) {
+  .swiper {
+    margin: 0;
+  }
+}
 
 </style>
