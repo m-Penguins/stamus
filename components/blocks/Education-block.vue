@@ -2,7 +2,14 @@
   <div class="education-block">
     <div class="education-block-wrap">
       <h2 class="education-block-title" v-html="title"></h2>
-       <elements-time-line-card :events="events" />
+      <div class="decktop">
+        <elements-time-line-card :events="events" />
+      </div>
+      <div class="education-block-container">
+        <div class="mob" v-for="(event, index) in events" :key="event">
+          <elements-education-mob-card :event="event" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -19,6 +26,10 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../assets/styles/style.scss';
+
+.mob {
+  display: none;
+}
 
 .education-block {
   display: flex;
@@ -40,6 +51,26 @@ export default {
   @include body-22-medium-Neue;
   color: $dark-blue-subtitle;
   padding-bottom: 30px;
+}
+
+.education-block-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+@media (max-width: 670px) {
+  .mob {
+    display: flex;
+  }
+
+  .decktop {
+    display: none;
+  }
+
+  .education-block {
+    margin-bottom: 80px;
+  }
 }
 
 </style>

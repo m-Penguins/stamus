@@ -17,7 +17,7 @@
       }"
     >
       <swiper-slide v-for="(item, index) in programs" :key="index" class="swiper-slide">
-        <elements-name-specialty-photo-card :specialists="item" />
+        <elements-name-specialty-photo-card :specialists="item" :arrayTooltip="mockArrayTooltips"/>
       </swiper-slide>
     </Swiper>
     <div class="wrapper-btn">
@@ -132,14 +132,21 @@ export default {
       }
   }
 
-  .wrapper-swiper {
-    overflow-x: hidden;
-  }
-
   .swiper-slide {
     margin-bottom: 40px;
     width: 308px !important;
   }
+
+  @media screen and (max-width: 1200px) {
+    .wrapper-swiper {
+      width: calc(98% + 15px);
+    }
+    .swiper {
+      overflow: visible;
+      width: auto !important;
+    }
+  }
+
 
   .main-events-block {
     display: flex;
@@ -148,10 +155,6 @@ export default {
   }
 
   @media (max-width: 800px) {
-    .wrapper-swiper {
-      width: calc(100% + 31px);
-    }
-
     .wrapper-btn {
       position: unset;
       div {
@@ -176,7 +179,7 @@ export default {
 
 @media (max-width: 650px) {
   .wrapper-swiper {
-    width: calc(100% + 16px);
+    width: calc(98% + 16px);
   }
 }
 

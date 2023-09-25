@@ -1,5 +1,4 @@
 <template>
-<blocks-main-popap-modal-form @togglerPopup='togglerPopup' :isOpen="isOpenPopup" :isDiscounts="true"/>
   <elements-main-info 
     title="Акции и скидки" 
     text="Небольшое описание в несколько строчек" 
@@ -31,7 +30,7 @@
     :text="'Скидка 25% в июне'"
     :titleLink="'Воспользоваться акцией'"
     link="#"
-    :handleLinkClick="handleLinkClick"
+    :handleLinkClick="openDiscountsModal"
     bgColor="dark-blue-gradient"
     img="bag.png"
     bigImg=true
@@ -41,7 +40,7 @@
     :text="'В стоматологии Стамус есть оптимальное вариант для вас – лечение зубов во сне'"
     :titleLink="'Воспользоваться акцией'"
     link="#"
-    :handleLinkClick="handleLinkClick"
+    :handleLinkClick="openDiscountsModal"
     bgColor="dark-blue-gradient"
     img="tooth.png"
     bigImg=true

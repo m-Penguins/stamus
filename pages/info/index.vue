@@ -1,6 +1,6 @@
 <template>
   <elements-main-info 
-    title="Информация для пациентов" 
+    title="Информация <br/> для пациентов" 
     imgBg="info.png" 
     imgAdaptiv="info-adaptiv.png" 
     :isButtonBase="false"

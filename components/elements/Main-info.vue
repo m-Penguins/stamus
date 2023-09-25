@@ -177,7 +177,16 @@ import { useAssets } from '../../stores/useAsset'
     }
   }
 
+  @media (max-width: 1357px) {
+    .dentistry-wrapper {
+      margin-top: 110px;
+    }
+  }
+
   @media (max-width: 1110px) {
+    .dentistry-wrapper {
+      margin-top: 0;
+    }
     .mob {
       display: flex;
       width: 100%;
@@ -199,11 +208,10 @@ import { useAssets } from '../../stores/useAsset'
 
     .dentistry-box {
       margin-left: 0;
-      gap: 14px;
     }
 
     .breadcrumbs {
-      margin-top: 88px;
+      margin-top: 108px;
     }
   }
 

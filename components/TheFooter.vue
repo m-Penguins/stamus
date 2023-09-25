@@ -156,15 +156,15 @@
         <div class="footer-text display-block">Политика конфидециальности</div>
         <div class="footer-text display-block">Лицензия</div>
         <div class="footer-text display-block">Версия для слабовидящих</div>
-        <div class="footer-text display-block">
+        <NuxtLink to="/business" class="footer-text display-block">
           Бизнесу и корпоративным клиентам
-        </div>
+        </NuxtLink>
         <!-- <a href="#" class="bvi-open">Включить режим доступности</a> -->
         <div class="display">
           <p class="footer-text">Политика конфидециальности</p>
           <p class="footer-text">Лицензия</p>
           <p class="footer-text">Версия для слабовидящих</p>
-          <p class="footer-text">Бизнесу и корпоративным клиентам</p>
+          <NuxtLink to="/business" class="footer-text">Бизнесу и корпоративным клиентам</NuxtLink>
         </div>
       </div>
     </div>

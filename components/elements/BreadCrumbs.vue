@@ -91,11 +91,11 @@ export default {
   }
 
   @media screen and (max-width: 1200px) {
-    margin-bottom: 60px;
     margin-top: 88px
   }
   .pre {
     color: $gray-text;
+    align-items: baseline;
   }
   &-text {
     display: flex;
@@ -121,7 +121,7 @@ export default {
     position: relative;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: baseline;
     height: 30px;
     :before {
       position: relative;
@@ -132,6 +132,7 @@ export default {
       padding-right: 6px;
       padding-left: 6px;
       color: $placeholder;
+      opacity: 0.5;
       top: 2px;
 
       @media screen and (max-width: 680px), (max-width: 1000px) and (max-height: 500px) {
@@ -143,11 +144,17 @@ export default {
       display: none;
     }
   }
-  .arrow {
-    margin-top: 2px;
-    margin-bottom: 19px;
+    .arrow {
+      margin-top: 2px;
+      margin-bottom: 19px;
+    }
   }
 }
+
+@media screen and (max-width: 1110px) {
+  .breadcrumbs {
+    margin-bottom: 60px;
+  }
 }
 
   @media (max-width: 650px) {

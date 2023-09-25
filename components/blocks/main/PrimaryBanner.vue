@@ -4,7 +4,7 @@
       <elements-title-text-button
         :fontSize="false"
         textButtonBase="Записаться онлайн"
-        :ss="redirectToExternalApp"
+        :customClick="redirectToExternalApp"
         title="Оффер <br> в несколько строчек"
         text="Небольшое описание в несколько строчек"
       />

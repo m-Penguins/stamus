@@ -153,6 +153,7 @@
         }
 
         .banner-images {
+          width: 100%;
           max-width: 697px;
           background-image: url("@/assets/images/img-banner/vectors.png");
           background-position: bottom;
@@ -160,8 +161,8 @@
           background-size: contain;
 
           .banner-img {
+            height: 439px;
             width: auto;
-            height: auto;
             max-width: 100%;
             max-height: 100%;
           }
@@ -237,12 +238,17 @@
 
   .grey {
     background: #F9F9FA;
-    height: 434px;
+    height: 420px;
     .banner-title {
       color: $dark-blue-subtitle;
     }
     .banner-text {
       color: $gray-text;
+    }
+    .banner-container {
+      .banner-box {
+        width: 100%;
+      }
     }
   }
 

@@ -1,9 +1,4 @@
 <template>
-  <blocks-main-popap-modal-form
-    @togglerPopup="togglerPopup"
-    class="modal-menu"
-    :isOpen="isOpenPopup"
-  />
   <header
     :class="showServices || showSearch ? 'showServicesHeader' : ''"
     @click="closeMenu"
@@ -187,8 +182,9 @@
                 showSearch = false;
                 showServices = false;
                 showMenuPatients = false;
+                openStartupModal();
               "
-              title="Записаться на прием"
+              title="Перезвоните мне"
             />
           </div>
         </div>
@@ -487,8 +483,9 @@
                 showSearch = false;
                 showServices = false;
                 showMenuPatients = false;
+                openStartupModal();
               "
-              title="Записаться на прием"
+              title="Перезвоните мне"
               class="header-services-menu-mob-button"
             />
           </div>
@@ -1000,7 +997,7 @@ export default {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 1px;
+    height: 0.5px;
     background-color: $click;
     transition: all 0.3s ease;
   }

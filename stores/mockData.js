@@ -13,6 +13,21 @@ export const mockArrayOurSpecialists = [
   {name: 'Шагалова Полина', category: 'Стоматолог', img:"avatar-7.png"},
 ];
 
+export const mockArrayTooltips = [
+  {text: 'Победитель Гран-при Продокторов «Лучший ортопед России» 2021', img: 'tool1.svg'},
+  {text: '2 место Премия Продокторов «Детский стоматолог» 2022 Краснодар', img: 'tool2.svg'},
+  {text: 'Врач высшей категории', img: 'tool3.svg'},
+  {text: 'Работает с эстетическими коронками', img: 'tool4.svg'},
+  {text: 'Работает под микроскопом', img: 'tool5.svg'},
+];
+
+export const mockAddresses = [
+  {name: 'Клиника на Гимназической', address: 'Краснодар, Гимназическая, 85'},
+  {name: 'Клиника на Мачуги', address: 'Краснодар, ул. Мачуги 1/1'},
+  {name: 'Клиника на Гимназической2', address: 'Краснодар, Гимназическая, 85'},
+  {name: 'Клиника на Гимназической3', address: 'Краснодар, Гимназическая, 85'},
+]
+
 export const mockArrayServices = [
   {heading: 'Лечение во сне', price: '3 400', isRecommended: true, isPopular: null, isDemand: null, type: 'Рекомендуем', tags: ["Стоматология", "Дети", 'Седация']},
   {heading: 'Профессиональная гигиена полости рта и зубов временный прикус', isRecommended: true, isPopular: null, isDemand: null, price: '5 400', type: 'Рекомендуем', tags: ["Стоматология", "Дети"]},
@@ -24,6 +39,11 @@ export const mockArrayServices = [
 export const mockArrayOurSpecialistsTwoDoctors = [
   {name: 'Овсоян Григорий', category: 'Челюстно-лицевой хирург', img:"avatar-4.png" },
   {name: 'Унаньян Карина', category: 'Стоматолог-терапевт', img:"avatar-5.png" },
+];
+
+export const mockArrayOurSpecialistsTwoDoctorsDiscounts = [
+  {name: 'Овсоян Григорий', category: 'Челюстно-лицевой хирург', img:"avatar-4.png", time:"15:00", address:"Прием на ул. Мачуги 1/1"},
+  {name: 'Унаньян Карина', category: 'Стоматолог-терапевт', img:"avatar-5.png", time:"17:00", address:"Прием на ул. Мачуги 1/1" },
 ];
 
 export const mockBusinessCards = [
@@ -141,6 +161,12 @@ export const mockInfoMain = [
   { 
     id: 12, 
     title: 'Положение о персональных данных', 
+    isOpen: false,
+    text: 'Открыть',
+  },
+  { 
+    id: 13, 
+    title: 'Сводная ведомость результатов проведенной СОУТ Митрофана Седина, 195 - Хакурате 34', 
     isOpen: false,
     text: 'Открыть',
   },
@@ -283,8 +309,8 @@ export const mockArrayDirection = [
 ];
 
 export const mockArrayDocumentationCard = [
-  {title: 'Лицензия на оказание стоматологических услуг в Краснодарском крае', text: 'Лицензия №23-01-015031' },
-  {title: 'Лицензия на оказание стоматологических услуг в Краснодарском крае', text: 'Лицензия №23-01-015031' },
+  {title: 'Лицензия на оказание стоматологических услуг в Краснодарском крае', text: 'Лицензия Л041-01126-23/00370271', link: 'http://176.99.11.245:1338/uploads/L041_01126_23_00370271_1_0764ad6130.pdf'},
+  {title: 'Лицензия на оказание стоматологических услуг в Краснодарском крае', text: 'Лицензия №Л041-01126-23/00621467', link: 'http://176.99.11.245:1338/uploads/Vypiska_iz_reestra_6_8d98857fd8.pdf' },
 ]
 
 export const mockArrayClinic = [

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <textarea :placeholder="placeholder"  class="textarea-base"></textarea>
+    <textarea :placeholder="placeholder" class="textarea-base"></textarea>
   </div>
 </template>
 

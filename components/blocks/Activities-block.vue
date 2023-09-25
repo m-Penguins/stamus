@@ -4,7 +4,7 @@
     <h2 class="activities-block-title">Основные направления деятельности</h2>
     <div class="activities-block-box">
       <div v-for="item in activitiesCard" :key="item">
-        <elements-activities-card :activitiesCard="item"/>
+        <elements-activities-card :activitiesCard="item" :isSvgArrow="false"/>
       </div>
     </div>
   </div>

@@ -1,8 +1,10 @@
 <template>
-  <div class="custom-select" :tabindex="tabindex" @blur="open = false">
-    <div class="selected" :class="{ open: open }" @click="open = !open">
-      {{ selected }}
+  <div class="custom-select" :tabindex="tabindex" @blur="open = false" :class="{'dopText': dopText}">
+    <div class="selected" :class="{ open: open}" @click="open = !open">
+      <div v-if="isSelectedNotDefault" class="label">{{ default }}</div>
+      <div class="default" :class="isSelectedNotDefault ? 'select-margin' : ''">{{ selected }}</div>
     </div>
+    <p v-if="dopText" class="select-dop-text">Не обязательно для заполнения</p>
     <div class="items" :class="{ selectHide: !open }">
       <div
         v-for="(option, i) of options"
@@ -47,6 +49,11 @@ export default {
       required: false,
       default: 0,
     },
+    dopText: {
+      type: Boolean,
+      required: false,
+      default: false,
+    }
   },
   data() {
     return {
@@ -61,11 +68,27 @@ export default {
   mounted() {
     this.$emit("input", this.selected);
   },
+  computed: {
+    isSelectedNotDefault() {
+      return this.selected !== this.default;
+    },
+  },
 };
 </script>
 
 <style  lang="scss" scoped>
 @import '/assets/styles/style.scss';
+
+.dopText {
+  margin-bottom: 20px
+}
+
+.select-dop-text {
+  @include body-12-regular;
+  color: #525660;
+  opacity: 0.7;
+  padding: 6px 0 0px 20px;
+}
 .custom-select {
   position: relative;
   width: 100%;
@@ -109,8 +132,20 @@ hr {
   border-bottom: 1px solid rgba(255, 255, 255, 0.8);
 }
 
+.label {
+  transform: translateY(-80%);
+  @include body-10-regular;
+}
+
+.select-margin {
+  margin: -10px -1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 323px;
+}
+
 .custom-select .selected {
-  display: flex;
   align-items: center;
   border-radius: 45px;
   border: 1px solid #E9E9E9;
@@ -130,8 +165,8 @@ hr {
     top: 53%;
     right: 22px;
     display: block;
-    width: 10px;
-    height: 2px;
+    width: 9px;
+    height: 1px;
     transition: all 0.3s ease-out;
     background-color: #7F838C;
     transform: translate(-3px, -50%) rotate(45deg);
@@ -152,8 +187,8 @@ hr {
     top: 57%;
     right: 22px;
     display: block;
-    width: 10px;
-    height: 2px;
+    width: 9px;
+    height: 1px;
     transition: all 0.3s ease-out;
     background-color: #7F838C;
     transform: translate(-3px, -50%) rotate(-45deg);
@@ -173,7 +208,7 @@ hr {
   left: 0;
   right: 0;
   top: 62px;
-  z-index: 1;
+  z-index: 12;
   overflow-y: scroll;
   height: 188px;
 }
@@ -196,5 +231,21 @@ hr {
 
 .selectHide {
   display: none;
+}
+
+@media (max-width: 900px) {
+  .select-margin {
+
+  }
+}
+
+@media (max-width: 443px) {
+  .default {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+    margin-right: 15px;
+  }
 }
 </style>

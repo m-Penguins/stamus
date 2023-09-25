@@ -7,6 +7,8 @@
       </main>
     </div>
     <TheFooter />
+    <Teleport to="body"><blocks-main-popap-modal-form /></Teleport>
+    <Teleport to="body"><elements-cookie-consent /></Teleport>
   </div>
 </template>
 
@@ -88,15 +90,15 @@ main {
   margin: 0 auto;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1328px) {
   main {
     padding: 0 31px;
   }
 }
 
-@media (max-width: 744px) {
+@media (max-width: 1200px) {
   main {
-    overflow-x: hidden;
+    overflow: hidden;
   }
 }
 

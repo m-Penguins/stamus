@@ -229,22 +229,21 @@ export default {
   }
 }
 
-@media screen and (max-width: 1276px) {
+@media screen and (max-width: 1200px) {
   .wrapper-swiper {
     width: calc(97% + 31px);
   }
-}
-
-@media screen and (max-width: 1200px) {
   .swiper-slide {
     width: auto !important;
   }
+  .swiper {
+      overflow: visible;
+    }
 }
 
   @media screen and (max-width: 744px) {
     .swiper {
       overflow: visible;
-      // width: 340px !important;
     }
   }
 

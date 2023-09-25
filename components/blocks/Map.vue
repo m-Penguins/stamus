@@ -20,38 +20,37 @@
       <div v-for="(tab, index) in tabs" :key="index" v-show="activeTab === index">
         <div v-if="activeTab === index">
           <div class="tab-map">
-            <client-only>
-              <YandexMap
-              v-bind="config"
-                  :coordinates="currentCoordinates"
-                  :detailed-controls="detailedControls"
-                  :controls="controls"
-                  map-type="map"
-                >     
-                  <!-- <YandexMarker :coordinates="currentCoordinates" :marker-id="123">
-                </YandexMarker> -->
-                <YmapMarker
-            v-for="marker in tabs"
-            :key="marker.id"
-            :markerId="marker.id"
-            v-bind="{
-              icon: {
-                layout: 'default#image',
-                imageHref: icon,
-              },
-              ...marker
-            }"
-        />
-              </YandexMap>
-            </client-only>
+            <div class="map-container">
+              <client-only>
+                <YandexMap
+                v-bind="config"
+                    :coordinates="currentCoordinates"
+                    :detailed-controls="detailedControls"
+                    :controls="controls"
+                    map-type="map"
+                  >     
+                    <YandexMarker :coordinates="currentCoordinates" :marker-id="123">
+                  </YandexMarker>
+                  <!-- <YmapMarker
+              v-for="marker in tabs"
+              :key="marker.id"
+              :markerId="marker.id"
+              v-bind="{
+                icon: {
+                  layout: 'default#image',
+                  imageHref: icon,
+                },
+                ...marker
+              }"
+          /> -->
+                </YandexMap>
+              </client-only>
+            </div>
             <elements-map-nav :info="tab"/>
           </div>
           <!-- <img class="tab-map" :src="assetsStore.useAsset(`images/${tab.image}`)" alt=""> -->
         </div>
       </div>
-    </div>
-    <div class="tabs-btn-base">
-      <elements-button-base title="Смотреть на карте" :arrow="true"/>
     </div>
   </div> 
 </template>
@@ -194,9 +193,9 @@ export default {
 }
 .yandex-container {
   -webkit-filter: grayscale(100%);
-      height: 502px;
-      border-radius: 15px;
-    }
+  height: 100%;
+  border-radius: 15px;
+}
 
     .ymaps-2-1-79-inner-panes {
       border-radius: 15px;
@@ -258,13 +257,15 @@ export default {
 }
 
 .tab-map {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   max-width: 1280px;
   height: 500px;
   border-radius: 20px;
-  // background-image: url('../../assets/images/map.png');
   position: relative;
 }
 
@@ -280,25 +281,33 @@ button.active::after {
   transition: all .3s ease;
 }
 
-  @media (max-width: 1000px) {
-    .tab-map {
-      background: none;
-      height: 100%;
-    }
-    .tabs-btn-base {
-      display: flex;
-      justify-content: center;
-      padding: 27px 0 100px 0;
-    }
+@media (max-width: 1000px) {
+  .tab-map {
+    background: none;
+    height: 100%;
+    margin-bottom: 100px;
+  }
+  .tabs-btn-base {
+    display: flex;
+    justify-content: center;
+    padding: 27px 0 100px 0;
+  }
 
-    .tabs {
-      margin: 0 auto;
-    }
+  .tabs {
+    margin: 0 auto;
+  }
+
+  .map-container {
+    height: 300px !important;
+  }
 }
 
   @media (max-width: 700px) {
     .tabs-btn-base {
       padding: 20px 0 80px 0;
+    }
+    .tab-map {
+      margin-bottom: 80px;
     }
 }
 </style>

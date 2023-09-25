@@ -2,7 +2,7 @@
   <div class="banner">
     <div class="banner-wrap">
       <div class="banner-inner">
-        <elements-bread-crumbs :breadcrumbs="breadcrumbs"/>
+        <elements-bread-crumbs :breadcrumbs="breadcrumbs" class="bread-crumbs-discounts"/>
         <div class="banner-box">
           <div class="banner-container">
             <h2 class="banner-title">Счастливые часы</h2>
@@ -103,11 +103,11 @@ export default {
   height: 100%;
 }
 
-@media (min-width: 1920px) {
+@media (min-width: 2560px) {
   .banner {
     .banner-wrap {
       background-size: contain;
-      width: 1880px;
+      width: 2560px;
     }
   }
 }
@@ -118,10 +118,20 @@ export default {
   }
 }
 
+@media (max-width: 1357px) {
+  .banner-wrap {
+    margin-top: 110px;
+  }
+}
+
 @media (max-width: 950px) {
+  .bread-crumbs-discounts {
+    margin: 88px 0 60px 0;
+  }
   .banner-wrap {
     background: none;
     height: 100%;
+    margin-top: 0px;
   }
   .banner-box {
     flex-direction: row-reverse;
@@ -164,13 +174,16 @@ export default {
 }
 
 @media (max-width: 650px) {
+
+  .bread-crumbs-discounts {
+    margin: 84px 0 0px 0;
+  }
   .banner-wrap {
     margin-bottom: 80px;
   }
   .banner-box {
     flex-wrap: wrap;
     flex-direction: column-reverse;
-    margin-top: 14px;
     gap: 31px;
   }
   .banner-container {

@@ -150,16 +150,17 @@ export default {
     position: relative;
   }
 
-  @media screen and (max-width: 1342px) {
+  @media screen and (max-width: 1200px) {
     .wrapper-swiper {
-      width: calc(97% + 31px);
+      width: calc(100% + 15px);
+    }
+    .swiper {
+      overflow: visible;
+      width: auto !important;
     }
   }
 
   @media screen and (max-width: 800px) {
-    // .wrapper-swiper {
-    //   width: calc(100% + 31px);
-    // }
 
     .wrapper-btn {
       position: unset;
@@ -185,23 +186,11 @@ export default {
     }
 }
 
-@media (max-width: 600px) {
-  // .swiper-slide {
-  //     width: 330px !important;
-  //   }
-}
-
-@media screen and (max-width: 745px) {
-  .swiper {
-    overflow: visible;
-    width: auto !important;
+@media (max-width: 650px) {
+    .wrapper-swiper {
+      width: calc(98% + 16px);
   }
-}
 
-@media screen and (max-width: 650px) {
-  .wrapper-swiper {
-    width: calc(98% + 16px);
-  }
 }
 
 @media screen and (max-width: 400px) {

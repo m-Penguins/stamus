@@ -2,9 +2,9 @@
   <div class="container">
     <h1 v-html="title" :class="{'fontSize':  fontSize ? 'fontSize' : '', 'typeColorWhiteText': typeColorWhiteText ? 'typeColorWhiteText' : ''}" class="main-title-dark-blue p-bt-30 title"></h1>
     <p v-if="isCategory" v-html="category" class="title-text-btn-category"></p>
-    <p v-html="text" :class="{'isButtonBase': !isButtonBase ? 'isButtonBase' : 'container-text', 'typeColorWhiteText': typeColorWhiteText ? 'typeColorWhiteText' : ''}" class="container-text p-bt-30 text"></p>
+    <p v-if="text" v-html="text" :class="{'isButtonBase': !isButtonBase ? 'isButtonBase' : 'container-text', 'typeColorWhiteText': typeColorWhiteText ? 'typeColorWhiteText' : ''}" class="container-text p-bt-30 text"></p>
     <div class="title-text-btn-container">
-      <elements-button-base v-if="isButtonBase" class="fontSize4 container-btn" :title="textButtonBase" @custom-click="ss"/>
+      <elements-button-base v-if="isButtonBase" class="fontSize4 container-btn" :title="textButtonBase" @custom-click="customClick"/>
       <elements-link-with-arrow v-if="isLinkWithArrow" type="true" :title="textLinkWithArrow"/>
     </div>
   </div>
@@ -55,7 +55,7 @@ import ElementsLinkWithArrow from './ElementsLinkWithArrow.vue'
         type: Boolean,
         default: false
       },
-      ss: Function
+      customClick: Function
     }
   }
 </script>
@@ -122,7 +122,7 @@ import ElementsLinkWithArrow from './ElementsLinkWithArrow.vue'
 
   .fontSize {
     font-size: 22px;
-    line-height: initial;
+    line-height: 27px;
     padding-bottom: 14px;
   }
 } 
@@ -133,6 +133,12 @@ import ElementsLinkWithArrow from './ElementsLinkWithArrow.vue'
   }
   .isButtonBase {
     // padding-bottom: 0 !important;
+  }
+  .fontSize {
+    padding-bottom: 14px;
+  }
+  .title-text-btn-category {
+    padding-bottom: 14px;
   }
 }
 </style>

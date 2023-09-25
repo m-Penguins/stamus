@@ -70,7 +70,7 @@ import { mockArrayDocumentationCard } from '../../stores/mockData';
 .contacts-page-title {
   @include body-60-medium;
   color: $dark-blue-subtitle;
-  padding: 100px 0 30px;
+  padding: 90px 0 30px;
 }
 
 .contacts-page-text {
@@ -102,7 +102,7 @@ import { mockArrayDocumentationCard } from '../../stores/mockData';
     padding: 10px 0 30px;
   }
   .contacts-page-text {
-    padding: 0 0 30px;
+    padding: 0 0 60px;
   }
 }
 </style>

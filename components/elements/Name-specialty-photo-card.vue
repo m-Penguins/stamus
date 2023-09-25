@@ -3,12 +3,12 @@
     <div class="card-photo-name-img">
       <img :src="assetsStore.useAsset(`images/specialists/${specialists.img}`)" alt="specialists"/>
     </div>
-    <div class="card-photo-name-container">
+    <div :class="specialists.address ? 'card-photo-name-container-discount' : 'card-photo-name-container' ">
       <div>
         <div class="card-photo-name-title">{{specialists.name}}</div>
         <div class="card-photo-name-text">{{specialists.category}}</div>
       </div>
-      <div class="tooltip">
+      <div v-if="isTooltip" class="tooltip">
         <img src="../../assets/images/icons/icons-badge.svg"/>
         <span class="info">
 					<div class="tooltip-box" v-for="(item) in arrayTooltip" :key="item">
@@ -18,7 +18,12 @@
 				</span>
       </div>
     </div>
-    <elements-link-with-arrow type="true" title="Подробнее о враче" :link="link" :clickHandler="handleLinkClick"/>
+    <elements-link-with-arrow v-if="isLink" type="true" title="Подробнее о враче" :link="link" :clickHandler="handleLinkClick"/>
+    <div class="card-photo-name-box-discount">
+      <p v-if="specialists.address" class="card-photo-name-box-discount__addres">{{ specialists.address }}</p>
+      <div v-if="specialists.time" class="card-photo-name-box-discount__time">{{ specialists.time }}</div>
+      <elements-button-base title="Записаться" class="card-photo-name-box-discount__btn"/>
+    </div>
   </div>
 </template>
 
@@ -31,6 +36,14 @@ export default {
     },
     link: {
       type: String
+    },
+    isLink: {
+      type: Boolean,
+      default: true
+    },
+    isTooltip: {
+      type: Boolean,
+      default: true
     },
     arrayTooltip: {
       type: Array
@@ -57,6 +70,36 @@ export default {
 
 <style scoped lang="scss">
 @import '/assets/styles/style.scss';
+
+.card-photo-name-container-discount {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 16px;
+}
+
+.card-photo-name-box-discount {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+    &__addres {
+      @include body-14-regular;
+      color: #232D5B;
+    }
+
+    &__time {
+      border-radius: 5px;
+      background: rgba(35, 45, 91, 0.05);
+      padding: 6px 10px 8px 10px;
+      @include body-20-regular;
+      color: #232D5B;
+      width: fit-content;
+    }
+
+    &__btn {
+      width: 100%;
+    }
+}
 .tooltip {
   position: relative;
   cursor: pointer;

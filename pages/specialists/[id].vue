@@ -9,7 +9,7 @@
             isCategory="true"
             category="Стоматолог-хирург"
             textButtonBase="Записаться онлайн" 
-            @click="redirectToExternalApp"
+            :customClick="redirectToExternalApp"
             title="Маашев Магомед" 
             text="Безусловно, новая модель организационной деятельности однозначно определяет каждого участника как способного принимать собственные решения касаемо переосмысления внешнеэкономических политик." 
             :isLinkWithArrow="true"
@@ -68,6 +68,7 @@
       </div>
     </div>
   </div>
+  <blocks-cases-direction text="Портфолио доктора" :dataDirection="mockArrayDirection"/>
   <blocks-main-feedback />
   <blocks-video-slider-block :imagesScroll="imagesScrollVideo" title="Видео"/>
   <blocks-our-specialists title="Еще специалисты" :data="mockArrayOurSpecialists"/>
@@ -125,7 +126,11 @@ export default {
           url: '/specialists'
         },
         {
-          title: `${route.params.id}`,
+          title: `Стоматолог-терапевт`,
+          url: ``
+        },
+        {
+          title: `Маашев Магомед`,
           url: `/specialists/${route.params.id}`
         }
       ]  

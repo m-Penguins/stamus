@@ -25,7 +25,7 @@
     :text="'Для организаций предусмотрен лояльный прайс лист на все базовые услуги'"
     :titleLink="'Оставить заявку'"
     link="#"
-    :handleLinkClick="handleLinkClick"
+    :handleLinkClick="openBidModal"
     bgColor="light-blue"
     type="true"
     img="price.png"
@@ -61,9 +61,6 @@ export default {
     checkScreenSize() {
       this.item = window.innerWidth <= 1110 ? false : true;
     },
-    handleLinkClick() {
-      this.isOpenPopup = true
-    }
   },
   setup() {
      const togglerPopup = (state) => {

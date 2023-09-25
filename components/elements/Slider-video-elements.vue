@@ -147,11 +147,17 @@ export default {
     position: relative;
   }
 
-  @media (max-width: 800px) {
+  @media screen and (max-width: 1200px) {
     .wrapper-swiper {
-      width: calc(100% + 31px);
+      width: calc(100% + 15px);
     }
+    .swiper {
+      overflow: visible;
+      width: auto !important;
+    }
+  }
 
+  @media (max-width: 800px) {
     .wrapper-btn {
       position: unset;
       div {
@@ -179,7 +185,7 @@ export default {
 
 @media (max-width: 650px) {
   .wrapper-swiper {
-    width: calc(100% + 16px);
+    width: calc(98% + 16px);
   }
 }
 

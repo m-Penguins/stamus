@@ -46,12 +46,12 @@
 </template>
 
 <script>
-import {mockArrayOurSpecialists} from '../../stores/mockData';
+import { mockArrayOurSpecialists } from '../../stores/mockData';
   export default {
     data() {
       return {
         currentPage: 1,
-        totalPages: 10 
+        totalPages: 5 
       };
     },
     methods: {
@@ -197,15 +197,11 @@ import {mockArrayOurSpecialists} from '../../stores/mockData';
   .specialist-box {
     width: 100%;
   }
-
-  .spicialists-page-card {
-    max-width: 270px;
-  }
 }
 
-@media (max-width: 586px) {
-  .spicialists-page-card {
-    max-width: 230px;
+@media (max-width: 676px) {
+  .spicialists-page-cards {
+    justify-content: center;
   }
 }
 
