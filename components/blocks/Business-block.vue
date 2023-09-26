@@ -66,6 +66,10 @@ export default {
   .business-block-container {
     width: 100%;
   }
+
+  .business-block {
+    margin-bottom: 80px;
+  }
 }
 
 </style>

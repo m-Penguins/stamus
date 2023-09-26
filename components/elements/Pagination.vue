@@ -33,13 +33,24 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 40px 0 90px;
-  gap: 22px;
+  gap: 6px;
 }
 
 .page-item {
   @include body-14-regular;
   color: $gray-text;
   cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:not(.active):hover {
+    border-radius: 5px;
+    background: #F0F0F0;
+    color: #232D5B;
+  }
 }
 
 .page-item a {

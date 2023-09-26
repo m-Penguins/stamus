@@ -2,10 +2,10 @@
   <div class="container">
     <h1 v-html="title" :class="{'fontSize':  fontSize ? 'fontSize' : '', 'typeColorWhiteText': typeColorWhiteText ? 'typeColorWhiteText' : ''}" class="main-title-dark-blue p-bt-30 title"></h1>
     <p v-if="isCategory" v-html="category" class="title-text-btn-category"></p>
-    <p v-if="text" v-html="text" :class="{'isButtonBase': !isButtonBase ? 'isButtonBase' : 'container-text', 'typeColorWhiteText': typeColorWhiteText ? 'typeColorWhiteText' : ''}" class="container-text p-bt-30 text"></p>
+    <p v-if="text" v-html="text" :class="{'isButtonBase': !isButtonBase ? 'isButtonBase' : '', 'typeColorWhiteText': typeColorWhiteText ? 'typeColorWhiteText' : ''}" class="container-text p-bt-30 text"></p>
     <div class="title-text-btn-container">
       <elements-button-base v-if="isButtonBase" class="fontSize4 container-btn" :title="textButtonBase" @custom-click="customClick"/>
-      <elements-link-with-arrow v-if="isLinkWithArrow" type="true" :title="textLinkWithArrow"/>
+      <elements-link-with-arrow v-if="isLinkWithArrow" type="true" :title="textLinkWithArrow" :link="link" :isExternal="isExternal"/>
     </div>
   </div>
 </template>
@@ -18,6 +18,10 @@ import ElementsLinkWithArrow from './ElementsLinkWithArrow.vue'
       title: {
         type: String,
         default: ''
+      },
+      link: {
+        type: String,
+        default: '#'
       },
       textButtonBase: {
         type: String,
@@ -52,6 +56,10 @@ import ElementsLinkWithArrow from './ElementsLinkWithArrow.vue'
         default: ''
       },
       typeColorWhiteText: {
+        type: Boolean,
+        default: false
+      },
+      isExternal: {
         type: Boolean,
         default: false
       },

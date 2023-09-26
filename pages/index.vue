@@ -20,13 +20,13 @@
       type="true"
       img="cards2.png"
       bigImg=true
+      :handleLinkClick="openBidModal"
     />
     <blocks-main-popularServices />
     <BlocksMainBanner 
       :selectedText="true"
       :text="'Независимый всеройсийский портал Продокторов'"
       :titleLink="'Записаться онлайн'"
-      @click="redirectToExternalApp"
       link="#"
       bgColor="blue-gradient"
       img="mobile.svg"
@@ -38,7 +38,7 @@
       :text="'среди частных детских стоматологий Краснодара по версии экспертного журнала Startsmile при поддержке ИД “КоммерстантЪ”'"
       :additionalText="' *1 место в рейтинге детских стоматологических клиник Краснодара за 2022 (клиники, которым более 3-х лет)'"
       :titleLink="'Узнать подробнее'"
-      link="#"
+      link="/detskaya-stomatologiya"
       bgColor="dark-red"
       img="image.png"
     />

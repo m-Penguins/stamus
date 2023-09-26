@@ -123,10 +123,10 @@
                         <NuxtLink
                           v-for="(elem, index) in navigationPatients"
                           :key="elem"
-                          :to="elem.path"
+                          :to="elem.path + (index === 3 ? '#middle' : '')"
                           class="menu-patients-items"
                         >
-                          <li>
+                          <li class="menu-patients-items-link">
                             <div>{{ elem.title }}</div>
                             <hr
                               class="menu-patients-line"
@@ -260,23 +260,18 @@
               v-for="navigationService in storeServices.getStateService"
               :key="navigationService.id"
               class="header-services-menu-item"
-              @mouseover="changeActiveClass(navigationService.id)"
+              @mouseover="changeActiveClass(navigationService.id, navigationService.title)"
             >
               <div
-                :class="{
-                  'active-directions-line':
-                    navigationService.id === activeClass,
-                }"
+                :class="{'active-directions-line': navigationService.id === activeClass || (activeClass === '' && navigationService.id === 1)}"
                 class="a2"
               ></div>
               <NuxtLink
-                exact
-                active-class="active-link"
                 @click="
                   showServices = false;
                   showSearch = false;
                 "
-                class="header-nav-item m-r-20"
+                class="header-nav-item-without-after m-r-20"
                 :to="`${navigationService.path}`"
               >
                 {{ navigationService.title }}
@@ -287,7 +282,7 @@
             <div
               v-for="item in storeServices.getStateService"
               :key="item.id"
-              :class="{ 'active-directions': item.id === activeClass }"
+              :class="{'active-directions': item.id === activeClass || (activeClass === '' && item.id === 1)}"
               class="a2"
             >
               <li
@@ -296,20 +291,22 @@
                 class="cursor-pointer"
               >
                 <div
-                  class="header-services-menu-text header-nav-item"
-                  :class="{ 'active-serv': direction.showServices === true }"
+                  class="header-services-menu-text"
+                  :class="{ 'active-serv': direction.showServices === true || (activeClass === '' && item.id === 1)}"
                   @click="toggleServices(direction)"
                 >
                   {{ direction.title }}
                 </div>
                 <ul
-                  v-if="direction.showServices"
+                  v-if="direction.showServices || (activeClass === '' && item.id === 1)"
                   class="header-services-menu-box"
                 >
                   <div class="header-services-menu-box-title">
                     {{ direction.title }}:
                   </div>
-                  <div class="header-services-menu-box-items">
+                  <div 
+                  class="header-services-menu-box-items"
+                  >
                     <li
                       class="header-services-menu-text"
                       v-for="(service, id) in direction.services"
@@ -428,7 +425,7 @@
                         v-for="elem in navigationPatients"
                         @click="showMenuMob = false"
                         :key="elem"
-                        :to="elem.path"
+                        :to="elem.path + (elem.id === 4 ? '#middle' : '')"
                         class="menu-patients-items-mob"
                       >
                         <li>
@@ -550,7 +547,7 @@
             <elements-link-with-arrow
               type="type"
               title="На страницу раздела"
-              href="/vzroslaya-stomatologiya"
+              :link="`/${linkTransform(clinic)}`"
             />
           </div>
         </div>
@@ -603,7 +600,7 @@
                       showMenuMob = false;
                       thirdBlockMobMenu = false;
                       firstBlockMobMenu = true;
-                      $router.push(`${item.path}/` + id);
+                      $router.push(item.path + service.path);
                     "
                     class="header-services-menu-box-link"
                     to="#"
@@ -652,7 +649,7 @@ export default {
         { id: 1, title: "Клиники", path: "/clinics" },
         { id: 2, title: "Наше приложение", path: "/stamusapp" },
         { id: 3, title: "Информация для пациентов", path: "/info" },
-        { id: 4, title: "Налоговый вычет", path: "/" },
+        { id: 4, title: "Налоговый вычет", path: "/info"},
       ],
     };
   },
@@ -673,10 +670,7 @@ export default {
         this.showSearch = false;
       }
     },
-    // closeMenuPatients() {
-    //   this.showMenuPatients = false;
-    //   this.$emit("menu-closed");
-    // },
+
     changeActiveClass(cls, title) {
       this.activeClass = cls;
       console.log(cls);
@@ -693,7 +687,7 @@ export default {
     const router = useRouter();
     const route = useRoute();
     const baseUrl = useRuntimeConfig().public.apiBaseUrl;
-    let directionTitle = "";
+    const directionTitle = ref("");
     let activeClass2 = "";
 
     const togglerPopup = (state) => {
@@ -723,7 +717,7 @@ export default {
           dir2.showServices = false;
         });
         direction.showServices = true;
-        directionTitle = direction.title;
+        directionTitle.value = direction.title;
       });
     };
 
@@ -737,25 +731,6 @@ export default {
       { title: "Цены", path: "/prices" },
       { title: "Контакты", path: "/contacts" },
     ];
-    const navigationServices = [
-      {
-        title: "Взрослая стоматология",
-        path: "/adult-dentistry",
-        class: "class1",
-      },
-      {
-        title: "Детская стоматология",
-        path: "/children-dentistry",
-        class: "class2",
-      },
-      { title: "Детская клиника", path: "/children-clinic", class: "class3" },
-      {
-        title: "Челюстной-лицевая хирургия",
-        path: "/portfolio",
-        class: "class4",
-      },
-      { title: "Лечение во сне", path: "/prices", class: "class5" },
-    ];
 
     return {
       assetsStore,
@@ -764,7 +739,6 @@ export default {
       isOpenPopup,
       togglerPopup,
       store,
-      navigationServices,
       storeServices,
       toggleServices,
       directionTitle,
@@ -803,11 +777,11 @@ export default {
   top: 54px;
   left: -76px;
   border-radius: 15px;
-  border: 1px solid var(--menu-burger-hover-bg, #f0f0f0);
+  border: 1px solid #f0f0f0;
   background: var(--white, #fff);
   z-index: 999;
   padding: 10px;
-  width: 243px;
+  width: 252px;
 }
 
 .menu-patients-container {
@@ -826,10 +800,10 @@ export default {
 }
 
 .menu-patients-list {
+  width: 100%;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  padding: 10px;
 }
 
 .menu-patients-items {
@@ -840,6 +814,12 @@ export default {
   div {
     padding: 10px;
     width: 100%;
+    &:hover {
+      border-radius: 5px;
+      background: #F0F0F0;
+      color: #232D5B;
+    }
+
   }
 }
 
@@ -1188,6 +1168,7 @@ export default {
   color: $placeholder;
   cursor: pointer;
   position: relative;
+  width: fit-content;
 }
 
 .header-services-menu-inner {
@@ -1232,7 +1213,7 @@ export default {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 1px;
+    height: 0.5px;
     background-color: $click;
     transition: all 0.3s ease;
   }

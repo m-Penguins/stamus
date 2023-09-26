@@ -2,6 +2,7 @@
   <NuxtLink 
   :href="mobCardLink.link" 
   class="mob-link-card"
+  target="_blank"
   >
   <p v-html="mobCardLink.title" class="mob-link-card__text"></p>
   <div>

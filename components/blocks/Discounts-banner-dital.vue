@@ -7,7 +7,7 @@
           <div class="banner-container">
             <h2 class="banner-title">Счастливые часы</h2>
             <p class="banner-text">Каждый день скидки до 50%</p>
-            <elements-link-with-arrow type="true" title="Посмотреть акции"/>
+            <elements-link-with-arrow link="/discounts" type="true" title="Посмотреть акции"/>
           </div>
           <div class="banner-img">
             <div class="banner-img-box">

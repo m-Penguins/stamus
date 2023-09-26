@@ -2,13 +2,13 @@
   <div class="container-size popular-service">
     <div class="service-title">
       <h2 class="popular-service__title" v-html="title"></h2>
-      <elements-link-with-arrow v-if="isLink" type="true" title="Посмотреть все" :isLink="isLink"/>
+      <elements-link-with-arrow v-if="isLink" link="/prices" type="true" title="Посмотреть все" :isLink="isLink"/>
     </div>
     <div class="service-form">
       <div class="service-box">
         <elements-select
           :options="addresData"
-          :default="'Укажите клинику'"
+          :default="'Направление'"
           class="select"
         />
         <elements-select

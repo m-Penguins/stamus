@@ -11,7 +11,7 @@
   export default {
     data() {
       return {
-        cookieConsentAccepted: false,
+        cookieConsentAccepted: true,
       };
     },
     mounted() {

@@ -1,10 +1,13 @@
 <template>
   <div class="partners-block">
     <div class="partners-block-wrap">
-      <div v-for="item in data" :key="item" class="partners-block-container">
-        <elements-partners-card :images="item" class="partners-block-box"/>
+      <h2 class="partners-block-title">Партнеры клиники</h2>
+      <div class="partners-block-wrap">
+        <div v-for="item in data" :key="item" class="partners-block-container">
+          <elements-partners-card :images="item" class="partners-block-box"/>
+        </div>
       </div>
-    </div>
+  </div>
   </div>
 </template>
 
@@ -24,6 +27,12 @@ export default {
   flex-direction: column;
   width: 100%;
   margin-bottom: 100px;
+}
+
+.partners-block-title {
+  @include body-22-medium;
+  color: #1E2433;
+  padding-bottom: 26px;
 }
 
 .partners-block-wrap {

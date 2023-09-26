@@ -1,6 +1,6 @@
 <template>
   <div class="container-size areas-wrapper">
-    <h2>Наши клиники</h2>
+    <h2 class="clinics-block-title">Наши клиники</h2>
     <div class="areas-box">
       <div class="areas-box-temp">
         <div class="areas-box__img img-first">
@@ -43,6 +43,10 @@
 
 <style lang="scss" scoped>
 @import '/assets/styles/style.scss';
+
+.clinics-block-title {
+  padding-top: 40px;
+}
 .mob {
   display: none;
 }
@@ -128,6 +132,10 @@
 }
 
   @media (max-width: 1000px) {
+
+    .clinics-block-title {
+      padding-top: 0;
+    }
     .areas-wrapper {
       h2 {
         padding-bottom: 40px;

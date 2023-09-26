@@ -8,7 +8,7 @@
           <div>
             <elements-title-text-button 
               textButtonBase="Записаться онлайн"
-              @click="redirectToExternalApp"
+              :customClick="redirectToExternalApp"
               :isButtonBase="isButtonBase" 
               :title="title" 
               font-size="true" 
@@ -25,7 +25,7 @@
         </div>
         <elements-title-text-button 
           :typeColorWhiteText="typeColorWhiteText" 
-          @click="redirectToExternalApp"
+          :customClick="redirectToExternalApp"
           textButtonBase="Записаться онлайн" 
           :isButtonBase="isButtonBase" 
           :title="title" :text="text" 
@@ -88,12 +88,6 @@ import { useAssets } from '../../stores/useAsset'
       time: String,
       money: String
     },
-    methods: {
-      redirectToExternalApp() {
-        const externalAppLink = 'https://app.1denta.ru/booking/booking?orgid=11074&roistat_visit=282247#/main';
-        window.open(externalAppLink, '_blank');
-      }
-    },
     setup() {
       const assetsStore = useAssets();
       return {
@@ -117,7 +111,7 @@ import { useAssets } from '../../stores/useAsset'
   max-width: 100%;
   height: 334px;
   border-radius: 25px;
-  object-position: right;
+  object-position: center;
 }
 
 .main-info-width {
@@ -165,7 +159,7 @@ import { useAssets } from '../../stores/useAsset'
   margin: 0 auto;
 }
 
-  @media (max-width: 1577px) {
+  @media (max-width: 1475px) {
     .dentistry-box {
       margin-left: 80px;
     }
@@ -215,7 +209,31 @@ import { useAssets } from '../../stores/useAsset'
     }
   }
 
-    @media (max-width: 600px) {
+  @media (max-width: 1080px) {
+    .img {
+      width: 400px;
+    }
+  }
+
+  @media (max-width: 970px) {
+    .img {
+      width: 334px;
+    }
+  }
+
+  @media (max-width: 668px) {
+    .img {
+      width: 334px;
+    }
+  }
+
+  @media (max-width: 633px) {
+    .img {
+      width: 100%;
+    }
+  }
+
+    @media (max-width: 633px) {
 
     .img-dital {
       width: 100%;
@@ -227,14 +245,6 @@ import { useAssets } from '../../stores/useAsset'
       flex-wrap: wrap;
       align-items: flex-start;
       justify-content: flex-start;
-
-      img {
-        // width: 100%;
-      }
-
-      .img {
-        width: 100%;
-      }
     }
 
     .mob {

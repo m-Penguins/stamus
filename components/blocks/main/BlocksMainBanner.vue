@@ -154,7 +154,8 @@
 
         .banner-images {
           width: 100%;
-          max-width: 697px;
+          // max-width: 697px;
+          max-width: 628px;
           background-image: url("@/assets/images/img-banner/vectors.png");
           background-position: bottom;
           background-repeat: no-repeat;

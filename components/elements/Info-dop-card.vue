@@ -4,9 +4,9 @@
       v-for="(item, index) in mockInfoDop" 
       :key="index"
       class="info-card"
-      :class="{ 'open': item.isOpen, 'ss': item.id === 7 }"
+      :class="{ 'open': item.isOpen, 'ndfl': item.id === 7 }"
     >
-    <div class="info-card__box" @click="toggleAccordion(index)">
+    <div class="info-card__box" @click="toggleAccordion(index)" :id="item.id === 7 ? 'middle' : ''">
       <h3 class="accordion-title">{{ item.title }}</h3>
       <div v-if="!item.isOpen">
         <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,7 +21,6 @@
         </svg>
       </div>
     </div>
-    <transition>
       <div v-show="item.isOpen" class="accordion-content">
         <div v-if="item.id === 1">
           <div class="accordion-content-text">
@@ -261,7 +260,6 @@
           </div>
         </div>
       </div>
-  </transition>
     </div>
   </div>
 </template>
@@ -307,15 +305,14 @@ export default {
 
 <style scoped lang="scss">
 @import '../../assets/styles/style.scss';
-.ss.open {
+.ndfl.open {
   max-height: 1500px !important;
   .accordion-content {
     overflow-y: hidden !important;
   }
-  // background-color: red;
 }
 
-.ss.open {
+.ndfl.open {
   .accordion-content {
     max-height: 1500px !important;
   }
@@ -372,6 +369,7 @@ export default {
     gap: 20px;
     width: 100%;
     cursor: pointer;
+    scroll-margin-top: 160px;
   }
 
   .accordion-content {
@@ -429,6 +427,14 @@ export default {
 
 .link-info-doc {
   width: fit-content;
+}
+
+@media (max-width: 1356px) {
+  .info-card {
+    &__box {
+      scroll-margin-top: 120px;
+    }
+  }
 }
 
 @media (max-width: 900px) {

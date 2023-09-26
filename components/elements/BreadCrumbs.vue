@@ -90,7 +90,7 @@ export default {
     margin-top: 50px;
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1355px) {
     margin-top: 88px
   }
   .pre {

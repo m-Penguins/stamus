@@ -36,7 +36,7 @@
     </div>
   </div>
   <div class="slider-base-btn">
-    <elements-button-base title="Смотреть всех специалистов"/>
+    <elements-button-base title="Смотреть всех специалистов" @click="$router.push('/specialists')"/>
   </div>
 </div>
 </template>
@@ -83,7 +83,7 @@ export default {
 
     &__box {
       display: flex;
-      padding-bottom: 17px;
+      // padding-bottom: 17px;
 
       &-title {
         @include body-22-medium-Neue;
@@ -155,6 +155,14 @@ export default {
   }
 
   @media (max-width: 800px) {
+
+    .slider-base-btn {
+      padding-bottom: 0px;
+    }
+
+    .slider-title {
+      padding: 0px 0 40px 0;
+    }
     .wrapper-btn {
       position: unset;
       div {

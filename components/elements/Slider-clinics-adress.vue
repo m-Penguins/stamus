@@ -80,7 +80,7 @@ export default {
 
     &__box {
       display: flex;
-      padding-bottom: 17px;
+      // padding-bottom: 17px;
 
       &-title {
         @include body-22-medium-Neue;
@@ -124,10 +124,6 @@ export default {
       }
   }
 
-  .wrapper-swiper {
-    overflow-x: hidden;
-  }
-
   .swiper-slide {
     margin-bottom: 40px;
     width: 308px !important;
@@ -137,6 +133,16 @@ export default {
     display: flex;
     flex-direction: column;
     position: relative;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .wrapper-swiper {
+      width: calc(98% + 15px);
+    }
+    .swiper {
+      overflow: visible;
+      width: auto !important;
+    }
   }
 
   @media (max-width: 800px) {
@@ -158,23 +164,13 @@ export default {
     }
   .swiper-slide {
     margin-bottom: 30px;
+    width: 334px !important;
   }
 }
 
-
-@media (max-width: 800px) {
-    .wrapper-swiper {
-      width: calc(100% + 31px);
-    }
-    .swiper-slide {
-      margin-bottom: 30px;
-      width: 334px !important;
-    }
-  }
-
 @media (max-width: 650px) {
   .wrapper-swiper {
-    width: calc(100% + 16px);
+    width: calc(97% + 16px);
   }
 }
 

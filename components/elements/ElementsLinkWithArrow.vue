@@ -2,6 +2,7 @@
   <NuxtLink 
   v-if="type" 
   :href="link" 
+  :target="isExternal ? '_blank' : '_self'"
   @click="handleClick()"
   class="wrapper">
     <p v-html="title" class="text text-gray"></p>
@@ -27,6 +28,10 @@
       title: {
         type: String,
         default: ''
+      },
+      isExternal: {
+        type: Boolean,
+        default: false
       },
       link: {
         type: String,

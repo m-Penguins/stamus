@@ -1,7 +1,7 @@
 <script setup>
   const cardMobAppMock = [
-    {title: 'Скачать в App Store', link: '#'},
-    {title: 'Скачать в Google Play', link: '#'},
+    {title: 'Скачать в App Store', link: 'https://apps.apple.com/ru/app/stamus/id1472150990?roistat_visit=295807'},
+    {title: 'Скачать в Google Play', link: 'https://play.google.com/store/apps/details?id=com.denta.network27'},
     ];
   const breadcrumbs = [{
           title: 'Главная',
@@ -10,7 +10,12 @@
         {
           title: 'Мобильное приложение',
           url: '/stamusapp'
-        }]  
+        }] 
+        
+  const redirectToAppStore = () => {
+    const externalAppLink = 'https://apps.apple.com/ru/app/stamus/id1472150990?roistat_visit=295807';
+    window.open(externalAppLink, '_blank');
+  }
 </script>
 
 <template>
@@ -26,6 +31,9 @@
           :isLinkWithArrow="true"
           textLinkWithArrow="Скачать в Google Play"
           class="stamus-app-title"
+          :customClick="redirectToAppStore"
+          link="https://play.google.com/store/apps/details?id=com.denta.network27"
+          :isExternal="true"
           />
           <div class="stamus-app-img-box">
             <img src="../../assets/images/big-images/mob-app.png" alt="mob" class="stamus-app-img-box-picture">

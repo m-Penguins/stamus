@@ -6,6 +6,11 @@
     <div class="card-photo-name-container">
       <div>
         <div class="card-photo-name-title">{{direction.name}}</div>
+        <elements-link-with-arrow
+              type="type"
+              title="Подробнее"
+              link="#"
+            />
       </div>
     </div>
   </div>
@@ -40,7 +45,7 @@ export default {
 }
 
 .card-photo-name-img {
-  padding-bottom: 30px;
+  padding-bottom: 20px;
 }
 
 .card-photo-name-container {
@@ -52,7 +57,7 @@ export default {
 .card-photo-name-title {
   @include body-20-regular;
   color: $dark-blue-subtitle;
-  padding-bottom: 4px;
+  padding-bottom: 20px;
 }
 
 .card-photo-name-description{

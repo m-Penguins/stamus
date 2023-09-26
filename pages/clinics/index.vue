@@ -3,7 +3,7 @@
     title="5 клиник в Краснодаре" 
     text="1 место в Краснодаре" 
     imgBg="clinics.png" 
-    imgAdaptiv="clinics.png" 
+    imgAdaptiv="clinic-adaptiv.png" 
     :isButtonBase="false"
     :typeColorWhite="item"
     :typeColorWhiteText="item"
@@ -35,12 +35,13 @@
     type="true"
     img="cards2.png"
     bigImg=true
+    :handleLinkClick="openBidModal"
   />
   <BlocksMainBanner 
     :title="'Наше приложение'"
     :text="'Мы разработали собственное приложение для вашего удобства! Оно есть и на iOS и на Android. Теперь вам не нужно ждать ответа администратора и вы можете записаться на прием самостоятельно! А еще в приложении есть программа лояльности и все актуальные скидки)'"
     :titleLink="'Узнать подробнее'"
-    link="#"
+    link="/stamusapp"
     bgColor="grey"
     type="true"
     img="mob5.png"

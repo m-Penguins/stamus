@@ -41,7 +41,7 @@ const imagesScroll = ['video1.png', 'video2.png', 'video3.png','video3.png','vid
     <div class="container-size popular-service">
       <div class="service-title">
         <h2 class="popular-service__title">Услуги</h2>
-        <elements-link-with-arrow type="true" title="Посмотреть все"/>
+        <elements-link-with-arrow type="true" title="Посмотреть все" link="/prices"/>
       </div>
       <div class="popular-service__list">
         <div v-for="(item, index) in mockArrayServicesCard" :key="index">

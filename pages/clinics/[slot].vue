@@ -3,7 +3,8 @@
     title="Клиника на Хакурате" 
     text="Краснодар,ул. Хакурате 34" 
     imgBg="clinic6.png" 
-    imgAdaptiv="clinic6-adaptive.png" 
+    imgAdaptiv="clinic6.png"
+    :isDital="true"
     :isButtonBase="false"
     :typeColorWhite="item"
     :typeColorWhiteText="item"
@@ -28,7 +29,7 @@
     bigImg=true
   />
   <blocks-main-feedback />
-  <blocks-clinics-adress text="Кейсы по направлению" 
+  <blocks-clinics-adress text="Другие клиники" 
   :dataDirection="mockArrayDirection" />
   <blocks-main-form />
 </template>

@@ -3,9 +3,24 @@ import { mockArrayOurSpecialists } from '../../stores/mockData';
 import { mockArrayDirection } from '../../stores/mockData';
 import { mockArrayClinic } from '../../stores/mockData';
 import { textAboutImportantArray } from '../../stores/mockData';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const route = useRoute()
 let mockDate = mockArrayClinic[3]
+
+const item = ref(true);
+const checkScreenSize = () => {
+  item.value = window.innerWidth <= 1110 ? false : true;
+};
+
+onMounted(() => {
+  checkScreenSize();
+  window.addEventListener('resize', checkScreenSize);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', checkScreenSize);
+});
 
 </script>
 
@@ -14,7 +29,9 @@ let mockDate = mockArrayClinic[3]
     :title="mockDate.title" 
     :text="mockDate.titleDescription" 
     imgBg="chelyustno-licevaya-hirurgiya.png" 
-    imgAdaptiv="chelyustno-licevaya-hirurgiya-adaptiv.png" 
+    imgAdaptiv="chelyustno-licevaya-hirurgiya-adaptiv.png"
+    :typeColorWhite="item"
+    :typeColorWhiteText="item"
     :breadcrumbs="[
         {
           title: 'Главная',

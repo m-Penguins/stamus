@@ -5,10 +5,10 @@
   <div class="spicialists-page-cards">
     <div class="spicialists-page-card" v-for="item in mockArrayOurSpecialistsTwoDoctorsDiscounts" :key="item" >
       <elements-name-specialty-photo-card 
-      link="#" 
-      :specialists="item"
-      :isLink="false"
-      :isTooltip="false"
+        link="#" 
+        :specialists="item"
+        :isLink="false"
+        :isTooltip="false"
       />
     </div>
   </div>

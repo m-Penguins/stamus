@@ -36,7 +36,7 @@
     </div>
   </div>
   <div class="slider-base-btn">
-    <elements-button-base title="Смотреть все кейсы"/>
+    <elements-button-base title="Смотреть все кейсы"  @click="$router.push('/portfolio')"/>
   </div>
 </div>
 </template>
@@ -177,6 +177,9 @@ export default {
   .swiper-slide {
     margin-bottom: 30px;
     width: 334px !important;
+  }
+  .slider-base-btn {
+    padding-bottom: 0;
   }
 }
 

@@ -11,7 +11,7 @@
       <div class="service-box">
         <elements-select
           :options="addresData"
-          :default="'Укажите клинику'"
+          :default="'Направление'"
           class="select"
         />
         <elements-select
