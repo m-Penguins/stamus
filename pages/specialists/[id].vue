@@ -68,7 +68,7 @@
       </div>
     </div>
   </div>
-  <blocks-cases-direction text="Портфолио доктора" :dataDirection="mockArrayDirection"/>
+  <blocks-cases-direction text="Портфолио доктора" :dataDirection="mockArrayDirection" id="portfolio" class="portfolio-id"/>
   <blocks-main-feedback />
   <blocks-video-slider-block :imagesScroll="imagesScrollVideo" title="Видео"/>
   <blocks-our-specialists title="Еще специалисты" :data="mockArrayOurSpecialists"/>
@@ -149,6 +149,10 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../assets/styles/style.scss';
+
+.portfolio-id {
+  scroll-margin-top: 100px;
+}
 .desktop {
   display: flex !important;
 }
@@ -244,6 +248,9 @@ export default {
 
 
 @media screen and (max-width: 1110px) {
+  .portfolio-id {
+    scroll-margin-top: 60px;
+  }
   .desktop {
     display: none !important;
   }

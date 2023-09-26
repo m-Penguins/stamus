@@ -49,8 +49,8 @@
             </div>
           </div>
           <div class="specialists-inner__info-btn">
-            <elements-button-base title="О докторе" class="specialists-btn-base"/>
-            <elements-link-with-arrow type="true" title="Смотреть портфолио"/>
+            <elements-button-base title="О докторе" @click="$router.push('/specialists/1')" class="specialists-btn-base"/>
+            <elements-link-with-arrow type="true" title="Смотреть портфолио" :to="'/specialists/1' +  '#portfolio'"/>
           </div>
         </div>
       </div>

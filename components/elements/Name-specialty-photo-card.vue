@@ -18,7 +18,7 @@
 				</span>
       </div>
     </div>
-    <elements-link-with-arrow v-if="isLink" type="true" title="Подробнее о враче" :link="link" :clickHandler="handleLinkClick"/>
+    <elements-link-with-arrow v-if="isLink" type="true" title="Подробнее о враче" link="/specialists/1" :clickHandler="handleLinkClick"/>
     <div v-if="specialists.address" class="card-photo-name-box-discount">
       <p class="card-photo-name-box-discount__addres">{{ specialists.address }}</p>
       <div v-if="specialists.time" class="card-photo-name-box-discount__time">{{ specialists.time }}</div>
