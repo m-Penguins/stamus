@@ -1,75 +1,97 @@
 <template>
   <div class="card-photo-name">
     <div class="card-photo-name-img">
-      <img :src="assetsStore.useAsset(`images/specialists/${specialists.img}`)" alt="specialists" class="card-img"/>
+      <img :src="specialists.img" alt="specialists" class="card-img" />
     </div>
-    <div :class="specialists.address ? 'card-photo-name-container-discount' : 'card-photo-name-container' ">
+    <div
+      :class="
+        specialists.address
+          ? 'card-photo-name-container-discount'
+          : 'card-photo-name-container'
+      "
+    >
       <div>
-        <div class="card-photo-name-title">{{specialists.name}}</div>
-        <div class="card-photo-name-text">{{specialists.category}}</div>
+        <div class="card-photo-name-title">{{ specialists.name }}</div>
+        <div class="card-photo-name-text">{{ specialists.position }}</div>
       </div>
       <div v-if="isTooltip" class="tooltip">
-        <img src="../../assets/images/icons/icons-badge.svg"/>
+        <img src="../../assets/images/icons/icons-badge.svg" />
         <span class="info">
-					<div class="tooltip-box" v-for="(item) in arrayTooltip" :key="item">
-            <img :src="assetsStore.useAsset(`images/icons/tooltip/${item.img}`)" alt="icon">
-            <p class="tooltip-text">{{item.text }}</p>
+          <div class="tooltip-box" v-for="item in arrayTooltip" :key="item">
+            <img
+              :src="assetsStore.useAsset(`images/icons/tooltip/${item.img}`)"
+              alt="icon"
+            />
+            <p class="tooltip-text">{{ item.text }}</p>
           </div>
-				</span>
+        </span>
       </div>
     </div>
-    <elements-link-with-arrow v-if="isLink" type="true" title="Подробнее о враче" link="/specialists/1" :clickHandler="handleLinkClick"/>
+    <elements-link-with-arrow
+      v-if="isLink"
+      type="true"
+      title="Подробнее о враче"
+      :link="`/specialists/${specialists.id}`"
+      :clickHandler="handleLinkClick"
+    />
     <div v-if="specialists.address" class="card-photo-name-box-discount">
-      <p class="card-photo-name-box-discount__addres">{{ specialists.address }}</p>
-      <div v-if="specialists.time" class="card-photo-name-box-discount__time">{{ specialists.time }}</div>
-      <elements-button-base title="Записаться" class="card-photo-name-box-discount__btn"/>
+      <p class="card-photo-name-box-discount__addres">
+        {{ specialists.address }}
+      </p>
+      <div v-if="specialists.time" class="card-photo-name-box-discount__time">
+        {{ specialists.time }}
+      </div>
+      <elements-button-base
+        title="Записаться"
+        class="card-photo-name-box-discount__btn"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { useAssets } from '../../stores/useAsset'
+import { useAssets } from "../../stores/useAsset";
 export default {
   props: {
     specialists: {
-      type: Object
+      type: Object,
     },
     link: {
-      type: String
+      type: String,
     },
     isLink: {
       type: Boolean,
-      default: true
+      default: true,
     },
     isTooltip: {
       type: Boolean,
-      default: true
+      default: true,
     },
     arrayTooltip: {
-      type: Array
+      type: Array,
     },
-    handleLinkClick: Function
+    handleLinkClick: Function,
   },
-    methods: {
+  methods: {
     selectButton() {
-      this.arr.map(item => {
-        return item
+      this.arr.map((item) => {
+        return item;
       });
     },
   },
   setup() {
     const assetsStore = useAssets();
-    const arr = ['1', '2', '3']
+    const arr = ["1", "2", "3"];
     return {
       arr,
-      assetsStore
-    }
-  }
-}
+      assetsStore,
+    };
+  },
+};
 </script>
 
 <style scoped lang="scss">
-@import '/assets/styles/style.scss';
+@import "/assets/styles/style.scss";
 
 .card-photo-name-container-discount {
   display: flex;
@@ -82,33 +104,33 @@ export default {
   flex-direction: column;
   gap: 20px;
 
-    &__addres {
-      @include body-14-regular;
-      color: #232D5B;
-    }
+  &__addres {
+    @include body-14-regular;
+    color: #232d5b;
+  }
 
-    &__time {
-      border-radius: 5px;
-      background: rgba(35, 45, 91, 0.05);
-      padding: 6px 10px 8px 10px;
-      @include body-20-regular;
-      color: #232D5B;
-      width: fit-content;
-    }
+  &__time {
+    border-radius: 5px;
+    background: rgba(35, 45, 91, 0.05);
+    padding: 6px 10px 8px 10px;
+    @include body-20-regular;
+    color: #232d5b;
+    width: fit-content;
+  }
 
-    &__btn {
-      width: 100%;
-    }
+  &__btn {
+    width: 100%;
+  }
 }
 .tooltip {
   position: relative;
   cursor: pointer;
-    &:hover .info,
-		&:focus .info {
-			visibility: visible;
-			opacity: 1;
-			transform: translate3d(0,0,0);
-		}
+  &:hover .info,
+  &:focus .info {
+    visibility: visible;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 .info {
   display: flex;
@@ -131,21 +153,21 @@ export default {
   cursor: text;
   visibility: hidden;
   opacity: 0;
-  transform: translate3d(0,-20px,0);
-  transition: all .5s ease-out;
-  
+  transform: translate3d(0, -20px, 0);
+  transition: all 0.5s ease-out;
+
   &:before {
     position: absolute;
-    content: '';
+    content: "";
     width: 100%;
     height: 14px;
     bottom: -14px;
     left: 0;
   }
-        
+
   &:after {
     position: absolute;
-    content: '';
+    content: "";
     width: 10px;
     height: 10px;
     transform: rotate(45deg);
@@ -159,7 +181,7 @@ export default {
 .tooltip-box {
   display: flex;
   align-items: center;
-  gap: 10px
+  gap: 10px;
 }
 
 .tooltip-text {
