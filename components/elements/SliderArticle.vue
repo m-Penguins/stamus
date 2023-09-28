@@ -192,14 +192,8 @@ export default {
 
 .swiper-slide {
   margin-bottom: 40px;
-  width:  auto !important;
-  // width: 308px !important;
+  max-width: 308px;
 }
-
-// .custom-size {
-//   width: 308px;
-// }
-
 .main-events-block {
   display: flex;
   flex-direction: column;
@@ -234,12 +228,20 @@ export default {
     width: calc(97% + 31px);
   }
   .swiper-slide {
-    width: auto !important;
+    width: 33%;
+    max-width: 100%;
   }
   .swiper {
       overflow: visible;
     }
 }
+
+@media (max-width: 860px) {
+  .swiper-slide {
+    width: 48.5%;
+  }
+}
+
 
   @media screen and (max-width: 744px) {
     .swiper {
@@ -248,6 +250,9 @@ export default {
   }
 
   @media screen and (max-width: 650px) {
+  .swiper-slide {
+    width: 330px;
+  }
   .wrapper-swiper {
     width: calc(98% + 16px);
   }

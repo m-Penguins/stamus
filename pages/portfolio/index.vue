@@ -133,9 +133,10 @@ import {mockArrayDirection} from '../../stores/mockData';
   margin-right: 16px;
 }
 
-@media (max-width: 1351px) {
+@media (max-width: 1328px) {
   .portfolio-page-card {
-    max-width: 334px;
+    width: 32%;
+    max-width: 100%;
   }
 }
 
@@ -146,9 +147,6 @@ import {mockArrayDirection} from '../../stores/mockData';
 }
 
 @media (max-width: 1098px) {
-  .portfolio-page-card {
-    max-width: 270px;
-  }
   .service-form {
     flex-wrap: wrap;
     gap: 10px;
@@ -191,18 +189,14 @@ import {mockArrayDirection} from '../../stores/mockData';
     font-size: 16px;
   }
 
-  .portfolio-page-card {
-    max-width: 334px;
-  }
-
   .portfolio-page-cards {
     gap: 40px 14px;
   }
 }
 
-@media (max-width: 743px) {
+@media (max-width: 860px) {
   .portfolio-page-card {
-    max-width: 300px;
+    width: 48.5%;
   }
 }
 
@@ -221,24 +215,14 @@ import {mockArrayDirection} from '../../stores/mockData';
     gap: 10px;
   }
 
-  .portfolio-page-card {
-    max-width: 270px;
-  }
-
   .portfolio-page-text {
     padding: 0 0 30px;
   }
 }
 
-@media (max-width: 586px) {
+@media (max-width: 550px) {
   .portfolio-page-card {
-    max-width: 230px;
-  }
-}
-
-@media (max-width: 506px) {
-  .portfolio-page-card {
-    max-width: 343px;
+    width: 100%;
   }
 }
 </style>

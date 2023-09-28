@@ -186,22 +186,18 @@
               <elements-input-base 
                 tag-type="input" 
                 label="ФИО налогоплательщика" 
-                class="popup-form-input"
                 v-model="store.nameFieldInfo"
                 :errorMessage="store.isNameInfoValid ? '' : '*Минимум 2 символа'"
               />
               <elements-input-base 
                 tag-type="input" 
                 label="Введите ИНН" 
-                class="popup-form-input"
-                type="number"
                 v-model="store.digitFieldInfo"
                 :errorMessage="store.isDigitValidInfo ? '' : '*Проверьте правильность заполнения данных'"
               />
               <elements-input-base 
                 tag-type="phoneMask" 
                 label="Контактный номер телефона" 
-                class="popup-form-input"
                 v-model="store.phoneFieldInfo" 
                 :errorMessage="store.isPhoneValidInfo ? '' : '*Неверный формат'"
               />
@@ -229,7 +225,6 @@
               <elements-input-base 
                 tag-type="input" 
                 label="ФИО пациента" 
-                class="popup-form-input"
                 v-model="store.namePatientField"
                 :errorMessage="store.isNamePatientFieldValid ? '' : '*Минимум 2 символа'"
               />
@@ -241,7 +236,6 @@
               <elements-input-base 
                 tag-type="email" 
                 label="Адрес электронной почты" 
-                class="popup-form-input"
                 v-model="store.emailFieldInfo" 
                 :errorMessage="store.isEmailVaildInfo ? '' : '*Проверьте правильность заполнения данных'"
               />

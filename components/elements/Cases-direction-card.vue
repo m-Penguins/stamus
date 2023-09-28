@@ -1,7 +1,7 @@
 <template>
   <div class="card-photo-name">
     <div class="card-photo-name-img">
-      <img :src="assetsStore.useAsset(`images/${direction.img}`)" alt="photo-name"/>
+      <img :src="assetsStore.useAsset(`images/${direction.img}`)" alt="photo-name" class="card-photo-name-img"/>
     </div>
     <div v-if="isCategoryAndDescription" class="card-photo-name-container">
       <div>
@@ -43,8 +43,15 @@ export default {
 <style scoped lang="scss">
 @import '/assets/styles/style.scss';
 
-.card-photo-name-img {
+.card-photo-name-box-image {
   padding-bottom: 30px;
+}
+
+.card-photo-name-img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  height: 346px;
 }
 
 .card-photo-name-container {
@@ -70,5 +77,15 @@ export default {
   color: $gray-text;
   opacity: 0.7;
   padding-bottom: 30px;
+}
+
+@media (max-width: 1328px) {
+  .card-photo-name {
+    width: 100%;
+
+    .card-photo-name-box-image {
+      width: 100%;
+    }
+  }
 }
 </style>

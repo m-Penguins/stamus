@@ -52,9 +52,11 @@ const onBlur = (e) => {
       :id="label"
       rows="5"
       class="form-textarea textarea-base"
+      :class="isFocused ? 'focused-input-color' : ''"
       :placeholder="placeholder"
       :value="modelValue"
       @focus="onFocus($event)"
+      @blur="onBlur($event)"
       @input="updateInputValue"/>
       <p v-if="dopText" v-html="dopText" class="dop-text"></p>
   </div>
@@ -70,7 +72,9 @@ const onBlur = (e) => {
       v-bind="$attrs"
       :placeholder="placeholder"
       class="form-input input"
-      :class="isFocused || modelValue.length ? 'focused-input' : ''"
+      :class="{
+      'focused-input': isFocused || modelValue.length,
+      'focused-input-color':  isFocused}"
       @input="updateInputValue"
       :value="modelValue"
       @focus="onFocus($event)"
@@ -92,7 +96,9 @@ const onBlur = (e) => {
       v-bind="$attrs"
       :placeholder="placeholder"
       class="form-input input"
-      :class="isFocused || modelValue.length ? 'focused-input' : ''"
+      :class="{
+      'focused-input': isFocused || modelValue.length,
+      'focused-input-color':  isFocused}"
       @input="updateInputValue"
       :value="modelValue"
       @focus="onFocus($event)"
@@ -114,7 +120,9 @@ const onBlur = (e) => {
       v-bind="$attrs"
       :placeholder="placeholder"
       class="form-input input"
-      :class="isFocused || modelValue.length ? 'focused-input' : ''"
+      :class="{
+      'focused-input': isFocused || modelValue.length,
+      'focused-input-color':  isFocused}"
       :mask="'+{7}(000)000-00-00'"
       :unmask="true"
       @input="updateInputValue"
@@ -130,6 +138,13 @@ const onBlur = (e) => {
 
 <style scoped lang="scss">
 @import '/assets/styles/style.scss';
+.focused-input-color {
+  color: #525660 !important;
+}
+
+.focused-textarea-color {
+  color: #525660;
+}
 .form-group {
   position: relative;
 }

@@ -22,10 +22,15 @@
         <!--dd -->
       </div>
       <div class="articles-page-cards">
-        <div v-for="(item, index) in mockArrayArticleCard" :key="index">
+        <div v-for="(item, index) in mockArrayArticleCard" :key="index" class="articles-page-cards-box">
           <elements-article-card class="articles-page-card" :article="item"/>
         </div>
       </div>
+      <elements-pagination
+        :current-page="currentPage"
+        :total-pages="totalPages"
+        @update:current-page="setCurrentPage"
+      />
       <blocks-main-form />
     </div>
   </div>
@@ -42,12 +47,17 @@ export default {
         { id: 2, title: 'Челюстно-лицевая хирургия'},
         { id: 3, title: 'Детская стоматология'},
         ],
+      currentPage: 1,
+      totalPages: 5 
       };
     },
     methods: {
-    selectButton(buttonId) {
-      this.selectedButton = buttonId;
-    },
+      selectButton(buttonId) {
+        this.selectedButton = buttonId;
+      },
+      setCurrentPage(pageNumber) {
+        this.currentPage = pageNumber;
+      }
   },
     setup() {
       const breadcrumbs = [{
@@ -129,19 +139,11 @@ export default {
   display: flex;
   gap: 40px 16px;
   flex-wrap: wrap;
-  padding-bottom: 80px;
 }
 
-@media (max-width: 1342px) {
-  .articles-page-cards {
-    justify-content: space-between;
-    gap: 40px 8px;
-  }
-}
-
-@media (max-width: 1068px) {
-  .articles-page-cards {
-      justify-content: space-around;
+@media (max-width: 1328px) {
+  .articles-page-cards-box {
+    width: 32%;
   }
 }
 
@@ -153,15 +155,18 @@ export default {
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 860px) {
   .articles-page-cards {
-      justify-content: space-between;
+    gap: 40px 14px;
+  }
+  .articles-page-cards-box {
+    width: 48.5%;
   }
 }
 
-@media (max-width: 729px) {
-  .articles-page-card {
-    width: 343px !important;
+@media (max-width: 550px) {
+  .articles-page-cards-box {
+    width: 100%;
   }
 }
 

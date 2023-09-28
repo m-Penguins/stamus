@@ -16,7 +16,7 @@
   />
   <blocks-chief-doctor-block :specialists="mockArray" />
   <blocks-services-block :addresData="addresData" title="Оказываемые услуги" :isLink="false"/>
-  <blocks-gallery />
+  <blocks-gallery :arrayImg="arrayImg"/>
   <blocks-our-specialists title="Наши специалисты" :data="mockArrayOurSpecialists"/>
   <BlocksMainBanner 
     :title="'Добровольное медицинское страхование'"
@@ -27,6 +27,7 @@
     type="true"
     img="cards2.png"
     bigImg=true
+    :handleLinkClick="openBidModal"
   />
   <blocks-main-feedback />
   <blocks-clinics-adress text="Другие клиники" 
@@ -55,6 +56,7 @@ export default {
     }
   },
   setup() {
+    const arrayImg = ['../../assets/images/gallery/gallery6.png', '../../assets/images/gallery/gallery5.png', '../../assets/images/gallery/gallery4.png', '../../assets/images/gallery/gallery3.png', '../../assets/images/gallery/gallery2.png', '../../assets/images/gallery/gallery1.png']
     const mockArrayDirection = [
       { name: 'Краснодар, Платановый бульвар 19/3', img:"clinics/clinic6.png"},
       { name: 'Краснодар, Платановый бульвар 19/3', img:"clinics/clinic7.png"},
@@ -88,7 +90,8 @@ export default {
       breadcrumbs,
       mockArray,
       mockArrayOurSpecialists,
-      mockArrayDirection
+      mockArrayDirection,
+      arrayImg
     };
   }
 };

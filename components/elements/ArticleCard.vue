@@ -44,18 +44,22 @@
       @include body-20-regular-inter;
       color: $black;
     }
+
+    &__box-img {
+      width: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      height: 346px;
+    }
  }
 
-@media (max-width: 1080px) {
-  .article-card {
-    width: 334px;
-    
-    &__box {
-      width: 330px;
 
-      &-img {
-        width: 100%;
-      }
+@media (max-width: 1328px) {
+  .article-card {
+    width: 100%;
+
+    &__box {
+      width: 100%;
     }
   }
 }

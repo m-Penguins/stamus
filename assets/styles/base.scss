@@ -309,19 +309,12 @@
       background: $light-gray;
     }
 }
-
-.input:focus {
-  border: 1px solid $dissabled;
-  color: $gray-text;
-  }
-
 .input:valid {
   color:  $placeholder;
   border: 1px solid  #E9E9E9;
 }
 
 .input:valid:hover {
-  color: $placeholder;
   border: 1px solid  $dissabled;
 }
 
@@ -351,6 +344,10 @@
       border: 1px solid $border-card;
       background: $light-gray;
     }
+}
+
+.textarea-base:valid {
+  color: $placeholder;
 }
 
 .grey-point-container {

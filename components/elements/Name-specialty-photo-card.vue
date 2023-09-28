@@ -1,7 +1,7 @@
 <template>
   <div class="card-photo-name">
     <div class="card-photo-name-img">
-      <img :src="assetsStore.useAsset(`images/specialists/${specialists.img}`)" alt="specialists"/>
+      <img :src="assetsStore.useAsset(`images/specialists/${specialists.img}`)" alt="specialists" class="card-img"/>
     </div>
     <div :class="specialists.address ? 'card-photo-name-container-discount' : 'card-photo-name-container' ">
       <div>
