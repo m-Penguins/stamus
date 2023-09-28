@@ -93,6 +93,14 @@ export default {
 <style scoped lang="scss">
 @import "/assets/styles/style.scss";
 
+.card-img {
+  height: 308px;
+  border-radius: 15px;
+  border: 1px solid #EDEDED;
+  width: 100%;
+  object-fit: contain;
+}
+
 .card-photo-name-container-discount {
   display: flex;
   justify-content: space-between;
@@ -135,16 +143,13 @@ export default {
 .info {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 22px;
   box-sizing: border-box;
   position: absolute;
-  bottom: 64px;
-  bottom: 62px;
-  left: -272px;
-  padding: 14px 20px;
+  bottom: 40px;
+  left: -273px;
+  padding: 12px 12px;
   background: white;
-  -webkit-box-shadow: 2px 5px 45px -5px rgba(30, 32, 40, 0.08);
-  -moz-box-shadow: 2px 5px 45px -5px rgba(30, 32, 40, 0.08);
   box-shadow: 2px 5px 45px -5px rgba(30, 32, 40, 0.08);
   border-radius: 15px;
   width: 297px;
