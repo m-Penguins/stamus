@@ -1,3 +1,137 @@
+<script>
+import { useService } from "../stores/services.js";
+import { useAssets } from "../stores/useAsset";
+import ButtonBase from "./elements/Button-base.vue";
+import { useActuveLink } from "../stores/activeLink";
+import ElementsLinkWithArrow from "./elements/ElementsLinkWithArrow.vue";
+export default {
+  components: { ButtonBase, ElementsLinkWithArrow },
+  props: {
+    showMenuPatients: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      showServices: false,
+      showSearch: false,
+      showMenuMob: false,
+      categories: false,
+      firstBlockMobMenu: true,
+      secondBlockMobMenu: false,
+      thirdBlockMobMenu: false,
+      // showMenuPatients: false,
+      // directionTitle: '',
+      clinic: "",
+      activeClass: "",
+      showServicesAll: false,
+      navigationPatients: [
+        { id: 1, title: "Клиники", path: "/clinics" },
+        { id: 2, title: "Наше приложение", path: "/stamusapp" },
+        { id: 3, title: "Информация для пациентов", path: "/info" },
+        { id: 4, title: "Налоговый вычет", path: "/info" },
+      ],
+    };
+  },
+  methods: {
+    openModal() {
+      this.$refs.modal.openModal("Modal Title", "Modal Message");
+    },
+
+    toggleMenu() {
+      this.$emit("toggleMenu");
+      console.log(this.showMenuPatients);
+    },
+
+    closeMenu(event) {
+      if (event.target.classList.contains("modal-menu")) {
+        this.showServices = false;
+        // this.showMenuPatients = false;
+        this.showSearch = false;
+      }
+    },
+
+    changeActiveClass(cls, title) {
+      this.activeClass = cls;
+      console.log(cls);
+      this.clinic = title;
+    },
+
+    closeSearch() {
+      this.showSearch = false;
+    },
+  },
+  setup() {
+    const assetsStore = useAssets();
+    const storeServices = useService();
+    const router = useRouter();
+    const route = useRoute();
+    const baseUrl = useRuntimeConfig().public.apiBaseUrl;
+    const directionTitle = ref("");
+    let activeClass2 = "";
+
+    const togglerPopup = (state) => {
+      isOpenPopup.value = state;
+    };
+
+    onMounted(async () => {
+      await storeServices.fetchdataService(baseUrl);
+    });
+
+    const navigateToRoute = (serv, dir) => {
+      const newRoute = `/${serv}/${linkTransform(dir)}`;
+      router.replace(newRoute);
+      console.log(newRoute);
+    };
+
+    const defaultServices = () => {
+      activeClass2 = storeServices.getStateService[0];
+
+      console.log(activeClass2.title);
+    };
+
+    const toggleServices = (direction) => {
+      storeServices.getStateService.forEach((dir) => {
+        console.log(dir.title);
+        dir.directions.forEach((dir2) => {
+          dir2.showServices = false;
+        });
+        direction.showServices = true;
+        directionTitle.value = direction.title;
+      });
+    };
+
+    const store = useActuveLink();
+    const isOpenPopup = ref(false);
+    const navigation = [
+      { title: "Специалисты", path: "/specialists" },
+      { title: "Пациентам", path: "" },
+      { title: "Акции и скидки", path: "/discounts" },
+      { title: "Портфолио", path: "/portfolio" },
+      { title: "Цены", path: "/prices" },
+      { title: "Контакты", path: "/contacts" },
+    ];
+
+    return {
+      assetsStore,
+      navigation,
+      route,
+      isOpenPopup,
+      togglerPopup,
+      store,
+      storeServices,
+      toggleServices,
+      directionTitle,
+      activeClass2,
+      defaultServices,
+      navigateToRoute,
+      route,
+    };
+  },
+};
+</script>
+
 <template>
   <header
     :class="showServices || showSearch ? 'showServicesHeader' : ''"
@@ -260,10 +394,16 @@
               v-for="navigationService in storeServices.getStateService"
               :key="navigationService.id"
               class="header-services-menu-item"
-              @mouseover="changeActiveClass(navigationService.id, navigationService.title)"
+              @mouseover="
+                changeActiveClass(navigationService.id, navigationService.title)
+              "
             >
               <div
-                :class="{'active-directions-line': navigationService.id === activeClass || (activeClass === '' && navigationService.id === 1)}"
+                :class="{
+                  'active-directions-line':
+                    navigationService.id === activeClass ||
+                    (activeClass === '' && navigationService.id === 1),
+                }"
                 class="a2"
               ></div>
               <NuxtLink
@@ -282,7 +422,11 @@
             <div
               v-for="item in storeServices.getStateService"
               :key="item.id"
-              :class="{'active-directions': item.id === activeClass || (activeClass === '' && item.id === 1)}"
+              :class="{
+                'active-directions':
+                  item.id === activeClass ||
+                  (activeClass === '' && item.id === 1),
+              }"
               class="a2"
             >
               <li
@@ -292,21 +436,26 @@
               >
                 <div
                   class="header-services-menu-text"
-                  :class="{ 'active-serv': direction.showServices === true || (activeClass === '' && item.id === 1)}"
+                  :class="{
+                    'active-serv':
+                      direction.showServices === true ||
+                      (activeClass === '' && item.id === 1),
+                  }"
                   @click="toggleServices(direction)"
                 >
                   {{ direction.title }}
                 </div>
                 <ul
-                  v-if="direction.showServices || (activeClass === '' && item.id === 1)"
+                  v-if="
+                    direction.showServices ||
+                    (activeClass === '' && item.id === 1)
+                  "
                   class="header-services-menu-box"
                 >
                   <div class="header-services-menu-box-title">
                     {{ direction.title }}:
                   </div>
-                  <div 
-                  class="header-services-menu-box-items"
-                  >
+                  <div class="header-services-menu-box-items">
                     <li
                       class="header-services-menu-text"
                       v-for="(service, id) in direction.services"
@@ -617,140 +766,6 @@
   </header>
 </template>
 
-<script>
-import { useService } from "../stores/services.js";
-import { useAssets } from "../stores/useAsset";
-import ButtonBase from "./elements/Button-base.vue";
-import { useActuveLink } from "../stores/activeLink";
-import ElementsLinkWithArrow from "./elements/ElementsLinkWithArrow.vue";
-export default {
-  components: { ButtonBase, ElementsLinkWithArrow },
-  props: {
-    showMenuPatients: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  data() {
-    return {
-      showServices: false,
-      showSearch: false,
-      showMenuMob: false,
-      categories: false,
-      firstBlockMobMenu: true,
-      secondBlockMobMenu: false,
-      thirdBlockMobMenu: false,
-      // showMenuPatients: false,
-      // directionTitle: '',
-      clinic: "",
-      activeClass: "",
-      showServicesAll: false,
-      navigationPatients: [
-        { id: 1, title: "Клиники", path: "/clinics" },
-        { id: 2, title: "Наше приложение", path: "/stamusapp" },
-        { id: 3, title: "Информация для пациентов", path: "/info" },
-        { id: 4, title: "Налоговый вычет", path: "/info"},
-      ],
-    };
-  },
-  methods: {
-    openModal() {
-      this.$refs.modal.openModal("Modal Title", "Modal Message");
-    },
-
-    toggleMenu() {
-      this.$emit("toggleMenu");
-      console.log(this.showMenuPatients);
-    },
-
-    closeMenu(event) {
-      if (event.target.classList.contains("modal-menu")) {
-        this.showServices = false;
-        // this.showMenuPatients = false;
-        this.showSearch = false;
-      }
-    },
-
-    changeActiveClass(cls, title) {
-      this.activeClass = cls;
-      console.log(cls);
-      this.clinic = title;
-    },
-
-    closeSearch() {
-      this.showSearch = false;
-    },
-  },
-  setup() {
-    const assetsStore = useAssets();
-    const storeServices = useService();
-    const router = useRouter();
-    const route = useRoute();
-    const baseUrl = useRuntimeConfig().public.apiBaseUrl;
-    const directionTitle = ref("");
-    let activeClass2 = "";
-
-    const togglerPopup = (state) => {
-      isOpenPopup.value = state;
-    };
-
-    onMounted(async () => {
-      await storeServices.fetchdataService(baseUrl);
-    });
-
-    const navigateToRoute = (serv, dir) => {
-      const newRoute = `/${serv}/${linkTransform(dir)}`;
-      router.replace(newRoute);
-      console.log(newRoute);
-    };
-
-    const defaultServices = () => {
-      activeClass2 = storeServices.getStateService[0];
-
-      console.log(activeClass2.title);
-    };
-
-    const toggleServices = (direction) => {
-      storeServices.getStateService.forEach((dir) => {
-        console.log(dir.title);
-        dir.directions.forEach((dir2) => {
-          dir2.showServices = false;
-        });
-        direction.showServices = true;
-        directionTitle.value = direction.title;
-      });
-    };
-
-    const store = useActuveLink();
-    const isOpenPopup = ref(false);
-    const navigation = [
-      { title: "Специалисты", path: "/specialists" },
-      { title: "Пациентам", path: "" },
-      { title: "Акции и скидки", path: "/discounts" },
-      { title: "Портфолио", path: "/portfolio" },
-      { title: "Цены", path: "/prices" },
-      { title: "Контакты", path: "/contacts" },
-    ];
-
-    return {
-      assetsStore,
-      navigation,
-      route,
-      isOpenPopup,
-      togglerPopup,
-      store,
-      storeServices,
-      toggleServices,
-      directionTitle,
-      activeClass2,
-      defaultServices,
-      navigateToRoute,
-      route,
-    };
-  },
-};
-</script>
-
 <style lang="scss">
 @import "/assets/styles/style.scss";
 
@@ -816,10 +831,9 @@ export default {
     width: 100%;
     &:hover {
       border-radius: 5px;
-      background: #F0F0F0;
-      color: #232D5B;
+      background: #f0f0f0;
+      color: #232d5b;
     }
-
   }
 }
 
