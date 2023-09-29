@@ -67,7 +67,7 @@ const imagesScroll = ['video1.png', 'video2.png', 'video3.png','video3.png','vid
         </div>
       </div>
     </div>
-    <blocks-gallery />
+    <blocks-gallery :arrayImg="arrayImg6"/>
     <blocks-cases-direction text="Другие кейсы" :dataDirection="mockArrayDirection"/>
     <blocks-main-form />
   </div>

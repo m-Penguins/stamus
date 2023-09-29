@@ -146,7 +146,7 @@ export default {
   gap: 22px;
   box-sizing: border-box;
   position: absolute;
-  bottom: 40px;
+  bottom: 70px;
   left: -273px;
   padding: 12px 12px;
   background: white;

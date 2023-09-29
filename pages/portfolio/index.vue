@@ -37,7 +37,7 @@
         :total-pages="totalPages"
         @update:current-page="setCurrentPage"
       />
-      <blocks-gallery/>
+      <blocks-gallery :arrayImg="arrayImg3"/>
       <blocks-main-form />
     </div>
   </div>

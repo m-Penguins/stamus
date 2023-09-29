@@ -22,6 +22,8 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', checkScreenSize);
 });
 
+const arrayImg = ['gallery6.png', 'gallery5.png', 'gallery4.png']
+
 </script>
 
 <template>
@@ -69,6 +71,6 @@ onBeforeUnmount(() => {
   <blocks-our-specialists title="Наши специалисты" :data="mockArrayOurSpecialists"/>
   <blocks-main-feedback />
   <blocks-map :dataInfo="infoData" text="Контакты"/>
-  <blocks-gallery />
+  <blocks-gallery :arrayImg="arrayImg"/>
   <blocks-main-form />
 </template>

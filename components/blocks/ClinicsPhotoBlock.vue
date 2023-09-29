@@ -139,6 +139,9 @@ const { data: clinicsData, error } = await useFetch(
 } 
 
 @media (max-width: 670px) {
+  .areas-wrapper {
+    margin-bottom: 80px;
+  }
   .areas-box {
     &__img {
       width: 100% !important;

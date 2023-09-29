@@ -52,6 +52,6 @@ let mockDate = mockArrayClinic[2]
   <blocks-our-specialists title="Наши специалисты" :data="mockArrayOurSpecialists"/>
   <blocks-main-feedback />
   <blocks-map :dataInfo="infoData" text="Контакты"/>
-  <blocks-gallery />
+  <blocks-gallery :arrayImg="arrayImg2"/>
   <blocks-main-form />
 </template>

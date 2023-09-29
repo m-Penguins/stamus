@@ -18,6 +18,7 @@ export default {
     },
   },
   async setup() {
+    const arrayImg = ['gallery6.png', 'gallery5.png', 'gallery4.png', 'gallery3.png']
     const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 
     const { data: specialistsData, error } = await useFetch(
@@ -33,6 +34,7 @@ export default {
     return {
       mockArray,
       specialistsData,
+      arrayImg
     };
   },
 };
@@ -64,7 +66,7 @@ export default {
   />
   <blocks-chief-doctor-block :specialists="mockArray" />
   <blocks-clinics-photo-block />
-  <blocks-gallery />
+  <blocks-gallery :arrayImg="arrayImg"/>
   <blocks-our-specialists
     v-if="specialistsData.data && !error"
     :data="specialistsData.data"

@@ -13,6 +13,12 @@ export const mockArrayOurSpecialists = [
   {name: 'Шагалова Полина', category: 'Стоматолог', img:"avatar-7.png"},
 ];
 
+export const arrayImg6 = ['gallery6.png', 'gallery5.png', 'gallery4.png', 'gallery3.png', 'gallery2.png', 'gallery1.png']
+export const arrayImg5 = ['gallery6.png', 'gallery5.png', 'gallery4.png', 'gallery3.png', 'gallery2.png']
+export const arrayImg4 = ['gallery6.png', 'gallery5.png', 'gallery4.png', 'gallery3.png']
+export const arrayImg3 = ['gallery6.png', 'gallery5.png', 'gallery4.png']
+export const arrayImg2 = ['gallery6.png', 'gallery5.png']
+
 export const mockArrayTooltips = [
   {text: 'Победитель Гран-при Продокторов «Лучший ортопед России» 2021', img: 'tool1.svg'},
   {text: '2 место Премия Продокторов «Детский стоматолог» 2022 Краснодар', img: 'tool2.svg'},
