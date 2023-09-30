@@ -27,12 +27,6 @@ export default {
       "gallery1.png",
     ];
 
-    const mockArray = {
-      name: "Овсоян Григорий",
-      category: "Челюстно-лицевой хирург",
-      img: "main-doctor.png",
-      text: "Лишь элементы политического процесса неоднозначны и будут призваны к ответу. Кстати,  элементы политического процесса набирают популярность среди определенных слоев населения, а значит, должны быть в равной степени предоставлены сами себе. Таким образом, сложившаяся структура организации способствует повышению качества своевременного выполнения сверхзадачи. Мы вынуждены отталкиваться от того, что сплочённость команды профессионалов прекрасно подходит для реализации как самодостаточных, так и внешне зависимых концептуальных решений. И нет сомнений, что независимые государства, инициированные исключительно синтетически.",
-    };
     const route = useRoute();
 
     const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
@@ -53,7 +47,19 @@ export default {
       ),
     );
 
-    const chiefDoctor = computed(() => clinicData.value?.chiefDoctor);
+    const chiefDoctor = computed(() => {
+      return {
+        name: clinicData.value?.attributes?.chiefDoctor?.heading,
+        category: clinicData.value?.attributes?.chiefDoctor?.position,
+        img:
+          baseUrl +
+          clinicData.value?.attributes?.chiefDoctor?.image?.data?.attributes
+            ?.url,
+        text: clinicData.value?.attributes?.chiefDoctor?.text,
+      };
+    });
+
+    console.log(chiefDoctor.value);
 
     const otherClinics = computed(() =>
       clinicsData.value?.data
@@ -86,7 +92,7 @@ export default {
       baseUrl,
       route,
       breadcrumbs,
-      mockArray,
+      chiefDoctor,
       otherClinics,
       arrayImg,
     };
@@ -126,7 +132,10 @@ export default {
       baseUrl + clinicData?.attributes?.infoBlock?.image?.data?.attributes?.url
     "
   />
-  <blocks-chief-doctor-block :specialists="mockArray" />
+  <blocks-chief-doctor-block
+    v-if="chiefDoctor.name"
+    :specialists="chiefDoctor"
+  />
   <blocks-services-block
     :addresData="addresData"
     title="Оказываемые услуги"
