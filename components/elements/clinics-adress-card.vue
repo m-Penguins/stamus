@@ -6,7 +6,11 @@
     <div class="card-photo-name-container">
       <div>
         <div class="card-photo-name-title">{{ direction.name }}</div>
-        <elements-link-with-arrow type="type" title="Подробнее" link="#" />
+        <elements-link-with-arrow
+          type="type"
+          title="Подробнее"
+          :link="direction.link"
+        />
       </div>
     </div>
   </div>

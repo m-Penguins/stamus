@@ -1,5 +1,4 @@
 <script>
-import { mockArrayOurSpecialists } from "../../stores/mockData";
 export default {
   data() {
     return {
@@ -54,6 +53,8 @@ export default {
       ),
     );
 
+    const chiefDoctor = computed(() => clinicData.value?.chiefDoctor);
+
     const otherClinics = computed(() =>
       clinicsData.value?.data
         ?.filter((cl) => String(cl.id) !== String(route.params.id))
@@ -61,6 +62,7 @@ export default {
           return {
             name: cl?.attributes?.heading,
             img: baseUrl + cl?.attributes?.photoBanner?.data?.attributes?.url,
+            link: String(cl?.id),
           };
         }),
     );
@@ -85,7 +87,6 @@ export default {
       route,
       breadcrumbs,
       mockArray,
-      mockArrayOurSpecialists,
       otherClinics,
       arrayImg,
     };
