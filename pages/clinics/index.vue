@@ -30,6 +30,10 @@ export default {
       `${apiBaseUrl}specialists?populate=deep`,
     );
 
+    if (!specialistsData.value) {
+      throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+    }
+
     const assetsStore = useAssets();
 
     const bigImage = assetsStore.useAsset("images/big-images/clinics.png");

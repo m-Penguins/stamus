@@ -1,7 +1,14 @@
 <template>
   <ul class="pagination">
-    <li v-for="pageNumber in totalPages" :key="pageNumber" :class="['page-item', { active: pageNumber === currentPage }]">
-      <a @click="setCurrentPage(pageNumber)" class="page-link">{{ pageNumber }}</a>
+    <li
+      v-for="pageNumber in totalPages"
+      :key="pageNumber"
+      :class="['page-item', { active: pageNumber === currentPage }]"
+      @click="setCurrentPage(pageNumber)"
+    >
+      <div class="page-link">
+        {{ pageNumber }}
+      </div>
     </li>
   </ul>
 </template>
@@ -11,23 +18,23 @@ export default {
   props: {
     currentPage: {
       type: Number,
-      required: true
+      required: true,
     },
     totalPages: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     setCurrentPage(pageNumber) {
-      this.$emit('update:currentPage', pageNumber);
-    }
-  }
+      this.$emit("update:currentPage", pageNumber);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/styles/style.scss';
+@import "../../assets/styles/style.scss";
 .pagination {
   display: flex;
   align-items: center;
@@ -48,8 +55,8 @@ export default {
 
   &:not(.active):hover {
     border-radius: 5px;
-    background: #F0F0F0;
-    color: #232D5B;
+    background: #f0f0f0;
+    color: #232d5b;
   }
 }
 
@@ -57,9 +64,9 @@ export default {
   text-decoration: none;
 }
 
-.page-item.active a {
+.page-item.active {
   border-radius: 5px;
-  border: 1px solid var(--dissabled, #CFD5E1);
+  border: 1px solid var(--dissabled, #cfd5e1);
   padding: 4px 10px;
 }
 </style>
