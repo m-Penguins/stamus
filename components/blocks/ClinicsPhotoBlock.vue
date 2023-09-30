@@ -15,24 +15,22 @@ const { data: clinicsData, error } = await useFetch(
       <div class="areas-box-temp">
         <div
           class="areas-box__img"
-          v-for="image in clinicsData?.data"
+          v-for="clinic in clinicsData?.data"
           :style="{
             backgroundImage: `url(${
-              baseUrl +
-              image?.attributes?.photoBanner?.data?.attributes
-                ?.url
+              baseUrl + clinic?.attributes?.photoBanner?.data?.attributes?.url
             })`,
           }"
         >
-          <h3>{{ image?.attributes?.heading }}</h3>
+          <h3>{{ clinic?.attributes?.heading }}</h3>
           <p class="areas-box-text">
-            {{ image?.attributes?.address }}
+            {{ clinic?.attributes?.address }}
           </p>
           <elements-link-with-arrow
             :type="false"
             title="Перейти"
             href="#"
-            @click="$router.push(`/clinics/` + image?.id)"
+            @click="$router.push(`/clinics/` + clinic?.id)"
           />
         </div>
       </div>
@@ -85,18 +83,18 @@ const { data: clinicsData, error } = await useFetch(
     font-size: 14px;
     gap: 14px;
     height: 380px;
-    box-shadow: inset 0 0 0 1000px rgba(0,0,0,.3);
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
 
     h3 {
       @include body-22-semi-bold;
       color: $white;
     }
   }
-  &__img:nth-child(-n+2) {
+  &__img:nth-child(-n + 2) {
     display: flex;
     width: 49%;
   }
-  &__img:nth-child(n+3) {
+  &__img:nth-child(n + 3) {
     display: flex;
     width: 32.2%;
   }
@@ -136,7 +134,7 @@ const { data: clinicsData, error } = await useFetch(
       width: 48.7% !important;
     }
   }
-} 
+}
 
 @media (max-width: 670px) {
   .areas-wrapper {

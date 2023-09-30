@@ -1,47 +1,43 @@
 <template>
   <div class="card-photo-name">
     <div class="card-photo-name-img">
-      <img :src="assetsStore.useAsset(`images/${direction.img}`)" alt="img" class="img"/>
+      <img :src="direction.img" alt="img" class="img" />
     </div>
     <div class="card-photo-name-container">
       <div>
-        <div class="card-photo-name-title">{{direction.name}}</div>
-        <elements-link-with-arrow
-              type="type"
-              title="Подробнее"
-              link="#"
-            />
+        <div class="card-photo-name-title">{{ direction.name }}</div>
+        <elements-link-with-arrow type="type" title="Подробнее" link="#" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { useAssets } from '../../stores/useAsset'
+import { useAssets } from "../../stores/useAsset";
 export default {
   props: {
     direction: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   setup() {
     const assetsStore = useAssets();
     return {
-      assetsStore
-    }
-  }
-}
+      assetsStore,
+    };
+  },
+};
 </script>
 
 <style scoped lang="scss">
-@import '/assets/styles/style.scss';
+@import "/assets/styles/style.scss";
 
 .img {
-    max-width: 100%;
-    width: 100%;
-    max-height: 456px;
-    object-fit: cover;
-    border-radius: 15px;
+  max-width: 100%;
+  width: 100%;
+  max-height: 456px;
+  object-fit: cover;
+  border-radius: 15px;
 }
 
 .card-photo-name-img {
@@ -60,7 +56,7 @@ export default {
   padding-bottom: 20px;
 }
 
-.card-photo-name-description{
+.card-photo-name-description {
   @include body-14-regular;
   color: $gray-text;
   opacity: 0.7;

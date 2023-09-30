@@ -18,11 +18,24 @@ export default {
     },
   },
   async setup() {
-    const arrayImg = ['gallery6.png', 'gallery5.png', 'gallery4.png', 'gallery3.png']
+    const arrayImg = [
+      "gallery6.png",
+      "gallery5.png",
+      "gallery4.png",
+      "gallery3.png",
+    ];
     const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 
     const { data: specialistsData, error } = await useFetch(
       `${apiBaseUrl}specialists?populate=deep`,
+    );
+
+    const assetsStore = useAssets();
+
+    const bigImage = assetsStore.useAsset("images/big-images/clinics.png");
+
+    const imgAdaptiv = assetsStore.useAsset(
+      "images/big-images/clinic-adaptiv.png",
     );
 
     const mockArray = {
@@ -34,7 +47,9 @@ export default {
     return {
       mockArray,
       specialistsData,
-      arrayImg
+      arrayImg,
+      bigImage,
+      imgAdaptiv,
     };
   },
 };
@@ -44,8 +59,8 @@ export default {
   <elements-main-info
     title="5 клиник в Краснодаре"
     text="1 место в Краснодаре"
-    imgBg="clinics.png"
-    imgAdaptiv="clinic-adaptiv.png"
+    :imgBg="bigImage"
+    :imgAdaptiv="imgAdaptiv"
     :isButtonBase="false"
     :typeColorWhite="item"
     :typeColorWhiteText="item"
@@ -66,7 +81,7 @@ export default {
   />
   <blocks-chief-doctor-block :specialists="mockArray" />
   <blocks-clinics-photo-block />
-  <blocks-gallery :arrayImg="arrayImg"/>
+  <blocks-gallery :arrayImg="arrayImg" />
   <blocks-our-specialists
     v-if="specialistsData.data && !error"
     :data="specialistsData.data"

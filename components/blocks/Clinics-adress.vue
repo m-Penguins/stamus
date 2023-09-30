@@ -1,6 +1,6 @@
 <template>
   <div class="container-size">
-    <elements-slider-clinics-adress :text="text" :programs="dataDirection"/>
+    <elements-slider-clinics-adress :text="text" :programs="dataDirection" />
   </div>
 </template>
 
@@ -10,10 +10,10 @@ export default {
     dataDirection: {
       type: Array,
     },
-      text: {
+    text: {
       type: String,
-      default: ''
-    }
+      default: "",
+    },
   },
 };
 </script>
