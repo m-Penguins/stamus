@@ -1,8 +1,15 @@
 <template>
-  <div class="custom-select" :tabindex="tabindex" @blur="open = false" :class="{'dopText': dopText}">
-    <div class="selected" :class="{ open: open}" @click="open = !open">
-      <div v-if="isSelectedNotDefault" class="label">{{ default }}</div>
-      <div class="default" :class="isSelectedNotDefault ? 'select-margin' : ''">{{ selected }}</div>
+  <div
+    class="custom-select"
+    :tabindex="tabindex"
+    @blur="open = false"
+    :class="{ dopText: dopText }"
+  >
+    <div class="selected" :class="{ open: open }" @click="open = !open">
+      <div v-if="default" class="label">{{ label }}</div>
+      <div class="default" :class="isSelectedNotDefault ? 'select-margin' : ''">
+        {{ selected }}
+      </div>
     </div>
     <p v-if="dopText" class="select-dop-text">Не обязательно для заполнения</p>
     <div class="items" :class="{ selectHide: !open }">
@@ -10,9 +17,9 @@
         v-for="(option, i) of options"
         :key="i"
         @click="
-        selected = option.name;
-        open = false;
-        $emit('input', option);
+          selected = option.name;
+          open = false;
+          $emit('input', option);
         "
         class="select-container"
       >
@@ -21,11 +28,11 @@
             <div class="select-title">{{ option.name }}</div>
             <div class="select-text">{{ option.address }}</div>
           </div>
-          <div  v-if="selected === option.name" class="selected-item">
-            <img src="../../assets/images/icons/check.svg" alt="icon">
+          <div v-if="selected === option.name" class="selected-item">
+            <img src="../../assets/images/icons/check.svg" alt="icon" />
           </div>
         </div>
-        <hr v-if="i !== options.length - 1"/>
+        <hr v-if="i !== options.length - 1" />
       </div>
     </div>
   </div>
@@ -53,7 +60,10 @@ export default {
       type: Boolean,
       required: false,
       default: false,
-    }
+    },
+    label: {
+      type: String,
+    },
   },
   data() {
     return {
@@ -76,11 +86,11 @@ export default {
 };
 </script>
 
-<style  lang="scss" scoped>
-@import '/assets/styles/style.scss';
+<style lang="scss" scoped>
+@import "/assets/styles/style.scss";
 
 .dopText {
-  margin-bottom: 20px
+  margin-bottom: 20px;
 }
 
 .select-dop-text {
@@ -98,7 +108,7 @@ export default {
 }
 
 .custom-select .selected:hover {
-  border: 1px solid #CFD5E1;
+  border: 1px solid #cfd5e1;
 }
 
 .select-box {
@@ -148,8 +158,8 @@ hr {
 .custom-select .selected {
   align-items: center;
   border-radius: 45px;
-  border: 1px solid #E9E9E9;
-  background: #FFF;
+  border: 1px solid #e9e9e9;
+  background: #fff;
   color: #525660;
   padding: 20px;
   cursor: pointer;
@@ -168,7 +178,7 @@ hr {
     width: 9px;
     height: 1px;
     transition: all 0.3s ease-out;
-    background-color: #7F838C;
+    background-color: #7f838c;
     transform: translate(-3px, -50%) rotate(45deg);
   }
   &::after {
@@ -177,11 +187,11 @@ hr {
 }
 
 .custom-select .selected.open {
-  border: 1px solid #E9E9E9;
+  border: 1px solid #e9e9e9;
   border-radius: 45px;
 
-    &::before,
-    &::after {
+  &::before,
+  &::after {
     content: "";
     position: absolute;
     top: 57%;
@@ -190,7 +200,7 @@ hr {
     width: 9px;
     height: 1px;
     transition: all 0.3s ease-out;
-    background-color: #7F838C;
+    background-color: #7f838c;
     transform: translate(-3px, -50%) rotate(-45deg);
   }
   &::after {
@@ -202,7 +212,7 @@ hr {
   color: #525660;
   border-radius: 15px;
   overflow: hidden;
-  border: 1px solid #E9E9E9;
+  border: 1px solid #e9e9e9;
   position: absolute;
   background-color: white;
   left: 0;
@@ -220,12 +230,12 @@ hr {
 }
 
 .custom-select .items .select-box:hover {
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
   border-radius: 5px;
 }
 
 .selected-item:hover {
-  background-image: url('../../assets/images/icons/check.svg');
+  background-image: url("../../assets/images/icons/check.svg");
   background-repeat: no-repeat;
 }
 
@@ -235,7 +245,6 @@ hr {
 
 @media (max-width: 900px) {
   .select-margin {
-
   }
 }
 

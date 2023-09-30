@@ -5,18 +5,37 @@ const route = useRoute();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const pageSize = ref(12);
-const currentPage = ref(route.query.page ?? 1);
+const pageSize = ref("12");
+const currentPageParam = ref(route.query.page ?? "1");
+const filterClinicParam = ref(route.query.clinic ?? "");
+const filterDirectionParam = ref(route.query.direction ?? "");
 
 const specialists = ref([]);
 
 const { data } = await useFetch(`${apiBaseUrl}specialists`, {
   query: {
-    "pagination[page]": String(currentPage.value),
+    "pagination[page]": String(currentPageParam.value),
     "pagination[pageSize]": String(pageSize.value),
     populate: "deep",
   },
 });
+
+const { data: clinics } = await useFetch(`${apiBaseUrl}clinics?populate=deep`);
+
+const clinicsList = clinics.value?.data?.map((cl) => ({
+  id: cl?.id,
+  name: cl?.attributes?.heading,
+  address: cl?.attributes?.address,
+}));
+
+const { data: directionsData } = await useFetch(
+  `${apiBaseUrl}services?populate=deep`,
+);
+
+const directions = useReducedServices(directionsData.value.data).map((el) => ({
+  id: el.id,
+  name: el.title,
+}));
 
 if (!data.value?.data) {
   throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
@@ -25,28 +44,18 @@ if (!data.value?.data) {
 specialists.value = data.value;
 
 watch(
-  () => route.query.page,
+  () => route.query,
   async () => {
     const { data } = await useFetch(`${apiBaseUrl}specialists`, {
       query: {
-        "pagination[page]": String(currentPage.value),
+        "pagination[page]": String(currentPageParam.value),
         "pagination[pageSize]": String(pageSize.value),
+        "filters[clinics][id]": String(filterClinicParam.value),
         populate: "deep",
       },
     });
     specialists.value = data.value;
   },
-  // async () => {
-  //   console.log(currentPage.value);
-  //   const { data } = await useFetch(`${apiBaseUrl}specialists`, {
-  //     query: {
-  //       "pagination[page]": String(currentPage.value),
-  //       "pagination[pageSize]": String(pageSize.value),
-  //       populate: "deep",
-  //     },
-  //   });
-  //   specialistsData.value = data.value;
-  // },
 );
 
 const totalPages = computed(() =>
@@ -54,11 +63,12 @@ const totalPages = computed(() =>
 );
 
 const setCurrentPage = (pageNumber) => {
-  currentPage.value = pageNumber;
-  console.log(currentPage.value);
+  currentPageParam.value = pageNumber;
+  console.log(currentPageParam.value);
   router.push({
     path: route.path,
     query: {
+      ...route.query,
       page: pageNumber,
     },
   });
@@ -67,6 +77,49 @@ const setCurrentPage = (pageNumber) => {
 const handleLinkClick = (id) => {
   router.push(`/specialists/` + String(id));
 };
+
+const handleClinicChange = (clinic) => {
+  setCurrentPage(1);
+
+  const newQuery = {
+    clinic: clinic.id,
+    page: 1,
+  };
+  Object.keys(newQuery).forEach(
+    (key) => newQuery[key] === undefined && delete newQuery[key],
+  );
+
+  router.push({
+    path: route.path,
+    query: {
+      ...route.query,
+      ...newQuery,
+    },
+  });
+};
+
+const handleDirectionChange = (direction) => {
+  setCurrentPage(1);
+
+  const newQuery = {
+    clinic: route.query?.clinic ?? "",
+    page: 1,
+    direction: direction.id,
+  };
+
+  Object.keys(newQuery).forEach(
+    (key) => newQuery[key] === undefined && delete newQuery[key],
+  );
+
+  router.push({
+    path: route.path,
+    query: {
+      ...route.query,
+      ...newQuery,
+    },
+  });
+};
+
 const breadcrumbs = [
   {
     title: "Главная",
@@ -128,13 +181,28 @@ const mockArrayTooltips = [
         <div class="specialist-box">
           <elements-select :options="[]" :default="'Взрослым'" class="select" />
           <elements-select
-            :options="[]"
-            :default="'Направление'"
+            :options="directions"
+            :default="
+              directions.find((dir) => String(dir.id) === filterDirectionParam)
+                ?.name ?? 'Направление'
+            "
+            label="Направление"
             class="select"
+            @input="handleDirectionChange"
           />
         </div>
         <div class="specialist-box">
-          <elements-select :options="[]" :default="'Клиника'" class="select" />
+          <elements-select
+            :options="clinicsList"
+            :default="
+              clinicsList.find(
+                (cl) => String(cl.id) === String(filterClinicParam),
+              )?.name ?? 'Клиника'
+            "
+            label="Клиника"
+            class="select"
+            @input="handleClinicChange"
+          />
           <div class="input-search">
             <elements-input-search-components
               class="input-search"
@@ -167,7 +235,7 @@ const mockArrayTooltips = [
         </div>
       </div>
       <elements-pagination
-        :current-page="currentPage"
+        :current-page="currentPageParam"
         :total-pages="totalPages"
         @update:current-page="setCurrentPage"
       />
