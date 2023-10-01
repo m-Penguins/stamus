@@ -12,12 +12,24 @@ const filterDirectionParam = ref(route.query.direction ?? "");
 
 const specialists = ref([]);
 
+const firstQuery = {
+  "pagination[page]": currentPageParam.value,
+  "pagination[pageSize]": pageSize.value,
+  "filters[clinics][id]": filterClinicParam.value,
+  "filters[category]": filterDirectionParam.value,
+};
+
+Object.keys(firstQuery).forEach(
+  (key) =>
+    (firstQuery[key] === undefined || !firstQuery[key]) &&
+    delete firstQuery[key],
+);
+
 const [{ data }, { data: clinics }, { data: directionsData }] =
   await Promise.all([
     useFetch(`${apiBaseUrl}specialists`, {
       query: {
-        "pagination[page]": currentPageParam.value,
-        "pagination[pageSize]": pageSize.value,
+        ...firstQuery,
         populate: "deep",
       },
     }),
