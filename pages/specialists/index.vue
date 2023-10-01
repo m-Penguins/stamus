@@ -62,7 +62,7 @@ watch(
         (newQuery[key] === undefined || !newQuery[key]) && delete newQuery[key],
     );
 
-    console.log(newQuery);
+    console.log(filterClinicParam.value);
 
     const { data } = await useFetch(`${apiBaseUrl}specialists`, {
       query: {
