@@ -18,6 +18,8 @@ if (!specialist.value?.data) {
   throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
 }
 
+console.log(otherSpecialists.value);
+
 const breadcrumbs = [
   {
     title: "Главная",
@@ -93,8 +95,6 @@ const reviews = ref(
     text: el?.attributes?.text,
   })),
 );
-
-console.log(singleServices.value);
 
 const redirectToExternalApp = () => {};
 </script>
@@ -245,7 +245,11 @@ const redirectToExternalApp = () => {};
   <blocks-our-specialists
     v-if="otherSpecialists?.data"
     title="Еще специалисты"
-    :data="otherSpecialists.data"
+    :data="
+      otherSpecialists?.data?.filter(
+        (el) => String(el?.id) !== String(route.params.id),
+      )
+    "
   />
   <blocks-main-form />
 </template>
