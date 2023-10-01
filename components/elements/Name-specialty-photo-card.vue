@@ -146,13 +146,13 @@ export default {
   gap: 22px;
   box-sizing: border-box;
   position: absolute;
-  bottom: 70px;
-  left: -273px;
+  bottom: 56px;
+  left: -263px;
   padding: 12px 12px;
   background: white;
   box-shadow: 2px 5px 45px -5px rgba(30, 32, 40, 0.08);
   border-radius: 15px;
-  width: 297px;
+  width: 287px;
   font-size: 16px;
   line-height: 24px;
   cursor: text;
@@ -160,6 +160,8 @@ export default {
   opacity: 0;
   transform: translate3d(0, -20px, 0);
   transition: all 0.5s ease-out;
+  overflow-y: scroll;
+  max-height: 300px;
 
   &:before {
     position: absolute;
@@ -182,6 +184,10 @@ export default {
     background: white;
   }
 }
+
+// .info::-webkit-scrollbar {
+//   display: none;
+// }
 
 .tooltip-box {
   display: flex;
@@ -214,5 +220,17 @@ export default {
   @include body-12-regular;
   color: $gray-text;
   opacity: 0.7;
+}
+
+@media (max-width: 695px) {
+  .card-img {
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 590px) {
+  .card-img {
+    object-fit: contain;
+  }
 }
 </style>

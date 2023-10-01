@@ -1,6 +1,6 @@
 <template>
   <div class="dentistry-wrapper">
-    <div class="dentistry-container" :style="`background-image:url(${imgBg})`">
+    <div class="dentistry-container" :style="`background-image:url(${imgBg})`" :class="{'bg-dark': isBgDark}">
       <div class="dentistry-box">
         <elements-bread-crumbs
           :breadcrumbs="breadcrumbs"
@@ -89,6 +89,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isBgDark: {
+      type: Boolean,
+      default: false,
+    },
     time: String,
     money: String,
   },
@@ -97,6 +101,10 @@ export default {
 
 <style scoped lang="scss">
 @import "/assets/styles/style.scss";
+
+.bg-dark {
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
+}
 
 .img {
   width: 50%;

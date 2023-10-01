@@ -308,7 +308,7 @@ const mockArrayTooltips = [
   display: flex;
   gap: 40px 16px;
   flex-wrap: wrap;
-  justify-content: space-between;
+  // justify-content: space-between;
 }
 
 .spicialists-page-card {
@@ -330,6 +330,13 @@ const mockArrayTooltips = [
   }
 }
 
+@media (max-width: 1328px) {
+  .spicialists-page-card {
+    width: 32%;
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 1201px) {
   .spicialists-page-title {
     padding: 50px 0 100px;
@@ -338,7 +345,7 @@ const mockArrayTooltips = [
 
 @media (max-width: 1098px) {
   .spicialists-page-card {
-    max-width: 270px;
+    width: 48.5%;
   }
 }
 
@@ -348,17 +355,17 @@ const mockArrayTooltips = [
     line-height: normal;
     padding: 10px 0 100px;
   }
-  .spicialists-page-card {
-    max-width: 334px;
-  }
+  // .spicialists-page-card {
+  //   max-width: 334px;
+  // }
   .spicialists-page-cards {
     gap: 40px 14px;
   }
 }
 
-@media (max-width: 743px) {
+@media (max-width: 590px) {
   .spicialists-page-card {
-    max-width: 300px;
+    width: 100%;
   }
 }
 

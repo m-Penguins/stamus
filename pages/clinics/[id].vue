@@ -119,6 +119,7 @@ export default {
     :typeColorWhite="item"
     :typeColorWhiteText="item"
     :breadcrumbs="breadcrumbs"
+    :isBgDark="true"
   />
   <blocks-video-block
     v-if="clinicData?.attributes?.infoBlock"
@@ -166,3 +167,9 @@ export default {
   />
   <blocks-main-form />
 </template>
+
+<!-- <style>
+.bg-dark {
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
+}
+</style> -->
