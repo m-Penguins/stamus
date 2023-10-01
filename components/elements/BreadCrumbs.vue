@@ -1,12 +1,17 @@
 <template>
   <div class="breadcrumbs">
     <div class="container-crumb">
-      <div class="content"
-      :class="typeColorWhite ? 'styleColor' : ''">
+      <div class="content" :class="typeColorWhite ? 'styleColor' : ''">
         <NuxtLink
           v-for="(breadcrumb, index) in breadcrumbs"
           :key="index"
-          :class="['breadcrumbs-text', {['pre']: index < breadcrumbs.length - 1} ]"
+          :class="[
+            'breadcrumbs-text',
+            {
+              ['pre']: index < breadcrumbs.length - 1,
+              disabled: index === breadcrumbs.length - 1,
+            },
+          ]"
           :to="breadcrumb.url"
           @click="index === 0 ? store.togglerLink(index) : null"
         >
@@ -18,34 +23,34 @@
 </template>
 
 <script>
-import { useActuveLink } from '../../stores/activeLink';
+import { useActuveLink } from "../../stores/activeLink";
 
 export default {
   props: {
     breadcrumbs: {
       type: Array,
-      default: () => []
-    }, 
+      default: () => [],
+    },
     typeColorWhite: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
-   setup() {
+  setup() {
     const store = useActuveLink();
     return {
-      store
-    }
-   }
-}
+      store,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-@import '/assets/styles/style.scss';
+@import "/assets/styles/style.scss";
 
-.styleColor  {
+.styleColor {
   .breadcrumbs-text {
-    color: #CFD5E1;
+    color: #cfd5e1;
   }
 }
 
@@ -64,7 +69,7 @@ export default {
   flex-direction: unset;
   overflow-x: scroll;
   white-space: nowrap;
-  .styleColor  {
+  .styleColor {
     .pre {
       color: white;
     }
@@ -72,14 +77,18 @@ export default {
 }
 
 .breadcrumbs::-webkit-scrollbar {
-    display: none;
-  }
+  display: none;
+}
 
 // .breadcrumbs {
 //   .styleColor:before {
 //     color: white;
 //   }
 // }
+
+.disabled {
+  pointer-events: none;
+}
 
 .breadcrumbs {
   position: relative;
@@ -91,7 +100,7 @@ export default {
   }
 
   @media screen and (max-width: 1355px) {
-    margin-top: 88px
+    margin-top: 88px;
   }
   .pre {
     color: $gray-text;
@@ -111,39 +120,40 @@ export default {
       white-space: nowrap;
     }
   }
-.container-crumb {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  .content {
+  .container-crumb {
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: baseline;
-    height: 30px;
-    :before {
+    align-items: flex-start;
+    .content {
       position: relative;
-      top: 0!important;
-      font-size: 14px;
-      line-height: 140%;
-      content: "/";
-      padding-right: 6px;
-      padding-left: 6px;
-      color: $placeholder;
-      opacity: 0.5;
-      top: 2px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: baseline;
+      height: 30px;
+      :before {
+        position: relative;
+        top: 0 !important;
+        font-size: 14px;
+        line-height: 140%;
+        content: "/";
+        padding-right: 6px;
+        padding-left: 6px;
+        color: $placeholder;
+        opacity: 0.5;
+        top: 2px;
 
-      @media screen and (max-width: 680px), (max-width: 1000px) and (max-height: 500px) {
-        font-size: 10px;
-        line-height: 16px;
+        @media screen and (max-width: 680px),
+          (max-width: 1000px) and (max-height: 500px) {
+          font-size: 10px;
+          line-height: 16px;
+        }
+      }
+      :first-child:before {
+        display: none;
       }
     }
-    :first-child:before{
-      display: none;
-    }
-  }
     .arrow {
       margin-top: 2px;
       margin-bottom: 19px;
@@ -157,9 +167,9 @@ export default {
   }
 }
 
-  @media (max-width: 650px) {
-    .breadcrumbs {
-      margin-bottom: 0px;
-    }
+@media (max-width: 650px) {
+  .breadcrumbs {
+    margin-bottom: 0px;
   }
+}
 </style>

@@ -83,7 +83,7 @@ export default {
         url: "/clinics",
       },
       {
-        title: `${clinicsData.value?.data?.attributes?.heading}`,
+        title: `${clinicData.value?.attributes?.heading}`,
         url: `/clinics/${route.params.id}`,
       },
     ];

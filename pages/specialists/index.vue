@@ -49,8 +49,6 @@ specialists.value = data.value;
 watch(
   () => route.query,
   async () => {
-    console.log("render happened");
-
     const newQuery = {
       "pagination[page]": currentPageParam.value,
       "pagination[pageSize]": pageSize.value,
@@ -61,8 +59,6 @@ watch(
       (key) =>
         (newQuery[key] === undefined || !newQuery[key]) && delete newQuery[key],
     );
-
-    console.log(filterClinicParam.value);
 
     const { data } = await useFetch(`${apiBaseUrl}specialists`, {
       query: {
@@ -139,6 +135,8 @@ const handleDirectionChange = (direction) => {
   });
   filterDirectionParam.value = direction.id;
 };
+
+const assetsStore = useAssets();
 
 const breadcrumbs = [
   {
@@ -254,9 +252,10 @@ const mockArrayTooltips = [
                 specialist?.attributes?.firstName +
                 ' ' +
                 specialist?.attributes?.lastName,
-              img:
-                baseUrl +
-                specialist?.attributes?.fotoSpecialist?.data?.attributes?.url,
+              img: specialist?.attributes?.fotoSpecialist?.data?.attributes?.url
+                ? baseUrl +
+                  specialist?.attributes?.fotoSpecialist?.data?.attributes?.url
+                : assetsStore.useAsset('images/icons/logo.svg'),
               position: specialist?.attributes?.position,
             }"
           />
