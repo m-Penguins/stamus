@@ -1,7 +1,7 @@
 <template>
   <div class="card-photo-name">
     <div class="card-photo-name-img">
-      <img :src="specialists.img" alt="specialists" class="card-img" />
+      <img :src="specialists.img" alt="specialist" class="card-img" />
     </div>
     <div
       :class="
@@ -96,7 +96,7 @@ export default {
 .card-img {
   height: 308px;
   border-radius: 15px;
-  border: 1px solid #EDEDED;
+  border: 1px solid #ededed;
   width: 100%;
   object-fit: contain;
 }
