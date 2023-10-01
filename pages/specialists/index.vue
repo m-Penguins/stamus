@@ -10,8 +10,6 @@ const currentPageParam = ref(route.query.page ?? "1");
 const filterClinicParam = ref(route.query.clinic ?? "");
 const filterDirectionParam = ref(route.query.direction ?? "");
 
-const specialists = ref([]);
-
 const firstQuery = {
   "pagination[page]": currentPageParam.value,
   "pagination[pageSize]": pageSize.value,
@@ -25,7 +23,7 @@ Object.keys(firstQuery).forEach(
     delete firstQuery[key],
 );
 
-const [{ data }, { data: clinics }, { data: directionsData }] =
+const [{ data: specialists }, { data: clinics }, { data: directionsData }] =
   await Promise.all([
     useFetch(`${apiBaseUrl}specialists`, {
       query: {
@@ -37,7 +35,7 @@ const [{ data }, { data: clinics }, { data: directionsData }] =
     useFetch(`${apiBaseUrl}services?populate=deep`),
   ]);
 
-if (!data.value?.data) {
+if (!specialists.value?.data) {
   throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
 }
 
@@ -52,15 +50,10 @@ const directions = useReducedServices(directionsData.value.data).map((el) => ({
   name: el.title,
 }));
 
-if (!data.value?.data) {
-  throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
-}
-
-specialists.value = data.value;
-
 watch(
   () => route.query,
   async () => {
+    console.log("RENDER");
     const newQuery = {
       "pagination[page]": currentPageParam.value,
       "pagination[pageSize]": pageSize.value,
@@ -255,7 +248,7 @@ const mockArrayTooltips = [
         <template v-if="specialists?.data?.length > 0">
           <div
             class="spicialists-page-card"
-            v-for="specialist in specialists.data"
+            v-for="specialist in specialists?.data"
             :key="specialist.id"
           >
             <elements-name-specialty-photo-card
