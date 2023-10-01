@@ -85,6 +85,15 @@ const documents = ref(
   ),
 );
 
+const reviews = ref(
+  specialist.value?.data?.attributes?.reviews?.data?.map((el) => ({
+    name: el?.attributes?.name,
+    grade: el?.attributes?.review,
+    date: el?.attributes?.date,
+    text: el?.attributes?.text,
+  })),
+);
+
 console.log(singleServices.value);
 
 const redirectToExternalApp = () => {};
@@ -231,7 +240,7 @@ const redirectToExternalApp = () => {};
     id="portfolio"
     class="portfolio-id"
   />
-  <blocks-main-feedback />
+  <blocks-main-feedback v-if="reviews?.length > 0" :reviews="reviews" />
   <!-- <blocks-video-slider-block :imagesScroll="imagesScrollVideo" title="Видео" /> -->
   <blocks-our-specialists
     v-if="otherSpecialists?.data"
