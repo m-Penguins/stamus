@@ -91,7 +91,10 @@ const redirectToExternalApp = () => {};
             textLinkWithArrow="Смотреть портфолио"
             class="stamus-app-title"
           />
-          <div class="specialists-addres desktop">
+          <div
+            class="specialists-addres desktop"
+            v-if="specialist?.data?.attributes?.clinics?.data?.length > 0"
+          >
             <div class="specialists-addres-box">
               <img
                 src="../../assets/images/icons/addres.svg"
@@ -99,10 +102,7 @@ const redirectToExternalApp = () => {};
                 class="stamus-app-img-box-picture"
               />
             </div>
-            <ul
-              class="specialists-addres-list"
-              v-if="specialist?.data?.attributes?.clinics?.data"
-            >
+            <ul class="specialists-addres-list">
               <li class="specialists-addres-list__text">Принимает по адресу</li>
               <li
                 v-for="item in specialist?.data?.attributes?.clinics?.data"
