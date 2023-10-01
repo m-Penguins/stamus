@@ -35,7 +35,7 @@ const addresMock = [
 ];
 
 const { data: specialist } = await useFetch(
-  `${apiBaseUrl}specialists/${route.params.id}?populate=deep`,
+  `${apiBaseUrl}specialists/${route.params.id}?populate=category.*,portofolios.*,reviews.*,fotoSpecialist.*,education.*,additionalEducation.*,docsPhoto.*,video.*,clinics.*,price_lists.*,clinics.*,achievements.*,areasOfActivity.*,meetingPerson.*`,
 );
 
 if (!specialist.value?.data) {
@@ -129,20 +129,23 @@ const redirectToExternalApp = () => {};
           />
         </div>
       </div>
-      <div class="specialists-addres mob">
+      <div
+        class="specialists-addres mob"
+        v-if="specialist?.data?.attributes?.clinics?.data?.length > 0"
+      >
         <div class="specialists-addres-box">
           <img src="../../assets/images/icons/addres.svg" alt="icon" />
         </div>
         <div class="specialists-addres-list">
           <div class="specialists-addres-list__text">Принимает по адресу</div>
           <div class="specialists-addres-list__box">
-            <!-- <div
-              v-for="item in addresMock"
+            <div
+              v-for="item in specialist?.data?.attributes?.clinics?.data"
               :key="item"
               class="specialists-addres-list__item"
             >
-              {{ item }}
-            </div> -->
+              {{ item?.attributes?.address }}
+            </div>
           </div>
         </div>
       </div>

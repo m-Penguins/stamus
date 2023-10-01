@@ -53,6 +53,7 @@ watch(
       "pagination[page]": currentPageParam.value,
       "pagination[pageSize]": pageSize.value,
       "filters[clinics][id]": filterClinicParam.value,
+      "filters[category]": filterDirectionParam.value,
     };
 
     Object.keys(newQuery).forEach(
@@ -118,7 +119,7 @@ const handleDirectionChange = (direction) => {
   const newQuery = {
     clinic: route.query?.clinic ?? "",
     page: 1,
-    direction: direction.id,
+    direction: direction.name,
   };
 
   Object.keys(newQuery).forEach(
@@ -133,7 +134,7 @@ const handleDirectionChange = (direction) => {
       ...newQuery,
     },
   });
-  filterDirectionParam.value = direction.id;
+  filterDirectionParam.value = direction.name;
 };
 
 const assetsStore = useAssets();

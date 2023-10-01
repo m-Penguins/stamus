@@ -233,6 +233,7 @@ export default {
 }
 
 .video-block-box {
+  object-fit: cover;
   width: 373px;
   display: inline-block;
   overflow: hidden;
