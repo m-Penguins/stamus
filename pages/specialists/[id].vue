@@ -64,7 +64,25 @@ const breadcrumbs = [
   },
 ];
 
-console.log(specialist);
+const portfolios = ref(
+  specialist?.value?.data?.attributes?.portofolios?.data?.map((el) => {
+    return {
+      id: el?.id,
+      img: el?.attributes?.photoBanner
+        ? baseUrl + el?.attributes?.photoBanner
+        : assetsStore.useAsset("images/icons/logo.svg"),
+      name: el?.attributes?.heading,
+      category: "detskaya",
+      description: el?.attributes?.description,
+    };
+  }),
+);
+
+const singleServices = ref(
+  specialist?.value?.data?.attributes?.price_lists?.data,
+);
+
+console.log(portfolios.value);
 
 const redirectToExternalApp = () => {};
 </script>
@@ -189,7 +207,7 @@ const redirectToExternalApp = () => {};
   <blocks-cases-direction
     v-if="specialist?.data?.attributes?.portofolios?.data?.length > 0"
     text="Портфолио доктора"
-    :dataDirection="specialist?.data?.attributes?.portofolios?.data"
+    :dataDirection="portfolios"
     id="portfolio"
     class="portfolio-id"
   />
