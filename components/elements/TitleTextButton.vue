@@ -26,7 +26,7 @@
         @custom-click="customClick"
       />
       <elements-link-with-arrow
-        v-if="isLinkWithArrow"
+        v-if="isLinkWithArrow && textLinkWithArrow"
         type="true"
         :title="textLinkWithArrow"
         :link="link"

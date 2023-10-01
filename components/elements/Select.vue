@@ -8,9 +8,13 @@
     <div class="selected" :class="{ open: open }" @click="open = !open">
       <div v-if="isSelectedId" class="label">{{ label }}</div>
       <div
-        v-if="() => isSelectedId !== selectedItem.id"
+        v-if="
+          () =>
+            isSelectedId !== selectedItem?.id ||
+            isSelectedId !== selectedItem?.name
+        "
         class="default"
-        :class="{ 'select-margin': selectedItem?.id }"
+        :class="{ 'select-margin': selectedItem?.id || selectedItem?.name }"
       >
         {{ selected }}
       </div>
@@ -24,7 +28,7 @@
           selected = option.name;
           open = false;
           $emit('input', option);
-          console.log(isSelectedId, '--', selectedItem, '=====');
+          console.log('???', selectedItem);
         "
         class="select-container"
       >
@@ -41,7 +45,6 @@
       </div>
     </div>
   </div>
-  
 </template>
 
 <script>

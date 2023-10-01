@@ -52,7 +52,7 @@ const breadcrumbs = [
     url: "/specialists",
   },
   {
-    title: `Стоматолог-терапевт`,
+    title: specialist.value?.data?.attributes?.position,
     url: ``,
   },
   {
@@ -88,7 +88,11 @@ const redirectToExternalApp = () => {};
             "
             :text="specialist?.data?.attributes?.description ?? ''"
             :isLinkWithArrow="true"
-            textLinkWithArrow="Смотреть портфолио"
+            :textLinkWithArrow="
+              specialist?.data?.attributes?.portofolios?.data?.length > 0
+                ? 'Смотреть портфолио'
+                : ''
+            "
             class="stamus-app-title"
           />
           <div
@@ -182,12 +186,13 @@ const redirectToExternalApp = () => {};
       </div>
     </div> -->
   </div>
-  <!-- <blocks-cases-direction
+  <blocks-cases-direction
+    v-if="specialist?.data?.attributes?.portofolios?.data?.length > 0"
     text="Портфолио доктора"
-    :dataDirection="mockArrayDirection"
+    :dataDirection="specialist?.data?.attributes?.portofolios?.data"
     id="portfolio"
     class="portfolio-id"
-  /> -->
+  />
   <blocks-main-feedback />
   <!-- <blocks-video-slider-block :imagesScroll="imagesScrollVideo" title="Видео" /> -->
   <!-- <blocks-our-specialists

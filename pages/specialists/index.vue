@@ -211,7 +211,7 @@ const mockArrayTooltips = [
             @input="handleDirectionChange"
             :isSelectedId="filterDirectionParam"
             :selectedItem="
-              directions.find((dir) => dir.id === filterDirectionParam)
+              directions.find((dir) => dir.name === filterDirectionParam)
             "
           />
         </div>
