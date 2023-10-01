@@ -1,75 +1,101 @@
 <template>
   <div class="container">
-    <h1 v-html="title" :class="{'fontSize':  fontSize ? 'fontSize' : '', 'typeColorWhiteText': typeColorWhiteText ? 'typeColorWhiteText' : ''}" class="main-title-dark-blue p-bt-30 title"></h1>
+    <h1
+      v-html="title"
+      :class="{
+        fontSize: fontSize ? 'fontSize' : '',
+        typeColorWhiteText: typeColorWhiteText ? 'typeColorWhiteText' : '',
+      }"
+      class="main-title-dark-blue p-bt-30 title"
+    ></h1>
     <p v-if="isCategory" v-html="category" class="title-text-btn-category"></p>
-    <p v-if="text" v-html="text" :class="{'isButtonBase': !isButtonBase ? 'isButtonBase' : '', 'typeColorWhiteText': typeColorWhiteText ? 'typeColorWhiteText' : ''}" class="container-text p-bt-30 text"></p>
+    <p
+      v-if="!!text"
+      v-html="text"
+      :class="{
+        isButtonBase: !isButtonBase ? 'isButtonBase' : '',
+        typeColorWhiteText: typeColorWhiteText ? 'typeColorWhiteText' : '',
+      }"
+      class="container-text p-bt-30 text"
+    ></p>
     <div class="title-text-btn-container">
-      <elements-button-base v-if="isButtonBase" class="fontSize4 container-btn" :title="textButtonBase" @custom-click="customClick"/>
-      <elements-link-with-arrow v-if="isLinkWithArrow" type="true" :title="textLinkWithArrow" :link="link" :isExternal="isExternal"/>
+      <elements-button-base
+        v-if="isButtonBase"
+        class="fontSize4 container-btn"
+        :title="textButtonBase"
+        @custom-click="customClick"
+      />
+      <elements-link-with-arrow
+        v-if="isLinkWithArrow"
+        type="true"
+        :title="textLinkWithArrow"
+        :link="link"
+        :isExternal="isExternal"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import ElementsLinkWithArrow from './ElementsLinkWithArrow.vue'
-  export default {
+import ElementsLinkWithArrow from "./ElementsLinkWithArrow.vue";
+export default {
   components: { ElementsLinkWithArrow },
-    props: {
-      title: {
-        type: String,
-        default: ''
-      },
-      link: {
-        type: String,
-        default: '#'
-      },
-      textButtonBase: {
-        type: String,
-        default: ''
-      },
-      textLinkWithArrow: {
-        type: String,
-        default: ''
-      },
-      text: {
-        type: String,
-        default: ''
-      },
-      fontSize: {
-        type: Boolean,
-        default: true
-      },
-      isButtonBase: {
-        type: Boolean,
-        default: true
-      },
-      isLinkWithArrow: {
-        type: Boolean,
-        default: false
-      },
-      isCategory: {
-        type: Boolean,
-        default: false
-      },
-      category: {
-        type: String,
-        default: ''
-      },
-      typeColorWhiteText: {
-        type: Boolean,
-        default: false
-      },
-      isExternal: {
-        type: Boolean,
-        default: false
-      },
-      customClick: Function
-    }
-  }
+  props: {
+    title: {
+      type: String,
+      default: "",
+    },
+    link: {
+      type: String,
+      default: "#",
+    },
+    textButtonBase: {
+      type: String,
+      default: "",
+    },
+    textLinkWithArrow: {
+      type: String,
+      default: "",
+    },
+    text: {
+      type: String,
+      default: "",
+    },
+    fontSize: {
+      type: Boolean,
+      default: true,
+    },
+    isButtonBase: {
+      type: Boolean,
+      default: true,
+    },
+    isLinkWithArrow: {
+      type: Boolean,
+      default: false,
+    },
+    isCategory: {
+      type: Boolean,
+      default: false,
+    },
+    category: {
+      type: String,
+      default: "",
+    },
+    typeColorWhiteText: {
+      type: Boolean,
+      default: false,
+    },
+    isExternal: {
+      type: Boolean,
+      default: false,
+    },
+    customClick: Function,
+  },
+};
 </script>
 
 <style scoped lang="scss">
-@import '/assets/styles/style.scss';
+@import "/assets/styles/style.scss";
 
 .typeColorWhiteText {
   color: white !important;
@@ -133,7 +159,7 @@ import ElementsLinkWithArrow from './ElementsLinkWithArrow.vue'
     line-height: 27px;
     padding-bottom: 14px;
   }
-} 
+}
 
 @media (max-width: 600px) {
   .container {

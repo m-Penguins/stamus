@@ -1,154 +1,201 @@
+<script setup>
+const route = useRoute();
+const assetsStore = useAssets();
+const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+const baseUrl = useRuntimeConfig().public.baseUrl;
+
+// import { mockArrayServices } from "../../stores/mockData";
+// import { mockArrayOurSpecialists } from "../../stores/mockData";
+
+// const imagesScroll = [
+//   "doc1.png",
+//   "doc2.png",
+//   "doc3.png",
+//   "doc1.png",
+//   "doc1.png",
+//   "doc1.png",
+// ];
+// const imagesScrollVideo = [
+//   "video1.png",
+//   "video2.png",
+//   "video3.png",
+//   "video3.png",
+//   "video3.png",
+//   "video3.png",
+// ];
+// const mockActivitiesCard = [
+//   { id: 1, title: "Лечение кариеса", link: "#" },
+//   { id: 2, title: "Лечение кариеса", link: "#" },
+//   { id: 3, title: "Лечение кариеса", link: "#" },
+// ];
+
+const addresMock = [
+  "Краснодар, ул. Гимназическая, 85",
+  "Краснодар, ул. Гимназическая, 85",
+];
+
+const { data: specialist } = await useFetch(
+  `${apiBaseUrl}specialists/${route.params.id}?populate=deep`,
+);
+
+if (!specialist.value?.data) {
+  throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+}
+
+const breadcrumbs = [
+  {
+    title: "Главная",
+    url: "/",
+  },
+  {
+    title: "Специалисты",
+    url: "/specialists",
+  },
+  {
+    title: `Стоматолог-терапевт`,
+    url: ``,
+  },
+  {
+    title:
+      specialist.value?.data?.attributes?.lastName +
+      " " +
+      specialist.value?.data?.attributes?.firstName,
+    url: `/specialists/${route.params.id}`,
+  },
+];
+
+console.log(specialist);
+
+const redirectToExternalApp = () => {};
+</script>
+
 <template>
   <div class="base-wrapper-grey">
     <div class="base-container-grey">
-      <elements-bread-crumbs :breadcrumbs="breadcrumbs"/>
+      <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
       <div class="stamus-app-container">
         <div class="stamus-app-container-text">
           <elements-title-text-button
-            font-size="true" 
+            font-size="true"
             isCategory="true"
-            category="Стоматолог-хирург"
-            textButtonBase="Записаться онлайн" 
+            :category="specialist?.data?.attributes?.position"
+            textButtonBase="Записаться онлайн"
             :customClick="redirectToExternalApp"
-            title="Маашев Магомед" 
-            text="Безусловно, новая модель организационной деятельности однозначно определяет каждого участника как способного принимать собственные решения касаемо переосмысления внешнеэкономических политик." 
+            :title="
+              specialist?.data?.attributes?.lastName +
+              ' ' +
+              specialist?.data?.attributes?.firstName
+            "
+            :text="specialist?.data?.attributes?.description ?? ''"
             :isLinkWithArrow="true"
             textLinkWithArrow="Смотреть портфолио"
             class="stamus-app-title"
           />
           <div class="specialists-addres desktop">
             <div class="specialists-addres-box">
-              <img src="../../assets/images/icons/addres.svg" alt="icon" class="stamus-app-img-box-picture">
+              <img
+                src="../../assets/images/icons/addres.svg"
+                alt="icon"
+                class="stamus-app-img-box-picture"
+              />
             </div>
-            <ul class="specialists-addres-list">
+            <ul
+              class="specialists-addres-list"
+              v-if="specialist?.data?.attributes?.clinics?.data"
+            >
               <li class="specialists-addres-list__text">Принимает по адресу</li>
-              <li v-for="item in addresMock" :key="item" class="specialists-addres-list__item">
-                {{item}}
+              <li
+                v-for="item in specialist?.data?.attributes?.clinics?.data"
+                :key="item.id"
+                class="specialists-addres-list__item"
+              >
+                {{ item?.attributes?.address }}
               </li>
             </ul>
           </div>
         </div>
-          <div class="stamus-app-img-box">
-            <img src="../../assets/images/specialists/Маашев.png" alt="mob" class="stamus-app-img-box-picture">
-          </div>
+        <div class="stamus-app-img-box">
+          <img
+            :src="
+              specialist?.data?.attributes?.fotoSpecialist?.data?.attributes
+                ?.url
+                ? baseUrl +
+                  specialist?.data?.attributes?.fotoSpecialist?.data?.attributes
+                    ?.url
+                : assetsStore.useAsset('images/icons/logo.svg')
+            "
+            alt="mob"
+            class="stamus-app-img-box-picture"
+          />
+        </div>
       </div>
       <div class="specialists-addres mob">
         <div class="specialists-addres-box">
-          <img src="../../assets/images/icons/addres.svg" alt="icon">
+          <img src="../../assets/images/icons/addres.svg" alt="icon" />
         </div>
         <div class="specialists-addres-list">
           <div class="specialists-addres-list__text">Принимает по адресу</div>
           <div class="specialists-addres-list__box">
-            <div v-for="item in addresMock" :key="item" class="specialists-addres-list__item">
-              {{item}}
-            </div>
+            <!-- <div
+              v-for="item in addresMock"
+              :key="item"
+              class="specialists-addres-list__item"
+            >
+              {{ item }}
+            </div> -->
           </div>
         </div>
       </div>
     </div>
   </div>
-  <blocks-video-block 
-    title="Знакомство" 
+  <!-- <blocks-video-block
+    title="Знакомство"
     text="Безусловно, новая модель организационной деятельности однозначно определяет каждого участника как способного принимать собственные решения касаемо переосмысления внешнеэкономических политик."
-    :isAcquaintanceBlock=true
+    :isAcquaintanceBlock="true"
     :info="mockDataInfo"
-  />
-  <blocks-activities-block :activitiesCard="mockActivitiesCard"/>
-  <blocks-education-block :events="timelineEvents" title="Образование"/>
-  <blocks-education-block :events="timelineEventsAdditionally" title="Дополнительное образование"/>
-  <blocks-video-slider-block :imagesScroll="imagesScroll" title="Сертификаты и документы"/>
+  /> -->
+  <!-- <blocks-activities-block :activitiesCard="mockActivitiesCard" />
+  <blocks-education-block :events="timelineEvents" title="Образование" />
+  <blocks-education-block
+    :events="timelineEventsAdditionally"
+    title="Дополнительное образование"
+  /> -->
+  <!-- <blocks-video-slider-block
+    :imagesScroll="imagesScroll"
+    title="Сертификаты и документы"
+  /> -->
   <div class="container-size popular-service">
     <div class="service-title">
       <h2 class="popular-service__title">Услуги</h2>
-      <elements-link-with-arrow type="true" link="/prices" title="Посмотреть все"/>
+      <elements-link-with-arrow
+        type="true"
+        link="/prices"
+        title="Посмотреть все"
+      />
     </div>
-    <div class="popular-service__list">
+    <!-- <div class="popular-service__list">
       <div v-for="(item, index) in mockArrayServices" :key="index">
-        <elements-service-card :service="item"/>
+        <elements-service-card :service="item" />
       </div>
-    </div>
+    </div> -->
   </div>
-  <blocks-cases-direction text="Портфолио доктора" :dataDirection="mockArrayDirection" id="portfolio" class="portfolio-id"/>
+  <!-- <blocks-cases-direction
+    text="Портфолио доктора"
+    :dataDirection="mockArrayDirection"
+    id="portfolio"
+    class="portfolio-id"
+  /> -->
   <blocks-main-feedback />
-  <blocks-video-slider-block :imagesScroll="imagesScrollVideo" title="Видео"/>
-  <blocks-our-specialists title="Еще специалисты" :data="mockArrayOurSpecialists"/>
+  <!-- <blocks-video-slider-block :imagesScroll="imagesScrollVideo" title="Видео" /> -->
+  <!-- <blocks-our-specialists
+    title="Еще специалисты"
+    :data="mockArrayOurSpecialists"
+  /> -->
   <blocks-main-form />
 </template>
 
-<script>
-import { mockArrayServices } from '../../stores/mockData'
-import { mockArrayOurSpecialists } from '../../stores/mockData'
-export default {
-  data() {
-    return {
-      mockDataInfo:
-        { 
-          id: 1, 
-          name: 'Овсоян Григорий', 
-          category: 'Стоматолог-терапевт', 
-          img: 'images/specialists/avatar.png', 
-          imgBig:'images/specialists/avatar-4.png',
-          experience: 6,
-          review: 200,
-          consultation: 25,
-        },
-      imagesScroll: ['doc1.png', 'doc2.png', 'doc3.png','doc1.png','doc1.png','doc1.png'],
-      imagesScrollVideo: ['video1.png', 'video2.png', 'video3.png','video3.png','video3.png','video3.png'],
-      mockActivitiesCard: [
-        {id: 1, title: "Лечение кариеса", link: "#"},
-        {id: 2, title: "Лечение кариеса", link: "#"},
-        {id: 3, title: "Лечение кариеса", link: "#"}
-      ],
-      timelineEvents: [
-        { id: 1, date: '2019', title: 'Специалитет “Название”', category: 'Врач-стоматолог' },
-        { id: 2, date: '2020', title: 'Ординатура “Название”', category: 'Врач-стоматолог-хирург' },
-        { id: 3, date: '2021', title: 'Курсы повышение квалификации “Название”', category: 'Врач-стоматолог-хирург' },
-        { id: 4, date: '2021', title: 'Проходит обучение по программе “Название”', category: 'Врач-стоматолог-хирург' },
-        { id: 5, date: 'н.в.', title: 'Проходит обучение по программе “Название”', category: 'Врач-стоматолог-хирург' },
-      ],
-      timelineEventsAdditionally: [
-        { id: 1, date: '2019', title: 'Специалитет “Название”', category: 'Врач-стоматолог' },
-        { id: 2, date: '2020', title: 'Ординатура “Название”', category: 'Врач-стоматолог-хирург' },
-        { id: 3, date: '2021', title: 'Курсы повышение квалификации “Название”', category: 'Врач-стоматолог-хирург' },
-        { id: 4, date: 'н.в.', title: 'Проходит обучение по программе “Название”', category: 'Врач-стоматолог-хирург' }
-      ],
-    }
-  },
-  setup() {
-      const route = useRoute()
-      const breadcrumbs = [
-        {
-          title: 'Главная',
-          url: '/'
-        },
-        {
-          title: 'Специалисты',
-          url: '/specialists'
-        },
-        {
-          title: `Стоматолог-терапевт`,
-          url: ``
-        },
-        {
-          title: `Маашев Магомед`,
-          url: `/specialists/${route.params.id}`
-        }
-      ]  
-      const addresMock = ['Краснодар, ул. Гимназическая, 85', 'Краснодар, ул. Гимназическая, 85']
-      return {
-        breadcrumbs,
-        route,
-        addresMock,
-        mockArrayServices,
-        mockArrayOurSpecialists
-      }
-    }
-}
-
-</script>
-
 <style lang="scss" scoped>
-@import '../../assets/styles/style.scss';
+@import "../../assets/styles/style.scss";
 
 .portfolio-id {
   scroll-margin-top: 100px;
@@ -170,7 +217,8 @@ export default {
 }
 
 .stamus-app-img-box-picture {
-  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 .service-title {
@@ -199,7 +247,7 @@ export default {
   display: flex;
   align-items: flex-start;
   border-radius: 10px;
-  border: 1px solid var(--stroke, #E9E9E9);
+  border: 1px solid var(--stroke, #e9e9e9);
   gap: 5px;
   padding: 10px 20px;
   margin: 40px 0 150px;
@@ -210,11 +258,11 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 6px;
-    &__item {
-      @include body-14-regular;
-      color: $gray-text;
-    }
-    &__text {
+  &__item {
+    @include body-14-regular;
+    color: $gray-text;
+  }
+  &__text {
     @include body-12-regular;
     color: $placeholder;
   }
@@ -235,9 +283,8 @@ export default {
 
 @media screen and (max-width: 1400px) {
   .stamus-app-title {
-      padding-top: 80px;
+    padding-top: 80px;
   }
-  
 }
 
 @media screen and (max-width: 1388px) {
@@ -245,7 +292,6 @@ export default {
     height: auto;
   }
 }
-
 
 @media screen and (max-width: 1110px) {
   .portfolio-id {
@@ -274,25 +320,25 @@ export default {
     padding: 0 0 40px;
   }
 
-  .stamus-app-container{
-      flex-direction: row-reverse;
-      gap: 34px;
-        .stamus-app-title { 
-          padding-top: 0;
-        }
+  .stamus-app-container {
+    flex-direction: row-reverse;
+    gap: 34px;
+    .stamus-app-title {
+      padding-top: 0;
+    }
   }
 
   .stamus-app-img {
     width: 334px;
     height: 334px;
     border-radius: 25px;
-    background: #F9F9FA;
+    background: #f9f9fa;
     display: flex;
     align-items: flex-end;
   }
 
   .stamus-app-img-box {
-    background: #F9F9FA;
+    background: #f9f9fa;
     height: 100%;
     border-radius: 25px;
   }
@@ -329,7 +375,6 @@ export default {
       flex-direction: column;
       gap: 6px;
     }
-}
-
+  }
 }
 </style>
