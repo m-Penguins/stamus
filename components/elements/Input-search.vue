@@ -1,8 +1,11 @@
 <template>
   <div class="input-base">
-    <input type="text" :placeholder="placeholder" v-model="searchTerm" class="input bg" @keyup.enter="search">
-    <button @click="search()">
+    <input type="text" :placeholder="placeholder" v-model="searchTerm" class="input bg" @keyup.enter="search" />
+    <button @click="search" class="btn-search">
       <img src="../../assets/images/icons/icon_search.svg" alt="icon search"/>
+    </button>
+    <button @click="clearInput" v-if="searchTerm" class="btn-close">
+      <img src="../../assets/images/icons/close.svg" alt="icon close"/>
     </button>
   </div>
 </template>
@@ -27,9 +30,12 @@
         })
         this.$emit('enterPressed');
       }
+    },
+    clearInput() {
+      this.searchTerm = '';
     }
   }
-  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -43,19 +49,32 @@
     padding: 14px 20px 14px 46px;
   }
 
-  button {
+  .btn-search, .btn-close {
     border: none;
     outline: none;
     background: transparent;
 }
 
-button {
+.btn-search {
   height: 20px;
   width: 20px;
   position: absolute;
   bottom: 17px;
   left: 20px;
   cursor: pointer;
+}
+
+.btn-close {
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  bottom: 17px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.input:focus {
+  color: #525660;
 }
   
   .input-error {
