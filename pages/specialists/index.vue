@@ -12,25 +12,28 @@ const filterDirectionParam = ref(route.query.direction ?? "");
 
 const specialists = ref([]);
 
-const { data } = await useFetch(`${apiBaseUrl}specialists`, {
-  query: {
-    "pagination[page]": String(currentPageParam.value),
-    "pagination[pageSize]": String(pageSize.value),
-    populate: "deep",
-  },
-});
+const [{ data }, { data: clinics }, { data: directionsData }] =
+  await Promise.all([
+    useFetch(`${apiBaseUrl}specialists`, {
+      query: {
+        "pagination[page]": currentPageParam.value,
+        "pagination[pageSize]": pageSize.value,
+        populate: "deep",
+      },
+    }),
+    useFetch(`${apiBaseUrl}clinics`),
+    useFetch(`${apiBaseUrl}services?populate=deep`),
+  ]);
 
-const { data: clinics } = await useFetch(`${apiBaseUrl}clinics?populate=deep`);
+if (!data.value?.data) {
+  throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+}
 
 const clinicsList = clinics.value?.data?.map((cl) => ({
   id: cl?.id,
   name: cl?.attributes?.heading,
   address: cl?.attributes?.address,
 }));
-
-const { data: directionsData } = await useFetch(
-  `${apiBaseUrl}services?populate=deep`,
-);
 
 const directions = useReducedServices(directionsData.value.data).map((el) => ({
   id: el.id,
@@ -46,11 +49,24 @@ specialists.value = data.value;
 watch(
   () => route.query,
   async () => {
+    console.log("render happened");
+
+    const newQuery = {
+      "pagination[page]": currentPageParam.value,
+      "pagination[pageSize]": pageSize.value,
+      "filters[clinics][id]": filterClinicParam.value,
+    };
+
+    Object.keys(newQuery).forEach(
+      (key) =>
+        (newQuery[key] === undefined || !newQuery[key]) && delete newQuery[key],
+    );
+
+    console.log(newQuery);
+
     const { data } = await useFetch(`${apiBaseUrl}specialists`, {
       query: {
-        "pagination[page]": String(currentPageParam.value),
-        "pagination[pageSize]": String(pageSize.value),
-        "filters[clinics][id]": String(filterClinicParam.value),
+        ...newQuery,
         populate: "deep",
       },
     });
@@ -64,7 +80,7 @@ const totalPages = computed(() =>
 
 const setCurrentPage = (pageNumber) => {
   currentPageParam.value = pageNumber;
-  console.log(currentPageParam.value);
+
   router.push({
     path: route.path,
     query: {
@@ -86,7 +102,8 @@ const handleClinicChange = (clinic) => {
     page: 1,
   };
   Object.keys(newQuery).forEach(
-    (key) => newQuery[key] === undefined && delete newQuery[key],
+    (key) =>
+      (newQuery[key] === undefined || !newQuery[key]) && delete newQuery[key],
   );
 
   router.push({
@@ -96,6 +113,7 @@ const handleClinicChange = (clinic) => {
       ...newQuery,
     },
   });
+  filterClinicParam.value = clinic.id;
 };
 
 const handleDirectionChange = (direction) => {
@@ -108,7 +126,8 @@ const handleDirectionChange = (direction) => {
   };
 
   Object.keys(newQuery).forEach(
-    (key) => newQuery[key] === undefined && delete newQuery[key],
+    (key) =>
+      (newQuery[key] === undefined || !newQuery[key]) && delete newQuery[key],
   );
 
   router.push({
@@ -118,6 +137,7 @@ const handleDirectionChange = (direction) => {
       ...newQuery,
     },
   });
+  filterDirectionParam.value = direction.id;
 };
 
 const breadcrumbs = [
@@ -189,6 +209,10 @@ const mockArrayTooltips = [
             label="Направление"
             class="select"
             @input="handleDirectionChange"
+            :isSelectedId="filterDirectionParam"
+            :selectedItem="
+              directions.find((dir) => dir.id === filterDirectionParam)
+            "
           />
         </div>
         <div class="specialist-box">
@@ -198,6 +222,10 @@ const mockArrayTooltips = [
               clinicsList.find(
                 (cl) => String(cl.id) === String(filterClinicParam),
               )?.name ?? 'Клиника'
+            "
+            :isSelectedId="filterClinicParam"
+            :selectedItem="
+              clinicsList.find((cl) => cl.id === filterClinicParam)
             "
             label="Клиника"
             class="select"

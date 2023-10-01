@@ -6,8 +6,12 @@
     :class="{ dopText: dopText }"
   >
     <div class="selected" :class="{ open: open }" @click="open = !open">
-      <div v-if="default" class="label">{{ label }}</div>
-      <div class="default" :class="isSelectedNotDefault ? 'select-margin' : ''">
+      <div v-if="isSelectedId" class="label">{{ label }}</div>
+      <div
+        v-if="() => isSelectedId !== selectedItem.id"
+        class="default"
+        :class="{ 'select-margin': selectedItem?.id }"
+      >
         {{ selected }}
       </div>
     </div>
@@ -20,6 +24,7 @@
           selected = option.name;
           open = false;
           $emit('input', option);
+          console.log(isSelectedId, '--', selectedItem, '=====');
         "
         class="select-container"
       >
@@ -63,6 +68,12 @@ export default {
     },
     label: {
       type: String,
+    },
+    isSelectedId: {
+      type: Number,
+    },
+    selectedItem: {
+      type: Object,
     },
   },
   data() {
