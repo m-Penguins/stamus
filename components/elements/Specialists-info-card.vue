@@ -1,32 +1,32 @@
 <template>
   <div class="specialists-inner__info-numbers">
     <div>
-      <p class="specialists-numbers">{{info.experience}}</p>
-      <p class="specialists-box__spec">лет опыта</p>
+      <p class="specialists-numbers">{{ info.experience.total }}</p>
+      <p class="specialists-box__spec">{{ info.experience.item }}</p>
     </div>
     <div>
-      <p class="specialists-numbers">{{info.review}}</p>
-      <p class="specialists-box__spec">отзыва</p>
+      <p class="specialists-numbers">{{ info.review.total }}</p>
+      <p class="specialists-box__spec">{{ info.review.item }}</p>
     </div>
     <div>
-      <p class="specialists-numbers">{{info.consultation}}</p>
-      <p class="specialists-box__spec">консультаций</p>
+      <p class="specialists-numbers">{{ info.consultation.total }}</p>
+      <p class="specialists-box__spec">{{ info.consultation.item }}</p>
     </div>
   </div>
 </template>
 
 <script>
-  export default {
-    props: {
-      info: {
-        type: Object
-      },
+export default {
+  props: {
+    info: {
+      type: Object,
     },
-  }
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-@import '/assets/styles/style.scss';
+@import "/assets/styles/style.scss";
 .specialists-inner {
   &__info {
     &-name {
@@ -36,7 +36,7 @@
       padding-top: 10px;
     }
 
-    &-numbers{
+    &-numbers {
       display: flex;
       align-items: center;
       text-align: center;
@@ -46,7 +46,6 @@
         @include body-22-semi-bold;
         color: $hover;
       }
-
     }
   }
 }

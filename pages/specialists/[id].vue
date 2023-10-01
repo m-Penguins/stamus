@@ -4,39 +4,15 @@ const assetsStore = useAssets();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-// import { mockArrayServices } from "../../stores/mockData";
-// import { mockArrayOurSpecialists } from "../../stores/mockData";
-
-// const imagesScroll = [
-//   "doc1.png",
-//   "doc2.png",
-//   "doc3.png",
-//   "doc1.png",
-//   "doc1.png",
-//   "doc1.png",
-// ];
-// const imagesScrollVideo = [
-//   "video1.png",
-//   "video2.png",
-//   "video3.png",
-//   "video3.png",
-//   "video3.png",
-//   "video3.png",
-// ];
-// const mockActivitiesCard = [
-//   { id: 1, title: "Лечение кариеса", link: "#" },
-//   { id: 2, title: "Лечение кариеса", link: "#" },
-//   { id: 3, title: "Лечение кариеса", link: "#" },
-// ];
-
-const addresMock = [
-  "Краснодар, ул. Гимназическая, 85",
-  "Краснодар, ул. Гимназическая, 85",
-];
-
-const { data: specialist } = await useFetch(
-  `${apiBaseUrl}specialists/${route.params.id}?populate=deep`,
-);
+const [
+  { data: specialistDeep },
+  { data: specialist },
+  { data: otherSpecialists },
+] = await Promise.all([
+  useFetch(`${apiBaseUrl}specialists/${route.params.id}?populate=deep`),
+  useFetch(`${apiBaseUrl}specialists/${route.params.id}?populate=*`),
+  useFetch(`${apiBaseUrl}specialists?populate=deep`),
+]);
 
 if (!specialist.value?.data) {
   throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
@@ -52,7 +28,7 @@ const breadcrumbs = [
     url: "/specialists",
   },
   {
-    title: `Стоматолог-терапевт`,
+    title: specialist.value?.data?.attributes?.position,
     url: ``,
   },
   {
@@ -60,11 +36,56 @@ const breadcrumbs = [
       specialist.value?.data?.attributes?.lastName +
       " " +
       specialist.value?.data?.attributes?.firstName,
-    url: `/specialists/${route.params.id}`,
+    url: ``,
   },
 ];
 
-console.log(specialist);
+const portfolios = ref(
+  specialist?.value?.data?.attributes?.portofolios?.data?.map((el) => {
+    return {
+      id: el?.id,
+      img: el?.attributes?.photoBanner
+        ? baseUrl + el?.attributes?.photoBanner
+        : assetsStore.useAsset("images/icons/logo.svg"),
+      name: el?.attributes?.heading,
+      category: "detskaya",
+      description: el?.attributes?.description,
+    };
+  }),
+);
+
+const singleServices = ref(
+  specialistDeep?.value?.data?.attributes?.price_lists?.data?.map((el) => {
+    const item = el?.attributes?.servicePrice?.map((single) => {
+      return {
+        id: single?.id,
+        heading: single?.heading,
+        price: single?.price,
+        isRecommended: single?.isRecommended,
+        isPopular: single?.isPopular,
+        isDemand: single?.isDemand,
+        tags: single?.tags,
+        link: "/prices",
+      };
+    });
+    return {
+      title: el?.attributes?.Title,
+      services: item,
+    };
+  }),
+);
+
+const meetingPerson = ref(
+  specialistDeep.value?.data?.attributes?.meetingPerson,
+);
+
+const documents = ref(
+  specialistDeep.value?.data?.attributes?.docsPhoto?.data?.map((el) =>
+    el?.attributes?.url ? baseUrl + el?.attributes?.url : "",
+  ),
+);
+
+console.log(singleServices.value);
 
 const redirectToExternalApp = () => {};
 </script>
@@ -88,7 +109,11 @@ const redirectToExternalApp = () => {};
             "
             :text="specialist?.data?.attributes?.description ?? ''"
             :isLinkWithArrow="true"
-            textLinkWithArrow="Смотреть портфолио"
+            :textLinkWithArrow="
+              specialist?.data?.attributes?.portofolios?.data?.length > 0
+                ? 'Смотреть портфолио'
+                : ''
+            "
             class="stamus-app-title"
           />
           <div
@@ -129,42 +154,61 @@ const redirectToExternalApp = () => {};
           />
         </div>
       </div>
-      <div class="specialists-addres mob">
+      <div
+        class="specialists-addres mob"
+        v-if="specialist?.data?.attributes?.clinics?.data?.length > 0"
+      >
         <div class="specialists-addres-box">
           <img src="../../assets/images/icons/addres.svg" alt="icon" />
         </div>
         <div class="specialists-addres-list">
           <div class="specialists-addres-list__text">Принимает по адресу</div>
           <div class="specialists-addres-list__box">
-            <!-- <div
-              v-for="item in addresMock"
+            <div
+              v-for="item in specialist?.data?.attributes?.clinics?.data"
               :key="item"
               class="specialists-addres-list__item"
             >
-              {{ item }}
-            </div> -->
+              {{ item?.attributes?.address }}
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- <blocks-video-block
-    title="Знакомство"
-    text="Безусловно, новая модель организационной деятельности однозначно определяет каждого участника как способного принимать собственные решения касаемо переосмысления внешнеэкономических политик."
+  <blocks-video-block
+    v-if="meetingPerson"
+    :title="meetingPerson?.heading"
+    :text="meetingPerson?.text"
     :isAcquaintanceBlock="true"
-    :info="mockDataInfo"
-  /> -->
-  <!-- <blocks-activities-block :activitiesCard="mockActivitiesCard" />
-  <blocks-education-block :events="timelineEvents" title="Образование" />
-  <blocks-education-block
+    :info="{
+      experience: meetingPerson?.dataMeeting?.[0],
+      review: meetingPerson?.dataMeeting?.[1],
+      consultation: meetingPerson?.dataMeeting?.[2],
+    }"
+    :link="meetingPerson?.link"
+    :video="
+      meetingPerson?.video?.data?.attributes?.url
+        ? baseUrl + meetingPerson?.video?.data?.attributes?.url
+        : ''
+    "
+    :videoThumbnail="
+      meetingPerson?.image?.data?.attributes?.url
+        ? baseUrl + meetingPerson?.image?.data?.attributes?.url
+        : ''
+    "
+  />
+  <!-- <blocks-activities-block :activitiesCard="mockActivitiesCard" /> -->
+  <!-- <blocks-education-block :events="timelineEvents" title="Образование" /> -->
+  <!-- <blocks-education-block
     :events="timelineEventsAdditionally"
     title="Дополнительное образование"
   /> -->
-  <!-- <blocks-video-slider-block
-    :imagesScroll="imagesScroll"
+  <blocks-video-slider-block
+    :imagesScroll="documents"
     title="Сертификаты и документы"
-  /> -->
-  <div class="container-size popular-service">
+  />
+  <div class="container-size popular-service" v-if="singleServices?.length > 0">
     <div class="service-title">
       <h2 class="popular-service__title">Услуги</h2>
       <elements-link-with-arrow
@@ -173,24 +217,27 @@ const redirectToExternalApp = () => {};
         title="Посмотреть все"
       />
     </div>
-    <!-- <div class="popular-service__list">
-      <div v-for="(item, index) in mockArrayServices" :key="index">
+    <div v-for="service in singleServices" class="popular-service__list">
+      <h2 class="popular-service__title">{{ service.title }}</h2>
+      <div v-for="(item, index) in service.services" :key="index">
         <elements-service-card :service="item" />
       </div>
-    </div> -->
+    </div>
   </div>
-  <!-- <blocks-cases-direction
+  <blocks-cases-direction
+    v-if="specialist?.data?.attributes?.portofolios?.data?.length > 0"
     text="Портфолио доктора"
-    :dataDirection="mockArrayDirection"
+    :dataDirection="portfolios"
     id="portfolio"
     class="portfolio-id"
-  /> -->
+  />
   <blocks-main-feedback />
   <!-- <blocks-video-slider-block :imagesScroll="imagesScrollVideo" title="Видео" /> -->
-  <!-- <blocks-our-specialists
+  <blocks-our-specialists
+    v-if="otherSpecialists?.data"
     title="Еще специалисты"
-    :data="mockArrayOurSpecialists"
-  /> -->
+    :data="otherSpecialists.data"
+  />
   <blocks-main-form />
 </template>
 
