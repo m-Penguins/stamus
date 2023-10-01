@@ -92,6 +92,8 @@ const handleLinkClick = (id) => {
 };
 
 const handleClinicChange = (clinic) => {
+  filterClinicParam.value = clinic.id;
+
   setCurrentPage(1);
 
   const newQuery = {
@@ -110,11 +112,11 @@ const handleClinicChange = (clinic) => {
       ...newQuery,
     },
   });
-  filterClinicParam.value = clinic.id;
 };
 
 const handleDirectionChange = (direction) => {
   setCurrentPage(1);
+  filterDirectionParam.value = direction.name;
 
   const newQuery = {
     clinic: route.query?.clinic ?? "",
@@ -134,7 +136,6 @@ const handleDirectionChange = (direction) => {
       ...newQuery,
     },
   });
-  filterDirectionParam.value = direction.name;
 };
 
 const assetsStore = useAssets();
@@ -239,28 +240,33 @@ const mockArrayTooltips = [
         </div>
       </div>
       <div class="spicialists-page-cards">
-        <div
-          class="spicialists-page-card"
-          v-for="specialist in specialists.data"
-          :key="specialist.id"
-        >
-          <elements-name-specialty-photo-card
-            link="#"
-            :handleLinkClick="() => handleLinkClick(specialist.id)"
-            :arrayTooltip="mockArrayTooltips"
-            :specialists="{
-              name:
-                specialist?.attributes?.firstName +
-                ' ' +
-                specialist?.attributes?.lastName,
-              img: specialist?.attributes?.fotoSpecialist?.data?.attributes?.url
-                ? baseUrl +
-                  specialist?.attributes?.fotoSpecialist?.data?.attributes?.url
-                : assetsStore.useAsset('images/icons/logo.svg'),
-              position: specialist?.attributes?.position,
-            }"
-          />
-        </div>
+        <template v-if="specialists?.data?.length > 0">
+          <div
+            class="spicialists-page-card"
+            v-for="specialist in specialists.data"
+            :key="specialist.id"
+          >
+            <elements-name-specialty-photo-card
+              link="#"
+              :handleLinkClick="() => handleLinkClick(specialist.id)"
+              :arrayTooltip="mockArrayTooltips"
+              :specialists="{
+                name:
+                  specialist?.attributes?.firstName +
+                  ' ' +
+                  specialist?.attributes?.lastName,
+                img: specialist?.attributes?.fotoSpecialist?.data?.attributes
+                  ?.url
+                  ? baseUrl +
+                    specialist?.attributes?.fotoSpecialist?.data?.attributes
+                      ?.url
+                  : assetsStore.useAsset('images/icons/logo.svg'),
+                position: specialist?.attributes?.position,
+              }"
+            />
+          </div>
+        </template>
+        <div v-else>Никого не найдено</div>
       </div>
       <elements-pagination
         :current-page="currentPageParam"
@@ -309,7 +315,6 @@ const mockArrayTooltips = [
   display: flex;
   gap: 40px 16px;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 .spicialists-page-card {
