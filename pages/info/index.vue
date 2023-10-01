@@ -1,8 +1,8 @@
 <template>
   <elements-main-info 
-    title="Информация <br/> для пациентов" 
-    imgBg="info.png" 
-    imgAdaptiv="info-adaptiv.png" 
+    title="Информация <br/> для пациентов"
+    :imgBg="bigImage" 
+    :imgAdaptiv="imgAdaptiv"
     :isButtonBase="false"
     :breadcrumbs="[
         {
@@ -51,6 +51,12 @@
 import { mockInfoMain } from '../../stores/mockData';
   export default {
     setup() {
+      const assetsStore = useAssets();
+      const bigImage = assetsStore.useAsset("images/big-images/info.png");
+
+      const imgAdaptiv = assetsStore.useAsset(
+        "images/big-images/info-adaptiv.png",
+      );
       const options = [
         { name: 'Получаю справку за себя'},
         { name: 'Получаю справку за ребенка'},
@@ -68,7 +74,9 @@ import { mockInfoMain } from '../../stores/mockData';
       return {
         mockInfoMain,
         options,
-        optionsDoc
+        optionsDoc,
+        bigImage,
+        imgAdaptiv
       }
     }
   }

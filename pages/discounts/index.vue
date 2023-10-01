@@ -2,8 +2,8 @@
   <elements-main-info 
     title="Акции и скидки" 
     text="Небольшое описание в несколько строчек" 
-    imgBg="discounts.png" 
-    imgAdaptiv="discounts-adaptiv.png" 
+    :imgBg="bigImage" 
+    :imgAdaptiv="imgAdaptiv" 
     :isButtonBase="false"
     :breadcrumbs="[
         {
@@ -62,13 +62,21 @@ export default {
     }
   },
   setup() {
+    const assetsStore = useAssets();
+    const bigImage = assetsStore.useAsset("images/big-images/discounts.png");
+
+    const imgAdaptiv = assetsStore.useAsset(
+      "images/big-images/discounts-adaptiv.png",
+    );
     const togglerPopup = (state) => {
       isOpenPopup.value = state
     }
     const isOpenPopup = ref(false);
     return {
       isOpenPopup,
-      togglerPopup
+      togglerPopup,
+      bigImage,
+      imgAdaptiv
     }
   }
 }

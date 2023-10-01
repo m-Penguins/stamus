@@ -1,41 +1,3 @@
-<template>
-<blocks-main-popap-modal-form :isPriceForm=true @togglerPopup='togglerPopup' :isOpen="isOpenPopup"/>
-  <elements-main-info 
-    title="Бизнесу и корпортивным клиентам" 
-    text="Небольшое описание в несколько строчек" 
-    imgBg="business.png" 
-    imgAdaptiv="business-adaptiv.png" 
-    :isButtonBase="false"
-    :typeColorWhite="item"
-    :typeColorWhiteText="item"
-    :breadcrumbs="[
-        {
-          title: 'Главная',
-          url: '/'
-        },
-        {
-          title: 'Бизнесу и корпоративным клиентам',
-          url: '/business'
-        }
-        ]"
-  />
-  <blocks-business-block :data="mockBusinessCards"/>
-  <BlocksMainBanner 
-    :title="'Корпоративные цены'"
-    :text="'Для организаций предусмотрен лояльный прайс лист на все базовые услуги'"
-    :titleLink="'Оставить заявку'"
-    link="#"
-    :handleLinkClick="openBidModal"
-    bgColor="light-blue"
-    type="true"
-    img="price.png"
-    bigImg=true
-  />
-  <blocks-chief-doctor-block :specialists="mockArray" />
-  <blocks-partners-block :data="mockArrayImg"/>
-  <blocks-main-form />
-</template>
-
 <script>
 import { mockBusinessCards } from '../../stores/mockData'
 export default {
@@ -82,13 +44,60 @@ export default {
       {img: 'partner5.png'},
       {img: 'partner6.png'},
     ]
+
+    const assetsStore = useAssets();
+    const bigImage = assetsStore.useAsset("images/big-images/business.png");
+
+    const imgAdaptiv = assetsStore.useAsset(
+      "images/big-images/business-adaptiv.png",
+    );
    return {
       mockArrayImg,
       mockBusinessCards,
       mockArray,
       isOpenPopup,
       togglerPopup,
+      bigImage,
+      imgAdaptiv
     };
   }
 };
 </script>
+
+<template>
+<blocks-main-popap-modal-form :isPriceForm=true @togglerPopup='togglerPopup' :isOpen="isOpenPopup"/>
+  <elements-main-info 
+    title="Бизнесу и корпортивным клиентам" 
+    text="Небольшое описание в несколько строчек" 
+    :imgBg="bigImage" 
+    :imgAdaptiv="imgAdaptiv" 
+    :isButtonBase="false"
+    :typeColorWhite="item"
+    :typeColorWhiteText="item"
+    :breadcrumbs="[
+        {
+          title: 'Главная',
+          url: '/'
+        },
+        {
+          title: 'Бизнесу и корпоративным клиентам',
+          url: '/business'
+        }
+        ]"
+  />
+  <blocks-business-block :data="mockBusinessCards"/>
+  <BlocksMainBanner 
+    :title="'Корпоративные цены'"
+    :text="'Для организаций предусмотрен лояльный прайс лист на все базовые услуги'"
+    :titleLink="'Оставить заявку'"
+    link="#"
+    :handleLinkClick="openBidModal"
+    bgColor="light-blue"
+    type="true"
+    img="price.png"
+    bigImg=true
+  />
+  <blocks-chief-doctor-block :specialists="mockArray" />
+  <blocks-partners-block :data="mockArrayImg"/>
+  <blocks-main-form />
+</template>

@@ -7,14 +7,21 @@ import { textAboutImportantArray } from '../../stores/mockData';
 const route = useRoute()
 let mockDate = mockArrayClinic[2]
 
+const assetsStore = useAssets();
+const bigImage = assetsStore.useAsset("images/big-images/children-clinic.png");
+
+const imgAdaptiv = assetsStore.useAsset(
+  "images/big-images/children-clinic-adaptiv.png",
+);
+
 </script>
 
 <template>
   <elements-main-info 
     :title="mockDate.title" 
     :text="mockDate.titleDescription" 
-    :imgBg="mockDate.imgBgTitle" 
-    :imgAdaptiv="mockDate.imgAdaptivTitle" 
+    :imgBg="bigImage" 
+    :imgAdaptiv="imgAdaptiv" 
     :breadcrumbs="[
         {
           title: 'Главная',

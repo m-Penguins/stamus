@@ -8,6 +8,13 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 const route = useRoute()
 let mockDate = mockArrayClinic[3]
 
+const assetsStore = useAssets();
+const bigImage = assetsStore.useAsset("images/big-images/chelyustno-licevaya-hirurgiya.png");
+
+const imgAdaptiv = assetsStore.useAsset(
+  "images/big-images/chelyustno-licevaya-hirurgiya-adaptiv.png",
+);
+
 const item = ref(true);
 const checkScreenSize = () => {
   item.value = window.innerWidth <= 1110 ? false : true;
@@ -29,9 +36,9 @@ const arrayImg = ['gallery6.png', 'gallery5.png', 'gallery4.png']
 <template>
   <elements-main-info 
     :title="mockDate.title" 
-    :text="mockDate.titleDescription" 
-    imgBg="chelyustno-licevaya-hirurgiya.png" 
-    imgAdaptiv="chelyustno-licevaya-hirurgiya-adaptiv.png"
+    :text="mockDate.titleDescription"
+    :imgBg="bigImage" 
+    :imgAdaptiv="imgAdaptiv" 
     :typeColorWhite="item"
     :typeColorWhiteText="item"
     :breadcrumbs="[
