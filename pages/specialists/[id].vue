@@ -18,6 +18,8 @@ if (!specialist.value?.data) {
   throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
 }
 
+console.log(otherSpecialists.value);
+
 const breadcrumbs = [
   {
     title: "Главная",
@@ -85,7 +87,14 @@ const documents = ref(
   ),
 );
 
-console.log(singleServices.value);
+const reviews = ref(
+  specialist.value?.data?.attributes?.reviews?.data?.map((el) => ({
+    name: el?.attributes?.name,
+    grade: el?.attributes?.review,
+    date: el?.attributes?.date,
+    text: el?.attributes?.text,
+  })),
+);
 
 const redirectToExternalApp = () => {};
 </script>
@@ -231,12 +240,16 @@ const redirectToExternalApp = () => {};
     id="portfolio"
     class="portfolio-id"
   />
-  <blocks-main-feedback />
+  <blocks-main-feedback v-if="reviews?.length > 0" :reviews="reviews" />
   <!-- <blocks-video-slider-block :imagesScroll="imagesScrollVideo" title="Видео" /> -->
   <blocks-our-specialists
     v-if="otherSpecialists?.data"
     title="Еще специалисты"
-    :data="otherSpecialists.data"
+    :data="
+      otherSpecialists?.data?.filter(
+        (el) => String(el?.id) !== String(route.params.id),
+      )
+    "
   />
   <blocks-main-form />
 </template>
