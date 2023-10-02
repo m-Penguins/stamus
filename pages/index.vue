@@ -1,15 +1,16 @@
 <script setup>
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
-const assetsStore = useAssets();
 
-const { data: fourSpecialists } = await useFetch(`${apiBaseUrl}specialists`, {
-  query: {
-    "pagination[page]": 1,
-    "pagination[pageSize]": 4,
-    populate: "deep",
-  },
-});
+const [{ data: fourSpecialists }] = await Promise.all([
+  useFetch(`${apiBaseUrl}specialists`, {
+    query: {
+      "pagination[page]": 1,
+      "pagination[pageSize]": 4,
+      populate: "deep",
+    },
+  }),
+]);
 
 const mainSpecialists = fourSpecialists.value?.data?.map((sp) => {
   return {
@@ -39,8 +40,6 @@ const mainSpecialists = fourSpecialists.value?.data?.map((sp) => {
     },
   };
 });
-
-console.log(mainSpecialists);
 </script>
 
 <template>

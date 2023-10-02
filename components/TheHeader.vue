@@ -67,7 +67,7 @@ export default {
     const storeServices = useService();
     const router = useRouter();
     const route = useRoute();
-    const baseUrl = useRuntimeConfig().public.apiBaseUrl;
+    const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
     const directionTitle = ref("");
     let activeClass2 = "";
 
@@ -76,7 +76,7 @@ export default {
     };
 
     onMounted(async () => {
-      await storeServices.fetchdataService(baseUrl);
+      await storeServices.fetchdataService(apiBaseUrl);
     });
 
     const navigateToRoute = (serv, dir) => {

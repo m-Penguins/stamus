@@ -2,8 +2,6 @@
 const props = defineProps(["mainSpecialists"]);
 
 const selectedIndex = ref(0);
-
-console.log(selectedIndex.value);
 </script>
 
 <template>
