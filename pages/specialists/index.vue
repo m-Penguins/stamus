@@ -9,12 +9,18 @@ const pageSize = ref("12");
 const currentPageParam = ref(route.query.page ?? "1");
 const filterClinicParam = ref(route.query.clinic ?? "");
 const filterDirectionParam = ref(route.query.direction ?? "");
+const filterSearchParam = ref(route.query.search ?? "");
 
 const firstQuery = {
   "pagination[page]": currentPageParam.value,
   "pagination[pageSize]": pageSize.value,
   "filters[clinics][id]": filterClinicParam.value,
   "filters[category]": filterDirectionParam.value,
+  "filters[fullName][$contains]": filterSearchParam.value,
+  "filters[fullName][$contains]": filterSearchParam.value.toLowerCase(),
+  "filters[fullName][$contains]":
+    filterSearchParam.value.charAt(0).toUpperCase() +
+    filterSearchParam.value.slice(1).toLowerCase(),
 };
 
 Object.keys(firstQuery).forEach(
@@ -59,6 +65,11 @@ watch(
       "pagination[pageSize]": pageSize.value,
       "filters[clinics][id]": filterClinicParam.value,
       "filters[category]": filterDirectionParam.value,
+      "filters[fullName][$contains]": filterSearchParam.value,
+      "filters[fullName][$contains]": filterSearchParam.value.toLowerCase(),
+      "filters[fullName][$contains]":
+        filterSearchParam.value.charAt(0).toUpperCase() +
+        filterSearchParam.value.slice(1).toLowerCase(),
     };
 
     Object.keys(newQuery).forEach(
@@ -96,15 +107,45 @@ const handleLinkClick = (id) => {
   router.push(`/specialists/` + String(id));
 };
 
+const handleSearchChange = () => {
+  setCurrentPage(1);
+
+  const newQuery = {
+    search: filterSearchParam.value,
+    clinic: filterClinicParam.value,
+    direction: filterDirectionParam.value,
+    page: 1,
+  };
+
+  Object.keys(newQuery).forEach(
+    (key) =>
+      (newQuery[key] === undefined || !newQuery[key]) && delete newQuery[key],
+  );
+  router.push({
+    path: route.path,
+    query: newQuery,
+  });
+};
+
+const handleDebouncedSearch = useDebounce(handleSearchChange, 500);
+
+const handleInputChange = (value) => {
+  filterSearchParam.value = value;
+  handleDebouncedSearch();
+};
+
 const handleClinicChange = (clinic) => {
   filterClinicParam.value = clinic.id;
 
   setCurrentPage(1);
 
   const newQuery = {
-    clinic: clinic.id,
+    search: filterSearchParam.value,
+    clinic: filterClinicParam.value,
+    direction: filterDirectionParam.value,
     page: 1,
   };
+
   Object.keys(newQuery).forEach(
     (key) =>
       (newQuery[key] === undefined || !newQuery[key]) && delete newQuery[key],
@@ -112,10 +153,7 @@ const handleClinicChange = (clinic) => {
 
   router.push({
     path: route.path,
-    query: {
-      ...route.query,
-      ...newQuery,
-    },
+    query: newQuery,
   });
 };
 
@@ -124,9 +162,10 @@ const handleDirectionChange = (direction) => {
   filterDirectionParam.value = direction.name;
 
   const newQuery = {
-    clinic: route.query?.clinic ?? "",
+    search: filterSearchParam.value,
+    clinic: filterClinicParam.value,
+    direction: filterDirectionParam.value,
     page: 1,
-    direction: direction.name,
   };
 
   Object.keys(newQuery).forEach(
@@ -136,10 +175,7 @@ const handleDirectionChange = (direction) => {
 
   router.push({
     path: route.path,
-    query: {
-      ...route.query,
-      ...newQuery,
-    },
+    query: newQuery,
   });
 };
 
@@ -155,33 +191,7 @@ const breadcrumbs = [
     url: "/specialists",
   },
 ];
-const mockArray = [
-  {
-    name: "Профессиональная гигиена полости рта и зубов временный прикус",
-    price: "от 3 400 ₽",
-    type: "Рекомендуем",
-  },
-  {
-    name: "Профессиональная гигиена полости рта и зубов временный прикус",
-    price: "от 3 400 ₽",
-    type: "Рекомендуем",
-  },
-  {
-    name: "Профессиональная гигиена полости рта и зубов временный прикус",
-    price: "от 3 400 ₽",
-    type: "Рекомендуем",
-  },
-  {
-    name: "Профессиональная гигиена полости рта и зубов временный прикус",
-    price: "от 3 400 ₽",
-    type: "Рекомендуем",
-  },
-  {
-    name: "Профессиональная гигиена полости рта и зубов временный прикус",
-    price: "от 3 400 ₽",
-    type: "Рекомендуем",
-  },
-];
+
 const mockArrayTooltips = [
   {
     text: "Победитель Гран-при Продокторов «Лучший ортопед России» 2021",
@@ -208,8 +218,9 @@ const mockArrayTooltips = [
           <elements-select
             :options="directions"
             :default="
-              directions.find((dir) => String(dir.name) === filterDirectionParam)
-                ?.name ?? 'Направление'
+              directions.find(
+                (dir) => String(dir.name) === filterDirectionParam,
+              )?.name ?? 'Направление'
             "
             label="Направление"
             class="select"
@@ -240,6 +251,9 @@ const mockArrayTooltips = [
             <elements-input-search-components
               class="input-search"
               placeholder="Найти"
+              :modelValue="filterSearchParam"
+              @update:modelValue="handleInputChange"
+              @submit="handleInputChange"
             />
           </div>
         </div>
