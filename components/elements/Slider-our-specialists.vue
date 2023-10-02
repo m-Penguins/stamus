@@ -72,7 +72,7 @@ export default {
                 id: item?.id,
               }"
               :arrayTooltip="mockArrayTooltips"
-              :isTooltipSlider="true"
+              :isTooltip="false"
             />
           </swiper-slide>
         </template>

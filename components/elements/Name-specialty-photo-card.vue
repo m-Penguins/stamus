@@ -160,8 +160,6 @@ export default {
   opacity: 0;
   transform: translate3d(0, -20px, 0);
   transition: all 0.5s ease-out;
-  overflow-y: scroll;
-  max-height: 300px;
 
   &:before {
     position: absolute;
@@ -178,8 +176,8 @@ export default {
     width: 10px;
     height: 10px;
     transform: rotate(45deg);
-    bottom: -3px;
-    left: 50%;
+    bottom: -1px;
+    left: 48%;
     margin-left: 130px;
     background: white;
   }

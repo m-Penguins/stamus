@@ -7,7 +7,7 @@
           :typeColorWhite="typeColorWhite"
         />
         <div class="mob">
-          <img :src="imgAdaptiv" :class="[isDital ? 'img-dital' : 'img']" />
+            <img :src="imgAdaptiv" :class="{'img-dital': isDital, 'img': !isDital}" />
           <div>
             <elements-title-text-button
               textButtonBase="Записаться онлайн"
@@ -184,6 +184,9 @@ export default {
 }
 
 @media (max-width: 1110px) {
+  .bg-dark {
+    box-shadow: 0 0 0;
+  }
   .dentistry-wrapper {
     margin-top: 0;
   }
