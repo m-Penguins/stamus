@@ -1,11 +1,11 @@
 <template>
   <div class="input-base">
-    <form @submit.prevent="(e) => handleSubmit(e.target[0].value)">
+    <form @submit.prevent="(e) => handleSubmit(e.target[0].value.trim())">
       <input
         type="text"
         :placeholder="placeholder"
         :value="modelValue"
-        @input="(e) => handleInput(e.target.value)"
+        @input="(e) => handleInput(e.target.value.trim())"
         class="input bg"
       />
       <button type="submit" class="btn-search">
