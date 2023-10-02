@@ -155,33 +155,6 @@ const breadcrumbs = [
     url: "/specialists",
   },
 ];
-const mockArray = [
-  {
-    name: "Профессиональная гигиена полости рта и зубов временный прикус",
-    price: "от 3 400 ₽",
-    type: "Рекомендуем",
-  },
-  {
-    name: "Профессиональная гигиена полости рта и зубов временный прикус",
-    price: "от 3 400 ₽",
-    type: "Рекомендуем",
-  },
-  {
-    name: "Профессиональная гигиена полости рта и зубов временный прикус",
-    price: "от 3 400 ₽",
-    type: "Рекомендуем",
-  },
-  {
-    name: "Профессиональная гигиена полости рта и зубов временный прикус",
-    price: "от 3 400 ₽",
-    type: "Рекомендуем",
-  },
-  {
-    name: "Профессиональная гигиена полости рта и зубов временный прикус",
-    price: "от 3 400 ₽",
-    type: "Рекомендуем",
-  },
-];
 const mockArrayTooltips = [
   {
     text: "Победитель Гран-при Продокторов «Лучший ортопед России» 2021",
@@ -204,7 +177,6 @@ const mockArrayTooltips = [
       <div class="spicialists-page-title">Специалисты</div>
       <div class="specialist-form">
         <div class="specialist-box">
-          <elements-select :options="[]" :default="'Взрослым'" class="select" />
           <elements-select
             :options="directions"
             :default="
@@ -219,8 +191,6 @@ const mockArrayTooltips = [
               directions.find((dir) => dir.name === filterDirectionParam)
             "
           />
-        </div>
-        <div class="specialist-box">
           <elements-select
             :options="clinicsList"
             :default="
@@ -236,6 +206,8 @@ const mockArrayTooltips = [
             class="select"
             @input="handleClinicChange"
           />
+        </div>
+        <div class="specialist-box width-style">
           <div class="input-search">
             <elements-input-search-components
               class="input-search"
@@ -265,7 +237,7 @@ const mockArrayTooltips = [
                   ? baseUrl +
                     specialist?.attributes?.fotoSpecialist?.data?.attributes
                       ?.url
-                  : assetsStore.useAsset('images/icons/logo.svg'),
+                  : assetsStore.useAsset('images/no-photo.png'),
                 position: specialist?.attributes?.position,
               }"
             />
@@ -286,6 +258,10 @@ const mockArrayTooltips = [
 
 <style lang="scss" scoped>
 @import "../../assets/styles/style.scss";
+
+.width-style {
+  width: 24% !important;
+}
 .input-search {
   width: 100%;
 }
@@ -311,6 +287,7 @@ const mockArrayTooltips = [
 
 .specialist-form {
   display: flex;
+  justify-content: space-between;
   width: 100%;
   gap: 20px;
   padding-bottom: 40px;
@@ -333,11 +310,14 @@ const mockArrayTooltips = [
 }
 
 @media (max-width: 1351px) {
-  .specialist-box {
-    flex-wrap: wrap;
+  .width-style {
+    width: 33% !important;
   }
   .spicialists-page-card {
     max-width: 334px;
+  }
+  .specialist-box {
+    width: 66%;
   }
 }
 
@@ -360,6 +340,18 @@ const mockArrayTooltips = [
   }
 }
 
+@media (max-width: 1000px) {  
+  .specialist-box {
+    width: 100%;
+  }
+  .specialist-form {
+    flex-wrap: wrap;
+  }
+  .width-style {
+    width: 100% !important;
+  }
+}
+
 @media (max-width: 904px) {
   .spicialists-page-title {
     font-size: 22px;
@@ -374,12 +366,6 @@ const mockArrayTooltips = [
   }
 }
 
-@media (max-width: 590px) {
-  .spicialists-page-card {
-    width: 100%;
-  }
-}
-
 @media (max-width: 676px) {
   .spicialists-page-title {
     padding: 10px 0 50px;
@@ -390,12 +376,16 @@ const mockArrayTooltips = [
 
   .specialist-box {
     width: 100%;
+    flex-wrap: wrap;
+  }
+  .spicialists-page-cards {
+    justify-content: center;
   }
 }
 
-@media (max-width: 676px) {
-  .spicialists-page-cards {
-    justify-content: center;
+@media (max-width: 590px) {
+  .spicialists-page-card {
+    width: 100%;
   }
 }
 

@@ -104,6 +104,13 @@ export default {
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
 
+.default {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 15px;
+}
+
 .dopText {
   margin-bottom: 20px;
 }
