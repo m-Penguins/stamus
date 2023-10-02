@@ -240,7 +240,7 @@ const redirectToExternalApp = () => {};
     id="portfolio"
     class="portfolio-id"
   />
-  <blocks-main-feedback v-if="reviews?.length > 0" :reviews="reviews" />
+  <blocks-main-feedback :reviews="reviews" />
   <!-- <blocks-video-slider-block :imagesScroll="imagesScrollVideo" title="Видео" /> -->
   <blocks-our-specialists
     v-if="otherSpecialists?.data"

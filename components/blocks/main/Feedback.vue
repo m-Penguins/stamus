@@ -1,5 +1,5 @@
 <template>
-  <div class="container-size wrapper-feedback">
+  <div v-if="reviews?.length > 0" class="container-size wrapper-feedback">
     <elements-slider :programs="reviews" />
   </div>
 </template>
