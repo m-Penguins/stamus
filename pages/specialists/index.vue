@@ -215,13 +215,13 @@ const mockArrayTooltips = [
           <elements-select
             :options="directions"
             :default="
-              directions.find((dir) => String(dir.id) === filterDirectionParam)
+              directions.find((dir) => String(dir.name) === filterDirectionParam)
                 ?.name ?? 'Направление'
             "
             label="Направление"
             class="select"
             @input="handleDirectionChange"
-            :isSelectedId="filterDirectionParam"
+            :isSelectedId="filterDirectionParam ?? route.query.direction"
             :selectedItem="
               directions.find((dir) => dir.name === filterDirectionParam)
             "
@@ -235,7 +235,7 @@ const mockArrayTooltips = [
                 (cl) => String(cl.id) === String(filterClinicParam),
               )?.name ?? 'Клиника'
             "
-            :isSelectedId="filterClinicParam"
+            :isSelectedId="filterClinicParam ?? route.query.clinic"
             :selectedItem="
               clinicsList.find((cl) => cl.id === filterClinicParam)
             "

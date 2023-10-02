@@ -14,7 +14,7 @@
             isSelectedId !== selectedItem?.name
         "
         class="default"
-        :class="{ 'select-margin': selectedItem?.id || selectedItem?.name }"
+        :class="{ 'select-margin': selectedItem?.id || selectedItem?.name || isSelectedId }"
       >
         {{ selected }}
       </div>
