@@ -1,12 +1,12 @@
 <template>
 	<div class="education-mob">
 		<div class="education-mob-container">
-			<div>{{ event.date }}</div>
-			<div class="education-mob-point"></div>
-			<div>{{ event.category }}</div>
+			<div>{{ event.years }}</div>
+			<!-- <div class="education-mob-point"></div> -->
+			<!-- <div>{{ event.category }}</div> -->
 		</div>
 		<div>
-			<div class="education-mob-title">{{ event.title }}</div>
+			<div class="education-mob-title">{{ event.educationalInstitution }}</div>
 		</div>
 	</div>
 </template>

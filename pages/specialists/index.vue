@@ -267,7 +267,7 @@ const mockArrayTooltips = [
             <elements-name-specialty-photo-card
               link="#"
               :handleLinkClick="() => handleLinkClick(specialist.id)"
-              :arrayTooltip="mockArrayTooltips"
+              :arrayTooltip="{achievement: specialist?.attributes?.achievements, img: specialist?.attributes?.achievements?.icon?.data?.attributes?.url}"
               :specialists="{
                 name:
                   specialist?.attributes?.firstName +
@@ -280,6 +280,7 @@ const mockArrayTooltips = [
                       ?.url
                   : assetsStore.useAsset('images/no-photo.png'),
                 position: specialist?.attributes?.position,
+                achievements: specialist?.attributes?.achievements,
               }"
             />
           </div>
