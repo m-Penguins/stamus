@@ -33,6 +33,9 @@ export default {
       type: Boolean,
       default: false,
     },
+    problemImg: {
+      type: String,
+    },
   },
 };
 </script>
@@ -143,7 +146,7 @@ export default {
       </div>
       <div v-if="isProblems">
         <div>
-          <img src="../../assets/images/problems/problem1.png" alt="problem" />
+          <img :src="problemImg" alt="problem" />
         </div>
       </div>
     </div>

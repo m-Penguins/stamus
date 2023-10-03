@@ -1,3 +1,7 @@
+<script setup>
+defineProps(["title", "cards", "image"]);
+</script>
+
 <template>
   <div class="solution-block">
     <div>
@@ -6,33 +10,26 @@
       </div>
       <div class="solution-block-container">
         <div class="solution-block-container__img">
-          <img 
-            src="../../assets/images/solution/solution1.png" 
+          <img
+            :src="image"
             alt="img"
             class="solution-block-container-picture"
-            >
+          />
         </div>
         <div class="solution-block-container__text">
-          <elements-solution-card v-for="card in cards" :key="card.id" :card="card" />
+          <elements-solution-card
+            v-for="card in cards"
+            :key="card.id"
+            :card="card"
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
 
-
-<script>
-export default {
-  props: {
-    title: String,
-    cards: Array
-  },
-}
-
-</script>
-
 <style scoped lang="scss">
-@import '/assets/styles/style.scss';
+@import "/assets/styles/style.scss";
 
 .solution-block {
   display: flex;
@@ -45,14 +42,14 @@ export default {
 .solution-block-box {
   padding: 40px;
   border-radius: 15px;
-  background: #F9F9FA;
-  margin-bottom: 40px
+  background: #f9f9fa;
+  margin-bottom: 40px;
 }
 
 .solution-block-title {
- @include body-22-medium-Neue;
- color: $dark-blue-subtitle;
- text-align: center;
+  @include body-22-medium-Neue;
+  color: $dark-blue-subtitle;
+  text-align: center;
 }
 
 .solution-block-container-picture {
@@ -76,21 +73,19 @@ export default {
   }
 
   .solution-block-container {
-    flex-wrap: wrap;  
+    flex-wrap: wrap;
 
-      &__text {
-        width: 100%;
-      }
+    &__text {
+      width: 100%;
+    }
 
-      &__img {
-        width: 100%;
-      }
+    &__img {
+      width: 100%;
+    }
   }
 
   .solution-block-container-picture {
     width: 100%;
   }
 }
-
-
 </style>
