@@ -41,6 +41,7 @@ const articles = articlesData.value?.data?.map((art) => {
       : assetsStore.useAsset("images/articles/articles-dital.png"),
     text: art?.attributes?.text,
     tags: art?.attributes?.tags,
+    description: art?.attributes?.description,
   };
 });
 
@@ -88,7 +89,7 @@ const totalPages = ref(Math.ceil(articles?.length / pageSize.value));
       </div>
       <div class="articles-page-cards">
         <div
-          v-for="(item, index) in articles"
+          v-for="item in articles"
           :key="item.id"
           class="articles-page-cards-box"
         >

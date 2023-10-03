@@ -130,8 +130,9 @@ const otherArticles = allArticles.value?.data
 
 .articles-dital-box {
   display: flex;
+  flex-wrap: wrap;
   position: absolute;
-  top: 93%;
+  bottom: 7%;
   left: 20px;
   gap: 10px;
 

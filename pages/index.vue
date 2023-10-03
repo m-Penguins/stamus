@@ -22,6 +22,7 @@ const articles = articlesData.value?.data?.map((art) => {
       : assetsStore.useAsset("images/articles/articles-dital.png"),
     text: art?.attributes?.text,
     tags: art?.attributes?.tags,
+    description: art?.attributes?.description,
   };
 });
 

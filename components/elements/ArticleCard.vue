@@ -13,7 +13,7 @@
       </div>
     </div>
     <h2 class="article-card__name">{{ article.heading }}</h2>
-    <p class="text-article" v-html="article.text"></p>
+    <p class="text-article">{{ article.description }}</p>
     <elements-link-with-arrow
       type="type"
       title="Читать"
