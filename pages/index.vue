@@ -2,7 +2,7 @@
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const [{ data: fourSpecialists }] = await Promise.all([
+const [{ data: fourSpecialists }, { data: articlesData }] = await Promise.all([
   useFetch(`${apiBaseUrl}specialists`, {
     query: {
       "pagination[page]": 1,
@@ -10,7 +10,20 @@ const [{ data: fourSpecialists }] = await Promise.all([
       populate: "deep",
     },
   }),
+  useFetch(`${apiBaseUrl}articles`, { query: { populate: "deep" } }),
 ]);
+
+const articles = articlesData.value?.data?.map((art) => {
+  return {
+    id: art?.id,
+    heading: art?.attributes?.heading,
+    img: art?.attributes?.fotoArticles?.data?.attributes?.url
+      ? baseUrl + art?.attributes?.fotoArticles?.data?.attributes?.url
+      : assetsStore.useAsset("images/articles/articles-dital.png"),
+    text: art?.attributes?.text,
+    tags: art?.attributes?.tags,
+  };
+});
 
 const mainSpecialists = fourSpecialists.value?.data?.map((sp) => {
   return {
@@ -119,7 +132,7 @@ const reviews = [
     bgColor="dark-red"
     img="image.png"
   />
-  <blocks-main-articles title="Статьи" />
+  <blocks-main-articles title="Статьи" :articles="articles" />
   <blocks-main-seo
     title="СЕО текст"
     text="Как уже неоднократно упомянуто, непосредственные участники технического прогресса неоднозначны и будут разоблачены.
