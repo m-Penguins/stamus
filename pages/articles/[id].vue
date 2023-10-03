@@ -126,6 +126,24 @@ const otherArticles = allArticles.value?.data
   gap: 24px;
   @include body-14-regular;
   color: $gray-text;
+
+  p {
+  }
+
+  a {
+  }
+
+  h1 {
+  }
+
+  h2 {
+  }
+
+  ul {
+  }
+
+  ol {
+  }
 }
 
 .articles-dital-box {
