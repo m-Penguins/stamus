@@ -1,17 +1,17 @@
 <template>
   <div class="timeline">
     <div class="timeline-item" v-for="(event, index) in displayedEvents" :key="event.id">
-      <div class="lines">
-        <div class="dot" :class="{'last': event.date === 'н.в.'}"></div>
+      <!-- <div class="lines">
+        <div class="dot" :class="{'last': event.years === 'н.в.'}"></div>
         <div class="line" v-if="index !== events.length - 1 && index !== displayedEvents.length - 1"></div>
-      </div>
+      </div> -->
       <div class="cards">
-        <h4 class="timeline-date">{{ event.date }}</h4>
-        <h4 class="timeline-title">{{ event.title }}</h4>
-        <h4 class="timeline-category">{{ event.category }}</h4>
+        <div class="timeline-date">{{ event.years }}</div>
+        <div class="timeline-title">{{ event.educationalInstitution }}</div>
+        <!-- <h4 class="timeline-category">{{ event.category }}</h4> -->
       </div>
     </div>
-    <div class="timeline-box" v-if="events.length === 5">
+    <div class="timeline-box" v-if="events.length >= 5">
       <button class="timeline-btn" @click="toggleShowMore">
         {{ showMoreText }}
         <div v-if="!showAll" class="timeline-svg">
@@ -91,11 +91,27 @@ export default {
   }
 }
 .cards {
-  margin-left: 10px;
+  margin-left: 4px;
   display: flex;
   align-items: baseline;
   gap: 10px;
-  margin-top: -7px;
+  width: 100%;
+  border-left: 1px solid #e9e9e9;
+  padding-left: 10px;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.cards::before {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    background: white;
+    border-radius: 999px;
+    left: -5px;
+    top: 7px;
+    border: 2px solid #CFD5E1;
 }
 
 .timeline-item {
@@ -105,12 +121,14 @@ export default {
 .timeline-date {
   @include body-12-regular;
   color: $placeholder;
+  width: fit-content;
+  white-space: nowrap;
 }
 
 .timeline-title {
   @include body-16-regular;
   color: $gray-text;
-      min-width: 175px;
+  min-width: 175px;
 }
 
 .timeline-category {

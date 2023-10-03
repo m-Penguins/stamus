@@ -208,7 +208,7 @@ const redirectToExternalApp = () => {};
     "
   />
   <!-- <blocks-activities-block :activitiesCard="mockActivitiesCard" /> -->
-  <!-- <blocks-education-block :events="timelineEvents" title="Образование" /> -->
+  <blocks-education-block :events="specialist?.data?.attributes?.education" title="Образование" />
   <!-- <blocks-education-block
     :events="timelineEventsAdditionally"
     title="Дополнительное образование"

@@ -17,12 +17,12 @@
       <div v-if="isTooltip" class="tooltip">
         <img src="../../assets/images/icons/icons-badge.svg" />
         <span class="info">
-          <div class="tooltip-box" v-for="item in arrayTooltip" :key="item">
+          <div class="tooltip-box" v-for="item in specialists.achievements" :key="item">
             <img
-              :src="assetsStore.useAsset(`images/icons/tooltip/${item.img}`)"
+              :src="baseUrl + item.icon.data.attributes.url"
               alt="icon"
             />
-            <p class="tooltip-text">{{ item.text }}</p>
+            <p class="tooltip-text">{{ item.achievement }}</p>
           </div>
         </span>
       </div>
@@ -68,7 +68,7 @@ export default {
       default: true,
     },
     arrayTooltip: {
-      type: Array,
+      type: Object,
     },
     handleLinkClick: Function,
   },
@@ -80,11 +80,13 @@ export default {
     },
   },
   setup() {
+    const baseUrl = useRuntimeConfig().public.baseUrl;
     const assetsStore = useAssets();
     const arr = ["1", "2", "3"];
     return {
       arr,
       assetsStore,
+      baseUrl
     };
   },
 };
