@@ -23,8 +23,6 @@ if (!specialist.value?.data) {
   throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
 }
 
-console.log(otherSpecialists.value);
-
 const breadcrumbs = [
   {
     title: "Главная",
