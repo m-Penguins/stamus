@@ -12,29 +12,39 @@ const imagesScroll = [
   "video3.png",
   "video3.png",
 ];
-const baseUrl = useRuntimeConfig().public.apiBaseUrl;
+const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+const baseUrl = useRuntimeConfig().public.baseUrl;
 
+const assetsStore = useAssets();
 const storeServices = useService();
 const serviceId = storeServices.getAllServicesArray.find((el) =>
   el.path.includes(route.params.slot),
 ).id;
 
-const { data: serviceData, error } = await useFetch(
-  `${baseUrl}services/${serviceId}?populate=deep`,
+const { data: serviceData } = await useFetch(
+  `${apiBaseUrl}services/${serviceId}?populate=deep`,
 );
 
-console.log("srvice datta", serviceId);
+console.log("srvice datta", serviceData);
 </script>
 
 <template>
   <div>
     <elements-main-info
-      :title="serviceData.data.attributes.heading"
-      :text="serviceData.data.attributes.description"
+      :title="serviceData?.data?.attributes?.heading"
+      :text="serviceData?.data?.attributes?.description"
       :imgBg="
-        serviceData.data.attributes.photoBanner.data ?? 'removal-tooth.png'
+        serviceData?.data?.attributes?.photoBanner?.data?.attributes?.url
+          ? baseUrl +
+            serviceData?.data?.attributes?.photoBanner?.data?.attributes?.url
+          : assetsStore.useAsset('images/big-images/removal-tooth.png')
       "
-      imgAdaptiv="removal-tooth.png"
+      :imgAdaptiv="
+        serviceData.data.attributes.photoBanner.data?.attributes?.url
+          ? baseUrl +
+            serviceData?.data?.attributes?.photoBanner?.data?.attributes?.url
+          : assetsStore.useAsset('images/big-images/removal-tooth.png')
+      "
       :isDital="true"
       :breadcrumbs="[
         {
@@ -64,7 +74,11 @@ console.log("srvice datta", serviceId);
     <div class="container-size popular-service">
       <div class="service-title">
         <h2 class="popular-service__title">Услуги</h2>
-        <elements-link-with-arrow type="true" title="Посмотреть все" link="/prices"/>
+        <elements-link-with-arrow
+          type="true"
+          title="Посмотреть все"
+          link="/prices"
+        />
       </div>
       <div class="popular-service__list">
         <div v-for="(item, index) in mockArrayServicesCard" :key="index">

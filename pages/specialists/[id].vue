@@ -96,6 +96,8 @@ const reviews = ref(
   })),
 );
 
+const activities = ref(specialistDeep.value?.data?.attributes?.areasOfActivity);
+
 const redirectToExternalApp = () => {};
 </script>
 
@@ -207,7 +209,7 @@ const redirectToExternalApp = () => {};
         : ''
     "
   />
-  <!-- <blocks-activities-block :activitiesCard="mockActivitiesCard" /> -->
+  <blocks-activities-block :activitiesCard="activities" />
   <!-- <blocks-education-block :events="timelineEvents" title="Образование" /> -->
   <!-- <blocks-education-block
     :events="timelineEventsAdditionally"
