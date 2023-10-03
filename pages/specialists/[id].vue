@@ -11,7 +11,12 @@ const [
 ] = await Promise.all([
   useFetch(`${apiBaseUrl}specialists/${route.params.id}?populate=deep`),
   useFetch(`${apiBaseUrl}specialists/${route.params.id}?populate=*`),
-  useFetch(`${apiBaseUrl}specialists?populate=deep`),
+  useFetch(`${apiBaseUrl}specialists`, {
+    query: {
+      populate: "deep",
+      "pagination[pageSize]": 100,
+    },
+  }),
 ]);
 
 if (!specialist.value?.data) {
