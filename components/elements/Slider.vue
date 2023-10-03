@@ -1,3 +1,16 @@
+<script setup>
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Navigation } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
+
+const props = defineProps(["programs", "link"]);
+
+const prev = ref(null);
+const next = ref(null);
+</script>
+
 <template>
   <div class="main-events-block">
     <div class="slider-title">
@@ -6,9 +19,9 @@
         <img src="@/assets/images/img-text/prodoctorov.svg" alt="Текст" />
       </div>
       <div class="slider-title__grade">
-        <div class="grey-point-text">4.8 средняя оценка</div>
+        <div class="grey-point-text">4,9 средняя оценка</div>
         <div class="grey-point"></div>
-        <div class="grey-point-text">1958 отзывов</div>
+        <div class="grey-point-text">{{ programs?.length }} отзывов</div>
       </div>
     </div>
     <div class="wrapper-swiper">
@@ -16,7 +29,7 @@
         class="swiper"
         :slides-per-view="'auto'"
         :space-between="16"
-        :modules="modules"
+        :modules="[Navigation]"
         :navigation="{
           prevEl: prev,
           nextEl: next,
@@ -83,38 +96,6 @@
     </div>
   </div>
 </template>
-
-<script>
-import { Swiper, SwiperSlide } from "swiper/vue";
-import { Navigation } from "swiper/modules";
-
-import "swiper/css";
-import "swiper/css/navigation";
-
-export default {
-  components: {
-    Swiper,
-    SwiperSlide,
-  },
-  props: {
-    programs: {
-      type: Array,
-    },
-    link: {
-      type: String,
-    },
-  },
-  setup() {
-    const prev = ref(null);
-    const next = ref(null);
-    return {
-      modules: [Navigation],
-      prev,
-      next,
-    };
-  },
-};
-</script>
 
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";

@@ -1,29 +1,98 @@
+<script setup>
+const assetsStore = useAssets();
+const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const breadcrumbs = [
+  {
+    title: "Главная",
+    url: "/",
+  },
+  {
+    title: "Статьи",
+    url: "/articles",
+  },
+];
+
+const tabs = ref([
+  { id: 1, title: "Стоматология" },
+  { id: 2, title: "Челюстно-лицевая хирургия" },
+  { id: 3, title: "Детская стоматология" },
+]);
+
+const selectButton = (id) => {
+  selectedTab.value = id;
+};
+
+const setCurrentPage = (num) => {
+  currentPage.value = num;
+};
+
+const [{ data: articlesData }] = await Promise.all([
+  useFetch(`${apiBaseUrl}articles`, { query: { populate: "deep" } }),
+]);
+
+const articles = articlesData.value?.data?.map((art) => {
+  return {
+    id: art?.id,
+    heading: art?.attributes?.heading,
+    img: art?.attributes?.fotoArticles?.data?.attributes?.url
+      ? baseUrl + art?.attributes?.fotoArticles?.data?.attributes?.url
+      : assetsStore.useAsset("images/articles/articles-dital.png"),
+    text: art?.attributes?.text,
+    tags: art?.attributes?.tags,
+  };
+});
+
+const selectedTab = ref("");
+const currentPage = ref("");
+
+const pageSize = ref(16);
+const totalPages = ref(Math.ceil(articles?.length / pageSize.value));
+</script>
+
 <template>
   <div class="articles-page">
     <div class="articles-page-wrap">
-      <elements-bread-crumbs :breadcrumbs="breadcrumbs"/>
-      <div class="articles-page-title">
-        Статьи
-      </div>
+      <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
+      <div class="articles-page-title">Статьи</div>
       <div class="articles-page-btns">
-        <button 
-          v-for="button in buttons" 
-          :key="button.id" 
-          :class="{ 'active': selectedButton === button.id }" 
-          @click="selectButton(button.id)"
-          class="articles-page-btn">
-          {{ button.title }}
-          <div v-if="selectedButton === button.id" class="articles-page-icon-active">
-            <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 3.5L9 9.5M3 9.5L9 3.5" stroke="white" stroke-linecap="round"/>
+        <button
+          v-for="tab in tabs"
+          :key="tab.id"
+          :class="{ active: selectedButton === tab.id }"
+          @click="() => selectButton(tab.id)"
+          class="articles-page-btn"
+        >
+          {{ tab.title }}
+          <div
+            v-if="selectedButton === tab.id"
+            class="articles-page-icon-active"
+          >
+            <svg
+              width="12"
+              height="13"
+              viewBox="0 0 12 13"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3 3.5L9 9.5M3 9.5L9 3.5"
+                stroke="white"
+                stroke-linecap="round"
+              />
             </svg>
           </div>
         </button>
         <!--dd -->
       </div>
       <div class="articles-page-cards">
-        <div v-for="(item, index) in mockArrayArticleCard" :key="index" class="articles-page-cards-box">
-          <elements-article-card class="articles-page-card" :article="item"/>
+        <div
+          v-for="(item, index) in articles"
+          :key="item.id"
+          class="articles-page-cards-box"
+        >
+          <elements-article-card class="articles-page-card" :article="item" />
         </div>
       </div>
       <elements-pagination
@@ -36,48 +105,8 @@
   </div>
 </template>
 
-<script>
-import { mockArrayArticleCard } from '../../stores/mockData'
-export default {
-  data() {
-    return {
-      selectedButton: 1,
-      buttons: [
-        { id: 1, title: 'Стоматология'},
-        { id: 2, title: 'Челюстно-лицевая хирургия'},
-        { id: 3, title: 'Детская стоматология'},
-        ],
-      currentPage: 1,
-      totalPages: 5 
-      };
-    },
-    methods: {
-      selectButton(buttonId) {
-        this.selectedButton = buttonId;
-      },
-      setCurrentPage(pageNumber) {
-        this.currentPage = pageNumber;
-      }
-  },
-    setup() {
-      const breadcrumbs = [{
-          title: 'Главная',
-          url: '/'
-        },
-        {
-          title: 'Статьи',
-          url: '/articles'
-        }]
-    return {
-      mockArrayArticleCard,
-      breadcrumbs
-    }
-  }
-}
-</script>
-
 <style lang="scss" scoped>
-@import '/assets/styles/style.scss';
+@import "/assets/styles/style.scss";
 
 .articles-page {
   display: flex;
@@ -119,13 +148,13 @@ export default {
   color: $hover;
   text-align: center;
   @include body-12-regular;
-  border: 1px solid  rgba(35, 45, 91, 0.05);
+  border: 1px solid rgba(35, 45, 91, 0.05);
   cursor: pointer;
 
-    &.active {
-      background: var(--accent, #232D5B);
-      color: white;
-    }
+  &.active {
+    background: var(--accent, #232d5b);
+    color: white;
+  }
 }
 
 .articles-page-icon-active {
@@ -169,5 +198,4 @@ export default {
     width: 100%;
   }
 }
-
 </style>

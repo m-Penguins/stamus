@@ -2,7 +2,7 @@
   <div class="main-events-block">
     <div class="slider-title">
       <div class="slider-title__box">
-        <h2 class="slider-title__box-title" v-html="title"></h2>
+        <h2 class="slider-title__box-title">{{ title }}</h2>
         <elements-link-with-arrow
           type="type"
           title="Все статьи"
@@ -232,8 +232,8 @@ export default {
     max-width: 100%;
   }
   .swiper {
-      overflow: visible;
-    }
+    overflow: visible;
+  }
 }
 
 @media (max-width: 860px) {
@@ -242,14 +242,13 @@ export default {
   }
 }
 
-
-  @media screen and (max-width: 744px) {
-    .swiper {
-      overflow: visible;
-    }
+@media screen and (max-width: 744px) {
+  .swiper {
+    overflow: visible;
   }
+}
 
-  @media screen and (max-width: 650px) {
+@media screen and (max-width: 650px) {
   .swiper-slide {
     width: 330px;
   }
@@ -258,9 +257,9 @@ export default {
   }
 }
 
-  @media screen and (max-width: 400px) {
-    .swiper {
-      margin: 0;
-    }
+@media screen and (max-width: 400px) {
+  .swiper {
+    margin: 0;
   }
+}
 </style>

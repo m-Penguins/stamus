@@ -1,52 +1,13 @@
 <template>
   <div class="article-wrap">
     <div class="container-size container-article">
-      <elements-slider-article :title="title" :programs="mockArray" />
+      <elements-slider-article :title="title" :programs="articles" />
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    title: {
-      type: String,
-      default: "",
-    },
-  },
-  setup() {
-    const mockArray = [
-      {
-        name: "Наименование статьи 1",
-        category: "Стоматология",
-        description: "Равным образом, реализация намеченных плановых ",
-      },
-      {
-        name: "Наименование статьи 2",
-        category: "Стоматология",
-        description: "Равным образом, реализация намеченных плановых ",
-      },
-      {
-        name: "Наименование статьи 3",
-        category: "Стоматология",
-        description: "Равным образом, реализация намеченных плановых ",
-      },
-      {
-        name: "Наименование статьи 4",
-        category: "Стоматология",
-        description: "Равным образом, реализация намеченных плановых ",
-      },
-      {
-        name: "Наименование статьи  5",
-        category: "Стоматология",
-        description: "Равным образом, реализация намеченных плановых ",
-      },
-    ];
-    return {
-      mockArray,
-    };
-  },
-};
+<script setup>
+const props = defineProps(["title", "articles"]);
 </script>
 
 <style lang="scss" scoped>
