@@ -11,14 +11,17 @@ const [
 ] = await Promise.all([
   useFetch(`${apiBaseUrl}specialists/${route.params.id}?populate=deep`),
   useFetch(`${apiBaseUrl}specialists/${route.params.id}?populate=*`),
-  useFetch(`${apiBaseUrl}specialists?populate=deep`),
+  useFetch(`${apiBaseUrl}specialists`, {
+    query: {
+      populate: "deep",
+      "pagination[pageSize]": 100,
+    },
+  }),
 ]);
 
 if (!specialist.value?.data) {
   throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
 }
-
-console.log(otherSpecialists.value);
 
 const breadcrumbs = [
   {
@@ -95,6 +98,8 @@ const reviews = ref(
     text: el?.attributes?.text,
   })),
 );
+
+const activities = ref(specialistDeep.value?.data?.attributes?.areasOfActivity);
 
 const redirectToExternalApp = () => {};
 </script>

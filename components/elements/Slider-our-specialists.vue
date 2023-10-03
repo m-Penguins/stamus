@@ -1,38 +1,17 @@
-<script>
+<script setup>
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
-export default {
-  components: {
-    Swiper,
-    SwiperSlide,
-  },
-  props: {
-    programs: {
-      type: Array,
-    },
-    title: {
-      type: String,
-      default: "",
-    },
-  },
-  setup() {
-    const prev = ref(null);
-    const next = ref(null);
+const props = defineProps(["programs", "title"]);
+const prev = ref(null);
+const next = ref(null);
 
-    const baseUrl = useRuntimeConfig().public.baseUrl;
+const baseUrl = useRuntimeConfig().public.baseUrl;
 
-    return {
-      modules: [Navigation],
-      prev,
-      next,
-      baseUrl,
-    };
-  },
-};
+const assetsStore = useAssets();
 </script>
 
 <template>
@@ -47,7 +26,7 @@ export default {
         class="swiper"
         :slides-per-view="'auto'"
         :space-between="16"
-        :modules="modules"
+        :modules="[Navigation]"
         :navigation="{
           prevEl: prev,
           nextEl: next,
@@ -65,9 +44,10 @@ export default {
                   item?.attributes?.firstName +
                   ' ' +
                   item?.attributes?.lastName,
-                img:
-                  baseUrl +
-                  item?.attributes?.fotoSpecialist?.data?.attributes?.url,
+                img: item?.attributes?.fotoSpecialist?.data?.attributes?.url
+                  ? baseUrl +
+                    item?.attributes?.fotoSpecialist?.data?.attributes?.url
+                  : assetsStore.useAsset('images/no-photo.png'),
                 position: item?.attributes?.position,
                 id: item?.id,
               }"
