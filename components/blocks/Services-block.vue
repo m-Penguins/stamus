@@ -1,8 +1,14 @@
 <template>
   <div class="container-size popular-service">
     <div class="service-title">
-      <h2 class="popular-service__title" v-html="title"></h2>
-      <elements-link-with-arrow v-if="isLink" link="/prices" type="true" title="Посмотреть все" :isLink="isLink"/>
+      <h2 class="popular-service__title">{{ title }}</h2>
+      <elements-link-with-arrow
+        v-if="isLink"
+        link="/prices"
+        type="true"
+        title="Посмотреть все"
+        :isLink="isLink"
+      />
     </div>
     <div class="service-form">
       <div class="service-box">
@@ -11,137 +17,108 @@
           :default="'Направление'"
           class="select"
         />
-        <elements-select
-          :options="addresData"
-          :default="'Укажите клинику'"
-          class="select"
-        />
       </div>
       <div class="input-search">
-        <elements-input-search-components class="input-search" placeholder="Найти"/>
+        <elements-input-search-components
+          class="input-search"
+          placeholder="Найти"
+        />
       </div>
     </div>
-    <div class="popular-service__list">
-      <div v-for="(item, index) in mockArrayServices" :key="index">
-        <elements-service-card :service="item"/>
+    <div
+      class="popular-service__list"
+      v-for="service in singleServices"
+      :key="service.title"
+    >
+      <h2 class="popular-service__title">{{ service.title }}</h2>
+      <div v-for="(item, index) in service.services" :key="index">
+        <elements-service-card :service="item" />
       </div>
     </div>
   </div>
 </template>
 
-
-<script>
-import {mockArrayServices} from '../../stores/mockData'
-import ElementsLinkWithArrow from '../../components/elements/ElementsLinkWithArrow.vue';
-  export default {
-  components: { ElementsLinkWithArrow },
-    props: {
-      addresData: {
-        type: Array,
-      },
-      title: {
-        type: String,
-        default: 'Услуги'
-      },
-      isLink: {
-        type: Boolean,
-        default: true
-      }
-    },
-    setup() {
-       const mockArray = [
-        {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-        {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-        {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-        {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-        {name: 'Профессиональная гигиена полости рта и зубов временный прикус', price: 'от 3 400 ₽', type: 'Рекомендуем'},
-        ];
-      return {
-        mockArray,
-        mockArrayServices
-      }
-    }
-  }
+<script setup>
+const props = defineProps(["addresData", "singleServices", "title", "isLink"]);
 </script>
 
 <style lang="scss" scoped>
-@import '/assets/styles/style.scss';
+@import "/assets/styles/style.scss";
 
-  .popular-service {
-
-    &__title {
-      @include body-22-medium-Neue;
-      color: $dark-blue-subtitle;
-    }
-
-    &__list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+.popular-service {
+  &__title {
+    @include body-22-medium-Neue;
+    color: $dark-blue-subtitle;
   }
 
-  .service-title {
+  &__list {
     display: flex;
-    align-items: baseline;
-    justify-content: flex-start;
-    gap: 24px;
-    padding-bottom: 40px;
+    flex-direction: column;
+    gap: 10px;
   }
+}
 
+.service-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 24px;
+  padding-bottom: 40px;
+}
+
+.service-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 40px;
+}
+
+.service-box {
+  display: flex;
+  gap: 16px;
+  margin-right: 16px;
+}
+
+.select {
+  width: 308px;
+}
+
+@media (max-width: 1017px) {
   .service-form {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 10px;
   }
-
   .service-box {
-    display: flex;
-    gap: 16px;
-    margin-right: 16px;
-  }
-
-  .select {
-    width: 308px;
-  }
-
-  @media (max-width: 1017px) {
-    .service-form {
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .service-box {
-      margin-right: 0;
-      width: 100%;
-      .select {
-        width: 100%;
-      }
-    }
-    .input-search {
+    margin-right: 0;
+    width: 100%;
+    .select {
       width: 100%;
     }
   }
+  .input-search {
+    width: 100%;
+  }
+}
 
-  @media (max-width: 740px) {
-    .popular-service {
-      margin: 0 auto 80px !important;
-    }
-    .service-box {
-      flex-wrap: wrap;
+@media (max-width: 740px) {
+  .popular-service {
+    margin: 0 auto 80px !important;
+  }
+  .service-box {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 400px) {
+  .service-title {
+    display: block;
+    padding-bottom: 30px;
+  }
+  .popular-service {
+    margin: 0 auto 80px;
+    &__title {
+      padding-bottom: 10px;
     }
   }
-
-  @media (max-width: 400px) {
-    .service-title {
-      display: block;
-      padding-bottom: 30px;
-    }
-    .popular-service {
-      margin: 0 auto 80px;
-      &__title {
-        padding-bottom: 10px;
-      }
-    }
-  }
+}
 </style>

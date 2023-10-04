@@ -47,6 +47,29 @@ export default {
       ),
     );
 
+    const singleServices = ref(
+      clinicsData?.value?.data
+        ?.find((cl) => String(cl.id) === String(route.params.id))
+        ?.attributes?.price_lists?.data?.map((el) => {
+          const item = el?.attributes?.servicePrice?.map((single) => {
+            return {
+              id: single?.id,
+              heading: single?.heading,
+              price: single?.price,
+              isRecommended: single?.isRecommended,
+              isPopular: single?.isPopular,
+              isDemand: single?.isDemand,
+              tags: single?.tags,
+              link: "/prices",
+            };
+          });
+          return {
+            title: el?.attributes?.Title,
+            services: item,
+          };
+        }),
+    );
+
     const chiefDoctor = computed(() => {
       return {
         name: clinicData.value?.attributes?.chiefDoctor?.heading,
@@ -58,8 +81,6 @@ export default {
         text: clinicData.value?.attributes?.chiefDoctor?.text,
       };
     });
-
-    console.log(chiefDoctor.value);
 
     const otherClinics = computed(() =>
       clinicsData.value?.data
@@ -89,6 +110,7 @@ export default {
     ];
     return {
       clinicData,
+      singleServices,
       baseUrl,
       route,
       breadcrumbs,
@@ -137,8 +159,9 @@ export default {
     v-if="chiefDoctor.name"
     :specialists="chiefDoctor"
   />
+
   <blocks-services-block
-    :addresData="addresData"
+    :singleServices="singleServices"
     title="Оказываемые услуги"
     :isLink="false"
   />
