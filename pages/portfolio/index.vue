@@ -1,35 +1,86 @@
+<script setup>
+const assetsStore = useAssets();
+const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const [{ data: portfoliosData }] = await Promise.all([
+  useFetch(`${apiBaseUrl}portofolios`, {
+    query: { populate: "deep" },
+  }),
+]);
+
+const portfolios = portfoliosData.value?.data?.map((p) => {
+  return {
+    id: p?.id,
+    name: p?.attributes?.heading,
+    category: p?.attributes?.direction?.directions,
+    description: p?.attributes?.description,
+    img: p?.attributes?.photoBanner?.data?.attributes?.url
+      ? baseUrl + p?.attributes?.photoBanner?.data?.attributes?.url
+      : assetsStore.useAsset("images/no-photo.png"),
+  };
+});
+
+const currentPage = ref(1);
+const pageSize = ref(20);
+const totalPages = ref(Math.ceil(portfolios?.length / pageSize.value));
+
+const setCurrentPage = (pageNumber) => {
+  currentPage.value = pageNumber;
+};
+
+const breadcrumbs = [
+  {
+    title: "Главная",
+    url: "/",
+  },
+  {
+    title: "Портфолио",
+    url: "/portfolio",
+  },
+];
+</script>
+
 <template>
   <div class="portfolio-page">
     <div class="portfolio-page-wrap">
-      <elements-bread-crumbs :breadcrumbs="breadcrumbs"/>
-      <div class="portfolio-page-title">
-        Портфолио
-      </div>
+      <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
+      <div class="portfolio-page-title">Портфолио</div>
       <div class="portfolio-page-text">
-        Небольшое описание в несколько строчек
+        Небольшое описание в несколько строчек (static, todo)
       </div>
       <div class="portfolio-form">
         <div class="portfolio-box">
           <elements-select
             :options="addresData"
-            :default="'Взрослым'"
+            :default="'Взрослым (todo)'"
             class="select"
           />
           <elements-select
             :options="addresData"
-            :default="'Направление'"
+            :default="'Направление (todo)'"
             class="select"
           />
         </div>
-        <div class="portfolio-box-search">          
+        <div class="portfolio-box-search">
           <div class="input-search">
-            <elements-input-search-components class="input-search" placeholder="Найти"/>
+            <elements-input-search-components
+              class="input-search"
+              placeholder="Найти"
+            />
           </div>
-        </div> 
+        </div>
       </div>
       <div class="portfolio-page-cards">
-        <div  class="portfolio-page-card" v-for="item in mockArrayDirection" :key="item" >
-          <elements-cases-direction-card :direction="item" @click="$router.push(`/portfolio/` + 1)"/>
+        <div
+          class="portfolio-page-card"
+          v-for="item in portfolios"
+          :key="item.id"
+        >
+          <elements-cases-direction-card
+            :direction="item"
+            @click="$router.push(`/portfolio/` + item.id)"
+          />
         </div>
       </div>
       <elements-pagination
@@ -37,45 +88,14 @@
         :total-pages="totalPages"
         @update:current-page="setCurrentPage"
       />
-      <blocks-gallery :arrayImg="arrayImg3"/>
+      <blocks-gallery :arrayImg="arrayImg3" />
       <blocks-main-form />
     </div>
   </div>
 </template>
 
-<script>
-import {mockArrayDirection} from '../../stores/mockData';
-  export default {
-    data() {
-    return {
-      currentPage: 1,
-      totalPages: 10 
-    };
-  },
-  methods: {
-    setCurrentPage(pageNumber) {
-      this.currentPage = pageNumber;
-    }
-  },
-    setup() {
-      const breadcrumbs = [{
-          title: 'Главная',
-          url: '/'
-        },
-        {
-          title: 'Портфолио',
-          url: '/portfolio'
-        }]
-      return {
-        breadcrumbs,
-        mockArrayDirection
-      }
-    }
-  }
-</script>
-
 <style lang="scss" scoped>
-@import '../../assets/styles/style.scss';
+@import "../../assets/styles/style.scss";
 .input-search {
   width: 308px;
 }
@@ -141,8 +161,8 @@ import {mockArrayDirection} from '../../stores/mockData';
 }
 
 @media (max-width: 1201px) {
-.portfolio-page-title {
-  padding: 50px 0 100px;
+  .portfolio-page-title {
+    padding: 50px 0 100px;
   }
 }
 
@@ -161,8 +181,8 @@ import {mockArrayDirection} from '../../stores/mockData';
   }
 
   .portfolio-box {
-      margin-right: 0;
-      width: 100%;
+    margin-right: 0;
+    width: 100%;
   }
 
   .portfolio-box-search {
@@ -226,4 +246,3 @@ import {mockArrayDirection} from '../../stores/mockData';
   }
 }
 </style>
-
