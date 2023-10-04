@@ -213,11 +213,11 @@ const redirectToExternalApp = () => {};
     "
   />
   <!-- <blocks-activities-block :activitiesCard="mockActivitiesCard" /> -->
-  <blocks-education-block :events="specialist?.data?.attributes?.education" title="Образование" />
-  <!-- <blocks-education-block
-    :events="timelineEventsAdditionally"
+  <blocks-education-block v-if="specialist?.data?.attributes?.education" :events="specialist?.data?.attributes?.education" title="Образование" />
+  <blocks-education-block
+    :events="specialist?.data?.attributes?.additionalEducation"
     title="Дополнительное образование"
-  /> -->
+  />
   <blocks-video-slider-block
     :imagesScroll="documents"
     title="Сертификаты и документы"
