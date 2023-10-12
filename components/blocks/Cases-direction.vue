@@ -1,6 +1,10 @@
 <template>
   <div class="container-size">
-    <elements-slider-cases-direction :text="text" :isCategoryAndDescription="isCategoryAndDescription" :programs="dataDirection"/>
+    <elements-slider-cases-direction
+      :text="text"
+      :isCategoryAndDescription="isCategoryAndDescription"
+      :programs="dataDirection"
+    />
   </div>
 </template>
 
@@ -10,14 +14,14 @@ export default {
     dataDirection: {
       type: Array,
     },
-      text: {
+    text: {
       type: String,
-      default: ''
+      default: "",
     },
     isCategoryAndDescription: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 };
 </script>

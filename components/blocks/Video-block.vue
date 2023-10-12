@@ -93,6 +93,9 @@ export default {
           <source :src="video" type="video/mp4" />
           Error Message
         </video>
+        <div v-if="!video && problemImg">
+          <img :src="problemImg" alt="problem" class="problems__image" />
+        </div>
         <!-- <img src="../../assets/images/video.png" alt="video" /> -->
         <!-- </div> -->
         <a class="video-block-rectangle" target="_blank" :href="link">
@@ -146,7 +149,7 @@ export default {
       </div>
       <div v-if="isProblems">
         <div>
-          <img :src="problemImg" alt="problem" />
+          <img :src="problemImg" alt="problem" class="problems__image" />
         </div>
       </div>
     </div>
@@ -397,5 +400,11 @@ export default {
   .video-block-text {
     font-size: 14px;
   }
+}
+
+.problems__image {
+  border-radius: 15px;
+  height: 100%;
+  object-fit: cover;
 }
 </style>

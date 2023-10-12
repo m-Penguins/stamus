@@ -45,8 +45,8 @@ const breadcrumbs = [
   },
 ];
 
-const portfolios = ref(
-  specialist?.value?.data?.attributes?.portofolios?.data?.map((el) => {
+const portfolios = specialist?.value?.data?.attributes?.portofolios?.data?.map(
+  (el) => {
     return {
       id: el?.id,
       img: el?.attributes?.photoBanner
@@ -56,33 +56,13 @@ const portfolios = ref(
       category: "detskaya",
       description: el?.attributes?.description,
     };
-  }),
+  },
 );
 
-const singleServices = ref(
-  specialistDeep?.value?.data?.attributes?.price_lists?.data?.map((el) => {
-    const item = el?.attributes?.servicePrice?.map((single) => {
-      return {
-        id: single?.id,
-        heading: single?.heading,
-        price: single?.price,
-        isRecommended: single?.isRecommended,
-        isPopular: single?.isPopular,
-        isDemand: single?.isDemand,
-        tags: single?.tags,
-        link: "/prices",
-      };
-    });
-    return {
-      title: el?.attributes?.Title,
-      services: item,
-    };
-  }),
+const singleServices = mapPriceList(
+  specialistDeep?.value?.data?.attributes?.price_lists?.data,
 );
-
-const meetingPerson = ref(
-  specialistDeep.value?.data?.attributes?.meetingPerson,
-);
+const meetingPerson = specialistDeep.value?.data?.attributes?.meetingPerson;
 
 const documents = ref(
   specialistDeep.value?.data?.attributes?.docsPhoto?.data?.map((el) =>
@@ -90,14 +70,7 @@ const documents = ref(
   ),
 );
 
-const reviews = ref(
-  specialist.value?.data?.attributes?.reviews?.data?.map((el) => ({
-    name: el?.attributes?.name,
-    grade: el?.attributes?.review,
-    date: el?.attributes?.date,
-    text: el?.attributes?.text,
-  })),
-);
+const reviews = mapReviews(specialist.value?.data?.attributes?.reviews?.data);
 
 const activities = ref(specialistDeep.value?.data?.attributes?.areasOfActivity);
 

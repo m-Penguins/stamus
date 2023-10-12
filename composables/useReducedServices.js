@@ -28,6 +28,7 @@ export default function (data) {
     }
 
     result[categoryIndex].directions[directionIndex].services.push({
+      ...item,
       id: item.id,
       title: heading,
       path: `/${linkTransform(heading)}`,

@@ -15,7 +15,24 @@ export const useService = defineStore("useServices", {
         .flatMap((el) => el.services);
       return services;
     },
+
+    getServicesGroupExcluded: (state) => {
+      return (serviceId) => {
+        const foundStoreItem = state.dataService?.map((item) =>
+          item?.directions.find((el) => {
+            return el?.services?.find(
+              (s) => String(s?.id) === String(serviceId),
+            );
+          }),
+        );
+
+        return foundStoreItem?.[0]?.services?.filter((s) => {
+          return String(s?.id) !== String(serviceId);
+        });
+      };
+    },
   },
+
   actions: {
     async fetchdataService(apiBaseUrl) {
       try {

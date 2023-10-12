@@ -53,6 +53,17 @@ export default {
   &__name {
     @include body-20-regular-inter;
     color: $black;
+    min-height: 75px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    box-orient: vertical;
   }
 
   &__box-img {
