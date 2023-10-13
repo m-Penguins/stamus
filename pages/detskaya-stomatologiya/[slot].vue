@@ -1,16 +1,4 @@
 <script setup>
-import { textAboutImportantArray } from "../../stores/mockData";
-import { mockArrayDirection } from "../../stores/mockData";
-import { mockArrayServicesCard } from "../../stores/mockData";
-import { mockArrayOurSpecialists } from "../../stores/mockData";
-const imagesScroll = [
-  "video1.png",
-  "video2.png",
-  "video3.png",
-  "video3.png",
-  "video3.png",
-  "video3.png",
-];
 const route = useRoute();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
@@ -35,6 +23,10 @@ const [
   useFetch(`${apiBaseUrl}services/${serviceId}?populate=deep`),
   useFetch(`${apiBaseUrl}articles?populate=deep&pagination[pageSize]=8`),
 ]);
+
+if (!serviceData?.value?.data) {
+  throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+}
 
 const infoBlock = serviceData?.value?.data?.attributes?.infoBlock;
 const infoBlockImage = infoBlock?.image?.data?.attributes?.formats?.small?.url

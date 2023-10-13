@@ -25,51 +25,51 @@ const selectedIndex = ref(0);
         >
           <div class="div-with-line" v-if="selectedIndex === index"></div>
           <div class="specialists-btn__img">
-            <img :src="person.img" />
+            <img :src="person?.img" />
           </div>
           <div class="specialists-box">
-            <div class="specialists-box__name">{{ person.name }}</div>
-            <div class="specialists-box__spec">{{ person.category }}</div>
+            <div class="specialists-box__name">{{ person?.name }}</div>
+            <div class="specialists-box__spec">{{ person?.category }}</div>
           </div>
         </button>
       </div>
       <div class="specialists-inner">
         <div class="specialists-inner__img">
-          <img :src="props.mainSpecialists[selectedIndex].imgBig" />
+          <img :src="props.mainSpecialists?.[selectedIndex]?.imgBig" />
         </div>
         <div class="specialists-inner__info">
           <div class="specialists-inner__info-name">
             <h2 class="specialists-heading">
-              {{ props.mainSpecialists[selectedIndex].name }}
+              {{ props.mainSpecialists?.[selectedIndex]?.name }}
             </h2>
             <p class="specialists-desc">
-              {{ props.mainSpecialists[selectedIndex].category }}
+              {{ props.mainSpecialists?.[selectedIndex]?.category }}
             </p>
           </div>
 
           <div class="specialists-inner__info-numbers">
             <div>
               <p class="specialists-numbers">
-                {{ props.mainSpecialists[selectedIndex].experience.year }}
+                {{ props.mainSpecialists?.[selectedIndex]?.experience?.year }}
               </p>
               <p class="specialists-box__spec">
-                {{ props.mainSpecialists[selectedIndex].experience.text }}
+                {{ props.mainSpecialists?.[selectedIndex]?.experience?.text }}
               </p>
             </div>
             <div>
               <p class="specialists-numbers">
-                {{ props.mainSpecialists[selectedIndex].review.year }}
+                {{ props.mainSpecialists?.[selectedIndex]?.review?.year }}
               </p>
               <p class="specialists-box__spec">
-                {{ props.mainSpecialists[selectedIndex].review.text }}
+                {{ props.mainSpecialists?.[selectedIndex]?.review?.text }}
               </p>
             </div>
             <div>
               <p class="specialists-numbers">
-                {{ props.mainSpecialists[selectedIndex].consultation.year }}
+                {{ props.mainSpecialists?.[selectedIndex]?.consultation?.year }}
               </p>
               <p class="specialists-box__spec">
-                {{ props.mainSpecialists[selectedIndex].consultation.text }}
+                {{ props.mainSpecialists?.[selectedIndex]?.consultation?.text }}
               </p>
             </div>
           </div>
@@ -78,7 +78,7 @@ const selectedIndex = ref(0);
               title="О докторе"
               @click="
                 $router.push(
-                  `/specialists/${props.mainSpecialists[selectedIndex].id}`,
+                  `/specialists/${props.mainSpecialists?.[selectedIndex]?.id}`,
                 )
               "
               class="specialists-btn-base"
@@ -86,7 +86,7 @@ const selectedIndex = ref(0);
             <elements-link-with-arrow
               type="true"
               title="Смотреть портфолио"
-              :to="`/specialists/${props.mainSpecialists[selectedIndex].id}#portfolio`"
+              :to="`/specialists/${props.mainSpecialists?.[selectedIndex]?.id}#portfolio`"
             />
           </div>
         </div>

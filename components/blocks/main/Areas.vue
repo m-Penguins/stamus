@@ -12,7 +12,7 @@ const storeServices = useService();
           <elements-link-with-arrow
             type=""
             title="Перейти"
-            href="/vzroslaya-stomatologiya"
+            href="/stomatologicheskie-uslugi"
           />
         </div>
         <div class="areas-box__img img-second">

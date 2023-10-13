@@ -14,7 +14,10 @@
             isSelectedId !== selectedItem?.name
         "
         class="default"
-        :class="{ 'select-margin': selectedItem?.id || selectedItem?.name || isSelectedId }"
+        :class="{
+          'select-margin':
+            selectedItem?.id || selectedItem?.name || isSelectedId,
+        }"
       >
         {{ selected }}
       </div>
@@ -28,7 +31,6 @@
           selected = option.name;
           open = false;
           $emit('input', option);
-          console.log('???', selectedItem);
         "
         class="select-container"
       >

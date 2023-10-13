@@ -118,7 +118,7 @@ const reviews = [
     :selectedText="true"
     :text="'Независимый всеройсийский портал Продокторов'"
     :titleLink="'Записаться онлайн'"
-    link="#"
+    link="https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/"
     bgColor="blue-gradient"
     img="mobile.svg"
     bigImg="true"
@@ -134,6 +134,7 @@ const reviews = [
     img="image.png"
   />
   <blocks-main-articles title="Статьи" :articles="articles" />
+
   <blocks-main-seo
     title="СЕО текст"
     text="Как уже неоднократно упомянуто, непосредственные участники технического прогресса неоднозначны и будут разоблачены.

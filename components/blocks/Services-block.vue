@@ -55,6 +55,7 @@ const props = defineProps(["addresData", "singleServices", "title", "isLink"]);
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: 20px;
   }
 }
 

@@ -1,5 +1,5 @@
 export const linkTransform = (string) => {
-  let tempString = string.toLowerCase();
+  let tempString = string?.toLowerCase();
   let convertedString = "";
   var converter = {
     а: "a",
@@ -40,7 +40,7 @@ export const linkTransform = (string) => {
     "<": "",
     ">": "",
   };
-  for (var i = 0; i < tempString.length; ++i) {
+  for (var i = 0; i < tempString?.length; ++i) {
     if (converter[tempString[i]] === undefined) {
       convertedString += tempString[i];
     } else {

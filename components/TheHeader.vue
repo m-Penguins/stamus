@@ -41,7 +41,6 @@ export default {
 
     toggleMenu() {
       this.$emit("toggleMenu");
-      console.log(this.showMenuPatients);
     },
 
     closeMenu(event) {
@@ -54,7 +53,6 @@ export default {
 
     changeActiveClass(cls, title) {
       this.activeClass = cls;
-      console.log(cls);
       this.clinic = title;
     },
 
@@ -82,18 +80,14 @@ export default {
     const navigateToRoute = (serv, dir) => {
       const newRoute = `/${serv}/${linkTransform(dir)}`;
       router.replace(newRoute);
-      console.log(newRoute);
     };
 
     const defaultServices = () => {
       activeClass2 = storeServices.getStateService[0];
-
-      console.log(activeClass2.title);
     };
 
     const toggleServices = (direction) => {
       storeServices.getStateService.forEach((dir) => {
-        console.log(dir.title);
         dir.directions.forEach((dir2) => {
           dir2.showServices = false;
         });
@@ -1187,7 +1181,7 @@ export default {
 
 .header-services-menu-inner {
   width: 266px;
-  padding-top: 20px;
+  padding: 20px 0;
 }
 
 .vertical-line {

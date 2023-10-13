@@ -17,10 +17,10 @@ const firstQuery = {
   "filters[clinics][id]": filterClinicParam.value,
   "filters[category]": filterDirectionParam.value,
   "filters[fullName][$contains]": filterSearchParam.value,
-  "filters[fullName][$contains]": filterSearchParam.value.toLowerCase(),
+  "filters[fullName][$contains]": filterSearchParam.value?.toLowerCase(),
   "filters[fullName][$contains]":
-    filterSearchParam.value.charAt(0).toUpperCase() +
-    filterSearchParam.value.slice(1).toLowerCase(),
+    filterSearchParam.value?.charAt(0)?.toUpperCase() +
+    filterSearchParam.value?.slice(1)?.toLowerCase(),
 };
 
 Object.keys(firstQuery).forEach(
@@ -59,17 +59,16 @@ const directions = useReducedServices(directionsData.value.data).map((el) => ({
 watch(
   () => route.query,
   async () => {
-    console.log("RENDER");
     const newQuery = {
       "pagination[page]": currentPageParam.value,
       "pagination[pageSize]": pageSize.value,
       "filters[clinics][id]": filterClinicParam.value,
       "filters[category]": filterDirectionParam.value,
       "filters[fullName][$contains]": filterSearchParam.value,
-      "filters[fullName][$contains]": filterSearchParam.value.toLowerCase(),
+      "filters[fullName][$contains]": filterSearchParam.value?.toLowerCase(),
       "filters[fullName][$contains]":
-        filterSearchParam.value.charAt(0).toUpperCase() +
-        filterSearchParam.value.slice(1).toLowerCase(),
+        filterSearchParam.value?.charAt(0)?.toUpperCase() +
+        filterSearchParam.value?.slice(1)?.toLowerCase(),
     };
 
     Object.keys(newQuery).forEach(
@@ -267,7 +266,11 @@ const mockArrayTooltips = [
             <elements-name-specialty-photo-card
               link="#"
               :handleLinkClick="() => handleLinkClick(specialist.id)"
-              :arrayTooltip="{achievement: specialist?.attributes?.achievements, img: specialist?.attributes?.achievements?.icon?.data?.attributes?.url}"
+              :arrayTooltip="{
+                achievement: specialist?.attributes?.achievements,
+                img: specialist?.attributes?.achievements?.icon?.data
+                  ?.attributes?.url,
+              }"
               :specialists="{
                 name:
                   specialist?.attributes?.firstName +

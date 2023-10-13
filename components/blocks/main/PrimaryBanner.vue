@@ -37,7 +37,7 @@
             />
           </router-link>
           <router-link
-            :to="linkTransform('Взрослая стоматология')"
+            :to="linkTransform('Стоматологические услуги')"
             class="desktop-link"
           >
             <div class="primary-banner-img desktop card_main">
@@ -45,7 +45,7 @@
             </div>
           </router-link>
           <router-link
-            :to="linkTransform('Взрослая стоматология')"
+            :to="linkTransform('Стоматологические услуги')"
             class="tablet-link"
           >
             <div class="primary-banner-img tablet card_main-tab">
@@ -53,7 +53,7 @@
             </div>
           </router-link>
           <router-link
-            :to="linkTransform('Взрослая стоматология')"
+            :to="linkTransform('Стоматологические услуги')"
             class="mob-link"
           >
             <img
