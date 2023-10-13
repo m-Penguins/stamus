@@ -1,28 +1,32 @@
 <template>
   <div class="card-photo-name">
     <div class="card-photo-name-img">
-      <img :src="specialists.img" alt="specialist" class="card-img" />
+      <img :src="specialists?.img" alt="specialist" class="card-img" />
     </div>
     <div
       :class="
-        specialists.address
+        specialists?.address
           ? 'card-photo-name-container-discount'
           : 'card-photo-name-container'
       "
     >
       <div>
-        <div class="card-photo-name-title">{{ specialists.name }}</div>
-        <div class="card-photo-name-text">{{ specialists.position }}</div>
+        <div class="card-photo-name-title">{{ specialists?.name }}</div>
+        <div class="card-photo-name-text">{{ specialists?.position }}</div>
       </div>
       <div v-if="isTooltip" class="tooltip">
         <img src="../../assets/images/icons/icons-badge.svg" />
         <span class="info">
-          <div class="tooltip-box" v-for="item in specialists.achievements" :key="item">
+          <div
+            class="tooltip-box"
+            v-for="item in specialists?.achievements"
+            :key="item"
+          >
             <img
-              :src="baseUrl + item.icon.data.attributes.url"
+              :src="baseUrl + item?.icon?.data?.attributes?.url"
               alt="icon"
             />
-            <p class="tooltip-text">{{ item.achievement }}</p>
+            <p class="tooltip-text">{{ item?.achievement }}</p>
           </div>
         </span>
       </div>
@@ -34,16 +38,20 @@
       :link="`/specialists/${specialists.id}`"
       :clickHandler="handleLinkClick"
     />
-    <div v-if="specialists.address" class="card-photo-name-box-discount">
+    <div v-if="specialists?.address" class="card-photo-name-box-discount">
       <p class="card-photo-name-box-discount__addres">
-        {{ specialists.address }}
+        {{ specialists?.address }}
       </p>
-      <div v-if="specialists.time" class="card-photo-name-box-discount__time">
+      <div v-if="specialists?.time" class="card-photo-name-box-discount__time">
         {{ specialists.time }}
       </div>
+      <p v-if="specialists?.description" class="">
+        {{ specialists?.description }}
+      </p>
       <elements-button-base
         title="Записаться"
         class="card-photo-name-box-discount__btn"
+        :link="specialists?.link ?? ''"
       />
     </div>
   </div>
@@ -86,7 +94,7 @@ export default {
     return {
       arr,
       assetsStore,
-      baseUrl
+      baseUrl,
     };
   },
 };

@@ -1,11 +1,7 @@
 <template>
   <blocks-discounts-banner-dital :breadcrumbs="breadcrumbs" />
   <div class="spicialists-page-cards">
-    <div
-      class="spicialists-page-card"
-      v-for="item in mockArrayOurSpecialistsTwoDoctorsDiscounts"
-      :key="item"
-    >
+    <div class="spicialists-page-card" v-for="item in specialists" :key="item">
       <elements-name-specialty-photo-card
         link="#"
         :specialists="item"
@@ -22,20 +18,35 @@ const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const assetsStore = useAssets();
 
-const { data: happyHours } = await useFetch(`${apiBaseUrl}lucky-time`, {
+const { data: happyHours } = await useFetch(`${apiBaseUrl}lucky-times`, {
   query: {
     populate: "deep",
   },
 });
 
-// {
-//   name: "Овсоян Григорий",
-//   category: "Челюстно-лицевой хирург",
-//   img: "avatar-4.png",
-//   time: "15:00",
-//   address: "Прием на ул. Мачуги 1/1",
-//   description:''
-// },
+const specialists = happyHours?.value?.data?.map((hh) => {
+  const spec = {
+    name:
+      hh?.attributes?.specialist?.data?.attributes?.firstName?.trim() +
+      " " +
+      hh?.attributes?.specialist?.data?.attributes?.lastName?.trim(),
+    position: hh?.attributes?.specialist?.data?.attributes?.position,
+    img: hh?.attributes?.specialist?.data?.attributes?.fotoSpecialist?.data
+      ?.attributes?.url
+      ? baseUrl +
+        hh?.attributes?.specialist?.data?.attributes?.fotoSpecialist?.data
+          ?.attributes?.url
+      : assetsStore.useAsset("images/no-photo.png"),
+    time: hh?.attributes?.time?.join(", ") ?? [],
+    address: `Прием на ${hh?.attributes?.specialist?.data?.attributes?.clinics?.data
+      ?.map((el) => el?.attributes?.address)
+      ?.join(", ")}`,
+    description: hh?.attributes?.description ?? "",
+    link: hh?.attributes?.link,
+  };
+
+  return spec;
+});
 
 console.log(happyHours?.value?.data);
 const breadcrumbs = [
