@@ -30,7 +30,7 @@ const storeServices = useService();
           <elements-link-with-arrow
             type=""
             title="Перейти"
-            href="/chelyustno-licevaya-hirurgiya"
+            href="/chelyustno-liczevaya-hirurgiya"
           />
         </div>
         <div class="areas-box__img img-fourth">

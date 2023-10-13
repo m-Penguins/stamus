@@ -1,4 +1,7 @@
 export const linkTransform = (string) => {
+  if (string === "Челюстно-лицевая хирургия") {
+    return "chelyustno-liczevaya-hirurgiya";
+  }
   let tempString = string?.toLowerCase();
   let convertedString = "";
   var converter = {
@@ -47,5 +50,6 @@ export const linkTransform = (string) => {
       convertedString += converter[tempString[i]];
     }
   }
+
   return convertedString;
 };

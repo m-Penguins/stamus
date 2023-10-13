@@ -2,6 +2,8 @@
 const route = useRoute();
 let mockDate = mockArrayClinic[1];
 
+console.log(route.path);
+
 const assetsStore = useAssets();
 const bigImageMock = assetsStore.useAsset("images/big-images/girl.png");
 
