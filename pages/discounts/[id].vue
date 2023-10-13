@@ -1,11 +1,13 @@
 <template>
-  <blocks-discounts-banner-dital 
-    :breadcrumbs="breadcrumbs" 
-  />
+  <blocks-discounts-banner-dital :breadcrumbs="breadcrumbs" />
   <div class="spicialists-page-cards">
-    <div class="spicialists-page-card" v-for="item in mockArrayOurSpecialistsTwoDoctorsDiscounts" :key="item" >
-      <elements-name-specialty-photo-card 
-        link="#" 
+    <div
+      class="spicialists-page-card"
+      v-for="item in mockArrayOurSpecialistsTwoDoctorsDiscounts"
+      :key="item"
+    >
+      <elements-name-specialty-photo-card
+        link="#"
         :specialists="item"
         :isLink="false"
         :isTooltip="false"
@@ -15,38 +17,45 @@
   <blocks-main-form />
 </template>
 
-<script>
-import { mockArrayOurSpecialistsTwoDoctorsDiscounts } from '../../stores/mockData';
-  export default {
-    props: {
-    },
-    data() {
-      return {
-      };
-    },
-    setup() {
-      const breadcrumbs = [{
-          title: 'Главная',
-          url: '/'
-        },
-        {
-          title: 'Акции и скидки',
-          url: '/discounts'
-        },
-        {
-          title: 'Счастливые часы',
-          url: `/discounts/schastlivye-chasy`
-        }]
-      return {
-        breadcrumbs,
-        mockArrayOurSpecialistsTwoDoctorsDiscounts
-      }
-    }
-  }
+<script setup>
+const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+const baseUrl = useRuntimeConfig().public.baseUrl;
+const assetsStore = useAssets();
+
+const { data: happyHours } = await useFetch(`${apiBaseUrl}lucky-time`, {
+  query: {
+    populate: "deep",
+  },
+});
+
+// {
+//   name: "Овсоян Григорий",
+//   category: "Челюстно-лицевой хирург",
+//   img: "avatar-4.png",
+//   time: "15:00",
+//   address: "Прием на ул. Мачуги 1/1",
+//   description:''
+// },
+
+console.log(happyHours?.value?.data);
+const breadcrumbs = [
+  {
+    title: "Главная",
+    url: "/",
+  },
+  {
+    title: "Акции и скидки",
+    url: "/discounts",
+  },
+  {
+    title: "Счастливые часы",
+    url: `/discounts/schastlivye-chasy`,
+  },
+];
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/styles/style.scss';
+@import "../../assets/styles/style.scss";
 
 .spicialists-page-cards {
   display: flex;
@@ -81,5 +90,4 @@ import { mockArrayOurSpecialistsTwoDoctorsDiscounts } from '../../stores/mockDat
     margin: 0 auto 80px;
   }
 }
-
 </style>
