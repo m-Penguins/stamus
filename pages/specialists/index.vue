@@ -134,7 +134,7 @@ const handleInputChange = (value) => {
 };
 
 const handleClinicChange = (clinic) => {
-  filterClinicParam.value = clinic.id;
+  filterClinicParam.value = clinic?.id ? clinic.id : null;
 
   setCurrentPage(1);
 
@@ -158,7 +158,7 @@ const handleClinicChange = (clinic) => {
 
 const handleDirectionChange = (direction) => {
   setCurrentPage(1);
-  filterDirectionParam.value = direction.name;
+  filterDirectionParam.value = direction?.name ? direction.name : null;
 
   const newQuery = {
     search: filterSearchParam.value,
