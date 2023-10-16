@@ -201,7 +201,7 @@ const breadcrumbs = [
       </section>
     </template>
 
-    <div v-else>Ничего не найдено</div>
+    <h3 v-else class="prices-box-title">Ничего не найдено</h3>
     <!-- <div>
       <div class="prices-box m-t-30">
         <div class="prices-box-title">Взрослая стоматология</div>
