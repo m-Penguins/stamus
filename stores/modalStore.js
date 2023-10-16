@@ -75,10 +75,6 @@ export const useModalStore = defineStore("modal-store", () => {
 
   async function submitModal() {
     startValidation.value = true;
-    console.log(nameField.value);
-    console.log(phoneField.value);
-    console.log(clinicSelect.value?.name);
-    console.log(commentField.value);
 
     if (isNameValid.value && isPhoneValid.value) {
       const formData = {
