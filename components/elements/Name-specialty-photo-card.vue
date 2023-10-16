@@ -42,8 +42,14 @@
       <p class="card-photo-name-box-discount__addres">
         {{ specialists?.address }}
       </p>
-      <div v-if="specialists?.time" class="card-photo-name-box-discount__time">
-        {{ specialists.time }}
+      <div v-if="specialists?.time" class="time__container">
+        <div
+          v-for="(time, index) in specialists.time"
+          :key="index"
+          class="card-photo-name-box-discount__time"
+        >
+          {{ time }}
+        </div>
       </div>
       <p v-if="specialists?.description" class="">
         {{ specialists?.description }}
@@ -102,6 +108,12 @@ export default {
 
 <style scoped lang="scss">
 @import "/assets/styles/style.scss";
+
+.time__container {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
 
 .card-img {
   height: 308px;

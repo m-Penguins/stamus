@@ -37,7 +37,7 @@ const specialists = happyHours?.value?.data?.map((hh) => {
         hh?.attributes?.specialist?.data?.attributes?.fotoSpecialist?.data
           ?.attributes?.url
       : assetsStore.useAsset("images/no-photo.png"),
-    time: hh?.attributes?.time?.join(", ") ?? [],
+    time: hh?.attributes?.time ?? [],
     address: `Прием на ${hh?.attributes?.specialist?.data?.attributes?.clinics?.data
       ?.map((el) => el?.attributes?.address)
       ?.join(", ")}`,
