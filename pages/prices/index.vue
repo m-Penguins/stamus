@@ -118,8 +118,6 @@ const handleInputChange = (value) => {
   searchInput.value = value;
 };
 
-// console.log(filteredPricesWithSearch.value);
-
 const breadcrumbs = [
   {
     title: "Главная",

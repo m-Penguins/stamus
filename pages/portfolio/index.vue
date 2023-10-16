@@ -29,8 +29,6 @@ const setCurrentPage = (pageNumber) => {
   currentPage.value = pageNumber;
 };
 
-console.log(portfoliosData.value.data);
-
 const breadcrumbs = [
   {
     title: "Главная",
