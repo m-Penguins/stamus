@@ -2,7 +2,25 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   // ... other options
-  modules: ["@pinia/nuxt"],
+  modules: [
+    "@pinia/nuxt",
+    [
+      "nuxt-mail",
+      {
+        message: {
+          to: process.env.MAIL_TO,
+        },
+        smtp: {
+          host: "smtp.yandex.ru",
+          port: 465,
+          auth: {
+            user: "dev@sloy.design",
+            pass: process.env.MAIL_PASS,
+          },
+        },
+      },
+    ],
+  ],
   css: ["@/assets/styles/global.scss"],
   runtimeConfig: {
     public: {
