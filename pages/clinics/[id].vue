@@ -105,6 +105,9 @@ const breadcrumbs = [
   },
 ];
 
+const title = clinicData?.value?.data?.attributes?.heading;
+const address = clinicData?.value?.data?.attributes?.address;
+
 const bgImg = clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes
   ?.url
   ? baseUrl +
@@ -121,8 +124,8 @@ const imgAdaptive = clinicData?.value?.data?.attributes?.photoBanner?.data
 
 <template>
   <elements-main-info
-    :title="clinicData?.attributes?.heading"
-    :text="clinicData?.attributes?.address"
+    :title="title"
+    :text="address"
     :imgBg="bgImg"
     :imgAdaptiv="imgAdaptive"
     :isDital="true"

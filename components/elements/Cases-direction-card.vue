@@ -83,7 +83,18 @@ export default {
   @include body-14-regular;
   color: $gray-text;
   opacity: 0.7;
-  padding-bottom: 30px;
+
+  min-height: 60px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-clamp: 3;
+  box-orient: vertical;
 }
 
 @media (max-width: 1328px) {

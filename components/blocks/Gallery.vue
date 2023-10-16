@@ -6,7 +6,13 @@
       v-if="arrayImg.length === 2 || arrayImg.length === 4"
       class="gallery-two-img-container"
     >
-      <img v-for="item in arrayImg" :key="item" :src="item" class="gall-img" />
+      <img
+        v-for="item in arrayImg"
+        :key="item"
+        :src="item"
+        class="gall-img"
+        alt="Галерея"
+      />
     </div>
 
     <div
@@ -17,6 +23,7 @@
         v-for="item in arrayImg"
         :key="item"
         :src="item"
+        alt="Галерея"
         class="gall-img-three"
       />
     </div>
@@ -26,6 +33,7 @@
         v-for="(item, index) in arrayImg"
         :key="index"
         :src="item"
+        alt="Галерея"
         :class="'img-' + index"
       />
     </div>
