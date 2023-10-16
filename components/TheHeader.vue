@@ -26,6 +26,7 @@ export default {
       clinic: "",
       activeClass: "",
       showServicesAll: false,
+      storeS: useService(),
       navigationPatients: [
         { id: 1, title: "Клиники", path: "/clinics" },
         { id: 2, title: "Наше приложение", path: "/stamusapp" },
@@ -33,6 +34,9 @@ export default {
         { id: 4, title: "Налоговый вычет", path: "/info" },
       ],
     };
+  },
+  mounted() {
+    this.activeClass = this.storeS.getStateService?.[0]?.id;
   },
   methods: {
     openModal() {

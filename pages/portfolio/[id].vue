@@ -19,8 +19,6 @@ if (!portfolioData.value?.data) {
   throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
 }
 
-console.log(portfolioData.value.data);
-
 const symptoms = portfolioData.value?.data?.attributes?.symptom
   ?.split("|")
   ?.map((s, i) => ({
