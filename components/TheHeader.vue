@@ -120,7 +120,7 @@ export default {
       activeClass2,
       defaultServices,
       navigateToRoute,
-      route,
+      router,
     };
   },
 };

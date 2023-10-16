@@ -1,8 +1,8 @@
 <template>
   <NuxtLink class="activities-card" :to="activitiesCard.link">
     <div class="activities-card-container">
-      <p class="activities-card-num">{{ activitiesCard.id }}.</p>
-      <p class="activities-card-title">{{ activitiesCard.item }}</p>
+      <p class="activities-card-num">{{ index + 1 }}.</p>
+      <p class="activities-card-title">{{ activitiesCard.title }}</p>
     </div>
     <div v-if="isSvgArrow">
       <svg
@@ -36,6 +36,9 @@ export default {
   props: {
     activitiesCard: {
       type: Object,
+    },
+    index: {
+      type: Number,
     },
     isSvgArrow: {
       type: Boolean,

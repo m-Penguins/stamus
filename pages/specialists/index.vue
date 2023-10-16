@@ -190,20 +190,6 @@ const breadcrumbs = [
     url: "/specialists",
   },
 ];
-
-const mockArrayTooltips = [
-  {
-    text: "Победитель Гран-при Продокторов «Лучший ортопед России» 2021",
-    img: "tool1.svg",
-  },
-  {
-    text: "2 место Премия Продокторов «Детский стоматолог» 2022 Краснодар",
-    img: "tool2.svg",
-  },
-  { text: "Врач высшей категории", img: "tool3.svg" },
-  { text: "Работает с эстетическими коронками", img: "tool4.svg" },
-  { text: "Работает под микроскопом", img: "tool5.svg" },
-];
 </script>
 
 <template>
