@@ -42,6 +42,9 @@
       <p class="card-photo-name-box-discount__addres">
         {{ specialists?.address }}
       </p>
+      <p v-if="specialists?.description" class="">
+        {{ specialists?.description }}
+      </p>
       <div v-if="specialists?.time" class="time__container">
         <div
           v-for="(time, index) in specialists.time"
@@ -51,59 +54,27 @@
           {{ time }}
         </div>
       </div>
-      <p v-if="specialists?.description" class="">
-        {{ specialists?.description }}
-      </p>
       <elements-button-base
         title="Записаться"
         class="card-photo-name-box-discount__btn"
-        :link="specialists?.link ?? ''"
+        @click="openStartupModal"
       />
+      <!-- :link="specialists?.link ?? ''" -->
     </div>
   </div>
 </template>
 
-<script>
-import { useAssets } from "../../stores/useAsset";
-export default {
-  props: {
-    specialists: {
-      type: Object,
-    },
-    link: {
-      type: String,
-    },
-    isLink: {
-      type: Boolean,
-      default: true,
-    },
-    isTooltip: {
-      type: Boolean,
-      default: true,
-    },
-    arrayTooltip: {
-      type: Object,
-    },
-    handleLinkClick: Function,
-  },
-  methods: {
-    selectButton() {
-      this.arr.map((item) => {
-        return item;
-      });
-    },
-  },
-  setup() {
-    const baseUrl = useRuntimeConfig().public.baseUrl;
-    const assetsStore = useAssets();
-    const arr = ["1", "2", "3"];
-    return {
-      arr,
-      assetsStore,
-      baseUrl,
-    };
-  },
-};
+<script setup>
+defineProps([
+  "specialists",
+  "link",
+  "isLink",
+  "isTooltip",
+  "arrayTooltip",
+  "handleLinkClick",
+]);
+
+const baseUrl = useRuntimeConfig().public.baseUrl;
 </script>
 
 <style scoped lang="scss">
