@@ -1187,7 +1187,7 @@ export default {
 
 .header-services-menu-inner {
   width: 266px;
-  padding-top: 20px;
+  padding: 20px 0;
 }
 
 .vertical-line {
