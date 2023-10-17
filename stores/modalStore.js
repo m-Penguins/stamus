@@ -89,18 +89,22 @@ export const useModalStore = defineStore("modal-store", () => {
 
       const mail = useMail();
 
-      const name = formData.name ? `name: ${formData.name}` : null;
-      const phone = formData.phone ? `phone: ${formData.phone}` : null;
-      const clinic = formData.clinic ? `clinic: ${formData.clinic}` : null;
-      const comment = formData.comment ? `comment: ${formData.comment}` : null;
+      const name = formData.name ? `Имя: ${formData.name}` : null;
+      const phone = formData.phone ? `Телефон: ${formData.phone}` : null;
+      const clinic = formData.clinic
+        ? `Адрес клиники: ${formData.clinic}`
+        : null;
+      const comment = formData.comment
+        ? `Комментарий: ${formData.comment}`
+        : null;
 
-      const msg = [name, phone, clinic, comment].filter(Boolean).join(", ");
+      const msg = [name, phone, clinic, comment].filter(Boolean).join("\n");
 
       try {
         await mail.send({
+          config: "form",
           from: "dev@sloy.design",
-          to: "stamusforma@gmail.com",
-          subject: "Заявка Стамус",
+          subject: "Заявка на прием Стамус",
           text: msg,
         });
 
@@ -111,7 +115,7 @@ export const useModalStore = defineStore("modal-store", () => {
       } finally {
         setTimeout(() => {
           closeModal();
-        }, 5000);
+        }, 2000);
       }
 
       return formData;

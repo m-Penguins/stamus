@@ -1,87 +1,160 @@
 import { defineStore } from "pinia";
 
 export const useFormStore = defineStore("form-store", () => {
-	const nameFieldInfo = ref("");
-	const phoneFieldInfo = ref("");
-	const emailFieldInfo = ref("");
-	const digitFieldInfo = ref("");
-	const namePatientField = ref("");
+  const getterNameField = ref("");
+  const digitField = ref("");
+  const phoneField = ref("");
 
-	const startValidation = ref(false);
-	const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-	const digitRegex = /^[0-9]+$/;
+  const checkBoxes = ref([]);
+  const whoIsGettingDocument = ref(null);
+  const patientNameField = ref("");
+  const address = ref("");
+  const emailField = ref("");
+
+  const startValidation = ref(false);
+  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  const digitRegex = /^[0-9]+$/;
 
   const isNameInfoValid = computed(() => {
-		if (startValidation.value) {
-			return nameFieldInfo.value.length > 1;
-		}
-		return true;
+    if (startValidation.value) {
+      return getterNameField.value.length > 1;
+    }
+    return true;
   });
 
-	const isNamePatientFieldValid = computed(() => {
-		if (startValidation.value) {
-			return namePatientField.value.length > 1;
-		}
-		return true;
+  const isNamePatientFieldValid = computed(() => {
+    if (startValidation.value) {
+      return patientNameField.value.length > 1;
+    }
+    return true;
   });
 
   const isDigitValidInfo = computed(() => {
-		if (startValidation.value) {
-			return digitRegex.test(digitFieldInfo.value);
-		}
-		return true;
-  });
-
-	const isEmailVaildInfo = computed(() => {
     if (startValidation.value) {
-      return emailRegex.test(emailFieldInfo.value);
+      return (
+        digitRegex.test(digitField.value) && digitField.value?.length >= 10
+      );
     }
     return true;
   });
 
-	const isPhoneValidInfo = computed(() => {
+  const isEmailValidInfo = computed(() => {
     if (startValidation.value) {
-      return phoneFieldInfo.value.substring(0, 16).length === 16;
+      return emailRegex.test(emailField.value);
     }
     return true;
   });
 
-	const isSubmitActivePersonalIncomeTax = computed(() => {
-		return ( 
-			nameFieldInfo.value.length &&
-			phoneFieldInfo.value.length > 0 &&
-			emailFieldInfo.value.length > 0 &&
-			digitFieldInfo.value.length > 0 &&
-			namePatientField.value.length > 0
-		);
-	});
+  const isPhoneValidInfo = computed(() => {
+    if (startValidation.value) {
+      return phoneField.value.substring(0, 16).length === 16;
+    }
+    return true;
+  });
 
-	function resetForm() {
-		nameFieldInfo.value = "";
-		phoneFieldInfo.value = "";
-		emailFieldInfo.value = "";
-		digitFieldInfo.value = "";
-		startValidation.value = false;
-	}
+  const isSubmitActivePersonalIncomeTax = computed(() => {
+    return (
+      getterNameField.value.length &&
+      phoneField.value.length > 0 &&
+      emailField.value.length > 0 &&
+      digitField.value.length > 0 &&
+      patientNameField.value.length > 0
+    );
+  });
 
-	async function submitModal() {
-		startValidation.value = true;
-	}
+  function resetForm() {
+    getterNameField.value = "";
+    phoneField.value = "";
+    emailField.value = "";
+    digitField.value = "";
+    startValidation.value = false;
+  }
 
-	return {
-		nameFieldInfo,
-		phoneFieldInfo,
-		namePatientField,
-		digitFieldInfo,
-		emailFieldInfo,
-		isNameInfoValid,
-		isDigitValidInfo,
-		isEmailVaildInfo,
-		isPhoneValidInfo,
-		startValidation,
-		isSubmitActivePersonalIncomeTax,
-		submitModal,
-		isNamePatientFieldValid,
-	}
+  async function submitModal() {
+    startValidation.value = true;
 
-})
+    if (
+      isSubmitActivePersonalIncomeTax.value &&
+      isPhoneValidInfo.value &&
+      isEmailValidInfo.value &&
+      isDigitValidInfo.value &&
+      isNamePatientFieldValid.value &&
+      isNameInfoValid.value
+    ) {
+      const mail = useMail();
+
+      const getterNameFieldValue = getterNameField.value
+        ? `ФИО налогоплательщика: ${getterNameField.value}`
+        : "";
+      const digitFieldValue = digitField.value
+        ? `ИНН: ${digitField.value}`
+        : "";
+      const phoneFieldValue = phoneField.value
+        ? `Телефон: ${phoneField.value}`
+        : "";
+
+      const checkBoxesValue =
+        checkBoxes.value?.length > 0
+          ? `Когда проходил лечение: ${checkBoxes.value?.join(", ")}`
+          : "";
+      const whoIsGettingDocumentValue = whoIsGettingDocument.value
+        ? `Для кого получает справку: ${whoIsGettingDocument.value}`
+        : "";
+      const patientNameFieldValue = patientNameField.value
+        ? `ФИО пациента: ${patientNameField.value}`
+        : "";
+      const addressValue = address.value
+        ? `Как хочет получить справку: ${address.value}`
+        : "";
+      const emailFieldValue = emailField.value
+        ? `Емейл: ${emailField.value}`
+        : "";
+
+      const msg = [
+        getterNameFieldValue,
+        digitFieldValue,
+        phoneFieldValue,
+        checkBoxesValue,
+        whoIsGettingDocumentValue,
+        patientNameFieldValue,
+        addressValue,
+        emailFieldValue,
+      ]
+        .filter(Boolean)
+        .join("\n");
+
+      try {
+        await mail.send({
+          config: "ndfl",
+          from: "dev@sloy.design",
+          subject: "Заявка на возврат НДФЛ",
+          text: msg,
+        });
+
+        resetForm();
+      } catch (error) {
+        console.log(error);
+        isError.value = true;
+      }
+    }
+  }
+
+  return {
+    checkBoxes,
+    whoIsGettingDocument,
+    address,
+    getterNameField,
+    phoneField,
+    patientNameField,
+    digitField,
+    emailField,
+    isNameInfoValid,
+    isDigitValidInfo,
+    isEmailValidInfo,
+    isPhoneValidInfo,
+    startValidation,
+    isSubmitActivePersonalIncomeTax,
+    submitModal,
+    isNamePatientFieldValid,
+  };
+});

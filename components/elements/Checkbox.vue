@@ -1,5 +1,5 @@
 <template>
-  <label class="checkbox" :class="{ 'checked': isChecked }">
+  <label class="checkbox" :class="{ checked: isChecked }">
     <input type="checkbox" v-model="isChecked" @change="toggleCheckbox" />
     <span class="checkmark"></span>
     <span class="label-text">{{ label }}</span>
@@ -10,23 +10,23 @@
 export default {
   props: {
     label: String,
-    value: Boolean
+    value: Boolean,
   },
   data() {
     return {
-      isChecked: this.value || false
+      isChecked: this.value || false,
     };
   },
   methods: {
     toggleCheckbox() {
-      this.$emit('input', this.isChecked);
-    }
-  }
+      this.$emit("input", this.isChecked);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '/assets/styles/style.scss';
+@import "/assets/styles/style.scss";
 .checkbox {
   display: flex;
   align-items: center;
@@ -42,7 +42,7 @@ export default {
   width: 20px;
   height: 20px;
   border-radius: 3px;
-  border: 1px solid #7F838C;
+  border: 1px solid #7f838c;
   margin-right: 8px;
   display: inline-block;
   position: relative;
@@ -55,7 +55,7 @@ export default {
   top: 50%;
   transform: translate(-50%, -50%);
   font-size: 12px;
-  color: #fff; 
+  color: #fff;
 }
 
 .checkbox:hover .checkmark {
@@ -64,12 +64,12 @@ export default {
 
 .label-text {
   @include body-16-regular;
-  color: #7F838C;
+  color: #7f838c;
 }
 
 .checkbox input[type="checkbox"]:checked + .checkmark {
-  background-color: #232D5B;
-  border-color: #232D5B;
+  background-color: #232d5b;
+  border-color: #232d5b;
 }
 
 .checkbox:hover .label-text {
@@ -77,7 +77,6 @@ export default {
 }
 
 .checkbox.checked .label-text {
-  color: #232D5B;
+  color: #232d5b;
 }
-
 </style>

@@ -137,8 +137,12 @@
               class="popup-btn"
             />
             <div class="popup-text">
-              Нажимая кнопку отправить, вы соглашаетесь с Политикой обработки
-              персональных данных
+              Нажимая кнопку отправить, вы соглашаетесь с
+              <a
+                href="http://176.99.11.245:1338/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf"
+                target="_blank"
+                >Политикой обработки персональных данных</a
+              >
             </div>
           </div>
         </div>
@@ -196,8 +200,12 @@
               :disabled="!store.isSubmitActive"
             />
             <div class="popup-text">
-              Нажимая кнопку отправить, вы соглашаетесь с Политикой обработки
-              персональных данных
+              Нажимая кнопку отправить, вы соглашаетесь с
+              <a
+                href="http://176.99.11.245:1338/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf"
+                target="_blank"
+                >Политикой обработки персональных данных</a
+              >
             </div>
           </div>
         </div>
@@ -448,6 +456,12 @@ export default {
   opacity: 0.7;
   padding-top: 14px;
   text-align: center;
+
+  & a {
+    color: inherit;
+    font-size: inherit;
+    text-decoration: underline;
+  }
 }
 
 @media (max-width: 900px) {

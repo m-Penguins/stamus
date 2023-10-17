@@ -7,9 +7,10 @@ export default defineNuxtConfig({
     [
       "nuxt-mail",
       {
-        message: {
-          to: process.env.MAIL_TO,
-        },
+        message: [
+          { name: "form", to: process.env.MAIL_TO },
+          { name: "ndfl", to: process.env.MAIL_TO_TAXES },
+        ],
         smtp: {
           host: "smtp.yandex.ru",
           port: 465,

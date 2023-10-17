@@ -106,8 +106,6 @@ const directions = [...new Set(allPrices.value.map((el) => el?.category))]
   }))
   ?.filter((el) => el?.name);
 
-console.log(allPrices.value);
-
 const handleDirectionChange = (category) => {
   categoryFilter.value = category?.name ? category.name : null;
 };

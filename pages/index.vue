@@ -58,7 +58,6 @@ const mainSpecialists = fourSpecialists.value?.data?.map((sp) => {
     },
   };
 });
-console.log(mainSpecialists);
 const reviews = [
   {
     name: "Пациент +7-989-00XXXXX",
