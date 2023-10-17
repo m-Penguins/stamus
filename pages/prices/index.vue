@@ -90,7 +90,7 @@ const filteredPricesWithSearch = computed(() => {
     .filter(Boolean);
 });
 
-const directions = allPrices.value
+const categories = allPrices.value
   ?.map((dir, ind) => ({
     id: dir?.id ?? ind + 1,
     name: dir?.direction,
@@ -98,20 +98,22 @@ const directions = allPrices.value
   }))
   ?.filter((el) => el?.name);
 
-const categories = allPrices.value
+const directions = [...new Set(allPrices.value.map((el) => el?.category))]
   ?.map((dir, ind) => ({
-    id: dir?.id ?? ind + 1,
-    name: dir?.category,
+    id: ind + 1,
+    name: dir,
     address: null,
   }))
   ?.filter((el) => el?.name);
 
-const handleDirectionChange = (direction) => {
-  directionFilter.value = direction?.name ? direction.name : null;
+console.log(allPrices.value);
+
+const handleDirectionChange = (category) => {
+  categoryFilter.value = category?.name ? category.name : null;
 };
 
-const handleCategoryChange = (category) => {
-  categoryFilter.value = category?.name ? category.name : null;
+const handleCategoryChange = (direction) => {
+  directionFilter.value = direction?.name ? direction.name : null;
 };
 
 const handleInputChange = (value) => {
