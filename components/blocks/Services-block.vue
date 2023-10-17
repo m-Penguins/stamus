@@ -13,6 +13,7 @@
     <div class="service-form">
       <div class="service-box">
         <elements-select
+          v-if="addresData"
           :options="addresData"
           :default="'Направление'"
           class="select"
@@ -22,24 +23,34 @@
         <elements-input-search-components
           class="input-search"
           placeholder="Найти"
+          v-model="searchValue"
+          @submit="(payload) => (searchValue = payload)"
         />
       </div>
     </div>
     <div
       class="popular-service__list"
-      v-for="service in singleServices"
-      :key="service.title"
+      v-for="item in actualList"
+      :key="item?.id"
     >
-      <h2 class="popular-service__title">{{ service.title }}</h2>
-      <div v-for="(item, index) in service.services" :key="index">
-        <elements-service-card :service="item" />
-      </div>
+      <elements-service-card :service="item" />
     </div>
   </div>
 </template>
 
 <script setup>
 const props = defineProps(["addresData", "singleServices", "title", "isLink"]);
+
+const searchValue = ref("");
+
+const actualList = computed(() => {
+  if (!searchValue.value?.trim()) {
+    return props.singleServices;
+  }
+  return props.singleServices?.filter((el) =>
+    el?.heading?.toLowerCase().includes(searchValue.value?.toLowerCase()),
+  );
+});
 </script>
 
 <style lang="scss" scoped>
@@ -55,6 +66,7 @@ const props = defineProps(["addresData", "singleServices", "title", "isLink"]);
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: 20px;
   }
 }
 

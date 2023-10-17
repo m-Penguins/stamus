@@ -6,21 +6,40 @@
     :class="{ dopText: dopText }"
   >
     <div class="selected" :class="{ open: open }" @click="open = !open">
-      <div v-if="isSelectedId" class="label">{{ label }}</div>
+      <div v-if="isSelectedId && selected" class="label">{{ label }}</div>
       <div
         v-if="
           () =>
-            isSelectedId !== selectedItem?.id ||
-            isSelectedId !== selectedItem?.name
+            selected &&
+            (isSelectedId !== selectedItem?.id ||
+              isSelectedId !== selectedItem?.name)
         "
         class="default"
-        :class="{ 'select-margin': selectedItem?.id || selectedItem?.name || isSelectedId }"
+        :class="{
+          'select-margin':
+            selectedItem?.id || selectedItem?.name || isSelectedId,
+        }"
       >
         {{ selected }}
+      </div>
+      <div v-if="!selected" class="default">
+        {{ default }}
       </div>
     </div>
     <p v-if="dopText" class="select-dop-text">Не обязательно для заполнения</p>
     <div class="items" :class="{ selectHide: !open }">
+      <div @click="resetChosen" class="select-container">
+        <div class="select-box">
+          <div>
+            <div class="select-title">Сбросить выбор</div>
+            <!-- <div class="select-text">123123</div> -->
+          </div>
+          <div v-if="!selected" class="selected-item">
+            <img src="../../assets/images/icons/check.svg" alt="icon" />
+          </div>
+        </div>
+        <hr />
+      </div>
       <div
         v-for="(option, i) of options"
         :key="i"
@@ -28,7 +47,6 @@
           selected = option.name;
           open = false;
           $emit('input', option);
-          console.log('???', selectedItem);
         "
         class="select-container"
       >
@@ -89,6 +107,13 @@ export default {
         : null,
       open: false,
     };
+  },
+  methods: {
+    resetChosen() {
+      this.selected = null;
+      this.open = false;
+      this.$emit("input", null);
+    },
   },
   mounted() {
     this.$emit("input", this.selected);

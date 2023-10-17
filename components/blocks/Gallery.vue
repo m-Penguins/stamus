@@ -2,60 +2,66 @@
   <div class="gallery">
     <div class="gallery-title">Галерея</div>
 
-    <div v-if="arrayImg.length === 2 || arrayImg.length === 4" class="gallery-two-img-container">
-      <img v-for="item in arrayImg" 
-        :key="item" 
-        :src="assetsStore.useAsset(`images/gallery/${item}`)" 
-        class="gall-img"/>
+    <div
+      v-if="arrayImg.length === 2 || arrayImg.length === 4"
+      class="gallery-two-img-container"
+    >
+      <img
+        v-for="item in arrayImg"
+        :key="item"
+        :src="item"
+        class="gall-img"
+        alt="Галерея"
+      />
     </div>
 
-    <div v-else-if="arrayImg.length === 3 || arrayImg.length === 5" class="gallery-three-img-container">
-      <img  
-        v-for="item in arrayImg" 
-        :key="item" 
-        :src="assetsStore.useAsset(`images/gallery/${item}`)" 
-        class="gall-img-three"/>
+    <div
+      v-else-if="arrayImg.length === 3 || arrayImg.length === 5"
+      class="gallery-three-img-container"
+    >
+      <img
+        v-for="item in arrayImg"
+        :key="item"
+        :src="item"
+        alt="Галерея"
+        class="gall-img-three"
+      />
     </div>
-    
+
     <div class="container" v-else-if="arrayImg.length === 6">
-      <img 
-        v-for="(item, index) in arrayImg" 
-        :key="index" 
-        :src="assetsStore.useAsset(`images/gallery/${item}`)"  
+      <img
+        v-for="(item, index) in arrayImg"
+        :key="index"
+        :src="item"
+        alt="Галерея"
         :class="'img-' + index"
       />
-    </div>  
+    </div>
   </div>
 </template>
 
 <script>
-import { useAssets } from '../../stores/useAsset'
 export default {
   props: {
     arrayImg: {
       type: Array,
-      default: []
-    }
+      default: [],
+    },
   },
-  setup() {
-      const assetsStore = useAssets();
-      return {
-        assetsStore,
-      }
-    }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import '/assets/styles/style.scss';
+@import "/assets/styles/style.scss";
 
 .container {
   display: grid;
   width: 100%;
   height: 100%;
-  grid-template-areas: "img-0 img-1 img-2"
-  "img-0 img-1 img-3"
-  "img-4 img-5 img-5";
+  grid-template-areas:
+    "img-0 img-1 img-2"
+    "img-0 img-1 img-3"
+    "img-4 img-5 img-5";
   grid-template-columns: 416px 524px 1fr;
   grid-template-rows: 1fr 185px 2fr;
   grid-gap: 16px;
@@ -97,11 +103,11 @@ export default {
   border-radius: 15px;
   height: 380px;
 }
-.gall-img-six:nth-child(-n+2) {
+.gall-img-six:nth-child(-n + 2) {
   width: 33%;
 }
 
-.gall-img-six:nth-child(n+2) {
+.gall-img-six:nth-child(n + 2) {
   width: 33%;
 }
 
@@ -119,7 +125,7 @@ export default {
   height: 380px;
 }
 
-.gall-img-three:nth-child(n+4) {
+.gall-img-three:nth-child(n + 4) {
   width: 49%;
 }
 
@@ -154,9 +160,10 @@ export default {
 
 @media (max-width: 1266px) {
   .container {
-    grid-template-areas: "img-0 img-1"
-    "img-2 img-3"
-    "img-4 img-5";
+    grid-template-areas:
+      "img-0 img-1"
+      "img-2 img-3"
+      "img-4 img-5";
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
 
@@ -172,7 +179,7 @@ export default {
     gap: 14px;
   }
 
-  .gall-img-three { 
+  .gall-img-three {
     width: 49%;
     height: 300px;
   }
@@ -182,13 +189,12 @@ export default {
 }
 
 @media (max-width: 861px) {
-
   .container {
     img {
       height: 200px !important;
     }
   }
-  .gall-img-three { 
+  .gall-img-three {
     width: 48.5%;
     height: 200px;
   }
@@ -201,7 +207,7 @@ export default {
     width: 48.3%;
   }
 
-  .gall-img-three:nth-child(n+4) {
+  .gall-img-three:nth-child(n + 4) {
     width: 48.7%;
   }
 }
@@ -213,12 +219,12 @@ export default {
 }
 
 @media (max-width: 570px) {
-  .gall-img-three { 
+  .gall-img-three {
     width: 100%;
   }
-  .gall-img-three:nth-child(n+4) {
-  width: 100%;
-}
+  .gall-img-three:nth-child(n + 4) {
+    width: 100%;
+  }
 }
 
 @media (max-width: 500px) {
@@ -239,5 +245,4 @@ export default {
     }
   }
 }
-
 </style>

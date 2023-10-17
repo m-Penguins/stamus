@@ -26,6 +26,7 @@ export default {
       clinic: "",
       activeClass: "",
       showServicesAll: false,
+      storeS: useService(),
       navigationPatients: [
         { id: 1, title: "Клиники", path: "/clinics" },
         { id: 2, title: "Наше приложение", path: "/stamusapp" },
@@ -34,6 +35,9 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.activeClass = this.storeS.getStateService?.[0]?.id;
+  },
   methods: {
     openModal() {
       this.$refs.modal.openModal("Modal Title", "Modal Message");
@@ -41,7 +45,6 @@ export default {
 
     toggleMenu() {
       this.$emit("toggleMenu");
-      console.log(this.showMenuPatients);
     },
 
     closeMenu(event) {
@@ -54,7 +57,6 @@ export default {
 
     changeActiveClass(cls, title) {
       this.activeClass = cls;
-      console.log(cls);
       this.clinic = title;
     },
 
@@ -82,18 +84,14 @@ export default {
     const navigateToRoute = (serv, dir) => {
       const newRoute = `/${serv}/${linkTransform(dir)}`;
       router.replace(newRoute);
-      console.log(newRoute);
     };
 
     const defaultServices = () => {
       activeClass2 = storeServices.getStateService[0];
-
-      console.log(activeClass2.title);
     };
 
     const toggleServices = (direction) => {
       storeServices.getStateService.forEach((dir) => {
-        console.log(dir.title);
         dir.directions.forEach((dir2) => {
           dir2.showServices = false;
         });
@@ -126,7 +124,7 @@ export default {
       activeClass2,
       defaultServices,
       navigateToRoute,
-      route,
+      router,
     };
   },
 };

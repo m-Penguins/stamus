@@ -39,6 +39,10 @@ const breadcrumbs = [
     url: "/portfolio",
   },
 ];
+
+const mockGallery = arrayImg6.map((img) =>
+  assetsStore.useAsset(`images/gallery/${img}`),
+);
 </script>
 
 <template>
@@ -88,7 +92,7 @@ const breadcrumbs = [
         :total-pages="totalPages"
         @update:current-page="setCurrentPage"
       />
-      <blocks-gallery :arrayImg="arrayImg3" />
+      <blocks-gallery :arrayImg="mockGallery" />
       <blocks-main-form />
     </div>
   </div>

@@ -18,12 +18,6 @@ export default {
     },
   },
   async setup() {
-    const arrayImg = [
-      "gallery6.png",
-      "gallery5.png",
-      "gallery4.png",
-      "gallery3.png",
-    ];
     const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 
     const { data: specialistsData } = await useFetch(
@@ -41,6 +35,14 @@ export default {
     const imgAdaptiv = assetsStore.useAsset(
       "images/big-images/clinic-adaptiv.png",
     );
+
+    const arrayImg = [
+      "gallery6.png",
+      "gallery5.png",
+      "gallery4.png",
+      "gallery3.png",
+      "gallery2.png",
+    ].map((item) => assetsStore.useAsset(`images/gallery/${item}`));
 
     const mockArray = {
       name: "Овсоян Григорий",

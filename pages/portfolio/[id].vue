@@ -19,18 +19,13 @@ if (!portfolioData.value?.data) {
   throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
 }
 
-const symptoms = [
-  { id: 1, text: "Длинное наименование симптома" },
-  { id: 2, text: "Наименование симптома" },
-  { id: 3, text: "наименование симптома" },
-  {
-    id: 4,
-    text: "Длинное наименование симптома Длинное наименование симптома",
-  },
-  { id: 5, text: "Длинное наименование симптома" },
-  { id: 6, text: "Наименование симптома" },
-  { id: 7, text: "Наименование" },
-];
+const symptoms = portfolioData.value?.data?.attributes?.symptom
+  ?.split("|")
+  ?.map((s, i) => ({
+    id: i + 1,
+    text: s,
+  }))
+  ?.filter(Boolean);
 
 const solution = portfolioData.value?.data?.attributes?.solution ?? [];
 const solutionImage = portfolioData.value?.data?.attributes?.solutionImage?.data
@@ -81,14 +76,13 @@ const otherCases = allCasesData.value?.data
     };
   });
 
-const imagesScroll = [
-  "video1.png",
-  "video2.png",
-  "video3.png",
-  "video3.png",
-  "video3.png",
-  "video3.png",
-];
+const gallery = portfolioData.value?.data?.attributes?.galery?.data
+  ?.map((img) =>
+    img?.attributes?.formats?.medium?.url
+      ? baseUrl + img?.attributes?.formats?.medium?.url
+      : "",
+  )
+  ?.filter(Boolean);
 </script>
 
 <template>
@@ -119,7 +113,7 @@ const imagesScroll = [
       ]"
     />
     <blocks-symptoms-block
-      title="Симптомы, с которыми обратился клиент (static)"
+      title="Симптомы, с которыми обратился клиент"
       :cards="symptoms"
     />
     <blocks-video-block
@@ -155,7 +149,7 @@ const imagesScroll = [
         </div>
       </div>
     </div>
-    <blocks-gallery :arrayImg="arrayImg6" />
+    <blocks-gallery :arrayImg="gallery" v-if="gallery?.length > 0" />
     <blocks-cases-direction text="Другие кейсы" :dataDirection="otherCases" />
     <blocks-main-form />
   </div>

@@ -17,10 +17,10 @@ const firstQuery = {
   "filters[clinics][id]": filterClinicParam.value,
   "filters[category]": filterDirectionParam.value,
   "filters[fullName][$contains]": filterSearchParam.value,
-  "filters[fullName][$contains]": filterSearchParam.value.toLowerCase(),
+  "filters[fullName][$contains]": filterSearchParam.value?.toLowerCase(),
   "filters[fullName][$contains]":
-    filterSearchParam.value.charAt(0).toUpperCase() +
-    filterSearchParam.value.slice(1).toLowerCase(),
+    filterSearchParam.value?.charAt(0)?.toUpperCase() +
+    filterSearchParam.value?.slice(1)?.toLowerCase(),
 };
 
 Object.keys(firstQuery).forEach(
@@ -59,17 +59,16 @@ const directions = useReducedServices(directionsData.value.data).map((el) => ({
 watch(
   () => route.query,
   async () => {
-    console.log("RENDER");
     const newQuery = {
       "pagination[page]": currentPageParam.value,
       "pagination[pageSize]": pageSize.value,
       "filters[clinics][id]": filterClinicParam.value,
       "filters[category]": filterDirectionParam.value,
       "filters[fullName][$contains]": filterSearchParam.value,
-      "filters[fullName][$contains]": filterSearchParam.value.toLowerCase(),
+      "filters[fullName][$contains]": filterSearchParam.value?.toLowerCase(),
       "filters[fullName][$contains]":
-        filterSearchParam.value.charAt(0).toUpperCase() +
-        filterSearchParam.value.slice(1).toLowerCase(),
+        filterSearchParam.value?.charAt(0)?.toUpperCase() +
+        filterSearchParam.value?.slice(1)?.toLowerCase(),
     };
 
     Object.keys(newQuery).forEach(
@@ -135,7 +134,7 @@ const handleInputChange = (value) => {
 };
 
 const handleClinicChange = (clinic) => {
-  filterClinicParam.value = clinic.id;
+  filterClinicParam.value = clinic?.id ? clinic.id : null;
 
   setCurrentPage(1);
 
@@ -159,7 +158,7 @@ const handleClinicChange = (clinic) => {
 
 const handleDirectionChange = (direction) => {
   setCurrentPage(1);
-  filterDirectionParam.value = direction.name;
+  filterDirectionParam.value = direction?.name ? direction.name : null;
 
   const newQuery = {
     search: filterSearchParam.value,
@@ -190,20 +189,6 @@ const breadcrumbs = [
     title: "Специалисты",
     url: "/specialists",
   },
-];
-
-const mockArrayTooltips = [
-  {
-    text: "Победитель Гран-при Продокторов «Лучший ортопед России» 2021",
-    img: "tool1.svg",
-  },
-  {
-    text: "2 место Премия Продокторов «Детский стоматолог» 2022 Краснодар",
-    img: "tool2.svg",
-  },
-  { text: "Врач высшей категории", img: "tool3.svg" },
-  { text: "Работает с эстетическими коронками", img: "tool4.svg" },
-  { text: "Работает под микроскопом", img: "tool5.svg" },
 ];
 </script>
 
@@ -267,7 +252,11 @@ const mockArrayTooltips = [
             <elements-name-specialty-photo-card
               link="#"
               :handleLinkClick="() => handleLinkClick(specialist.id)"
-              :arrayTooltip="{achievement: specialist?.attributes?.achievements, img: specialist?.attributes?.achievements?.icon?.data?.attributes?.url}"
+              :arrayTooltip="{
+                achievement: specialist?.attributes?.achievements,
+                img: specialist?.attributes?.achievements?.icon?.data
+                  ?.attributes?.url,
+              }"
               :specialists="{
                 name:
                   specialist?.attributes?.firstName +

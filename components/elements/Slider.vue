@@ -92,7 +92,11 @@ const next = ref(null);
     </div>
     <div class="slider-base-btn">
       <!-- DOBAVIT SSILKU -->
-      <elements-button-base title="Все отзывы" :arrow="true" />
+      <elements-button-base
+        title="Все отзывы"
+        :arrow="true"
+        link="https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/"
+      />
     </div>
   </div>
 </template>
