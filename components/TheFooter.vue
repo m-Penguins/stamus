@@ -94,32 +94,13 @@
           <h3 class="footer-subtitle">Наши адреса</h3>
           <div class="footer-address__container">
             <div class="footer-address__container-link">
-              <NuxtLink
-                @click="
-                  $router.push(
-                    `/clinics/${linkTransform('ул. Московская 140')}`,
-                  )
-                "
-                to="#"
-              >
+              <NuxtLink to="/clinics/5">
                 <p class="footer-text">ул. Московская 140</p>
               </NuxtLink>
-              <NuxtLink
-                @click="
-                  $router.push(`/clinics/${linkTransform('ул. Хакурате 34')}`)
-                "
-                class="footer-text"
-                to="#"
-              >
+              <NuxtLink class="footer-text" to="/clinics/3">
                 <p class="footer-text">ул. Хакурате 34</p>
               </NuxtLink>
-              <NuxtLink
-                @click="
-                  $router.push(`/clinics/${linkTransform('ул. Мачуги 1-1')}`)
-                "
-                class="footer-text"
-                to="#"
-              >
+              <NuxtLink class="footer-text" to="/clinics/4">
                 <p class="footer-text">ул. Мачуги 1/1</p>
               </NuxtLink>
               <!-- <NuxtLink @click="$router.push(`clinics/${linkTransform('ул. Черкасская 17')}`)" class="footer-text" to="#">
@@ -129,42 +110,45 @@
           </div>
         </div>
         <div class="p-r-18 address">
-          <NuxtLink
-            @click="
-              $router.push(`/clinics/${linkTransform('ул. Гимназическая 85')}`)
-            "
-            class="footer-text"
-            to="#"
-          >
+          <NuxtLink class="footer-text" to="/clinics/6">
             <p class="footer-text">ул. Гимназическая 85</p>
           </NuxtLink>
-          <NuxtLink
-            @click="
-              $router.push(
-                `/clinics/${linkTransform('Платановый бульвар 19/3')}`,
-              )
-            "
-            class="footer-text"
-            to="#"
-          >
+          <NuxtLink class="footer-text" to="/clinics/7">
             <p class="footer-text">Платановый бульвар 19/3</p>
           </NuxtLink>
           <!-- <NuxtLink @click="navigateToRoute('ул. Средняя 1-3')" class="footer-text" to="#">
             <p class="footer-text">ул. Средняя 1/3</p>
           </NuxtLink> -->
         </div>
-        <a href="http://176.99.11.245:1338/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf" target="_blank" class="footer-text display-block">Политика конфидециальности</a>
-        <a href="http://176.99.11.245:1338/uploads/Liczenziya_ot_26_07_2023_g_41de6703eb.pdf" target="_blank" class="footer-text display-block">Лицензия</a>
+        <a
+          href="http://176.99.11.245:1338/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf"
+          target="_blank"
+          class="footer-text display-block"
+          >Политика конфидециальности</a
+        >
+        <a
+          href="http://176.99.11.245:1338/uploads/Liczenziya_ot_26_07_2023_g_41de6703eb.pdf"
+          target="_blank"
+          class="footer-text display-block"
+          >Лицензия</a
+        >
         <div class="footer-text display-block">Версия для слабовидящих</div>
         <NuxtLink to="/business" class="footer-text display-block">
           Бизнесу и корпоративным клиентам
         </NuxtLink>
         <!-- <a href="#" class="bvi-open">Включить режим доступности</a> -->
         <div class="display">
-          <a href="../assets/docs/Положение-о-работе-с-ПДн.pdf" target="_blank" class="footer-text">Политика конфидециальности</a>
+          <a
+            href="../assets/docs/Положение-о-работе-с-ПДн.pdf"
+            target="_blank"
+            class="footer-text"
+            >Политика конфидециальности</a
+          >
           <a class="footer-text">Лицензия</a>
           <p class="footer-text">Версия для слабовидящих</p>
-          <NuxtLink to="/business" class="footer-text">Бизнесу и корпоративным клиентам</NuxtLink>
+          <NuxtLink to="/business" class="footer-text"
+            >Бизнесу и корпоративным клиентам</NuxtLink
+          >
         </div>
       </div>
     </div>
