@@ -237,6 +237,7 @@ const breadcrumbs = [
     <elements-button-base
       title="Скачать полный прайс"
       :isDownload="true"
+      :link="'https://disk.yandex.ru/d/KVMGriYcVDOHgg'"
       class="prices-btn"
     />
   </div>

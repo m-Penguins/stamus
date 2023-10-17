@@ -153,16 +153,16 @@
             <p class="footer-text">ул. Средняя 1/3</p>
           </NuxtLink> -->
         </div>
-        <div class="footer-text display-block">Политика конфидециальности</div>
-        <div class="footer-text display-block">Лицензия</div>
+        <a href="http://176.99.11.245:1338/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf" target="_blank" class="footer-text display-block">Политика конфидециальности</a>
+        <a href="http://176.99.11.245:1338/uploads/Liczenziya_ot_26_07_2023_g_41de6703eb.pdf" target="_blank" class="footer-text display-block">Лицензия</a>
         <div class="footer-text display-block">Версия для слабовидящих</div>
         <NuxtLink to="/business" class="footer-text display-block">
           Бизнесу и корпоративным клиентам
         </NuxtLink>
         <!-- <a href="#" class="bvi-open">Включить режим доступности</a> -->
         <div class="display">
-          <p class="footer-text">Политика конфидециальности</p>
-          <p class="footer-text">Лицензия</p>
+          <a href="../assets/docs/Положение-о-работе-с-ПДн.pdf" target="_blank" class="footer-text">Политика конфидециальности</a>
+          <a class="footer-text">Лицензия</a>
           <p class="footer-text">Версия для слабовидящих</p>
           <NuxtLink to="/business" class="footer-text">Бизнесу и корпоративным клиентам</NuxtLink>
         </div>

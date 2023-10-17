@@ -7,6 +7,10 @@ const [{ data: fourSpecialists }, { data: articlesData }] = await Promise.all([
     query: {
       "pagination[page]": 1,
       "pagination[pageSize]": 4,
+      "filters[id][$in][0]": 3,
+      "filters[id][$in][1]": 9,
+      "filters[id][$in][2]": 4,
+      "filters[id][$in][3]": 7,
       populate: "deep",
     },
   }),
@@ -54,7 +58,7 @@ const mainSpecialists = fourSpecialists.value?.data?.map((sp) => {
     },
   };
 });
-
+console.log(mainSpecialists)
 const reviews = [
   {
     name: "Пациент +7-989-00XXXXX",
@@ -93,7 +97,7 @@ const reviews = [
   <blocks-main-primary-banner />
   <BlocksMainBanner
     :title="'Лечим не только зубы'"
-    :text="'Многопрофильная детская клиника СтамусМед'"
+    :text="'Многопрофильная детская клиника Стамусу на Юбилейном'"
     :titleLink="'Узнать подробнее'"
     link="/detskaya-klinika"
     bgColor="light-blue-gradient"
@@ -104,7 +108,7 @@ const reviews = [
   <blocks-main-specialists :mainSpecialists="mainSpecialists" />
   <BlocksMainBanner
     :title="'Добровольное медицинское страхование'"
-    :text="'которое в отличие от обязательного обеспечивает получение гражданином дополнительных медицинских услуг'"
+    :text="'Работаем с большинством страховых компаний России.'"
     :titleLink="'Узнать подробнее'"
     link="#"
     bgColor="light-blue"

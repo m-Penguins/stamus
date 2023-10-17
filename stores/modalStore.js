@@ -99,6 +99,7 @@ export const useModalStore = defineStore("modal-store", () => {
       try {
         await mail.send({
           from: "dev@sloy.design",
+          to: "stamusforma@gmail.com",
           subject: "Заявка Стамус",
           text: msg,
         });

@@ -5,8 +5,8 @@
         :fontSize="false"
         textButtonBase="Записаться онлайн"
         :customClick="redirectToExternalApp"
-        title="Оффер <br> в несколько строчек"
-        text="Небольшое описание в несколько строчек"
+        title="5 клиник СТАМУС в Краснодаре"
+        text="Результат с гарантией. Цены «под ключ»"
       />
       <div class="primary-banner-box">
         <div class="primary-banner-wrap">
