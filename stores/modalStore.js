@@ -100,11 +100,20 @@ export const useModalStore = defineStore("modal-store", () => {
 
       const msg = [name, phone, clinic, comment].filter(Boolean).join("\n");
 
+      const subject = () => {
+        if (isModalOpenBid.value) {
+          return "Корпоративная заявка";
+        } else if (isModalOpenDiscounts.value) {
+          return "Заявка из Счастливых часов";
+        }
+        return "Заявка на прием Стамус";
+      };
+
       try {
         await mail.send({
           config: "form",
           from: "dev@sloy.design",
-          subject: "Заявка на прием Стамус",
+          subject: subject(),
           text: msg,
         });
 
@@ -115,7 +124,7 @@ export const useModalStore = defineStore("modal-store", () => {
       } finally {
         setTimeout(() => {
           closeModal();
-        }, 2000);
+        }, 1500);
       }
 
       return formData;
