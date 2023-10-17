@@ -22,7 +22,9 @@ const getSearchData = async () => {
   ] = await Promise.all([
     useFetch(`${apiBaseUrl}specialists`, {
       query: {
-        "filters[fullName][$contains]":
+        "filters[fullName][$contains][0]": searchTerm.value,
+        "filters[fullName][$contains][1]": searchTerm.value?.toLowerCase(),
+        "filters[fullName][$contains][2]":
           searchTerm.value?.charAt(0)?.toUpperCase() +
           searchTerm.value?.slice(1)?.toLowerCase(),
 
@@ -39,9 +41,9 @@ const getSearchData = async () => {
     }),
     useFetch(`${apiBaseUrl}services`, {
       query: {
-        "filters[heading][$contains]": searchTerm.value,
-        "filters[heading][$contains]": searchTerm.value?.toLowerCase(),
-        "filters[heading][$contains]":
+        "filters[heading][$contains][0]": searchTerm.value,
+        "filters[heading][$contains][1]": searchTerm.value?.toLowerCase(),
+        "filters[heading][$contains][2]":
           searchTerm.value?.charAt(0)?.toUpperCase() +
           searchTerm.value?.slice(1)?.toLowerCase(),
         populate: "deep",
@@ -49,9 +51,9 @@ const getSearchData = async () => {
     }),
     useFetch(`${apiBaseUrl}articles`, {
       query: {
-        "filters[heading][$contains]": searchTerm.value,
-        "filters[heading][$contains]": searchTerm.value?.toLowerCase(),
-        "filters[heading][$contains]":
+        "filters[heading][$contains][0]": searchTerm.value,
+        "filters[heading][$contains][1]": searchTerm.value?.toLowerCase(),
+        "filters[heading][$contains][2]":
           searchTerm.value?.charAt(0)?.toUpperCase() +
           searchTerm.value?.slice(1)?.toLowerCase(),
         populate: "deep",
@@ -69,11 +71,15 @@ const getSearchData = async () => {
     achievements: sp?.attributes?.achievements,
     link: `/specialists/${sp?.id}`,
   }));
+
   services.value = servicesData?.value?.data?.map((serv) => ({
     id: serv?.id,
     title: serv?.attributes?.heading,
-    link: "#",
+    link: `/${linkTransform(serv?.attributes?.category)}/${linkTransform(
+      serv?.attributes?.heading,
+    )}`,
   }));
+
   articles.value = articlesData?.value?.data?.map((art) => ({
     id: art?.id,
     title: art?.attributes?.heading,
@@ -148,11 +154,7 @@ watch(
             :key="item?.id"
             class="search-inner"
           >
-            <elements-activities-card
-              :activitiesCard="item"
-              :index="index"
-              :isSvgArrow="false"
-            />
+            <elements-activities-card :activitiesCard="item" :index="index" />
           </div>
         </div>
 
