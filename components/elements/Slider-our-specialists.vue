@@ -39,6 +39,7 @@ const assetsStore = useAssets();
             class="swiper-slide"
           >
             <elements-name-specialty-photo-card
+              :is-link="true"
               :specialists="{
                 name:
                   item?.attributes?.firstName +

@@ -45,7 +45,7 @@ export default {
     <div class="video-block-wrap">
       <div class="video-block-container">
         <div class="video-block-info">
-          <h3 v-html="title" class="video-block-title"></h3>
+          <h3 v-if="title" class="video-block-title">{{ title }}</h3>
           <p v-if="!isContactsBlock" v-html="text" class="video-block-text"></p>
           <div v-if="isContactsBlock" class="video-block-contacts">
             <div class="video-block-contacts-box grey">
@@ -261,7 +261,8 @@ export default {
 
 .video-block-rectangle {
   width: 220px;
-  height: 348px;
+  min-height: 348px;
+  height: 100%;
   border-radius: 15px;
   background: var(--text, #525660);
   position: relative;

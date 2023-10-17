@@ -10,7 +10,12 @@ const [
   { data: otherSpecialists },
 ] = await Promise.all([
   useFetch(`${apiBaseUrl}specialists/${route.params.id}?populate=deep`),
-  useFetch(`${apiBaseUrl}specialists/${route.params.id}?populate=*`),
+  useFetch(`${apiBaseUrl}specialists/${route.params.id}`, {
+    query: {
+      populate:
+        "portofolios.photoBanner.*,fotoSpecialist.*,education.*,additionalEducation.*,docsPhoto.*,video.*,clinics.*,services.*,reviews.*,price_lists.*,achievements.*,areasOfActivity.*,meetingPerson.*",
+    },
+  }),
   useFetch(`${apiBaseUrl}specialists`, {
     query: {
       populate: "deep",
@@ -49,8 +54,9 @@ const portfolios = specialist?.value?.data?.attributes?.portofolios?.data?.map(
   (el) => {
     return {
       id: el?.id,
-      img: el?.attributes?.photoBanner
-        ? baseUrl + el?.attributes?.photoBanner
+      img: el?.attributes?.photoBanner?.data?.attributes?.formats?.medium?.url
+        ? baseUrl +
+          el?.attributes?.photoBanner?.data?.attributes?.formats?.medium?.url
         : assetsStore.useAsset("images/no-photo.png"),
       name: el?.attributes?.heading,
       category: "detskaya",
@@ -187,11 +193,12 @@ const redirectToExternalApp = () => {};
   />
   <!-- <blocks-activities-block :activitiesCard="mockActivitiesCard" /> -->
   <blocks-education-block
-    v-if="specialist?.data?.attributes?.education"
+    v-if="specialist?.data?.attributes?.education?.length > 0"
     :events="specialist?.data?.attributes?.education"
     title="Образование"
   />
   <blocks-education-block
+    v-if="specialist?.data?.attributes?.additionalEducation?.length > 0"
     :events="specialist?.data?.attributes?.additionalEducation"
     title="Дополнительное образование"
   />
@@ -215,6 +222,7 @@ const redirectToExternalApp = () => {};
       </div>
     </div>
   </div>
+
   <blocks-cases-direction
     v-if="specialist?.data?.attributes?.portofolios?.data?.length > 0"
     text="Портфолио доктора"

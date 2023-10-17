@@ -1,6 +1,10 @@
 <template>
   <div>
-    <nuxt-link :to="service.link" class="link">
+    <a
+      href="https://app.1denta.ru/booking/booking?orgid=11074&roistat_visit=282247#/main"
+      target="_blank"
+      class="link"
+    >
       <div class="service-card">
         <div class="service-card-container">
           <div class="grey-point-container">
@@ -37,7 +41,7 @@
           <div class="service-card-box__price">от {{ service.price }} ₽</div>
         </div>
       </div>
-    </nuxt-link>
+    </a>
   </div>
 </template>
 

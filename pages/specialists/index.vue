@@ -16,9 +16,9 @@ const firstQuery = {
   "pagination[pageSize]": pageSize.value,
   "filters[clinics][id]": filterClinicParam.value,
   "filters[category]": filterDirectionParam.value,
-  "filters[fullName][$contains]": filterSearchParam.value,
-  "filters[fullName][$contains]": filterSearchParam.value?.toLowerCase(),
-  "filters[fullName][$contains]":
+  "filters[fullName][$contains][0]": filterSearchParam.value,
+  "filters[fullName][$contains][1]": filterSearchParam.value?.toLowerCase(),
+  "filters[fullName][$contains][2]":
     filterSearchParam.value?.charAt(0)?.toUpperCase() +
     filterSearchParam.value?.slice(1)?.toLowerCase(),
 };
@@ -64,9 +64,9 @@ watch(
       "pagination[pageSize]": pageSize.value,
       "filters[clinics][id]": filterClinicParam.value,
       "filters[category]": filterDirectionParam.value,
-      "filters[fullName][$contains]": filterSearchParam.value,
-      "filters[fullName][$contains]": filterSearchParam.value?.toLowerCase(),
-      "filters[fullName][$contains]":
+      "filters[fullName][$contains][0]": filterSearchParam.value,
+      "filters[fullName][$contains][1]": filterSearchParam.value?.toLowerCase(),
+      "filters[fullName][$contains][2]":
         filterSearchParam.value?.charAt(0)?.toUpperCase() +
         filterSearchParam.value?.slice(1)?.toLowerCase(),
     };
@@ -250,7 +250,7 @@ const breadcrumbs = [
             :key="specialist.id"
           >
             <elements-name-specialty-photo-card
-              link="#"
+              :is-link="true"
               :handleLinkClick="() => handleLinkClick(specialist.id)"
               :arrayTooltip="{
                 achievement: specialist?.attributes?.achievements,
