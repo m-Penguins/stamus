@@ -94,6 +94,7 @@ const reviews = [
 
 <template>
   <blocks-main-primary-banner />
+
   <BlocksMainBanner
     :title="'Лечим не только зубы'"
     :text="'Многопрофильная детская клиника Стамусу на Юбилейном'"
@@ -103,6 +104,7 @@ const reviews = [
     type="true"
     img="girl.png"
   />
+
   <blocks-main-areas />
   <blocks-main-specialists :mainSpecialists="mainSpecialists" />
   <BlocksMainBanner

@@ -132,7 +132,9 @@
           class="footer-text display-block"
           >Лицензия</a
         >
-        <div class="footer-text display-block">Версия для слабовидящих</div>
+        <a href="#" class="bvi-open footer-text display-block" data-bvi="close"
+          >Версия для слабовидящих</a
+        >
         <NuxtLink to="/business" class="footer-text display-block">
           Бизнесу и корпоративным клиентам
         </NuxtLink>
@@ -145,7 +147,9 @@
             >Политика конфидециальности</a
           >
           <a class="footer-text">Лицензия</a>
-          <p class="footer-text">Версия для слабовидящих</p>
+          <a href="#" class="bvi-open footer-text" data-bvi="close"
+            >Версия для слабовидящих</a
+          >
           <NuxtLink to="/business" class="footer-text"
             >Бизнесу и корпоративным клиентам</NuxtLink
           >
@@ -307,6 +311,8 @@ export default {
     @include body-14-regular;
     color: $gray-text;
     width: fit-content;
+    padding: 0;
+    background-color: transparent;
   }
 
   .footer-img {

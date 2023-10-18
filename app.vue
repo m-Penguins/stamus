@@ -12,24 +12,33 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      showMenuPatients: false,
-    };
-  },
-  methods: {
-    toggleMenu() {
-      this.showMenuPatients = !this.showMenuPatients;
+<script setup>
+const showMenuPatients = ref(false);
+
+const toggleMenu = () => (showMenuPatients.value = !showMenuPatients.value);
+
+const closeMenu = () => (showMenuPatients.value = false);
+
+useHead({
+  link: [
+    {
+      rel: "stylesheet",
+      href: "./bvi.css",
+      type: "text/css",
     },
-    closeMenu() {
-      if (this.showMenuPatients) {
-        this.showMenuPatients = false;
-      }
+  ],
+  script: [
+    { src: "./bvi.js", tagPosition: "bodyClose", type: "text/javascript" },
+    {
+      innerHTML: `new isvek.Bvi({
+        images: false,
+        panelHide: true
+      });`,
+      tagPosition: "bodyClose",
+      type: "text/javascript",
     },
-  },
-};
+  ],
+});
 </script>
 
 <style lang="scss">
