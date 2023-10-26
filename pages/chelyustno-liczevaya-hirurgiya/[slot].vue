@@ -44,7 +44,8 @@ const infoBlockVideo = infoBlock?.video?.data?.attributes?.url
   ? baseUrl + infoBlock?.video?.data?.attributes?.url
   : "";
 
-const tagsImportant = serviceData?.value?.data?.attributes?.tagsImportant;
+const tagsImportant =
+  serviceData?.value?.data?.attributes?.tagsImportant?.split(" | ");
 
 const directionLabel = route.path.split("/").filter(Boolean)[0];
 const similarServicesArray = storeServices.getServicesGroupExcluded(serviceId);
