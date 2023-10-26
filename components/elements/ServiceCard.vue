@@ -1,10 +1,6 @@
 <template>
   <div>
-    <a
-      href="https://app.1denta.ru/booking/booking?orgid=11074&roistat_visit=282247#/main"
-      target="_blank"
-      class="link"
-    >
+    <button class="link" @click="store.openModal">
       <div class="service-card">
         <div class="service-card-container">
           <div class="grey-point-container">
@@ -27,7 +23,7 @@
             v-if="service.isRecommended"
             class="service-card-box__type-isRecommended"
           >
-            Рекомендуем
+            Акция
           </div>
           <div
             v-if="service.isPopular"
@@ -38,25 +34,30 @@
           <div v-if="service.isDemand" class="service-card-box__type-isDemand">
             Высокий спрос
           </div>
-          <div class="service-card-box__price">от {{ service.price }} ₽</div>
+          <div class="service-card-box__price">{{ service.price }} ₽</div>
         </div>
       </div>
-    </a>
+    </button>
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    service: {
-      type: Object,
-    },
-  },
-};
+<script setup>
+defineProps(["service"]);
+
+const store = useModalStore();
 </script>
 
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
+
+.link {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
 
 .service-card {
   display: flex;
@@ -125,12 +126,15 @@ export default {
   .service-card-title {
     @include body-16-regular;
     color: $dark-blue-subtitle;
+    text-align: left;
   }
 }
 
 @media (max-width: 800px) {
   .service-card {
-    display: block;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 
     .service-card-container {
       gap: 20px;
