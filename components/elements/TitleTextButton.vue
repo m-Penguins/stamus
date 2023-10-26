@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1
-      v-text="title"
+      v-html="title"
       :class="{
         fontSize: fontSize ? 'fontSize' : '',
         typeColorWhiteText: typeColorWhiteText ? 'typeColorWhiteText' : '',
