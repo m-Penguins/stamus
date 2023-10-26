@@ -1,8 +1,3 @@
-/*!
- * Button visually impaired - v1.0.0 https://bvi.isvek.ru
- * Copyright 2014-2021 Oleg Korotenko <bvi@isvek.ru>.
- * Licensed MIT (https://github.com/veks/button-visually-impaired-javascript/blob/master/LICENSE.md)
- */
 (function (global, factory) {
   typeof exports === "object" && typeof module !== "undefined"
     ? (module.exports = factory())
