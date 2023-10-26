@@ -2,23 +2,28 @@
   <div class="about-important">
     <div class="about-important-title">О важном</div>
     <div class="about-important-container">
-      <div v-html="item" class="about-important-box" v-for="(item) in arrayText" :key="item"></div>
+      <div
+        v-text="item"
+        class="about-important-box"
+        v-for="item in arrayText"
+        :key="item"
+      ></div>
     </div>
   </div>
 </template>
 
 <script>
-  export default {
-    props: {
-      arrayText: {
-        type: Object,
-      }
-    }
-  }
+export default {
+  props: {
+    arrayText: {
+      type: Object,
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
-@import '/assets/styles/style.scss';
+@import "/assets/styles/style.scss";
 
 .about-important {
   display: flex;
@@ -51,43 +56,41 @@
   padding: 14px 20px;
   align-items: flex-start;
   gap: 10px;
-
 }
 
-  @media screen and (max-width: 800px) {
-    .about-important {
-      flex-wrap: wrap;
-    }
-
-    .about-important-container {
-      flex-direction: inherit;
-      flex-wrap: wrap;
-      flex: 1 1 auto;
-    }
-
-    .about-important-title { 
-      padding-bottom: 30px
-    }
-
-    .about-important-box {
-      @include body-14-regular;
-      width: 49%;
-      height: 104px;
-    }
+@media screen and (max-width: 800px) {
+  .about-important {
+    flex-wrap: wrap;
   }
 
-    @media screen and (max-width: 717px) {
-    .about-important {
-      margin: 0 auto 80px auto;
-    }
-    
-    .about-important-container {
-      justify-content: center;
-    }
+  .about-important-container {
+    flex-direction: inherit;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+  }
 
-    .about-important-box {
-      width: 100%;
-    }
-  } 
+  .about-important-title {
+    padding-bottom: 30px;
+  }
 
+  .about-important-box {
+    @include body-14-regular;
+    width: 49%;
+    height: 104px;
+  }
+}
+
+@media screen and (max-width: 717px) {
+  .about-important {
+    margin: 0 auto 80px auto;
+  }
+
+  .about-important-container {
+    justify-content: center;
+  }
+
+  .about-important-box {
+    width: 100%;
+  }
+}
 </style>
