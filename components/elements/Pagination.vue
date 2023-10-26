@@ -1,6 +1,7 @@
 <template>
   <ul class="pagination">
     <li
+      v-if="totalPages > 1"
       v-for="pageNumber in totalPages"
       :key="pageNumber"
       :class="['page-item', { active: pageNumber === currentPage }]"
