@@ -63,8 +63,8 @@
           >
           <a
             class="footer-text header-nav-item"
-            href="mailto:stamus-med@info.ru"
-            >stamus-med@info.ru</a
+            href="mailto:stamus.dent@yandex.ru"
+            >stamus.dent@yandex.ru</a
           >
           <div class="footer-social">
             <a href="/" class="footer-social-link">
