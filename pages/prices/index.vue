@@ -135,7 +135,11 @@ const breadcrumbs = [
     <div class="prices-wrap">
       <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
       <h1 class="prices-title">Цены на услуги</h1>
-      <p class="prices-text">Небольшое описание в несколько строчек</p>
+      <p class="prices-text">
+        Все наши цены под ключ. <br />
+        Анестезия, осмотры, наложение швов и прочие сопутствующие услуги уже
+        включены в стоимость.
+      </p>
     </div>
   </div>
   <div class="container-size popular-service">
