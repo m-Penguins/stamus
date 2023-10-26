@@ -15,7 +15,7 @@ const firstQuery = {
   "pagination[page]": currentPageParam.value,
   "pagination[pageSize]": pageSize.value,
   "filters[clinics][id]": filterClinicParam.value,
-  "filters[category]": filterDirectionParam.value,
+  "filters[position]": filterDirectionParam.value,
   "filters[fullName][$contains][0]": filterSearchParam.value,
   "filters[fullName][$contains][1]": filterSearchParam.value?.toLowerCase(),
   "filters[fullName][$contains][2]":
@@ -51,10 +51,16 @@ const clinicsList = clinics.value?.data?.map((cl) => ({
   address: cl?.attributes?.address,
 }));
 
-const directions = useReducedServices(directionsData.value.data).map((el) => ({
-  id: el.id,
-  name: el.title,
-}));
+const directions = [
+  ...new Set(
+    specialists.value?.data
+      ?.map((sp, ind) => ({
+        id: ind + 1,
+        name: sp?.attributes?.position,
+      }))
+      .filter((el) => el.name),
+  ),
+];
 
 watch(
   () => route.query,
@@ -63,7 +69,7 @@ watch(
       "pagination[page]": currentPageParam.value,
       "pagination[pageSize]": pageSize.value,
       "filters[clinics][id]": filterClinicParam.value,
-      "filters[category]": filterDirectionParam.value,
+      "filters[position]": filterDirectionParam.value,
       "filters[fullName][$contains][0]": filterSearchParam.value,
       "filters[fullName][$contains][1]": filterSearchParam.value?.toLowerCase(),
       "filters[fullName][$contains][2]":
