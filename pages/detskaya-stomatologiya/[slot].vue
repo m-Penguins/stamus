@@ -18,7 +18,7 @@ const [
   { data: articlesData },
 ] = await Promise.all([
   useFetch(
-    `${apiBaseUrl}services/${serviceId}?populate=reviews.*,clinics.*,price_lists.*,photoBanner.*,direction.*,specialists.fotoSpecialist.*,articles.*,infoBlock.image.*,infoBlock.video.*`,
+    `${apiBaseUrl}services/${serviceId}?populate=reviews.*,clinics.*,price_lists.*,photoBanner.*,direction.*,specialists.fotoSpecialist.*,specialists.achievements.icon.*,articles.*,infoBlock.image.*,infoBlock.video.*`,
   ),
   useFetch(`${apiBaseUrl}services/${serviceId}?populate=deep`),
   useFetch(`${apiBaseUrl}articles?populate=deep&pagination[pageSize]=8`),

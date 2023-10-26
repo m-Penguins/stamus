@@ -57,6 +57,7 @@ const specialists =
       img: sp?.attributes?.fotoSpecialist?.data?.attributes?.url
         ? baseUrl + sp?.attributes?.fotoSpecialist?.data?.attributes?.url
         : assetsStore.useAsset("images/no-photo.png"),
+      achievements: sp?.attributes?.achievements,
     };
   });
 
@@ -143,6 +144,7 @@ const gallery = portfolioData.value?.data?.attributes?.galery?.data
           :key="specialist.id"
         >
           <elements-name-specialty-photo-card
+            :isTooltip="true"
             :specialists="specialist"
             @click="$router.push(`/specialists/` + specialist.id)"
           />

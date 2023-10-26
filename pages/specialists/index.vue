@@ -41,6 +41,8 @@ const [{ data: specialists }, { data: clinics }, { data: directionsData }] =
     useFetch(`${apiBaseUrl}services?populate=deep`),
   ]);
 
+console.log("ALL SPEC", specialists.value);
+
 if (!specialists.value?.data) {
   throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
 }
@@ -258,11 +260,6 @@ const breadcrumbs = [
             <elements-name-specialty-photo-card
               :is-link="true"
               :handleLinkClick="() => handleLinkClick(specialist.id)"
-              :arrayTooltip="{
-                achievement: specialist?.attributes?.achievements,
-                img: specialist?.attributes?.achievements?.icon?.data
-                  ?.attributes?.url,
-              }"
               :specialists="{
                 name:
                   specialist?.attributes?.firstName +
@@ -277,6 +274,7 @@ const breadcrumbs = [
                 position: specialist?.attributes?.position,
                 achievements: specialist?.attributes?.achievements,
               }"
+              :isTooltip="true"
             />
           </div>
         </template>

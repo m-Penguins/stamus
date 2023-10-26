@@ -30,7 +30,7 @@ const [
   { data: articlesData },
 ] = await Promise.all([
   useFetch(
-    `${apiBaseUrl}services/${serviceId}?populate=reviews.*,clinics.*,price_lists.*,photoBanner.*,direction.*,specialists.fotoSpecialist.*,articles.*,infoBlock.image.*,infoBlock.video.*`,
+    `${apiBaseUrl}services/${serviceId}?populate=reviews.*,clinics.*,price_lists.*,photoBanner.*,direction.*,specialists.fotoSpecialist.*,specialists.achievements.icon.*,articles.*,infoBlock.image.*,infoBlock.video.*`,
   ),
   useFetch(`${apiBaseUrl}services/${serviceId}?populate=deep`),
   useFetch(`${apiBaseUrl}articles?populate=deep&pagination[pageSize]=8`),
@@ -68,6 +68,8 @@ const priceList = mapPriceList(
 const reviews = mapReviews(serviceData?.value?.data?.attributes?.reviews?.data);
 
 const specialists = serviceData?.value?.data?.attributes?.specialists?.data;
+
+console.log("123123123", specialists.value);
 
 const articles = articlesData?.value?.data?.map((art) => {
   return {

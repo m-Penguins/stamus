@@ -17,7 +17,7 @@ const { data: clinicData } = await useFetch(
   {
     query: {
       populate:
-        "specialists.fotoSpecialist.*,infoBlock.image.*,infoBlock.video.*,photoBanner.*,reviews.*,portofolios.photoBanner.*,tagsImportant.*,descriptionBlock.image.*,gallery.*,price_lists.servicePrice.*",
+        "specialists.fotoSpecialist.*,specialists.achievements.icon.*,infoBlock.image.*,infoBlock.video.*,photoBanner.*,reviews.*,portofolios.photoBanner.*,tagsImportant.*,descriptionBlock.image.*,gallery.*,price_lists.servicePrice.*",
     },
   },
 );

@@ -51,9 +51,9 @@ const assetsStore = useAssets();
                   : assetsStore.useAsset('images/no-photo.png'),
                 position: item?.attributes?.position,
                 id: item?.id,
+                achievements: item?.attributes?.achievements,
               }"
-              :arrayTooltip="mockArrayTooltips"
-              :isTooltip="false"
+              :isTooltip="true"
             />
           </swiper-slide>
         </template>
