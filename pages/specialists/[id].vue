@@ -78,9 +78,7 @@ const documents = ref(
 
 const reviews = mapReviews(specialist.value?.data?.attributes?.reviews?.data);
 
-const activities = ref(specialistDeep.value?.data?.attributes?.areasOfActivity);
-
-const redirectToExternalApp = () => {};
+const activities = specialistDeep.value?.data?.attributes?.areasOfActivity;
 </script>
 
 <template>
@@ -94,6 +92,7 @@ const redirectToExternalApp = () => {};
             isCategory="true"
             :category="specialist?.data?.attributes?.position"
             textButtonBase="Записаться онлайн"
+            :isButtonBase="true"
             :customClick="redirectToExternalApp"
             :title="
               specialist?.data?.attributes?.lastName +
@@ -107,6 +106,7 @@ const redirectToExternalApp = () => {};
                 ? 'Смотреть портфолио'
                 : ''
             "
+            link="#portfolio"
             class="stamus-app-title"
           />
           <div

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1
-      v-html="title"
+      v-text="title"
       :class="{
         fontSize: fontSize ? 'fontSize' : '',
         typeColorWhiteText: typeColorWhiteText ? 'typeColorWhiteText' : '',
@@ -11,7 +11,7 @@
     <p v-if="isCategory" v-html="category" class="title-text-btn-category"></p>
     <p
       v-if="!!text"
-      v-html="text"
+      v-text="text"
       :class="{
         isButtonBase: !isButtonBase ? 'isButtonBase' : '',
         typeColorWhiteText: typeColorWhiteText ? 'typeColorWhiteText' : '',
