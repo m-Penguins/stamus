@@ -204,7 +204,6 @@ export default {
   height: 500px;
 }
 .yandex-container {
-  -webkit-filter: grayscale(100%);
   height: 100%;
   border-radius: 15px;
 }
