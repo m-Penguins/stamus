@@ -123,7 +123,7 @@ const reviews = [
     :selectedText="true"
     :text="'Независимый всеройсийский портал Продокторов'"
     :titleLink="'Записаться онлайн'"
-    link="https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/#otzivi"
+    link="https://app.1denta.ru/booking/booking?orgid=11074&roistat_visit=282247#/network"
     bgColor="blue-gradient"
     img="mobile.svg"
     bigImg="true"
