@@ -95,7 +95,7 @@ const next = ref(null);
       <elements-button-base
         title="Все отзывы"
         :arrow="true"
-        link="https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/"
+        link="https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/#otzivi"
       />
     </div>
   </div>
