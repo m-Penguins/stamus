@@ -69,8 +69,6 @@ const reviews = mapReviews(serviceData?.value?.data?.attributes?.reviews?.data);
 
 const specialists = serviceData?.value?.data?.attributes?.specialists?.data;
 
-console.log("123123123", specialists.value);
-
 const articles = articlesData?.value?.data?.map((art) => {
   return {
     id: art?.id,

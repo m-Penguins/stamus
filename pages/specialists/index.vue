@@ -41,8 +41,6 @@ const [{ data: specialists }, { data: clinics }, { data: directionsData }] =
     useFetch(`${apiBaseUrl}services?populate=deep`),
   ]);
 
-console.log("ALL SPEC", specialists.value);
-
 if (!specialists.value?.data) {
   throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
 }
