@@ -1,7 +1,7 @@
 <template>
   <div class="info">
-    <div 
-      v-for="(item, index) in mockInfoMain" 
+    <div
+      v-for="(item, index) in mockInfoMain"
       :key="item.id"
       class="info-card"
       :class="{ 'open': item.isOpen }">
@@ -104,7 +104,7 @@
           </div>
           <div v-else-if="item.id === 10">
             <div class="accordion-content-text">
-              <elements-link-with-arrow type="true" title="Открыть" href="/prices"/>
+              <elements-link-with-arrow type="true" title="Открыть" href="https://disk.yandex.ru/d/KVMGriYcVDOHgg" isExternal/>
             </div>
           </div>
           <div v-else-if="item.id === 11" class="info-links-box">
@@ -196,7 +196,7 @@ export default {
     }
   }
 }
-  
+
 .accordion-content-subtitle {
   margin: 24px 0 24px;
 }
