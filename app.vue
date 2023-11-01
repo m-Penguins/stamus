@@ -3,7 +3,7 @@
     <TheHeader :showMenuPatients="showMenuPatients" @toggleMenu="toggleMenu" />
     <div class="main" @click="closeMenu">
       <main>
-        <NuxtLoadingIndicator color="#232D5B" :throttle="0" height="8" />
+        <NuxtLoadingIndicator color="#232D5B" :throttle="0" :height="8" />
         <NuxtPage />
       </main>
     </div>
