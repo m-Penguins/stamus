@@ -109,7 +109,7 @@ const setCurrentPage = (pageNumber) => {
 };
 
 const handleLinkClick = (id) => {
-  router.push(`/specialists/` + String(id));
+  router.push(`/specialists/${id}`);
 };
 
 const handleSearchChange = () => {
