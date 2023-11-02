@@ -29,7 +29,7 @@ Object.keys(firstQuery).forEach(
     delete firstQuery[key],
 );
 
-const [{ data: specialists }, { data: clinics }, { data: directionsData }] =
+const [{ data: specialists }, { data: clinics }] =
   await Promise.all([
     useFetch(`${apiBaseUrl}specialists`, {
       query: {
@@ -38,7 +38,6 @@ const [{ data: specialists }, { data: clinics }, { data: directionsData }] =
       },
     }),
     useFetch(`${apiBaseUrl}clinics`),
-    useFetch(`${apiBaseUrl}services?populate=deep`),
   ]);
 
 if (!specialists.value?.data) {
@@ -108,9 +107,7 @@ const setCurrentPage = (pageNumber) => {
   });
 };
 
-const handleLinkClick = (id) => {
-  router.push(`/specialists/${id}`);
-};
+
 
 const handleSearchChange = () => {
   setCurrentPage(1);
@@ -257,8 +254,8 @@ const breadcrumbs = [
           >
             <elements-name-specialty-photo-card
               :is-link="true"
-              :handleLinkClick="() => handleLinkClick(specialist.id)"
               :specialists="{
+                id: specialist?.id,
                 name:
                   specialist?.attributes?.firstName +
                   ' ' +
