@@ -18,7 +18,7 @@
     <elements-link-with-arrow
       type="true"
       title="Смотреть кейс"
-      @click="router.push(`/portfolio/${direction.id}`)"
+      :href="`/portfolio/${direction.id}`"
     />
   </div>
 </template>

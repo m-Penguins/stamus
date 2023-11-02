@@ -8,10 +8,11 @@
       <div class="contacts-page-text">
         Сети клиник “Стамус”
       </div>
-      <blocks-video-block 
-        :title="titleVideo" 
+      <blocks-video-block
+        :title="titleVideo"
         :text="textVideo"
         :isContactsBlock=true
+        link="https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/#otzivi"
       />
       <blocks-map :dataInfo="infoData" text="Информация о клиниках"/>
       <blocks-documentation-block :cards="mockArrayDocumentationCard"/>

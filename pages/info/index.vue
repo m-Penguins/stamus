@@ -1,7 +1,7 @@
 <template>
-  <elements-main-info 
+  <elements-main-info
     title="Информация <br/> для пациентов"
-    :imgBg="bigImage" 
+    :imgBg="bigImage"
     :imgAdaptiv="imgAdaptiv"
     :isButtonBase="false"
     :breadcrumbs="[
@@ -23,7 +23,7 @@
     <h2 class="info-title">Дополнительная информация</h2>
     <blocks-info-dop-block :optionsData="options" :optionsDoc="optionsDoc"/>
   </div>
-  <BlocksMainBanner 
+  <BlocksMainBanner
     :title="'Наше приложение'"
     :text="'Мы разработали собственное приложение для вашего удобства! Оно есть и на iOS и на Android. Теперь вам не нужно ждать ответа администратора и вы можете записаться на прием самостоятельно! А еще в приложении есть программа лояльности и все актуальные скидки)'"
     :titleLink="'Узнать подробнее'"
@@ -34,11 +34,11 @@
     bigImg=true
   />
   <blocks-map :dataInfo="infoData" text="Информация о клиниках"/>
-  <BlocksMainBanner 
+  <BlocksMainBanner
     :title="'Уже были у нас?'"
     :text="'Оставьте отзыв, будем очень вам благодарны'"
     :titleLink="'Оставить отзыв'"
-    link="#"
+    link="https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/"
     bgColor="grey"
     type="true"
     img="mobile.svg"
