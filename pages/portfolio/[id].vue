@@ -181,9 +181,20 @@ const gallery = portfolioData.value?.data?.attributes?.galery?.data
   max-width: 308px;
 }
 
+@media (max-width: 700px) {
+  .attending-physicians-block-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  .attending-physicians-block-card {
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 500px) {
   .attending-physicians-block-card {
     max-width: 100%;
+    width: 100%;
   }
 }
 </style>
