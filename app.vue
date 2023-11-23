@@ -20,6 +20,13 @@ const toggleMenu = () => (showMenuPatients.value = !showMenuPatients.value);
 
 const closeMenu = () => (showMenuPatients.value = false);
 
+const route = useRoute();
+
+watch(
+  () => route.fullPath,
+  () => (showMenuPatients.value = false),
+);
+
 useHead({
   link: [
     {

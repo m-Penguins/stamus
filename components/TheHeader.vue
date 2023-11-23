@@ -259,7 +259,9 @@ export default {
                           class="menu-patients-items"
                         >
                           <li class="menu-patients-items-link">
-                            <div>{{ elem.title }}</div>
+                            <div>
+                              {{ elem.title }}
+                            </div>
                             <hr
                               class="menu-patients-line"
                               v-if="index < navigationPatients.length - 1"

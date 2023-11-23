@@ -961,6 +961,23 @@ const toggleAccordion = (index) => {
 const sendData = () => {
   store.submitModal();
 };
+
+const route = useRoute();
+
+const openNdfl = () => {
+  const ndflBox = document?.getElementsByClassName("ndfl");
+  if (ndflBox && ndflBox?.classList?.contains("open")) {
+    return;
+  }
+
+  document?.getElementById("middle")?.click();
+};
+
+onMounted(() => {
+  if (route?.hash === "#middle") {
+    openNdfl();
+  }
+});
 </script>
 
 <style scoped lang="scss">
