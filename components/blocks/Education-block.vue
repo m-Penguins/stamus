@@ -6,30 +6,23 @@
         <elements-time-line-card :events="events" />
       </div>
       <div class="education-block-container">
-        <div class="mob" v-for="(event, index) in events" :key="event">
-          <elements-education-mob-card :event="event" />
-        </div>
+        <elements-education-mob-card :events="events" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   props: {
     events: Array,
-    title: String
+    title: String,
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/styles/style.scss';
-
-.mob {
-  display: none;
-}
+@import "../../assets/styles/style.scss";
 
 .education-block {
   display: flex;
@@ -60,10 +53,6 @@ export default {
 }
 
 @media (max-width: 670px) {
-  .mob {
-    display: flex;
-  }
-
   .decktop {
     display: none;
   }
@@ -72,5 +61,4 @@ export default {
     margin-bottom: 80px;
   }
 }
-
 </style>

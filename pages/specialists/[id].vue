@@ -202,10 +202,15 @@ const activities = specialistDeep.value?.data?.attributes?.areasOfActivity;
     :events="specialist?.data?.attributes?.additionalEducation"
     title="Дополнительное образование"
   />
-  <blocks-video-slider-block
+
+  <BlocksCertificateSlider
     :imagesScroll="documents"
     title="Сертификаты и документы"
   />
+  <!-- <blocks-video-slider-block
+    :imagesScroll="documents"
+    title="Сертификаты и документы"
+  /> -->
   <div class="container-size popular-service" v-if="singleServices?.length > 0">
     <div class="service-title">
       <h2 class="popular-service__title">Услуги</h2>
