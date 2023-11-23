@@ -211,6 +211,9 @@ const articles = articlesData?.value?.data?.map((art) => {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    &:not(:last-of-type) {
+      margin-bottom: 20px;
+    }
   }
 }
 </style>
