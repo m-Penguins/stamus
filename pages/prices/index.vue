@@ -7,7 +7,9 @@ const categoryFilter = ref("");
 
 const [{ data: pricesData }] = await Promise.all([
   useFetch(`${apiBaseUrl}prices-list`, {
-    query: { populate: "services.*,servicePrice.*" },
+    query: {
+      populate: "services.*,servicePrice.Sale_popular.*,servicePrice.*",
+    },
   }),
 ]);
 

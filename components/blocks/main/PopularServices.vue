@@ -10,13 +10,13 @@
 </template>
 
 <script setup>
-const baseUrl = useRuntimeConfig().public.apiBaseUrl;
+const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 
 const { data, error } = await useFetch(
-  `${baseUrl}popular-service?populate=deep`,
+  `${apiBaseUrl}popular-service?populate=deep`,
 );
 
-const popularServicesData = ref(data.value.data.attributes.popularService);
+const popularServicesData = ref(data?.value?.data?.attributes?.popularService);
 </script>
 
 <style lang="scss" scoped>

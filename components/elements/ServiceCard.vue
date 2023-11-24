@@ -19,21 +19,20 @@
           <div class="service-card-title">{{ service.heading }}</div>
         </div>
         <div class="service-card-box">
-          <div
-            v-if="service.isRecommended"
-            class="service-card-box__type-isRecommended"
-          >
-            Акция
-          </div>
-          <div
-            v-if="service.isPopular"
-            class="service-card-box__type-isPopular"
-          >
-            Популярное
-          </div>
-          <div v-if="service.isDemand" class="service-card-box__type-isDemand">
-            Высокий спрос
-          </div>
+          <template v-if="service?.Sale_popular?.length > 0">
+            <div
+              v-for="tag in service?.Sale_popular"
+              :key="tag?.id"
+              class="service-card-box__type"
+              :style="{
+                color: tag?.color,
+                backgroundColor: `${tag?.color}15`,
+              }"
+            >
+              {{ tag?.text }}
+            </div>
+          </template>
+
           <div class="service-card-box__price">{{ service.price }} ₽</div>
         </div>
       </div>
@@ -89,36 +88,12 @@ const store = useModalStore();
       color: $hover;
     }
 
-    &__type-isRecommended {
+    &__type {
       display: flex;
       align-items: center;
       padding: 6px 10px 8px 10px;
       border-radius: 5px;
-      background: rgba(23, 201, 137, 0.05);
       @include body-12-regular;
-      color: $green;
-      width: max-content;
-    }
-
-    &__type-isPopular {
-      display: flex;
-      align-items: center;
-      padding: 6px 10px 8px 10px;
-      border-radius: 5px;
-      background: rgba(220, 101, 15, 0.05);
-      @include body-12-regular;
-      color: #dc650f;
-      width: max-content;
-    }
-
-    &__type-isDemand {
-      display: flex;
-      align-items: center;
-      padding: 6px 10px 8px 10px;
-      border-radius: 5px;
-      background: rgba(244, 81, 81, 0.05);
-      @include body-12-regular;
-      color: #f45151;
       width: max-content;
     }
   }

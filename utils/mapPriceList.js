@@ -6,9 +6,7 @@ export default function (priceList) {
           id: single?.id,
           heading: single?.heading,
           price: single?.price,
-          isRecommended: single?.isRecommended,
-          isPopular: single?.isPopular,
-          isDemand: single?.isDemand,
+          Sale_popular: single?.Sale_popular,
           tags: single?.tags,
           link: "/prices",
         };

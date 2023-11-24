@@ -70,9 +70,13 @@ const portfolios = specialist?.value?.data?.attributes?.portofolios?.data?.map(
   },
 );
 
+console.log(specialistDeep.value?.data?.attributes?.price_lists);
+
 const singleServices = mapPriceList(
   specialistDeep?.value?.data?.attributes?.price_lists?.data,
 );
+
+console.log(singleServices);
 const meetingPerson = specialistDeep.value?.data?.attributes?.meetingPerson;
 
 const documents = ref(
@@ -226,8 +230,8 @@ const activities = specialistDeep.value?.data?.attributes?.areasOfActivity;
       />
     </div>
     <div v-for="service in singleServices" class="popular-service__list">
-      <h2 class="popular-service__title">{{ service.title }}</h2>
-      <div v-for="(item, index) in service.services" :key="index">
+      <h2 class="popular-service__title">{{ service?.title }}</h2>
+      <div v-for="(item, index) in service?.services" :key="index">
         <elements-service-card :service="item" />
       </div>
     </div>
