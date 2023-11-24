@@ -29,16 +29,16 @@ Object.keys(firstQuery).forEach(
     delete firstQuery[key],
 );
 
-const [{ data: specialists }, { data: clinics }] =
-  await Promise.all([
-    useFetch(`${apiBaseUrl}specialists`, {
-      query: {
-        ...firstQuery,
-        populate: "deep",
-      },
-    }),
-    useFetch(`${apiBaseUrl}clinics`),
-  ]);
+const [{ data: specialists }, { data: clinics }] = await Promise.all([
+  useFetch(`${apiBaseUrl}specialists`, {
+    query: {
+      ...firstQuery,
+      populate: "deep",
+      "sort[0]": "order:asc",
+    },
+  }),
+  useFetch(`${apiBaseUrl}clinics`),
+]);
 
 if (!specialists.value?.data) {
   throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
@@ -85,6 +85,7 @@ watch(
       query: {
         ...newQuery,
         populate: "deep",
+        "sort[0]": "order:asc",
       },
     });
     specialists.value = data.value;
@@ -106,8 +107,6 @@ const setCurrentPage = (pageNumber) => {
     },
   });
 };
-
-
 
 const handleSearchChange = () => {
   setCurrentPage(1);

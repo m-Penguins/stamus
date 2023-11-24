@@ -9,7 +9,11 @@ const [
   { data: specialist },
   { data: otherSpecialists },
 ] = await Promise.all([
-  useFetch(`${apiBaseUrl}specialists/${route.params.id}?populate=deep`),
+  useFetch(`${apiBaseUrl}specialists/${route.params.id}`, {
+    query: {
+      populate: "deep",
+    },
+  }),
   useFetch(`${apiBaseUrl}specialists/${route.params.id}`, {
     query: {
       populate:
@@ -20,6 +24,7 @@ const [
     query: {
       populate: "deep",
       "pagination[pageSize]": 100,
+      "sort[0]": "order:asc",
     },
   }),
 ]);

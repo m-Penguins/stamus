@@ -27,15 +27,7 @@ const getSearchData = async () => {
         "filters[fullName][$contains][2]":
           searchTerm.value?.charAt(0)?.toUpperCase() +
           searchTerm.value?.slice(1)?.toLowerCase(),
-
-        // "filters[$or][firstName][$contains]":
-        //   searchTerm.value?.charAt(0)?.toUpperCase() +
-        //   searchTerm.value?.slice(1)?.toLowerCase(),
-
-        // "filters[lastName][$contains]":
-        //   searchTerm.value?.charAt(0)?.toUpperCase() +
-        //   searchTerm.value?.slice(1)?.toLowerCase(),
-
+        "sort[0]": "order:asc",
         populate: "deep",
       },
     }),

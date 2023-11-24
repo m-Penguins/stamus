@@ -11,6 +11,7 @@ const [{ data: fourSpecialists }, { data: articlesData }] = await Promise.all([
       "filters[id][$in][1]": 9,
       "filters[id][$in][2]": 4,
       "filters[id][$in][3]": 7,
+      "sort[0]": "order:asc",
       populate: "deep",
     },
   }),
