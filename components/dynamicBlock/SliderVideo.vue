@@ -15,6 +15,13 @@ const videos = props?.block?.video;
 
 const prev = ref(null);
 const next = ref(null);
+
+const videoStore = useModalVideoStore();
+
+const handleVideoClick = (link) => {
+  videoStore.isModalOpen = true;
+  videoStore.link = link;
+};
 </script>
 
 <template>
@@ -40,7 +47,7 @@ const next = ref(null);
           :key="video?.id"
           class="swiper-slide"
         >
-          <div class="ss-card">
+          <div class="ss-card" @click="handleVideoClick(video?.videoLink)">
             <div class="ss-image">
               <img
                 v-if="video?.videoPreview?.data?.attributes?.url"
@@ -116,6 +123,7 @@ const next = ref(null);
   display: flex;
   flex-direction: column;
   gap: 16px;
+  cursor: pointer;
 }
 
 .ss-image {

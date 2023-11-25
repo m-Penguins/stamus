@@ -73,6 +73,9 @@ console.log(serviceBlocks);
         :block="block"
       />
     </section>
+    <teleport to="body">
+      <ModalVideo />
+    </teleport>
   </div>
 </template>
 

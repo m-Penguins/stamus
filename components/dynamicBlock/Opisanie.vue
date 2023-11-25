@@ -3,6 +3,13 @@ const props = defineProps(["block"]);
 
 const assetsStore = useAssets();
 const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const videoStore = useModalVideoStore();
+
+const handleVideoClick = (link) => {
+  videoStore.isModalOpen = true;
+  videoStore.link = link;
+};
 </script>
 
 <template>
@@ -19,7 +26,11 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
       </div>
     </div>
     <div class="video-block-inner">
-      <div v-if="block?.videoLink" class="video-block-rectangle-video">
+      <div
+        v-if="block?.videoLink"
+        class="video-block-rectangle-video"
+        @click="handleVideoClick(block?.videoLink)"
+      >
         <img
           v-if="block?.image?.data?.attributes?.url"
           :src="`${baseUrl}${block?.image?.data?.attributes?.url}`"
