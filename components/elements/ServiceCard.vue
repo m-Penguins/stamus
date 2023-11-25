@@ -6,17 +6,17 @@
           <div class="grey-point-container">
             <div
               class="service-card-category grey-point-container"
-              v-for="(item, index) in service.tags"
+              v-for="(item, index) in service?.tags"
               :key="item"
             >
               <p class="grey-point-text">{{ item }}</p>
               <div
                 class="grey-point"
-                v-if="index < service.tags.length - 1"
+                v-if="index < service?.tags.length - 1"
               ></div>
             </div>
           </div>
-          <div class="service-card-title">{{ service.heading }}</div>
+          <div class="service-card-title">{{ service?.heading }}</div>
         </div>
         <div class="service-card-box">
           <template v-if="service?.Sale_popular?.length > 0">
