@@ -2,6 +2,7 @@ import PriceList from "@/components/dynamicBlock/PriceList.vue";
 import SliderSpecialists from "@/components/dynamicBlock/SliderSpecialists.vue";
 import Reviews from "@/components/dynamicBlock/Reviews.vue";
 import Opisanie from "@/components/dynamicBlock/Opisanie.vue";
+import SliderVideo from "@/components/dynamicBlock/SliderVideo.vue";
 
 export default function (component) {
   switch (component) {
@@ -13,6 +14,8 @@ export default function (component) {
       return Reviews;
     case "blocks-story.opisanie-uslugi":
       return Opisanie;
+    case "blocks-story.video":
+      return SliderVideo;
 
     default:
       "";

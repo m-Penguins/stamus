@@ -1,8 +1,6 @@
 <script setup>
 const props = defineProps(["block"]);
 
-console.log(props.block);
-
 const assetsStore = useAssets();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 </script>
@@ -22,14 +20,12 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
     </div>
     <div class="video-block-inner">
       <div v-if="block?.videoLink" class="video-block-rectangle-video">
-        <nuxt-link :to="block?.videoLink">
-          <img
-            v-if="block?.image?.data?.attributes?.url"
-            :src="`${baseUrl}${block?.image?.data?.attributes?.url}`"
-            alt="Video"
-            class="problems__image"
-          />
-        </nuxt-link>
+        <img
+          v-if="block?.image?.data?.attributes?.url"
+          :src="`${baseUrl}${block?.image?.data?.attributes?.url}`"
+          alt="Video"
+          class="problems__image"
+        />
         <img
           class="utube"
           :src="assetsStore.useAsset('images/icons/play.svg')"
@@ -207,6 +203,8 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
   justify-content: center;
   align-items: center;
   position: relative;
+
+  cursor: pointer;
 
   & a {
     height: 100%;
