@@ -20,7 +20,7 @@ const { data: serviceData } = await useFetch(
   {
     query: {
       populate:
-        "photoBanner.*,blocks.*, blocks.price_lists.servicePrice.Sale_popular.*, blocks.specialists.fotoSpecialist.*, blocks.specialists.achievements.icon.*",
+        "photoBanner.*,blocks.*, blocks.price_lists.servicePrice.Sale_popular.*, blocks.specialists.fotoSpecialist.*, blocks.specialists.achievements.icon.*, blocks.reviews.*",
     },
   },
 );
