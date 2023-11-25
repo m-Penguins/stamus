@@ -10,6 +10,8 @@ const handleVideoClick = (link) => {
   videoStore.isModalOpen = true;
   videoStore.link = link;
 };
+
+console.log(props.block.description);
 </script>
 
 <template>
@@ -19,7 +21,7 @@ const handleVideoClick = (link) => {
         <h3 v-if="block?.title" class="video-block-title">
           {{ block?.title }}
         </h3>
-        <p v-html="block?.description" class="video-block-text"></p>
+        <div v-html="block?.description" class="video-block-text"></div>
       </div>
       <div class="video-block-logo">
         <img src="@/assets/images/icons/video-logo-block.svg" alt="icon" />

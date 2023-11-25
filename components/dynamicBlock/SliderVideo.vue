@@ -42,28 +42,26 @@ const handleVideoClick = (link) => {
           nextEl: next,
         }"
       >
-        <swiper-slide
-          v-for="(video, index) in videos"
-          :key="video?.id"
-          class="swiper-slide"
-        >
-          <div class="ss-card" @click="handleVideoClick(video?.videoLink)">
-            <div class="ss-image">
-              <img
-                v-if="video?.videoPreview?.data?.attributes?.url"
-                :src="`${baseUrl}${video?.videoPreview?.data?.attributes?.url}`"
-                alt="Video"
-                class="problems__image"
-              />
-              <img
-                class="utube"
-                :src="assetsStore.useAsset('images/icons/play.svg')"
-                alt="Play"
-              />
+        <template v-for="(video, index) in videos" :key="video?.id">
+          <swiper-slide class="swiper-slide" v-if="video?.videoLink">
+            <div class="ss-card" @click="handleVideoClick(video?.videoLink)">
+              <div class="ss-image">
+                <img
+                  v-if="video?.videoPreview?.data?.attributes?.url"
+                  :src="`${baseUrl}${video?.videoPreview?.data?.attributes?.url}`"
+                  alt="Video"
+                  class="problems__image"
+                />
+                <img
+                  class="utube"
+                  :src="assetsStore.useAsset('images/icons/play.svg')"
+                  alt="Play"
+                />
+              </div>
+              <p class="ss-title">{{ video?.title }}</p>
             </div>
-            <p class="ss-title">{{ video?.title }}</p>
-          </div>
-        </swiper-slide>
+          </swiper-slide>
+        </template>
       </Swiper>
       <div class="wrapper-btn">
         <div ref="prev" class="swiper-button-prev">
