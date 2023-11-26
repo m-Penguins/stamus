@@ -70,13 +70,10 @@ const portfolios = specialist?.value?.data?.attributes?.portofolios?.data?.map(
   },
 );
 
-console.log(specialistDeep.value?.data?.attributes?.price_lists);
-
 const singleServices = mapPriceList(
   specialistDeep?.value?.data?.attributes?.price_lists?.data,
 );
 
-console.log(singleServices);
 const meetingPerson = specialistDeep.value?.data?.attributes?.meetingPerson;
 
 const documents = ref(

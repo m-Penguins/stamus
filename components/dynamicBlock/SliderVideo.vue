@@ -6,8 +6,6 @@ import "swiper/css/navigation";
 
 const props = defineProps(["block"]);
 
-console.log(props.block);
-
 const assetsStore = useAssets();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 

@@ -10,8 +10,6 @@ const handleVideoClick = (link) => {
   videoStore.isModalOpen = true;
   videoStore.link = link;
 };
-
-console.log(props.block.description);
 </script>
 
 <template>
