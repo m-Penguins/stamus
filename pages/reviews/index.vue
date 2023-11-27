@@ -83,8 +83,6 @@ const getReviewsData = async () => {
     "filters[services][id][$eq][1]": serviceFilter.value,
   };
 
-  console.log(strapiQuery);
-
   clearObjectFields(strapiQuery);
 
   const { data: reviewsData } = await useFetch(`${apiBaseUrl}reviews`, {
@@ -120,8 +118,6 @@ const allServices = servicesData.value?.data
     name: serv?.attributes?.heading,
   }))
   .filter((el) => el.name);
-
-console.log(filteredReviews.value);
 
 watch(
   () => route.query,

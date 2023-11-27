@@ -1,8 +1,6 @@
 <script setup>
 const route = useRoute();
 
-const store = useModalStore();
-
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
@@ -26,8 +24,6 @@ const { data: serviceData } = await useFetch(
 );
 
 const serviceBlocks = serviceData.value?.data?.attributes?.blocks;
-
-console.log(serviceBlocks);
 </script>
 
 <template>
