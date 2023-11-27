@@ -4,13 +4,13 @@ defineProps(["block"]);
 
 <template>
   <div class="about-important">
-    <div class="about-important-title">{{ title }}</div>
+    <div class="about-important-title">{{ block?.title ?? "Важно знать" }}</div>
     <div class="about-important-container">
       <div
         class="about-important-box"
-        v-for="item in text?.split('|')"
-        :key="item"
-        v-text="item"
+        v-for="item in block?.item"
+        :key="item?.id"
+        v-text="item?.link"
       ></div>
     </div>
   </div>
@@ -70,7 +70,6 @@ defineProps(["block"]);
   .about-important-box {
     @include body-14-regular;
     width: 49%;
-    height: 104px;
   }
 }
 
