@@ -9,6 +9,7 @@ import ContactForm from "@/components/dynamicBlock/ContactForm.vue";
 import Blog from "@/components/dynamicBlock/Blog.vue";
 import Cases from "@/components/dynamicBlock/Cases.vue";
 import Seo from "@/components/dynamicBlock/Seo.vue";
+import Osnovnie from "@/components/dynamicBlock/Osnovnie.vue";
 
 export default function (component) {
   switch (component) {
@@ -34,6 +35,8 @@ export default function (component) {
       return Cases;
     case "blocks-story.seo-blok":
       return Seo;
+    case "blocks-story.osnovnye-napravleniya":
+      return Osnovnie;
 
     default:
       "";

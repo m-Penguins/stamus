@@ -10,7 +10,7 @@ defineProps(["block"]);
         class="about-important-box"
         v-for="item in block?.item"
         :key="item?.id"
-        v-text="item?.link"
+        v-text="item?.text"
       ></div>
     </div>
   </div>
