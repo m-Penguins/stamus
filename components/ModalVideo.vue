@@ -5,7 +5,7 @@
       class="modal-mask"
       @click="videoStore.closeModal"
     >
-      <div class="modal-container" @click.stop v-html="videoStore.link"></div>
+      <div class="modal-container" @click.stop v-html="videoStore?.link"></div>
     </div>
   </transition>
 </template>

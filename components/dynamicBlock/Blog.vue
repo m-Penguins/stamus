@@ -11,7 +11,7 @@ const prev = ref(null);
 const next = ref(null);
 
 const assetsStore = useAssets();
-const baseUrl = useRuntimeConfig().public.baseUrl;
+const baseUrl = useRuntimeConfig().public?.baseUrl;
 </script>
 
 <template>
