@@ -4,6 +4,9 @@ import Reviews from "@/components/dynamicBlock/Reviews.vue";
 import Opisanie from "@/components/dynamicBlock/Opisanie.vue";
 import SliderVideo from "@/components/dynamicBlock/SliderVideo.vue";
 import Banner from "@/components/dynamicBlock/Banner.vue";
+import AboutImportant from "@/components/dynamicBlock/AboutImportant.vue";
+import ContactForm from "@/components/dynamicBlock/ContactForm.vue";
+import Blog from "@/components/dynamicBlock/Blog.vue";
 
 export default function (component) {
   switch (component) {
@@ -19,6 +22,12 @@ export default function (component) {
       return SliderVideo;
     case "blocks-story.banner":
       return Banner;
+    case "blocks-story.o-vazhnom":
+      return AboutImportant;
+    case "blocks-story.forma":
+      return ContactForm;
+    case "blocks-story.blog":
+      return Blog;
 
     default:
       "";

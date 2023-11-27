@@ -1,7 +1,6 @@
 <script setup>
 // hides this page
 // remove to give access
-throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
 
 const assetsStore = useAssets();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
