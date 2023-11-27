@@ -286,7 +286,7 @@ const breadcrumbs = [
 </template>
 
 <style lang="scss" scoped>
-@import "../../assets/styles/style.scss";
+@import "@/assets/styles/style.scss";
 
 .width-style {
   width: 24% !important;
