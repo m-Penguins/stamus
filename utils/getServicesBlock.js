@@ -7,6 +7,8 @@ import Banner from "@/components/dynamicBlock/Banner.vue";
 import AboutImportant from "@/components/dynamicBlock/AboutImportant.vue";
 import ContactForm from "@/components/dynamicBlock/ContactForm.vue";
 import Blog from "@/components/dynamicBlock/Blog.vue";
+import Cases from "@/components/dynamicBlock/Cases.vue";
+import Seo from "@/components/dynamicBlock/Seo.vue";
 
 export default function (component) {
   switch (component) {
@@ -28,6 +30,10 @@ export default function (component) {
       return ContactForm;
     case "blocks-story.blog":
       return Blog;
+    case "blocks-story.kejsy":
+      return Cases;
+    case "blocks-story.seo-blok":
+      return Seo;
 
     default:
       "";
