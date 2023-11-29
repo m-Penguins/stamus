@@ -21,10 +21,13 @@ const toggleMenu = () => (showMenuPatients.value = !showMenuPatients.value);
 const closeMenu = () => (showMenuPatients.value = false);
 
 const route = useRoute();
-
+const reviewStore = useReviewStore();
 watch(
   () => route.fullPath,
-  () => (showMenuPatients.value = false),
+  () => {
+    if (reviewStore.currentStep > 0) reviewStore.resetStore();
+    showMenuPatients.value = false;
+  },
 );
 
 useHead({
