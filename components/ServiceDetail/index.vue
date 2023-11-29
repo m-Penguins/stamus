@@ -18,12 +18,13 @@ const { data: serviceData } = await useFetch(
   {
     query: {
       populate:
-        "photoBanner.*,blocks.*, blocks.price_lists.servicePrice.Sale_popular.*, blocks.specialists.fotoSpecialist.*, blocks.specialists.achievements.icon.*, blocks.reviews.*, blocks.image.*, blocks.video.videoPreview.*, blocks.banner.image.*, blocks.item.*, blocks.articles.fotoArticles.*, blocks.portofolios.photoBanner.*, blocks.portofolios.direction.*, blocks.services.*",
+        "photoBanner.*,blocks.*, blocks.price_lists.servicePrice.Sale_popular.*, blocks.specialists.fotoSpecialist.*, blocks.specialists.achievements.icon.*, blocks.reviews.*, blocks.image.*, blocks.video.videoPreview.*, blocks.banner.image.*, blocks.item.*, blocks.articles.fotoArticles.*, blocks.portofolios.photoBanner.*, blocks.portofolios.direction.*, blocks.services.*, blocks.gallery.*, blocks.certificates.*",
     },
   },
 );
 
 const serviceBlocks = serviceData.value?.data?.attributes?.blocks;
+console.log(serviceBlocks);
 </script>
 
 <template>

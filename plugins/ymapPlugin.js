@@ -1,4 +1,4 @@
-import plugin from "vue-yandex-maps";
+import YmapPlugin from "vue-yandex-maps";
 import { defineNuxtPlugin } from "nuxt/app";
 
 const settings = {
@@ -10,5 +10,5 @@ const settings = {
 };
 
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.use(plugin, settings);
+  nuxtApp.vueApp.use(YmapPlugin, settings);
 });

@@ -64,6 +64,12 @@ body {
   font-family: "Neue Machin";
 }
 
+body.modal-open {
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+
 a,
 a:link,
 a:visited {

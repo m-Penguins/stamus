@@ -15,11 +15,15 @@ const popupImg = ref("");
 
 const openCert = (image) => {
   popupImg.value = image;
+  document.body.classList.add("modal-open");
 
   isCertOpen.value = true;
 };
 
-const closeCert = () => (isCertOpen.value = false);
+const closeCert = () => {
+  document.body.classList.remove("modal-open");
+  isCertOpen.value = false;
+};
 </script>
 
 <template>
@@ -139,8 +143,6 @@ const closeCert = () => (isCertOpen.value = false);
   margin: 0 auto;
   width: 100%;
   height: auto;
-
-  border-radius: 10px;
 }
 
 .popup-close {
@@ -175,13 +177,16 @@ const closeCert = () => (isCertOpen.value = false);
   padding: 10px;
   background: #ffffff;
   border-radius: 20px;
-  max-width: 816px;
-  width: 500px;
+  max-width: 1216px;
+  width: fit-content;
   z-index: 902;
+
+  max-height: 90vh;
+  max-height: 90svh;
 }
 
 .popup-wrap {
-  padding: 10px;
+  padding: 20px 10px;
   width: 100%;
   height: 100vh;
   position: fixed;
@@ -198,6 +203,8 @@ const closeCert = () => (isCertOpen.value = false);
   visibility: visible;
   opacity: 1;
   z-index: 901;
+
+  overflow: auto;
 }
 
 .swiper-slide {
