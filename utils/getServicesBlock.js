@@ -13,6 +13,7 @@ import Osnovnie from "@/components/dynamicBlock/Osnovnie.vue";
 import MyMap from "@/components/blocks/MyMap.vue";
 import Galereya from "@/components/dynamicBlock/Galereya.vue";
 import Certificaty from "@/components/dynamicBlock/Certificaty.vue";
+import Obrazovanie from "@/components/dynamicBlock/Obrazovanie.vue";
 
 export default function (component) {
   switch (component) {
@@ -46,6 +47,8 @@ export default function (component) {
       return Galereya;
     case "blocks-story.sertifikaty":
       return Certificaty;
+    case "blocks-story.obrazovanie":
+      return Obrazovanie;
 
     default:
       "";

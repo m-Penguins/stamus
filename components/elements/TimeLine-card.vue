@@ -1,6 +1,10 @@
 <template>
   <div class="timeline">
-    <div class="timeline-item" v-for="(event, index) in displayedEvents" :key="event.id">
+    <div
+      class="timeline-item"
+      v-for="(event, index) in displayedEvents"
+      :key="event?.id"
+    >
       <!-- <div class="lines">
         <div class="dot" :class="{'last': event.years === 'н.в.'}"></div>
         <div class="line" v-if="index !== events.length - 1 && index !== displayedEvents.length - 1"></div>
@@ -15,13 +19,35 @@
       <button class="timeline-btn" @click="toggleShowMore">
         {{ showMoreText }}
         <div v-if="!showAll" class="timeline-svg">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M6 8L10 12L14 8" stroke="#7F838C" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+          >
+            <path
+              d="M6 8L10 12L14 8"
+              stroke="#7F838C"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </div>
         <div v-else class="timeline-svg">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M6 12L10 8L14 12" stroke="#232D5B" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+          >
+            <path
+              d="M6 12L10 8L14 12"
+              stroke="#232D5B"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </div>
       </button>
@@ -45,7 +71,7 @@ export default {
       return this.showAll ? "Скрыть" : "Показать ещё";
     },
   },
-   methods: {
+  methods: {
     toggleShowMore() {
       this.showAll = !this.showAll;
       if (this.showAll) {
@@ -59,17 +85,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../assets/styles/style.scss';
+@import "../../assets/styles/style.scss";
 .timeline {
   width: fit-content;
 }
 .timeline-item {
   .lines {
     .last {
-      border: 3px solid #CFD5E1;
+      border: 3px solid #cfd5e1;
       width: 14px;
       height: 14px;
-      background: #232D5B;
+      background: #232d5b;
       margin-left: -2px;
     }
   }
@@ -79,14 +105,14 @@ export default {
   .dot {
     width: 10px;
     height: 10px;
-    border: 1px solid #CFD5E1;
+    border: 1px solid #cfd5e1;
     border-radius: 7px;
   }
-  
+
   .line {
     height: 34px;
     width: 1px;
-    background: #CFD5E1;
+    background: #cfd5e1;
     margin-left: 4.2px;
   }
 }
@@ -103,15 +129,15 @@ export default {
 }
 
 .cards::before {
-    content: "";
-    position: absolute;
-    width: 7px;
-    height: 7px;
-    background: white;
-    border-radius: 999px;
-    left: -5px;
-    top: 7px;
-    border: 2px solid #CFD5E1;
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: white;
+  border-radius: 999px;
+  left: -5px;
+  top: 7px;
+  border: 2px solid #cfd5e1;
 }
 
 .timeline-item {
@@ -158,5 +184,4 @@ export default {
   display: flex;
   align-items: center;
 }
-
 </style>
