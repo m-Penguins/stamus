@@ -391,5 +391,7 @@ const handleVideoClick = (link) => {
   object-fit: cover;
   width: 100%;
   max-width: 100%;
+
+  pointer-events: none;
 }
 </style>

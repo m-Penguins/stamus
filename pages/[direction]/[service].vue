@@ -1,8 +1,6 @@
 <script setup>
 const route = useRoute();
 
-console.log(route.params);
-
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 

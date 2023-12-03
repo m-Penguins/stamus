@@ -10,6 +10,7 @@
     <TheFooter />
     <Teleport to="body"><blocks-main-popap-modal-form /></Teleport>
     <Teleport to="body"><elements-cookie-consent /></Teleport>
+    <Teleport to="body"><ModalVideo /></Teleport>
   </div>
 </template>
 

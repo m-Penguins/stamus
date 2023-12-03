@@ -15,9 +15,14 @@ const sendData = () => {
       {{ block?.title ?? "Записаться на консультацию" }}
     </h2>
     <div
+      v-if="block?.text"
       class="form-wrapper__subtitle subtitle-gray"
       v-html="block?.text"
     ></div>
+    <div v-else class="form-wrapper__subtitle subtitle-gray">
+      <p>Перезвоним в течении 15 минут и уточним</p>
+      <p>удобную для вас поликлинику и дату</p>
+    </div>
     <div class="form-wrapper__box">
       <elements-input-base
         tag-type="input"
