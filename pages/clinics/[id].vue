@@ -37,8 +37,11 @@ const clinicDataID = clinicsData.value?.data?.find(
 )?.id;
 
 const { data: clinicData } = await useFetch(
-  `${apiBaseUrl}clinics/${clinicDataID}?populate=reviews.*,clinics.*,price_lists.*,photoBanner.*,direction.*,specialists.fotoSpecialist.*,specialists.achievements.icon.*,articles.*,infoBlock.image.*,infoBlock.video.*,chiefDoctor.image.*,galery.*`,
+  `${apiBaseUrl}clinics/${clinicDataID}?populate=reviews.*,clinics.*,price_lists.*,photoBanner.*,direction.*,specialists.fotoSpecialist.*,specialists.achievements.icon.*,articles.*,infoBlock.image.*,infoBlock.video.*,chiefDoctor.image.*,galery.*,meta.metaImage.*`,
 );
+
+const metaData = clinicData.value?.data?.attributes?.meta;
+useHead(getMetaObject(metaData, baseUrl));
 
 const galleryList = clinicData?.value?.data?.attributes?.galery?.data
   ?.map((img) =>
