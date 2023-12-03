@@ -32,6 +32,8 @@ export default {
         { id: 2, title: "Наше приложение", path: "/stamusapp" },
         { id: 3, title: "Информация для пациентов", path: "/info" },
         { id: 4, title: "Налоговый вычет", path: "/info" },
+        { id: 5, title: "Отзывы", path: "/reviews" },
+        { id: 6, title: "Статьи", path: "/articles" },
       ],
     };
   },
