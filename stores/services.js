@@ -39,7 +39,6 @@ export const useService = defineStore("useServices", {
         const res = await axios.get(`${apiBaseUrl}services?populate=deep`);
         const { data } = res;
         const navigationServices = useReducedServices(data.data);
-        // console.log(navigationServices);
 
         this.dataService = navigationServices;
       } catch (error) {
