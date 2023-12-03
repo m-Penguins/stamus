@@ -465,10 +465,9 @@ export default {
                         @click="
                           showServices = false;
                           showSearch = false;
-                          $router.push(item.path + service.path);
                         "
                         class="header-services-menu-box-link"
-                        to="#"
+                        :to="item?.path + service?.path"
                       >
                         {{ service.title }}
                       </NuxtLink>
@@ -593,17 +592,17 @@ export default {
             <div class="header-services-menu-mob-container">
               <div
                 v-for="item in storeServices.getStateService"
-                :key="item.id"
+                :key="item?.id"
                 class="header-services-menu-item-mob"
                 @click="
-                  changeActiveClass(item.id, item.title);
+                  changeActiveClass(item?.id, item?.title);
                   secondBlockMobMenu = true;
                   firstBlockMobMenu = false;
                 "
                 :class="{ 'display-none': secondBlockMobMenu }"
               >
                 <div class="header-nav-item-mob m-r-20">
-                  {{ item.title }}
+                  {{ item?.title }}
                 </div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
