@@ -2,7 +2,6 @@
 const props = defineProps(["block"]);
 
 const eduBlocks = props?.block?.education;
-console.log(eduBlocks);
 </script>
 
 <template>

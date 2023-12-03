@@ -1,5 +1,18 @@
 <script setup>
 const props = defineProps(["block"]);
+
+const getServiceLink = (item) => {
+  const direction =
+    item?.attributes?.category?.data?.attributes?.napravleniya_uslug_1_col?.data
+      ?.attributes?.slug;
+
+  const service = item?.attributes?.slug;
+
+  if (direction && service) {
+    return `/${direction}/${service}`;
+  }
+  return "/";
+};
 </script>
 
 <template>
@@ -9,12 +22,7 @@ const props = defineProps(["block"]);
     </h2>
     <div class="activities-block-box">
       <div v-for="(item, index) in block?.services?.data" :key="item?.id">
-        <NuxtLink
-          class="activities-card"
-          :to="`/${linkTransform(item?.attributes?.category)}/${linkTransform(
-            item?.attributes?.heading,
-          )}`"
-        >
+        <NuxtLink class="activities-card" :to="getServiceLink(item)">
           <div class="activities-card-container">
             <p class="activities-card-num">{{ index + 1 }}.</p>
             <p class="activities-card-title">{{ item?.attributes?.heading }}</p>

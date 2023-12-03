@@ -16,7 +16,11 @@ const [{ data: portfolioData }, { data: allCasesData }] = await Promise.all([
 ]);
 
 if (!portfolioData.value?.data) {
-  throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page Not Found",
+    fatal: true,
+  });
 }
 
 const symptoms = portfolioData.value?.data?.attributes?.symptom

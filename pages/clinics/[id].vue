@@ -25,7 +25,11 @@ const { data: clinicsData } = await useFetch(
 );
 
 if (!clinicsData.value) {
-  throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page Not Found",
+    fatal: true,
+  });
 }
 
 const clinicDataID = clinicsData.value?.data?.find(

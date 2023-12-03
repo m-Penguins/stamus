@@ -30,7 +30,11 @@ const [
 ]);
 
 if (!specialist.value?.data) {
-  throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page Not Found",
+    fatal: true,
+  });
 }
 
 const breadcrumbs = [

@@ -21,7 +21,11 @@ const { data: directionData } = await useFetch(`${apiBaseUrl}main-derections`, {
 });
 
 if (!directionData?.value?.data?.length) {
-  throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page Not Found",
+    fatal: true,
+  });
 }
 
 const mainInfo = directionData?.value?.data?.[0]?.attributes;
@@ -37,8 +41,6 @@ const mainAdaptiveImg = mainInfo?.photoBanner?.data?.attributes?.formats?.small
 
 const directionBlocks = mainInfo?.blocks;
 
-console.log(mainInfo);
-
 const breadcrumbs = [
   {
     title: "Главная",
@@ -49,6 +51,9 @@ const breadcrumbs = [
     url: `${route.fullPath}`,
   },
 ];
+
+const metaData = mainInfo?.meta;
+useHead(getMetaObject(metaData, baseUrl));
 </script>
 
 <template>
@@ -61,7 +66,7 @@ const breadcrumbs = [
     :link="mainInfo?.link"
     :link_text="mainInfo?.link_text"
   />
-  <BlocksMap :blocks="directionBlocks" />
+  <BlocksMapper :blocks="directionBlocks" />
 </template>
 
 <style lang="scss" scoped></style>

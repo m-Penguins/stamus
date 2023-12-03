@@ -1,6 +1,8 @@
 <script setup>
 const route = useRoute();
 
+console.log(route.params);
+
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
@@ -14,7 +16,11 @@ const { data: serviceData } = await useFetch(`${apiBaseUrl}services`, {
 });
 
 if (!serviceData?.value?.data?.length) {
-  throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page Not Found",
+    fatal: true,
+  });
 }
 const mainInfo = serviceData?.value?.data?.[0]?.attributes;
 
@@ -32,7 +38,6 @@ const serviceBlocks = mainInfo?.blocks;
 const directionName =
   mainInfo?.category?.data?.attributes?.napravleniya_uslug_1_col?.data
     ?.attributes?.heading;
-console.log(mainInfo);
 
 const breadcrumbs = [
   {
@@ -48,6 +53,9 @@ const breadcrumbs = [
     url: `${route.fullPath}`,
   },
 ];
+
+const metaData = mainInfo?.meta;
+useHead(getMetaObject(metaData, baseUrl));
 </script>
 
 <template>
@@ -60,7 +68,7 @@ const breadcrumbs = [
     :link="mainInfo?.link"
     :link_text="mainInfo?.link_text"
   />
-  <BlocksMap :blocks="serviceBlocks" />
+  <BlocksMapper :blocks="serviceBlocks" />
 </template>
 
 <style lang="scss" scoped></style>

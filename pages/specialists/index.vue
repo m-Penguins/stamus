@@ -41,7 +41,11 @@ const [{ data: specialists }, { data: clinics }] = await Promise.all([
 ]);
 
 if (!specialists.value?.data) {
-  throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page Not Found",
+    fatal: true,
+  });
 }
 
 const clinicsList = clinics.value?.data?.map((cl) => ({
