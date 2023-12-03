@@ -81,8 +81,6 @@ const getArticlesData = async () => {
 
 const articlesData = await getArticlesData();
 
-console.log(articlesData.value);
-
 const { data: directionsData } = useFetch(`${apiBaseUrl}main-derections`, {
   query: {
     populate: "deep",
