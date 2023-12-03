@@ -1,10 +1,123 @@
 <script setup>
 // hides this page
 // remove to give access
-
 const assetsStore = useAssets();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const route = useRoute();
+
+const pageSize = ref(12);
+const currentPage = ref(route.query.page ?? 1);
+
+const dirFilter = ref(route.query.dir);
+
+const totalItems = ref(0);
+
+const totalPages = computed(() =>
+  Math.ceil(articlesData.value?.meta?.pagination?.total / pageSize.value),
+);
+
+const handlePageClick = async (page) => {
+  currentPage.value = page;
+  const searchQuery = {
+    page,
+    dir: dirFilter.value,
+  };
+
+  clearObjectFields(searchQuery);
+
+  if (window) {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
+  await navigateTo({
+    path: `${route.fullPath}`,
+    query: searchQuery,
+    replace: true,
+  });
+};
+
+const handleDirChange = async (dir) => {
+  dirFilter.value = dir?.id;
+  currentPage.value = 1;
+  const searchQuery = {
+    page: currentPage.value,
+    dir: dir?.id,
+  };
+
+  clearObjectFields(searchQuery);
+
+  await navigateTo({
+    path: `${route.fullPath}`,
+    query: searchQuery,
+    replace: true,
+  });
+};
+
+const getArticlesData = async () => {
+  const strapiQuery = {
+    populate: "napravleniya_uslug_1.*, fotoArticles.*, services.*",
+    "pagination[page]": currentPage.value,
+    "pagination[pageSize]": pageSize.value,
+    "filters[napravleniya_uslug_1][id][$eq][1]": dirFilter.value,
+  };
+
+  clearObjectFields(strapiQuery);
+
+  const { data: articlesData } = await useFetch(`${apiBaseUrl}articles`, {
+    query: {
+      ...strapiQuery,
+    },
+  });
+
+  totalItems.value = articlesData?.value?.meta?.pagination?.total ?? 0;
+
+  return articlesData;
+};
+
+const articlesData = await getArticlesData();
+
+console.log(articlesData.value);
+
+const { data: directionsData } = useFetch(`${apiBaseUrl}main-derections`, {
+  query: {
+    populate: "deep",
+  },
+});
+
+const allDirections = directionsData.value?.data
+  ?.map((dir) => ({
+    id: dir?.id,
+    name: dir?.attributes?.heading,
+  }))
+  .filter((el) => el.name);
+
+const filteredArticles = computed(() =>
+  articlesData.value?.data?.map((art) => {
+    return {
+      id: art?.id,
+      heading: art?.attributes?.heading,
+      img: art?.attributes?.fotoArticles?.data?.attributes?.url
+        ? baseUrl + art?.attributes?.fotoArticles?.data?.attributes?.url
+        : assetsStore.useAsset("images/articles/articles-dital.png"),
+      text: art?.attributes?.text,
+      tags: art?.attributes?.tags,
+      description: art?.attributes?.description,
+    };
+  }),
+);
+
+watch(
+  () => route.query,
+  async () => {
+    const data = await getArticlesData();
+    articlesData.value = data.value;
+  },
+);
 
 const breadcrumbs = [
   {
@@ -16,43 +129,6 @@ const breadcrumbs = [
     url: "/articles",
   },
 ];
-
-const tabs = ref([
-  { id: 1, title: "Стоматология" },
-  { id: 2, title: "Челюстно-лицевая хирургия" },
-  { id: 3, title: "Детская стоматология" },
-]);
-
-const selectButton = (id) => {
-  selectedTab.value = id;
-};
-
-const setCurrentPage = (num) => {
-  currentPage.value = num;
-};
-
-const [{ data: articlesData }] = await Promise.all([
-  useFetch(`${apiBaseUrl}articles`, { query: { populate: "deep" } }),
-]);
-
-const articles = articlesData.value?.data?.map((art) => {
-  return {
-    id: art?.id,
-    heading: art?.attributes?.heading,
-    img: art?.attributes?.fotoArticles?.data?.attributes?.url
-      ? baseUrl + art?.attributes?.fotoArticles?.data?.attributes?.url
-      : assetsStore.useAsset("images/articles/articles-dital.png"),
-    text: art?.attributes?.text,
-    tags: art?.attributes?.tags,
-    description: art?.attributes?.description,
-  };
-});
-
-const selectedTab = ref("");
-const currentPage = ref("");
-
-const pageSize = ref(16);
-const totalPages = ref(Math.ceil(articles?.length / pageSize.value));
 </script>
 
 <template>
@@ -60,7 +136,16 @@ const totalPages = ref(Math.ceil(articles?.length / pageSize.value));
     <div class="articles-page-wrap">
       <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
       <div class="articles-page-title">Статьи</div>
-      <div class="articles-page-btns">
+      <div class="filters-box">
+        <elements-custom-select
+          :options="allDirections"
+          label="Выберите направление"
+          class="select"
+          @select="handleDirChange"
+          :selectedId="dirFilter"
+        />
+      </div>
+      <!-- <div class="articles-page-btns">
         <button
           v-for="tab in tabs"
           :key="tab.id"
@@ -88,21 +173,21 @@ const totalPages = ref(Math.ceil(articles?.length / pageSize.value));
             </svg>
           </div>
         </button>
-        <!--dd -->
-      </div>
-      <div class="articles-page-cards">
+      </div> -->
+      <div class="articles-page-cards" v-if="filteredArticles?.length">
         <div
-          v-for="item in articles"
+          v-for="item in filteredArticles"
           :key="item.id"
           class="articles-page-cards-box"
         >
           <elements-article-card class="articles-page-card" :article="item" />
         </div>
       </div>
+      <div v-else :style="{ textAlign: 'center' }">Ничего не найдено</div>
       <elements-pagination
         :current-page="currentPage"
         :total-pages="totalPages"
-        @update:current-page="setCurrentPage"
+        @update:current-page="handlePageClick"
       />
       <blocks-main-form />
     </div>
@@ -111,6 +196,16 @@ const totalPages = ref(Math.ceil(articles?.length / pageSize.value));
 
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
+
+.filters-box {
+  width: 100%;
+  max-width: 308px;
+  gap: 14px;
+  align-self: flex-start;
+  display: flex;
+
+  margin-bottom: 40px;
+}
 
 .articles-page {
   display: flex;

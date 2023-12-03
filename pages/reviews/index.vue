@@ -171,7 +171,7 @@ const breadcrumbs = [
         />
       </div>
     </template>
-    <div v-else>Ничего не найдено</div>
+    <div v-else :style="{ textAlign: 'center' }">Ничего не найдено</div>
     <elements-pagination
       :current-page="currentPage"
       :total-pages="totalPages"
