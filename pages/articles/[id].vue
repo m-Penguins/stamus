@@ -25,7 +25,9 @@ const breadcrumbs = [
 
 const [{ data: articleData }, { data: allArticles }] = await Promise.all([
   useFetch(`${apiBaseUrl}articles/${route.params.id}`, {
-    query: { populate: "deep" },
+    query: {
+      populate: "fotoArticles.*,meta.metaImage.*,napravleniya_uslug_1.*",
+    },
   }),
   useFetch(`${apiBaseUrl}articles`, { query: { populate: "deep" } }),
 ]);
@@ -52,6 +54,9 @@ const otherArticles = allArticles.value?.data
       tags: art?.attributes?.tags,
     };
   });
+
+const metaData = articleData.value?.data?.attributes?.meta;
+useHead(getMetaObject(metaData, baseUrl));
 </script>
 
 <template>

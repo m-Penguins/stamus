@@ -81,11 +81,14 @@ const getArticlesData = async () => {
 
 const articlesData = await getArticlesData();
 
-const { data: directionsData } = useFetch(`${apiBaseUrl}main-derections`, {
-  query: {
-    populate: "deep",
+const { data: directionsData } = await useFetch(
+  `${apiBaseUrl}main-derections`,
+  {
+    query: {
+      populate: "deep",
+    },
   },
-});
+);
 
 const allDirections = directionsData.value?.data
   ?.map((dir) => ({
