@@ -58,51 +58,49 @@
         </div>
         <div class="footer-contacts">
           <h3 class="footer-subtitle">Контакты</h3>
-          <a class="footer-text header-nav-item" href="tel:+79998887766"
-            >+7 (999) 888 - 77 - 66</a
-          >
-          <a
+          <NuxtLink
+            target="_blank"
             class="footer-text header-nav-item"
-            href="mailto:stamus.dent@yandex.ru"
-            >stamus.dent@yandex.ru</a
+            :to="`tel:${phone?.replaceAll(' ', '')}`"
+          >
+            {{ phone }}
+          </NuxtLink>
+          <NuxtLink
+            target="_blank"
+            class="footer-text header-nav-item"
+            :to="`mailto:${email}`"
+            >{{ email }}</NuxtLink
           >
           <div class="footer-social">
-            <a href="/" class="footer-social-link">
+            <NuxtLink
+              v-for="social in socials"
+              :key="social?.id"
+              :to="social?.link"
+              class="footer-social-link"
+            >
               <img
+                :src="`${baseUrl}${social?.icon?.data?.attributes?.url}`"
+                alt="social"
                 class="footer-img"
-                src="@/assets/images/icons/YouTube-fill.svg"
-                alt="Social icon"
               />
-            </a>
-            <a href="/" class="footer-social-link">
-              <img
-                class="footer-img"
-                src="@/assets/images/icons/vk-fill.svg"
-                alt="Social icon"
-              />
-            </a>
-            <a href="/" class="footer-social-link">
-              <img
-                class="footer-img"
-                src="@/assets/images/icons/Telegram-fill.svg"
-                alt="Social icon"
-              />
-            </a>
+            </NuxtLink>
           </div>
         </div>
         <div class="footer-address">
           <h3 class="footer-subtitle">Наши адреса</h3>
           <div class="footer-address__container">
             <div class="footer-address__container-link">
-              <NuxtLink to="/clinics/5">
-                <p class="footer-text">ул. Московская 140</p>
+              <NuxtLink
+                v-for="clinic in clinicsData?.data?.slice(
+                  0,
+                  clinicColumnNumber,
+                )"
+                :key="clinic?.id"
+                :to="`/clinics/${clinic?.id}`"
+              >
+                <p class="footer-text">{{ clinic?.attributes?.address }}</p>
               </NuxtLink>
-              <NuxtLink class="footer-text" to="/clinics/3">
-                <p class="footer-text">ул. Хакурате 34</p>
-              </NuxtLink>
-              <NuxtLink class="footer-text" to="/clinics/4">
-                <p class="footer-text">ул. Мачуги 1/1</p>
-              </NuxtLink>
+
               <!-- <NuxtLink @click="$router.push(`clinics/${linkTransform('ул. Черкасская 17')}`)" class="footer-text" to="#">
                 <p class="footer-text">ул. Черкасская 17</p>
               </NuxtLink> -->
@@ -110,28 +108,32 @@
           </div>
         </div>
         <div class="p-r-18 address">
-          <NuxtLink class="footer-text" to="/clinics/6">
-            <p class="footer-text">ул. Гимназическая 85</p>
+          <NuxtLink
+            v-for="clinic in clinicsData?.data?.slice(clinicColumnNumber)"
+            :key="clinic?.id"
+            :to="`/clinics/${clinic?.id}`"
+          >
+            <p class="footer-text">{{ clinic?.attributes?.address }}</p>
           </NuxtLink>
-          <NuxtLink class="footer-text" to="/clinics/7">
-            <p class="footer-text">Платановый бульвар 19/3</p>
-          </NuxtLink>
+
           <!-- <NuxtLink @click="navigateToRoute('ул. Средняя 1-3')" class="footer-text" to="#">
             <p class="footer-text">ул. Средняя 1/3</p>
           </NuxtLink> -->
         </div>
-        <a
-          href="http://176.99.11.245:1338/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf"
+        <NuxtLink
+          :to="policy"
           target="_blank"
           class="footer-text display-block"
-          >Политика конфидециальности</a
         >
-        <a
-          href="http://176.99.11.245:1338/uploads/Liczenziya_ot_26_07_2023_g_41de6703eb.pdf"
+          Политика конфидециальности
+        </NuxtLink>
+        <NuxtLink
+          :to="license"
           target="_blank"
           class="footer-text display-block"
-          >Лицензия</a
         >
+          Лицензия
+        </NuxtLink>
         <a href="#" class="bvi-open footer-text display-block" data-bvi="close"
           >Версия для слабовидящих</a
         >
@@ -140,13 +142,13 @@
         </NuxtLink>
         <!-- <a href="#" class="bvi-open">Включить режим доступности</a> -->
         <div class="display">
-          <a
-            href="../assets/docs/Положение-о-работе-с-ПДн.pdf"
-            target="_blank"
-            class="footer-text"
-            >Политика конфидециальности</a
-          >
-          <a class="footer-text">Лицензия</a>
+          <NuxtLink :to="policy" target="_blank" class="footer-text">
+            Политика конфидециальности
+          </NuxtLink>
+          <NuxtLink :to="license" target="_blank" class="footer-text">
+            Лицензия
+          </NuxtLink>
+
           <a href="#" class="bvi-open footer-text" data-bvi="close"
             >Версия для слабовидящих</a
           >
@@ -159,51 +161,56 @@
   </footer>
 </template>
 
-<script>
-import { useRoute, useRouter } from "vue-router";
+<script setup>
 // import bvi from "bvi"
-export default {
-  data() {
-    return {
-      socialsList: {
-        youTube: {
-          href: "",
-          iconName: "YouTube-fill",
-        },
-        telegramm: {
-          href: "",
-          iconName: "Telegram",
-        },
-        vk: {
-          href: "",
-          iconName: "vk-fill",
-        },
-      },
-    };
-  },
-  // mounted() {
-  //   console.log("mounted", bvi);
-  // },
-  methods: {
-    activateBvi() {
-      // Здесь можно добавить дополнительный код, если необходимо
-      // Затем активируйте "bvi" при клике
-      // bvi.activate();
-    },
-  },
-  setup() {
-    const route = useRoute();
-    const router = useRouter();
-    const navigateToRoute = (str) => {
-      const newRoute = `/clinics/${linkTransform(str)}`;
-      router.replace(newRoute);
-    };
 
-    return {
-      route,
-      navigateToRoute,
-    };
-  },
+// mounted() {
+//   console.log("mounted", bvi);
+// },
+// const activateBvi = () => {
+// Здесь можно добавить дополнительный код, если необходимо
+// Затем активируйте "bvi" при клике
+// bvi.activate();
+// };
+const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const [{ data: clinicsData }, { data: footerData }] = await Promise.all([
+  useFetch(`${apiBaseUrl}clinics`, {}),
+  useFetch(`${apiBaseUrl}footer`, {
+    query: {
+      populate: "links.icon.*,privacy.*,license.*",
+    },
+  }),
+]);
+
+console.log(footerData.value);
+
+const phone = footerData?.value?.data?.attributes?.phone;
+const email = footerData?.value?.data?.attributes?.email;
+
+const socials = footerData.value?.data?.attributes?.links;
+
+const license = footerData.value?.data?.attributes?.license?.data?.attributes
+  ?.url
+  ? baseUrl + footerData.value?.data?.attributes?.license?.data?.attributes?.url
+  : "";
+
+const policy = footerData.value?.data?.attributes?.privacy?.data?.attributes
+  ?.url
+  ? baseUrl + footerData.value?.data?.attributes?.privacy?.data?.attributes?.url
+  : "";
+
+const clinicColumnNumber = computed(() => {
+  return clinicsData.value?.data?.length > 5 ? 4 : 3;
+});
+
+const route = useRoute();
+const router = useRouter();
+
+const navigateToRoute = (str) => {
+  const newRoute = `/clinics/${linkTransform(str)}`;
+  router.replace(newRoute);
 };
 </script>
 

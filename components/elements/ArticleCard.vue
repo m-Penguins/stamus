@@ -1,19 +1,19 @@
 <template>
   <div class="article-card">
     <div class="article-card__box">
-      <img :src="article.img" alt="Articles" class="article-card__box-img" />
+      <img :src="article?.img" alt="Articles" class="article-card__box-img" />
     </div>
     <div class="tags-box">
       <div
-        v-for="(tag, index) in article.tags"
+        v-for="(tag, index) in article?.tags"
         :key="index"
         class="article-card__category"
       >
         {{ tag }}
       </div>
     </div>
-    <h2 class="article-card__name">{{ article.heading }}</h2>
-    <p class="text-article">{{ article.description }}</p>
+    <h2 class="article-card__name">{{ article?.heading }}</h2>
+    <p class="text-article">{{ article?.description }}</p>
     <elements-link-with-arrow
       type="type"
       title="Читать"

@@ -6,7 +6,10 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const [{ data: portfolioData }, { data: allCasesData }] = await Promise.all([
   useFetch(`${apiBaseUrl}portofolios/${route.params.id}`, {
-    query: { populate: "deep" },
+    query: {
+      populate:
+        "infoBlock.image.*,infoBlock.video.*,gallery.*,specialists.fotoSpecialist.*,photoBanner.*,solutionImage.*,services.*, meta.metaImage.*,solution.*,napravleniya_uslug_1.*",
+    },
   }),
   useFetch(`${apiBaseUrl}portofolios`, {
     query: {
@@ -16,7 +19,11 @@ const [{ data: portfolioData }, { data: allCasesData }] = await Promise.all([
 ]);
 
 if (!portfolioData.value?.data) {
-  throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page Not Found",
+    fatal: true,
+  });
 }
 
 const symptoms = portfolioData.value?.data?.attributes?.symptom
@@ -84,6 +91,9 @@ const gallery = portfolioData.value?.data?.attributes?.galery?.data
       : "",
   )
   ?.filter(Boolean);
+
+const metaData = portfolioData.value?.data?.attributes?.meta;
+useHead(getMetaObject(metaData, baseUrl));
 </script>
 
 <template>

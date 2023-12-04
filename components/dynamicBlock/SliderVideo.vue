@@ -1,27 +1,32 @@
 <script setup>
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation } from "swiper/modules";
-
 import "swiper/css";
 import "swiper/css/navigation";
 
-const props = defineProps(["programs", "link"]);
+const props = defineProps(["block"]);
+
+const assetsStore = useAssets();
+const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const videos = props?.block?.video;
 
 const prev = ref(null);
 const next = ref(null);
+
+const videoStore = useModalVideoStore();
+
+const handleVideoClick = (link) => {
+  videoStore.isModalOpen = true;
+  videoStore.link = link;
+};
 </script>
 
 <template>
   <div class="main-events-block">
     <div class="slider-title">
       <div class="slider-title__box">
-        <h2 class="slider-title__box-title">Отзывы с</h2>
-        <img src="@/assets/images/img-text/prodoctorov.svg" alt="Текст" />
-      </div>
-      <div class="slider-title__grade">
-        <div class="grey-point-text">4,9 средняя оценка</div>
-        <div class="grey-point"></div>
-        <div class="grey-point-text">{{ programs?.length }} отзывов</div>
+        <h2 class="slider-title__box-title">{{ block?.title }}</h2>
       </div>
     </div>
     <div class="wrapper-swiper">
@@ -35,13 +40,26 @@ const next = ref(null);
           nextEl: next,
         }"
       >
-        <swiper-slide
-          v-for="(item, index) in programs"
-          :key="index"
-          class="swiper-slide"
-        >
-          <elements-element-feedback-card :data="item" />
-        </swiper-slide>
+        <template v-for="(video, index) in videos" :key="video?.id">
+          <swiper-slide class="swiper-slide" v-if="video?.videoLink">
+            <div class="ss-card" @click="handleVideoClick(video?.videoLink)">
+              <div class="ss-image">
+                <img
+                  v-if="video?.videoPreview?.data?.attributes?.url"
+                  :src="`${baseUrl}${video?.videoPreview?.data?.attributes?.url}`"
+                  alt="Video"
+                  class="problems__image"
+                />
+                <img
+                  class="utube"
+                  :src="assetsStore.useAsset('images/icons/play.svg')"
+                  alt="Play"
+                />
+              </div>
+              <p class="ss-title">{{ video?.title }}</p>
+            </div>
+          </swiper-slide>
+        </template>
       </Swiper>
       <div class="wrapper-btn">
         <div ref="prev" class="swiper-button-prev">
@@ -90,16 +108,45 @@ const next = ref(null);
         </div>
       </div>
     </div>
-    <div class="slider-base-btn">
-      <NuxtLink to="/reviews" class="button-base">Все отзывы</NuxtLink>
-    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
+
+.ss-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.ss-image {
+  width: 100%;
+  max-width: 416px;
+  height: 290px;
+}
+
+.problems__image {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 15px;
+}
+
+.utube {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  cursor: pointer;
+}
+
 .slider-title {
-  padding: 0px 0 40px 0;
+  padding: 0px 0 30px 0;
 
   &__box {
     display: flex;
@@ -115,7 +162,6 @@ const next = ref(null);
   &__grade {
     display: flex;
     align-items: center;
-    gap: 10px;
   }
 }
 
@@ -154,12 +200,17 @@ const next = ref(null);
 }
 
 .wrapper-swiper {
+  // overflow-x: hidden;
   width: 100%;
 }
 
 .swiper-slide {
-  margin-bottom: 40px;
-  width: 416px !important;
+  width: 100%;
+  max-width: 416px !important;
+  min-height: 290px;
+
+  cursor: pointer;
+  overflow: hidden;
 }
 
 .main-events-block {
@@ -178,7 +229,7 @@ const next = ref(null);
   }
 }
 
-@media screen and (max-width: 800px) {
+@media (max-width: 800px) {
   .wrapper-btn {
     position: unset;
     div {
@@ -198,8 +249,9 @@ const next = ref(null);
   .slider-base-btn {
     padding-bottom: 0;
   }
+
   .swiper-slide {
-    width: 334px !important;
+    max-width: 334px !important;
   }
 }
 
@@ -209,9 +261,9 @@ const next = ref(null);
   }
 }
 
-@media screen and (max-width: 400px) {
-  .swiper {
-    margin: 0;
+@media (max-width: 600px) {
+  .swiper-slide {
+    max-width: 330px !important;
   }
 }
 </style>

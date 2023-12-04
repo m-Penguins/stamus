@@ -41,7 +41,11 @@ const [{ data: specialists }, { data: clinics }] = await Promise.all([
 ]);
 
 if (!specialists.value?.data) {
-  throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page Not Found",
+    fatal: true,
+  });
 }
 
 const clinicsList = clinics.value?.data?.map((cl) => ({
@@ -286,7 +290,7 @@ const breadcrumbs = [
 </template>
 
 <style lang="scss" scoped>
-@import "../../assets/styles/style.scss";
+@import "@/assets/styles/style.scss";
 
 .width-style {
   width: 24% !important;

@@ -10,6 +10,7 @@
     <TheFooter />
     <Teleport to="body"><blocks-main-popap-modal-form /></Teleport>
     <Teleport to="body"><elements-cookie-consent /></Teleport>
+    <Teleport to="body"><ModalVideo /></Teleport>
   </div>
 </template>
 
@@ -21,10 +22,13 @@ const toggleMenu = () => (showMenuPatients.value = !showMenuPatients.value);
 const closeMenu = () => (showMenuPatients.value = false);
 
 const route = useRoute();
-
+const reviewStore = useReviewStore();
 watch(
   () => route.fullPath,
-  () => (showMenuPatients.value = false),
+  () => {
+    if (reviewStore.currentStep > 0) reviewStore.resetStore();
+    showMenuPatients.value = false;
+  },
 );
 
 useHead({
@@ -62,6 +66,12 @@ html {
 
 body {
   font-family: "Neue Machin";
+}
+
+body.modal-open {
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
 }
 
 a,

@@ -4,33 +4,25 @@ const assetsStore = useAssets();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const [
-  { data: specialistDeep },
-  { data: specialist },
-  { data: otherSpecialists },
-] = await Promise.all([
-  useFetch(`${apiBaseUrl}specialists/${route.params.id}`, {
-    query: {
-      populate: "deep",
-    },
-  }),
-  useFetch(`${apiBaseUrl}specialists/${route.params.id}`, {
+const { data: specialist } = await useFetch(
+  `${apiBaseUrl}specialists/${route.params.id}`,
+  {
     query: {
       populate:
-        "portofolios.photoBanner.*,fotoSpecialist.*,education.*,additionalEducation.*,docsPhoto.*,video.*,clinics.*,services.*,reviews.*,price_lists.*,achievements.*,areasOfActivity.*,meetingPerson.*",
+        "portofolios.photoBanner.*,fotoSpecialist.*,education.*,additionalEducation.*,docsPhoto.*,video.*,clinics.*,services.*,reviews.*,price_lists.*,achievements.*,areasOfActivity.*,meetingPerson.*" +
+        blocksQuey,
     },
-  }),
-  useFetch(`${apiBaseUrl}specialists`, {
-    query: {
-      populate: "deep",
-      "pagination[pageSize]": 100,
-      "sort[0]": "order:asc",
-    },
-  }),
-]);
+  },
+);
+
+console.log(specialist.value);
 
 if (!specialist.value?.data) {
-  throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page Not Found",
+    fatal: true,
+  });
 }
 
 const breadcrumbs = [
@@ -55,39 +47,10 @@ const breadcrumbs = [
   },
 ];
 
-const portfolios = specialist?.value?.data?.attributes?.portofolios?.data?.map(
-  (el) => {
-    return {
-      id: el?.id,
-      img: el?.attributes?.photoBanner?.data?.attributes?.formats?.medium?.url
-        ? baseUrl +
-          el?.attributes?.photoBanner?.data?.attributes?.formats?.medium?.url
-        : assetsStore.useAsset("images/no-photo.png"),
-      name: el?.attributes?.heading,
-      category: "detskaya",
-      description: el?.attributes?.description,
-    };
-  },
-);
+const metaData = specialist.value?.data?.attributes?.meta;
+useHead(getMetaObject(metaData, baseUrl));
 
-console.log(specialistDeep.value?.data?.attributes?.price_lists);
-
-const singleServices = mapPriceList(
-  specialistDeep?.value?.data?.attributes?.price_lists?.data,
-);
-
-console.log(singleServices);
-const meetingPerson = specialistDeep.value?.data?.attributes?.meetingPerson;
-
-const documents = ref(
-  specialistDeep.value?.data?.attributes?.docsPhoto?.data?.map((el) =>
-    el?.attributes?.url ? baseUrl + el?.attributes?.url : "",
-  ),
-);
-
-const reviews = mapReviews(specialist.value?.data?.attributes?.reviews?.data);
-
-const activities = specialistDeep.value?.data?.attributes?.areasOfActivity;
+const blocks = specialist.value?.data?.attributes?.blocks;
 </script>
 
 <template>
@@ -178,84 +141,7 @@ const activities = specialistDeep.value?.data?.attributes?.areasOfActivity;
       </div>
     </div>
   </div>
-  <blocks-video-block
-    v-if="meetingPerson"
-    :title="meetingPerson?.heading"
-    :text="meetingPerson?.text"
-    :isAcquaintanceBlock="true"
-    :info="{
-      experience: meetingPerson?.dataMeeting?.[0],
-      review: meetingPerson?.dataMeeting?.[1],
-      consultation: meetingPerson?.dataMeeting?.[2],
-    }"
-    :link="meetingPerson?.link"
-    :video="
-      meetingPerson?.video?.data?.attributes?.url
-        ? baseUrl + meetingPerson?.video?.data?.attributes?.url
-        : ''
-    "
-    :videoThumbnail="
-      meetingPerson?.image?.data?.attributes?.url
-        ? baseUrl + meetingPerson?.image?.data?.attributes?.url
-        : ''
-    "
-  />
-  <!-- <blocks-activities-block :activitiesCard="mockActivitiesCard" /> -->
-  <blocks-education-block
-    v-if="specialist?.data?.attributes?.education?.length > 0"
-    :events="specialist?.data?.attributes?.education"
-    title="Образование"
-  />
-  <blocks-education-block
-    v-if="specialist?.data?.attributes?.additionalEducation?.length > 0"
-    :events="specialist?.data?.attributes?.additionalEducation"
-    title="Дополнительное образование"
-  />
-
-  <BlocksCertificateSlider
-    :imagesScroll="documents"
-    title="Сертификаты и документы"
-  />
-  <!-- <blocks-video-slider-block
-    :imagesScroll="documents"
-    title="Сертификаты и документы"
-  /> -->
-  <div class="container-size popular-service" v-if="singleServices?.length > 0">
-    <div class="service-title">
-      <h2 class="popular-service__title">Услуги</h2>
-      <elements-link-with-arrow
-        type="true"
-        link="/prices"
-        title="Посмотреть все"
-      />
-    </div>
-    <div v-for="service in singleServices" class="popular-service__list">
-      <h2 class="popular-service__title">{{ service?.title }}</h2>
-      <div v-for="(item, index) in service?.services" :key="index">
-        <elements-service-card :service="item" />
-      </div>
-    </div>
-  </div>
-
-  <blocks-cases-direction
-    v-if="specialist?.data?.attributes?.portofolios?.data?.length > 0"
-    text="Портфолио доктора"
-    :dataDirection="portfolios"
-    id="portfolio"
-    class="portfolio-id"
-  />
-  <blocks-main-feedback :reviews="reviews" />
-  <!-- <blocks-video-slider-block :imagesScroll="imagesScrollVideo" title="Видео" /> -->
-  <blocks-our-specialists
-    v-if="otherSpecialists?.data"
-    title="Еще специалисты"
-    :data="
-      otherSpecialists?.data?.filter(
-        (el) => String(el?.id) !== String(route.params.id),
-      )
-    "
-  />
-  <blocks-main-form />
+  <BlocksMapper :blocks="blocks" />
 </template>
 
 <style lang="scss" scoped>

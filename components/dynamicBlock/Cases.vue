@@ -1,27 +1,23 @@
-<script setup>
+<script setup lang="ts">
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
-const props = defineProps(["programs", "link"]);
+defineProps(["block"]);
 
 const prev = ref(null);
 const next = ref(null);
+
+const baseUrl = useRuntimeConfig().public.baseUrl;
 </script>
 
 <template>
   <div class="main-events-block">
     <div class="slider-title">
       <div class="slider-title__box">
-        <h2 class="slider-title__box-title">Отзывы с</h2>
-        <img src="@/assets/images/img-text/prodoctorov.svg" alt="Текст" />
-      </div>
-      <div class="slider-title__grade">
-        <div class="grey-point-text">4,9 средняя оценка</div>
-        <div class="grey-point"></div>
-        <div class="grey-point-text">{{ programs?.length }} отзывов</div>
+        <h2 class="slider-title__box-title">Похожие работы</h2>
       </div>
     </div>
     <div class="wrapper-swiper">
@@ -36,11 +32,42 @@ const next = ref(null);
         }"
       >
         <swiper-slide
-          v-for="(item, index) in programs"
+          v-for="(portfolio, index) in block?.portofolios?.data"
           :key="index"
           class="swiper-slide"
         >
-          <elements-element-feedback-card :data="item" />
+          <div class="card-photo-name">
+            <div class="card-photo-name-img">
+              <img
+                v-if="portfolio?.attributes?.photoBanner?.data?.attributes?.url"
+                :src="`${baseUrl}${portfolio?.attributes?.photoBanner?.data?.attributes?.url}`"
+                :alt="
+                  portfolio?.attributes?.photoBanner?.data?.attributes
+                    ?.alternativeText ?? 'photo-name'
+                "
+                class="card-photo-name-img"
+              />
+            </div>
+            <div class="card-photo-name-container">
+              <div>
+                <div class="card-photo-name-title">
+                  {{ portfolio?.attributes?.heading }}
+                </div>
+                <div class="card-photo-name-text">
+                  {{ portfolio?.attributes?.direction?.directions }}
+                </div>
+              </div>
+            </div>
+            <div class="card-photo-name-description">
+              {{ portfolio?.attributes?.description }}
+            </div>
+
+            <elements-link-with-arrow
+              type="true"
+              title="Смотреть кейс"
+              :href="`/portfolio/${portfolio?.id}`"
+            />
+          </div>
         </swiper-slide>
       </Swiper>
       <div class="wrapper-btn">
@@ -91,22 +118,24 @@ const next = ref(null);
       </div>
     </div>
     <div class="slider-base-btn">
-      <NuxtLink to="/reviews" class="button-base">Все отзывы</NuxtLink>
+      <NuxtLink to="/portfolio" class="button-base"
+        >Смотреть все работы</NuxtLink
+      >
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
+
 .slider-title {
-  padding: 0px 0 40px 0;
+  padding: 20px 0 40px 0;
 
   &__box {
     display: flex;
-    padding-bottom: 8px;
+    padding-bottom: 17px;
 
     &-title {
-      padding-right: 10px;
       @include body-22-medium-Neue;
       color: $dark-blue-subtitle;
     }
@@ -115,7 +144,6 @@ const next = ref(null);
   &__grade {
     display: flex;
     align-items: center;
-    gap: 10px;
   }
 }
 
@@ -130,7 +158,7 @@ const next = ref(null);
   gap: 20px;
   align-items: center;
   position: absolute;
-  top: 3px;
+  top: 13px;
   right: 0;
 
   div {
@@ -153,13 +181,9 @@ const next = ref(null);
   }
 }
 
-.wrapper-swiper {
-  width: 100%;
-}
-
 .swiper-slide {
   margin-bottom: 40px;
-  width: 416px !important;
+  width: 308px !important;
 }
 
 .main-events-block {
@@ -178,7 +202,7 @@ const next = ref(null);
   }
 }
 
-@media screen and (max-width: 800px) {
+@media (max-width: 800px) {
   .wrapper-btn {
     position: unset;
     div {
@@ -187,7 +211,7 @@ const next = ref(null);
     }
     .swiper-button-next {
       position: absolute;
-      right: -1%;
+      right: -2%;
     }
 
     .swiper-button-prev {
@@ -195,11 +219,12 @@ const next = ref(null);
       left: -10px;
     }
   }
+  .swiper-slide {
+    margin-bottom: 30px;
+    width: 334px !important;
+  }
   .slider-base-btn {
     padding-bottom: 0;
-  }
-  .swiper-slide {
-    width: 334px !important;
   }
 }
 
@@ -209,9 +234,66 @@ const next = ref(null);
   }
 }
 
-@media screen and (max-width: 400px) {
-  .swiper {
-    margin: 0;
+@media (max-width: 600px) {
+  .swiper-slide {
+    width: 330px !important;
+  }
+}
+
+.card-photo-name-box-image {
+  padding-bottom: 30px;
+}
+
+.card-photo-name-img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  height: 346px;
+}
+
+.card-photo-name-container {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.card-photo-name-title {
+  @include body-20-regular;
+  color: $dark-blue-subtitle;
+  padding-bottom: 4px;
+}
+
+.card-photo-name-text {
+  @include body-12-regular;
+  color: $gray-text;
+  opacity: 0.7;
+}
+
+.card-photo-name-description {
+  @include body-14-regular;
+  color: $gray-text;
+  opacity: 0.7;
+
+  min-height: 60px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-clamp: 3;
+  box-orient: vertical;
+}
+
+@media (max-width: 1328px) {
+  .card-photo-name {
+    width: 100%;
+
+    .card-photo-name-box-image {
+      width: 100%;
+    }
   }
 }
 </style>
