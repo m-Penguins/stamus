@@ -58,36 +58,32 @@
         </div>
         <div class="footer-contacts">
           <h3 class="footer-subtitle">Контакты</h3>
-          <a class="footer-text header-nav-item" href="tel:+79998887766"
-            >+7 (999) 888 - 77 - 66</a
-          >
-          <a
+          <NuxtLink
+            target="_blank"
             class="footer-text header-nav-item"
-            href="mailto:stamus-med@info.ru"
-            >stamus-med@info.ru</a
+            :to="`tel:${phone?.replaceAll(' ', '')}`"
+          >
+            {{ phone }}
+          </NuxtLink>
+          <NuxtLink
+            target="_blank"
+            class="footer-text header-nav-item"
+            :to="`mailto:${email}`"
+            >{{ email }}</NuxtLink
           >
           <div class="footer-social">
-            <a href="/" class="footer-social-link">
+            <NuxtLink
+              v-for="social in socials"
+              :key="social?.id"
+              :to="social?.link"
+              class="footer-social-link"
+            >
               <img
+                :src="`${baseUrl}${social?.icon?.data?.attributes?.url}`"
+                alt="social"
                 class="footer-img"
-                src="@/assets/images/icons/YouTube-fill.svg"
-                alt="Social icon"
               />
-            </a>
-            <a href="/" class="footer-social-link">
-              <img
-                class="footer-img"
-                src="@/assets/images/icons/vk-fill.svg"
-                alt="Social icon"
-              />
-            </a>
-            <a href="/" class="footer-social-link">
-              <img
-                class="footer-img"
-                src="@/assets/images/icons/Telegram-fill.svg"
-                alt="Social icon"
-              />
-            </a>
+            </NuxtLink>
           </div>
         </div>
         <div class="footer-address">
@@ -95,34 +91,17 @@
           <div class="footer-address__container">
             <div class="footer-address__container-link">
               <NuxtLink
-                @click="
-                  $router.push(
-                    `/clinics/${linkTransform('ул. Московская 140')}`,
-                  )
-                "
-                to="#"
+                v-for="clinic in clinicsData?.data?.slice(
+                  0,
+                  clinicColumnNumber,
+                )"
+                :key="clinic?.id"
+                :to="`/clinics/${clinic?.id}`"
               >
-                <p class="footer-text">ул. Московская 140</p>
+                <p class="footer-text">{{ clinic?.attributes?.address }}</p>
               </NuxtLink>
-              <NuxtLink
-                @click="
-                  $router.push(`/clinics/${linkTransform('ул. Хакурате 34')}`)
-                "
-                class="footer-text"
-                to="#"
-              >
-                <p class="footer-text">ул. Хакурате 34</p>
-              </NuxtLink>
-              <NuxtLink
-                @click="
-                  $router.push(`/clinics/${linkTransform('ул. Мачуги 1-1')}`)
-                "
-                class="footer-text"
-                to="#"
-              >
-                <p class="footer-text">ул. Мачуги 1/1</p>
-              </NuxtLink>
-              <NuxtLink @click="$router.push(`clinics/${linkTransform('ул. Черкасская 17')}`)" class="footer-text" to="#">
+
+              <!-- <NuxtLink @click="$router.push(`clinics/${linkTransform('ул. Черкасская 17')}`)" class="footer-text" to="#">
                 <p class="footer-text">ул. Черкасская 17</p>
               </NuxtLink>
             </div>
@@ -130,117 +109,108 @@
         </div>
         <div class="p-r-18 address">
           <NuxtLink
-            @click="
-              $router.push(`/clinics/${linkTransform('ул. Гимназическая 85')}`)
-            "
-            class="footer-text"
-            to="#"
+            v-for="clinic in clinicsData?.data?.slice(clinicColumnNumber)"
+            :key="clinic?.id"
+            :to="`/clinics/${clinic?.id}`"
           >
-            <p class="footer-text">ул. Гимназическая 85</p>
+            <p class="footer-text">{{ clinic?.attributes?.address }}</p>
           </NuxtLink>
-          <NuxtLink
-            @click="
-              $router.push(
-                `/clinics/${linkTransform('Платановый бульвар 19/3')}`,
-              )
-            "
-            class="footer-text"
-            to="#"
-          >
-            <p class="footer-text">Платановый бульвар 19/3</p>
-          </NuxtLink>
-          <NuxtLink @click="navigateToRoute('ул. Средняя 1-3')" class="footer-text" to="#">
+
+          <!-- <NuxtLink @click="navigateToRoute('ул. Средняя 1-3')" class="footer-text" to="#">
             <p class="footer-text">ул. Средняя 1/3</p>
           </NuxtLink>
         </div>
-        <a class="footer-text display-block">Политика конфидециальности</a>
-        <a class="footer-text display-block">Лицензия</a>
-        <div class="footer-text display-block">Версия для слабовидящих</div>
+        <NuxtLink
+          :to="policy"
+          target="_blank"
+          class="footer-text display-block"
+        >
+          Политика конфидециальности
+        </NuxtLink>
+        <NuxtLink
+          :to="license"
+          target="_blank"
+          class="footer-text display-block"
+        >
+          Лицензия
+        </NuxtLink>
+        <a href="#" class="bvi-open footer-text display-block" data-bvi="close"
+          >Версия для слабовидящих</a
+        >
         <NuxtLink to="/business" class="footer-text display-block">
           Бизнесу и корпоративным клиентам
         </NuxtLink>
         <a href="#" class="bvi-open">Включить режим доступности</a>
         <div class="display">
-          <a href="../" class="footer-text">Политика конфидециальности</a>
-          <a class="footer-text">Лицензия</a>
-          <p class="footer-text">Версия для слабовидящих</p>
-          <NuxtLink to="/business" class="footer-text">Бизнесу и корпоративным клиентам</NuxtLink>
+          <NuxtLink :to="policy" target="_blank" class="footer-text">
+            Политика конфидециальности
+          </NuxtLink>
+          <NuxtLink :to="license" target="_blank" class="footer-text">
+            Лицензия
+          </NuxtLink>
+
+          <a href="#" class="bvi-open footer-text" data-bvi="close"
+            >Версия для слабовидящих</a
+          >
+          <NuxtLink to="/business" class="footer-text"
+            >Бизнесу и корпоративным клиентам</NuxtLink
+          >
         </div>
       </div>
     </div>
   </footer>
 </template>
 
-<script>
-import { useRoute, useRouter } from "vue-router";
+<script setup>
+// import bvi from "bvi"
 
-export default {
-  data() {
-    return {
-      socialsList: {
-        youTube: {
-          href: "",
-          iconName: "YouTube-fill",
-        },
-        telegramm: {
-          href: "",
-          iconName: "Telegram",
-        },
-        vk: {
-          href: "",
-          iconName: "vk-fill",
-        },
-      },
-    };
-  },
-   mounted () {
-    /* eslint-disable */
-    this.popupItem = this.$el
-    const bvi_init = {
-      settings: {
-        'bvi_theme': 'white',
-        'bvi_font': 'times',
-        'bvi_font_size': 16,
-        'bvi_letter_spacing': 'normal',
-        'bvi_line_height': 'normal',
-        'bvi_images': true,
-        'bvi_reload': false,
-        'bvi_fixed': true,
-        'bvi_tts': true,
-        'bvi_flash_iframe': true,
-        'bvi_hide': false
-      }
-    };
-    initBvi()
-    function initBvi() {
-      jQuery(document).ready(function(a){a.bvi(bvi_init.settings)});
-    }
-    /* eslint-enable */
-  },
-  setup() {
-    const route = useRoute();
-    const router = useRouter();
-    const navigateToRoute = (str) => {
-      const newRoute = `/clinics/${linkTransform(str)}`;
-      router.replace(newRoute);
-    };
-      onMounted(() => {
-        let recaptchaScriptgovno = document.createElement('script')
-      recaptchaScriptgovno.setAttribute('src', 'https://code.jquery.com/jquery-3.3.1.min.js')
-      document.head.appendChild(recaptchaScriptgovno)
-    let recaptchaScript = document.createElement('script')
-      recaptchaScript.setAttribute('src', 'http://176.99.11.245:1338/uploads/bvi_min_4122b9d8da.js')
-      document.body.appendChild(recaptchaScript)
-    
-    let recaptchaScriptcss = document.createElement('style')
-      recaptchaScriptcss.setAttribute('link', 'http://176.99.11.245:1338/uploads/bvi_min_c859dc6023.css')
-      document.head.appendChild(recaptchaScriptcss)
-  })
-    return {
-      route,
-      navigateToRoute,
-    };
-  },
+// mounted() {
+//   console.log("mounted", bvi);
+// },
+// const activateBvi = () => {
+// Здесь можно добавить дополнительный код, если необходимо
+// Затем активируйте "bvi" при клике
+// bvi.activate();
+// };
+const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const [{ data: clinicsData }, { data: footerData }] = await Promise.all([
+  useFetch(`${apiBaseUrl}clinics`, {}),
+  useFetch(`${apiBaseUrl}footer`, {
+    query: {
+      populate: "links.icon.*,privacy.*,license.*",
+    },
+  }),
+]);
+
+console.log(footerData.value);
+
+const phone = footerData?.value?.data?.attributes?.phone;
+const email = footerData?.value?.data?.attributes?.email;
+
+const socials = footerData.value?.data?.attributes?.links;
+
+const license = footerData.value?.data?.attributes?.license?.data?.attributes
+  ?.url
+  ? baseUrl + footerData.value?.data?.attributes?.license?.data?.attributes?.url
+  : "";
+
+const policy = footerData.value?.data?.attributes?.privacy?.data?.attributes
+  ?.url
+  ? baseUrl + footerData.value?.data?.attributes?.privacy?.data?.attributes?.url
+  : "";
+
+const clinicColumnNumber = computed(() => {
+  return clinicsData.value?.data?.length > 5 ? 4 : 3;
+});
+
+const route = useRoute();
+const router = useRouter();
+
+const navigateToRoute = (str) => {
+  const newRoute = `/clinics/${linkTransform(str)}`;
+  router.replace(newRoute);
 };
 </script>
 
@@ -348,6 +318,8 @@ export default {
     @include body-14-regular;
     color: $gray-text;
     width: fit-content;
+    padding: 0;
+    background-color: transparent;
   }
 
   .footer-img {

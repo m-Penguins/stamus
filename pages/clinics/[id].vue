@@ -25,7 +25,11 @@ const { data: clinicsData } = await useFetch(
 );
 
 if (!clinicsData.value) {
-  throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page Not Found",
+    fatal: true,
+  });
 }
 
 const clinicDataID = clinicsData.value?.data?.find(
@@ -33,8 +37,11 @@ const clinicDataID = clinicsData.value?.data?.find(
 )?.id;
 
 const { data: clinicData } = await useFetch(
-  `${apiBaseUrl}clinics/${clinicDataID}?populate=reviews.*,clinics.*,price_lists.*,photoBanner.*,direction.*,specialists.fotoSpecialist.*,articles.*,infoBlock.image.*,infoBlock.video.*,chiefDoctor.image.*,galery.*`,
+  `${apiBaseUrl}clinics/${clinicDataID}?populate=reviews.*,clinics.*,price_lists.*,photoBanner.*,direction.*,specialists.fotoSpecialist.*,specialists.achievements.icon.*,articles.*,infoBlock.image.*,infoBlock.video.*,chiefDoctor.image.*,galery.*,meta.metaImage.*`,
 );
+
+const metaData = clinicData.value?.data?.attributes?.meta;
+useHead(getMetaObject(metaData, baseUrl));
 
 const galleryList = clinicData?.value?.data?.attributes?.galery?.data
   ?.map((img) =>
@@ -53,9 +60,7 @@ const singleServices = ref(
           id: single?.id,
           heading: single?.heading,
           price: single?.price,
-          isRecommended: single?.isRecommended,
-          isPopular: single?.isPopular,
-          isDemand: single?.isDemand,
+          Sale_popular: single?.Sale_popular,
           tags: single?.tags,
           link: "/prices",
         };

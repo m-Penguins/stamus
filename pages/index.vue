@@ -11,6 +11,7 @@ const [{ data: fourSpecialists }, { data: articlesData }] = await Promise.all([
       "filters[id][$in][1]": 9,
       "filters[id][$in][2]": 4,
       "filters[id][$in][3]": 7,
+      "sort[0]": "order:asc",
       populate: "deep",
     },
   }),
@@ -94,6 +95,7 @@ const reviews = [
 
 <template>
   <blocks-main-primary-banner />
+
   <BlocksMainBanner
     :title="'Лечим не только зубы'"
     :text="'Многопрофильная детская клиника Стамусу на Юбилейном'"
@@ -103,6 +105,7 @@ const reviews = [
     type="true"
     img="girl.png"
   />
+
   <blocks-main-areas />
   <blocks-main-specialists :mainSpecialists="mainSpecialists" />
   <BlocksMainBanner
@@ -121,7 +124,7 @@ const reviews = [
     :selectedText="true"
     :text="'Независимый всеройсийский портал Продокторов'"
     :titleLink="'Записаться онлайн'"
-    link="https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/"
+    link="https://app.1denta.ru/booking/booking?orgid=11074&roistat_visit=282247#/network"
     bgColor="blue-gradient"
     img="mobile.svg"
     bigImg="true"

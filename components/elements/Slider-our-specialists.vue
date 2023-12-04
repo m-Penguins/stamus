@@ -51,9 +51,9 @@ const assetsStore = useAssets();
                   : assetsStore.useAsset('images/no-photo.png'),
                 position: item?.attributes?.position,
                 id: item?.id,
+                achievements: item?.attributes?.achievements,
               }"
-              :arrayTooltip="mockArrayTooltips"
-              :isTooltip="false"
+              :isTooltip="true"
             />
           </swiper-slide>
         </template>
@@ -106,16 +106,14 @@ const assetsStore = useAssets();
       </div>
     </div>
     <div class="slider-base-btn">
-      <elements-button-base
-        title="Смотреть всех специалистов"
-        @click="$router.push('/specialists')"
-      />
+      <NuxtLink class="button-base" to="/specialists">Смотреть всех специалистов</NuxtLink>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
+
 
 .slider-title {
   padding: 20px 0 40px 0;

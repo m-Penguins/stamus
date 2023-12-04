@@ -1,9 +1,9 @@
 <template>
-  <div class="article-wrap" v-if="articles?.length">
+  <!-- <div class="article-wrap" v-if="articles?.length">
     <div class="container-size container-article">
       <elements-slider-article :title="title" :programs="articles" />
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script setup>

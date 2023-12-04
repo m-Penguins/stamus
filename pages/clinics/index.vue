@@ -21,11 +21,21 @@ export default {
     const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 
     const { data: specialistsData } = await useFetch(
-      `${apiBaseUrl}specialists?populate=deep`,
+      `${apiBaseUrl}specialists`,
+      {
+        query: {
+          populate: "deep",
+          "sort[0]": "order:asc",
+        },
+      },
     );
 
     if (!specialistsData.value) {
-      throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+      throw createError({
+        statusCode: 404,
+        statusMessage: "Page Not Found",
+        fatal: true,
+      });
     }
 
     const assetsStore = useAssets();

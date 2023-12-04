@@ -1,62 +1,62 @@
 <template>
   <div>
-    <a
-      href="https://app.1denta.ru/booking/booking?orgid=11074&roistat_visit=282247#/main"
-      target="_blank"
-      class="link"
-    >
+    <button class="link" @click="store.openModal">
       <div class="service-card">
         <div class="service-card-container">
           <div class="grey-point-container">
             <div
               class="service-card-category grey-point-container"
-              v-for="(item, index) in service.tags"
+              v-for="(item, index) in service?.tags"
               :key="item"
             >
               <p class="grey-point-text">{{ item }}</p>
               <div
                 class="grey-point"
-                v-if="index < service.tags.length - 1"
+                v-if="index < service?.tags.length - 1"
               ></div>
             </div>
           </div>
-          <div class="service-card-title">{{ service.heading }}</div>
+          <div class="service-card-title">{{ service?.heading }}</div>
         </div>
         <div class="service-card-box">
-          <div
-            v-if="service.isRecommended"
-            class="service-card-box__type-isRecommended"
-          >
-            Рекомендуем
-          </div>
-          <div
-            v-if="service.isPopular"
-            class="service-card-box__type-isPopular"
-          >
-            Популярное
-          </div>
-          <div v-if="service.isDemand" class="service-card-box__type-isDemand">
-            Высокий спрос
-          </div>
-          <div class="service-card-box__price">от {{ service.price }} ₽</div>
+          <template v-if="service?.Sale_popular?.length > 0">
+            <div
+              v-for="tag in service?.Sale_popular"
+              :key="tag?.id"
+              class="service-card-box__type"
+              :style="{
+                color: tag?.color,
+                backgroundColor: `${tag?.color}15`,
+              }"
+            >
+              {{ tag?.text }}
+            </div>
+          </template>
+
+          <div class="service-card-box__price">{{ service.price }} ₽</div>
         </div>
       </div>
-    </a>
+    </button>
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    service: {
-      type: Object,
-    },
-  },
-};
+<script setup>
+defineProps(["service"]);
+
+const store = useModalStore();
 </script>
 
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
+
+.link {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
 
 .service-card {
   display: flex;
@@ -88,36 +88,12 @@ export default {
       color: $hover;
     }
 
-    &__type-isRecommended {
+    &__type {
       display: flex;
       align-items: center;
       padding: 6px 10px 8px 10px;
       border-radius: 5px;
-      background: rgba(23, 201, 137, 0.05);
       @include body-12-regular;
-      color: $green;
-      width: max-content;
-    }
-
-    &__type-isPopular {
-      display: flex;
-      align-items: center;
-      padding: 6px 10px 8px 10px;
-      border-radius: 5px;
-      background: rgba(220, 101, 15, 0.05);
-      @include body-12-regular;
-      color: #dc650f;
-      width: max-content;
-    }
-
-    &__type-isDemand {
-      display: flex;
-      align-items: center;
-      padding: 6px 10px 8px 10px;
-      border-radius: 5px;
-      background: rgba(244, 81, 81, 0.05);
-      @include body-12-regular;
-      color: #f45151;
       width: max-content;
     }
   }
@@ -125,12 +101,15 @@ export default {
   .service-card-title {
     @include body-16-regular;
     color: $dark-blue-subtitle;
+    text-align: left;
   }
 }
 
 @media (max-width: 800px) {
   .service-card {
-    display: block;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 
     .service-card-container {
       gap: 20px;

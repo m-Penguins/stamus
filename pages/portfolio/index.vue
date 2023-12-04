@@ -83,7 +83,6 @@ const mockGallery = arrayImg6.map((img) =>
         >
           <elements-cases-direction-card
             :direction="item"
-            @click="$router.push(`/portfolio/` + item.id)"
           />
         </div>
       </div>

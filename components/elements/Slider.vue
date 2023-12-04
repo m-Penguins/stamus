@@ -91,12 +91,7 @@ const next = ref(null);
       </div>
     </div>
     <div class="slider-base-btn">
-      <!-- DOBAVIT SSILKU -->
-      <elements-button-base
-        title="Все отзывы"
-        :arrow="true"
-        link="https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/"
-      />
+      <NuxtLink to="/reviews" class="button-base">Все отзывы</NuxtLink>
     </div>
   </div>
 </template>

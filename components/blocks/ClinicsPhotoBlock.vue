@@ -29,8 +29,7 @@ const { data: clinicsData, error } = await useFetch(
           <elements-link-with-arrow
             :type="false"
             title="Перейти"
-            href="#"
-            @click="$router.push(`/clinics/` + clinic?.id)"
+            :href="'/clinics/' + clinic?.id"
           />
         </div>
       </div>

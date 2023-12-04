@@ -32,6 +32,8 @@ export default {
         { id: 2, title: "Наше приложение", path: "/stamusapp" },
         { id: 3, title: "Информация для пациентов", path: "/info" },
         { id: 4, title: "Налоговый вычет", path: "/info" },
+        { id: 5, title: "Отзывы", path: "/reviews" },
+        { id: 6, title: "Статьи", path: "/articles" },
       ],
     };
   },
@@ -259,7 +261,9 @@ export default {
                           class="menu-patients-items"
                         >
                           <li class="menu-patients-items-link">
-                            <div>{{ elem.title }}</div>
+                            <div>
+                              {{ elem.title }}
+                            </div>
                             <hr
                               class="menu-patients-line"
                               v-if="index < navigationPatients.length - 1"
@@ -463,10 +467,9 @@ export default {
                         @click="
                           showServices = false;
                           showSearch = false;
-                          $router.push(item.path + service.path);
                         "
                         class="header-services-menu-box-link"
-                        to="#"
+                        :to="item?.path + service?.path"
                       >
                         {{ service.title }}
                       </NuxtLink>
@@ -591,17 +594,17 @@ export default {
             <div class="header-services-menu-mob-container">
               <div
                 v-for="item in storeServices.getStateService"
-                :key="item.id"
+                :key="item?.id"
                 class="header-services-menu-item-mob"
                 @click="
-                  changeActiveClass(item.id, item.title);
+                  changeActiveClass(item?.id, item?.title);
                   secondBlockMobMenu = true;
                   firstBlockMobMenu = false;
                 "
                 :class="{ 'display-none': secondBlockMobMenu }"
               >
                 <div class="header-nav-item-mob m-r-20">
-                  {{ item.title }}
+                  {{ item?.title }}
                 </div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

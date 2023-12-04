@@ -14,7 +14,10 @@
         <div class="card-photo-name-title">{{ specialists?.name }}</div>
         <div class="card-photo-name-text">{{ specialists?.position }}</div>
       </div>
-      <div v-if="isTooltip" class="tooltip">
+      <div
+        v-if="isTooltip && specialists?.achievements?.length > 0"
+        class="tooltip"
+      >
         <img src="../../assets/images/icons/icons-badge.svg" />
         <span class="info">
           <div
@@ -65,12 +68,11 @@
 </template>
 
 <script setup>
-defineProps([
+const props = defineProps([
   "specialists",
   "link",
   "isLink",
   "isTooltip",
-  "arrayTooltip",
   "handleLinkClick",
 ]);
 

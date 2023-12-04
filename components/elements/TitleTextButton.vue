@@ -11,7 +11,7 @@
     <p v-if="isCategory" v-html="category" class="title-text-btn-category"></p>
     <p
       v-if="!!text"
-      v-html="text"
+      v-text="text"
       :class="{
         isButtonBase: !isButtonBase ? 'isButtonBase' : '',
         typeColorWhiteText: typeColorWhiteText ? 'typeColorWhiteText' : '',

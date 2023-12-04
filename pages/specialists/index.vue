@@ -15,7 +15,7 @@ const firstQuery = {
   "pagination[page]": currentPageParam.value,
   "pagination[pageSize]": pageSize.value,
   "filters[clinics][id]": filterClinicParam.value,
-  "filters[category]": filterDirectionParam.value,
+  "filters[position]": filterDirectionParam.value,
   "filters[fullName][$contains][0]": filterSearchParam.value,
   "filters[fullName][$contains][1]": filterSearchParam.value?.toLowerCase(),
   "filters[fullName][$contains][2]":
@@ -29,20 +29,23 @@ Object.keys(firstQuery).forEach(
     delete firstQuery[key],
 );
 
-const [{ data: specialists }, { data: clinics }, { data: directionsData }] =
-  await Promise.all([
-    useFetch(`${apiBaseUrl}specialists`, {
-      query: {
-        ...firstQuery,
-        populate: "deep",
-      },
-    }),
-    useFetch(`${apiBaseUrl}clinics`),
-    useFetch(`${apiBaseUrl}services?populate=deep`),
-  ]);
+const [{ data: specialists }, { data: clinics }] = await Promise.all([
+  useFetch(`${apiBaseUrl}specialists`, {
+    query: {
+      ...firstQuery,
+      populate: "deep",
+      "sort[0]": "order:asc",
+    },
+  }),
+  useFetch(`${apiBaseUrl}clinics`),
+]);
 
 if (!specialists.value?.data) {
-  throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page Not Found",
+    fatal: true,
+  });
 }
 
 const clinicsList = clinics.value?.data?.map((cl) => ({
@@ -51,10 +54,16 @@ const clinicsList = clinics.value?.data?.map((cl) => ({
   address: cl?.attributes?.address,
 }));
 
-const directions = useReducedServices(directionsData.value.data).map((el) => ({
-  id: el.id,
-  name: el.title,
-}));
+const directions = [
+  ...new Set(
+    specialists.value?.data
+      ?.map((sp, ind) => ({
+        id: ind + 1,
+        name: sp?.attributes?.position,
+      }))
+      .filter((el) => el.name),
+  ),
+];
 
 watch(
   () => route.query,
@@ -63,7 +72,7 @@ watch(
       "pagination[page]": currentPageParam.value,
       "pagination[pageSize]": pageSize.value,
       "filters[clinics][id]": filterClinicParam.value,
-      "filters[category]": filterDirectionParam.value,
+      "filters[position]": filterDirectionParam.value,
       "filters[fullName][$contains][0]": filterSearchParam.value,
       "filters[fullName][$contains][1]": filterSearchParam.value?.toLowerCase(),
       "filters[fullName][$contains][2]":
@@ -80,6 +89,7 @@ watch(
       query: {
         ...newQuery,
         populate: "deep",
+        "sort[0]": "order:asc",
       },
     });
     specialists.value = data.value;
@@ -100,10 +110,6 @@ const setCurrentPage = (pageNumber) => {
       page: pageNumber,
     },
   });
-};
-
-const handleLinkClick = (id) => {
-  router.push(`/specialists/` + String(id));
 };
 
 const handleSearchChange = () => {
@@ -251,13 +257,8 @@ const breadcrumbs = [
           >
             <elements-name-specialty-photo-card
               :is-link="true"
-              :handleLinkClick="() => handleLinkClick(specialist.id)"
-              :arrayTooltip="{
-                achievement: specialist?.attributes?.achievements,
-                img: specialist?.attributes?.achievements?.icon?.data
-                  ?.attributes?.url,
-              }"
               :specialists="{
+                id: specialist?.id,
                 name:
                   specialist?.attributes?.firstName +
                   ' ' +
@@ -271,6 +272,7 @@ const breadcrumbs = [
                 position: specialist?.attributes?.position,
                 achievements: specialist?.attributes?.achievements,
               }"
+              :isTooltip="true"
             />
           </div>
         </template>
@@ -288,7 +290,7 @@ const breadcrumbs = [
 </template>
 
 <style lang="scss" scoped>
-@import "../../assets/styles/style.scss";
+@import "@/assets/styles/style.scss";
 
 .width-style {
   width: 24% !important;

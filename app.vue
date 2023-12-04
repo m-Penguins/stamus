@@ -3,33 +3,54 @@
     <TheHeader :showMenuPatients="showMenuPatients" @toggleMenu="toggleMenu" />
     <div class="main" @click="closeMenu">
       <main>
+        <NuxtLoadingIndicator color="#232D5B" :throttle="0" :height="8" />
         <NuxtPage />
       </main>
     </div>
     <TheFooter />
     <Teleport to="body"><blocks-main-popap-modal-form /></Teleport>
     <Teleport to="body"><elements-cookie-consent /></Teleport>
+    <Teleport to="body"><ModalVideo /></Teleport>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      showMenuPatients: false,
-    };
+<script setup>
+const showMenuPatients = ref(false);
+
+const toggleMenu = () => (showMenuPatients.value = !showMenuPatients.value);
+
+const closeMenu = () => (showMenuPatients.value = false);
+
+const route = useRoute();
+const reviewStore = useReviewStore();
+watch(
+  () => route.fullPath,
+  () => {
+    if (reviewStore.currentStep > 0) reviewStore.resetStore();
+    showMenuPatients.value = false;
   },
-  methods: {
-    toggleMenu() {
-      this.showMenuPatients = !this.showMenuPatients;
+);
+
+useHead({
+  link: [
+    {
+      rel: "stylesheet",
+      href: "./bvi.css",
+      type: "text/css",
     },
-    closeMenu() {
-      if (this.showMenuPatients) {
-        this.showMenuPatients = false;
-      }
+  ],
+  script: [
+    { src: "./bvi.js", tagPosition: "bodyClose", type: "text/javascript" },
+    {
+      innerHTML: `new isvek.Bvi({
+        images: false,
+        panelHide: true
+      });`,
+      tagPosition: "bodyClose",
+      type: "text/javascript",
     },
-  },
-};
+  ],
+});
 </script>
 
 <style lang="scss">
@@ -45,6 +66,12 @@ html {
 
 body {
   font-family: "Neue Machin";
+}
+
+body.modal-open {
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
 }
 
 a,
