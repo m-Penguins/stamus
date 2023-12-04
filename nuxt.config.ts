@@ -2,6 +2,25 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   // ... other options
+  head: {
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: '' },
+      { name: 'format-detection', content: 'telephone=no' }
+    ],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'http://176.99.11.245:1338/uploads/bvi_min_c859dc6023.css', type: 'text/css' }
+    ],
+    script: [
+      { src: 'http://176.99.11.245:1338/uploads/bvi_min_4122b9d8da.js' },
+      {
+        src: "https://code.jquery.com/jquery-3.3.1.slim.min.js",
+        type: "text/javascript"
+      },
+    ]
+  },
   modules: [
     "@pinia/nuxt",
     [

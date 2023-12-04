@@ -51,8 +51,8 @@
                 active-class="active-link"
                 class="header-nav-item footer-text"
                 to="/contacts"
-                >Контакты</NuxtLink
-              >
+                >Контакты
+              </NuxtLink>
             </div>
           </div>
         </div>
@@ -94,61 +94,77 @@
           <h3 class="footer-subtitle">Наши адреса</h3>
           <div class="footer-address__container">
             <div class="footer-address__container-link">
-              <NuxtLink to="/clinics/5">
+              <NuxtLink
+                @click="
+                  $router.push(
+                    `/clinics/${linkTransform('ул. Московская 140')}`,
+                  )
+                "
+                to="#"
+              >
                 <p class="footer-text">ул. Московская 140</p>
               </NuxtLink>
-              <NuxtLink class="footer-text" to="/clinics/3">
+              <NuxtLink
+                @click="
+                  $router.push(`/clinics/${linkTransform('ул. Хакурате 34')}`)
+                "
+                class="footer-text"
+                to="#"
+              >
                 <p class="footer-text">ул. Хакурате 34</p>
               </NuxtLink>
-              <NuxtLink class="footer-text" to="/clinics/4">
+              <NuxtLink
+                @click="
+                  $router.push(`/clinics/${linkTransform('ул. Мачуги 1-1')}`)
+                "
+                class="footer-text"
+                to="#"
+              >
                 <p class="footer-text">ул. Мачуги 1/1</p>
               </NuxtLink>
-              <!-- <NuxtLink @click="$router.push(`clinics/${linkTransform('ул. Черкасская 17')}`)" class="footer-text" to="#">
+              <NuxtLink @click="$router.push(`clinics/${linkTransform('ул. Черкасская 17')}`)" class="footer-text" to="#">
                 <p class="footer-text">ул. Черкасская 17</p>
-              </NuxtLink> -->
+              </NuxtLink>
             </div>
           </div>
         </div>
         <div class="p-r-18 address">
-          <NuxtLink class="footer-text" to="/clinics/6">
+          <NuxtLink
+            @click="
+              $router.push(`/clinics/${linkTransform('ул. Гимназическая 85')}`)
+            "
+            class="footer-text"
+            to="#"
+          >
             <p class="footer-text">ул. Гимназическая 85</p>
           </NuxtLink>
-          <NuxtLink class="footer-text" to="/clinics/7">
+          <NuxtLink
+            @click="
+              $router.push(
+                `/clinics/${linkTransform('Платановый бульвар 19/3')}`,
+              )
+            "
+            class="footer-text"
+            to="#"
+          >
             <p class="footer-text">Платановый бульвар 19/3</p>
           </NuxtLink>
-          <!-- <NuxtLink @click="navigateToRoute('ул. Средняя 1-3')" class="footer-text" to="#">
+          <NuxtLink @click="navigateToRoute('ул. Средняя 1-3')" class="footer-text" to="#">
             <p class="footer-text">ул. Средняя 1/3</p>
-          </NuxtLink> -->
+          </NuxtLink>
         </div>
-        <a
-          href="http://176.99.11.245:1338/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf"
-          target="_blank"
-          class="footer-text display-block"
-          >Политика конфидециальности</a
-        >
-        <a
-          href="http://176.99.11.245:1338/uploads/Liczenziya_ot_26_07_2023_g_41de6703eb.pdf"
-          target="_blank"
-          class="footer-text display-block"
-          >Лицензия</a
-        >
+        <a class="footer-text display-block">Политика конфидециальности</a>
+        <a class="footer-text display-block">Лицензия</a>
         <div class="footer-text display-block">Версия для слабовидящих</div>
         <NuxtLink to="/business" class="footer-text display-block">
           Бизнесу и корпоративным клиентам
         </NuxtLink>
-        <!-- <a href="#" class="bvi-open">Включить режим доступности</a> -->
+        <a href="#" class="bvi-open">Включить режим доступности</a>
         <div class="display">
-          <a
-            href="../assets/docs/Положение-о-работе-с-ПДн.pdf"
-            target="_blank"
-            class="footer-text"
-            >Политика конфидециальности</a
-          >
+          <a href="../" class="footer-text">Политика конфидециальности</a>
           <a class="footer-text">Лицензия</a>
           <p class="footer-text">Версия для слабовидящих</p>
-          <NuxtLink to="/business" class="footer-text"
-            >Бизнесу и корпоративным клиентам</NuxtLink
-          >
+          <NuxtLink to="/business" class="footer-text">Бизнесу и корпоративным клиентам</NuxtLink>
         </div>
       </div>
     </div>
@@ -157,7 +173,7 @@
 
 <script>
 import { useRoute, useRouter } from "vue-router";
-// import bvi from "bvi"
+
 export default {
   data() {
     return {
@@ -177,15 +193,29 @@ export default {
       },
     };
   },
-  // mounted() {
-  //   console.log("mounted", bvi);
-  // },
-  methods: {
-    activateBvi() {
-      // Здесь можно добавить дополнительный код, если необходимо
-      // Затем активируйте "bvi" при клике
-      // bvi.activate();
-    },
+   mounted () {
+    /* eslint-disable */
+    this.popupItem = this.$el
+    const bvi_init = {
+      settings: {
+        'bvi_theme': 'white',
+        'bvi_font': 'times',
+        'bvi_font_size': 16,
+        'bvi_letter_spacing': 'normal',
+        'bvi_line_height': 'normal',
+        'bvi_images': true,
+        'bvi_reload': false,
+        'bvi_fixed': true,
+        'bvi_tts': true,
+        'bvi_flash_iframe': true,
+        'bvi_hide': false
+      }
+    };
+    initBvi()
+    function initBvi() {
+      jQuery(document).ready(function(a){a.bvi(bvi_init.settings)});
+    }
+    /* eslint-enable */
   },
   setup() {
     const route = useRoute();
@@ -194,7 +224,18 @@ export default {
       const newRoute = `/clinics/${linkTransform(str)}`;
       router.replace(newRoute);
     };
-
+      onMounted(() => {
+        let recaptchaScriptgovno = document.createElement('script')
+      recaptchaScriptgovno.setAttribute('src', 'https://code.jquery.com/jquery-3.3.1.min.js')
+      document.head.appendChild(recaptchaScriptgovno)
+    let recaptchaScript = document.createElement('script')
+      recaptchaScript.setAttribute('src', 'http://176.99.11.245:1338/uploads/bvi_min_4122b9d8da.js')
+      document.body.appendChild(recaptchaScript)
+    
+    let recaptchaScriptcss = document.createElement('style')
+      recaptchaScriptcss.setAttribute('link', 'http://176.99.11.245:1338/uploads/bvi_min_c859dc6023.css')
+      document.head.appendChild(recaptchaScriptcss)
+  })
     return {
       route,
       navigateToRoute,
