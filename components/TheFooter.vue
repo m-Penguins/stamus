@@ -184,8 +184,6 @@ const [{ data: clinicsData }, { data: footerData }] = await Promise.all([
   }),
 ]);
 
-console.log(footerData.value);
-
 const phone = footerData?.value?.data?.attributes?.phone;
 const email = footerData?.value?.data?.attributes?.email;
 
