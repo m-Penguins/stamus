@@ -3,31 +3,150 @@ const assetsStore = useAssets();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const [{ data: portfoliosData }] = await Promise.all([
-  useFetch(`${apiBaseUrl}portofolios`, {
-    query: { populate: "deep" },
-  }),
-]);
+const route = useRoute();
 
-const portfolios = portfoliosData.value?.data?.map((p) => {
-  return {
-    id: p?.id,
-    name: p?.attributes?.heading,
-    category: p?.attributes?.direction?.directions,
-    description: p?.attributes?.description,
-    img: p?.attributes?.photoBanner?.data?.attributes?.url
-      ? baseUrl + p?.attributes?.photoBanner?.data?.attributes?.url
-      : assetsStore.useAsset("images/no-photo.png"),
+const pageSize = ref(12);
+const currentPage = ref(route.query.page ?? 1);
+
+const dirFilter = ref(route.query.dir);
+const searchFilter = ref(route.query.search);
+
+const totalItems = ref(0);
+
+const totalPages = computed(() =>
+  Math.ceil(portfoliosData.value?.meta?.pagination?.total / pageSize.value),
+);
+
+const handlePageClick = async (page) => {
+  currentPage.value = page;
+  const searchQuery = {
+    page,
+    dir: dirFilter.value,
+    search: searchFilter.value,
   };
-});
 
-const currentPage = ref(1);
-const pageSize = ref(20);
-const totalPages = ref(Math.ceil(portfolios?.length / pageSize.value));
+  clearObjectFields(searchQuery);
 
-const setCurrentPage = (pageNumber) => {
-  currentPage.value = pageNumber;
+  if (window) {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
+  await navigateTo({
+    path: `${route.fullPath}`,
+    query: searchQuery,
+    replace: true,
+  });
 };
+
+const handleDirChange = async (dir) => {
+  dirFilter.value = dir?.id;
+  currentPage.value = 1;
+  const searchQuery = {
+    page: currentPage.value,
+    dir: dir?.id,
+    search: searchFilter.value,
+  };
+
+  clearObjectFields(searchQuery);
+
+  await navigateTo({
+    path: `${route.fullPath}`,
+    query: searchQuery,
+    replace: true,
+  });
+};
+
+const handleSearchChange = async () => {
+  currentPage.value = 1;
+  const searchQuery = {
+    page: currentPage.value,
+    dir: dirFilter.value,
+    search: searchFilter.value,
+  };
+
+  clearObjectFields(searchQuery);
+
+  await navigateTo({
+    path: `${route.fullPath}`,
+    query: searchQuery,
+    replace: true,
+  });
+};
+
+const handleDebouncedSearch = useDebounce(handleSearchChange, 500);
+
+const handleInputChange = (value) => {
+  searchFilter.value = value;
+  handleDebouncedSearch();
+};
+
+const getPortfoliosData = async () => {
+  const strapiQuery = {
+    populate: "napravleniya_uslug_1.*,photoBanner.*,infoBlock.*",
+    "pagination[page]": currentPage.value,
+    "pagination[pageSize]": pageSize.value,
+    "filters[napravleniya_uslug_1][id][$eq][1]": dirFilter.value,
+    "filters[heading][$contains][0]": searchFilter.value?.toLowerCase(),
+    "filters[heading][$contains][1]": searchFilter.value?.toUpperCase(),
+    "filters[heading][$contains][2]":
+      searchFilter.value?.charAt(0)?.toUpperCase() +
+      searchFilter.value?.slice(1)?.toLowerCase(),
+  };
+
+  clearObjectFields(strapiQuery);
+
+  const { data: portfoliosData } = await useFetch(`${apiBaseUrl}portofolios`, {
+    query: { ...strapiQuery },
+  });
+
+  totalItems.value = portfoliosData?.value?.meta?.pagination?.total ?? 0;
+
+  return portfoliosData;
+};
+
+const portfoliosData = await getPortfoliosData();
+
+const { data: directionsData } = await useFetch(
+  `${apiBaseUrl}main-derections`,
+  {
+    query: {
+      populate: "deep",
+    },
+  },
+);
+
+const allDirections = directionsData.value?.data
+  ?.map((dir) => ({
+    id: dir?.id,
+    name: dir?.attributes?.heading,
+  }))
+  .filter((el) => el.name);
+
+const portfolios = computed(() =>
+  portfoliosData.value?.data?.map((p) => {
+    return {
+      id: p?.id,
+      name: p?.attributes?.heading,
+      category: p?.attributes?.direction?.directions,
+      description: p?.attributes?.description,
+      img: p?.attributes?.photoBanner?.data?.attributes?.url
+        ? baseUrl + p?.attributes?.photoBanner?.data?.attributes?.url
+        : assetsStore.useAsset("images/no-photo.png"),
+    };
+  }),
+);
+
+watch(
+  () => route.query,
+  async () => {
+    const data = await getPortfoliosData();
+    portfoliosData.value = data.value;
+    console.log(data.value);
+  },
+);
 
 const breadcrumbs = [
   {
@@ -55,15 +174,12 @@ const mockGallery = arrayImg6.map((img) =>
       </div>
       <div class="portfolio-form">
         <div class="portfolio-box">
-          <elements-select
-            :options="addresData"
-            :default="'Взрослым (todo)'"
+          <elements-custom-select
+            :options="allDirections"
+            label="Выберите направление"
             class="select"
-          />
-          <elements-select
-            :options="addresData"
-            :default="'Направление (todo)'"
-            class="select"
+            @select="handleDirChange"
+            :selectedId="dirFilter"
           />
         </div>
         <div class="portfolio-box-search">
@@ -71,25 +187,27 @@ const mockGallery = arrayImg6.map((img) =>
             <elements-input-search-components
               class="input-search"
               placeholder="Найти"
+              :modelValue="searchFilter"
+              @update:modelValue="handleInputChange"
+              @submit="handleInputChange"
             />
           </div>
         </div>
       </div>
-      <div class="portfolio-page-cards">
+      <div v-if="portfolios?.length" class="portfolio-page-cards">
         <div
           class="portfolio-page-card"
           v-for="item in portfolios"
           :key="item.id"
         >
-          <elements-cases-direction-card
-            :direction="item"
-          />
+          <elements-cases-direction-card :direction="item" />
         </div>
       </div>
+      <div v-else :style="{ textAlign: 'center' }">Ничего не найдено</div>
       <elements-pagination
         :current-page="currentPage"
         :total-pages="totalPages"
-        @update:current-page="setCurrentPage"
+        @update:current-page="handlePageClick"
       />
       <blocks-gallery :arrayImg="mockGallery" />
       <blocks-main-form />
