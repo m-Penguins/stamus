@@ -1,97 +1,112 @@
 <script setup>
-const router = useRouter();
 const route = useRoute();
 
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const pageSize = ref("12");
-const currentPageParam = ref(route.query.page ?? "1");
-const filterClinicParam = ref(route.query.clinic ?? "");
-const filterDirectionParam = ref(route.query.direction ?? "");
-const filterSearchParam = ref(route.query.search ?? "");
+const pageSize = ref(12);
+const currentPage = ref(route.query.page ?? 1);
 
-const firstQuery = {
-  "pagination[page]": currentPageParam.value,
-  "pagination[pageSize]": pageSize.value,
-  "filters[clinics][id]": filterClinicParam.value,
-  "filters[position]": filterDirectionParam.value,
-  "filters[fullName][$contains][0]": filterSearchParam.value,
-  "filters[fullName][$contains][1]": filterSearchParam.value?.toLowerCase(),
-  "filters[fullName][$contains][2]":
-    filterSearchParam.value?.charAt(0)?.toUpperCase() +
-    filterSearchParam.value?.slice(1)?.toLowerCase(),
+const clinicFilter = ref(route.query.clinic);
+const dirFilter = ref(route.query.dir);
+const searchFilter = ref(route.query.search);
+
+const totalItems = ref(0);
+
+console.log(1);
+
+const getSpecialistsData = async () => {
+  const strapiQuery = {
+    populate: "fotoSpecialist.*,direction.*,clinic.*",
+    sort: "order:asc",
+    "pagination[page]": currentPage.value,
+    "pagination[pageSize]": pageSize.value,
+    "filters[clinics][id]": clinicFilter.value,
+    "filters[direction][id][$eq]": dirFilter.value,
+    "filters[fullName][$contains][0]": searchFilter.value?.toUpperCase(),
+    "filters[fullName][$contains][1]": searchFilter.value?.toLowerCase(),
+    "filters[fullName][$contains][2]":
+      searchFilter.value?.charAt(0)?.toUpperCase() +
+      searchFilter.value?.slice(1)?.toLowerCase(),
+    // "filters[firstName][$contains][0]": searchFilter.value?.toUpperCase(),
+    // "filters[firstName][$contains][1]": searchFilter.value?.toLowerCase(),
+    // "filters[firstName][$contains][2]":
+    //   searchFilter.value?.charAt(0)?.toUpperCase() +
+    //   searchFilter.value?.slice(1)?.toLowerCase(),
+    // "filters[lastName][$contains][3]": searchFilter.value?.toUpperCase(),
+    // "filters[lastName][$contains][4]": searchFilter.value?.toLowerCase(),
+    // "filters[lastName][$contains][5]":
+    //   searchFilter.value?.charAt(0)?.toUpperCase() +
+    //   searchFilter.value?.slice(1)?.toLowerCase(),
+  };
+
+  clearObjectFields(strapiQuery);
+
+  const { data: specialistsData } = await useFetch(`${apiBaseUrl}specialists`, {
+    query: { ...strapiQuery },
+  });
+
+  totalItems.value = specialistsData?.value?.meta?.pagination?.total ?? 0;
+
+  return specialistsData;
 };
 
-Object.keys(firstQuery).forEach(
-  (key) =>
-    (firstQuery[key] === undefined || !firstQuery[key]) &&
-    delete firstQuery[key],
-);
+console.log(2);
+// const firstQuery = {
+//   "sort[0]": "order:asc",
+//   "pagination[page]": currentPageParam.value,
+//   "pagination[pageSize]": pageSize.value,
+//   "filters[clinics][id]": filterClinicParam.value,
+//   "filters[direction][heading][$eq]": filterDirectionParam.value,
+//   "filters[fullName][$contains][0]": filterSearchParam.value,
+//   "filters[fullName][$contains][1]": filterSearchParam.value?.toLowerCase(),
+//   "filters[fullName][$contains][2]":
+//     filterSearchParam.value?.charAt(0)?.toUpperCase() +
+//     filterSearchParam.value?.slice(1)?.toLowerCase(),
+// };
 
-const [{ data: specialists }, { data: clinics }] = await Promise.all([
-  useFetch(`${apiBaseUrl}specialists`, {
-    query: {
-      ...firstQuery,
-      populate: "deep",
-      "sort[0]": "order:asc",
-    },
-  }),
-  useFetch(`${apiBaseUrl}clinics`),
-]);
+// Object.keys(firstQuery).forEach(
+//   (key) =>
+//     (firstQuery[key] === undefined || !firstQuery[key]) &&
+//     delete firstQuery[key],
+// );
 
-if (!specialists.value?.data) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: "Page Not Found",
-    fatal: true,
-  });
-}
+const specialists = await getSpecialistsData();
 
-const clinicsList = clinics.value?.data?.map((cl) => ({
+// const { data: specialists } = await useFetch(`${apiBaseUrl}specialists`, {
+//   query: {
+//     ...firstQuery,
+//     populate: "deep",
+//     "sort[0]": "order:asc",
+//   },
+// });
+
+// if (!specialists.value?.data) {
+//   throw createError({
+//     statusCode: 404,
+//     statusMessage: "Page Not Found",
+//     fatal: true,
+//   });
+// }
+
+const baseDataStore = useBaseDataStore();
+
+const allClinics = baseDataStore.clinics?.data?.map((cl) => ({
   id: cl?.id,
   name: cl?.attributes?.heading,
-  address: cl?.attributes?.address,
 }));
 
-const directions = [
-  ...new Set(
-    specialists.value?.data
-      ?.map((sp, ind) => ({
-        id: ind + 1,
-        name: sp?.attributes?.position,
-      }))
-      .filter((el) => el.name),
-  ),
-];
+const allDirections = baseDataStore.directions?.data
+  ?.map((dir) => ({
+    id: dir?.id,
+    name: dir?.attributes?.heading,
+  }))
+  .filter((el) => el.name);
 
 watch(
   () => route.query,
   async () => {
-    const newQuery = {
-      "pagination[page]": currentPageParam.value,
-      "pagination[pageSize]": pageSize.value,
-      "filters[clinics][id]": filterClinicParam.value,
-      "filters[position]": filterDirectionParam.value,
-      "filters[fullName][$contains][0]": filterSearchParam.value,
-      "filters[fullName][$contains][1]": filterSearchParam.value?.toLowerCase(),
-      "filters[fullName][$contains][2]":
-        filterSearchParam.value?.charAt(0)?.toUpperCase() +
-        filterSearchParam.value?.slice(1)?.toLowerCase(),
-    };
-
-    Object.keys(newQuery).forEach(
-      (key) =>
-        (newQuery[key] === undefined || !newQuery[key]) && delete newQuery[key],
-    );
-
-    const { data } = await useFetch(`${apiBaseUrl}specialists`, {
-      query: {
-        ...newQuery,
-        populate: "deep",
-        "sort[0]": "order:asc",
-      },
-    });
+    const data = await getSpecialistsData();
     specialists.value = data.value;
   },
 );
@@ -100,87 +115,91 @@ const totalPages = computed(() =>
   Math.ceil(specialists.value?.meta?.pagination?.total / pageSize.value),
 );
 
-const setCurrentPage = (pageNumber) => {
-  currentPageParam.value = pageNumber;
+const handlePageClick = async (page) => {
+  currentPage.value = page;
+  const searchQuery = {
+    page,
+    dir: clinicFilter.value,
+    clinic: clinicFilter.value,
+    search: searchFilter.value,
+  };
 
-  router.push({
-    path: route.path,
-    query: {
-      ...route.query,
-      page: pageNumber,
-    },
+  clearObjectFields(searchQuery);
+
+  if (window) {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
+  await navigateTo({
+    path: `${route.fullPath}`,
+    query: searchQuery,
+    replace: true,
   });
 };
 
-const handleSearchChange = () => {
-  setCurrentPage(1);
-
-  const newQuery = {
-    search: filterSearchParam.value,
-    clinic: filterClinicParam.value,
-    direction: filterDirectionParam.value,
-    page: 1,
+const handleSearchChange = async () => {
+  currentPage.value = 1;
+  const searchQuery = {
+    page: currentPage.value,
+    dir: clinicFilter.value,
+    clinic: clinicFilter.value,
+    search: searchFilter.value,
   };
 
-  Object.keys(newQuery).forEach(
-    (key) =>
-      (newQuery[key] === undefined || !newQuery[key]) && delete newQuery[key],
-  );
-  router.push({
-    path: route.path,
-    query: newQuery,
+  clearObjectFields(searchQuery);
+
+  await navigateTo({
+    path: `${route.fullPath}`,
+    query: searchQuery,
+    replace: true,
   });
 };
 
 const handleDebouncedSearch = useDebounce(handleSearchChange, 500);
 
 const handleInputChange = (value) => {
-  filterSearchParam.value = value;
+  searchFilter.value = value;
   handleDebouncedSearch();
 };
 
-const handleClinicChange = (clinic) => {
-  filterClinicParam.value = clinic?.id ? clinic.id : null;
-
-  setCurrentPage(1);
-
-  const newQuery = {
-    search: filterSearchParam.value,
-    clinic: filterClinicParam.value,
-    direction: filterDirectionParam.value,
-    page: 1,
+const handleClinicChange = async (clinic) => {
+  clinicFilter.value = clinic?.id;
+  currentPage.value = 1;
+  const searchQuery = {
+    page: currentPage.value,
+    dir: dirFilter.value,
+    clinic: clinic?.id,
+    search: searchFilter.value,
   };
 
-  Object.keys(newQuery).forEach(
-    (key) =>
-      (newQuery[key] === undefined || !newQuery[key]) && delete newQuery[key],
-  );
+  clearObjectFields(searchQuery);
 
-  router.push({
-    path: route.path,
-    query: newQuery,
+  await navigateTo({
+    path: `${route.fullPath}`,
+    query: searchQuery,
+    replace: true,
   });
 };
 
-const handleDirectionChange = (direction) => {
-  setCurrentPage(1);
-  filterDirectionParam.value = direction?.name ? direction.name : null;
-
-  const newQuery = {
-    search: filterSearchParam.value,
-    clinic: filterClinicParam.value,
-    direction: filterDirectionParam.value,
-    page: 1,
+const handleDirChange = async (dir) => {
+  dirFilter.value = dir?.id;
+  currentPage.value = 1;
+  const searchQuery = {
+    page: currentPage.value,
+    dir: dir?.id,
+    clinic: clinicFilter.value,
+    search: searchFilter.value,
   };
 
-  Object.keys(newQuery).forEach(
-    (key) =>
-      (newQuery[key] === undefined || !newQuery[key]) && delete newQuery[key],
-  );
+  clearObjectFields(searchQuery);
 
-  router.push({
-    path: route.path,
-    query: newQuery,
+  await navigateTo({
+    path: `${route.fullPath}`,
+    query: searchQuery,
+    replace: true,
   });
 };
 
@@ -205,43 +224,51 @@ const breadcrumbs = [
       <div class="spicialists-page-title">Специалисты</div>
       <div class="specialist-form">
         <div class="specialist-box">
-          <elements-select
-            :options="directions"
+          <elements-custom-select
+            :options="allDirections"
+            label="Направление"
+            class="select"
+            @select="handleDirChange"
+            :selectedId="dirFilter"
+          />
+          <!-- <elements-select
+            :options="allDirections"
             :default="
-              directions.find(
-                (dir) => String(dir.name) === filterDirectionParam,
-              )?.name ?? 'Направление'
+              allDirections.find((dir) => String(dir.name) === clinicFilter)
+                ?.name ?? 'Направление'
             "
             label="Направление"
             class="select"
-            @input="handleDirectionChange"
-            :isSelectedId="filterDirectionParam ?? route.query.direction"
-            :selectedItem="
-              directions.find((dir) => dir.name === filterDirectionParam)
-            "
+            @input="handleDirChange"
+            :isSelectedId="clinicFilter ?? route.query.direction"
+            :selectedItem="allDirections.find((dir) => dir.name === clinicFilter)"
+          /> -->
+          <elements-custom-select
+            :options="allClinics"
+            label="Клиника"
+            class="select"
+            @select="handleClinicChange"
+            :selectedId="clinicFilter"
           />
-          <elements-select
-            :options="clinicsList"
+          <!-- <elements-select
+            :options="allClinics"
             :default="
-              clinicsList.find(
-                (cl) => String(cl.id) === String(filterClinicParam),
-              )?.name ?? 'Клиника'
+              allClinics.find((cl) => String(cl.id) === String(clinicFilter))
+                ?.name ?? 'Клиника'
             "
-            :isSelectedId="filterClinicParam ?? route.query.clinic"
-            :selectedItem="
-              clinicsList.find((cl) => cl.id === filterClinicParam)
-            "
+            :isSelectedId="clinicFilter ?? route.query.clinic"
+            :selectedItem="allClinics.find((cl) => cl.id === clinicFilter)"
             label="Клиника"
             class="select"
             @input="handleClinicChange"
-          />
+          /> -->
         </div>
         <div class="specialist-box width-style">
           <div class="input-search">
             <elements-input-search-components
               class="input-search"
               placeholder="Найти"
-              :modelValue="filterSearchParam"
+              :modelValue="searchFilter"
               @update:modelValue="handleInputChange"
               @submit="handleInputChange"
             />
@@ -276,12 +303,12 @@ const breadcrumbs = [
             />
           </div>
         </template>
-        <div v-else>Никого не найдено</div>
+        <div v-else :style="{ textAlign: 'center' }">Никого не найдено</div>
       </div>
       <elements-pagination
-        :current-page="currentPageParam"
+        :current-page="currentPage"
         :total-pages="totalPages"
-        @update:current-page="setCurrentPage"
+        @update:current-page="handlePageClick"
       />
       <blocks-main-popular-services />
       <blocks-main-form />
