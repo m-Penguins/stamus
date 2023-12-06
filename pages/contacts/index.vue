@@ -141,8 +141,6 @@ const { data: contactsData } = await useFetch(`${apiBaseUrl}contact`, {
 
 const contactsMainInfo = contactsData.value?.data?.attributes;
 
-console.log(contactsData.value);
-
 const title = contactsMainInfo?.Title;
 
 const items = contactsMainInfo?.items;

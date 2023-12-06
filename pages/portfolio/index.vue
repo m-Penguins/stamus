@@ -144,7 +144,6 @@ watch(
   async () => {
     const data = await getPortfoliosData();
     portfoliosData.value = data.value;
-    console.log(data.value);
   },
 );
 

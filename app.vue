@@ -8,7 +8,9 @@
       </main>
     </div>
     <TheFooter />
-    <Teleport to="body"><blocks-main-popap-modal-form /></Teleport>
+    <Teleport to="body"
+      ><blocks-main-popap-modal-form :clinics="baseDataStore.clinics"
+    /></Teleport>
     <Teleport to="body"><elements-cookie-consent /></Teleport>
     <Teleport to="body"><ModalVideo /></Teleport>
   </div>
@@ -30,6 +32,11 @@ watch(
     showMenuPatients.value = false;
   },
 );
+
+const baseDataStore = useBaseDataStore();
+
+await baseDataStore.getClinics();
+await baseDataStore.getDirections();
 
 useHead({
   link: [
