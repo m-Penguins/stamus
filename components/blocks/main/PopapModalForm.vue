@@ -319,6 +319,7 @@ export default {
 .popup-wrap {
   width: 100%;
   height: 100vh;
+  height: 100svh;
   position: fixed;
   top: 0;
   left: 0;
@@ -389,6 +390,11 @@ export default {
   max-width: 416px;
   width: 100%;
   z-index: 902;
+
+  height: 100%;
+  max-height: 700px;
+
+  overflow: auto;
 }
 
 .popup-close {

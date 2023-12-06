@@ -74,6 +74,7 @@ export default {
     const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
     const directionTitle = ref("");
     let activeClass2 = "";
+    const modalStore = useModalStore();
 
     const togglerPopup = (state) => {
       isOpenPopup.value = state;
@@ -127,6 +128,7 @@ export default {
       defaultServices,
       navigateToRoute,
       router,
+      modalStore,
     };
   },
 };
@@ -318,7 +320,7 @@ export default {
                 showSearch = false;
                 showServices = false;
                 showMenuPatients = false;
-                openStartupModal();
+                modalStore.openModal();
               "
               title="Перезвоните мне"
             />
@@ -630,7 +632,7 @@ export default {
                 showSearch = false;
                 showServices = false;
                 showMenuPatients = false;
-                openStartupModal();
+                modalStore.openModal();
               "
               title="Перезвоните мне"
               class="header-services-menu-mob-button"
