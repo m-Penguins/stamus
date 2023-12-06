@@ -35,7 +35,11 @@ watch(
 
 const baseDataStore = useBaseDataStore();
 
-await Promise.all([baseDataStore.getClinics(), baseDataStore.getDirections()]);
+await Promise.all([
+  baseDataStore.getClinics(),
+  baseDataStore.getDirections(),
+  baseDataStore.getPopularServices(),
+]);
 
 useHead({
   link: [

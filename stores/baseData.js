@@ -4,6 +4,7 @@ export const useBaseDataStore = defineStore("base-data-store", () => {
   const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
   const clinics = ref(null);
   const directions = ref(null);
+  const popularServices = ref(null);
 
   const getClinics = async () => {
     const { data: clinicsData } = await useFetch(`${apiBaseUrl}clinics`, {
@@ -28,10 +29,22 @@ export const useBaseDataStore = defineStore("base-data-store", () => {
     directions.value = directionsData.value;
   };
 
+  const getPopularServices = async () => {
+    const { data: popData } = await useFetch(`${apiBaseUrl}popular-service`, {
+      query: {
+        populate: "deep",
+      },
+    });
+
+    popularServices.value = popData.value;
+  };
+
   return {
     clinics,
     directions,
+    popularServices,
     getClinics,
     getDirections,
+    getPopularServices,
   };
 });

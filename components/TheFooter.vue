@@ -91,7 +91,7 @@
           <div class="footer-address__container">
             <div class="footer-address__container-link">
               <NuxtLink
-                v-for="clinic in clinicsData?.data?.slice(
+                v-for="clinic in baseDataStore.clinics?.data?.slice(
                   0,
                   clinicColumnNumber,
                 )"
@@ -109,7 +109,9 @@
         </div>
         <div class="p-r-18 address">
           <NuxtLink
-            v-for="clinic in clinicsData?.data?.slice(clinicColumnNumber)"
+            v-for="clinic in baseDataStore.clinics?.data?.slice(
+              clinicColumnNumber,
+            )"
             :key="clinic?.id"
             :to="`/clinics/${clinic?.id}`"
           >
@@ -175,14 +177,13 @@
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const [{ data: clinicsData }, { data: footerData }] = await Promise.all([
-  useFetch(`${apiBaseUrl}clinics`, {}),
-  useFetch(`${apiBaseUrl}footer`, {
-    query: {
-      populate: "links.icon.*,privacy.*,license.*",
-    },
-  }),
-]);
+const baseDataStore = useBaseDataStore();
+
+const { data: footerData } = await useFetch(`${apiBaseUrl}footer`, {
+  query: {
+    populate: "links.icon.*,privacy.*,license.*",
+  },
+});
 
 const phone = footerData?.value?.data?.attributes?.phone;
 const email = footerData?.value?.data?.attributes?.email;
@@ -200,7 +201,7 @@ const policy = footerData.value?.data?.attributes?.privacy?.data?.attributes
   : "";
 
 const clinicColumnNumber = computed(() => {
-  return clinicsData.value?.data?.length > 5 ? 4 : 3;
+  return baseDataStore.clinics?.data?.length > 5 ? 4 : 3;
 });
 
 const route = useRoute();
