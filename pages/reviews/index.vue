@@ -145,6 +145,9 @@ const breadcrumbs = [
     <div class="reviews-header">
       <h1 class="prices-title">Отзывы</h1>
       <p class="prices-text">Небольшое описание в несколько строчек</p>
+      <NuxtLink to="/leave-review" class="button-base review-btn"
+        >Оставить отзыв</NuxtLink
+      >
     </div>
     <div class="filters-box">
       <elements-custom-select
@@ -193,6 +196,12 @@ const breadcrumbs = [
 
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
+
+.review-btn {
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+}
 
 .reviews {
   display: flex;
