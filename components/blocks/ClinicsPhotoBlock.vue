@@ -38,7 +38,7 @@ const { data: clinicsData, error } = await useFetch(
 </template>
 
 <style lang="scss" scoped>
-@import "/assets/styles/style.scss";
+@import "@/assets/styles/style.scss";
 
 .clinics-block-title {
   padding-top: 40px;
@@ -93,7 +93,11 @@ const { data: clinicsData, error } = await useFetch(
     display: flex;
     width: 49%;
   }
-  &__img:nth-child(n + 3) {
+  &__img:nth-child(n + 6) {
+    display: flex;
+    width: 49%;
+  }
+  &__img:nth-child(n + 3):nth-child(-n + 5) {
     display: flex;
     width: 32.2%;
   }
