@@ -1,8 +1,10 @@
 import YmapPlugin from "vue-yandex-maps";
 import { defineNuxtPlugin } from "nuxt/app";
 
+const yandexKey = process.env.YANDEX_API_KEY;
+
 const settings = {
-  apiKey: "b4ed0b4f-9710-4113-bfd7-ef2be1938fa2", // Индивидуальный ключ API
+  apiKey: yandexKey, // Индивидуальный ключ API
   lang: "ru_RU", // Используемый язык
   coordorder: "latlong", // Порядок задания географических координат
   debug: false, // Режим отладки

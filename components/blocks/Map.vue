@@ -5,7 +5,7 @@
       <div class="tab-map">
         <div class="map-container">
           <client-only>
-            <yandex-map
+            <yandexMap
               :settings="settings"
               :coords="[45.085805, 39.002218]"
               :detailed-controls="detailedControls"
@@ -13,7 +13,7 @@
               map-type="map"
               zoom="10"
             >
-              <ymap-marker
+              <ymapMarker
                 v-for="(item, index) in tabs"
                 :key="item?.name"
                 :coords="item?.coordinates"
@@ -22,8 +22,8 @@
                 :icon="activeTab === index ? iconActive : iconNotActive"
                 :hint-content="item?.name"
               >
-              </ymap-marker>
-            </yandex-map>
+              </ymapMarker>
+            </yandexMap>
           </client-only>
         </div>
         <elements-map-nav :info="tabs?.[activeTab]" />
@@ -34,6 +34,7 @@
 </template>
 
 <script setup>
+import { yandexMap, ymapMarker } from "vue-yandex-maps";
 import baloon from "@/assets/images/icons/map_baloon.svg";
 import baloon1 from "@/assets/images/icons/map_baloon1.svg";
 
