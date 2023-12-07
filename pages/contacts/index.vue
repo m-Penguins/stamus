@@ -108,7 +108,7 @@
         </div>
       </div>
 
-      <blocks-map text="Информация о клиниках" />
+      <LazyBlocksMap />
       <div class="doc-block">
         <div class="doc-block-title">Документы</div>
         <div class="doc-block-container">

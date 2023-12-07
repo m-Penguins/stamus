@@ -1,10 +1,10 @@
 <template>
-  <div class="tabs">
-    <div class="tabs-title">{{ block?.title ?? "Контакты" }}</div>
-    <div class="tab-content">
-      <div class="tab-map">
-        <div class="map-container">
-          <client-only>
+  <ClientOnly>
+    <div class="tabs">
+      <div class="tabs-title">{{ block?.title ?? "Контакты" }}</div>
+      <div class="tab-content">
+        <div class="tab-map">
+          <div class="map-container">
             <yandexMap
               :settings="settings"
               :coords="[45.085805, 39.002218]"
@@ -24,13 +24,13 @@
               >
               </ymapMarker>
             </yandexMap>
-          </client-only>
+          </div>
+          <elements-map-nav :info="tabs?.[activeTab]" />
         </div>
-        <elements-map-nav :info="tabs?.[activeTab]" />
+        <!-- <img class="tab-map" :src="assetsStore.useAsset(`images/${tab.image}`)" alt=""> -->
       </div>
-      <!-- <img class="tab-map" :src="assetsStore.useAsset(`images/${tab.image}`)" alt=""> -->
     </div>
-  </div>
+  </ClientOnly>
 </template>
 
 <script setup>
