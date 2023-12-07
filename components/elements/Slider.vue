@@ -9,6 +9,16 @@ const props = defineProps(["programs", "link"]);
 
 const prev = ref(null);
 const next = ref(null);
+
+const withGrades = props?.programs?.filter((el) => el?.grade);
+
+const average =
+  withGrades?.reduce((acc, it) => (acc += it?.grade), 0) / withGrades?.length;
+
+console.log(withGrades);
+
+const averageGrade = average ? average?.toFixed(1) : average;
+console.log(averageGrade);
 </script>
 
 <template>
@@ -19,9 +29,13 @@ const next = ref(null);
         <img src="@/assets/images/img-text/prodoctorov.svg" alt="Текст" />
       </div>
       <div class="slider-title__grade">
-        <div class="grey-point-text">4,9 средняя оценка</div>
-        <div class="grey-point"></div>
-        <div class="grey-point-text">{{ programs?.length }} отзывов</div>
+        <div v-if="averageGrade" class="grey-point-text">
+          {{ averageGrade }} средняя оценка
+        </div>
+        <div v-if="averageGrade" class="grey-point"></div>
+        <div class="grey-point-text">
+          {{ pluralize(programs?.length, ["отзыв", "отзыва", "отзывов"]) }}
+        </div>
       </div>
     </div>
     <div class="wrapper-swiper">

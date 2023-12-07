@@ -32,8 +32,7 @@ export default {
         { id: 2, title: "Наше приложение", path: "/stamusapp" },
         { id: 3, title: "Информация для пациентов", path: "/info" },
         { id: 4, title: "Налоговый вычет", path: "/info" },
-        { id: 5, title: "Отзывы", path: "/reviews" },
-        { id: 6, title: "Статьи", path: "/articles" },
+        { id: 5, title: "Статьи", path: "/articles" },
       ],
     };
   },
@@ -80,10 +79,6 @@ export default {
       isOpenPopup.value = state;
     };
 
-    onMounted(async () => {
-      await storeServices.fetchdataService(apiBaseUrl);
-    });
-
     const navigateToRoute = (serv, dir) => {
       const newRoute = `/${serv}/${linkTransform(dir)}`;
       router.replace(newRoute);
@@ -108,6 +103,8 @@ export default {
     const navigation = [
       { title: "Специалисты", path: "/specialists" },
       { title: "Пациентам", path: "" },
+      { title: "Отзывы", path: "/reviews" },
+
       { title: "Акции и скидки", path: "/discounts" },
       { title: "Портфолио", path: "/portfolio" },
       { title: "Цены", path: "/prices" },

@@ -1,12 +1,14 @@
 <template>
   <div class="feedback-card">
-    <h3 class="feedback-card__title">{{ data.name }}</h3>
+    <h3 class="feedback-card__title">{{ data?.name }}</h3>
     <div class="feedback-card__box">
-      <p class="feedback-card__box-grade">Оценка {{ data.grade }}</p>
-      <div class="feedback-card__box-point"></div>
-      <p class="feedback-card__box-date">{{ data.date }}</p>
+      <p v-if="data?.grade" class="feedback-card__box-grade">
+        Оценка {{ data?.grade }}
+      </p>
+      <div v-if="data?.grade" class="feedback-card__box-point"></div>
+      <p class="feedback-card__box-date">{{ data?.date }}</p>
     </div>
-    <p class="feedback-card__text">{{ data.text }}</p>
+    <p class="feedback-card__text">{{ data?.text }}</p>
   </div>
 </template>
 

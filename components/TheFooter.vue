@@ -61,7 +61,7 @@
           <NuxtLink
             target="_blank"
             class="footer-text header-nav-item"
-            :to="`tel:${phone?.replaceAll(' ', '')}`"
+            :to="`tel:+${phone?.replace(/\D/g, '')}`"
           >
             {{ phone }}
           </NuxtLink>
@@ -174,30 +174,28 @@
 // Затем активируйте "bvi" при клике
 // bvi.activate();
 // };
-const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+
+const props = defineProps(["footerData"]);
+
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const baseDataStore = useBaseDataStore();
 
-const { data: footerData } = await useFetch(`${apiBaseUrl}footer`, {
-  query: {
-    populate: "links.icon.*,privacy.*,license.*",
-  },
-});
+const phone = props?.footerData?.data?.attributes?.phone;
+const email = props?.footerData?.data?.attributes?.email;
 
-const phone = footerData?.value?.data?.attributes?.phone;
-const email = footerData?.value?.data?.attributes?.email;
+const socials = props?.footerData?.data?.attributes?.links;
 
-const socials = footerData.value?.data?.attributes?.links;
-
-const license = footerData.value?.data?.attributes?.license?.data?.attributes
+const license = props?.footerData?.data?.attributes?.license?.data?.attributes
   ?.url
-  ? baseUrl + footerData.value?.data?.attributes?.license?.data?.attributes?.url
+  ? baseUrl +
+    props?.footerData?.data?.attributes?.license?.data?.attributes?.url
   : "";
 
-const policy = footerData.value?.data?.attributes?.privacy?.data?.attributes
+const policy = props?.footerData?.data?.attributes?.privacy?.data?.attributes
   ?.url
-  ? baseUrl + footerData.value?.data?.attributes?.privacy?.data?.attributes?.url
+  ? baseUrl +
+    props?.footerData?.data?.attributes?.privacy?.data?.attributes?.url
   : "";
 
 const clinicColumnNumber = computed(() => {

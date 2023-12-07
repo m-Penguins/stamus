@@ -7,7 +7,7 @@
         <NuxtPage />
       </main>
     </div>
-    <TheFooter />
+    <TheFooter :footerData="footerData" />
     <Teleport to="body"
       ><blocks-main-popap-modal-form :clinics="baseDataStore.clinics"
     /></Teleport>
@@ -33,12 +33,21 @@ watch(
   },
 );
 
-const baseDataStore = useBaseDataStore();
+const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 
-await Promise.all([
+const baseDataStore = useBaseDataStore();
+const servicesStore = useService();
+
+const [{ data: footerData }] = await Promise.all([
+  useFetch(`${apiBaseUrl}footer`, {
+    query: {
+      populate: "links.icon.*,privacy.*,license.*",
+    },
+  }),
   baseDataStore.getClinics(),
   baseDataStore.getDirections(),
   baseDataStore.getPopularServices(),
+  servicesStore.fetchdataService(apiBaseUrl),
 ]);
 
 useHead({
