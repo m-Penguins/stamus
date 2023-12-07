@@ -1,7 +1,12 @@
 <script setup>
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/pagination";
+
+const pagination = {
+  clickable: false,
+};
 
 const props = defineProps(["block"]);
 
@@ -14,13 +19,21 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
     class="swiper"
     :slides-per-view="1"
     :spaceBetween="30"
+    :pagination="pagination"
     loop
     centeredSlides
     :autoplay="{
       delay: 3500,
       disableOnInteraction: false,
     }"
-    :modules="[Autoplay]"
+    :modules="[Pagination]"
+    :style="{
+      '--swiper-pagination-color': '#232D5B',
+      '--swiper-pagination-bullet-inactive-color': '#E6E6E6',
+      '--swiper-pagination-bullet-inactive-opacity': '1',
+      '--swiper-pagination-bullet-size': '8px',
+      '--swiper-pagination-bullet-horizontal-gap': '4px',
+    }"
   >
     <SwiperSlide v-for="banner in block?.banner" :key="banner?.id">
       <div
