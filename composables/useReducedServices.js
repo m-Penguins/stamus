@@ -41,7 +41,6 @@ export default function (data) {
       path: `/${item?.attributes?.slug}`,
     });
 
-    console.log(result);
     return result?.sort((a, b) => a?.order - b?.order);
   }, []);
 

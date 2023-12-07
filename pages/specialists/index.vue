@@ -13,8 +13,6 @@ const searchFilter = ref(route.query.search);
 
 const totalItems = ref(0);
 
-console.log(1);
-
 const getSpecialistsData = async () => {
   const strapiQuery = {
     populate: "fotoSpecialist.*,direction.*,clinic.*",
@@ -51,7 +49,6 @@ const getSpecialistsData = async () => {
   return specialistsData;
 };
 
-console.log(2);
 // const firstQuery = {
 //   "sort[0]": "order:asc",
 //   "pagination[page]": currentPageParam.value,
