@@ -26,7 +26,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
       delay: 3500,
       disableOnInteraction: false,
     }"
-    :modules="[Pagination]"
+    :modules="[Autoplay, Pagination]"
     :style="{
       '--swiper-pagination-color': '#232D5B',
       '--swiper-pagination-bullet-inactive-color': '#E6E6E6',
