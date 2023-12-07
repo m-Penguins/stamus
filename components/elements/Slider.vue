@@ -15,10 +15,7 @@ const withGrades = props?.programs?.filter((el) => el?.grade);
 const average =
   withGrades?.reduce((acc, it) => (acc += it?.grade), 0) / withGrades?.length;
 
-console.log(withGrades);
-
 const averageGrade = average ? average?.toFixed(1) : average;
-console.log(averageGrade);
 </script>
 
 <template>

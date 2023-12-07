@@ -2,8 +2,7 @@
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 
 const searchInput = ref("");
-const directionFilter = ref("");
-const categoryFilter = ref("");
+const serviceFilter = ref(null);
 
 const [{ data: pricesData }] = await Promise.all([
   useFetch(`${apiBaseUrl}prices-list`, {
@@ -15,56 +14,74 @@ const [{ data: pricesData }] = await Promise.all([
 
 const allPrices = ref([
   {
-    direction: null,
-    category: null,
-    services: [],
+    title: null,
+    prices: [],
   },
 ]);
 
 pricesData?.value?.data?.forEach((el) => {
-  const services = el?.attributes?.services?.data;
-  const direction = services?.[0]?.attributes?.direction;
-  const category = services?.[0]?.attributes?.category;
-  if (services?.length > 0 && direction) {
-    const directionPrices = allPrices.value?.find(
-      (dir) => dir?.direction === direction,
-    );
-    if (directionPrices) {
-      directionPrices.services = [
-        ...directionPrices?.services,
-        ...el?.attributes?.servicePrice,
-      ];
-    } else {
-      allPrices.value?.push({
-        direction,
-        category,
-        services: el?.attributes?.servicePrice,
-      });
-    }
+  const allSinglePriceServices = el?.attributes?.services?.data;
+
+  const noRelationPrices = allPrices.value?.find((el) => !el?.title);
+
+  if (allSinglePriceServices?.length > 0) {
+    allSinglePriceServices?.forEach((s) => {
+      const key = s?.attributes?.heading;
+
+      const alreadyInPrices = allPrices.value?.find((el) => el?.title === key);
+
+      if (alreadyInPrices) {
+        alreadyInPrices?.prices?.push(...el?.attributes?.servicePrice);
+      } else {
+        allPrices.value?.push({
+          id: s?.id,
+          title: key,
+          prices: [...el?.attributes?.servicePrice],
+        });
+      }
+    });
   } else {
-    const noDir = allPrices.value?.find((d) => d.direction === null);
-    noDir.services = [...noDir?.services, ...el?.attributes?.servicePrice];
+    noRelationPrices?.prices?.push(...el?.attributes?.servicePrice);
   }
+
+  // if (services?.length > 0 && direction) {
+  //   const directionPrices = allPrices.value.value?.find(
+  //     (dir) => dir?.direction === direction,
+  //   );
+  //   if (directionPrices) {
+  //     directionPrices.services = [
+  //       ...directionPrices?.services,
+  //       ...el?.attributes?.servicePrice,
+  //     ];
+  //   } else {
+  //     allPrices.value.value?.push({
+  //       direction,
+  //       category,
+  //       services: el?.attributes?.servicePrice,
+  //     });
+  //   }
+  // } else {
+  //   const noDir = allPrices.value.value?.find((d) => d.direction === null);
+  //   noDir.services = [...noDir?.services, ...el?.attributes?.servicePrice];
+  // }
 });
 
-const sortedPrices = computed(() => {
-  return [...allPrices.value]?.sort((a, b) => {
-    if (!a.direction || !b.direction) {
-      return -1;
+const allServices = allPrices.value
+  ?.map((el, index) => {
+    if (el?.title) {
+      return {
+        id: el?.id,
+        name: el?.title,
+      };
     }
-    return a?.direction.localeCompare(b?.direction);
-  });
-});
+  })
+  ?.filter(Boolean);
 
 const filteredPrices = computed(() => {
-  return sortedPrices.value?.filter((group) => {
-    return (
-      (directionFilter.value
-        ? group?.direction === directionFilter.value
-        : true) &&
-      (categoryFilter.value ? group?.category === categoryFilter.value : true)
-    );
-  });
+  if (serviceFilter.value) {
+    return allPrices.value.filter((el) => el?.id === serviceFilter.value);
+  }
+  return allPrices.value;
 });
 
 const filteredPricesWithSearch = computed(() => {
@@ -73,16 +90,17 @@ const filteredPricesWithSearch = computed(() => {
   }
   return filteredPrices.value
     ?.map((group) => {
-      const filteredServices = group?.services?.filter((s) => {
+      const filteredPrices = group?.prices?.filter((s) => {
         return s?.heading
           ?.toLowerCase()
           ?.includes(searchInput.value?.trim()?.toLowerCase());
       });
 
-      if (filteredServices?.length > 0) {
+      if (filteredPrices?.length > 0) {
         const filteredGroup = {
-          ...group,
-          services: filteredServices,
+          title: group?.title,
+          id: group?.id,
+          prices: filteredPrices,
         };
         return filteredGroup;
       } else {
@@ -92,28 +110,8 @@ const filteredPricesWithSearch = computed(() => {
     .filter(Boolean);
 });
 
-const categories = allPrices.value
-  ?.map((dir, ind) => ({
-    id: dir?.id ?? ind + 1,
-    name: dir?.direction,
-    address: null,
-  }))
-  ?.filter((el) => el?.name);
-
-const directions = [...new Set(allPrices.value.map((el) => el?.category))]
-  ?.map((dir, ind) => ({
-    id: ind + 1,
-    name: dir,
-    address: null,
-  }))
-  ?.filter((el) => el?.name);
-
-const handleDirectionChange = (category) => {
-  categoryFilter.value = category?.name ? category.name : null;
-};
-
-const handleCategoryChange = (direction) => {
-  directionFilter.value = direction?.name ? direction.name : null;
+const handleServiceChange = (service) => {
+  serviceFilter.value = service?.id;
 };
 
 const handleInputChange = (value) => {
@@ -147,17 +145,12 @@ const breadcrumbs = [
   <div class="container-size popular-service">
     <div class="service-form">
       <div class="service-box">
-        <elements-select
-          :options="directions"
-          :default="'Направление'"
+        <elements-custom-select
+          :options="allServices"
+          label="Услуга"
           class="select"
-          @input="handleDirectionChange"
-        />
-        <elements-select
-          :options="categories"
-          default="Категория"
-          class="select"
-          @input="handleCategoryChange"
+          @select="handleServiceChange"
+          :selectedId="serviceFilter"
         />
       </div>
       <div class="input-search">
@@ -172,15 +165,15 @@ const breadcrumbs = [
     <template v-if="filteredPricesWithSearch?.length > 0">
       <section
         class="prices__section"
-        v-for="section in filteredPricesWithSearch"
+        v-for="section in filteredPricesWithSearch.filter((el) => el?.title)"
         :key="section?.id"
       >
         <div class="prices-box">
-          <h3 class="prices-box-title">{{ section?.direction }}</h3>
+          <h3 class="prices-box-title">{{ section?.title }}</h3>
           <div class="grey-point-container">
             <p class="grey-point-text">
               {{
-                pluralize(section?.services?.length, [
+                pluralize(section?.prices?.length, [
                   "услуга",
                   "услуги",
                   "услуг",
@@ -191,16 +184,55 @@ const breadcrumbs = [
             <p class="grey-point-text">
               От
               {{
-                [...section?.services]?.sort((a, b) => a?.price - b?.price)?.[0]
-                  ?.price
+                [...section?.prices]?.sort(
+                  (a, b) => a?.attributes?.price - b?.attributes?.price,
+                )?.[0]?.price
               }}
               ₽
             </p>
           </div>
         </div>
+
         <hr />
         <div class="popular-service__list">
-          <div v-for="service in section?.services" :key="service?.id">
+          <div v-for="service in section?.prices" :key="service?.id">
+            <elements-service-card :service="service" />
+          </div>
+        </div>
+      </section>
+      <section
+        class="prices__section"
+        v-for="section in filteredPricesWithSearch.filter((el) => !el?.title)"
+        :key="section?.id"
+      >
+        <div class="prices-box">
+          <h3 class="prices-box-title">{{ section?.title }}</h3>
+          <div class="grey-point-container">
+            <p class="grey-point-text">
+              {{
+                pluralize(section?.prices?.length, [
+                  "услуга",
+                  "услуги",
+                  "услуг",
+                ])
+              }}
+            </p>
+            <div class="grey-point"></div>
+            <p class="grey-point-text">
+              От
+              {{
+                [...section?.prices]?.sort(
+                  (a, b) => a?.attributes?.price - b?.attributes?.price,
+                )?.[0]?.price
+              }}
+              ₽
+            </p>
+          </div>
+        </div>
+
+        <hr />
+        <div class="popular-service__list">
+          <div v-for="service in section?.prices" :key="service?.id">
             <elements-service-card :service="service" />
           </div>
         </div>
@@ -208,38 +240,7 @@ const breadcrumbs = [
     </template>
 
     <h3 v-else class="prices-box-title">Ничего не найдено</h3>
-    <!-- <div>
-      <div class="prices-box m-t-30">
-        <div class="prices-box-title">Взрослая стоматология</div>
-        <div class="grey-point-container">
-          <p class="grey-point-text">6 услуг</p>
-          <div class="grey-point"></div>
-          <p class="grey-point-text">От 400 ₽</p>
-        </div>
-      </div>
-      <hr />
-      <div class="popular-service__list">
-        <div v-for="(item, index) in mockArrayServices" :key="index">
-          <elements-service-card :service="item" />
-        </div>
-      </div>
-    </div> -->
-    <!-- <div>
-      <div class="prices-box m-t-30">
-        <div class="prices-box-title">Детская клиника</div>
-        <div class="grey-point-container">
-          <p class="grey-point-text">6 услуг</p>
-          <div class="grey-point"></div>
-          <p class="grey-point-text">От 400 ₽</p>
-        </div>
-      </div>
-      <hr />
-      <div class="popular-service__list">
-        <div v-for="(item, index) in mockArrayServices" :key="index">
-          <elements-service-card :service="item" />
-        </div>
-      </div>
-    </div> -->
+
     <elements-button-base
       title="Скачать полный прайс"
       :isDownload="true"
