@@ -17,6 +17,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 <template>
   <Swiper
     class="swiper"
+    :autoHeight="true"
     :slides-per-view="1"
     :spaceBetween="30"
     :pagination="pagination"
