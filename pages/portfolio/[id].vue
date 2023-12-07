@@ -124,6 +124,7 @@ useHead(getMetaObject(metaData, baseUrl));
       ]"
     />
     <blocks-symptoms-block
+      v-if="symptoms && symptoms?.length"
       title="Симптомы, с которыми обратился клиент"
       :cards="symptoms"
     />
@@ -145,7 +146,7 @@ useHead(getMetaObject(metaData, baseUrl));
         :image="solutionImage"
       />
     </div>
-    <div class="attending-physicians-block">
+    <div class="attending-physicians-block" v-if="specialists?.length">
       <h3 class="attending-physicians-block-title">Лечащие врачи</h3>
       <div class="attending-physicians-block-cards">
         <div

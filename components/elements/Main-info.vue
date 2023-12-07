@@ -1,13 +1,20 @@
 <template>
   <div class="dentistry-wrapper">
-    <div class="dentistry-container" :style="`background-image:url(${imgBg})`" :class="{'bg-dark': isBgDark}">
+    <div
+      class="dentistry-container"
+      :style="`background-image:url(${imgBg})`"
+      :class="{ 'bg-dark': isBgDark }"
+    >
       <div class="dentistry-box">
         <elements-bread-crumbs
           :breadcrumbs="breadcrumbs"
           :typeColorWhite="typeColorWhite"
         />
         <div class="mob">
-            <img :src="imgAdaptiv" :class="{'img-dital': isDital, 'img': !isDital}" />
+          <img
+            :src="imgAdaptiv"
+            :class="{ 'img-dital': isDital, img: !isDital }"
+          />
           <div>
             <elements-title-text-button
               textButtonBase="Записаться онлайн"
@@ -39,7 +46,7 @@
       <elements-analitic-card
         :time="time"
         :money="money"
-        v-if="isTimeAndPriceCard"
+        v-if="isTimeAndPriceCard && time && money"
         class="desktop"
       />
     </div>
@@ -145,8 +152,11 @@ export default {
   width: 100%;
   height: 920px;
   border-radius: 45px;
-  background-size: cover;
+
+  background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
+
   margin-bottom: 100px;
   display: flex;
   justify-content: flex-start;
