@@ -7,8 +7,10 @@
         <NuxtPage />
       </main>
     </div>
-    <TheFooter />
-    <Teleport to="body"><blocks-main-popap-modal-form /></Teleport>
+    <TheFooter :footerData="footerData" />
+    <Teleport to="body"
+      ><blocks-main-popap-modal-form :clinics="baseDataStore.clinics"
+    /></Teleport>
     <Teleport to="body"><elements-cookie-consent /></Teleport>
     <Teleport to="body"><ModalVideo /></Teleport>
   </div>
@@ -31,26 +33,49 @@ watch(
   },
 );
 
-useHead({
-  link: [
-    {
-      rel: "stylesheet",
-      href: "./bvi.css",
-      type: "text/css",
+const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+
+const baseDataStore = useBaseDataStore();
+const servicesStore = useService();
+
+const [{ data: footerData }] = await Promise.all([
+  useFetch(`${apiBaseUrl}footer`, {
+    query: {
+      populate: "links.icon.*,privacy.*,license.*",
     },
-  ],
-  script: [
-    { src: "./bvi.js", tagPosition: "bodyClose", type: "text/javascript" },
-    {
-      innerHTML: `new isvek.Bvi({
-        images: false,
-        panelHide: true
-      });`,
-      tagPosition: "bodyClose",
-      type: "text/javascript",
-    },
-  ],
-});
+  }),
+  baseDataStore.getClinics(),
+  baseDataStore.getDirections(),
+  baseDataStore.getPopularServices(),
+  servicesStore.fetchdataService(apiBaseUrl),
+]);
+
+// useHead({
+//   link: [
+//     {
+//       rel: "stylesheet",
+//       href: "./bvi.css",
+//       type: "text/css",
+//     },
+//   ],
+//   script: [
+//     {
+//       src: "/bvi.js",
+//       tagPosition: "bodyClose",
+//       type: "text/javascript",
+//       defer: true,
+//     },
+//     {
+//       innerHTML: `new isvek.Bvi({
+//         images: false,
+//         panelHide: true
+//       });`,
+//       tagPosition: "bodyClose",
+//       type: "text/javascript",
+//       defer: true,
+//     },
+//   ],
+// });
 </script>
 
 <style lang="scss">

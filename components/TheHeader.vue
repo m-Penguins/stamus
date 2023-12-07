@@ -32,8 +32,7 @@ export default {
         { id: 2, title: "Наше приложение", path: "/stamusapp" },
         { id: 3, title: "Информация для пациентов", path: "/info" },
         { id: 4, title: "Налоговый вычет", path: "/info" },
-        { id: 5, title: "Отзывы", path: "/reviews" },
-        { id: 6, title: "Статьи", path: "/articles" },
+        { id: 5, title: "Статьи", path: "/articles" },
       ],
     };
   },
@@ -74,14 +73,11 @@ export default {
     const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
     const directionTitle = ref("");
     let activeClass2 = "";
+    const modalStore = useModalStore();
 
     const togglerPopup = (state) => {
       isOpenPopup.value = state;
     };
-
-    onMounted(async () => {
-      await storeServices.fetchdataService(apiBaseUrl);
-    });
 
     const navigateToRoute = (serv, dir) => {
       const newRoute = `/${serv}/${linkTransform(dir)}`;
@@ -107,6 +103,8 @@ export default {
     const navigation = [
       { title: "Специалисты", path: "/specialists" },
       { title: "Пациентам", path: "" },
+      { title: "Отзывы", path: "/reviews" },
+
       { title: "Акции и скидки", path: "/discounts" },
       { title: "Портфолио", path: "/portfolio" },
       { title: "Цены", path: "/prices" },
@@ -127,6 +125,7 @@ export default {
       defaultServices,
       navigateToRoute,
       router,
+      modalStore,
     };
   },
 };
@@ -318,7 +317,7 @@ export default {
                 showSearch = false;
                 showServices = false;
                 showMenuPatients = false;
-                openStartupModal();
+                modalStore.openModal();
               "
               title="Перезвоните мне"
             />
@@ -630,7 +629,7 @@ export default {
                 showSearch = false;
                 showServices = false;
                 showMenuPatients = false;
-                openStartupModal();
+                modalStore.openModal();
               "
               title="Перезвоните мне"
               class="header-services-menu-mob-button"

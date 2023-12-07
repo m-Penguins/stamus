@@ -81,16 +81,9 @@ const getArticlesData = async () => {
 
 const articlesData = await getArticlesData();
 
-const { data: directionsData } = await useFetch(
-  `${apiBaseUrl}main-derections`,
-  {
-    query: {
-      populate: "deep",
-    },
-  },
-);
+const baseDataStore = useBaseDataStore();
 
-const allDirections = directionsData.value?.data
+const allDirections = baseDataStore.directions?.data
   ?.map((dir) => ({
     id: dir?.id,
     name: dir?.attributes?.heading,

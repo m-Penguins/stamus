@@ -35,15 +35,17 @@ export const useService = defineStore("useServices", {
 
   actions: {
     async fetchdataService(apiBaseUrl) {
-      try {
-        const res = await axios.get(`${apiBaseUrl}services?populate=deep`);
-        const { data } = res;
-        const navigationServices = useReducedServices(data.data);
+      // const res = await axios.get(`${apiBaseUrl}services?populate=deep`);
 
-        this.dataService = navigationServices;
-      } catch (error) {
-        console.log(error);
-      }
+      const { data } = await useFetch(`${apiBaseUrl}services`, {
+        query: {
+          populate: "category.uslugas.*,category.napravleniya_uslug_1_col.*",
+        },
+      });
+
+      const navigationServices = useReducedServices(data?.value?.data);
+
+      this.dataService = navigationServices;
     },
   },
 });

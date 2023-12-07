@@ -44,7 +44,7 @@ const handleSelect = (option) => {
         <hr />
       </div>
       <div
-        v-for="(option, i) of options"
+        v-for="(option, i) in options"
         :key="i"
         @click="handleSelect(option)"
         class="select-container"
@@ -52,10 +52,9 @@ const handleSelect = (option) => {
         <div class="select-box">
           <div>
             <div class="select-title">{{ option.name }}</div>
-            <div class="select-text">{{ option.address }}</div>
           </div>
-          <div v-if="selected?.name === option.name" class="selected-item">
-            <img src="../../assets/images/icons/check.svg" alt="icon" />
+          <div v-if="selectedItem === option.name" class="selected-item">
+            <img src="@/assets/images/icons/check.svg" alt="icon" />
           </div>
         </div>
         <hr v-if="i !== options.length - 1" />

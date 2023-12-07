@@ -15,8 +15,6 @@ const { data: specialist } = await useFetch(
   },
 );
 
-console.log(specialist.value);
-
 if (!specialist.value?.data) {
   throw createError({
     statusCode: 404,

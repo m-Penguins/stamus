@@ -35,11 +35,24 @@ export default defineNuxtConfig({
           href: "/favicon/safari-pinned-tab.svg",
           color: "#5bbad5",
         },
+        {
+          rel: "stylesheet",
+          href: "/bvi.css",
+          type: "text/css",
+        },
       ],
       meta: [
         { name: "msapplication-TileColor", content: "#2b5797" },
         { name: "theme-color", content: "#ffffff" },
         { name: "msapplication-config", content: "/favicon/browserconfig.xml" },
+      ],
+      script: [
+        {
+          src: "/bvi.js",
+          tagPosition: "bodyClose",
+          type: "text/javascript",
+          defer: true,
+        },
       ],
     },
   },

@@ -46,6 +46,8 @@ export default {
       "images/big-images/business-adaptiv.png",
     );
 
+    const baseDataStore = useBaseDataStore();
+
     const mockArray = {
       name: "Овсоян Григорий",
       category: "Челюстно-лицевой хирург",
@@ -61,6 +63,7 @@ export default {
       bigImage,
       imgAdaptiv,
       mockArray,
+      baseDataStore,
     };
   },
 };
@@ -71,6 +74,7 @@ export default {
     :isPriceForm="true"
     @togglerPopup="togglerPopup"
     :isOpen="isOpenPopup"
+    :clinics="baseDataStore.clinics"
   />
   <elements-main-info
     title="Бизнесу и корпортивным клиентам"

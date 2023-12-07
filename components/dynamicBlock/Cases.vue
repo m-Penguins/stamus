@@ -14,7 +14,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 </script>
 
 <template>
-  <div class="main-events-block">
+  <div class="main-events-block" id="portfolio">
     <div class="slider-title">
       <div class="slider-title__box">
         <h2 class="slider-title__box-title">Похожие работы</h2>

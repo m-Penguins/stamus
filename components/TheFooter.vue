@@ -61,7 +61,7 @@
           <NuxtLink
             target="_blank"
             class="footer-text header-nav-item"
-            :to="`tel:${phone?.replaceAll(' ', '')}`"
+            :to="`tel:+${phone?.replace(/\D/g, '')}`"
           >
             {{ phone }}
           </NuxtLink>
@@ -91,7 +91,7 @@
           <div class="footer-address__container">
             <div class="footer-address__container-link">
               <NuxtLink
-                v-for="clinic in clinicsData?.data?.slice(
+                v-for="clinic in baseDataStore.clinics?.data?.slice(
                   0,
                   clinicColumnNumber,
                 )"
@@ -109,7 +109,9 @@
         </div>
         <div class="p-r-18 address">
           <NuxtLink
-            v-for="clinic in clinicsData?.data?.slice(clinicColumnNumber)"
+            v-for="clinic in baseDataStore.clinics?.data?.slice(
+              clinicColumnNumber,
+            )"
             :key="clinic?.id"
             :to="`/clinics/${clinic?.id}`"
           >
@@ -172,37 +174,32 @@
 // Затем активируйте "bvi" при клике
 // bvi.activate();
 // };
-const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+
+const props = defineProps(["footerData"]);
+
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const [{ data: clinicsData }, { data: footerData }] = await Promise.all([
-  useFetch(`${apiBaseUrl}clinics`, {}),
-  useFetch(`${apiBaseUrl}footer`, {
-    query: {
-      populate: "links.icon.*,privacy.*,license.*",
-    },
-  }),
-]);
+const baseDataStore = useBaseDataStore();
 
-console.log(footerData.value);
+const phone = props?.footerData?.data?.attributes?.phone;
+const email = props?.footerData?.data?.attributes?.email;
 
-const phone = footerData?.value?.data?.attributes?.phone;
-const email = footerData?.value?.data?.attributes?.email;
+const socials = props?.footerData?.data?.attributes?.links;
 
-const socials = footerData.value?.data?.attributes?.links;
-
-const license = footerData.value?.data?.attributes?.license?.data?.attributes
+const license = props?.footerData?.data?.attributes?.license?.data?.attributes
   ?.url
-  ? baseUrl + footerData.value?.data?.attributes?.license?.data?.attributes?.url
+  ? baseUrl +
+    props?.footerData?.data?.attributes?.license?.data?.attributes?.url
   : "";
 
-const policy = footerData.value?.data?.attributes?.privacy?.data?.attributes
+const policy = props?.footerData?.data?.attributes?.privacy?.data?.attributes
   ?.url
-  ? baseUrl + footerData.value?.data?.attributes?.privacy?.data?.attributes?.url
+  ? baseUrl +
+    props?.footerData?.data?.attributes?.privacy?.data?.attributes?.url
   : "";
 
 const clinicColumnNumber = computed(() => {
-  return clinicsData.value?.data?.length > 5 ? 4 : 3;
+  return baseDataStore.clinics?.data?.length > 5 ? 4 : 3;
 });
 
 const route = useRoute();

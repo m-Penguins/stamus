@@ -64,10 +64,6 @@ export const useReviewStore = defineStore("review-store", () => {
       } catch (error) {
         console.log(error);
         currentStep.value = 3;
-      } finally {
-        setTimeout(() => {
-          moveStep3();
-        }, 1500);
       }
 
       return formData;

@@ -2408,3 +2408,7 @@
 });
 
 //# sourceMappingURL=bvi.js.map
+new isvek.Bvi({
+  images: false,
+  panelHide: true,
+});
