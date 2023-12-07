@@ -4,6 +4,7 @@
       class="dentistry-container"
       :style="`background-image:url(${imgBg})`"
       :class="{ 'bg-dark': isBgDark }"
+      v-bind="$attrs"
     >
       <div class="dentistry-box">
         <elements-bread-crumbs

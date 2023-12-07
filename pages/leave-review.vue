@@ -3,9 +3,14 @@ const reviewStore = useReviewStore();
 
 const moveStep2 = computed(() => {
   // good review
-  if (["Отлично", "Хорошо", "Приемлемо"].includes(pickedRadio.value)) {
+  if (isGoodReview.value) {
     return () => {
-      console.log(123);
+      if (window) {
+        window?.open(
+          "https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/",
+          "_blank",
+        );
+      }
       reviewStore.moveStep3();
     };
   }
@@ -16,6 +21,10 @@ const moveStep2 = computed(() => {
     };
   }
 });
+
+const isGoodReview = computed(() =>
+  ["Отлично", "Хорошо", "Приемлемо"].includes(pickedRadio.value),
+);
 
 const stepHeader = [
   {
@@ -464,10 +473,8 @@ const breadcrumbs = [
   .popup-button-box {
     flex-wrap: wrap;
     gap: 14px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 16px 16px;
+    position: static;
+    padding: 0 0 16px;
   }
 
   .popup-button-box-discounts {

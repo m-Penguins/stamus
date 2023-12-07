@@ -180,7 +180,7 @@ const breadcrumbs = [
       :total-pages="totalPages"
       @update:current-page="handlePageClick"
     />
-    <BlocksMainBanner
+    <!-- <BlocksMainBanner
       :title="'Уже были у нас?'"
       :text="'Оставьте отзыв, будем очень вам благодарны'"
       :titleLink="'Оставить отзыв'"
@@ -189,7 +189,7 @@ const breadcrumbs = [
       type="true"
       img="mobile.svg"
       bigImg="true"
-    />
+    /> -->
     <blocks-main-form />
   </div>
 </template>

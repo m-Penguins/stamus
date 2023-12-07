@@ -139,6 +139,7 @@ const imgAdaptive = clinicData?.value?.data?.attributes?.photoBanner?.data
     :typeColorWhiteText="item"
     :breadcrumbs="breadcrumbs"
     :isBgDark="true"
+    :style="{ backgroundSize: 'cover' }"
   />
   <blocks-video-block
     v-if="clinicData?.data?.attributes?.infoBlock"
