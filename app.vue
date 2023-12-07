@@ -50,26 +50,32 @@ const [{ data: footerData }] = await Promise.all([
   servicesStore.fetchdataService(apiBaseUrl),
 ]);
 
-useHead({
-  link: [
-    {
-      rel: "stylesheet",
-      href: "./bvi.css",
-      type: "text/css",
-    },
-  ],
-  script: [
-    { src: "./bvi.js", tagPosition: "bodyClose", type: "text/javascript" },
-    {
-      innerHTML: `new isvek.Bvi({
-        images: false,
-        panelHide: true
-      });`,
-      tagPosition: "bodyClose",
-      type: "text/javascript",
-    },
-  ],
-});
+// useHead({
+//   link: [
+//     {
+//       rel: "stylesheet",
+//       href: "./bvi.css",
+//       type: "text/css",
+//     },
+//   ],
+//   script: [
+//     {
+//       src: "/bvi.js",
+//       tagPosition: "bodyClose",
+//       type: "text/javascript",
+//       defer: true,
+//     },
+//     {
+//       innerHTML: `new isvek.Bvi({
+//         images: false,
+//         panelHide: true
+//       });`,
+//       tagPosition: "bodyClose",
+//       type: "text/javascript",
+//       defer: true,
+//     },
+//   ],
+// });
 </script>
 
 <style lang="scss">
