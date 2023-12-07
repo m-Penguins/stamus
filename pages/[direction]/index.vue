@@ -17,6 +17,7 @@ const { data: directionData } = await useFetch(`${apiBaseUrl}main-derections`, {
   query: {
     "filters[slug][$eq]": directionSlug,
     populate: blocksQuey,
+    sort: "order:asc",
   },
 });
 

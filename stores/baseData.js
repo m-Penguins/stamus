@@ -22,6 +22,7 @@ export const useBaseDataStore = defineStore("base-data-store", () => {
       {
         query: {
           populate: "deep",
+          sort: "order:asc",
         },
       },
     );

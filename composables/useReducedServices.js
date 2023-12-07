@@ -16,6 +16,7 @@ export default function (data) {
         title: categoryInner?.heading,
         path: `/${categoryInner?.slug}`,
         directions: [],
+        order: categoryInner?.order,
       });
     }
 
@@ -40,7 +41,8 @@ export default function (data) {
       path: `/${item?.attributes?.slug}`,
     });
 
-    return result;
+    console.log(result);
+    return result?.sort((a, b) => a?.order - b?.order);
   }, []);
 
   return navigationServices;
