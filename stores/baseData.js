@@ -8,9 +8,9 @@ export const useBaseDataStore = defineStore("base-data-store", () => {
 
   const getClinics = async () => {
     const { data: clinicsData } = await useFetch(`${apiBaseUrl}clinics`, {
-      query: {
-        populate: "deep",
-      },
+      // query: {
+      //   populate: "deep",
+      // },
     });
 
     clinics.value = clinicsData.value;
@@ -21,12 +21,10 @@ export const useBaseDataStore = defineStore("base-data-store", () => {
       `${apiBaseUrl}main-derections`,
       {
         query: {
-          populate: "deep",
           sort: "order:asc",
         },
       },
     );
-
     directions.value = directionsData.value;
   };
 
