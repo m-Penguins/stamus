@@ -24,7 +24,7 @@
   />
   <blocks-our-specialists title="Наши специалисты" :data="data" />
   <blocks-main-feedback />
-  <blocks-map :dataInfo="infoData" text="Контакты" />
+  <blocks-map />
   <blocks-gallery />
   <blocks-main-form />
 </template>

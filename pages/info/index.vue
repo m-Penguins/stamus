@@ -5,23 +5,23 @@
     :imgAdaptiv="imgAdaptiv"
     :isButtonBase="false"
     :breadcrumbs="[
-        {
-          title: 'Главная',
-          url: '/'
-        },
-        {
-          title: 'Информация для пациентов',
-          url: '/info'
-        }
-        ]"
+      {
+        title: 'Главная',
+        url: '/',
+      },
+      {
+        title: 'Информация для пациентов',
+        url: '/info',
+      },
+    ]"
   />
   <div class="info">
     <h2 class="info-title">Об организации STAMUS</h2>
-    <blocks-info-block/>
+    <blocks-info-block />
   </div>
   <div class="info">
     <h2 class="info-title">Дополнительная информация</h2>
-    <blocks-info-dop-block :optionsData="options" :optionsDoc="optionsDoc"/>
+    <blocks-info-dop-block :optionsData="options" :optionsDoc="optionsDoc" />
   </div>
   <BlocksMainBanner
     :title="'Наше приложение'"
@@ -31,9 +31,9 @@
     bgColor="grey"
     type="true"
     img="mob5.png"
-    bigImg=true
+    bigImg="true"
   />
-  <blocks-map :dataInfo="infoData" text="Информация о клиниках"/>
+  <blocks-map :block="{ title: 'Информация о клиниках' }" />
   <BlocksMainBanner
     :title="'Уже были у нас?'"
     :text="'Оставьте отзыв, будем очень вам благодарны'"
@@ -42,48 +42,48 @@
     bgColor="grey"
     type="true"
     img="mobile.svg"
-    bigImg=true
+    bigImg="true"
   />
   <blocks-main-form />
 </template>
 
 <script>
-import { mockInfoMain } from '../../stores/mockData';
-  export default {
-    setup() {
-      const assetsStore = useAssets();
-      const bigImage = assetsStore.useAsset("images/big-images/info.png");
+import { mockInfoMain } from "../../stores/mockData";
+export default {
+  setup() {
+    const assetsStore = useAssets();
+    const bigImage = assetsStore.useAsset("images/big-images/info.png");
 
-      const imgAdaptiv = assetsStore.useAsset(
-        "images/big-images/info-adaptiv.png",
-      );
-      const options = [
-        { name: 'Получаю справку за себя'},
-        { name: 'Получаю справку за ребенка'},
-        { name: 'Получаю справку за супруга(-и)'},
-        { name: 'Получаю справку за родителя'},
-      ]
-      const optionsDoc = [
-        { name: 'Заберу справку на Хакурате 34'},
-        { name: 'Заберу справку на Гимназическая 85'},
-        { name: 'Заберу справку на Московская 140'},
-        { name: 'Заберу справку на Мачуги 1/1'},
-        { name: 'Заберу справку на Платановом бульваре 19/3'},
-        { name: 'Прислать на почту'},
-      ]
-      return {
-        mockInfoMain,
-        options,
-        optionsDoc,
-        bigImage,
-        imgAdaptiv
-      }
-    }
-  }
+    const imgAdaptiv = assetsStore.useAsset(
+      "images/big-images/info-adaptiv.png",
+    );
+    const options = [
+      { name: "Получаю справку за себя" },
+      { name: "Получаю справку за ребенка" },
+      { name: "Получаю справку за супруга(-и)" },
+      { name: "Получаю справку за родителя" },
+    ];
+    const optionsDoc = [
+      { name: "Заберу справку на Хакурате 34" },
+      { name: "Заберу справку на Гимназическая 85" },
+      { name: "Заберу справку на Московская 140" },
+      { name: "Заберу справку на Мачуги 1/1" },
+      { name: "Заберу справку на Платановом бульваре 19/3" },
+      { name: "Прислать на почту" },
+    ];
+    return {
+      mockInfoMain,
+      options,
+      optionsDoc,
+      bigImage,
+      imgAdaptiv,
+    };
+  },
+};
 </script>
 
 <style scoped lang="scss">
-@import '../../assets/styles/style.scss';
+@import "../../assets/styles/style.scss";
 
 .info {
   width: 1280px;
@@ -92,9 +92,8 @@ import { mockInfoMain } from '../../stores/mockData';
 }
 
 .info-title {
-  @include body-22-medium-Neue ;
+  @include body-22-medium-Neue;
   color: black;
   padding-bottom: 40px;
 }
-
 </style>
