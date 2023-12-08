@@ -6,17 +6,20 @@ const [{ data: fourSpecialists }, { data: articlesData }] = await Promise.all([
   useFetch(`${apiBaseUrl}specialists`, {
     query: {
       "pagination[page]": 1,
-      "pagination[pageSize]": 4,
+      "pagination[pageSize]": 5,
       "filters[id][$in][0]": 3,
       "filters[id][$in][1]": 9,
       "filters[id][$in][2]": 4,
       "filters[id][$in][3]": 7,
+      "filters[id][$in][4]": 10,
       "sort[0]": "order:asc",
       populate: "deep",
     },
   }),
   useFetch(`${apiBaseUrl}articles`, { query: { populate: "deep" } }),
 ]);
+
+console.log(fourSpecialists.value);
 
 const articles = articlesData.value?.data?.map((art) => {
   return {

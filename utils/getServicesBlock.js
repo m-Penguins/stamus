@@ -10,7 +10,7 @@ import Blog from "@/components/dynamicBlock/Blog.vue";
 import Cases from "@/components/dynamicBlock/Cases.vue";
 import Seo from "@/components/dynamicBlock/Seo.vue";
 import Osnovnie from "@/components/dynamicBlock/Osnovnie.vue";
-import MyMap from "@/components/blocks/MyMap.vue";
+import Map from "@/components/blocks/Map.client.vue";
 import Galereya from "@/components/dynamicBlock/Galereya.vue";
 import Certificaty from "@/components/dynamicBlock/Certificaty.vue";
 import Obrazovanie from "@/components/dynamicBlock/Obrazovanie.vue";
@@ -42,7 +42,7 @@ export default function (component) {
     case "blocks-story.osnovnye-napravleniya":
       return Osnovnie;
     case "blocks-story.karta":
-      return MyMap;
+      return Map;
     case "blocks-story.galereya":
       return Galereya;
     case "blocks-story.sertifikaty":

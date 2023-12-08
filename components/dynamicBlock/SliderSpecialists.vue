@@ -1,11 +1,12 @@
 <script setup lang="ts">
-defineProps(["block"]);
+const props = defineProps(["block"]);
+console.log(props.block);
 </script>
 
 <template>
   <elements-slider-our-specialists
     :programs="block?.specialists?.data"
-    title="Наши специалисты"
+    :title="block?.title ?? 'Наши специалисты'"
   />
 </template>
 
