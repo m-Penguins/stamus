@@ -60,7 +60,7 @@ const blocks = specialist.value?.data?.attributes?.blocks;
           <elements-title-text-button
             font-size="true"
             isCategory="true"
-            :category="specialist?.data?.attributes?.position"
+            :category="specialist?.data?.attributes?.position ?? ''"
             textButtonBase="Записаться онлайн"
             :isButtonBase="true"
             :customClick="redirectToExternalApp"
