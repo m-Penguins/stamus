@@ -16,7 +16,7 @@ const totalItems = ref(0);
 const getSpecialistsData = async () => {
   const strapiQuery = {
     populate: "fotoSpecialist.*,direction.*,clinic.*",
-    sort: "order:asc",
+    sort: "order:desc",
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
     "filters[clinics][id]": clinicFilter.value,
