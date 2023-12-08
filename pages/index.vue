@@ -19,8 +19,6 @@ const [{ data: fourSpecialists }, { data: articlesData }] = await Promise.all([
   useFetch(`${apiBaseUrl}articles`, { query: { populate: "deep" } }),
 ]);
 
-console.log(fourSpecialists.value);
-
 const articles = articlesData.value?.data?.map((art) => {
   return {
     id: art?.id,

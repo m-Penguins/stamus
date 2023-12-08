@@ -13,8 +13,6 @@ const [{ data: pricesData }] = await Promise.all([
   }),
 ]);
 
-console.log(pricesData.value);
-
 const allPrices = ref([
   {
     title: null,
