@@ -144,6 +144,9 @@ const selectedIndex = ref(0);
     flex-direction: column;
     gap: 14px;
 
+    max-height: 380px;
+    overflow: auto;
+
     .active {
       position: relative;
     }
