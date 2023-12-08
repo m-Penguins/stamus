@@ -5,7 +5,45 @@
       <div class="tab-content">
         <div class="tab-map">
           <div class="map-container">
-            <yandexMap
+            <yandex-map
+              :settings="{
+                location: {
+                  center: [39.002218, 45.085805],
+                  zoom: 10,
+                  duration: 1000,
+                },
+              }"
+            >
+              <yandex-map-default-scheme-layer
+                :settings="{ theme, visible: true }"
+              />
+              <yandex-map-default-features-layer />
+              <yandex-map-controls :settings="{ position: 'right' }">
+                <yandex-map-zoom-control />
+              </yandex-map-controls>
+              <yandex-map-marker
+                v-for="(marker, index) in tabs"
+                :key="index"
+                :settings="{
+                  coordinates: marker?.coordinates,
+                  onClick: () => (activeTab = index),
+                  zIndex: activeTab === index ? 1 : 0,
+                }"
+              >
+                <img
+                  :src="activeTab === index ? baloon : baloon1"
+                  alt="logo"
+                  :style="{
+                    minWidth: '50px',
+                    position: 'relative',
+                    boxSizing: 'border-box',
+                    transform: 'translate(-50%, calc(-50% - 24px))',
+                    cursor: 'pointer',
+                  }"
+                />
+              </yandex-map-marker>
+            </yandex-map>
+            <!-- <yandexMap
               :settings="settings"
               :coords="[45.085805, 39.002218]"
               :detailed-controls="detailedControls"
@@ -23,7 +61,7 @@
                 :hint-content="item?.name"
               >
               </ymapMarker>
-            </yandexMap>
+            </yandexMap> -->
           </div>
           <elements-map-nav :info="tabs?.[activeTab]" />
         </div>
@@ -34,11 +72,21 @@
 </template>
 
 <script setup>
-import { yandexMap, ymapMarker } from "vue-yandex-maps";
+import {
+  YandexMap,
+  YandexMapControls,
+  YandexMapDefaultSchemeLayer,
+  YandexMapDefaultFeaturesLayer,
+  YandexMapMarker,
+  YandexMapDefaultMarker,
+  YandexMapZoomControl,
+} from "vue-yandex-maps";
 import baloon from "@/assets/images/icons/map_baloon.svg";
 import baloon1 from "@/assets/images/icons/map_baloon1.svg";
 
 defineProps(["block"]);
+
+const theme = "light";
 
 const activeTab = ref(0);
 
@@ -67,10 +115,8 @@ const iconNotActive = {
 };
 
 const settings = {
-  apiKey: "b4ed0b4f-9710-4113-bfd7-ef2be1938fa2",
   lang: "ru_RU",
   coordorder: "latlong",
-  version: "2.1",
 };
 
 const tabs = [
@@ -81,7 +127,7 @@ const tabs = [
     tel: "+7 (999) 888 - 77 - 66",
     email: "hakurate@stamus-info.ru",
     address: "Краснодар, ул. Московская 140",
-    coordinates: [45.085805, 39.002218],
+    coordinates: [39.002218, 45.085805],
   },
   {
     name: "ул. Хакурате 34",
@@ -90,7 +136,7 @@ const tabs = [
     tel: "+7 (999) 888 - 77 - 66",
     email: "hakurate@stamus-info.ru",
     address: "Краснодар, ул. Хакурате 34",
-    coordinates: [45.041031, 38.982473],
+    coordinates: [38.982473, 45.041031],
   },
   {
     name: "ул. Мачуги 1/1",
@@ -99,7 +145,7 @@ const tabs = [
     tel: "+7 (999) 888 - 77 - 66",
     email: "hakurate@stamus-info.ru",
     address: "Краснодар, ул. Мачуги 1/1",
-    coordinates: [45.014403, 39.063016],
+    coordinates: [39.063016, 45.014403, 45.014403],
   },
   // {
   //   name: 'ул. Черкасская 17',
@@ -116,7 +162,7 @@ const tabs = [
     tel: "+7 (999) 888 - 77 - 66",
     email: "hakurate@stamus-info.ru",
     address: "Краснодар, ул. Гимназическая 85",
-    coordinates: [45.024673, 38.975978],
+    coordinates: [38.975978, 45.024673],
   },
   {
     name: "Платановый бульвар 19/3",
@@ -125,7 +171,7 @@ const tabs = [
     tel: "+7 (999) 888 - 77 - 66",
     email: "hakurate@stamus-info.ru",
     address: "Краснодар, Платановый бульвар 19/3",
-    coordinates: [45.033521, 38.909799],
+    coordinates: [38.909799, 45.033521],
   },
   // {
   //   name: 'ул. Средняя 1/3',
@@ -147,6 +193,11 @@ const detailedControls = {
 
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
+
+.map-marker-icon {
+  width: 50px;
+  height: 50px;
+}
 .map-container {
   background-color: #f0f0f0;
   width: 100%;
