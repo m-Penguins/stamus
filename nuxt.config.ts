@@ -75,7 +75,11 @@ export default defineNuxtConfig({
         },
       },
     ],
+    "vue-yandex-maps/nuxt",
   ],
+  yandexMaps: {
+    apikey: process.env.YANDEX_API_KEY,
+  },
   css: ["@/assets/styles/global.scss"],
   runtimeConfig: {
     public: {
@@ -86,7 +90,7 @@ export default defineNuxtConfig({
   imports: {
     dirs: ["stores", "utils"],
   },
-  plugins: [{ src: "~/plugins/ymapPlugin.js", mode: "client" }],
+  // plugins: [{ src: "~/plugins/ymapPlugin.js", mode: "client" }],
   // plugins: [
   //   { src: '~/plugins/bvi.js', ssr: false },
   // ]
