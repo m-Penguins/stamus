@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const props = defineProps(["block"]);
-console.log(props.block);
 </script>
 
 <template>

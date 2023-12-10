@@ -144,7 +144,10 @@ const breadcrumbs = [
     <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
     <div class="reviews-header">
       <h1 class="prices-title">Отзывы</h1>
-      <p class="prices-text">Небольшое описание в несколько строчек</p>
+      <p v-if="totalItems" class="prices-text">
+        {{ pluralize(totalItems, ["история", "истории", "историй"]) }} наших
+        пациентов
+      </p>
       <NuxtLink to="/leave-review" class="button-base review-btn"
         >Оставить отзыв</NuxtLink
       >

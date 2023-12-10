@@ -52,12 +52,7 @@
             />
           </div>
 
-          <NuxtLink
-            v-if="link"
-            class="video-block-rectangle"
-            target="_blank"
-            :to="link"
-          >
+          <NuxtLink v-if="link" class="video-block-rectangle" :to="link">
             <div class="desktop">
               <svg
                 width="64"
@@ -155,8 +150,7 @@ const docs = contactsMainInfo?.docs?.map((d) => ({
 }));
 // const videoLink
 // const videoImage
-const link =
-  "https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/#otzivi";
+const link = "/reviews";
 const link_text = "Читать отзывы";
 
 const breadcrumbs = [
