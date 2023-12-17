@@ -7,72 +7,18 @@ const serviceFilter = ref(null);
 const [{ data: pricesData }] = await Promise.all([
   useFetch(`${apiBaseUrl}prices-list`, {
     query: {
-      populate: "services.*,servicePrice.Sale_popular.*,servicePrice.*",
+      populate: "servicePrice.Sale_popular.*,servicePrice.*",
       "pagination[pageSize]": 300,
     },
   }),
 ]);
 
-const allPrices = ref([
-  {
-    title: null,
-    prices: [],
-  },
-]);
-
-pricesData?.value?.data?.forEach((el) => {
-  const allSinglePriceServices = el?.attributes?.services?.data;
-
-  const noRelationPrices = allPrices.value?.find((el) => !el?.title);
-
-  if (allSinglePriceServices?.length > 0) {
-    allSinglePriceServices?.forEach((s) => {
-      const key = s?.attributes?.heading;
-
-      const alreadyInPrices = allPrices.value?.find((el) => el?.title === key);
-
-      if (alreadyInPrices) {
-        alreadyInPrices?.prices?.push(...el?.attributes?.servicePrice);
-      } else {
-        allPrices.value?.push({
-          id: s?.id,
-          title: key,
-          prices: [...el?.attributes?.servicePrice],
-        });
-      }
-    });
-  } else {
-    noRelationPrices?.prices?.push(...el?.attributes?.servicePrice);
-  }
-
-  // if (services?.length > 0 && direction) {
-  //   const directionPrices = allPrices.value.value?.find(
-  //     (dir) => dir?.direction === direction,
-  //   );
-  //   if (directionPrices) {
-  //     directionPrices.services = [
-  //       ...directionPrices?.services,
-  //       ...el?.attributes?.servicePrice,
-  //     ];
-  //   } else {
-  //     allPrices.value.value?.push({
-  //       direction,
-  //       category,
-  //       services: el?.attributes?.servicePrice,
-  //     });
-  //   }
-  // } else {
-  //   const noDir = allPrices.value.value?.find((d) => d.direction === null);
-  //   noDir.services = [...noDir?.services, ...el?.attributes?.servicePrice];
-  // }
-});
-
-const allServices = allPrices.value
-  ?.map((el, index) => {
-    if (el?.title) {
+const allServices = pricesData.value?.data
+  ?.map((el) => {
+    if (el?.attributes?.Title) {
       return {
         id: el?.id,
-        name: el?.title,
+        name: el?.attributes?.Title,
       };
     }
   })
@@ -80,9 +26,11 @@ const allServices = allPrices.value
 
 const filteredPrices = computed(() => {
   if (serviceFilter.value) {
-    return allPrices.value.filter((el) => el?.id === serviceFilter.value);
+    return pricesData.value?.data?.filter(
+      (el) => el?.id === serviceFilter.value,
+    );
   }
-  return allPrices.value;
+  return pricesData.value?.data;
 });
 
 const filteredPricesWithSearch = computed(() => {
@@ -91,7 +39,7 @@ const filteredPricesWithSearch = computed(() => {
   }
   return filteredPrices.value
     ?.map((group) => {
-      const filteredPrices = group?.prices?.filter((s) => {
+      const filteredPrices = group?.attributes?.servicePrice?.filter((s) => {
         return s?.heading
           ?.toLowerCase()
           ?.includes(searchInput.value?.trim()?.toLowerCase());
@@ -99,9 +47,11 @@ const filteredPricesWithSearch = computed(() => {
 
       if (filteredPrices?.length > 0) {
         const filteredGroup = {
-          title: group?.title,
+          attributes: {
+            Title: group?.attributes?.Title,
+            servicePrice: filteredPrices,
+          },
           id: group?.id,
-          prices: filteredPrices,
         };
         return filteredGroup;
       } else {
@@ -148,7 +98,7 @@ const breadcrumbs = [
       <div class="service-box">
         <elements-custom-select
           :options="allServices"
-          label="Услуга"
+          label="Категория услуг"
           class="select"
           @select="handleServiceChange"
           :selectedId="serviceFilter"
@@ -166,15 +116,17 @@ const breadcrumbs = [
     <template v-if="filteredPricesWithSearch?.length > 0">
       <section
         class="prices__section"
-        v-for="section in filteredPricesWithSearch.filter((el) => el?.title)"
+        v-for="section in filteredPricesWithSearch.filter(
+          (el) => el?.attributes?.Title,
+        )"
         :key="section?.id"
       >
         <div class="prices-box">
-          <h3 class="prices-box-title">{{ section?.title }}</h3>
+          <h3 class="prices-box-title">{{ section?.attributes?.Title }}</h3>
           <div class="grey-point-container">
             <p class="grey-point-text">
               {{
-                pluralize(section?.prices?.length, [
+                pluralize(section?.attributes?.servicePrice?.length, [
                   "услуга",
                   "услуги",
                   "услуг",
@@ -185,8 +137,8 @@ const breadcrumbs = [
             <p class="grey-point-text">
               От
               {{
-                [...section?.prices]?.sort(
-                  (a, b) => a?.attributes?.price - b?.attributes?.price,
+                [...section?.attributes?.servicePrice]?.sort(
+                  (a, b) => a?.price - b?.price,
                 )?.[0]?.price
               }}
               ₽
@@ -196,44 +148,10 @@ const breadcrumbs = [
 
         <hr />
         <div class="popular-service__list">
-          <div v-for="service in section?.prices" :key="service?.id">
-            <elements-service-card :service="service" />
-          </div>
-        </div>
-      </section>
-      <section
-        class="prices__section"
-        v-for="section in filteredPricesWithSearch.filter((el) => !el?.title)"
-        :key="section?.id"
-      >
-        <div class="prices-box">
-          <h3 class="prices-box-title">{{ section?.title }}</h3>
-          <div class="grey-point-container">
-            <p class="grey-point-text">
-              {{
-                pluralize(section?.prices?.length, [
-                  "услуга",
-                  "услуги",
-                  "услуг",
-                ])
-              }}
-            </p>
-            <div class="grey-point"></div>
-            <p class="grey-point-text">
-              От
-              {{
-                [...section?.prices]?.sort(
-                  (a, b) => a?.attributes?.price - b?.attributes?.price,
-                )?.[0]?.price
-              }}
-              ₽
-            </p>
-          </div>
-        </div>
-
-        <hr />
-        <div class="popular-service__list">
-          <div v-for="service in section?.prices" :key="service?.id">
+          <div
+            v-for="service in section?.attributes?.servicePrice"
+            :key="service?.id"
+          >
             <elements-service-card :service="service" />
           </div>
         </div>
