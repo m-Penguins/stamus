@@ -259,7 +259,7 @@ export default {
                         <NuxtLink
                           v-for="(elem, index) in navigationPatients"
                           :key="elem"
-                          :to="elem.path + (index === 3 ? '#middle' : '')"
+                          :to="elem.path + (index === 3 ? '#ndfl' : '')"
                           class="menu-patients-items"
                         >
                           <li class="menu-patients-items-link">

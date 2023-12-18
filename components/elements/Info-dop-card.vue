@@ -974,7 +974,7 @@ const openNdfl = () => {
 };
 
 onMounted(() => {
-  if (route?.hash === "#middle") {
+  if (route?.hash === "#ndfl") {
     openNdfl();
   }
 });
