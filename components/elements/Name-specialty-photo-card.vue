@@ -18,7 +18,7 @@
         v-if="isTooltip && specialists?.achievements?.length > 0"
         class="tooltip"
       >
-        <img src="../../assets/images/icons/icons-badge.svg" />
+        <img src="@/assets/images/icons/icons-badge.svg" />
         <span class="info">
           <div
             class="tooltip-box"
@@ -75,6 +75,8 @@ const props = defineProps([
   "isTooltip",
   "handleLinkClick",
 ]);
+
+console.log(props.isTooltip);
 
 const baseUrl = useRuntimeConfig().public.baseUrl;
 </script>

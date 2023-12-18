@@ -15,7 +15,7 @@ const totalItems = ref(0);
 
 const getSpecialistsData = async () => {
   const strapiQuery = {
-    populate: "fotoSpecialist.*,direction.*,clinic.*",
+    populate: "fotoSpecialist.*,direction.*,clinic.*,achievements.icon.*",
     sort: "order:desc",
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
@@ -69,6 +69,8 @@ const getSpecialistsData = async () => {
 // );
 
 const specialists = await getSpecialistsData();
+
+console.log(specialists.value);
 
 // const { data: specialists } = await useFetch(`${apiBaseUrl}specialists`, {
 //   query: {
@@ -277,7 +279,7 @@ const breadcrumbs = [
           <div
             class="spicialists-page-card"
             v-for="specialist in specialists?.data"
-            :key="specialist.id"
+            :key="specialist?.id"
           >
             <elements-name-specialty-photo-card
               :is-link="true"
