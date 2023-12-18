@@ -8,12 +8,12 @@ const [{ data: portfolioData }, { data: allCasesData }] = await Promise.all([
   useFetch(`${apiBaseUrl}portofolios/${route.params.id}`, {
     query: {
       populate:
-        "infoBlock.image.*,infoBlock.video.*,gallery.*,specialists.fotoSpecialist.*,photoBanner.*,solutionImage.*,services.*, meta.metaImage.*,solution.*,napravleniya_uslug_1.*",
+        "infoBlock.image.*,infoBlock.video.*,galery.*,specialists.fotoSpecialist.*,photoBanner.*,solutionImage.*,services.*, meta.metaImage.*,solution.*,napravleniya_uslug_1.*",
     },
   }),
   useFetch(`${apiBaseUrl}portofolios`, {
     query: {
-      populate: "deep",
+      populate: "photoBanner.*",
     },
   }),
 ]);
@@ -91,6 +91,8 @@ const gallery = portfolioData.value?.data?.attributes?.galery?.data
       : "",
   )
   ?.filter(Boolean);
+
+console.log(portfolioData.value);
 
 const metaData = portfolioData.value?.data?.attributes?.meta;
 useHead(getMetaObject(metaData, baseUrl));
