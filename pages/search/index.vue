@@ -14,7 +14,25 @@ const articles = ref(null);
 
 const totalResults = ref(0);
 
+const getServiceLink = (item) => {
+  const direction =
+    item?.attributes?.category?.data?.attributes?.napravleniya_uslug_1_col?.data
+      ?.attributes?.slug;
+
+  const service = item?.attributes?.slug;
+
+  if (direction && service) {
+    return `/${direction}/${service}`;
+  }
+  return "/";
+};
+
 const getSearchData = async () => {
+  const capitalSearch =
+    searchTerm.value?.charAt(0)?.toUpperCase() +
+    searchTerm.value?.slice(1)?.toLowerCase();
+  const lowerSearch = searchTerm.value?.toLowerCase();
+
   const [
     { data: specialistsData },
     { data: servicesData },
@@ -23,10 +41,8 @@ const getSearchData = async () => {
     useFetch(`${apiBaseUrl}specialists`, {
       query: {
         "filters[fullName][$contains][0]": searchTerm.value,
-        "filters[fullName][$contains][1]": searchTerm.value?.toLowerCase(),
-        "filters[fullName][$contains][2]":
-          searchTerm.value?.charAt(0)?.toUpperCase() +
-          searchTerm.value?.slice(1)?.toLowerCase(),
+        "filters[fullName][$contains][1]": lowerSearch,
+        "filters[fullName][$contains][2]": capitalSearch,
         "sort[0]": "order:asc",
         populate: "deep",
       },
@@ -34,20 +50,16 @@ const getSearchData = async () => {
     useFetch(`${apiBaseUrl}services`, {
       query: {
         "filters[heading][$contains][0]": searchTerm.value,
-        "filters[heading][$contains][1]": searchTerm.value?.toLowerCase(),
-        "filters[heading][$contains][2]":
-          searchTerm.value?.charAt(0)?.toUpperCase() +
-          searchTerm.value?.slice(1)?.toLowerCase(),
-        populate: "deep",
+        "filters[heading][$contains][1]": lowerSearch,
+        "filters[heading][$contains][2]": capitalSearch,
+        populate: "category.napravleniya_uslug_1_col.*",
       },
     }),
     useFetch(`${apiBaseUrl}articles`, {
       query: {
         "filters[heading][$contains][0]": searchTerm.value,
-        "filters[heading][$contains][1]": searchTerm.value?.toLowerCase(),
-        "filters[heading][$contains][2]":
-          searchTerm.value?.charAt(0)?.toUpperCase() +
-          searchTerm.value?.slice(1)?.toLowerCase(),
+        "filters[heading][$contains][1]": lowerSearch,
+        "filters[heading][$contains][2]": capitalSearch,
         populate: "deep",
       },
     }),
@@ -64,12 +76,10 @@ const getSearchData = async () => {
     link: `/specialists/${sp?.id}`,
   }));
 
-  services.value = servicesData?.value?.data?.map((serv) => ({
-    id: serv?.id,
-    title: serv?.attributes?.heading,
-    link: `/${linkTransform(serv?.attributes?.category)}/${linkTransform(
-      serv?.attributes?.heading,
-    )}`,
+  services.value = servicesData?.value?.data?.map((singleService) => ({
+    id: singleService?.id,
+    title: singleService?.attributes?.heading,
+    link: getServiceLink(singleService),
   }));
 
   articles.value = articlesData?.value?.data?.map((art) => ({
@@ -120,7 +130,7 @@ watch(
           },
           {
             title: `${searchTerm}`,
-            url: `/search/`,
+            url: `/`,
           },
         ]"
       />

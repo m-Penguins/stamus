@@ -1,6 +1,10 @@
 <template>
   <div class="wrap">
-    <TheHeader :showMenuPatients="showMenuPatients" @toggleMenu="toggleMenu" />
+    <TheHeader
+      :showMenuPatients="showMenuPatients"
+      @toggleMenu="toggleMenu"
+      :phone="footerData?.data?.attributes?.phone"
+    />
     <div class="main" @click="closeMenu">
       <main>
         <NuxtLoadingIndicator color="#232D5B" :throttle="0" :height="8" />
@@ -41,7 +45,7 @@ const servicesStore = useService();
 const [{ data: footerData }] = await Promise.all([
   useFetch(`${apiBaseUrl}footer`, {
     query: {
-      populate: "links.icon.*,privacy.*,license.*",
+      populate: "links.icon.*,privacy.*,license_stamus.*,license_stamusmed.*",
     },
   }),
   baseDataStore.getClinics(),
@@ -49,6 +53,8 @@ const [{ data: footerData }] = await Promise.all([
   baseDataStore.getPopularServices(),
   servicesStore.fetchdataService(apiBaseUrl),
 ]);
+
+console.log(footerData.value?.data);
 
 // useHead({
 //   link: [
