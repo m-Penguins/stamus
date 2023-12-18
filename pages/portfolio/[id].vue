@@ -92,8 +92,6 @@ const gallery = portfolioData.value?.data?.attributes?.galery?.data
   )
   ?.filter(Boolean);
 
-console.log(portfolioData.value);
-
 const metaData = portfolioData.value?.data?.attributes?.meta;
 useHead(getMetaObject(metaData, baseUrl));
 </script>

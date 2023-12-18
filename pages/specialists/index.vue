@@ -70,8 +70,6 @@ const getSpecialistsData = async () => {
 
 const specialists = await getSpecialistsData();
 
-console.log(specialists.value);
-
 // const { data: specialists } = await useFetch(`${apiBaseUrl}specialists`, {
 //   query: {
 //     ...firstQuery,

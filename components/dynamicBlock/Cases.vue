@@ -7,8 +7,6 @@ import "swiper/css/navigation";
 
 const props = defineProps(["block"]);
 
-console.log(props?.block);
-
 const prev = ref(null);
 const next = ref(null);
 

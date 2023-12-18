@@ -76,8 +76,6 @@ const props = defineProps([
   "handleLinkClick",
 ]);
 
-console.log(props.isTooltip);
-
 const baseUrl = useRuntimeConfig().public.baseUrl;
 </script>
 
