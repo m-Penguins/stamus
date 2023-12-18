@@ -9,6 +9,7 @@ const [{ data: pricesData }] = await Promise.all([
     query: {
       populate: "servicePrice.Sale_popular.*,servicePrice.*",
       "pagination[pageSize]": 300,
+      "sort[0]": "order:asc",
     },
   }),
 ]);

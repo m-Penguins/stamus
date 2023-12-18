@@ -5,6 +5,7 @@ export const useBaseDataStore = defineStore("base-data-store", () => {
   const clinics = ref(null);
   const directions = ref(null);
   const popularServices = ref(null);
+  const allServices = ref(null);
 
   const getClinics = async () => {
     const { data: clinicsData } = await useFetch(`${apiBaseUrl}clinics`, {
@@ -42,6 +43,7 @@ export const useBaseDataStore = defineStore("base-data-store", () => {
     clinics,
     directions,
     popularServices,
+    allServices,
     getClinics,
     getDirections,
     getPopularServices,

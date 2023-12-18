@@ -1,7 +1,7 @@
 <template>
   <div class="card-photo-name">
     <div class="card-photo-name-img">
-      <img :src="direction.img" alt="photo-name" class="card-photo-name-img" />
+      <img :src="direction.img" alt="photo-name" />
     </div>
     <div v-if="isCategoryAndDescription" class="card-photo-name-container">
       <div>
@@ -58,7 +58,24 @@ export default {
   width: 100%;
   object-fit: cover;
   border-radius: 20px;
-  height: 346px;
+  /* height: 308px; */
+
+  aspect-ratio: 1;
+
+  @supports not (aspect-ratio: 1/1) {
+    padding-top: 100%;
+    height: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  & img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    border-radius: 20px;
+  }
 }
 
 .card-photo-name-container {
