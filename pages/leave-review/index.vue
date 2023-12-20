@@ -1,7 +1,8 @@
 <script setup>
-const baseUrl = useRuntimeConfig().public.baseUrl;
 const reviewStore = useReviewStore();
+
 const baseDataStore = useBaseDataStore();
+const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
   ?.attributes?.url

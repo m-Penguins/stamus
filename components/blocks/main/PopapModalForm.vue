@@ -138,9 +138,7 @@
             />
             <div class="popup-text">
               Нажимая кнопку отправить, вы соглашаетесь с
-              <a
-                href="http://176.99.11.245:1338/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf"
-                target="_blank"
+              <a :href="privacyLink" target="_blank"
                 >Политикой обработки персональных данных</a
               >
             </div>
@@ -201,9 +199,7 @@
             />
             <div class="popup-text">
               Нажимая кнопку отправить, вы соглашаетесь с
-              <a
-                href="http://176.99.11.245:1338/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf"
-                target="_blank"
+              <a :href="privacyLink" target="_blank"
                 >Политикой обработки персональных данных</a
               >
             </div>
@@ -216,6 +212,15 @@
 
 <script setup>
 const props = defineProps(["isOpen", "addresData", "clinics"]);
+
+const baseDataStore = useBaseDataStore();
+const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
+  ?.attributes?.url
+  ? baseUrl +
+    baseDataStore?.footerData?.data?.attributes?.privacy?.data?.attributes?.url
+  : "";
 
 const isExpanded = ref(false);
 

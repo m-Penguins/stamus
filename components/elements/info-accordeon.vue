@@ -25,9 +25,38 @@ const mockCheckBoxes = [
   "Проходил лечение в 2022 г",
   "Проходил лечение в 2023 г",
 ];
+const optionsData = [
+  { name: "Получаю справку за себя" },
+  { name: "Получаю справку за ребенка" },
+  { name: "Получаю справку за супруга(-и)" },
+  { name: "Получаю справку за родителя" },
+];
+
+const baseDataStore = useBaseDataStore();
+
+const optionsDoc = baseDataStore.clinics?.data
+  ?.map((el) => {
+    const address = el?.attributes?.address;
+
+    if (address) {
+      return {
+        name: `Заберу справку на ${el?.attributes?.address}`,
+      };
+    }
+  })
+  ?.filter(Boolean);
+
 const sendData = () => {
   store.submitModal();
 };
+
+const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
+  ?.attributes?.url
+  ? baseUrl +
+    baseDataStore?.footerData?.data?.attributes?.privacy?.data?.attributes?.url
+  : "";
 </script>
 
 <template>
@@ -195,9 +224,7 @@ const sendData = () => {
               />
               <div class="info-dop-card-subtext">
                 Нажимая кнопку отправить, вы соглашаетесь с
-                <a
-                  href="http://176.99.11.245:1338/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf"
-                  target="_blank"
+                <a :href="privacyLink" target="_blank"
                   >Политикой обработки персональных данных</a
                 >
               </div>

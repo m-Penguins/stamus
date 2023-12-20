@@ -52,20 +52,6 @@ const assetsStore = useAssets();
 const bigImage = assetsStore.useAsset("images/big-images/info.png");
 
 const imgAdaptiv = assetsStore.useAsset("images/big-images/info-adaptiv.png");
-const options = [
-  { name: "Получаю справку за себя" },
-  { name: "Получаю справку за ребенка" },
-  { name: "Получаю справку за супруга(-и)" },
-  { name: "Получаю справку за родителя" },
-];
-const optionsDoc = [
-  { name: "Заберу справку на Хакурате 34" },
-  { name: "Заберу справку на Гимназическая 85" },
-  { name: "Заберу справку на Московская 140" },
-  { name: "Заберу справку на Мачуги 1/1" },
-  { name: "Заберу справку на Платановом бульваре 19/3" },
-  { name: "Прислать на почту" },
-];
 
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 
