@@ -43,7 +43,7 @@ const breadcrumbs = [
       specialist.value?.data?.attributes?.firstName,
     url: ``,
   },
-];
+].filter((el) => el?.title);
 
 const metaData = specialist.value?.data?.attributes?.meta;
 useHead(getMetaObject(metaData, baseUrl));
@@ -71,12 +71,8 @@ const blocks = specialist.value?.data?.attributes?.blocks;
             "
             :text="specialist?.data?.attributes?.description ?? ''"
             :isLinkWithArrow="true"
-            :textLinkWithArrow="
-              specialist?.data?.attributes?.portofolios?.data?.length > 0
-                ? 'Смотреть портфолио'
-                : ''
-            "
-            link="#portfolio"
+            :textLinkWithArrow="'Смотреть портфолио'"
+            :link="`/portfolio?specialist=${route.params?.id}`"
             class="stamus-app-title"
           />
           <div

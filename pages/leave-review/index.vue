@@ -1,15 +1,23 @@
 <script setup>
 const reviewStore = useReviewStore();
 
+const baseDataStore = useBaseDataStore();
+const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
+  ?.attributes?.url
+  ? baseUrl +
+    baseDataStore?.footerData?.data?.attributes?.privacy?.data?.attributes?.url
+  : "";
+
+const clinics = baseDataStore.clinics?.data;
+
 const moveStep2 = computed(() => {
   // good review
   if (isGoodReview.value) {
     return () => {
       if (window) {
-        window?.open(
-          "https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/",
-          "_blank",
-        );
+        window?.open(reviewStore?.clinic?.prodoctorov_link);
       }
       reviewStore.moveStep3();
     };
@@ -23,13 +31,17 @@ const moveStep2 = computed(() => {
 });
 
 const isGoodReview = computed(() =>
-  ["Отлично", "Хорошо", "Приемлемо"].includes(pickedRadio.value),
+  ["Отлично", "Хорошо", "Приемлемо"].includes(reviewStore?.pickedRating),
 );
 
 const stepHeader = [
   {
     title: "Оцените ваш прием",
     text: "Выберите клинику, которую вы посещали",
+  },
+  {
+    title: "Оцените ваш прием",
+    text: "Выберите пункт, который больше всего описывает процесс приема у специалиста",
   },
   {
     title: "Написать руководителю",
@@ -63,8 +75,6 @@ const radioButtons = [
   },
 ];
 
-const pickedRadio = ref(null);
-
 const breadcrumbs = [
   {
     title: "Главная",
@@ -91,25 +101,47 @@ const breadcrumbs = [
       ></p>
     </div>
     <div v-if="reviewStore?.currentStep === 0" class="radio-buttons">
+      <label v-for="radio in clinics" :key="radio?.title" class="radio-button">
+        <input
+          type="radio"
+          :value="radio?.attributes"
+          v-model="reviewStore.clinic"
+        />
+        <div class="radio-circle"></div>
+        <span class="radio-label">{{ radio?.attributes?.heading }}</span>
+      </label>
+      <button
+        class="button-base review-button"
+        :disabled="!reviewStore.clinic"
+        @click="reviewStore.moveStep1"
+      >
+        Далее
+      </button>
+    </div>
+    <div v-if="reviewStore?.currentStep === 1" class="radio-buttons">
       <label
         v-for="radio in radioButtons"
         :key="radio?.title"
         class="radio-button"
       >
-        <input type="radio" :value="radio.title" v-model="pickedRadio" />
+        <input
+          type="radio"
+          :value="radio.title"
+          v-model="reviewStore.pickedRating"
+        />
         <div class="radio-circle"></div>
         <span class="radio-label">{{ radio?.title }}</span>
       </label>
       <button
         class="button-base review-button"
-        :disabled="!pickedRadio"
+        :disabled="!reviewStore.pickedRating"
         @click="moveStep2"
       >
         Далее
       </button>
     </div>
 
-    <div v-else-if="reviewStore.currentStep === 1">
+    <div v-else-if="reviewStore.currentStep === 2">
       <div class="popup-container">
         <div class="popup-inner">
           <div class="popup-input">
@@ -159,9 +191,7 @@ const breadcrumbs = [
           />
           <div class="popup-text">
             Нажимая кнопку отправить, вы соглашаетесь с
-            <a
-              href="http://176.99.11.245:1338/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf"
-              target="_blank"
+            <a :href="privacyLink" target="_blank"
               >Политикой обработки персональных данных</a
             >
           </div>

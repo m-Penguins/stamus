@@ -68,7 +68,9 @@ const breadcrumbs = [
 @import "../../assets/styles/style.scss";
 
 .spicialists-page-cards {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
   gap: 40px 16px;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -89,6 +91,8 @@ const breadcrumbs = [
   .spicialists-page-cards {
     margin: 0 auto 80px;
     gap: 40px 14px;
+
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -98,6 +102,7 @@ const breadcrumbs = [
   }
   .spicialists-page-cards {
     margin: 0 auto 80px;
+    grid-template-columns: 1fr;
   }
 }
 </style>

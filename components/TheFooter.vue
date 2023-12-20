@@ -129,13 +129,22 @@
         >
           Политика конфидециальности
         </NuxtLink>
-        <NuxtLink
-          :to="license"
-          target="_blank"
-          class="footer-text display-block"
-        >
-          Лицензия
-        </NuxtLink>
+        <div>
+          <NuxtLink
+            :to="licenseStamus"
+            target="_blank"
+            class="footer-text display-block"
+          >
+            Лицензия Стамус
+          </NuxtLink>
+          <NuxtLink
+            :to="licenseStamusMed"
+            target="_blank"
+            class="footer-text display-block"
+          >
+            Лицензия СтамусМед
+          </NuxtLink>
+        </div>
         <a href="#" class="bvi-open footer-text display-block" data-bvi="close"
           >Версия для слабовидящих</a
         >
@@ -147,9 +156,19 @@
           <NuxtLink :to="policy" target="_blank" class="footer-text">
             Политика конфидециальности
           </NuxtLink>
-          <NuxtLink :to="license" target="_blank" class="footer-text">
-            Лицензия
-          </NuxtLink>
+          <div class="footer-text">
+            <NuxtLink :to="licenseStamus" target="_blank" class="footer-text">
+              Лицензия Стамус
+            </NuxtLink>
+            /
+            <NuxtLink
+              :to="licenseStamusMed"
+              target="_blank"
+              class="footer-text"
+            >
+              Лицензия СтамусМед
+            </NuxtLink>
+          </div>
 
           <a href="#" class="bvi-open footer-text" data-bvi="close"
             >Версия для слабовидящих</a
@@ -186,10 +205,16 @@ const email = props?.footerData?.data?.attributes?.email;
 
 const socials = props?.footerData?.data?.attributes?.links;
 
-const license = props?.footerData?.data?.attributes?.license?.data?.attributes
-  ?.url
+const licenseStamus = props?.footerData?.data?.attributes?.license_stamus?.data
+  ?.attributes?.url
   ? baseUrl +
-    props?.footerData?.data?.attributes?.license?.data?.attributes?.url
+    props?.footerData?.data?.attributes?.license_stamus?.data?.attributes?.url
+  : "";
+const licenseStamusMed = props?.footerData?.data?.attributes?.license_stamusmed
+  ?.data?.attributes?.url
+  ? baseUrl +
+    props?.footerData?.data?.attributes?.license_stamusmed?.data?.attributes
+      ?.url
   : "";
 
 const policy = props?.footerData?.data?.attributes?.privacy?.data?.attributes

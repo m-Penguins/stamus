@@ -5,7 +5,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-defineProps(["block"]);
+const props = defineProps(["block"]);
 
 const prev = ref(null);
 const next = ref(null);
@@ -14,10 +14,16 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 </script>
 
 <template>
-  <div class="main-events-block" id="portfolio">
+  <div
+    class="main-events-block"
+    id="portfolio"
+    v-if="block?.portofolios?.data?.length"
+  >
     <div class="slider-title">
       <div class="slider-title__box">
-        <h2 class="slider-title__box-title">Похожие работы</h2>
+        <h2 class="slider-title__box-title">
+          {{ block?.title ?? "Портфолио" }}
+        </h2>
       </div>
     </div>
     <div class="wrapper-swiper">
@@ -45,7 +51,6 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
                   portfolio?.attributes?.photoBanner?.data?.attributes
                     ?.alternativeText ?? 'photo-name'
                 "
-                class="card-photo-name-img"
               />
             </div>
             <div class="card-photo-name-container">
@@ -248,7 +253,24 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
   width: 100%;
   object-fit: cover;
   border-radius: 20px;
-  height: 346px;
+  /* height: 308px; */
+
+  aspect-ratio: 1;
+
+  @supports not (aspect-ratio: 1/1) {
+    padding-top: 100%;
+    height: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  & img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    border-radius: 20px;
+  }
 }
 
 .card-photo-name-container {

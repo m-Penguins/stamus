@@ -11,6 +11,9 @@ export default {
       type: Boolean,
       default: false,
     },
+    phone: {
+      type: String,
+    },
   },
   data() {
     return {
@@ -256,7 +259,7 @@ export default {
                         <NuxtLink
                           v-for="(elem, index) in navigationPatients"
                           :key="elem"
-                          :to="elem.path + (index === 3 ? '#middle' : '')"
+                          :to="elem.path + (index === 3 ? '#ndfl' : '')"
                           class="menu-patients-items"
                         >
                           <li class="menu-patients-items-link">
@@ -272,6 +275,15 @@ export default {
                       </ul>
                     </div>
                   </div>
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink
+                  target="_blank"
+                  class="footer-text header-nav-item"
+                  :to="`tel:+${phone?.replace(/\D/g, '')}`"
+                >
+                  {{ phone }}
                 </NuxtLink>
               </li>
             </ul>
@@ -500,6 +512,13 @@ export default {
           class="header-nav-list"
           :class="{ 'display-none': !firstBlockMobMenu }"
         >
+          <NuxtLink
+            target="_blank"
+            class="header-nav-item-mob p-t-20"
+            :to="`tel:+${phone?.replace(/\D/g, '')}`"
+          >
+            {{ phone }}
+          </NuxtLink>
           <div
             :class="showMenuPatients ? 'menu-mob-modal-flex' : 'menu-mob-modal'"
           >
@@ -772,8 +791,8 @@ export default {
 .menu-mob-modal {
   display: grid;
   grid-gap: 18px;
-  grid-template-columns: repeat(2, 56%);
-  grid-template-rows: 15px 15px 15px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 15px 15px 15px 15px;
   grid-auto-flow: column;
   padding: 20px 0 60px;
 }

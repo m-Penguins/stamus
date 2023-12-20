@@ -17,11 +17,11 @@
   />
   <div class="info">
     <h2 class="info-title">Об организации STAMUS</h2>
-    <blocks-info-block />
+    <elements-info-accordeon :items="about" />
   </div>
   <div class="info">
     <h2 class="info-title">Дополнительная информация</h2>
-    <blocks-info-dop-block :optionsData="options" :optionsDoc="optionsDoc" />
+    <elements-info-accordeon :items="additionalCards" />
   </div>
   <BlocksMainBanner
     :title="'Наше приложение'"
@@ -38,7 +38,7 @@
     :title="'Уже были у нас?'"
     :text="'Оставьте отзыв, будем очень вам благодарны'"
     :titleLink="'Оставить отзыв'"
-    link="https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/"
+    link="/leave-review"
     bgColor="grey"
     type="true"
     img="mobile.svg"
@@ -47,39 +47,31 @@
   <blocks-main-form />
 </template>
 
-<script>
-import { mockInfoMain } from "../../stores/mockData";
-export default {
-  setup() {
-    const assetsStore = useAssets();
-    const bigImage = assetsStore.useAsset("images/big-images/info.png");
+<script setup>
+const assetsStore = useAssets();
+const bigImage = assetsStore.useAsset("images/big-images/info.png");
 
-    const imgAdaptiv = assetsStore.useAsset(
-      "images/big-images/info-adaptiv.png",
-    );
-    const options = [
-      { name: "Получаю справку за себя" },
-      { name: "Получаю справку за ребенка" },
-      { name: "Получаю справку за супруга(-и)" },
-      { name: "Получаю справку за родителя" },
-    ];
-    const optionsDoc = [
-      { name: "Заберу справку на Хакурате 34" },
-      { name: "Заберу справку на Гимназическая 85" },
-      { name: "Заберу справку на Московская 140" },
-      { name: "Заберу справку на Мачуги 1/1" },
-      { name: "Заберу справку на Платановом бульваре 19/3" },
-      { name: "Прислать на почту" },
-    ];
-    return {
-      mockInfoMain,
-      options,
-      optionsDoc,
-      bigImage,
-      imgAdaptiv,
-    };
+const imgAdaptiv = assetsStore.useAsset("images/big-images/info-adaptiv.png");
+
+const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+
+const { data: infoData } = await useFetch(`${apiBaseUrl}information`, {
+  query: {
+    populate: "about.*,additional.*",
   },
-};
+});
+
+const about = infoData.value?.data?.attributes?.about;
+
+const additional = infoData.value?.data?.attributes?.additional;
+
+const additionalCards = [
+  ...additional,
+  {
+    id: "ndfl",
+    title: "Документы на возврат НДФЛ",
+  },
+];
 </script>
 
 <style scoped lang="scss">

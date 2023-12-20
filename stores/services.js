@@ -36,12 +36,16 @@ export const useService = defineStore("useServices", {
   actions: {
     async fetchdataService(apiBaseUrl) {
       // const res = await axios.get(`${apiBaseUrl}services?populate=deep`);
+      const baseDataStore = useBaseDataStore();
 
       const { data } = await useFetch(`${apiBaseUrl}services`, {
         query: {
           populate: "category.uslugas.*,category.napravleniya_uslug_1_col.*",
+          "pagination[pageSize]": 300,
         },
       });
+
+      baseDataStore.allServices = data.value;
 
       const navigationServices = useReducedServices(data?.value?.data);
 

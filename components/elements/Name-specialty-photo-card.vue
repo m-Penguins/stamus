@@ -18,7 +18,7 @@
         v-if="isTooltip && specialists?.achievements?.length > 0"
         class="tooltip"
       >
-        <img src="../../assets/images/icons/icons-badge.svg" />
+        <img src="@/assets/images/icons/icons-badge.svg" />
         <span class="info">
           <div
             class="tooltip-box"
@@ -45,7 +45,10 @@
       <p class="card-photo-name-box-discount__addres">
         {{ specialists?.address }}
       </p>
-      <p v-if="specialists?.description" class="">
+      <p
+        v-if="specialists?.description"
+        class="card-photo-name-box-discount__addres"
+      >
         {{ specialists?.description }}
       </p>
       <div v-if="specialists?.time" class="time__container">
@@ -95,6 +98,12 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
   width: 100%;
   object-fit: contain;
 }
+.card-photo-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
 
 .card-photo-name-container-discount {
   display: flex;
@@ -103,6 +112,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 }
 
 .card-photo-name-box-discount {
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   gap: 20px;

@@ -8,8 +8,12 @@ const route = useRoute();
 const pageSize = ref(12);
 const currentPage = ref(route.query.page ?? 1);
 
+// dir = service
 const dirFilter = ref(route.query.dir);
 const searchFilter = ref(route.query.search);
+
+// specialist filter
+const specFilter = ref(route.query.specialist);
 
 const totalItems = ref(0);
 
@@ -88,7 +92,8 @@ const getPortfoliosData = async () => {
     populate: "napravleniya_uslug_1.*,photoBanner.*,infoBlock.*",
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
-    "filters[napravleniya_uslug_1][id][$eq][1]": dirFilter.value,
+    "filters[specialists][id][$eq][4]": specFilter.value,
+    "filters[services][id][$eq][1]": dirFilter.value,
     "filters[heading][$contains][0]": searchFilter.value?.toLowerCase(),
     "filters[heading][$contains][1]": searchFilter.value?.toUpperCase(),
     "filters[heading][$contains][2]":
@@ -111,7 +116,7 @@ const portfoliosData = await getPortfoliosData();
 
 const baseDataStore = useBaseDataStore();
 
-const allDirections = baseDataStore.directions?.data
+const allServices = baseDataStore.allServices?.data
   ?.map((dir) => ({
     id: dir?.id,
     name: dir?.attributes?.heading,
@@ -167,8 +172,8 @@ const mockGallery = arrayImg6.map((img) =>
       <div class="portfolio-form">
         <div class="portfolio-box">
           <elements-custom-select
-            :options="allDirections"
-            label="Выберите направление"
+            :options="allServices"
+            label="Выберите услугу"
             class="select"
             @select="handleDirChange"
             :selectedId="dirFilter"
@@ -253,7 +258,7 @@ const mockGallery = arrayImg6.map((img) =>
   display: flex;
   gap: 40px 16px;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .portfolio-page-card {
