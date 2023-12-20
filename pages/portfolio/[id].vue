@@ -26,6 +26,8 @@ if (!portfolioData.value?.data) {
   });
 }
 
+const symptomTitle = portfolioData.value?.data?.attributes?.symptom_title;
+
 const symptoms = portfolioData.value?.data?.attributes?.symptom
   ?.split("|")
   ?.map((s, i) => ({
@@ -69,6 +71,8 @@ const specialists =
   });
 
 const infoBlock = portfolioData.value?.data?.attributes?.infoBlock;
+
+console.log(infoBlock);
 
 const otherCases = allCasesData.value?.data
   ?.filter((c) => String(c?.id) !== String(route.params.id))
@@ -125,7 +129,7 @@ useHead(getMetaObject(metaData, baseUrl));
     />
     <blocks-symptoms-block
       v-if="symptoms && symptoms?.length"
-      title="Симптомы, с которыми обратился клиент"
+      :title="symptomTitle ?? 'Симптомы, с которыми обратился клиент'"
       :cards="symptoms"
     />
     <blocks-video-block
