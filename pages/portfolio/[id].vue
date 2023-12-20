@@ -132,17 +132,8 @@ useHead(getMetaObject(metaData, baseUrl));
       :title="symptomTitle ?? 'Симптомы, с которыми обратился клиент'"
       :cards="symptoms"
     />
-    <blocks-video-block
-      :title="infoBlock?.heading"
-      :text="infoBlock?.text"
-      :isProblems="true"
-      :link="infoBlock?.link"
-      :problemImg="
-        infoBlock?.image?.data?.attributes?.url
-          ? baseUrl + infoBlock?.image?.data?.attributes?.url
-          : assetsStore.useAsset('images/problems/problem1.png')
-      "
-    />
+    <dynamic-block-opisanie :block="infoBlock" />
+
     <div>
       <blocks-solution-block
         title="Решение"
