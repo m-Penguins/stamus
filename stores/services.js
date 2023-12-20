@@ -45,7 +45,6 @@ export const useService = defineStore("useServices", {
         },
       });
 
-      console.log(data.value);
       baseDataStore.allServices = data.value;
 
       const navigationServices = useReducedServices(data?.value?.data);

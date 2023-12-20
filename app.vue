@@ -54,7 +54,7 @@ const [{ data: footerData }] = await Promise.all([
   servicesStore.fetchdataService(apiBaseUrl),
 ]);
 
-console.log(footerData.value?.data);
+baseDataStore.footerData = footerData.value;
 
 // useHead({
 //   link: [

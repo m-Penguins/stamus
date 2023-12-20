@@ -64,6 +64,7 @@ export default defineNuxtConfig({
         message: [
           { name: "form", to: process.env.MAIL_TO },
           { name: "ndfl", to: process.env.MAIL_TO_TAXES },
+          { name: "review", to: process.env.MAIL_TO_REVIEW },
         ],
         smtp: {
           host: "smtp.yandex.ru",
