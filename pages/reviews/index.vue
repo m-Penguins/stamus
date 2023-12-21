@@ -96,14 +96,20 @@ const getReviewsData = async () => {
   return reviewsData;
 };
 
-const reviewsData = await getReviewsData();
+const [{ data: specialistsData }, reviewsData] = await Promise.all([
+  useFetch(`${apiBaseUrl}specialists`, {
+    query: {
+      "pagination[pageSize]": 300,
+    },
+  }),
+  getReviewsData(),
+]);
+
+const baseDataStore = useBaseDataStore();
+
+const servicesData = baseDataStore.allServices;
 
 const filteredReviews = computed(() => reviewsData?.value?.data);
-
-const [{ data: specialistsData }, { data: servicesData }] = await Promise.all([
-  useFetch(`${apiBaseUrl}specialists`),
-  useFetch(`${apiBaseUrl}services`),
-]);
 
 const allSpecialists = specialistsData.value?.data
   ?.map((spec) => ({
@@ -112,7 +118,7 @@ const allSpecialists = specialistsData.value?.data
   }))
   .filter((el) => el.name);
 
-const allServices = servicesData.value?.data
+const allServices = servicesData?.data
   ?.map((serv) => ({
     id: serv?.id,
     name: serv?.attributes?.heading,
