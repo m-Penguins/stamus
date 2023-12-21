@@ -20,9 +20,19 @@ const route = useRoute();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const { data: clinicsData } = await useFetch(
-  `${apiBaseUrl}clinics?populate=deep`,
-);
+const [{ data: clinicsData }, { data: clinicData }] = await Promise.all([
+  useFetch(`${apiBaseUrl}clinics`, {
+    query: {
+      populate: "photoBanner.*",
+    },
+  }),
+  useFetch(`${apiBaseUrl}clinics/${route.params?.id}`, {
+    query: {
+      populate:
+        "reviews.*,clinics.*,price_lists.servicePrice.Sale_popular.*,photoBanner.*,direction.*,specialists.fotoSpecialist.*,specialists.achievements.icon.*,articles.*,infoBlock.image.*,infoBlock.video.*,chiefDoctor.image.*,galery.*,meta.metaImage.*",
+    },
+  }),
+]);
 
 if (!clinicsData.value) {
   throw createError({
@@ -31,17 +41,7 @@ if (!clinicsData.value) {
     fatal: true,
   });
 }
-
-const clinicDataID = clinicsData.value?.data?.find(
-  (cl) => String(cl.id) === String(route.params.id),
-)?.id;
-
-const { data: clinicData } = await useFetch(
-  `${apiBaseUrl}clinics/${clinicDataID}?populate=reviews.*,clinics.*,price_lists.*,photoBanner.*,direction.*,specialists.fotoSpecialist.*,specialists.achievements.icon.*,articles.*,infoBlock.image.*,infoBlock.video.*,chiefDoctor.image.*,galery.*,meta.metaImage.*`,
-);
-
-const metaData = clinicData.value?.data?.attributes?.meta;
-useHead(getMetaObject(metaData, baseUrl));
+const pricesData = clinicData.value?.data?.attributes?.price_lists;
 
 const galleryList = clinicData?.value?.data?.attributes?.galery?.data
   ?.map((img) =>
@@ -50,24 +50,6 @@ const galleryList = clinicData?.value?.data?.attributes?.galery?.data
       : "",
   )
   ?.filter(Boolean);
-
-const singleServices = ref(
-  clinicsData?.value?.data
-    ?.find((cl) => String(cl.id) === String(route.params.id))
-    ?.attributes?.price_lists?.data?.flatMap((el) => {
-      const item = el?.attributes?.servicePrice?.map((single) => {
-        return {
-          id: single?.id,
-          heading: single?.heading,
-          price: single?.price,
-          Sale_popular: single?.Sale_popular,
-          tags: single?.tags,
-          link: "/prices",
-        };
-      });
-      return item;
-    }),
-);
 
 const chiefDoctor = computed(() => {
   return {
@@ -95,20 +77,7 @@ const otherClinics = computed(() =>
 
 const reviews = mapReviews(clinicData?.value?.data?.attributes?.reviews?.data);
 
-const breadcrumbs = [
-  {
-    title: "Главная",
-    url: "/",
-  },
-  {
-    title: "Клиники",
-    url: "/clinics",
-  },
-  {
-    title: `${clinicData.value?.data?.attributes?.heading}`,
-    url: `/clinics/${route.params.id}`,
-  },
-];
+const infoBlock = clinicData.value?.data?.attributes?.infoBlock;
 
 const title = clinicData?.value?.data?.attributes?.heading;
 const address = clinicData?.value?.data?.attributes?.address;
@@ -125,6 +94,23 @@ const imgAdaptive = clinicData?.value?.data?.attributes?.photoBanner?.data
     clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes?.formats
       ?.small?.url
   : assetsStore.useAsset("images/big-images/info.png");
+
+const breadcrumbs = [
+  {
+    title: "Главная",
+    url: "/",
+  },
+  {
+    title: "Клиники",
+    url: "/clinics",
+  },
+  {
+    title: `${clinicData.value?.data?.attributes?.heading}`,
+    url: `/clinics/${route.params.id}`,
+  },
+];
+const metaData = clinicData.value?.data?.attributes?.meta;
+useHead(getMetaObject(metaData, baseUrl));
 </script>
 
 <template>
@@ -141,41 +127,22 @@ const imgAdaptive = clinicData?.value?.data?.attributes?.photoBanner?.data
     :isBgDark="true"
     :style="{ backgroundSize: 'cover' }"
   />
-  <blocks-video-block
-    v-if="clinicData?.data?.attributes?.infoBlock"
-    :title="clinicData?.data?.attributes?.infoBlock?.heading"
-    :text="clinicData?.data?.attributes?.infoBlock?.text"
-    :link="clinicData?.data?.attributes?.infoBlock?.link"
-    :problemImg="
-      clinicData?.data?.attributes?.infoBlock?.image?.data?.attributes?.url
-        ? baseUrl +
-          clinicData?.data?.attributes?.infoBlock?.image?.data?.attributes?.url
-        : ''
-    "
-    :video="
-      clinicData?.data?.attributes?.infoBlock?.video?.data?.attributes?.url
-        ? baseUrl +
-          clinicData?.data?.attributes?.infoBlock?.video?.data?.attributes?.url
-        : ''
-    "
-    :videoThumbnail="
-      clinicData?.data?.attributes?.infoBlock?.image?.data?.attributes?.url
-        ? baseUrl +
-          clinicData?.data?.attributes?.infoBlock?.image?.data?.attributes?.url
-        : ''
-    "
+  <dynamic-block-opisanie
+    v-if="infoBlock"
+    :block="infoBlock"
+    class="infoBlock"
   />
+
   <blocks-chief-doctor-block
     v-if="chiefDoctor.name"
     :specialists="chiefDoctor"
   />
 
-  <blocks-services-block
-    v-if="singleServices?.length > 0"
-    :singleServices="singleServices"
-    title="Оказываемые услуги"
-    :isLink="false"
+  <BlocksOkazivaemieUslugi
+    v-if="pricesData?.data?.length"
+    :pricesData="pricesData"
   />
+
   <blocks-gallery v-if="galleryList?.length > 0" :arrayImg="galleryList" />
 
   <blocks-our-specialists
@@ -208,3 +175,11 @@ const imgAdaptive = clinicData?.value?.data?.attributes?.photoBanner?.data
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
 }
 </style> -->
+
+<style scoped lang="scss">
+@import "/assets/styles/style.scss";
+
+.infoBlock {
+  margin-bottom: 100px;
+}
+</style>

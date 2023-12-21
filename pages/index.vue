@@ -13,24 +13,13 @@ const [{ data: fourSpecialists }, { data: articlesData }] = await Promise.all([
       "filters[id][$in][3]": 7,
       "filters[id][$in][4]": 10,
       "sort[0]": "order:asc",
-      populate: "deep",
+      populate: "fotoSpecialist.*",
     },
   }),
-  useFetch(`${apiBaseUrl}articles`, { query: { populate: "deep" } }),
+  useFetch(`${apiBaseUrl}articles`, { query: { populate: "fotoArticles.*" } }),
 ]);
 
-const articles = articlesData.value?.data?.map((art) => {
-  return {
-    id: art?.id,
-    heading: art?.attributes?.heading,
-    img: art?.attributes?.fotoArticles?.data?.attributes?.url
-      ? baseUrl + art?.attributes?.fotoArticles?.data?.attributes?.url
-      : assetsStore.useAsset("images/articles/articles-dital.png"),
-    text: art?.attributes?.text,
-    tags: art?.attributes?.tags,
-    description: art?.attributes?.description,
-  };
-});
+const articles = { articles: articlesData.value };
 
 const mainSpecialists = fourSpecialists.value?.data?.map((sp) => {
   return {
@@ -140,7 +129,7 @@ const mainSpecialists = fourSpecialists.value?.data?.map((sp) => {
     bgColor="dark-red"
     img="image.png"
   />
-  <blocks-main-articles title="Статьи" :articles="articles" />
+  <DynamicBlockBlog :block="articles" />
 
   <blocks-main-seo
     title="Стоматология Стамус в Краснодаре это"

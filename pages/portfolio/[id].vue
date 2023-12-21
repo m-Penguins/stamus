@@ -8,7 +8,7 @@ const [{ data: portfolioData }, { data: allCasesData }] = await Promise.all([
   useFetch(`${apiBaseUrl}portofolios/${route.params.id}`, {
     query: {
       populate:
-        "infoBlock.image.*,infoBlock.video.*,galery.*,specialists.fotoSpecialist.*,photoBanner.*,solutionImage.*,services.*, meta.metaImage.*,solution.*,napravleniya_uslug_1.*",
+        "infoBlock.image.*,infoBlock.video.*,galery.*,specialists.fotoSpecialist.*,photoBanner.*,solutionImage.*,services.*, meta.metaImage.*,solution.*,napravleniya_uslug_1.*,same_portfolios.photoBanner.*",
     },
   }),
   useFetch(`${apiBaseUrl}portofolios`, {
@@ -25,6 +25,13 @@ if (!portfolioData.value?.data) {
     fatal: true,
   });
 }
+
+const samePortfolios = {
+  portofolios: portfolioData.value?.data?.attributes?.same_portfolios,
+  title: "Другие кейсы",
+};
+
+const symptomTitle = portfolioData.value?.data?.attributes?.symptom_title;
 
 const symptoms = portfolioData.value?.data?.attributes?.symptom
   ?.split("|")
@@ -125,20 +132,15 @@ useHead(getMetaObject(metaData, baseUrl));
     />
     <blocks-symptoms-block
       v-if="symptoms && symptoms?.length"
-      title="Симптомы, с которыми обратился клиент"
+      :title="symptomTitle ?? 'Симптомы, с которыми обратился клиент'"
       :cards="symptoms"
     />
-    <blocks-video-block
-      :title="infoBlock?.heading"
-      :text="infoBlock?.text"
-      :isProblems="true"
-      :link="infoBlock?.link"
-      :problemImg="
-        infoBlock?.image?.data?.attributes?.url
-          ? baseUrl + infoBlock?.image?.data?.attributes?.url
-          : assetsStore.useAsset('images/problems/problem1.png')
-      "
+    <dynamic-block-opisanie
+      v-if="infoBlock"
+      :block="infoBlock"
+      class="infoBlock"
     />
+
     <div>
       <blocks-solution-block
         title="Решение"
@@ -163,13 +165,20 @@ useHead(getMetaObject(metaData, baseUrl));
       </div>
     </div>
     <blocks-gallery :arrayImg="gallery" v-if="gallery?.length > 0" />
-    <blocks-cases-direction text="Другие кейсы" :dataDirection="otherCases" />
+    <div class="container-size">
+      <dynamic-block-cases :block="samePortfolios" />
+    </div>
+
     <blocks-main-form />
   </div>
 </template>
 
 <style scoped lang="scss">
-@import "../../assets/styles/style.scss";
+@import "@/assets/styles/style.scss";
+
+.infoBlock {
+  margin-bottom: 100px;
+}
 .attending-physicians-block {
   width: 1280px;
   max-width: 100%;

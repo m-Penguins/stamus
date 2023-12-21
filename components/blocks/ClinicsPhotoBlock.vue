@@ -1,14 +1,11 @@
 <script setup>
-const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const { data: clinicsData, error } = await useFetch(
-  `${apiBaseUrl}clinics?populate=deep`,
-);
+defineProps(["clinicsData"]);
 </script>
 
 <template>
-  <div v-if="clinicsData.data && !error" class="container-size areas-wrapper">
+  <div v-if="clinicsData?.data" class="container-size areas-wrapper">
     <h2 class="clinics-block-title">Наши клиники</h2>
 
     <div class="areas-box">

@@ -1,22 +1,10 @@
 <script setup>
-const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+const props = defineProps(["pricesData"]);
 
 const searchInput = ref("");
 const serviceFilter = ref(null);
 
-const [{ data: pricesData }] = await Promise.all([
-  useFetch(`${apiBaseUrl}prices-list`, {
-    query: {
-      populate: "servicePrice.Sale_popular.*,servicePrice.*",
-      "pagination[pageSize]": 300,
-      "sort[0]": "order:desc",
-    },
-  }),
-]);
-
-console.log(pricesData.value);
-
-const allServices = pricesData.value?.data
+const allServices = props.pricesData?.data
   ?.map((el) => {
     if (el?.attributes?.Title) {
       return {
@@ -29,11 +17,11 @@ const allServices = pricesData.value?.data
 
 const filteredPrices = computed(() => {
   if (serviceFilter.value) {
-    return pricesData.value?.data?.filter(
+    return props.pricesData?.data?.filter(
       (el) => el?.id === serviceFilter.value,
     );
   }
-  return pricesData.value?.data;
+  return props.pricesData?.data;
 });
 
 const filteredPricesWithSearch = computed(() => {
@@ -71,31 +59,9 @@ const handleServiceChange = (service) => {
 const handleInputChange = (value) => {
   searchInput.value = value;
 };
-
-const breadcrumbs = [
-  {
-    title: "Главная",
-    url: "/",
-  },
-  {
-    title: "Цены на услуги",
-    url: "/prices",
-  },
-];
 </script>
 
 <template>
-  <div class="prices">
-    <div class="prices-wrap">
-      <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
-      <h1 class="prices-title">Цены на услуги</h1>
-      <p class="prices-text">
-        Все наши цены под ключ. <br />
-        Анестезия, наложение и снятие швов, изоляция и прицельные снимки уже
-        включены в стоимость
-      </p>
-    </div>
-  </div>
   <div class="container-size popular-service">
     <div class="service-form">
       <div class="service-box">
@@ -162,13 +128,6 @@ const breadcrumbs = [
     </template>
 
     <h3 v-else class="prices-box-title">Ничего не найдено</h3>
-
-    <elements-button-base
-      title="Скачать полный прайс"
-      :isDownload="true"
-      :link="'https://disk.yandex.ru/d/KVMGriYcVDOHgg'"
-      class="prices-btn"
-    />
   </div>
 </template>
 

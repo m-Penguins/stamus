@@ -20,15 +20,20 @@ export default {
   async setup() {
     const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 
-    const { data: specialistsData } = await useFetch(
-      `${apiBaseUrl}specialists`,
-      {
-        query: {
-          populate: "deep",
-          "sort[0]": "order:asc",
-        },
-      },
-    );
+    const [{ data: clinicsData }, { data: specialistsData }] =
+      await Promise.all([
+        useFetch(`${apiBaseUrl}clinics`, {
+          query: {
+            populate: "photoBanner.*",
+          },
+        }),
+        useFetch(`${apiBaseUrl}specialists`, {
+          query: {
+            populate: "fotoSpecialist.*,achievements.*",
+            "sort[0]": "order:asc",
+          },
+        }),
+      ]);
 
     if (!specialistsData.value) {
       throw createError({
@@ -66,6 +71,7 @@ export default {
       arrayImg,
       bigImage,
       imgAdaptiv,
+      clinicsData,
     };
   },
 };
@@ -96,10 +102,10 @@ export default {
     text="Как уже неоднократно упомянуто, непосредственные участники технического прогресса неоднозначны и будут разоблачены. С учётом сложившейся международной обстановки, высококачественный прототип будущего проекта не даёт нам иного выбора, кроме определения приоретизации разума над эмоциями. Разнообразный и богатый опыт говорит нам, что укрепление и развитие внутренней структуры в значительной степени обусловливает важность системы массового участия."
   />
   <blocks-chief-doctor-block :specialists="mockArray" />
-  <blocks-clinics-photo-block />
+  <blocks-clinics-photo-block :clinics-data="clinicsData" />
   <blocks-gallery :arrayImg="arrayImg" />
   <blocks-our-specialists
-    v-if="specialistsData.data && !error"
+    v-if="specialistsData.data"
     :data="specialistsData.data"
     title="Наши специалисты"
   />
