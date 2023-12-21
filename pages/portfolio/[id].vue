@@ -132,7 +132,7 @@ useHead(getMetaObject(metaData, baseUrl));
       :title="symptomTitle ?? 'Симптомы, с которыми обратился клиент'"
       :cards="symptoms"
     />
-    <dynamic-block-opisanie :block="infoBlock" />
+    <dynamic-block-opisanie v-if="infoBlock" :block="infoBlock" />
 
     <div>
       <blocks-solution-block

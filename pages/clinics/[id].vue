@@ -143,7 +143,7 @@ const imgAdaptive = clinicData?.value?.data?.attributes?.photoBanner?.data
     :isBgDark="true"
     :style="{ backgroundSize: 'cover' }"
   />
-  <dynamic-block-opisanie :block="infoBlock" />
+  <dynamic-block-opisanie v-if="infoBlock" :block="infoBlock" />
 
   <blocks-chief-doctor-block
     v-if="chiefDoctor.name"
