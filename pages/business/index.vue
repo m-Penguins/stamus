@@ -77,7 +77,7 @@ export default {
     :clinics="baseDataStore.clinics"
   />
   <elements-main-info
-    title="Бизнесу и корпортивным клиентам"
+    title="Бизнесу и корпоративным клиентам"
     text="Небольшое описание в несколько строчек"
     :imgBg="bigImage"
     :imgAdaptiv="imgAdaptiv"
