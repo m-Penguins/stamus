@@ -113,7 +113,7 @@ export default {
 
 <template>
   <elements-main-info
-    title="5 клиник в Краснодаре"
+    :title="`${clinicsData?.data?.length ?? 5} клиник в Краснодаре`"
     text="1 место в Краснодаре"
     :imgBg="bigImage"
     :imgAdaptiv="imgAdaptiv"
