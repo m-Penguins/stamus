@@ -110,6 +110,8 @@ const breadcrumbs = [
   },
 ];
 
+const infoBlock = clinicData.value?.data?.attributes?.infoBlock;
+
 const title = clinicData?.value?.data?.attributes?.heading;
 const address = clinicData?.value?.data?.attributes?.address;
 
@@ -141,30 +143,8 @@ const imgAdaptive = clinicData?.value?.data?.attributes?.photoBanner?.data
     :isBgDark="true"
     :style="{ backgroundSize: 'cover' }"
   />
-  <blocks-video-block
-    v-if="clinicData?.data?.attributes?.infoBlock"
-    :title="clinicData?.data?.attributes?.infoBlock?.heading"
-    :text="clinicData?.data?.attributes?.infoBlock?.text"
-    :link="clinicData?.data?.attributes?.infoBlock?.link"
-    :problemImg="
-      clinicData?.data?.attributes?.infoBlock?.image?.data?.attributes?.url
-        ? baseUrl +
-          clinicData?.data?.attributes?.infoBlock?.image?.data?.attributes?.url
-        : ''
-    "
-    :video="
-      clinicData?.data?.attributes?.infoBlock?.video?.data?.attributes?.url
-        ? baseUrl +
-          clinicData?.data?.attributes?.infoBlock?.video?.data?.attributes?.url
-        : ''
-    "
-    :videoThumbnail="
-      clinicData?.data?.attributes?.infoBlock?.image?.data?.attributes?.url
-        ? baseUrl +
-          clinicData?.data?.attributes?.infoBlock?.image?.data?.attributes?.url
-        : ''
-    "
-  />
+  <dynamic-block-opisanie :block="infoBlock" />
+
   <blocks-chief-doctor-block
     v-if="chiefDoctor.name"
     :specialists="chiefDoctor"
