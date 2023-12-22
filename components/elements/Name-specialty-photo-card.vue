@@ -26,6 +26,7 @@
             :key="item"
           >
             <img
+              v-if="item?.icon?.data?.attributes?.url"
               :src="baseUrl + item?.icon?.data?.attributes?.url"
               alt="icon"
             />
