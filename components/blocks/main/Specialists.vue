@@ -145,7 +145,7 @@ const selectedIndex = ref(0);
     gap: 14px;
 
     max-height: 380px;
-    overflow: auto;
+    overflow-y: auto;
 
     .active {
       position: relative;
@@ -160,11 +160,11 @@ const selectedIndex = ref(0);
     padding: 10px;
     border: 1px solid var(--stroke, #e9e9e9);
     background: white;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
       border: 1px solid #d5d5d5;
-      cursor: pointer;
-      transition: all 0.3s ease-in-out;
       color: var(--accent, #232d5b);
     }
 

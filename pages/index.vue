@@ -25,7 +25,44 @@ const description = mainData.value?.data?.attributes?.description;
 const twoDirections =
   mainData.value?.data?.attributes?.two_directions?.data?.slice(0, 2);
 
-console.log(twoDirections);
+const firstBanner = mainData.value?.data?.attributes?.first_banner;
+const secondBanner = mainData.value?.data?.attributes?.second_banner;
+const thirdBanner = mainData.value?.data?.attributes?.third_banner;
+const fourthBanner = mainData.value?.data?.attributes?.fourth_banner;
+
+const reviews = mainData.value?.data?.attributes;
+
+const mainSpecialists =
+  mainData.value?.data?.attributes?.specialists?.data?.map((sp) => {
+    return {
+      id: sp?.id,
+      name: `${sp?.attributes?.firstName} ${sp?.attributes?.lastName}`,
+      category: sp?.attributes?.position,
+      img: sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.thumbnail
+        ?.url
+        ? baseUrl +
+          sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.thumbnail
+            ?.url
+        : assetsStore.useAsset("images/icons/logo.svg"),
+      imgBig: sp?.attributes?.fotoSpecialist?.data?.attributes?.url
+        ? baseUrl + sp?.attributes?.fotoSpecialist?.data?.attributes?.url
+        : assetsStore.useAsset("images/icons/logo.svg"),
+      experience: {
+        year: sp?.attributes?.meetingPerson?.dataMeeting?.[0]?.total,
+        text: sp?.attributes?.meetingPerson?.dataMeeting?.[0]?.item,
+      },
+      review: {
+        year: sp?.attributes?.meetingPerson?.dataMeeting?.[1]?.total,
+        text: sp?.attributes?.meetingPerson?.dataMeeting?.[1]?.item,
+      },
+      consultation: {
+        year: sp?.attributes?.meetingPerson?.dataMeeting?.[2]?.total,
+        text: sp?.attributes?.meetingPerson?.dataMeeting?.[2]?.item,
+      },
+    };
+  });
+
+console.log(mainData.value);
 
 const metaData = mainData.value?.data?.attributes?.meta;
 useHead(getMetaObject(metaData, baseUrl));
@@ -75,49 +112,30 @@ useHead(getMetaObject(metaData, baseUrl));
     :twoDirections="twoDirections"
   />
 
-  <BlocksMainBanner
-    :title="'Лечим не только зубы'"
-    :text="'Многопрофильная детская клиника Стамусу на Юбилейном'"
-    :titleLink="'Узнать подробнее'"
-    link="/detskaya-klinika"
-    bgColor="light-blue-gradient"
-    type="true"
-    img="girl.png"
-  />
+  <section class="section-wrapper">
+    <BlocksMyBanner :block="firstBanner" />
+  </section>
 
   <blocks-main-areas />
+
   <blocks-main-specialists :mainSpecialists="mainSpecialists" />
-  <BlocksMainBanner
-    :title="'Добровольное медицинское страхование'"
-    :text="'Работаем с большинством страховых компаний России.'"
-    :titleLink="'Узнать подробнее'"
-    link="#"
-    bgColor="light-blue"
-    type="true"
-    img="cards2.png"
-    bigImg="true"
-    :handleLinkClick="openBidModal"
-  />
+
+  <section class="section-wrapper">
+    <BlocksMyBanner :block="secondBanner" />
+  </section>
   <blocks-main-popularServices />
-  <BlocksMainBanner
-    :selectedText="true"
-    :text="'Независимый всеройсийский портал Продокторов'"
-    :titleLink="'Записаться онлайн'"
-    link="https://app.1denta.ru/booking/booking?orgid=11074&roistat_visit=282247#/network"
-    bgColor="blue-gradient"
-    img="mobile.svg"
-    bigImg="true"
-  />
-  <blocks-main-feedback :reviews="reviews" />
-  <BlocksMainBanner
-    :title="'Лучшая детская стоматология'"
-    :text="'среди частных детских стоматологий Краснодара по версии экспертного журнала Startsmile при поддержке ИД “КоммерстантЪ”'"
-    :additionalText="' *1 место в рейтинге детских стоматологических клиник Краснодара за 2022 (клиники, которым более 3-х лет)'"
-    :titleLink="'Узнать подробнее'"
-    link="/detskaya-stomatologiya"
-    bgColor="dark-red"
-    img="image.png"
-  />
+
+  <section class="section-wrapper">
+    <BlocksMyBanner :block="thirdBanner" />
+  </section>
+
+  <section class="section-wrapper">
+    <DynamicBlockReviews :block="reviews" />
+  </section>
+
+  <section class="section-wrapper">
+    <BlocksMyBanner :block="fourthBanner" />
+  </section>
   <DynamicBlockBlog :block="articles" />
 
   <blocks-main-seo
@@ -140,4 +158,15 @@ useHead(getMetaObject(metaData, baseUrl));
 
 <style lang="scss" scoped>
 @import "../assets/styles/style.scss";
+
+.section-wrapper {
+  width: 100%;
+  max-width: 1280px;
+
+  margin: 0 auto 100px;
+
+  @include media(680px) {
+    margin: 0 auto 80px;
+  }
+}
 </style>
