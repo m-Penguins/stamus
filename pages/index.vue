@@ -66,8 +66,6 @@ const seoData = mainData.value?.data?.attributes?.seo_block;
 
 const articles = mainData.value?.data?.attributes?.articles;
 
-console.log(mainData.value);
-
 const metaData = mainData.value?.data?.attributes?.meta;
 useHead(getMetaObject(metaData, baseUrl));
 
@@ -130,6 +128,7 @@ useHead(getMetaObject(metaData, baseUrl));
   <section class="section-wrapper" v-if="secondBanner">
     <BlocksMyBanner :block="secondBanner" />
   </section>
+
   <blocks-main-popularServices />
 
   <section class="section-wrapper" v-if="thirdBanner">
@@ -147,6 +146,7 @@ useHead(getMetaObject(metaData, baseUrl));
   <section class="section-wrapper" v-if="articles?.data?.length">
     <DynamicBlockBlog :block="{ articles: articles }" />
   </section>
+
   <section class="section-wrapper" v-if="seoData">
     <DynamicBlockSeo :block="seoData" />
   </section>
