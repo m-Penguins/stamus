@@ -2,125 +2,78 @@
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const [{ data: fourSpecialists }, { data: articlesData }] = await Promise.all([
-  useFetch(`${apiBaseUrl}specialists`, {
+const baseDataStore = useBaseDataStore();
+
+const clinicsNumber = baseDataStore.clinics?.data?.length;
+
+const mainTitle = `${clinicsNumber} клиник СТАМУС в Краснодаре`;
+
+const [{ data: mainData }, { data: directionsData }] = await Promise.all([
+  useFetch(`${apiBaseUrl}glavnaya`, {
     query: {
-      "pagination[page]": 1,
-      "pagination[pageSize]": 5,
-      "filters[id][$in][0]": 3,
-      "filters[id][$in][1]": 9,
-      "filters[id][$in][2]": 4,
-      "filters[id][$in][3]": 7,
-      "filters[id][$in][4]": 10,
-      "sort[0]": "order:asc",
-      populate: "fotoSpecialist.*",
+      populate:
+        "two_directions.photoBanner.*,first_banner.banner.image.*,second_banner.banner.image.*,third_banner.banner.image.*,fourth_banner.banner.image.*,meta.metaImage.*,articles.fotoArticles.*,reviews.*,specialists.fotoSpecialist.*",
     },
   }),
-  useFetch(`${apiBaseUrl}articles`, { query: { populate: "fotoArticles.*" } }),
+  useFetch(`${apiBaseUrl}main-derections`, {
+    query: { populate: "photoBanner.*" },
+  }),
 ]);
 
-const articles = { articles: articlesData.value };
+const description = mainData.value?.data?.attributes?.description;
 
-const mainSpecialists = fourSpecialists.value?.data?.map((sp) => {
-  return {
-    id: sp?.id,
-    name: `${sp?.attributes?.firstName} ${sp?.attributes?.lastName}`,
-    category: sp?.attributes?.position,
-    img: sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.thumbnail
-      ?.url
-      ? baseUrl +
-        sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.thumbnail
-          ?.url
-      : assetsStore.useAsset("images/icons/logo.svg"),
-    imgBig: sp?.attributes?.fotoSpecialist?.data?.attributes?.url
-      ? baseUrl + sp?.attributes?.fotoSpecialist?.data?.attributes?.url
-      : assetsStore.useAsset("images/icons/logo.svg"),
-    experience: {
-      year: sp?.attributes?.meetingPerson?.dataMeeting?.[0]?.total,
-      text: sp?.attributes?.meetingPerson?.dataMeeting?.[0]?.item,
-    },
-    review: {
-      year: sp?.attributes?.meetingPerson?.dataMeeting?.[1]?.total,
-      text: sp?.attributes?.meetingPerson?.dataMeeting?.[1]?.item,
-    },
-    consultation: {
-      year: sp?.attributes?.meetingPerson?.dataMeeting?.[2]?.total,
-      text: sp?.attributes?.meetingPerson?.dataMeeting?.[2]?.item,
-    },
-  };
-});
-// const reviews = [
-//   {
-//     name: "Пациент +7-989-00XXXXX",
-//     grade: "4,8",
-//     text: '"Стамус" отличная клиника для всей семьи. Познакомилась с этой клиникой благодаря сыну. Очень понравились детские стоматологи. И не раздумывая, решила выбрать эту клинику и для себя. Проходила здесь лечение, врач профессионально провел лечение в комфортной для меня обстановке. Доктор был очень внимательный, вежливый, отзывчивый. Очень подробно отвечал на все мои вопросы. Я осталась очень довольна. Кстати, цвет подобрал идеальный. Рекомендую эту клинику и этих специалистов.',
-//     date: "20 сентября",
-//   },
-//   {
-//     name: "Пациент +7-918-08XXXXX",
-//     grade: "4,9",
-//     text: "Обратилась с болью в зубе. Удалили зуб безболезненно и быстро, поставили имплант, поставили ортопедическую часть. Всем осталась максимально довольна: чистотой, вниманием, обслуживанием и улыбками! Данную клинику рекомендую на 100 процентов! Понравилось месторасположение, профессионализм врачей, спектр услуг, современное оборудование, доброжелательность! Абсолютно всё!",
-//     date: "14 сентября",
-//   },
-//   {
-//     name: "Пациент +7-928-43XXXXX",
-//     grade: "5,0",
-//     text: 'Мы обратились по поводу удаления зуба дочке, которая ранее наотрез отказалась идти к стоматологу в обычной поликлинике (истерика и убегание, отбивание руками и прочие "прелести"). По рекомендации другого доктора обратились в "Стамус" . Моему восторгу нет предела. Профессионализм, чуткость, доброта, забота - вызвали слезы на глазах. Спасибо вам огромное. Не навязывали лишние услуги и лишние расходы. Объективно отвечали на вопросы. Комфортно для детей. Игровая - супер, подарки после приема - супер.',
-//     date: "8 сентября",
-//   },
-//   {
-//     name: "Пациент +7-938-88XXXXX",
-//     grade: "4.9",
-//     text: 'Обращался по удалению и одновременной имплантации, было удалено и имплантировано 5 зубов. Операция проводилась под наркозом за 1 раз. Все очень понравилось, врачи провели осмотр, рассказали об этапах и как все будет проходить. Максимально подробно. После операции также все рассказали, дали рекомендации по питанию. Через неделю сняли швы и проконсультировали по дальнейшим шагам. Весь персонал отзывчивый, всегда готов помочь, даже присылают "напоминалки" о том, что прием назначен. Клиника технологична, не нужно рассказывать, зачем ты пришел.',
-//     date: "30 августа",
-//   },
-//   {
-//     name: "Пациент +7-918-37XXXXX",
-//     grade: "5,0",
-//     text: 'После неудачного посещения врача в детской поликлинике, обратились в детскую клинику "СтамусМед". И, начиная с ресепшен и до самого посещения врача, сразу увидели контраст. Уважительное отношение к пациентам. Внимательно выслушали, пригласили врача, который грамотно проконсультировал, все разъяснил. Записали на прием в удобное для нас время. Когда посетили врача, то увидели и почувствовали грамотного, внимательного специалиста. Врач осмотрела, очень внимательно слушала ребенка. Все делала квалифицированно и, главное, уважительно. После такого приема решили, что данная клиника и такой врач будет для нас постоянным.',
-//     date: "19 июня",
-//   },
-// ];
-useHead({
-  title:
-    "Стоматология Стамус в Краснодаре. Семейная стоматология в вашем районе для взрослых и детей",
-  meta: [
-    {
-      name: "twitter:title",
-      content:
-        "Стоматология Стамус в Краснодаре. Семейная стоматология в вашем районе для взрослых и детей",
-    },
-    {
-      property: "og:title",
-      content:
-        "Стоматология Стамус в Краснодаре. Семейная стоматология в вашем районе для взрослых и детей",
-    },
-    {
-      name: "description",
-      content:
-        "Стамус - это сеть стоматологий в Краснодаре зарекомендовавшая себя с 2006 года. Семейная стоматология для взрослых и детей с отличными отзывами. Записаться",
-    },
-    {
-      name: "twitter:description",
-      content:
-        "Стамус - это сеть стоматологий в Краснодаре зарекомендовавшая себя с 2006 года. Семейная стоматология для взрослых и детей с отличными отзывами. Записаться",
-    },
-    {
-      property: "og:description",
-      content:
-        "Стамус - это сеть стоматологий в Краснодаре зарекомендовавшая себя с 2006 года. Семейная стоматология для взрослых и детей с отличными отзывами. Записаться",
-    },
-    {
-      name: "keywords",
-      content:
-        "стоматология, стоматология в Краснодаре, семейная стоматология,стоматология стамус, стамус, взрослая стоматология",
-    },
-  ],
-});
+const twoDirections =
+  mainData.value?.data?.attributes?.two_directions?.data?.slice(0, 2);
+
+console.log(twoDirections);
+
+const metaData = mainData.value?.data?.attributes?.meta;
+useHead(getMetaObject(metaData, baseUrl));
+
+// useHead({
+//   title:
+//     "Стоматология Стамус в Краснодаре. Семейная стоматология в вашем районе для взрослых и детей",
+//   meta: [
+//     {
+//       name: "twitter:title",
+//       content:
+//         "Стоматология Стамус в Краснодаре. Семейная стоматология в вашем районе для взрослых и детей",
+//     },
+//     {
+//       property: "og:title",
+//       content:
+//         "Стоматология Стамус в Краснодаре. Семейная стоматология в вашем районе для взрослых и детей",
+//     },
+//     {
+//       name: "description",
+//       content:
+//         "Стамус - это сеть стоматологий в Краснодаре зарекомендовавшая себя с 2006 года. Семейная стоматология для взрослых и детей с отличными отзывами. Записаться",
+//     },
+//     {
+//       name: "twitter:description",
+//       content:
+//         "Стамус - это сеть стоматологий в Краснодаре зарекомендовавшая себя с 2006 года. Семейная стоматология для взрослых и детей с отличными отзывами. Записаться",
+//     },
+//     {
+//       property: "og:description",
+//       content:
+//         "Стамус - это сеть стоматологий в Краснодаре зарекомендовавшая себя с 2006 года. Семейная стоматология для взрослых и детей с отличными отзывами. Записаться",
+//     },
+//     {
+//       name: "keywords",
+//       content:
+//         "стоматология, стоматология в Краснодаре, семейная стоматология,стоматология стамус, стамус, взрослая стоматология",
+//     },
+//   ],
+// });
 </script>
 
 <template>
-  <blocks-main-primary-banner />
+  <blocks-main-primary-banner
+    :title="mainTitle"
+    :description="description"
+    :twoDirections="twoDirections"
+  />
 
   <BlocksMainBanner
     :title="'Лечим не только зубы'"

@@ -115,8 +115,9 @@ export default {
 }
 
 .container {
+  width: 100%;
   // width: 431px;
-  width: 481px;
+  max-width: 481px;
 
   .container-text {
     @include body-20-regular;
