@@ -1,5 +1,6 @@
 <script setup>
 defineProps(["block"]);
+
 const assetsStore = useAssets();
 const baseUrl = useRuntimeConfig().public?.baseUrl;
 </script>
@@ -19,8 +20,16 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
       alt="rectangle"
     />
     <div class="seo-block-text">
-      <h2 class="seo-block-text__title p-bt-14" v-html="block?.title"></h2>
-      <div class="seo-block-text__text" v-html="block?.description"></div>
+      <h2
+        class="seo-block-text__title p-bt-14"
+        v-if="block?.title"
+        v-html="block?.title"
+      ></h2>
+      <div
+        class="seo-block-text__text"
+        v-if="block?.description"
+        v-html="block?.description"
+      ></div>
     </div>
   </div>
 </template>

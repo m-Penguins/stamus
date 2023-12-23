@@ -12,7 +12,7 @@ const [{ data: mainData }, { data: directionsData }] = await Promise.all([
   useFetch(`${apiBaseUrl}glavnaya`, {
     query: {
       populate:
-        "two_directions.photoBanner.*,first_banner.banner.image.*,second_banner.banner.image.*,third_banner.banner.image.*,fourth_banner.banner.image.*,meta.metaImage.*,articles.fotoArticles.*,reviews.*,specialists.fotoSpecialist.*",
+        "two_directions.photoBanner.*,first_banner.banner.image.*,second_banner.banner.image.*,third_banner.banner.image.*,fourth_banner.banner.image.*,meta.metaImage.*,articles.fotoArticles.*,reviews.*,specialists.fotoSpecialist.*,seo_block.image.*",
     },
   }),
   useFetch(`${apiBaseUrl}main-derections`, {
@@ -61,6 +61,10 @@ const mainSpecialists =
       },
     };
   });
+
+const seoData = mainData.value?.data?.attributes?.seo_block;
+
+const articles = mainData.value?.data?.attributes?.articles;
 
 console.log(mainData.value);
 
@@ -112,47 +116,41 @@ useHead(getMetaObject(metaData, baseUrl));
     :twoDirections="twoDirections"
   />
 
-  <section class="section-wrapper">
+  <section class="section-wrapper" v-if="firstBanner">
     <BlocksMyBanner :block="firstBanner" />
   </section>
 
   <blocks-main-areas />
 
-  <blocks-main-specialists :mainSpecialists="mainSpecialists" />
+  <blocks-main-specialists
+    v-if="mainSpecialists?.length"
+    :mainSpecialists="mainSpecialists"
+  />
 
-  <section class="section-wrapper">
+  <section class="section-wrapper" v-if="secondBanner">
     <BlocksMyBanner :block="secondBanner" />
   </section>
   <blocks-main-popularServices />
 
-  <section class="section-wrapper">
+  <section class="section-wrapper" v-if="thirdBanner">
     <BlocksMyBanner :block="thirdBanner" />
   </section>
 
-  <section class="section-wrapper">
+  <section class="section-wrapper" v-if="reviews">
     <DynamicBlockReviews :block="reviews" />
   </section>
 
-  <section class="section-wrapper">
+  <section class="section-wrapper" v-if="fourthBanner">
     <BlocksMyBanner :block="fourthBanner" />
   </section>
-  <DynamicBlockBlog :block="articles" />
 
-  <blocks-main-seo
-    title="Стоматология Стамус в Краснодаре это"
-    text="<ul>
-    <li>- Более 100 врачей</li>
-    <li>- 17 лет работы и непрерывного роста</li>
-    <li>- Самое большое детское стоматологическое отделение в городе</li>
-    <li>- Первая частная челюстно-лицевая хирургия в Краснодаре.</li>
-  </ul>
-  <br/>
-  <p>Наши операторы открыто расскажут о ценах и услугах, и это не будет отличаться от информации в клиниках. Стоимость услуг включает в себя анестезию, прицельные снимки, снятие швов и др.</p>
-  <br/>
-  <p>В «Стамус» обслуживается ежегодно 50 тысяч пациентов. Тщательный контроль, стандарты и протоколы позволяют проводить эффективное лечение пациентов.</p>
-  "
-    img="rectangle.png"
-  />
+  <section class="section-wrapper" v-if="articles?.data?.length">
+    <DynamicBlockBlog :block="{ articles: articles }" />
+  </section>
+  <section class="section-wrapper" v-if="seoData">
+    <DynamicBlockSeo :block="seoData" />
+  </section>
+
   <blocks-main-form />
 </template>
 
