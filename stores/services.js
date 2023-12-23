@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import axios from "axios";
 import useReducedServices from "@/composables/useReducedServices";
 
 export const useService = defineStore("useServices", {
