@@ -86,7 +86,7 @@ $mobile: 680px;
 .primary-banner-img {
   position: relative;
 
-  background-color: #232d5b;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
   height: 100%;
 
   border-radius: 45px;

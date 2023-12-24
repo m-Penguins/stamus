@@ -1,7 +1,7 @@
 <script setup>
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-defineProps(["clinicsData"]);
+defineProps(["directionsData"]);
 </script>
 
 <template>
