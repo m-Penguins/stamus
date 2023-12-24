@@ -58,7 +58,7 @@ const blocks = specialist.value?.data?.attributes?.blocks;
       <div class="stamus-app-container">
         <div class="stamus-app-container-text">
           <elements-title-text-button
-            font-size="true"
+            :font-size="true"
             isCategory="true"
             :category="specialist?.data?.attributes?.position ?? ''"
             textButtonBase="Записаться онлайн"

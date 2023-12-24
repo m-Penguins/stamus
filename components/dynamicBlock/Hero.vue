@@ -18,7 +18,7 @@
               :customClick="redirectToExternalApp"
               :isButtonBase="isButtonBase"
               :title="title"
-              font-size="true"
+              :font-size="true"
               :text="text"
               :class="isTimeAndPriceCard ? 'main-info-width' : ''"
             />
