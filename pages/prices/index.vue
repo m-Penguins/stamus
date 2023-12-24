@@ -1,5 +1,8 @@
 <script setup>
+import imagePlaceholders from "~/utils/imagePlaceholders";
+
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const searchInput = ref("");
 const serviceFilter = ref(null);
@@ -69,6 +72,8 @@ const handleServiceChange = (service) => {
 const handleInputChange = (value) => {
   searchInput.value = value;
 };
+
+const priceLink = baseUrl + imagePlaceholders?.priceListPDF;
 
 const breadcrumbs = [
   {
@@ -197,12 +202,14 @@ useHead({
 
     <h3 v-else class="prices-box-title">Ничего не найдено</h3>
 
-    <elements-button-base
-      title="Скачать полный прайс"
-      :isDownload="true"
-      :link="'https://disk.yandex.ru/d/KVMGriYcVDOHgg'"
-      class="prices-btn"
-    />
+    <a
+      :href="priceLink"
+      target="_blank"
+      download
+      rel="noopener noreferrer"
+      class="prices-btn button-base"
+      >Скачать полный прайс</a
+    >
   </div>
 </template>
 
