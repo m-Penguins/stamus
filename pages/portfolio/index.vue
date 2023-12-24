@@ -1,4 +1,6 @@
 <script setup>
+import imagePlaceholders from "~/utils/imagePlaceholders";
+
 const assetsStore = useAssets();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
@@ -130,9 +132,10 @@ const portfolios = computed(() =>
       name: p?.attributes?.heading,
       category: p?.attributes?.direction?.directions,
       description: p?.attributes?.description,
-      img: p?.attributes?.photoBanner?.data?.attributes?.url
-        ? baseUrl + p?.attributes?.photoBanner?.data?.attributes?.url
-        : assetsStore.useAsset("images/no-photo.png"),
+      img: p?.attributes?.photoBanner?.data?.attributes?.formats?.small?.url
+        ? baseUrl +
+          p?.attributes?.photoBanner?.data?.attributes?.formats?.small?.url
+        : baseUrl + imagePlaceholders?.portfoliosSmall,
     };
   }),
 );

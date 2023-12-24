@@ -1,4 +1,6 @@
 <script setup>
+import imagePlaceholders from "~/utils/imagePlaceholders";
+
 // hides this page
 // remove to give access
 
@@ -39,7 +41,7 @@ const img = articleData.value?.data?.attributes?.fotoArticles?.data?.attributes
   ?.url
   ? baseUrl +
     articleData.value?.data?.attributes?.fotoArticles?.data?.attributes?.url
-  : assetsStore.useAsset("images/articles/articles-dital.png");
+  : baseUrl + imagePlaceholders?.articles;
 
 const otherArticles = allArticles.value?.data
   ?.filter((art) => String(art.id) !== String(route.params.id))
@@ -47,9 +49,10 @@ const otherArticles = allArticles.value?.data
     return {
       id: art?.id,
       heading: art?.attributes?.heading,
-      img: art?.attributes?.fotoArticles?.data?.attributes?.url
-        ? baseUrl + art?.attributes?.fotoArticles?.data?.attributes?.url
-        : assetsStore.useAsset("images/articles/articles-dital.png"),
+      img: art?.attributes?.fotoArticles?.data?.attributes?.formats?.small?.url
+        ? baseUrl +
+          art?.attributes?.fotoArticles?.data?.attributes?.formats?.small?.url
+        : baseUrl + imagePlaceholders?.articles,
       text: art?.attributes?.text,
       tags: art?.attributes?.tags,
     };

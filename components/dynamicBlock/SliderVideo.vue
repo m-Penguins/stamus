@@ -45,8 +45,22 @@ const handleVideoClick = (link) => {
             <div class="ss-card" @click="handleVideoClick(video?.videoLink)">
               <div class="ss-image">
                 <img
-                  v-if="video?.videoPreview?.data?.attributes?.url"
+                  v-if="
+                    video?.videoPreview?.data?.attributes?.formats?.small?.url
+                  "
+                  :src="`${baseUrl}${video?.videoPreview?.data?.attributes?.formats?.small?.url}`"
+                  alt="Video"
+                  class="problems__image"
+                />
+                <img
+                  v-else-if="video?.videoPreview?.data?.attributes?.url"
                   :src="`${baseUrl}${video?.videoPreview?.data?.attributes?.url}`"
+                  alt="Video"
+                  class="problems__image"
+                />
+                <img
+                  v-else
+                  :src="`${baseUrl}${imagePlaceholders?.portfoliosSmall}`"
                   alt="Video"
                   class="problems__image"
                 />

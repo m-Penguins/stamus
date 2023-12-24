@@ -11,8 +11,6 @@ const prev = ref(null);
 const next = ref(null);
 
 const baseUrl = useRuntimeConfig().public.baseUrl;
-
-console.log(props.programs);
 </script>
 
 <template>

@@ -1,4 +1,6 @@
 <script setup>
+import imagePlaceholders from "~/utils/imagePlaceholders";
+
 const route = useRoute();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
@@ -68,9 +70,12 @@ const getSearchData = async () => {
   specialists.value = specialistsData?.value?.data?.map((sp) => ({
     id: sp?.id,
     name: sp?.attributes?.firstName + " " + sp?.attributes?.lastName,
-    img: sp?.attributes?.fotoSpecialist?.data?.attributes?.url
-      ? baseUrl + sp?.attributes?.fotoSpecialist?.data?.attributes?.url
-      : assetsStore.useAsset("images/no-photo.png"),
+    img: sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.thumbnail
+      ?.url
+      ? baseUrl +
+        sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.thumbnail
+          ?.url
+      : baseUrl + imagePlaceholders?.specialists,
     position: sp?.attributes?.position,
     achievements: sp?.attributes?.achievements,
     link: `/specialists/${sp?.id}`,

@@ -4,8 +4,6 @@ const route = useRoute();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const assetsStore = useAssets();
-
 const { data: serviceData } = await useFetch(`${apiBaseUrl}services`, {
   query: {
     "filters[slug][$eq]": route.params?.service,
@@ -24,12 +22,12 @@ const mainInfo = serviceData?.value?.data?.[0]?.attributes;
 
 const mainBigImg = mainInfo?.photoBanner?.data?.attributes?.url
   ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.url
-  : assetsStore.useAsset("images/big-images/removal-tooth.png");
+  : baseUrl + imagePlaceholders?.services;
 
 const mainAdaptiveImg = mainInfo?.photoBanner?.data?.attributes?.formats?.small
   ?.url
   ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.formats?.small?.url
-  : assetsStore.useAsset("images/big-images/removal-tooth.png");
+  : baseUrl + imagePlaceholders?.services;
 
 const serviceBlocks = mainInfo?.blocks;
 

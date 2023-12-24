@@ -69,7 +69,10 @@ const otherClinics = computed(() =>
     .map((cl) => {
       return {
         name: cl?.attributes?.heading,
-        img: baseUrl + cl?.attributes?.photoBanner?.data?.attributes?.url,
+        img: cl?.attributes?.photoBanner?.data?.attributes?.formats?.small?.url
+          ? baseUrl +
+            cl?.attributes?.photoBanner?.data?.attributes?.formats?.small?.url
+          : baseUrl + imagePlaceholders?.services,
         link: String(cl?.id),
       };
     }),
@@ -86,14 +89,14 @@ const bgImg = clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes
   ?.url
   ? baseUrl +
     clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes?.url
-  : assetsStore.useAsset("images/big-images/info.png");
+  : baseUrl + imagePlaceholders?.services;
 
 const imgAdaptive = clinicData?.value?.data?.attributes?.photoBanner?.data
   ?.attributes?.formats?.small?.url
   ? baseUrl +
     clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes?.formats
       ?.small?.url
-  : assetsStore.useAsset("images/big-images/info.png");
+  : baseUrl + imagePlaceholders?.services;
 
 const breadcrumbs = [
   {

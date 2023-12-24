@@ -1,114 +1,93 @@
-<script>
-export default {
-  data() {
-    return {
-      item: true,
-    };
-  },
-  mounted() {
-    this.checkScreenSize();
-    window.addEventListener("resize", this.checkScreenSize);
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.checkScreenSize);
-  },
-  methods: {
-    checkScreenSize() {
-      this.item = window.innerWidth <= 1110 ? false : true;
-    },
-  },
-  async setup() {
-    const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+<script setup>
+const item = ref(true);
 
-    const [{ data: clinicsData }, { data: specialistsData }] =
-      await Promise.all([
-        useFetch(`${apiBaseUrl}clinics`, {
-          query: {
-            populate: "photoBanner.*",
-          },
-        }),
-        useFetch(`${apiBaseUrl}specialists`, {
-          query: {
-            populate: "fotoSpecialist.*,achievements.*",
-            "sort[0]": "order:asc",
-          },
-        }),
-      ]);
-
-    if (!specialistsData.value) {
-      throw createError({
-        statusCode: 404,
-        statusMessage: "Page Not Found",
-        fatal: true,
-      });
-    }
-
-    const assetsStore = useAssets();
-
-    const bigImage = assetsStore.useAsset("images/big-images/clinics.png");
-
-    const imgAdaptiv = assetsStore.useAsset(
-      "images/big-images/clinic-adaptiv.png",
-    );
-
-    const arrayImg = [
-      "gallery6.png",
-      "gallery5.png",
-      "gallery4.png",
-      "gallery3.png",
-      "gallery2.png",
-    ].map((item) => assetsStore.useAsset(`images/gallery/${item}`));
-
-    const mockArray = {
-      name: "Овсоян Григорий",
-      category: "Челюстно-лицевой хирург",
-      img: assetsStore.useAsset("images/specialists/main-doctor.png"),
-      text: "Лишь элементы политического процесса неоднозначны и будут призваны к ответу. Кстати,  элементы политического процесса набирают популярность среди определенных слоев населения, а значит, должны быть в равной степени предоставлены сами себе. Таким образом, сложившаяся структура организации способствует повышению качества своевременного выполнения сверхзадачи. Мы вынуждены отталкиваться от того, что сплочённость команды профессионалов прекрасно подходит для реализации как самодостаточных, так и внешне зависимых концептуальных решений. И нет сомнений, что независимые государства, инициированные исключительно синтетически.",
-    };
-
-    useHead({
-      title: " 6 клиник Стамус в Краснодаре, Адреса",
-      meta: [
-        {
-          name: "twitter:title",
-          content: " 6 клиник Стамус в Краснодаре, Адреса",
-        },
-        {
-          property: "og:title",
-          content: " 6 клиник Стамус в Краснодаре, Адреса",
-        },
-        {
-          name: "description",
-          content:
-            "Сеть клиник Стамус представлена в каждом районе города Краснодара, Детская клиника находится на Юбилейном",
-        },
-        {
-          name: "twitter:description",
-          content:
-            "Сеть клиник Стамус представлена в каждом районе города Краснодара, Детская клиника находится на Юбилейном",
-        },
-        {
-          property: "og:description",
-          content:
-            "Сеть клиник Стамус представлена в каждом районе города Краснодара, Детская клиника находится на Юбилейном",
-        },
-        {
-          name: "keywords",
-          content:
-            "стамус, stamus, клиника стамус, стоматология стамус, стамус краснодар, стоматологическая клиника стамус",
-        },
-      ],
-    });
-    return {
-      mockArray,
-      specialistsData,
-      arrayImg,
-      bigImage,
-      imgAdaptiv,
-      clinicsData,
-    };
-  },
+const checkScreenSize = () => {
+  item.value = window.innerWidth <= 1110 ? false : true;
 };
+
+onMounted(() => {
+  checkScreenSize();
+  window?.addEventListener("resize", checkScreenSize);
+});
+
+const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+
+const [{ data: clinicsData }, { data: specialistsData }] = await Promise.all([
+  useFetch(`${apiBaseUrl}clinics`, {
+    query: {
+      populate: "photoBanner.*",
+    },
+  }),
+  useFetch(`${apiBaseUrl}specialists`, {
+    query: {
+      populate: "fotoSpecialist.*,achievements.*",
+      "sort[0]": "order:asc",
+    },
+  }),
+]);
+
+if (!specialistsData.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page Not Found",
+    fatal: true,
+  });
+}
+
+const assetsStore = useAssets();
+
+const bigImage = assetsStore.useAsset("images/big-images/clinics.png");
+
+const imgAdaptiv = assetsStore.useAsset("images/big-images/clinic-adaptiv.png");
+
+const arrayImg = [
+  "gallery6.png",
+  "gallery5.png",
+  "gallery4.png",
+  "gallery3.png",
+  "gallery2.png",
+].map((item) => assetsStore.useAsset(`images/gallery/${item}`));
+
+const mockArray = {
+  name: "Овсоян Григорий",
+  category: "Челюстно-лицевой хирург",
+  img: assetsStore.useAsset("images/specialists/main-doctor.png"),
+  text: "Лишь элементы политического процесса неоднозначны и будут призваны к ответу. Кстати,  элементы политического процесса набирают популярность среди определенных слоев населения, а значит, должны быть в равной степени предоставлены сами себе. Таким образом, сложившаяся структура организации способствует повышению качества своевременного выполнения сверхзадачи. Мы вынуждены отталкиваться от того, что сплочённость команды профессионалов прекрасно подходит для реализации как самодостаточных, так и внешне зависимых концептуальных решений. И нет сомнений, что независимые государства, инициированные исключительно синтетически.",
+};
+
+useHead({
+  title: " 6 клиник Стамус в Краснодаре, Адреса",
+  meta: [
+    {
+      name: "twitter:title",
+      content: " 6 клиник Стамус в Краснодаре, Адреса",
+    },
+    {
+      property: "og:title",
+      content: " 6 клиник Стамус в Краснодаре, Адреса",
+    },
+    {
+      name: "description",
+      content:
+        "Сеть клиник Стамус представлена в каждом районе города Краснодара, Детская клиника находится на Юбилейном",
+    },
+    {
+      name: "twitter:description",
+      content:
+        "Сеть клиник Стамус представлена в каждом районе города Краснодара, Детская клиника находится на Юбилейном",
+    },
+    {
+      property: "og:description",
+      content:
+        "Сеть клиник Стамус представлена в каждом районе города Краснодара, Детская клиника находится на Юбилейном",
+    },
+    {
+      name: "keywords",
+      content:
+        "стамус, stamus, клиника стамус, стоматология стамус, стамус краснодар, стоматологическая клиника стамус",
+    },
+  ],
+});
 </script>
 
 <template>

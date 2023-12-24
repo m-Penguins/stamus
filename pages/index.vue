@@ -68,8 +68,6 @@ const seoData = mainData.value?.data?.attributes?.seo_block;
 
 const articles = mainData.value?.data?.attributes?.articles;
 
-console.log(articles);
-
 const metaData = mainData.value?.data?.attributes?.meta;
 useHead(getMetaObject(metaData, baseUrl));
 </script>
