@@ -4,6 +4,8 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
+import { useElementVisibility } from "@vueuse/core";
+
 const pagination = {
   clickable: false,
 };
@@ -12,10 +14,14 @@ const props = defineProps(["block"]);
 
 const assetsStore = useAssets();
 const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const target = ref(null);
+const targetIsVisible = useElementVisibility(target);
 </script>
 
 <template>
   <Swiper
+    ref="target"
     class="swiper"
     :autoHeight="true"
     :slides-per-view="1"
@@ -24,7 +30,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
     loop
     centeredSlides
     :autoplay="{
-      delay: 3500,
+      delay: targetIsVisible ? 3500 : 0,
       disableOnInteraction: false,
     }"
     :modules="[Autoplay, Pagination]"

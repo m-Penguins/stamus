@@ -58,6 +58,7 @@ export default defineNuxtConfig({
   },
   modules: [
     "@pinia/nuxt",
+    "@vueuse/nuxt",
     [
       "nuxt-mail",
       {

@@ -4,6 +4,8 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
+import { useElementVisibility } from "@vueuse/core";
+
 const pagination = {
   clickable: false,
 };
@@ -12,11 +14,18 @@ const props = defineProps(["block"]);
 
 const assetsStore = useAssets();
 const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const target = ref(null);
+const targetIsVisible = useElementVisibility(target);
 </script>
 
 <template>
   <Swiper
+    ref="target"
     class="swiper"
+    :class="{
+      invisible: !targetIsVisible && block?.banner?.length,
+    }"
     :autoHeight="true"
     :slides-per-view="1"
     :spaceBetween="30"
@@ -91,6 +100,10 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 
 <style lang="scss" scoped>
 @import "@/assets/styles/style.scss";
+
+.swiper.invisible:deep(.swiper-wrapper) {
+  height: 100% !important;
+}
 
 .banner-container {
   display: grid;
