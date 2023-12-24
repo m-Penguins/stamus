@@ -1,7 +1,9 @@
 <script setup>
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-defineProps(["title", "description", "twoDirections"]);
+const props = defineProps(["title", "description", "twoDirections"]);
+
+console.log(props.twoDirections);
 </script>
 
 <template>
@@ -20,17 +22,22 @@ defineProps(["title", "description", "twoDirections"]);
             <NuxtLink :to="item?.attributes?.slug" class="desktop-link">
               <div class="primary-banner-img">
                 <img
-                  v-if="item?.attributes?.photoBanner?.data?.attributes?.url"
                   :src="
-                    item?.attributes?.photoBanner?.data?.attributes?.url
-                      ? `${baseUrl}${item?.attributes?.photoBanner?.data?.attributes?.url}`
-                      : ''
+                    item?.attributes?.photoBanner?.data?.attributes?.formats
+                      ?.medium?.url
+                      ? `${baseUrl}${item?.attributes?.photoBanner?.data?.attributes?.formats?.medium?.url}`
+                      : baseUrl + imagePlaceholders?.services
                   "
                   :alt="
                     item?.attributes?.photoBanner?.data?.attributes
                       ?.alternativeText
                   "
                   class="banner-image"
+                  :class="{
+                    'no-photo':
+                      !item?.attributes?.photoBanner?.data?.attributes?.formats
+                        ?.medium?.url,
+                  }"
                 />
                 <div class="primary-banner-btn">
                   {{ item?.attributes?.heading }}
@@ -86,7 +93,7 @@ $mobile: 680px;
 .primary-banner-img {
   position: relative;
 
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
+  background-color: #cccccc;
   height: 100%;
 
   border-radius: 45px;
@@ -108,6 +115,10 @@ $mobile: 680px;
   width: 100%;
 
   transition: all 0.3s ease-in-out;
+
+  &.no-photo {
+    object-fit: contain;
+  }
 }
 
 .primary-banner-btn {

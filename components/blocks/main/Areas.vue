@@ -15,9 +15,18 @@ defineProps(["directionsData"]);
           v-for="direction in directionsData?.data"
           :style="{
             backgroundImage: `url(${
-              baseUrl +
-              direction?.attributes?.photoBanner?.data?.attributes?.url
+              direction?.attributes?.photoBanner?.data?.attributes?.formats
+                ?.medium?.url
+                ? baseUrl +
+                  direction?.attributes?.photoBanner?.data?.attributes?.formats
+                    ?.medium?.url
+                : baseUrl + imagePlaceholders?.services
             })`,
+          }"
+          :class="{
+            'no-photo':
+              !direction?.attributes?.photoBanner?.data?.attributes?.formats
+                ?.medium?.url,
           }"
         >
           <h3>{{ direction?.attributes?.heading }}</h3>
@@ -37,6 +46,17 @@ defineProps(["directionsData"]);
 
 <style lang="scss" scoped>
 @import "@/assets/styles/style.scss";
+
+.areas-box__img {
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  background-color: #cccccc;
+
+  &.no-photo {
+    background-size: contain;
+  }
+}
 
 .clinics-block-title {
   padding-top: 40px;

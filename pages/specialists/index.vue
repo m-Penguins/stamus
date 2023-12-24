@@ -26,16 +26,6 @@ const getSpecialistsData = async () => {
     "filters[fullName][$contains][2]":
       searchFilter.value?.charAt(0)?.toUpperCase() +
       searchFilter.value?.slice(1)?.toLowerCase(),
-    // "filters[firstName][$contains][0]": searchFilter.value?.toUpperCase(),
-    // "filters[firstName][$contains][1]": searchFilter.value?.toLowerCase(),
-    // "filters[firstName][$contains][2]":
-    //   searchFilter.value?.charAt(0)?.toUpperCase() +
-    //   searchFilter.value?.slice(1)?.toLowerCase(),
-    // "filters[lastName][$contains][3]": searchFilter.value?.toUpperCase(),
-    // "filters[lastName][$contains][4]": searchFilter.value?.toLowerCase(),
-    // "filters[lastName][$contains][5]":
-    //   searchFilter.value?.charAt(0)?.toUpperCase() +
-    //   searchFilter.value?.slice(1)?.toLowerCase(),
   };
 
   clearObjectFields(strapiQuery);
@@ -49,42 +39,7 @@ const getSpecialistsData = async () => {
   return specialistsData;
 };
 
-// const firstQuery = {
-//   "sort[0]": "order:asc",
-//   "pagination[page]": currentPageParam.value,
-//   "pagination[pageSize]": pageSize.value,
-//   "filters[clinics][id]": filterClinicParam.value,
-//   "filters[direction][heading][$eq]": filterDirectionParam.value,
-//   "filters[fullName][$contains][0]": filterSearchParam.value,
-//   "filters[fullName][$contains][1]": filterSearchParam.value?.toLowerCase(),
-//   "filters[fullName][$contains][2]":
-//     filterSearchParam.value?.charAt(0)?.toUpperCase() +
-//     filterSearchParam.value?.slice(1)?.toLowerCase(),
-// };
-
-// Object.keys(firstQuery).forEach(
-//   (key) =>
-//     (firstQuery[key] === undefined || !firstQuery[key]) &&
-//     delete firstQuery[key],
-// );
-
 const specialists = await getSpecialistsData();
-
-// const { data: specialists } = await useFetch(`${apiBaseUrl}specialists`, {
-//   query: {
-//     ...firstQuery,
-//     populate: "deep",
-//     "sort[0]": "order:asc",
-//   },
-// });
-
-// if (!specialists.value?.data) {
-//   throw createError({
-//     statusCode: 404,
-//     statusMessage: "Page Not Found",
-//     fatal: true,
-//   });
-// }
 
 const baseDataStore = useBaseDataStore();
 
@@ -262,18 +217,7 @@ useHead({
             @select="handleDirChange"
             :selectedId="dirFilter"
           />
-          <!-- <elements-select
-            :options="allDirections"
-            :default="
-              allDirections.find((dir) => String(dir.name) === clinicFilter)
-                ?.name ?? 'Направление'
-            "
-            label="Направление"
-            class="select"
-            @input="handleDirChange"
-            :isSelectedId="clinicFilter ?? route.query.direction"
-            :selectedItem="allDirections.find((dir) => dir.name === clinicFilter)"
-          /> -->
+
           <elements-custom-select
             :options="allClinics"
             label="Клиника"
@@ -281,18 +225,6 @@ useHead({
             @select="handleClinicChange"
             :selectedId="clinicFilter"
           />
-          <!-- <elements-select
-            :options="allClinics"
-            :default="
-              allClinics.find((cl) => String(cl.id) === String(clinicFilter))
-                ?.name ?? 'Клиника'
-            "
-            :isSelectedId="clinicFilter ?? route.query.clinic"
-            :selectedItem="allClinics.find((cl) => cl.id === clinicFilter)"
-            label="Клиника"
-            class="select"
-            @input="handleClinicChange"
-          /> -->
         </div>
         <div class="specialist-box width-style">
           <div class="input-search">
@@ -322,11 +254,11 @@ useHead({
                   ' ' +
                   specialist?.attributes?.lastName,
                 img: specialist?.attributes?.fotoSpecialist?.data?.attributes
-                  ?.url
+                  ?.formats?.small?.url
                   ? baseUrl +
                     specialist?.attributes?.fotoSpecialist?.data?.attributes
-                      ?.url
-                  : assetsStore.useAsset('images/no-photo.png'),
+                      ?.formats?.small?.url
+                  : baseUrl + imagePlaceholders?.specialists,
                 position: specialist?.attributes?.position,
                 achievements: specialist?.attributes?.achievements,
               }"

@@ -43,10 +43,12 @@ const mainSpecialists =
         ? baseUrl +
           sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.thumbnail
             ?.url
-        : assetsStore.useAsset("images/icons/logo.svg"),
-      imgBig: sp?.attributes?.fotoSpecialist?.data?.attributes?.url
-        ? baseUrl + sp?.attributes?.fotoSpecialist?.data?.attributes?.url
-        : assetsStore.useAsset("images/icons/logo.svg"),
+        : baseUrl + imagePlaceholders?.specialists,
+      imgBig: sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.small
+        ?.url
+        ? baseUrl +
+          sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.small?.url
+        : baseUrl + imagePlaceholders?.specialists,
       experience: {
         year: sp?.attributes?.meetingPerson?.dataMeeting?.[0]?.total,
         text: sp?.attributes?.meetingPerson?.dataMeeting?.[0]?.item,
@@ -65,6 +67,8 @@ const mainSpecialists =
 const seoData = mainData.value?.data?.attributes?.seo_block;
 
 const articles = mainData.value?.data?.attributes?.articles;
+
+console.log(articles);
 
 const metaData = mainData.value?.data?.attributes?.meta;
 useHead(getMetaObject(metaData, baseUrl));
