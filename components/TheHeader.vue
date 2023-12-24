@@ -26,7 +26,7 @@ export default {
       thirdBlockMobMenu: false,
       // showMenuPatients: false,
       // directionTitle: '',
-      clinic: "",
+      activeDirection: "",
       activeClass: "",
       showServicesAll: false,
       storeS: useService(),
@@ -61,7 +61,7 @@ export default {
 
     changeActiveClass(cls, title) {
       this.activeClass = cls;
-      this.clinic = title;
+      this.activeDirection = title;
     },
 
     closeSearch() {
@@ -80,11 +80,6 @@ export default {
 
     const togglerPopup = (state) => {
       isOpenPopup.value = state;
-    };
-
-    const navigateToRoute = (serv, dir) => {
-      const newRoute = `/${serv}/${linkTransform(dir)}`;
-      router.replace(newRoute);
     };
 
     const defaultServices = () => {
@@ -126,7 +121,6 @@ export default {
       directionTitle,
       activeClass2,
       defaultServices,
-      navigateToRoute,
       router,
       modalStore,
     };
@@ -408,7 +402,7 @@ export default {
               :key="navigationService.id"
               class="header-services-menu-item"
               @mouseover="
-                changeActiveClass(navigationService.id, navigationService.title)
+                changeActiveClass(navigationService.id, navigationService)
               "
             >
               <div
@@ -593,7 +587,7 @@ export default {
                         v-for="elem in navigationPatients"
                         @click="showMenuMob = false"
                         :key="elem"
-                        :to="elem.path + (elem.id === 4 ? '#middle' : '')"
+                        :to="elem.path + (elem.id === 4 ? '#ndfl' : '')"
                         class="menu-patients-items-mob"
                       >
                         <li>
@@ -615,7 +609,7 @@ export default {
                 :key="item?.id"
                 class="header-services-menu-item-mob"
                 @click="
-                  changeActiveClass(item?.id, item?.title);
+                  changeActiveClass(item?.id, item);
                   secondBlockMobMenu = true;
                   firstBlockMobMenu = false;
                 "
@@ -668,9 +662,11 @@ export default {
               Услуги
             </p>
             <p class="breadCrumbs-slash">/</p>
-            <p class="breadCrumbs-second-text">{{ clinic }}</p>
+            <p class="breadCrumbs-second-text">{{ activeDirection?.title }}</p>
           </div>
-          <div class="menu-mob-second-block-title">{{ clinic }}</div>
+          <div class="menu-mob-second-block-title">
+            {{ activeDirection?.title }}
+          </div>
           <div
             v-for="item in storeServices.getStateService"
             :key="item.id"
@@ -715,7 +711,7 @@ export default {
             <elements-link-with-arrow
               type="type"
               title="На страницу раздела"
-              :link="`/${linkTransform(clinic)}`"
+              :link="activeDirection?.path"
             />
           </div>
         </div>
@@ -741,7 +737,7 @@ export default {
                 thirdBlockMobMenu = false;
               "
             >
-              {{ clinic }}
+              {{ activeDirection?.title }}
             </p>
             <p class="breadCrumbs-slash">/</p>
             <p class="breadCrumbs-second-text">{{ directionTitle }}</p>
@@ -881,6 +877,8 @@ export default {
   align-items: center;
   gap: 6px;
   padding: 20px 0 40px;
+
+  overflow-x: clip;
 }
 
 .breadCrumbs-first-text {

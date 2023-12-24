@@ -4,8 +4,6 @@ import imagePlaceholders from "~/utils/imagePlaceholders";
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const props = defineProps(["clinicsData"]);
-
-console.log(props.clinicsData?.data);
 </script>
 
 <template>

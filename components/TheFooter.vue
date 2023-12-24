@@ -100,10 +100,6 @@
               >
                 <p class="footer-text">{{ clinic?.attributes?.address }}</p>
               </NuxtLink>
-
-              <!-- <NuxtLink @click="$router.push(`clinics/${linkTransform('ул. Черкасская 17')}`)" class="footer-text" to="#">
-                <p class="footer-text">ул. Черкасская 17</p>
-              </NuxtLink> -->
             </div>
           </div>
         </div>
@@ -229,11 +225,6 @@ const clinicColumnNumber = computed(() => {
 
 const route = useRoute();
 const router = useRouter();
-
-const navigateToRoute = (str) => {
-  const newRoute = `/clinics/${linkTransform(str)}`;
-  router.replace(newRoute);
-};
 </script>
 
 <style lang="scss" scoped>

@@ -141,6 +141,7 @@ const sendData = () => {
 
 @media (max-width: 744px) {
   .form-wrapper {
+    border-radius: 25px;
     &__title {
       padding-top: 40px;
       font-size: 22px;
