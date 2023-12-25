@@ -90,8 +90,6 @@ const tabs = baseDataStore.clinics?.data
     }
   })
   ?.filter(Boolean);
-
-console.log(tabs);
 </script>
 
 <style lang="scss" scoped>

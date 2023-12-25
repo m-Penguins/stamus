@@ -1,23 +1,19 @@
 <script setup>
 import imagePlaceholders from "~/utils/imagePlaceholders";
 
-// hides this page
-// remove to give access
-
 const route = useRoute();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const assetsStore = useAssets();
-
-const [{ data: articleData }, { data: allArticles }] = await Promise.all([
-  useFetch(`${apiBaseUrl}articles/${route.params.id}`, {
+const { data: articleData } = await useFetch(
+  `${apiBaseUrl}articles/${route.params.id}`,
+  {
     query: {
-      populate: "fotoArticles.*,meta.metaImage.*,napravleniya_uslug_1.*",
+      populate:
+        "fotoArticles.*,meta.metaImage.*,napravleniya_uslug_1.*,other_articles.fotoArticles.*",
     },
-  }),
-  useFetch(`${apiBaseUrl}articles`, { query: { populate: "deep" } }),
-]);
+  },
+);
 
 const heading = articleData.value?.data?.attributes?.heading;
 const tags = articleData.value?.data?.attributes?.tags;
@@ -28,20 +24,7 @@ const img = articleData.value?.data?.attributes?.fotoArticles?.data?.attributes
     articleData.value?.data?.attributes?.fotoArticles?.data?.attributes?.url
   : baseUrl + imagePlaceholders?.articles;
 
-const otherArticles = allArticles.value?.data
-  ?.filter((art) => String(art.id) !== String(route.params.id))
-  .map((art) => {
-    return {
-      id: art?.id,
-      heading: art?.attributes?.heading,
-      img: art?.attributes?.fotoArticles?.data?.attributes?.formats?.small?.url
-        ? baseUrl +
-          art?.attributes?.fotoArticles?.data?.attributes?.formats?.small?.url
-        : baseUrl + imagePlaceholders?.articles,
-      text: art?.attributes?.text,
-      tags: art?.attributes?.tags,
-    };
-  });
+const otherArticles = articleData.value?.data?.attributes?.other_articles;
 
 const breadcrumbs = [
   {
@@ -87,13 +70,27 @@ useHead(getMetaObject(metaData, baseUrl));
         <div class="articles-dital-container" v-html="text"></div>
       </div>
     </div>
-    <blocks-main-articles title="Другие статьи" :articles="otherArticles" />
+    <section class="section-wrapper" v-if="otherArticles?.data?.length">
+      <DynamicBlockBlog
+        :block="{ articles: otherArticles, title: 'Другие статьи' }"
+      />
+    </section>
     <blocks-main-form />
   </div>
 </template>
 
 <style lang="scss" scoped>
-@import "../../assets/styles/style.scss";
+@import "@/assets/styles/style.scss";
+.section-wrapper {
+  width: 100%;
+  max-width: 1280px;
+
+  margin: 0 auto 100px;
+
+  @include media(680px) {
+    margin: 0 auto 80px;
+  }
+}
 
 .articles-dital-wrapper {
   display: flex;

@@ -54,8 +54,6 @@ const [{ data: footerData }] = await Promise.all([
   servicesStore.fetchdataService(apiBaseUrl),
 ]);
 
-console.log(baseDataStore.clinics);
-
 baseDataStore.footerData = footerData.value;
 
 // useHead({
