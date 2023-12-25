@@ -9,7 +9,7 @@ const selectedIndex = ref(0);
     <div class="specialists-subject">
       <h2 class="specialists-heading-title">Наши специалисты</h2>
       <elements-link-with-arrow
-        type="true"
+        type
         title="Смотреть всех специалистов"
         href="/specialists"
       />
@@ -84,7 +84,7 @@ const selectedIndex = ref(0);
               class="specialists-btn-base"
             />
             <elements-link-with-arrow
-              type="true"
+              type
               title="Смотреть портфолио"
               :to="`/specialists/${props.mainSpecialists?.[selectedIndex]?.id}#portfolio`"
             />

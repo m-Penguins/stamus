@@ -137,7 +137,7 @@ export default {
     link="#"
     :handleLinkClick="openBidModal"
     bgColor="light-blue"
-    type="true"
+    type
     img="price.png"
     bigImg="true"
   />

@@ -776,7 +776,7 @@
             {{ item.text2 }}
             <div class="accordion-content-text">
               <elements-link-with-arrow
-                type="true"
+                type
                 title="Открыть"
                 target="_blank"
                 href="http://176.99.11.245:1338/uploads/perechen_gemofiliya_0dfad2d898.pdf"
@@ -799,7 +799,7 @@
         <div v-else-if="item.id === 4">
           <div class="accordion-content-text">
             <elements-link-with-arrow
-              type="true"
+              type
               title="Открыть"
               target="_blank"
               href="http://176.99.11.245:1338/uploads/Terprogramma_KK_1_1c7f44b81b.pdf"
@@ -809,7 +809,7 @@
         <div v-else-if="item.id === 5">
           <div class="accordion-content-text">
             <elements-link-with-arrow
-              type="true"
+              type
               title="Открыть"
               target="_blank"
               href="http://176.99.11.245:1338/uploads/gosterprogramma_8cc56a71ee.pdf"

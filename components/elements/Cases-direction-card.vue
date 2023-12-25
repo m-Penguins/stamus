@@ -16,7 +16,7 @@
       {{ direction.name }}
     </div>
     <elements-link-with-arrow
-      type="true"
+      type
       title="Смотреть кейс"
       :href="`/portfolio/${direction.id}`"
     />

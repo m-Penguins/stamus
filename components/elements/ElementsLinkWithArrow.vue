@@ -60,8 +60,8 @@ export default {
       default: "#",
     },
     type: {
-      type: String,
-      default: "",
+      type: Boolean,
+      default: false,
     },
     clickHandler: Function,
   },

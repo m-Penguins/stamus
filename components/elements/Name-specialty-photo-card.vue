@@ -11,8 +11,10 @@
       "
     >
       <div>
-        <div class="card-photo-name-title">{{ specialists?.name }}</div>
-        <div class="card-photo-name-text">{{ specialists?.position }}</div>
+        <div class="card-photo-name-title">{{ specialists?.name ?? "" }}</div>
+        <div class="card-photo-name-text">
+          {{ specialists?.position ?? "" }}
+        </div>
       </div>
       <div
         v-if="isTooltip && specialists?.achievements?.length > 0"
@@ -37,11 +39,12 @@
     </div>
     <elements-link-with-arrow
       v-if="isLink"
-      type="true"
+      type
       title="Подробнее о враче"
       :link="`/specialists/${specialists.id}`"
       :clickHandler="handleLinkClick"
     />
+
     <div v-if="specialists?.address" class="card-photo-name-box-discount">
       <p class="card-photo-name-box-discount__addres">
         {{ specialists?.address }}
@@ -61,13 +64,20 @@
           {{ time }}
         </div>
       </div>
-      <elements-button-base
+      <!-- <elements-button-base
         title="Записаться"
         class="card-photo-name-box-discount__btn"
         @click="openStartupModal"
-      />
+      /> -->
       <!-- :link="specialists?.link ?? ''" -->
     </div>
+    <NuxtLink
+      v-if="props.link"
+      :to="link"
+      target="_blank"
+      class="button-base card-photo-name-box-discount__btn my-button"
+      >Записаться</NuxtLink
+    >
   </div>
 </template>
 
@@ -85,6 +95,12 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 
 <style scoped lang="scss">
 @import "/assets/styles/style.scss";
+
+.my-button {
+  width: 100%;
+  height: max-content;
+  margin-top: 16px;
+}
 
 .time__container {
   display: flex;

@@ -159,7 +159,7 @@ useHead(getMetaObject(metaData, baseUrl));
     :titleLink="'Узнать подробнее'"
     link="#"
     bgColor="light-blue"
-    type="true"
+    type
     img="cards2.png"
     bigImg="true"
     :handleLinkClick="openBidModal"

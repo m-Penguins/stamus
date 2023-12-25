@@ -10,21 +10,6 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const assetsStore = useAssets();
 
-const breadcrumbs = [
-  {
-    title: "Главная",
-    url: "/",
-  },
-  {
-    title: "Статьи",
-    url: "/articles",
-  },
-  {
-    title: `Наименование статьи`,
-    url: `/articles/${route.params.id}`,
-  },
-];
-
 const [{ data: articleData }, { data: allArticles }] = await Promise.all([
   useFetch(`${apiBaseUrl}articles/${route.params.id}`, {
     query: {
@@ -57,6 +42,21 @@ const otherArticles = allArticles.value?.data
       tags: art?.attributes?.tags,
     };
   });
+
+const breadcrumbs = [
+  {
+    title: "Главная",
+    url: "/",
+  },
+  {
+    title: "Статьи",
+    url: "/articles",
+  },
+  {
+    title: articleData.value?.data?.attributes?.heading,
+    url: `/articles/${route.params.id}`,
+  },
+];
 
 const metaData = articleData.value?.data?.attributes?.meta;
 useHead(getMetaObject(metaData, baseUrl));

@@ -223,16 +223,7 @@ useHead({
       :total-pages="totalPages"
       @update:current-page="handlePageClick"
     />
-    <!-- <BlocksMainBanner
-      :title="'Уже были у нас?'"
-      :text="'Оставьте отзыв, будем очень вам благодарны'"
-      :titleLink="'Оставить отзыв'"
-      link="https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/"
-      bgColor="grey"
-      type="true"
-      img="mobile.svg"
-      bigImg="true"
-    /> -->
+
     <blocks-main-form />
   </div>
 </template>
