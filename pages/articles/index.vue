@@ -1,7 +1,4 @@
 <script setup>
-// hides this page
-// remove to give access
-const assetsStore = useAssets();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
@@ -80,7 +77,7 @@ const getArticlesData = async () => {
     populate: "napravleniya_uslug_1.*, fotoArticles.*, services.*",
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
-    "filters[tag_category][$in][1]": tagFilter.value,
+    "filters[tag_category][$in]": tagFilter.value,
   };
 
   clearObjectFields(strapiQuery);

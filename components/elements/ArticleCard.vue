@@ -20,7 +20,7 @@
     <elements-link-with-arrow
       type="type"
       title="Читать"
-      @click="$router.push(`/articles/` + article.id)"
+      :link="`/articles/${article?.id}`"
     />
   </div>
 </template>

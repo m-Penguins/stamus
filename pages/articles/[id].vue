@@ -16,7 +16,7 @@ const { data: articleData } = await useFetch(
 );
 
 const heading = articleData.value?.data?.attributes?.heading;
-const tags = articleData.value?.data?.attributes?.tags;
+const tags = articleData.value?.data?.attributes?.tag_category;
 const text = articleData.value?.data?.attributes?.text;
 const img = articleData.value?.data?.attributes?.fotoArticles?.data?.attributes
   ?.url
@@ -59,9 +59,14 @@ useHead(getMetaObject(metaData, baseUrl));
             }"
           >
             <div class="articles-dital-box">
-              <div v-for="(item, index) in tags" :key="index">
+              <!-- <div v-for="(item, index) in tags" :key="index">
                 <div class="articles-dital-box__item">
                   {{ item }}
+                </div>
+              </div> -->
+              <div>
+                <div class="articles-dital-box__item">
+                  {{ tags }}
                 </div>
               </div>
             </div>
