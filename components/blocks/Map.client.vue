@@ -43,29 +43,9 @@
                 />
               </yandex-map-marker>
             </yandex-map>
-            <!-- <yandexMap
-              :settings="settings"
-              :coords="[45.085805, 39.002218]"
-              :detailed-controls="detailedControls"
-              :controls="controls"
-              map-type="map"
-              zoom="10"
-            >
-              <ymapMarker
-                v-for="(item, index) in tabs"
-                :key="item?.name"
-                :coords="item?.coordinates"
-                :marker-id="item?.name"
-                @click="activeTab = index"
-                :icon="activeTab === index ? iconActive : iconNotActive"
-                :hint-content="item?.name"
-              >
-              </ymapMarker>
-            </yandexMap> -->
           </div>
-          <elements-map-nav :info="tabs?.[activeTab]" />
+          <elements-map-nav :tab="tabs?.[activeTab]" />
         </div>
-        <!-- <img class="tab-map" :src="assetsStore.useAsset(`images/${tab.image}`)" alt=""> -->
       </div>
     </div>
   </ClientOnly>
@@ -90,102 +70,32 @@ const theme = "light";
 
 const activeTab = ref(0);
 
-const iconActive = {
-  layout: "default#image", // 'default#imageWithContent' для использования с контентом
-  imageHref: baloon, // адрес изображения или data:image/svg+xml;base64
-  imageSize: [43, 55], // размер иконки в px
-  imageOffset: [-22, -55], // смещение иконки в px,
-  /* Следующие поля актуальны для layout: 'default#imageWithContent' */
-  content: "some content here", // содержимое контента
-  contentOffset: [-22, -55], // смещение контента в px,
-  contentLayout:
-    '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>', // строковый HTML шаблон для контента
-};
+const baseDataStore = useBaseDataStore();
 
-const iconNotActive = {
-  layout: "default#image", // 'default#imageWithContent' для использования с контентом
-  imageHref: baloon1, // адрес изображения или data:image/svg+xml;base64
-  imageSize: [43, 55], // размер иконки в px
-  imageOffset: [-22, -55], // смещение иконки в px,
-  /* Следующие поля актуальны для layout: 'default#imageWithContent' */
-  content: "some content here", // содержимое контента
-  contentOffset: [-22, -55], // смещение контента в px,
-  contentLayout:
-    '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>', // строковый HTML шаблон для контента
-};
+const tabs = baseDataStore.clinics?.data
+  ?.map((el) => {
+    const coords =
+      el?.attributes?.coordx && el?.attributes?.coordy
+        ? [el?.attributes?.coordx, el?.attributes?.coordy]
+        : null;
 
-const settings = {
-  lang: "ru_RU",
-  coordorder: "latlong",
-};
+    if (coords) {
+      return {
+        email: el?.attributes?.email,
+        address: el?.attributes?.address,
+        phone: el?.attributes?.phone,
+        hours: el?.attributes?.working_time,
+        coordinates: coords,
+      };
+    }
+  })
+  ?.filter(Boolean);
 
-const tabs = [
-  {
-    name: "ул. Московская 140",
-    hours: "8:00 до 21:00",
-    tel: "+7 (999) 888 - 77 - 66",
-    email: "hakurate@stamus-info.ru",
-    address: "Краснодар, ул. Московская 140",
-    coordinates: [39.002218, 45.085805],
-  },
-  {
-    name: "ул. Хакурате 34",
-    hours: "8:00 до 21:00",
-    tel: "+7 (999) 888 - 77 - 66",
-    email: "hakurate@stamus-info.ru",
-    address: "Краснодар, ул. Хакурате 34",
-    coordinates: [38.982473, 45.041031],
-  },
-  {
-    name: "ул. Мачуги 1/1",
-    hours: "8:00 до 21:00",
-    tel: "+7 (999) 888 - 77 - 66",
-    email: "hakurate@stamus-info.ru",
-    address: "Краснодар, ул. Мачуги 1/1",
-    coordinates: [39.063016, 45.014403, 45.014403],
-  },
-  // {
-  //   name: 'ул. Черкасская 17',
-  //   hours: '8:00 до 21:00',
-  //   tel: '+7 (999) 888 - 77 - 66',
-  //   email:"hakurate@stamus-info.ru",
-  //   address:"Краснодар, ул. Черкасская 17"
-  // },
-  {
-    name: "ул. Гимназическая 85",
-    hours: "8:00 до 21:00",
-    tel: "+7 (999) 888 - 77 - 66",
-    email: "hakurate@stamus-info.ru",
-    address: "Краснодар, ул. Гимназическая 85",
-    coordinates: [38.975978, 45.024673],
-  },
-  {
-    name: "Платановый бульвар 19/3",
-    hours: "8:00 до 21:00",
-    tel: "+7 (999) 888 - 77 - 66",
-    email: "hakurate@stamus-info.ru",
-    address: "Краснодар, Платановый бульвар 19/3",
-    coordinates: [38.909799, 45.033521],
-  },
-  // {
-  //   name: 'ул. Средняя 1/3',
-  //   hours: '8:00 до 21:00',
-  //   tel: '+7 (999) 888 - 77 - 66',
-  //   email:"hakurate@stamus-info.ru",
-  //   address:"Краснодар, ул. Средняя 1/3"
-  //   }
-];
-
-const assetsStore = useAssets();
-const coordinates = [45.085805, 39.002218];
-const controls = ["fullscreenControl"];
-const detailedControls = {
-  zoomControl: { position: { right: 10, top: 50 } },
-};
+console.log(tabs);
 </script>
 
 <style lang="scss" scoped>
-@import "/assets/styles/style.scss";
+@import "@/assets/styles/style.scss";
 
 .map-marker-icon {
   width: 50px;
