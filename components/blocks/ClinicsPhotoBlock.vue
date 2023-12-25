@@ -1,7 +1,9 @@
 <script setup>
+import imagePlaceholders from "~/utils/imagePlaceholders";
+
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-defineProps(["clinicsData"]);
+const props = defineProps(["clinicsData"]);
 </script>
 
 <template>
@@ -15,8 +17,18 @@ defineProps(["clinicsData"]);
           v-for="clinic in clinicsData?.data"
           :style="{
             backgroundImage: `url(${
-              baseUrl + clinic?.attributes?.photoBanner?.data?.attributes?.url
+              clinic?.attributes?.photoBanner?.data?.attributes?.formats?.medium
+                ?.url
+                ? baseUrl +
+                  clinic?.attributes?.photoBanner?.data?.attributes?.formats
+                    ?.medium?.url
+                : baseUrl + imagePlaceholders?.services
             })`,
+          }"
+          :class="{
+            'no-photo':
+              !clinic?.attributes?.photoBanner?.data?.attributes?.formats
+                ?.medium?.url,
           }"
         >
           <h3>{{ clinic?.attributes?.heading }}</h3>
@@ -36,6 +48,17 @@ defineProps(["clinicsData"]);
 
 <style lang="scss" scoped>
 @import "@/assets/styles/style.scss";
+
+.areas-box__img {
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  background-color: #cccccc;
+
+  &.no-photo {
+    background-size: contain;
+  }
+}
 
 .clinics-block-title {
   padding-top: 40px;

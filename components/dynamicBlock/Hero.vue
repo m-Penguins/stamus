@@ -18,7 +18,7 @@
               :customClick="redirectToExternalApp"
               :isButtonBase="isButtonBase"
               :title="title"
-              font-size="true"
+              :font-size="true"
               :text="text"
               :class="isTimeAndPriceCard ? 'main-info-width' : ''"
             />
@@ -103,6 +103,7 @@ const buttonText = props?.link_text ? props?.link_text : "Записаться �
   width: 100%;
   height: 920px;
   border-radius: 45px;
+  background-color: #cccccc;
   background-size: cover;
   background-repeat: no-repeat;
   margin-bottom: 100px;

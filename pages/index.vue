@@ -43,10 +43,12 @@ const mainSpecialists =
         ? baseUrl +
           sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.thumbnail
             ?.url
-        : assetsStore.useAsset("images/icons/logo.svg"),
-      imgBig: sp?.attributes?.fotoSpecialist?.data?.attributes?.url
-        ? baseUrl + sp?.attributes?.fotoSpecialist?.data?.attributes?.url
-        : assetsStore.useAsset("images/icons/logo.svg"),
+        : baseUrl + imagePlaceholders?.specialists,
+      imgBig: sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.small
+        ?.url
+        ? baseUrl +
+          sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.small?.url
+        : baseUrl + imagePlaceholders?.specialists,
       experience: {
         year: sp?.attributes?.meetingPerson?.dataMeeting?.[0]?.total,
         text: sp?.attributes?.meetingPerson?.dataMeeting?.[0]?.item,
@@ -68,43 +70,6 @@ const articles = mainData.value?.data?.attributes?.articles;
 
 const metaData = mainData.value?.data?.attributes?.meta;
 useHead(getMetaObject(metaData, baseUrl));
-
-// useHead({
-//   title:
-//     "Стоматология Стамус в Краснодаре. Семейная стоматология в вашем районе для взрослых и детей",
-//   meta: [
-//     {
-//       name: "twitter:title",
-//       content:
-//         "Стоматология Стамус в Краснодаре. Семейная стоматология в вашем районе для взрослых и детей",
-//     },
-//     {
-//       property: "og:title",
-//       content:
-//         "Стоматология Стамус в Краснодаре. Семейная стоматология в вашем районе для взрослых и детей",
-//     },
-//     {
-//       name: "description",
-//       content:
-//         "Стамус - это сеть стоматологий в Краснодаре зарекомендовавшая себя с 2006 года. Семейная стоматология для взрослых и детей с отличными отзывами. Записаться",
-//     },
-//     {
-//       name: "twitter:description",
-//       content:
-//         "Стамус - это сеть стоматологий в Краснодаре зарекомендовавшая себя с 2006 года. Семейная стоматология для взрослых и детей с отличными отзывами. Записаться",
-//     },
-//     {
-//       property: "og:description",
-//       content:
-//         "Стамус - это сеть стоматологий в Краснодаре зарекомендовавшая себя с 2006 года. Семейная стоматология для взрослых и детей с отличными отзывами. Записаться",
-//     },
-//     {
-//       name: "keywords",
-//       content:
-//         "стоматология, стоматология в Краснодаре, семейная стоматология,стоматология стамус, стамус, взрослая стоматология",
-//     },
-//   ],
-// });
 </script>
 
 <template>
@@ -118,7 +83,7 @@ useHead(getMetaObject(metaData, baseUrl));
     <BlocksMyBanner :block="firstBanner" />
   </section>
 
-  <blocks-main-areas />
+  <blocks-main-areas :directions-data="directionsData" />
 
   <blocks-main-specialists
     v-if="mainSpecialists?.length"

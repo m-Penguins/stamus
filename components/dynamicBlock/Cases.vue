@@ -4,6 +4,7 @@ import { Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
+import imagePlaceholders from "~/utils/imagePlaceholders";
 
 const props = defineProps(["block"]);
 
@@ -45,8 +46,12 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
           <div class="card-photo-name">
             <div class="card-photo-name-img">
               <img
-                v-if="portfolio?.attributes?.photoBanner?.data?.attributes?.url"
-                :src="`${baseUrl}${portfolio?.attributes?.photoBanner?.data?.attributes?.url}`"
+                :src="
+                  portfolio?.attributes?.photoBanner?.data?.attributes?.formats
+                    ?.small?.url
+                    ? `${baseUrl}${portfolio?.attributes?.photoBanner?.data?.attributes?.formats?.small?.url}`
+                    : baseUrl + imagePlaceholders?.portfoliosSmall
+                "
                 :alt="
                   portfolio?.attributes?.photoBanner?.data?.attributes
                     ?.alternativeText ?? 'photo-name'

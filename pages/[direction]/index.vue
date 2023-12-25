@@ -2,13 +2,6 @@
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const assetsStore = useAssets();
-const bigImageMock = assetsStore.useAsset("images/big-images/girl.png");
-
-const imgAdaptiveMock = assetsStore.useAsset(
-  "images/big-images/girl-adaptiv.png",
-);
-
 const route = useRoute();
 
 const directionSlug = route?.params?.direction;
@@ -33,12 +26,12 @@ const mainInfo = directionData?.value?.data?.[0]?.attributes;
 
 const mainBigImg = mainInfo?.photoBanner?.data?.attributes?.url
   ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.url
-  : bigImageMock;
+  : baseUrl + imagePlaceholders?.services;
 
 const mainAdaptiveImg = mainInfo?.photoBanner?.data?.attributes?.formats?.small
   ?.url
   ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.formats?.small?.url
-  : imgAdaptiveMock;
+  : baseUrl + imagePlaceholders?.services;
 
 const directionBlocks = mainInfo?.blocks;
 

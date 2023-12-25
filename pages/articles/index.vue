@@ -95,9 +95,10 @@ const filteredArticles = computed(() =>
     return {
       id: art?.id,
       heading: art?.attributes?.heading,
-      img: art?.attributes?.fotoArticles?.data?.attributes?.url
-        ? baseUrl + art?.attributes?.fotoArticles?.data?.attributes?.url
-        : assetsStore.useAsset("images/articles/articles-dital.png"),
+      img: art?.attributes?.fotoArticles?.data?.attributes?.formats?.small?.url
+        ? baseUrl +
+          art?.attributes?.fotoArticles?.data?.attributes?.formats?.small?.url
+        : baseUrl + imagePlaceholders?.articles,
       text: art?.attributes?.text,
       tags: art?.attributes?.tags,
       description: art?.attributes?.description,

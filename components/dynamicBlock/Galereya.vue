@@ -5,8 +5,8 @@
     <div v-if="arrayImg.length === 1" class="gallery-two-img-container">
       <template v-for="item in arrayImg" :key="item?.id">
         <img
-          v-if="item?.attributes?.url"
-          :src="`${baseUrl}${item?.attributes?.url}`"
+          v-if="item?.attributes?.formats?.medium?.url"
+          :src="`${baseUrl}${item?.attributes?.formats?.medium?.url}`"
           class="gall-img-solo"
           :alt="item?.attributes?.alternativeText ?? 'галерея'"
         />
@@ -19,8 +19,8 @@
     >
       <template v-for="item in arrayImg" :key="item?.id">
         <img
-          v-if="item?.attributes?.url"
-          :src="`${baseUrl}${item?.attributes?.url}`"
+          v-if="item?.attributes?.formats?.medium?.url"
+          :src="`${baseUrl}${item?.attributes?.formats?.medium?.url}`"
           class="gall-img"
           :alt="item?.attributes?.alternativeText ?? 'галерея'"
         />
@@ -33,8 +33,8 @@
     >
       <template v-for="item in arrayImg" :key="item?.id">
         <img
-          v-if="item?.attributes?.url"
-          :src="`${baseUrl}${item?.attributes?.url}`"
+          v-if="item?.attributes?.formats?.medium?.url"
+          :src="`${baseUrl}${item?.attributes?.formats?.medium?.url}`"
           class="gall-img-three"
           :alt="item?.attributes?.alternativeText ?? 'галерея'"
         />
@@ -44,8 +44,8 @@
     <div class="container" v-else-if="arrayImg.length === 6">
       <template v-for="(item, index) in arrayImg" :key="item?.id">
         <img
-          v-if="item?.attributes?.url"
-          :src="`${baseUrl}${item?.attributes?.url}`"
+          v-if="item?.attributes?.formats?.medium?.url"
+          :src="`${baseUrl}${item?.attributes?.formats?.medium?.url}`"
           :class="'img-' + index"
           :alt="item?.attributes?.alternativeText ?? 'галерея'"
         />

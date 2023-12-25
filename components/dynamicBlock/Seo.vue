@@ -1,7 +1,6 @@
 <script setup>
 defineProps(["block"]);
 
-const assetsStore = useAssets();
 const baseUrl = useRuntimeConfig().public?.baseUrl;
 </script>
 
@@ -13,12 +12,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
       :src="`${baseUrl}${block?.image?.data?.attributes?.url}`"
       :alt="block?.image?.data?.attributes?.alternativeText ?? 'Изображение'"
     />
-    <img
-      v-else
-      class="image"
-      :src="assetsStore.useAsset(`images/blocks/${img}`)"
-      alt="rectangle"
-    />
+
     <div class="seo-block-text">
       <h2
         class="seo-block-text__title p-bt-14"
