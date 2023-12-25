@@ -148,8 +148,10 @@ const docs = contactsMainInfo?.docs?.map((d) => ({
     ? `${baseUrl}${d?.file?.data?.[0]?.attributes?.url}`
     : null,
 }));
-// const videoLink
-// const videoImage
+
+const videoLink = null;
+const videoImage = null;
+
 const link = "/reviews";
 const link_text = "Читать отзывы";
 

@@ -124,7 +124,11 @@ const targetIsVisible = useElementVisibility(target);
             <div class="title-dark-blue banner-title">
               {{ banner?.title }}
             </div>
-            <div class="banner-text" v-html="banner?.description"></div>
+            <div
+              v-if="banner?.description"
+              class="banner-text"
+              v-html="banner?.description"
+            ></div>
             <NuxtLink
               v-if="banner?.link"
               :to="banner?.link"
@@ -190,6 +194,17 @@ const targetIsVisible = useElementVisibility(target);
     color: #ffffff;
     margin-bottom: 20px;
   }
+}
+
+.banner-text:deep(ol li),
+.banner-text:deep(ul li) {
+  list-style: initial;
+
+  margin-left: 24px;
+}
+
+.banner-text:deep(ol li) {
+  list-style: unset;
 }
 
 .banner-box {

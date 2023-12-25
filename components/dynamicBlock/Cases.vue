@@ -75,7 +75,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
             <elements-link-with-arrow
               type
               title="Смотреть кейс"
-              :href="`/portfolio/${portfolio?.id}`"
+              :link="`/portfolio/${portfolio?.id}`"
             />
           </div>
         </swiper-slide>

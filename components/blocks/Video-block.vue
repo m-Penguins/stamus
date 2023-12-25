@@ -96,8 +96,7 @@ export default {
         <div v-if="!video && problemImg">
           <img :src="problemImg" alt="problem" class="problems__image" />
         </div>
-        <!-- <img src="../../assets/images/video.png" alt="video" /> -->
-        <!-- </div> -->
+
         <a class="video-block-rectangle" target="_blank" :href="link">
           <div class="desktop">
             <svg

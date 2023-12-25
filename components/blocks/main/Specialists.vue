@@ -11,7 +11,7 @@ const selectedIndex = ref(0);
       <elements-link-with-arrow
         type
         title="Смотреть всех специалистов"
-        href="/specialists"
+        link="/specialists"
       />
     </div>
     <div class="specialists-container">

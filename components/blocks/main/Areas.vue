@@ -36,7 +36,7 @@ defineProps(["directionsData"]);
           <elements-link-with-arrow
             :type="false"
             title="Перейти"
-            :href="`/${direction?.attributes?.slug}`"
+            :link="`/${direction?.attributes?.slug}`"
           />
         </div>
       </div>

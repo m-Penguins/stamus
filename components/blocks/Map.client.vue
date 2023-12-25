@@ -122,7 +122,6 @@ const settings = {
 const tabs = [
   {
     name: "ул. Московская 140",
-    image: "map.png",
     hours: "8:00 до 21:00",
     tel: "+7 (999) 888 - 77 - 66",
     email: "hakurate@stamus-info.ru",
@@ -131,7 +130,6 @@ const tabs = [
   },
   {
     name: "ул. Хакурате 34",
-    image: "map.png",
     hours: "8:00 до 21:00",
     tel: "+7 (999) 888 - 77 - 66",
     email: "hakurate@stamus-info.ru",
@@ -140,7 +138,6 @@ const tabs = [
   },
   {
     name: "ул. Мачуги 1/1",
-    image: "map.png",
     hours: "8:00 до 21:00",
     tel: "+7 (999) 888 - 77 - 66",
     email: "hakurate@stamus-info.ru",
@@ -149,7 +146,6 @@ const tabs = [
   },
   // {
   //   name: 'ул. Черкасская 17',
-  //   image: 'map.png',
   //   hours: '8:00 до 21:00',
   //   tel: '+7 (999) 888 - 77 - 66',
   //   email:"hakurate@stamus-info.ru",
@@ -157,7 +153,6 @@ const tabs = [
   // },
   {
     name: "ул. Гимназическая 85",
-    image: "map.png",
     hours: "8:00 до 21:00",
     tel: "+7 (999) 888 - 77 - 66",
     email: "hakurate@stamus-info.ru",
@@ -166,7 +161,6 @@ const tabs = [
   },
   {
     name: "Платановый бульвар 19/3",
-    image: "map.png",
     hours: "8:00 до 21:00",
     tel: "+7 (999) 888 - 77 - 66",
     email: "hakurate@stamus-info.ru",
@@ -175,7 +169,6 @@ const tabs = [
   },
   // {
   //   name: 'ул. Средняя 1/3',
-  //   image: 'map.png',
   //   hours: '8:00 до 21:00',
   //   tel: '+7 (999) 888 - 77 - 66',
   //   email:"hakurate@stamus-info.ru",

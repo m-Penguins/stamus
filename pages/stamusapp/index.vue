@@ -67,7 +67,7 @@ useHead({
       <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
       <div class="stamus-app-container">
         <elements-title-text-button
-          font-size="true"
+          :font-size="true"
           textButtonBase="Скачать в App Store"
           title="Мобильное приложение"
           text="Сети клиник “Стамус”"

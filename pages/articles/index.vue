@@ -10,7 +10,7 @@ const route = useRoute();
 const pageSize = ref(12);
 const currentPage = ref(route.query.page ?? 1);
 
-const dirFilter = ref(route.query.dir);
+const tagFilter = ref(route.query.tag ?? []);
 
 const totalItems = ref(0);
 
@@ -22,7 +22,7 @@ const handlePageClick = async (page) => {
   currentPage.value = page;
   const searchQuery = {
     page,
-    dir: dirFilter.value,
+    tag: tagFilter.value,
   };
 
   clearObjectFields(searchQuery);
@@ -41,21 +41,38 @@ const handlePageClick = async (page) => {
   });
 };
 
-const handleDirChange = async (dir) => {
-  dirFilter.value = dir?.id;
-  currentPage.value = 1;
-  const searchQuery = {
-    page: currentPage.value,
-    dir: dir?.id,
-  };
+const handleTagClick = async (tag) => {
+  if (!tagFilter.value?.includes(tag)) {
+    tagFilter.value.push(tag);
+    currentPage.value = 1;
+    const searchQuery = {
+      page: currentPage.value,
+      tag: tagFilter.value,
+    };
 
-  clearObjectFields(searchQuery);
+    clearObjectFields(searchQuery);
 
-  await navigateTo({
-    path: `${route.fullPath}`,
-    query: searchQuery,
-    replace: true,
-  });
+    await navigateTo({
+      path: `${route.fullPath}`,
+      query: searchQuery,
+      replace: true,
+    });
+  } else {
+    tagFilter.value = tagFilter.value?.filter((el) => el !== tag);
+    currentPage.value = 1;
+    const searchQuery = {
+      page: currentPage.value,
+      tag: tagFilter.value,
+    };
+
+    clearObjectFields(searchQuery);
+
+    await navigateTo({
+      path: `${route.fullPath}`,
+      query: searchQuery,
+      replace: true,
+    });
+  }
 };
 
 const getArticlesData = async () => {
@@ -63,7 +80,7 @@ const getArticlesData = async () => {
     populate: "napravleniya_uslug_1.*, fotoArticles.*, services.*",
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
-    "filters[napravleniya_uslug_1][id][$eq][1]": dirFilter.value,
+    "filters[tag_category][$in][1]": tagFilter.value,
   };
 
   clearObjectFields(strapiQuery);
@@ -81,15 +98,6 @@ const getArticlesData = async () => {
 
 const articlesData = await getArticlesData();
 
-const baseDataStore = useBaseDataStore();
-
-const allDirections = baseDataStore.directions?.data
-  ?.map((dir) => ({
-    id: dir?.id,
-    name: dir?.attributes?.heading,
-  }))
-  .filter((el) => el.name);
-
 const filteredArticles = computed(() =>
   articlesData.value?.data?.map((art) => {
     return {
@@ -100,11 +108,17 @@ const filteredArticles = computed(() =>
           art?.attributes?.fotoArticles?.data?.attributes?.formats?.small?.url
         : baseUrl + imagePlaceholders?.articles,
       text: art?.attributes?.text,
-      tags: art?.attributes?.tags,
+      tags: art?.attributes?.tag_category,
       description: art?.attributes?.description,
     };
   }),
 );
+
+const allTags = articlesData.value?.data
+  ?.map((art) => art?.attributes?.tag_category)
+  ?.filter(Boolean);
+
+const uniqueTags = [...new Set(allTags)];
 
 watch(
   () => route.query,
@@ -165,26 +179,18 @@ useHead({
     <div class="articles-page-wrap">
       <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
       <div class="articles-page-title">Статьи</div>
-      <div class="filters-box">
-        <elements-custom-select
-          :options="allDirections"
-          label="Выберите направление"
-          class="select"
-          @select="handleDirChange"
-          :selectedId="dirFilter"
-        />
-      </div>
-      <!-- <div class="articles-page-btns">
+
+      <div class="articles-page-btns">
         <button
-          v-for="tab in tabs"
-          :key="tab.id"
-          :class="{ active: selectedButton === tab.id }"
-          @click="() => selectButton(tab.id)"
+          v-for="(tag, index) in uniqueTags"
+          :key="index"
+          :class="{ active: tagFilter?.includes(tag) }"
+          @click.stop="handleTagClick(tag)"
           class="articles-page-btn"
         >
-          {{ tab.title }}
+          {{ tag }}
           <div
-            v-if="selectedButton === tab.id"
+            v-if="tagFilter?.includes(tag)"
             class="articles-page-icon-active"
           >
             <svg
@@ -202,7 +208,7 @@ useHead({
             </svg>
           </div>
         </button>
-      </div> -->
+      </div>
       <div class="articles-page-cards" v-if="filteredArticles?.length">
         <div
           v-for="item in filteredArticles"

@@ -81,40 +81,10 @@ export default {
   setup() {
     const assetsStore = useAssets();
     const textAboutImportant = textAboutImportantArray;
-    const mockArrayDirection = [
-      {
-        name: "Название кейса",
-        category: "Взрослая стоматология",
-        img: "avatar1.png",
-        description:
-          "Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись",
-      },
-      {
-        name: "Название кейса",
-        category: "Взрослая стоматология",
-        img: "avatar2.png",
-        description:
-          "Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись",
-      },
-      {
-        name: "Название кейса",
-        category: "Взрослая стоматология",
-        img: "avatar3.png",
-        description:
-          "Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись",
-      },
-      {
-        name: "Название кейса",
-        category: "Взрослая стоматология",
-        img: "avatar4.png",
-        description:
-          "Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись",
-      },
-    ];
+
     return {
       assetsStore,
       textAboutImportant,
-      mockArrayDirection,
     };
   },
 };

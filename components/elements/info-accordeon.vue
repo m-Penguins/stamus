@@ -173,7 +173,6 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
               :key="index"
               :for="box"
               class="checkbox"
-              :class="{ checked: isChecked }"
             >
               <input
                 v-model="store.checkBoxes"

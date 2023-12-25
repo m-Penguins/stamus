@@ -18,7 +18,7 @@
     <elements-link-with-arrow
       type
       title="Смотреть кейс"
-      :href="`/portfolio/${direction.id}`"
+      :link="`/portfolio/${direction.id}`"
     />
   </div>
 </template>

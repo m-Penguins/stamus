@@ -41,7 +41,7 @@
     link="/leave-review"
     bgColor="grey"
     type
-    img="mobile.svg"
+    img="mobile.png"
     bigImg="true"
   />
   <blocks-main-form />
