@@ -3,7 +3,7 @@
   <div class="spicialists-page-cards">
     <div class="spicialists-page-card" v-for="item in specialists" :key="item">
       <elements-name-specialty-photo-card
-        link="#"
+        :link="item?.link"
         :specialists="item"
         :isLink="false"
         :isTooltip="false"
@@ -26,12 +26,17 @@ const { data: happyHours } = await useFetch(`${apiBaseUrl}lucky-times`, {
 });
 
 const specialists = happyHours?.value?.data?.map((hh) => {
+  const firstName = hh?.attributes?.specialist?.data?.attributes?.firstName;
+  const lastname = hh?.attributes?.specialist?.data?.attributes?.lastName;
+
+  const addressData =
+    hh?.attributes?.specialist?.data?.attributes?.clinics?.data?.map(
+      (el) => el?.attributes?.address,
+    );
+
   const spec = {
-    name:
-      hh?.attributes?.specialist?.data?.attributes?.firstName?.trim() +
-      " " +
-      hh?.attributes?.specialist?.data?.attributes?.lastName?.trim(),
-    position: hh?.attributes?.specialist?.data?.attributes?.position,
+    name: (firstName ?? "") + " " + (lastname ?? ""),
+    position: hh?.attributes?.specialist?.data?.attributes?.position ?? "",
     img: hh?.attributes?.specialist?.data?.attributes?.fotoSpecialist?.data
       ?.attributes?.formats?.small?.url
       ? baseUrl +
@@ -39,9 +44,7 @@ const specialists = happyHours?.value?.data?.map((hh) => {
           ?.attributes?.formats?.small?.url
       : baseUrl + imagePlaceholders?.specialists,
     time: hh?.attributes?.time ?? [],
-    address: `Прием на ${hh?.attributes?.specialist?.data?.attributes?.clinics?.data
-      ?.map((el) => el?.attributes?.address)
-      ?.join(", ")}`,
+    address: addressData?.length ? `Прием на ${addressData?.join(", ")}` : "",
     description: hh?.attributes?.description ?? "",
     link: hh?.attributes?.link,
   };
@@ -107,7 +110,7 @@ useHead({
 .spicialists-page-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 1fr;
+  /* grid-auto-rows: 1fr; */
   gap: 40px 16px;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -129,7 +132,7 @@ useHead({
     margin: 0 auto 80px;
     gap: 40px 14px;
 
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -140,6 +143,7 @@ useHead({
   .spicialists-page-cards {
     margin: 0 auto 80px;
     grid-template-columns: 1fr;
+    justify-items: center;
   }
 }
 </style>

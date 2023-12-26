@@ -29,7 +29,7 @@
     :titleLink="'Узнать подробнее'"
     link="/stamusapp"
     bgColor="grey"
-    type="true"
+    type
     img="mob5.png"
     bigImg="true"
   />
@@ -40,8 +40,8 @@
     :titleLink="'Оставить отзыв'"
     link="/leave-review"
     bgColor="grey"
-    type="true"
-    img="mobile.svg"
+    type
+    img="mobile.png"
     bigImg="true"
   />
   <blocks-main-form />

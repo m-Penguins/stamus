@@ -1,7 +1,7 @@
 <template>
   <NuxtLink
     v-if="type"
-    :href="link"
+    :to="link"
     :target="isExternal ? '_blank' : '_self'"
     @click="handleClick()"
     class="wrapper"
@@ -23,7 +23,7 @@
       </svg>
     </div>
   </NuxtLink>
-  <NuxtLink v-else :href="link" class="wrapper" @click="handleClick()">
+  <NuxtLink v-else :to="link" class="wrapper" @click="handleClick()">
     <p v-html="title" class="text text-white"></p>
     <div class="arrow-white">
       <svg
@@ -60,8 +60,8 @@ export default {
       default: "#",
     },
     type: {
-      type: String,
-      default: "",
+      type: Boolean,
+      default: false,
     },
     clickHandler: Function,
   },

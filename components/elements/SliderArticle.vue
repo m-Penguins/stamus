@@ -6,7 +6,7 @@
         <elements-link-with-arrow
           type="type"
           title="Все статьи"
-          href="/articles"
+          link="/articles"
         />
       </div>
     </div>

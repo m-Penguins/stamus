@@ -80,7 +80,7 @@ useHead(getMetaObject(metaData, baseUrl));
   />
 
   <section class="section-wrapper" v-if="firstBanner">
-    <BlocksMyBanner :block="firstBanner" />
+    <DynamicBlockBanner :block="firstBanner" />
   </section>
 
   <blocks-main-areas :directions-data="directionsData" />
@@ -91,13 +91,13 @@ useHead(getMetaObject(metaData, baseUrl));
   />
 
   <section class="section-wrapper" v-if="secondBanner">
-    <BlocksMyBanner :block="secondBanner" />
+    <DynamicBlockBanner :block="secondBanner" />
   </section>
 
   <blocks-main-popularServices />
 
   <section class="section-wrapper" v-if="thirdBanner">
-    <BlocksMyBanner :block="thirdBanner" />
+    <DynamicBlockBanner :block="thirdBanner" />
   </section>
 
   <section class="section-wrapper" v-if="reviews">
@@ -105,7 +105,7 @@ useHead(getMetaObject(metaData, baseUrl));
   </section>
 
   <section class="section-wrapper" v-if="fourthBanner">
-    <BlocksMyBanner :block="fourthBanner" />
+    <DynamicBlockBanner :block="fourthBanner" />
   </section>
 
   <section class="section-wrapper" v-if="articles?.data?.length">

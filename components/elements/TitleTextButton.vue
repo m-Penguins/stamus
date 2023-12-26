@@ -27,7 +27,7 @@
       />
       <elements-link-with-arrow
         v-if="isLinkWithArrow && textLinkWithArrow"
-        type="true"
+        type
         :title="textLinkWithArrow"
         :link="link"
         :isExternal="isExternal"

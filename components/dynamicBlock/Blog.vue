@@ -28,7 +28,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
           <elements-link-with-arrow
             type="type"
             title="Все статьи"
-            href="/articles"
+            link="/articles"
           />
         </div>
       </div>
@@ -79,7 +79,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
               <elements-link-with-arrow
                 type="type"
                 title="Читать"
-                @click="$router.push(`/articles/` + article?.id)"
+                :link="`/articles/${article?.id}`"
               />
             </div>
           </swiper-slide>

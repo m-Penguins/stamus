@@ -38,7 +38,7 @@ const props = defineProps(["clinicsData"]);
           <elements-link-with-arrow
             :type="false"
             title="Перейти"
-            :href="'/clinics/' + clinic?.id"
+            :link="'/clinics/' + clinic?.id"
           />
         </div>
       </div>

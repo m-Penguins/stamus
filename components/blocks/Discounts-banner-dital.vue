@@ -2,43 +2,54 @@
   <div class="banner">
     <div class="banner-wrap">
       <div class="banner-inner">
-        <elements-bread-crumbs :breadcrumbs="breadcrumbs" class="bread-crumbs-discounts"/>
+        <elements-bread-crumbs
+          :breadcrumbs="breadcrumbs"
+          class="bread-crumbs-discounts"
+        />
         <div class="banner-box">
           <div class="banner-container">
             <h2 class="banner-title">Счастливые часы</h2>
             <p class="banner-text">Каждый день скидки до 50%</p>
-            <elements-link-with-arrow link="/discounts" type="true" title="Посмотреть акции"/>
+            <elements-link-with-arrow
+              link="/discounts"
+              type
+              title="Посмотреть акции"
+            />
           </div>
           <div class="banner-img">
             <div class="banner-img-box">
-              <img src="../../assets/images/img-banner/tooth.png" alt="image" class="img">
+              <img
+                src="../../assets/images/img-banner/tooth.png"
+                alt="image"
+                class="img"
+              />
             </div>
           </div>
-      </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { useAssets } from '../../stores/useAsset'
+import { useAssets } from "../../stores/useAsset";
 export default {
   props: {
     breadcrumbs: {
-        type: Array,
-    }
+      type: Array,
+    },
   },
   setup() {
     const assetsStore = useAssets();
     return {
-      assetsStore
-    }
-  }
-}
+      assetsStore,
+    };
+  },
+};
 </script>
 
 <style scoped lang="scss">
-@import '/assets/styles/style.scss';
+@import "/assets/styles/style.scss";
 .banner-img {
   height: 100%;
   width: 53%;
@@ -56,7 +67,7 @@ export default {
 }
 .banner-title {
   @include body-60-medium;
-  color: #1E2433;
+  color: #1e2433;
   padding-top: 60px;
 }
 
@@ -174,7 +185,6 @@ export default {
 }
 
 @media (max-width: 650px) {
-
   .bread-crumbs-discounts {
     margin: 84px 0 0px 0;
   }
@@ -201,5 +211,4 @@ export default {
     padding-bottom: 4px;
   }
 }
-
 </style>

@@ -128,7 +128,7 @@ useHead({
     :titleLink="'Узнать подробнее'"
     link="#"
     bgColor="light-blue"
-    type="true"
+    type
     img="cards2.png"
     bigImg="true"
     :handleLinkClick="openBidModal"
@@ -139,7 +139,7 @@ useHead({
     :titleLink="'Узнать подробнее'"
     link="/stamusapp"
     bgColor="grey"
-    type="true"
+    type
     img="mob5.png"
     bigImg="true"
   />

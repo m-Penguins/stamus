@@ -3,12 +3,12 @@
     <div
       class="dentistry-container"
       :style="`background-image:url(${imgBg})`"
-      :class="{ 'bg-dark': isBgDark }"
+      :class="{ 'bg-dark': false }"
     >
       <div class="dentistry-box">
         <elements-bread-crumbs
           :breadcrumbs="breadcrumbs"
-          :typeColorWhite="typeColorWhite"
+          :typeColorWhite="false"
         />
         <div class="mob">
           <img :src="imgAdaptive" class="img" />
@@ -16,16 +16,14 @@
             <elements-title-text-button
               textButtonBase="Записаться онлайн"
               :customClick="redirectToExternalApp"
-              :isButtonBase="isButtonBase"
+              :isButtonBase="false"
               :title="title"
               :font-size="true"
               :text="text"
-              :class="isTimeAndPriceCard ? 'main-info-width' : ''"
             />
           </div>
         </div>
         <elements-title-text-button
-          :typeColorWhiteText="typeColorWhiteText"
           :customClick="heroClick"
           :textButtonBase="buttonText"
           isButtonBase
@@ -106,6 +104,7 @@ const buttonText = props?.link_text ? props?.link_text : "Записаться �
   background-color: #cccccc;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   margin-bottom: 100px;
   display: flex;
   justify-content: flex-start;
