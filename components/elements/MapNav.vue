@@ -29,7 +29,7 @@
           <div class="map-nav-title">E-mail</div>
           <a
             class="map-nav-info header-nav-item"
-            href="mailto:hakurate@stamus-info.ru"
+            :href="`mailto:${tab?.email}`"
             >{{ tab?.email }}</a
           >
         </div>
