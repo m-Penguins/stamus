@@ -47,32 +47,10 @@ const selectedIndex = ref(0);
             </p>
           </div>
 
-          <div class="specialists-inner__info-numbers">
-            <div>
-              <p class="specialists-numbers">
-                {{ props.mainSpecialists?.[selectedIndex]?.experience?.year }}
-              </p>
-              <p class="specialists-box__spec">
-                {{ props.mainSpecialists?.[selectedIndex]?.experience?.text }}
-              </p>
-            </div>
-            <div>
-              <p class="specialists-numbers">
-                {{ props.mainSpecialists?.[selectedIndex]?.review?.year }}
-              </p>
-              <p class="specialists-box__spec">
-                {{ props.mainSpecialists?.[selectedIndex]?.review?.text }}
-              </p>
-            </div>
-            <div>
-              <p class="specialists-numbers">
-                {{ props.mainSpecialists?.[selectedIndex]?.consultation?.year }}
-              </p>
-              <p class="specialists-box__spec">
-                {{ props.mainSpecialists?.[selectedIndex]?.consultation?.text }}
-              </p>
-            </div>
-          </div>
+          <p class="description">
+            {{ mainSpecialists?.[selectedIndex]?.description }}
+          </p>
+
           <div class="specialists-inner__info-btn">
             <elements-button-base
               title="О докторе"
@@ -97,6 +75,7 @@ const selectedIndex = ref(0);
 
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
+
 .specialists {
   padding-top: 80px;
 }
@@ -144,7 +123,7 @@ const selectedIndex = ref(0);
     flex-direction: column;
     gap: 14px;
 
-    max-height: 380px;
+    max-height: 370px;
     overflow-y: auto;
 
     .active {
@@ -212,6 +191,7 @@ const selectedIndex = ref(0);
 
 .specialists-inner {
   display: flex;
+  align-items: flex-end;
   gap: 16px;
 
   &__img {
@@ -221,6 +201,8 @@ const selectedIndex = ref(0);
       width: 308px;
       height: 308px;
       border-radius: 15px;
+
+      object-fit: cover;
     }
   }
 
@@ -228,6 +210,8 @@ const selectedIndex = ref(0);
     @include flex-column-start;
     // justify-content: space-between;
     gap: 30px;
+
+    max-width: 400px;
 
     &-name {
       display: flex;
@@ -252,12 +236,12 @@ const selectedIndex = ref(0);
       display: flex;
       align-items: center;
       gap: 20px;
-      margin-top: 77px;
+      margin-top: 27px;
     }
   }
 }
 
-@media (max-width: 1018px) {
+@media (max-width: 1220px) {
   .specialists {
     padding-top: 0;
   }
@@ -374,6 +358,7 @@ const selectedIndex = ref(0);
     &__img {
       width: 343px;
       height: 343px;
+      align-self: center;
     }
 
     &__info-btn {
