@@ -9,10 +9,8 @@ export const useFormStore = defineStore("form-store", () => {
   const whoIsGettingDocument = ref(null);
   const patientNameField = ref("");
   const address = ref("");
-  const emailField = ref("");
 
   const startValidation = ref(false);
-  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const digitRegex = /^[0-9]+$/;
 
   const isNameInfoValid = computed(() => {
@@ -38,13 +36,6 @@ export const useFormStore = defineStore("form-store", () => {
     return true;
   });
 
-  const isEmailValidInfo = computed(() => {
-    if (startValidation.value) {
-      return emailRegex.test(emailField.value);
-    }
-    return true;
-  });
-
   const isPhoneValidInfo = computed(() => {
     if (startValidation.value) {
       return phoneField.value.substring(0, 16).length === 16;
@@ -56,7 +47,6 @@ export const useFormStore = defineStore("form-store", () => {
     return (
       getterNameField.value.length &&
       phoneField.value.length > 0 &&
-      emailField.value.length > 0 &&
       digitField.value.length > 0 &&
       patientNameField.value.length > 0
     );
@@ -65,7 +55,6 @@ export const useFormStore = defineStore("form-store", () => {
   function resetForm() {
     getterNameField.value = "";
     phoneField.value = "";
-    emailField.value = "";
     digitField.value = "";
     startValidation.value = false;
   }
@@ -76,7 +65,6 @@ export const useFormStore = defineStore("form-store", () => {
     if (
       isSubmitActivePersonalIncomeTax.value &&
       isPhoneValidInfo.value &&
-      isEmailValidInfo.value &&
       isDigitValidInfo.value &&
       isNamePatientFieldValid.value &&
       isNameInfoValid.value
@@ -106,9 +94,6 @@ export const useFormStore = defineStore("form-store", () => {
       const addressValue = address.value
         ? `Как хочет получить справку: ${address.value}`
         : "";
-      const emailFieldValue = emailField.value
-        ? `Емейл: ${emailField.value}`
-        : "";
 
       const msg = [
         getterNameFieldValue,
@@ -118,7 +103,6 @@ export const useFormStore = defineStore("form-store", () => {
         whoIsGettingDocumentValue,
         patientNameFieldValue,
         addressValue,
-        emailFieldValue,
       ]
         .filter(Boolean)
         .join("\n");
@@ -147,10 +131,8 @@ export const useFormStore = defineStore("form-store", () => {
     phoneField,
     patientNameField,
     digitField,
-    emailField,
     isNameInfoValid,
     isDigitValidInfo,
-    isEmailValidInfo,
     isPhoneValidInfo,
     startValidation,
     isSubmitActivePersonalIncomeTax,
