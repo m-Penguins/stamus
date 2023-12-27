@@ -20,7 +20,6 @@ if (isNDFL.value) {
 
 const store = useFormStore();
 const mockCheckBoxes = [
-  "Проходил лечение в 2020 г",
   "Проходил лечение в 2021 г",
   "Проходил лечение в 2022 г",
   "Проходил лечение в 2023 г",
@@ -204,16 +203,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
               class="select"
               @input="(v) => (store.address = v?.name ?? '')"
             />
-            <elements-input-base
-              tag-type="email"
-              label="Адрес электронной почты"
-              v-model="store.emailField"
-              :errorMessage="
-                store.isEmailValidInfo
-                  ? ''
-                  : '*Проверьте правильность заполнения данных'
-              "
-            />
+
             <div>
               <elements-button-base
                 type="submit"

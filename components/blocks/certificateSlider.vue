@@ -31,7 +31,12 @@ const closeCert = () => {
     <transition name="modal">
       <div class="popup-wrap" v-if="isCertOpen" @click="closeCert">
         <div class="popup" @click.stop>
-          <img class="popup-img" :src="popupImg" alt="clinic" loading="lazy" />
+          <img
+            class="popup-img"
+            :src="popupImg"
+            alt="certificate"
+            loading="lazy"
+          />
           <div class="popup-close">
             <svg
               @click="closeCert"
@@ -79,7 +84,12 @@ const closeCert = () => {
             class="swiper-slide"
             @click="openCert(item)"
           >
-            <img class="swiper-img" :src="item" alt="clinic" loading="lazy" />
+            <img
+              class="swiper-img"
+              :src="item"
+              alt="certificate"
+              loading="lazy"
+            />
           </swiper-slide>
         </Swiper>
         <div class="wrapper-btn">

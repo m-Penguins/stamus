@@ -163,8 +163,8 @@ const breadcrumbs = [
     url: "/",
   },
   {
-    title: "Специалисты",
-    url: "/specialists",
+    title: "Врачи",
+    url: "/team",
   },
 ];
 
@@ -207,7 +207,7 @@ useHead({
   <div class="spicialists-page">
     <div class="spicialists-page-wrap">
       <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
-      <div class="spicialists-page-title">Специалисты</div>
+      <div class="spicialists-page-title">Наши Врачи</div>
       <div class="specialist-form">
         <div class="specialist-box">
           <elements-custom-select

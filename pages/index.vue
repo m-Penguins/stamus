@@ -49,6 +49,7 @@ const mainSpecialists =
         ? baseUrl +
           sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.small?.url
         : baseUrl + imagePlaceholders?.specialists,
+      description: sp?.attributes?.description,
       experience: {
         year: sp?.attributes?.meetingPerson?.dataMeeting?.[0]?.total,
         text: sp?.attributes?.meetingPerson?.dataMeeting?.[0]?.item,
@@ -115,7 +116,7 @@ useHead(getMetaObject(metaData, baseUrl));
   <section class="section-wrapper" v-if="seoData">
     <DynamicBlockSeo :block="seoData" />
   </section>
-
+  <LazyBlocksMap />
   <blocks-main-form />
 </template>
 

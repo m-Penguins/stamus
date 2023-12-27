@@ -5,7 +5,7 @@
     </h2>
     <p class="form-wrapper__subtitle subtitle-gray">
       Перезвоним в течении 15 минут и уточним <br />
-      удобную для вас поликлинику и дату
+      удобную для вас клинику и дату
     </p>
     <div class="form-wrapper__box">
       <elements-input-base

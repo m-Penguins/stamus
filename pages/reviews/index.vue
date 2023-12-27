@@ -195,7 +195,7 @@ useHead({
     <div class="filters-box">
       <elements-custom-select
         :options="allSpecialists"
-        label="Выберите специалиста"
+        label="Выберите врача"
         class="select"
         @select="handleSpecChange"
         :selectedId="specFilter"

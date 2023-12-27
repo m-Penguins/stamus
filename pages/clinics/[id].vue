@@ -150,7 +150,7 @@ useHead(getMetaObject(metaData, baseUrl));
 
   <blocks-our-specialists
     v-if="clinicData?.data?.attributes?.specialists?.data"
-    title="Наши специалисты"
+    title="Наши врачи"
     :data="clinicData?.data?.attributes?.specialists?.data"
   />
   <BlocksMainBanner

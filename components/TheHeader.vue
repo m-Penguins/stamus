@@ -99,7 +99,7 @@ export default {
     const store = useActuveLink();
     const isOpenPopup = ref(false);
     const navigation = [
-      { title: "Специалисты", path: "/specialists" },
+      { title: "Врачи", path: "/team" },
       { title: "Пациентам", path: "" },
       { title: "Отзывы", path: "/reviews" },
 

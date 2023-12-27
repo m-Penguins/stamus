@@ -107,9 +107,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
       </div>
     </div>
     <div class="slider-base-btn">
-      <NuxtLink class="button-base" to="/specialists"
-        >Смотреть всех специалистов</NuxtLink
-      >
+      <NuxtLink class="button-base" to="/team">Смотреть всех врачей</NuxtLink>
     </div>
   </div>
 </template>

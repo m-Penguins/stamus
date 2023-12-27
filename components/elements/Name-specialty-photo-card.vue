@@ -41,7 +41,7 @@
       v-if="isLink"
       type
       title="Подробнее о враче"
-      :link="`/specialists/${specialists.id}`"
+      :link="`/team/${specialists.id}`"
       :clickHandler="handleLinkClick"
     />
 

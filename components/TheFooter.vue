@@ -13,8 +13,8 @@
                 exact
                 active-class="active-link"
                 class="header-nav-item footer-text"
-                to="/specialists"
-                >Специалисты</NuxtLink
+                to="/team"
+                >Врачи</NuxtLink
               >
               <NuxtLink
                 exact
@@ -80,7 +80,7 @@
             >
               <img
                 :src="`${baseUrl}${social?.icon?.data?.attributes?.url}`"
-                alt="social"
+                :alt="social?.icon?.data?.attributes?.alternativeText"
                 class="footer-img"
               />
             </NuxtLink>

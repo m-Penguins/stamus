@@ -78,7 +78,7 @@ const getSearchData = async () => {
       : baseUrl + imagePlaceholders?.specialists,
     position: sp?.attributes?.position,
     achievements: sp?.attributes?.achievements,
-    link: `/specialists/${sp?.id}`,
+    link: `/team/${sp?.id}`,
   }));
 
   services.value = servicesData?.value?.data?.map((singleService) => ({
@@ -211,7 +211,7 @@ useHead({
         </div>
 
         <div v-if="specialists?.length > 0" class="search-block">
-          <h4 class="search-subtitle">Подходящие специалисты</h4>
+          <h4 class="search-subtitle">Подходящие врачи</h4>
           <hr class="hr" />
           <div v-for="item in specialists" :key="item" class="search-inner">
             <elements-search-specialist-card :spesialistCard="item" />

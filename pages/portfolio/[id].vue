@@ -149,7 +149,7 @@ useHead(getMetaObject(metaData, baseUrl));
           <elements-name-specialty-photo-card
             :isTooltip="true"
             :specialists="specialist"
-            @click="$router.push(`/specialists/` + specialist.id)"
+            @click="$router.push(`/team/` + specialist.id)"
           />
         </div>
       </div>

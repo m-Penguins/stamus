@@ -22,7 +22,7 @@
     img="tooth.png"
     bigImg="true"
   />
-  <blocks-our-specialists title="Наши специалисты" :data="data" />
+  <blocks-our-specialists title="Наши врачи" :data="data" />
   <blocks-main-feedback />
   <blocks-map />
   <blocks-gallery />
