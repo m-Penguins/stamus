@@ -31,7 +31,7 @@ const moveStep2 = computed(() => {
 });
 
 const isGoodReview = computed(() =>
-  ["Отлично", "Хорошо", "Приемлемо"].includes(reviewStore?.pickedRating),
+  ["Отлично", "Хорошо"].includes(reviewStore?.pickedRating),
 );
 
 const stepHeader = [
@@ -184,18 +184,12 @@ useHead({
               label="Ваше имя"
               class="popup-form-input"
               v-model="reviewStore.nameField"
-              :error-message="
-                reviewStore.isNameValid ? '' : '*Минимум 2 символа'
-              "
             />
             <elements-input-base
               tag-type="phoneMask"
-              label="Ваш номер телефона"
+              label="Номер телефона (по желанию)"
               class="popup-form-input"
               v-model="reviewStore.phoneField"
-              :error-message="
-                reviewStore.isPhoneValid ? '' : '*Неверный формат'
-              "
             />
           </div>
           <elements-input-base
@@ -221,7 +215,6 @@ useHead({
             title="Отправить"
             class="popup-btn"
             :onClick="reviewStore.submitModal"
-            :disabled="!reviewStore.isSubmitActive"
           />
           <div class="popup-text">
             Нажимая кнопку отправить, вы соглашаетесь с
