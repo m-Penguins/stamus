@@ -80,7 +80,7 @@
             >
               <img
                 :src="`${baseUrl}${social?.icon?.data?.attributes?.url}`"
-                alt="social"
+                :alt="social?.icon?.data?.attributes?.alternativeText"
                 class="footer-img"
               />
             </NuxtLink>

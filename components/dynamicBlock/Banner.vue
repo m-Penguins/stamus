@@ -82,13 +82,10 @@ const targetIsVisible = useElementVisibility(target);
           </div>
           <div class="banner-images">
             <img
+              v-if="banner?.image?.data?.attributes?.url"
               class="banner-img"
-              :src="
-                banner?.image?.data?.attributes?.url
-                  ? `${baseUrl}${banner?.image?.data?.attributes?.url}`
-                  : assetsStore.useAsset(`images/img-banner/tooth.png`)
-              "
-              alt="img"
+              :src="`${baseUrl}${banner?.image?.data?.attributes?.url}`"
+              :alt="banner?.image?.data?.attributes?.alternativeText"
             />
           </div>
         </div>
@@ -155,13 +152,10 @@ const targetIsVisible = useElementVisibility(target);
           </div>
           <div class="banner-images">
             <img
+              v-if="banner?.image?.data?.attributes?.url"
               class="banner-img"
-              :src="
-                banner?.image?.data?.attributes?.url
-                  ? `${baseUrl}${banner?.image?.data?.attributes?.url}`
-                  : assetsStore.useAsset(`images/img-banner/tooth.png`)
-              "
-              alt="img"
+              :src="`${baseUrl}${banner?.image?.data?.attributes?.url}`"
+              :alt="banner?.image?.data?.attributes?.alternativeText"
             />
           </div>
         </div>
@@ -175,6 +169,8 @@ const targetIsVisible = useElementVisibility(target);
 
 .banner-container {
   display: grid;
+
+  max-height: 480px;
 
   grid-template-columns: [text-start bg-start] 1fr [text-end image-start] 1fr [image-end bg-end];
 
@@ -196,6 +192,10 @@ const targetIsVisible = useElementVisibility(target);
   }
 }
 
+.banner-text {
+  @include body-18-regular;
+}
+
 .banner-text:deep(ol li),
 .banner-text:deep(ul li) {
   list-style: initial;
@@ -211,6 +211,10 @@ const targetIsVisible = useElementVisibility(target);
   grid-area: text;
 
   padding: 60px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media screen and (max-width: 640px) {
@@ -220,11 +224,18 @@ const targetIsVisible = useElementVisibility(target);
 }
 
 .banner-images {
+  max-height: 480px;
+
   grid-area: image;
   font-size: 0;
 
   display: flex;
   justify-content: center;
+
+  background-image: url("@/assets/images/img-banner/vectors.png");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 .banner-img {
   max-width: 100%;
@@ -239,6 +250,7 @@ const targetIsVisible = useElementVisibility(target);
 
 @media screen and (max-width: 900px) {
   .banner-container {
+    max-height: unset;
     grid-template-columns: [text-start bg-start image-start] auto[text-end bg-end image-end];
 
     grid-template-rows: [text-start bg-start] auto [image-start text-end] auto [image-end bg-end];
