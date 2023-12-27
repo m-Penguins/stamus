@@ -7,11 +7,11 @@ const selectedIndex = ref(0);
 <template>
   <div class="container-size specialists">
     <div class="specialists-subject">
-      <h2 class="specialists-heading-title">Наши специалисты</h2>
+      <h2 class="specialists-heading-title">Наши врачи</h2>
       <elements-link-with-arrow
         type
-        title="Смотреть всех специалистов"
-        link="/specialists"
+        title="Смотреть всех врачей"
+        link="/team"
       />
     </div>
     <div class="specialists-container">
@@ -78,7 +78,7 @@ const selectedIndex = ref(0);
               title="О докторе"
               @click="
                 $router.push(
-                  `/specialists/${props.mainSpecialists?.[selectedIndex]?.id}`,
+                  `/team/${props.mainSpecialists?.[selectedIndex]?.id}`,
                 )
               "
               class="specialists-btn-base"
@@ -86,7 +86,7 @@ const selectedIndex = ref(0);
             <elements-link-with-arrow
               type
               title="Смотреть портфолио"
-              :to="`/specialists/${props.mainSpecialists?.[selectedIndex]?.id}#portfolio`"
+              :to="`/team/${props.mainSpecialists?.[selectedIndex]?.id}#portfolio`"
             />
           </div>
         </div>

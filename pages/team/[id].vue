@@ -29,8 +29,8 @@ const breadcrumbs = [
     url: "/",
   },
   {
-    title: "Специалисты",
-    url: "/specialists",
+    title: "Врачи",
+    url: "/team",
   },
   {
     title: specialist.value?.data?.attributes?.position,

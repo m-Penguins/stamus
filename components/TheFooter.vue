@@ -13,8 +13,8 @@
                 exact
                 active-class="active-link"
                 class="header-nav-item footer-text"
-                to="/specialists"
-                >Специалисты</NuxtLink
+                to="/team"
+                >Врачи</NuxtLink
               >
               <NuxtLink
                 exact

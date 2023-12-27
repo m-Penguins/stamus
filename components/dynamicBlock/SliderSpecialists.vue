@@ -5,7 +5,7 @@ const props = defineProps(["block"]);
 <template>
   <elements-slider-our-specialists
     :programs="block?.specialists?.data"
-    :title="block?.title ?? 'Наши специалисты'"
+    :title="block?.title ?? 'Наши врачи'"
   />
 </template>
 

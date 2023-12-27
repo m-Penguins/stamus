@@ -120,7 +120,7 @@ useHead({
   <blocks-our-specialists
     v-if="specialistsData.data"
     :data="specialistsData.data"
-    title="Наши специалисты"
+    title="Наши врачи"
   />
   <BlocksMainBanner
     :title="'Добровольное медицинское страхование'"
