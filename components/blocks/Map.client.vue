@@ -6,10 +6,11 @@
         <div class="tab-map">
           <div class="map-container">
             <yandex-map
+              v-model="map"
               :settings="{
                 location: {
-                  center: [39.002218, 45.085805],
-                  zoom: 10,
+                  center: [38.952473, 45.051031],
+                  zoom: 11.5,
                   duration: 1000,
                 },
               }"
@@ -26,7 +27,17 @@
                 :key="index"
                 :settings="{
                   coordinates: marker?.coordinates,
-                  onClick: () => (activeTab = index),
+                  onClick: () => {
+                    map?.setLocation({
+                      center: [
+                        marker?.coordinates?.[0],
+                        marker?.coordinates?.[1],
+                      ],
+                      zoom: 17,
+                      duration: 1000,
+                    });
+                    activeTab = index;
+                  },
                   zIndex: activeTab === index ? 1 : 0,
                 }"
               >
@@ -63,6 +74,8 @@ import {
 } from "vue-yandex-maps";
 import baloon from "@/assets/images/icons/map_baloon.svg";
 import baloon1 from "@/assets/images/icons/map_baloon1.svg";
+
+const map = shallowRef(null);
 
 defineProps(["block"]);
 

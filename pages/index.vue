@@ -116,7 +116,7 @@ useHead(getMetaObject(metaData, baseUrl));
   <section class="section-wrapper" v-if="seoData">
     <DynamicBlockSeo :block="seoData" />
   </section>
-
+  <LazyBlocksMap />
   <blocks-main-form />
 </template>
 
