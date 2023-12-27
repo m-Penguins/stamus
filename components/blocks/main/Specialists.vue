@@ -52,19 +52,16 @@ const selectedIndex = ref(0);
           </p>
 
           <div class="specialists-inner__info-btn">
-            <elements-button-base
-              title="О докторе"
-              @click="
-                $router.push(
-                  `/team/${props.mainSpecialists?.[selectedIndex]?.id}`,
-                )
-              "
-              class="specialists-btn-base"
-            />
+            <NuxtLink
+              :to="`/team/${props.mainSpecialists?.[selectedIndex]?.id}`"
+              class="button-base specialists-btn-base"
+              >О враче</NuxtLink
+            >
+
             <elements-link-with-arrow
               type
               title="Смотреть портфолио"
-              :to="`/team/${props.mainSpecialists?.[selectedIndex]?.id}#portfolio`"
+              :to="`/portfolio?specialist=${props.mainSpecialists?.[selectedIndex]?.id}`"
             />
           </div>
         </div>
