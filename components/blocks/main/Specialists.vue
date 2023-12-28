@@ -73,6 +73,11 @@ const selectedIndex = ref(0);
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
 
+.description {
+  @include body-16-regular;
+  color: #525660;
+}
+
 .specialists {
   padding-top: 80px;
 }
