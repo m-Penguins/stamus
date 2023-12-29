@@ -48,8 +48,8 @@
 export default {
   props: {
     title: {
-      type: String,
-      default: "",
+      type: Boolean,
+      default: false,
     },
     isExternal: {
       type: Boolean,

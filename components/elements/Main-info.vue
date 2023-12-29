@@ -15,6 +15,7 @@
           <img
             :src="imgAdaptiv"
             :class="{ 'img-dital': isDital, img: !isDital }"
+            class="my-image"
           />
           <div>
             <elements-title-text-button
@@ -110,6 +111,10 @@ export default {
 <style scoped lang="scss">
 @import "/assets/styles/style.scss";
 
+.my-image {
+  border-radius: 25px;
+}
+
 .bg-dark {
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
 }
@@ -154,7 +159,7 @@ export default {
   height: 920px;
   border-radius: 45px;
 
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 

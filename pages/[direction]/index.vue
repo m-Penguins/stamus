@@ -14,6 +14,8 @@ const { data: directionData } = await useFetch(`${apiBaseUrl}main-derections`, {
   },
 });
 
+console.log(directionData.value);
+
 if (!directionData?.value?.data?.length) {
   throw createError({
     statusCode: 404,
@@ -28,9 +30,9 @@ const mainBigImg = mainInfo?.photoBanner?.data?.attributes?.url
   ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.url
   : baseUrl + imagePlaceholders?.services;
 
-const mainAdaptiveImg = mainInfo?.photoBanner?.data?.attributes?.formats?.small
+const mainAdaptiveImg = mainInfo?.photoBanner?.data?.attributes?.formats?.medium
   ?.url
-  ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.formats?.small?.url
+  ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.formats?.medium?.url
   : baseUrl + imagePlaceholders?.services;
 
 const directionBlocks = mainInfo?.blocks;

@@ -96,13 +96,13 @@ useHead({
           <span
             ><img src="../../assets/images/icons/frame1.svg" alt="icon"
           /></span>
-          Запись онлайн без звонка в клинику
+          Онлайн запись без звонка в клинику
         </div>
         <div class="stamus-app-info-box__item">
           <span
             ><img src="../../assets/images/icons/frame2.svg" alt="icon"
           /></span>
-          Актуальные акции и скидки
+          Актуальные акции клиник
         </div>
         <div class="stamus-app-info-box__item">
           <span
@@ -119,7 +119,7 @@ useHead({
       </div>
     </div>
     <blocks-mobile-app-block />
-    <blocks-mob-app-banner />
+    <!-- <blocks-mob-app-banner /> -->
     <div class="stamus-app-links">
       <div
         v-for="item in cardMobAppMock"
@@ -171,9 +171,9 @@ export default {
   display: flex;
   gap: 200px;
 }
-
 .stamus-app-img-box-picture {
-  height: 752px;
+  height: 100%;
+  object-fit: contain;
 }
 
 .stamus-app-info {
@@ -280,7 +280,6 @@ export default {
 
   .stamus-app-img-box-picture {
     height: 300px;
-    width: 200px;
     margin: 0 auto;
   }
 }

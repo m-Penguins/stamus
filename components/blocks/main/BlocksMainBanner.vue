@@ -419,4 +419,15 @@ export default {
     height: 280px;
   }
 }
+
+.business {
+  background-color: #2f3760;
+
+  .banner-title {
+    color: $light-gray;
+  }
+  .banner-text {
+    color: $light-gray;
+  }
+}
 </style>

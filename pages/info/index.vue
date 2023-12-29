@@ -16,7 +16,7 @@
     ]"
   />
   <div class="info">
-    <h2 class="info-title">Об организации STAMUS</h2>
+    <h2 class="info-title">Об организациях Стамус и СтамусМед</h2>
     <elements-info-accordeon :items="about" />
   </div>
   <div class="info">
@@ -25,12 +25,12 @@
   </div>
   <BlocksMainBanner
     :title="'Наше приложение'"
-    :text="'Мы разработали собственное приложение для вашего удобства! Оно есть и на iOS и на Android. Теперь вам не нужно ждать ответа администратора и вы можете записаться на прием самостоятельно! А еще в приложении есть программа лояльности и все актуальные скидки)'"
+    :text="'Мы разработали собственное приложение для вашего удобства! Оно есть и на iOS и на Android. Теперь вам не нужно ждать ответа оператора и вы можете записаться на прием самостоятельно! А еще в приложении есть история визитов, информация об акциях и можно ознакомиться с документацией клиники'"
     :titleLink="'Узнать подробнее'"
     link="/stamusapp"
     bgColor="grey"
     type
-    img="mob5.png"
+    img="phone12.png"
     bigImg="true"
   />
   <blocks-map :block="{ title: 'Информация о клиниках' }" />
@@ -41,7 +41,7 @@
     link="/leave-review"
     bgColor="grey"
     type
-    img="mobile.png"
+    img="baloons.png"
     bigImg="true"
   />
   <blocks-main-form />
@@ -49,9 +49,9 @@
 
 <script setup>
 const assetsStore = useAssets();
-const bigImage = assetsStore.useAsset("images/big-images/info.png");
+const bigImage = assetsStore.useAsset("images/big-images/info.jpg");
 
-const imgAdaptiv = assetsStore.useAsset("images/big-images/info-adaptiv.png");
+const imgAdaptiv = assetsStore.useAsset("images/big-images/info-adaptiv.jpg");
 
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 

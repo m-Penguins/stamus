@@ -204,7 +204,8 @@ useHead({
       <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
       <div class="portfolio-page-title">Портфолио</div>
       <div class="portfolio-page-text">
-        Небольшое описание в несколько строчек (static, todo)
+        На странице представлены работы наших клиник. <br />
+        Вы можете отфильтровать их по услуге или ввести свой запрос в поиск
       </div>
       <div class="portfolio-form">
         <div class="portfolio-box">
