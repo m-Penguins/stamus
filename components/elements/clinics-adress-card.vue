@@ -46,6 +46,14 @@ export default {
 
 .card-photo-name-img {
   padding-bottom: 20px;
+
+  height: 346px;
+
+  & img {
+    height: 100%;
+
+    object-fit: cover;
+  }
 }
 
 .card-photo-name-container {
