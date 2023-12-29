@@ -94,7 +94,6 @@ useHead({
 <template>
   <elements-main-info
     :title="`${clinicsData?.data?.length ?? 5} клиник в Краснодаре`"
-    text="Подробнее о каждой: ниже"
     :imgBg="bigImage"
     :imgAdaptiv="imgAdaptiv"
     :isButtonBase="false"

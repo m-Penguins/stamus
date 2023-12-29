@@ -32,11 +32,23 @@ export default {
 
     const mockArrayImg = [
       { img: "partner1.png" },
-      { img: "partner2.png" },
-      { img: "partner3.png" },
+      { img: "partner2.jpg" },
+      { img: "partner3.svg" },
       { img: "partner4.png" },
       { img: "partner5.png" },
-      { img: "partner6.png" },
+      { img: "partner6.jpg" },
+      { img: "partner7.png" },
+      { img: "partner8.png" },
+      { img: "partner9.png" },
+      { img: "partner10.svg" },
+      { img: "partner11.png" },
+      { img: "partner12.svg" },
+      { img: "partner13.svg" },
+      { img: "partner14.svg" },
+      { img: "partner15.svg" },
+      { img: "partner16.svg" },
+      { img: "partner17.svg" },
+      { img: "partner18.svg" },
     ];
 
     const assetsStore = useAssets();
