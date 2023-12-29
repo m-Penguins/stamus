@@ -176,7 +176,10 @@ useHead({
     <div class="articles-page-wrap">
       <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
       <div class="articles-page-title">Статьи</div>
-
+      <p class="contacts-page-text">
+        Отвечаем на актуальные медицинские вопросы, <br />
+        рассказываем о жизни клиник и делимся новостями.
+      </p>
       <div class="articles-page-btns">
         <button
           v-for="(tag, index) in uniqueTags"
@@ -228,6 +231,24 @@ useHead({
 
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
+
+.contacts-page-text {
+  @include body-20-regular;
+  color: $gray-text;
+  padding-bottom: 100px;
+}
+
+@media (max-width: 904px) {
+  .contacts-page-text {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 676px) {
+  .contacts-page-text {
+    padding: 0 0 60px;
+  }
+}
 
 .filters-box {
   width: 100%;

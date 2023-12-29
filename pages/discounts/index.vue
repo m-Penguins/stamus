@@ -5,10 +5,10 @@ const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const assetsStore = useAssets();
-const bigImage = assetsStore.useAsset("images/big-images/discounts.png");
+const bigImage = assetsStore.useAsset("images/big-images/discounts_new.png");
 
 const imgAdaptiv = assetsStore.useAsset(
-  "images/big-images/discounts-adaptiv.png",
+  "images/big-images/discounts-adaptiv_new.jpg",
 );
 const togglerPopup = (state) => {
   isOpenPopup.value = state;
@@ -69,7 +69,7 @@ useHead({
 <template>
   <elements-main-info
     title="Акции и скидки"
-    text="Небольшое описание в несколько строчек"
+    text="А так же подарочные сертификаты и абонементы"
     :imgBg="bigImage"
     :imgAdaptiv="imgAdaptiv"
     :isButtonBase="false"

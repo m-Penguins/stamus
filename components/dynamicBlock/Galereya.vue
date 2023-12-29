@@ -2,7 +2,7 @@
   <div class="gallery">
     <div class="gallery-title">{{ block?.title ?? "Галерея" }}</div>
 
-    <div v-if="arrayImg.length === 1" class="gallery-two-img-container">
+    <div v-if="arrayImg?.length === 1" class="gallery-two-img-container">
       <template v-for="item in arrayImg" :key="item?.id">
         <img
           v-if="item?.attributes?.formats?.medium?.url"
@@ -14,7 +14,7 @@
     </div>
 
     <div
-      v-if="arrayImg.length === 2 || arrayImg.length === 4"
+      v-if="arrayImg?.length === 2 || arrayImg?.length === 4"
       class="gallery-two-img-container"
     >
       <template v-for="item in arrayImg" :key="item?.id">
@@ -28,7 +28,7 @@
     </div>
 
     <div
-      v-else-if="arrayImg.length === 3 || arrayImg.length === 5"
+      v-else-if="arrayImg?.length === 3 || arrayImg?.length === 5"
       class="gallery-three-img-container"
     >
       <template v-for="item in arrayImg" :key="item?.id">
@@ -41,7 +41,7 @@
       </template>
     </div>
 
-    <div class="container" v-else-if="arrayImg.length === 6">
+    <div class="container" v-else-if="arrayImg?.length === 6">
       <template v-for="(item, index) in arrayImg" :key="item?.id">
         <img
           v-if="item?.attributes?.formats?.medium?.url"
