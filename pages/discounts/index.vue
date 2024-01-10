@@ -84,15 +84,6 @@ useHead({
       },
     ]"
   />
-  <BlocksMainBanner
-    :title="'Счастливые часы'"
-    :text="'Скидки до 50%'"
-    :titleLink="'Воспользоваться акцией'"
-    :link="`/discounts/${linkTransform('Счастливые часы')}`"
-    bgColor="dark-blue-gradient"
-    img="tooth.png"
-    bigImg="true"
-  />
 
   <template v-for="item in discountsData?.data">
     <BlocksMapper :blocks="item?.attributes?.blocks" />

@@ -9,8 +9,8 @@
               v-model="map"
               :settings="{
                 location: {
-                  center: [38.952473, 45.051031],
-                  zoom: 11.5,
+                  center: [38.982473, 45.081031],
+                  zoom: 11.09,
                   duration: 1000,
                 },
               }"
