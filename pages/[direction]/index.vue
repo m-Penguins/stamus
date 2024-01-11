@@ -14,8 +14,6 @@ const { data: directionData } = await useFetch(`${apiBaseUrl}main-derections`, {
   },
 });
 
-console.log(directionData.value);
-
 if (!directionData?.value?.data?.length) {
   throw createError({
     statusCode: 404,

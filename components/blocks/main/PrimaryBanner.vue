@@ -2,8 +2,6 @@
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const props = defineProps(["title", "description", "twoDirections"]);
-
-console.log(props.twoDirections);
 </script>
 
 <template>

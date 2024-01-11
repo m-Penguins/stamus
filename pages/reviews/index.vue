@@ -109,7 +109,7 @@ const baseDataStore = useBaseDataStore();
 
 const servicesData = baseDataStore.allServices;
 
-const filteredReviews = computed(() => reviewsData?.value?.data);
+const filteredReviews = computed(() => mapReviews(reviewsData?.value?.data));
 
 const allSpecialists = specialistsData.value?.data
   ?.map((spec) => ({
@@ -213,7 +213,7 @@ useHead({
         <ElementsReviewCard
           v-for="review in filteredReviews"
           :key="review?.id"
-          :review="review?.attributes"
+          :review="review"
         />
       </div>
     </template>
