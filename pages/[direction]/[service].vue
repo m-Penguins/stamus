@@ -20,6 +20,8 @@ if (!serviceData?.value?.data?.length) {
 }
 const mainInfo = serviceData?.value?.data?.[0]?.attributes;
 
+const serviceId = serviceData?.value?.data?.[0]?.id;
+
 const mainBigImg = mainInfo?.photoBanner?.data?.attributes?.url
   ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.url
   : baseUrl + imagePlaceholders?.services;
@@ -64,7 +66,7 @@ useHead(getMetaObject(metaData, baseUrl));
     :link="mainInfo?.link"
     :link_text="mainInfo?.link_text"
   />
-  <BlocksMapper :blocks="serviceBlocks" />
+  <BlocksMapper :blocks="serviceBlocks" :serviceId="serviceId" />
 </template>
 
 <style lang="scss" scoped></style>

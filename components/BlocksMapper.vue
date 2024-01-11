@@ -1,10 +1,14 @@
 <script setup>
-defineProps(["blocks"]);
+defineProps(["blocks", "serviceId"]);
 </script>
 
 <template>
   <section class="service-section-block" v-for="block in blocks">
-    <component :is="getServicesBlock(block?.['__component'])" :block="block" />
+    <component
+      :is="getServicesBlock(block?.['__component'])"
+      :block="block"
+      :serviceId="serviceId"
+    />
   </section>
 </template>
 
