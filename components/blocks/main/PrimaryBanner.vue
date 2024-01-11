@@ -2,6 +2,8 @@
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const props = defineProps(["title", "description", "twoDirections"]);
+
+console.log(props.twoDirections);
 </script>
 
 <template>
@@ -22,8 +24,8 @@ const props = defineProps(["title", "description", "twoDirections"]);
                 <img
                   :src="
                     item?.attributes?.photoBanner?.data?.attributes?.formats
-                      ?.medium?.url
-                      ? `${baseUrl}${item?.attributes?.photoBanner?.data?.attributes?.formats?.medium?.url}`
+                      ?.large?.url
+                      ? `${baseUrl}${item?.attributes?.photoBanner?.data?.attributes?.formats?.large?.url}`
                       : baseUrl + imagePlaceholders?.services
                   "
                   :alt="
@@ -34,7 +36,7 @@ const props = defineProps(["title", "description", "twoDirections"]);
                   :class="{
                     'no-photo':
                       !item?.attributes?.photoBanner?.data?.attributes?.formats
-                        ?.medium?.url,
+                        ?.large?.url,
                   }"
                 />
                 <div class="primary-banner-btn">
