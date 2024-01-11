@@ -20,7 +20,7 @@ const getSpecialistsData = async () => {
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
     "filters[clinics][id]": clinicFilter.value,
-    "filters[direction][id][$eq]": dirFilter.value,
+    "filters[directions][id][$eq]": dirFilter.value,
     "filters[fullName][$contains][0]": searchFilter.value?.toUpperCase(),
     "filters[fullName][$contains][1]": searchFilter.value?.toLowerCase(),
     "filters[fullName][$contains][2]":

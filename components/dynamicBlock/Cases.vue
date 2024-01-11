@@ -6,12 +6,16 @@ import "swiper/css";
 import "swiper/css/navigation";
 import imagePlaceholders from "~/utils/imagePlaceholders";
 
-const props = defineProps(["block"]);
+const props = defineProps(["block", "serviceId"]);
 
 const prev = ref(null);
 const next = ref(null);
 
 const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const allCasesLink = props?.serviceId
+  ? `/portfolio?dir=${props?.serviceId}`
+  : "/portfolio";
 </script>
 
 <template>
@@ -128,7 +132,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
       </div>
     </div>
     <div class="slider-base-btn">
-      <NuxtLink to="/portfolio" class="button-base"
+      <NuxtLink :to="allCasesLink" class="button-base"
         >Смотреть все работы</NuxtLink
       >
     </div>
