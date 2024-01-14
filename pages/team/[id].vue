@@ -9,7 +9,7 @@ const { data: specialist } = await useFetch(
   {
     query: {
       populate:
-        "portofolios.photoBanner.*,fotoSpecialist.*,education.*,additionalEducation.*,docsPhoto.*,video.*,clinics.*,services.*,reviews.*,price_lists.*,achievements.*,areasOfActivity.*,meetingPerson.*" +
+        "portofolios.photoBanner.*,fotoSpecialist.*,education.*,additionalEducation.*,docsPhoto.*,video.*,clinics.*,services.category.napravleniya_uslug_1_col.*,reviews.*,price_lists.*,achievements.*,areasOfActivity.*,meetingPerson.*" +
         blocksQuey,
     },
   },
@@ -49,6 +49,8 @@ const metaData = specialist.value?.data?.attributes?.meta;
 useHead(getMetaObject(metaData, baseUrl));
 
 const blocks = specialist.value?.data?.attributes?.blocks;
+
+const blockServices = specialist.value?.data?.attributes?.services;
 </script>
 
 <template>
@@ -135,7 +137,7 @@ const blocks = specialist.value?.data?.attributes?.blocks;
       </div>
     </div>
   </div>
-  <BlocksMapper :blocks="blocks" />
+  <BlocksMapper :blocks="blocks" :block-services="blockServices" />
 </template>
 
 <style lang="scss" scoped>

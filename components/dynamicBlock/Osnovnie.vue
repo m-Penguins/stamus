@@ -1,5 +1,9 @@
 <script setup>
-const props = defineProps(["block"]);
+const props = defineProps(["block", "blockServices"]);
+
+if (props.blockServices) {
+  props.block.services = props.blockServices;
+}
 
 const getServiceLink = (item) => {
   const direction =

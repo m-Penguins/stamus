@@ -1,5 +1,9 @@
 <script setup lang="ts">
-const props = defineProps(["block"]);
+const props = defineProps(["block", "blockSpecialists"]);
+
+if (props.blockSpecialists) {
+  props.block.specialists = props.blockSpecialists;
+}
 </script>
 
 <template>
