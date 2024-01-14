@@ -32,15 +32,15 @@ export default {
 
     const mockArrayImg = [
       { img: "partner1.png" },
-      { img: "partner2.jpg" },
-      { img: "partner3.svg" },
+      { img: "partner2.png" },
+      { img: "partner3.png" },
       { img: "partner4.png" },
       { img: "partner5.png" },
-      { img: "partner6.jpg" },
+      { img: "partner6.png" },
       { img: "partner7.png" },
       { img: "partner8.png" },
       { img: "partner9.png" },
-      { img: "partner10.svg" },
+      { img: "partner10.png" },
       { img: "partner11.png" },
       { img: "partner12.svg" },
       { img: "partner13.svg" },
@@ -62,7 +62,7 @@ export default {
 
     const mockArray = {
       name: "Клиника Стамус",
-      img: assetsStore.useAsset("images/specialists/main-doctor.png"),
+      img: assetsStore.useAsset("images/specialists/main-doctor2.png"),
       text: "Во всех клиниках Стамус врачи ведут прием по ДМС, а так же проводят лечение корпоративным клиентам. Это очень удобно, так как организации с которыми мы сотрудничаем имеют офисы по всему Краснодару и ваши сотрудники могут обратиться в ближайшую для себя клинику Стамус.<br /><br />Мы давно сотрудничаем с предприятиями, но всегда готовы подойти индивидуально к запросам организации.<br /><br />Постоплата предусмотрена для всех организаций.<br /><br />По ДМС мы предоставляем весь перечень услуг от лечения зубов до имплантации и протезирования. Сотрудничаем с большинством страховых компаний и ежемесячно заключаем договора с новыми.",
     };
 

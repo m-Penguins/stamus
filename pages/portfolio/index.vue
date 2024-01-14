@@ -1,6 +1,4 @@
 <script setup>
-import imagePlaceholders from "~/utils/imagePlaceholders";
-
 const assetsStore = useAssets();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
@@ -159,7 +157,7 @@ const breadcrumbs = [
   },
 ];
 
-const mockGallery = arrayImg6.map((img) =>
+const mockGallery = portfolioGallery.map((img) =>
   assetsStore.useAsset(`images/gallery/${img}`),
 );
 
