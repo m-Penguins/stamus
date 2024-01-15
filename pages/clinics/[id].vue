@@ -32,8 +32,6 @@ const [{ data: clinicsData }, { data: clinicData }] = await Promise.all([
   }),
 ]);
 
-console.log(clinicData.value);
-
 if (!clinicsData.value) {
   throw createError({
     statusCode: 404,
