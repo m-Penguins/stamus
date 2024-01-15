@@ -150,6 +150,7 @@ useHead(getMetaObject(metaData, baseUrl));
             :isTooltip="true"
             :specialists="specialist"
             @click="$router.push(`/team/` + specialist.id)"
+            class="spec-card"
           />
         </div>
       </div>
@@ -165,6 +166,10 @@ useHead(getMetaObject(metaData, baseUrl));
 
 <style scoped lang="scss">
 @import "@/assets/styles/style.scss";
+
+.spec-card {
+  cursor: pointer;
+}
 
 .infoBlock {
   margin-bottom: 100px;
