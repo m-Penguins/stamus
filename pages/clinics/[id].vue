@@ -14,8 +14,6 @@ onBeforeUnmount(() => {
   window.removeEventListener("resize", checkScreenSize);
 });
 
-const assetsStore = useAssets();
-
 const route = useRoute();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
@@ -29,10 +27,12 @@ const [{ data: clinicsData }, { data: clinicData }] = await Promise.all([
   useFetch(`${apiBaseUrl}clinics/${route.params?.id}`, {
     query: {
       populate:
-        "reviews.*,clinics.*,price_lists.servicePrice.Sale_popular.*,photoBanner.*,direction.*,specialists.fotoSpecialist.*,specialists.achievements.icon.*,articles.*,infoBlock.image.*,infoBlock.video.*,chiefDoctor.image.*,galery.*,meta.metaImage.*",
+        "reviews.*,clinics.*,price.services.category.napravleniya_uslug_1_col.*,photoBanner.*,direction.*,specialists.fotoSpecialist.*,specialists.achievements.icon.*,articles.*,infoBlock.image.*,infoBlock.video.*,chiefDoctor.image.*,galery.*,meta.metaImage.*",
     },
   }),
 ]);
+
+console.log(clinicData.value);
 
 if (!clinicsData.value) {
   throw createError({
@@ -41,7 +41,7 @@ if (!clinicsData.value) {
     fatal: true,
   });
 }
-const pricesData = clinicData.value?.data?.attributes?.price_lists;
+const pricesData = clinicData.value?.data?.attributes?.price;
 
 const galleryList = clinicData?.value?.data?.attributes?.galery?.data
   ?.map((img) =>
@@ -55,10 +55,12 @@ const chiefDoctor = computed(() => {
   return {
     name: clinicData.value?.data?.attributes?.chiefDoctor?.heading,
     category: clinicData.value?.data?.attributes?.chiefDoctor?.position,
-    img:
-      baseUrl +
-      clinicData.value?.data?.attributes?.chiefDoctor?.image?.data?.attributes
-        ?.url,
+    img: clinicData.value?.data?.attributes?.chiefDoctor?.image?.data
+      ?.attributes?.url
+      ? baseUrl +
+        clinicData.value?.data?.attributes?.chiefDoctor?.image?.data?.attributes
+          ?.url
+      : "",
     text: clinicData.value?.data?.attributes?.chiefDoctor?.text,
   };
 });
@@ -141,10 +143,9 @@ useHead(getMetaObject(metaData, baseUrl));
     :specialists="chiefDoctor"
   />
 
-  <BlocksOkazivaemieUslugi
-    v-if="pricesData?.data?.length"
-    :pricesData="pricesData"
-  />
+  <div class="osnovnie-block" v-if="pricesData">
+    <DynamicBlockOsnovnie :block="pricesData" />
+  </div>
 
   <blocks-gallery v-if="galleryList?.length > 0" :arrayImg="galleryList" />
 
@@ -180,9 +181,13 @@ useHead(getMetaObject(metaData, baseUrl));
 </style> -->
 
 <style scoped lang="scss">
-@import "/assets/styles/style.scss";
+@import "@/assets/styles/style.scss";
 
 .infoBlock {
+  margin-bottom: 100px;
+}
+
+.osnovnie-block {
   margin-bottom: 100px;
 }
 </style>
