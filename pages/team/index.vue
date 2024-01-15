@@ -9,17 +9,44 @@ const currentPage = ref(route.query.page ?? 1);
 
 const clinicFilter = ref(route.query.clinic);
 const dirFilter = ref(route.query.dir);
+const positionFilter = ref(route.query.position);
 const searchFilter = ref(route.query.search);
 
 const totalItems = ref(0);
 
+const { data: specialistsPositions } = await useFetch(
+  `${apiBaseUrl}specialists`,
+  {
+    query: {
+      populate: "position",
+      "pagination[pageSize]": 1000,
+    },
+  },
+);
+
+const allPositions = [
+  ...new Set(
+    specialistsPositions.value?.data
+      ?.map((el) => el?.attributes?.position)
+      ?.filter(Boolean),
+  ),
+]?.map((el, index) => ({
+  id: index + 1,
+  name: el,
+}));
+
 const getSpecialistsData = async () => {
+  const positionQ = allPositions?.find(
+    (el) => el?.id === Number(positionFilter.value),
+  )?.name;
+
   const strapiQuery = {
     populate: "fotoSpecialist.*,direction.*,clinic.*,achievements.icon.*",
     sort: "order:desc",
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
     "filters[clinics][id]": clinicFilter.value,
+    "filters[position][$eq][21]": positionQ,
     "filters[directions][id][$eq]": dirFilter.value,
     "filters[fullName][$contains][0]": searchFilter.value?.toUpperCase(),
     "filters[fullName][$contains][1]": searchFilter.value?.toLowerCase(),
@@ -98,6 +125,7 @@ const handleSearchChange = async () => {
     page: currentPage.value,
     dir: clinicFilter.value,
     clinic: clinicFilter.value,
+    position: positionFilter.value,
     search: searchFilter.value,
   };
 
@@ -124,6 +152,7 @@ const handleClinicChange = async (clinic) => {
     page: currentPage.value,
     dir: dirFilter.value,
     clinic: clinic?.id,
+    position: positionFilter.value,
     search: searchFilter.value,
   };
 
@@ -143,6 +172,7 @@ const handleDirChange = async (dir) => {
     page: currentPage.value,
     dir: dir?.id,
     clinic: clinicFilter.value,
+    position: positionFilter.value,
     search: searchFilter.value,
   };
 
@@ -155,7 +185,25 @@ const handleDirChange = async (dir) => {
   });
 };
 
-const assetsStore = useAssets();
+const handlePositionChange = async (position) => {
+  positionFilter.value = position?.id;
+  currentPage.value = 1;
+  const searchQuery = {
+    page: currentPage.value,
+    dir: dirFilter.value,
+    clinic: clinicFilter.value,
+    position: positionFilter.value,
+    search: searchFilter.value,
+  };
+
+  clearObjectFields(searchQuery);
+
+  await navigateTo({
+    path: `${route.fullPath}`,
+    query: searchQuery,
+    replace: true,
+  });
+};
 
 const breadcrumbs = [
   {
@@ -224,6 +272,13 @@ useHead({
             class="select"
             @select="handleClinicChange"
             :selectedId="clinicFilter"
+          />
+          <elements-custom-select
+            :options="allPositions"
+            label="Специальность"
+            class="select"
+            @select="handlePositionChange"
+            :selectedId="positionFilter"
           />
         </div>
         <div class="specialist-box width-style">
@@ -329,7 +384,12 @@ useHead({
 .specialist-box {
   display: flex;
   gap: 20px;
-  width: 50%;
+  width: 75%;
+}
+
+.select {
+  flex-basis: 32%;
+  max-width: 32%;
 }
 
 @media (max-width: 1351px) {
@@ -399,7 +459,11 @@ useHead({
 
   .specialist-box {
     width: 100%;
-    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  .select {
+    flex-basis: unset;
+    max-width: 100%;
   }
   .spicialists-page-cards {
     justify-content: center;
