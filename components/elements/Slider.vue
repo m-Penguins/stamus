@@ -29,10 +29,10 @@ const averageGrade = average ? average?.toFixed(1) : average;
         <div v-if="averageGrade" class="grey-point-text">
           {{ averageGrade }} средняя оценка
         </div>
-        <div v-if="averageGrade" class="grey-point"></div>
-        <div class="grey-point-text">
+        <!-- <div v-if="averageGrade" class="grey-point"></div> -->
+        <!-- <div class="grey-point-text">
           {{ pluralize(programs?.length, ["отзыв", "отзыва", "отзывов"]) }}
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="wrapper-swiper">
