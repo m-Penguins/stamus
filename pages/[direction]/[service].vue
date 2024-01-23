@@ -7,7 +7,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 const { data: serviceData } = await useFetch(`${apiBaseUrl}services`, {
   query: {
     "filters[slug][$eq]": route.params?.service,
-    populate: blocksQuey,
+    populate: blocksQuey + ",specialists.fotoSpecialist.*",
   },
 });
 
@@ -32,6 +32,8 @@ const mainAdaptiveImg = mainInfo?.photoBanner?.data?.attributes?.formats?.medium
   : baseUrl + imagePlaceholders?.services;
 
 const serviceBlocks = mainInfo?.blocks;
+
+const blockSpecialists = mainInfo?.specialists;
 
 const directionName =
   mainInfo?.category?.data?.attributes?.napravleniya_uslug_1_col?.data
@@ -66,7 +68,11 @@ useHead(getMetaObject(metaData, baseUrl));
     :link="mainInfo?.link"
     :link_text="mainInfo?.link_text"
   />
-  <BlocksMapper :blocks="serviceBlocks" :serviceId="serviceId" />
+  <BlocksMapper
+    :blocks="serviceBlocks"
+    :serviceId="serviceId"
+    :block-specialists="blockSpecialists"
+  />
 </template>
 
 <style lang="scss" scoped></style>

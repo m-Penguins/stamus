@@ -2,23 +2,20 @@
 import imagePlaceholders from "~/utils/imagePlaceholders";
 
 const route = useRoute();
-const assetsStore = useAssets();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const [{ data: portfolioData }, { data: allCasesData }] = await Promise.all([
-  useFetch(`${apiBaseUrl}portofolios/${route.params.id}`, {
+const { data: portfolioData } = await useFetch(
+  `${apiBaseUrl}portofolios/${route.params.id}`,
+  {
     query: {
       populate:
-        "infoBlock.image.*,infoBlock.video.*,galery.*,specialists.fotoSpecialist.*,photoBanner.*,solutionImage.*,services.*, meta.metaImage.*,solution.*,napravleniya_uslug_1.*,same_portfolios.photoBanner.*",
+        "infoBlockPort.image.*,infoBlockPort.description.*,galery.*,specialists.fotoSpecialist.*,photoBanner.*,solutionImage.*,services.*, meta.metaImage.*,solution.*,napravleniya_uslug_1.*,same_portfolios.photoBanner.*,cardImage.*",
     },
-  }),
-  useFetch(`${apiBaseUrl}portofolios`, {
-    query: {
-      populate: "photoBanner.*",
-    },
-  }),
-]);
+  },
+);
+
+console.log(portfolioData.value);
 
 if (!portfolioData.value?.data) {
   throw createError({
@@ -51,17 +48,17 @@ const solutionImage = portfolioData.value?.data?.attributes?.solutionImage?.data
       ?.formats?.medium?.url
   : baseUrl + imagePlaceholders?.portfoliosSmall;
 
-const bigImage = portfolioData.value?.data?.attributes?.photoBanner?.data
+const bigImage = portfolioData.value?.data?.attributes?.cardImage?.data
   ?.attributes?.url
   ? baseUrl +
-    portfolioData.value?.data?.attributes?.photoBanner?.data?.attributes?.url
+    portfolioData.value?.data?.attributes?.cardImage?.data?.attributes?.url
   : baseUrl + imagePlaceholders?.portfoliosBig;
 
-const smallImage = portfolioData.value?.data?.attributes?.photoBanner?.data
+const smallImage = portfolioData.value?.data?.attributes?.cardImage?.data
   ?.attributes?.formats?.small?.url
   ? baseUrl +
-    portfolioData.value?.data?.attributes?.photoBanner?.data?.attributes
-      ?.formats?.small?.url
+    portfolioData.value?.data?.attributes?.cardImage?.data?.attributes?.formats
+      ?.small?.url
   : baseUrl + imagePlaceholders?.portfoliosSmall;
 
 const specialists =
@@ -79,7 +76,7 @@ const specialists =
     };
   });
 
-const infoBlock = portfolioData.value?.data?.attributes?.infoBlock;
+const infoBlock = portfolioData.value?.data?.attributes?.infoBlockPort;
 
 const gallery = portfolioData.value?.data?.attributes?.galery?.data
   ?.map((img) =>
@@ -125,9 +122,9 @@ useHead(getMetaObject(metaData, baseUrl));
       :title="symptomTitle ?? 'Симптомы, с которыми обратился клиент'"
       :cards="symptoms"
     />
-    <dynamic-block-opisanie
+    <blocks-case-info-block
       v-if="infoBlock"
-      :block="infoBlock"
+      :infoBlock="infoBlock"
       class="infoBlock"
     />
 
@@ -150,6 +147,7 @@ useHead(getMetaObject(metaData, baseUrl));
             :isTooltip="true"
             :specialists="specialist"
             @click="$router.push(`/team/` + specialist.id)"
+            class="spec-card"
           />
         </div>
       </div>
@@ -165,6 +163,10 @@ useHead(getMetaObject(metaData, baseUrl));
 
 <style scoped lang="scss">
 @import "@/assets/styles/style.scss";
+
+.spec-card {
+  cursor: pointer;
+}
 
 .infoBlock {
   margin-bottom: 100px;

@@ -92,5 +92,9 @@ defineProps(["title", "cards", "image"]);
       width: 100%;
     }
   }
+
+  .solution-block-container__img {
+    margin: 0 auto;
+  }
 }
 </style>

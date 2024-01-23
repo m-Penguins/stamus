@@ -7,6 +7,15 @@ export const arrayImg6 = [
   "gallery1.png",
 ];
 
+export const portfolioGallery = [
+  "gallery6.png",
+  "port3.jpg",
+  "gallery4.png",
+  "port1.jpg",
+  "gallery2.png",
+  "port2.jpg",
+];
+
 export const mockBusinessCards = [
   { title: "Более 17 лет", text: "работаем на рынке" },
   { title: "7 филиалов", text: "в Краснодаре" },

@@ -1,5 +1,5 @@
 <script setup>
-defineProps(["blocks", "serviceId"]);
+defineProps(["blocks", "serviceId", "blockServices", "blockSpecialists"]);
 </script>
 
 <template>
@@ -8,6 +8,8 @@ defineProps(["blocks", "serviceId"]);
       :is="getServicesBlock(block?.['__component'])"
       :block="block"
       :serviceId="serviceId"
+      :blockServices="blockServices"
+      :blockSpecialists="blockSpecialists"
     />
   </section>
 </template>

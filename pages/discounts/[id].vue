@@ -1,5 +1,9 @@
 <template>
-  <blocks-discounts-banner-dital :breadcrumbs="breadcrumbs" />
+  <blocks-discounts-banner-dital
+    :breadcrumbs="breadcrumbs"
+    :title="title"
+    :description="description"
+  />
   <div class="spicialists-page-cards">
     <div class="spicialists-page-card" v-for="item in specialists" :key="item">
       <elements-name-specialty-photo-card
@@ -14,16 +18,22 @@
 </template>
 
 <script setup>
-import imagePlaceholders from "~/utils/imagePlaceholders";
-
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const { data: happyHours } = await useFetch(`${apiBaseUrl}lucky-times`, {
-  query: {
-    populate: "deep",
-  },
-});
+const [{ data: happyHours }, { data: headerData }] = await Promise.all([
+  useFetch(`${apiBaseUrl}lucky-times`, {
+    query: {
+      populate: "deep",
+    },
+  }),
+  useFetch(`${apiBaseUrl}happy-hour`, {
+    query: { populate: "title.*,description.*" },
+  }),
+]);
+
+const title = headerData?.value?.data?.attributes?.title;
+const description = headerData?.value?.data?.attributes?.description;
 
 const specialists = happyHours?.value?.data?.map((hh) => {
   const firstName = hh?.attributes?.specialist?.data?.attributes?.firstName;

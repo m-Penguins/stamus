@@ -8,8 +8,12 @@
         />
         <div class="banner-box">
           <div class="banner-container">
-            <h2 class="banner-title">Счастливые часы</h2>
-            <p class="banner-text">Каждый день скидки до 50%</p>
+            <h2 v-if="title" class="banner-title">{{ title }}</h2>
+            <div
+              v-if="description"
+              v-html="description"
+              class="banner-text"
+            ></div>
             <elements-link-with-arrow
               link="/discounts"
               type
@@ -37,6 +41,13 @@ export default {
   props: {
     breadcrumbs: {
       type: Array,
+    },
+    title: {
+      type: String,
+      default: "Счастливые часы",
+    },
+    description: {
+      type: String,
     },
   },
   setup() {

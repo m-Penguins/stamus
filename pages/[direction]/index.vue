@@ -28,9 +28,9 @@ const mainBigImg = mainInfo?.photoBanner?.data?.attributes?.url
   ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.url
   : baseUrl + imagePlaceholders?.services;
 
-const mainAdaptiveImg = mainInfo?.photoBanner?.data?.attributes?.formats?.medium
+const mainAdaptiveImg = mainInfo?.photoBanner?.data?.attributes?.formats?.large
   ?.url
-  ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.formats?.medium?.url
+  ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.formats?.large?.url
   : baseUrl + imagePlaceholders?.services;
 
 const directionBlocks = mainInfo?.blocks;

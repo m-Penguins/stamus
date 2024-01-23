@@ -3,19 +3,19 @@
     <div class="chief-doctor-block-wrap">
       <div class="chief-doctor-block-container">
         <img
-          :src="specialists.img"
+          :src="specialists?.img || fallBackImg"
           alt="main doctor"
           class="chief-doctor-block-img"
         />
       </div>
       <div class="chief-doctor-block-box">
-        <h2 class="chief-doctor-block-box__title">{{ specialists.name }}</h2>
+        <h2 class="chief-doctor-block-box__title">{{ specialists?.name }}</h2>
         <p class="chief-doctor-block-box__category">
-          {{ specialists.category }}
+          {{ specialists?.category }}
         </p>
         <div
           class="chief-doctor-block-box__text"
-          v-html="specialists.text"
+          v-html="specialists?.text"
         ></div>
       </div>
     </div>
@@ -32,8 +32,13 @@ export default {
   },
   setup() {
     const assetsStore = useAssets();
+
+    const fallBackImg = assetsStore.useAsset(
+      "images/specialists/main-doctor2.png",
+    );
     return {
       assetsStore,
+      fallBackImg,
     };
   },
 };
