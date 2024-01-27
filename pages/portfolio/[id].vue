@@ -15,8 +15,6 @@ const { data: portfolioData } = await useFetch(
   },
 );
 
-console.log(portfolioData.value);
-
 if (!portfolioData.value?.data) {
   throw createError({
     statusCode: 404,

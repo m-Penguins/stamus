@@ -2,8 +2,6 @@
 const props = defineProps(["infoBlock"]);
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-console.log(props.infoBlock);
-
 const image = props?.infoBlock?.image?.data?.attributes?.formats?.medium?.url
   ? baseUrl + props.infoBlock?.image?.data?.attributes?.formats?.medium?.url
   : "";
