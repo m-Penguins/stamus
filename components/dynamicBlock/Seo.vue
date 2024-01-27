@@ -62,6 +62,11 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
     &__text {
       @include body-14-regular;
       color: $gray-text;
+      width: 100%;
+
+      &:deep(figure) {
+        width: 100% !important;
+      }
     }
   }
 }

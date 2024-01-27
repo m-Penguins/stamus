@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const props = defineProps(["block"]);
 
+console.log(props.block);
+
 const reviews = mapReviews(props?.block?.reviews?.data);
 </script>
 
