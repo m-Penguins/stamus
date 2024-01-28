@@ -19,7 +19,23 @@ const props = defineProps(["title", "description", "twoDirections"]);
           <template v-for="item in twoDirections">
             <NuxtLink :to="item?.attributes?.slug" class="desktop-link">
               <div class="primary-banner-img">
-                <img
+                <NuxtImg
+                  :src="item?.attributes?.photoBanner?.data?.attributes?.url"
+                  provider="strapi"
+                  :alt="
+                    item?.attributes?.photoBanner?.data?.attributes
+                      ?.alternativeText
+                  "
+                  sizes="xs:560px md:1000"
+                  format="webp"
+                  class="banner-image"
+                  :class="{
+                    'no-photo':
+                      !item?.attributes?.photoBanner?.data?.attributes?.formats
+                        ?.large?.url,
+                  }"
+                />
+                <!-- <img
                   :src="
                     item?.attributes?.photoBanner?.data?.attributes?.formats
                       ?.large?.url
@@ -36,7 +52,7 @@ const props = defineProps(["title", "description", "twoDirections"]);
                       !item?.attributes?.photoBanner?.data?.attributes?.formats
                         ?.large?.url,
                   }"
-                />
+                /> -->
                 <div class="primary-banner-btn">
                   {{ item?.attributes?.heading }}
                 </div>

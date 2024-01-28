@@ -1,7 +1,15 @@
 <template>
   <div class="card-photo-name">
     <div class="card-photo-name-img">
-      <img :src="specialists?.img" alt="specialist" class="card-img" />
+      <NuxtImg
+        :src="specialists?.img"
+        provider="strapi"
+        :alt="specialists?.alt"
+        sizes="xs:400px md:600px"
+        format="webp"
+        class="card-img"
+        loading="lazy"
+      />
     </div>
     <div
       :class="

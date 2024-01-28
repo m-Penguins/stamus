@@ -1,17 +1,28 @@
 <template>
   <div class="dentistry-wrapper">
-    <div
-      class="dentistry-container"
-      :style="`background-image:url(${imgBg})`"
-      :class="{ 'bg-dark': false }"
-    >
+    <div class="dentistry-container" :class="{ 'bg-dark': false }">
+      <NuxtImg
+        :src="imgBg"
+        provider="strapi"
+        :alt="imgAlt"
+        sizes="lg:1280px xl:1560 xxl:1920px "
+        format="webp"
+        class="banner-img"
+      />
       <div class="dentistry-box">
         <elements-bread-crumbs
           :breadcrumbs="breadcrumbs"
           :typeColorWhite="false"
         />
         <div class="mob">
-          <img :src="imgAdaptive" class="img" />
+          <NuxtImg
+            :src="imgBg"
+            provider="strapi"
+            :alt="imgAlt"
+            sizes="xs:600px"
+            format="webp"
+            class="img"
+          />
           <div>
             <elements-title-text-button
               textButtonBase="Записаться онлайн"
@@ -41,7 +52,7 @@ const props = defineProps([
   "title",
   "text",
   "imgBg",
-  "imgAdaptive",
+  "imgAlt",
   "breadcrumbs",
   "link",
   "link_text",
@@ -62,6 +73,23 @@ const buttonText = props?.link_text ? props?.link_text : "Записаться �
 
 <style scoped lang="scss">
 @import "@/assets/styles/style.scss";
+
+.banner-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  z-index: 0;
+
+  object-fit: cover;
+  border-radius: 45px;
+}
+
+@media (max-width: 1110px) {
+  .banner-img {
+    display: none;
+  }
+}
 
 .bg-dark {
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
@@ -113,6 +141,7 @@ const buttonText = props?.link_text ? props?.link_text : "Записаться �
 }
 
 .dentistry-box {
+  z-index: 3;
   display: flex;
   height: 42%;
   justify-content: space-between;

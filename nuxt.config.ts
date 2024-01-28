@@ -57,6 +57,7 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    "@nuxt/image",
     "@pinia/nuxt",
     "@vueuse/nuxt",
     [
@@ -92,14 +93,14 @@ export default defineNuxtConfig({
   imports: {
     dirs: ["stores", "utils"],
   },
-  // plugins: [{ src: "~/plugins/ymapPlugin.js", mode: "client" }],
-  // plugins: [
-  //   { src: '~/plugins/bvi.js', ssr: false },
-  // ]
+  image: {
+    providers: {
+      strapi: {
+        provider: "~/providers/localImageSharp",
+        options: {
+          baseURL: `${process.env.BASE_URL}`,
+        },
+      },
+    },
+  },
 });
-
-// import { defineNuxtPlugin } from 'nuxt';
-
-// export default defineNuxtPlugin(function (nuxtApp) {
-//   // Your plugin code here
-// });

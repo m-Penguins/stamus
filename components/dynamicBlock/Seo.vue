@@ -6,11 +6,14 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
 
 <template>
   <div class="seo-block" :class="{ reversed: block?.reverse }">
-    <img
+    <NuxtImg
       v-if="block?.image?.data?.attributes?.url"
+      :src="block?.image?.data?.attributes?.url"
+      provider="strapi"
+      :alt="block?.image?.data?.attributes?.alternativeText"
+      sizes="xs:400px sm:600px md:1000px lg:1200px xl:1920px"
+      format="webp"
       class="image"
-      :src="`${baseUrl}${block?.image?.data?.attributes?.url}`"
-      :alt="block?.image?.data?.attributes?.alternativeText ?? 'Изображение'"
     />
 
     <div class="seo-block-text">

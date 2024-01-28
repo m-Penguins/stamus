@@ -44,12 +44,11 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
                   item?.attributes?.firstName +
                   ' ' +
                   item?.attributes?.lastName,
-                img: item?.attributes?.fotoSpecialist?.data?.attributes?.formats
-                  ?.small?.url
-                  ? baseUrl +
-                    item?.attributes?.fotoSpecialist?.data?.attributes?.formats
-                      ?.small?.url
-                  : baseUrl + imagePlaceholders?.specialists,
+                img:
+                  item?.attributes?.fotoSpecialist?.data?.attributes?.url ??
+                  imagePlaceholders?.specialists,
+                alt: item?.attributes?.fotoSpecialist?.data?.attributes
+                  ?.alternativeText,
                 position: item?.attributes?.position,
                 id: item?.id,
                 achievements: item?.attributes?.achievements,

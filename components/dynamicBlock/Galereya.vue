@@ -4,11 +4,13 @@
 
     <div v-if="arrayImg?.length === 1" class="gallery-two-img-container">
       <template v-for="item in arrayImg" :key="item?.id">
-        <img
-          v-if="item?.attributes?.formats?.medium?.url"
-          :src="`${baseUrl}${item?.attributes?.formats?.medium?.url}`"
-          class="gall-img-solo"
+        <NuxtImg
+          :src="item?.attributes?.url"
+          provider="strapi"
           :alt="item?.attributes?.alternativeText ?? 'галерея'"
+          sizes="xs:400px sm:600px md:1200px lg:1920px"
+          format="webp"
+          class="gall-img-solo"
         />
       </template>
     </div>
@@ -18,11 +20,13 @@
       class="gallery-two-img-container"
     >
       <template v-for="item in arrayImg" :key="item?.id">
-        <img
-          v-if="item?.attributes?.formats?.medium?.url"
-          :src="`${baseUrl}${item?.attributes?.formats?.medium?.url}`"
-          class="gall-img"
+        <NuxtImg
+          :src="item?.attributes?.url"
+          provider="strapi"
           :alt="item?.attributes?.alternativeText ?? 'галерея'"
+          sizes="xs:400px md:600px"
+          format="webp"
+          class="gall-img"
         />
       </template>
     </div>
@@ -32,22 +36,26 @@
       class="gallery-three-img-container"
     >
       <template v-for="item in arrayImg" :key="item?.id">
-        <img
-          v-if="item?.attributes?.formats?.medium?.url"
-          :src="`${baseUrl}${item?.attributes?.formats?.medium?.url}`"
-          class="gall-img-three"
+        <NuxtImg
+          :src="item?.attributes?.url"
+          provider="strapi"
           :alt="item?.attributes?.alternativeText ?? 'галерея'"
+          sizes="xs:400px md:600px"
+          format="webp"
+          class="gall-img-three"
         />
       </template>
     </div>
 
     <div class="container" v-else-if="arrayImg?.length === 6">
       <template v-for="(item, index) in arrayImg" :key="item?.id">
-        <img
-          v-if="item?.attributes?.formats?.medium?.url"
-          :src="`${baseUrl}${item?.attributes?.formats?.medium?.url}`"
-          :class="'img-' + index"
+        <NuxtImg
+          :src="item?.attributes?.url"
+          provider="strapi"
           :alt="item?.attributes?.alternativeText ?? 'галерея'"
+          sizes="xs:400px md:600px"
+          format="webp"
+          :class="'img-' + index"
         />
       </template>
     </div>

@@ -1,10 +1,8 @@
 <script setup>
 const props = defineProps(["block"]);
 
-const baseUrl = useRuntimeConfig().public.baseUrl;
-
-const documents = props?.block?.certificates?.data?.map((el) =>
-  el?.attributes?.url ? baseUrl + el?.attributes?.url : "",
+const documents = props?.block?.certificates?.data?.map(
+  (el) => el?.attributes?.url,
 );
 </script>
 

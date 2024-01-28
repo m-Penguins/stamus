@@ -50,17 +50,20 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
           >
             <div class="article-card">
               <div class="article-card__box">
-                <img
+                <NuxtImg
                   :src="
-                    article?.attributes?.fotoArticles?.data?.attributes?.formats
-                      ?.small?.url
-                      ? baseUrl +
-                        article?.attributes?.fotoArticles?.data?.attributes
-                          ?.formats?.small?.url
-                      : baseUrl + imagePlaceholders?.articles
+                    article?.attributes?.fotoArticles?.data?.attributes?.url ??
+                    imagePlaceholders?.articles
                   "
-                  alt="Article"
+                  provider="strapi"
+                  :alt="
+                    article?.attributes?.fotoArticles?.data?.attributes
+                      ?.alternativeText ?? 'Статья'
+                  "
+                  sizes="xs:400px md:600px"
+                  format="webp"
                   class="article-card__box-img"
+                  loading="lazy"
                 />
               </div>
               <div class="tags-box">

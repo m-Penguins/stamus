@@ -31,12 +31,15 @@ const closeCert = () => {
     <transition name="modal">
       <div class="popup-wrap" v-if="isCertOpen" @click="closeCert">
         <div class="popup" @click.stop>
-          <img
-            class="popup-img"
+          <NuxtImg
             :src="popupImg"
-            alt="certificate"
-            loading="lazy"
+            provider="strapi"
+            alt="Сертификат"
+            sizes="xs:400px sm:600px md:900px lg:1200px xl:1920px"
+            format="webp"
+            class="popup-img"
           />
+
           <div class="popup-close">
             <svg
               @click="closeCert"
@@ -84,10 +87,13 @@ const closeCert = () => {
             class="swiper-slide"
             @click="openCert(item)"
           >
-            <img
-              class="swiper-img"
+            <NuxtImg
               :src="item"
-              alt="certificate"
+              provider="strapi"
+              alt="Cертификат"
+              sizes="xs:400px md:600px"
+              format="webp"
+              class="swiper-img"
               loading="lazy"
             />
           </swiper-slide>

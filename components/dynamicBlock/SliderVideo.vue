@@ -44,24 +44,12 @@ const handleVideoClick = (link) => {
           <swiper-slide class="swiper-slide" v-if="video?.videoLink">
             <div class="ss-card" @click="handleVideoClick(video?.videoLink)">
               <div class="ss-image">
-                <img
-                  v-if="
-                    video?.videoPreview?.data?.attributes?.formats?.small?.url
-                  "
-                  :src="`${baseUrl}${video?.videoPreview?.data?.attributes?.formats?.small?.url}`"
-                  alt="Video"
-                  class="problems__image"
-                />
-                <img
-                  v-else-if="video?.videoPreview?.data?.attributes?.url"
-                  :src="`${baseUrl}${video?.videoPreview?.data?.attributes?.url}`"
-                  alt="Video"
-                  class="problems__image"
-                />
-                <img
-                  v-else
-                  :src="`${baseUrl}${imagePlaceholders?.portfoliosSmall}`"
-                  alt="Video"
+                <NuxtImg
+                  :src="video?.videoPreview?.data?.attributes?.url"
+                  provider="strapi"
+                  :alt="video?.videoPreview?.data?.attributes?.alternativeText"
+                  sizes="xs:400px md:600px"
+                  format="webp"
                   class="problems__image"
                 />
                 <img

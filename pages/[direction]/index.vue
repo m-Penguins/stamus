@@ -24,14 +24,10 @@ if (!directionData?.value?.data?.length) {
 
 const mainInfo = directionData?.value?.data?.[0]?.attributes;
 
-const mainBigImg = mainInfo?.photoBanner?.data?.attributes?.url
-  ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.url
-  : baseUrl + imagePlaceholders?.services;
+const mainImg =
+  mainInfo?.photoBanner?.data?.attributes?.url ?? imagePlaceholders?.services;
 
-const mainAdaptiveImg = mainInfo?.photoBanner?.data?.attributes?.formats?.large
-  ?.url
-  ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.formats?.large?.url
-  : baseUrl + imagePlaceholders?.services;
+const mainImgAlt = mainInfo?.photoBanner?.data?.attributes?.alternativeText;
 
 const directionBlocks = mainInfo?.blocks;
 
@@ -54,8 +50,8 @@ useHead(getMetaObject(metaData, baseUrl));
   <DynamicBlockHero
     :title="mainInfo?.heading"
     :text="mainInfo?.description"
-    :imgBg="mainBigImg"
-    :imgAdaptive="mainAdaptiveImg"
+    :imgBg="mainImg"
+    :imgAlt="mainImgAlt"
     :breadcrumbs="breadcrumbs"
     :link="mainInfo?.link"
     :link_text="mainInfo?.link_text"

@@ -49,17 +49,20 @@ const allCasesLink = props?.serviceId
         >
           <div class="card-photo-name">
             <div class="card-photo-name-img">
-              <img
+              <NuxtImg
                 :src="
-                  portfolio?.attributes?.photoBanner?.data?.attributes?.formats
-                    ?.small?.url
-                    ? `${baseUrl}${portfolio?.attributes?.photoBanner?.data?.attributes?.formats?.small?.url}`
-                    : baseUrl + imagePlaceholders?.portfoliosSmall
+                  portfolio?.attributes?.photoBanner?.data?.attributes?.url ??
+                  imagePlaceholders?.portfoliosSmall
                 "
+                provider="strapi"
                 :alt="
                   portfolio?.attributes?.photoBanner?.data?.attributes
-                    ?.alternativeText ?? 'photo-name'
+                    ?.alternativeText
                 "
+                sizes="xs:400px md:600px"
+                format="webp"
+                class="banner-img"
+                loading="lazy"
               />
             </div>
             <div class="card-photo-name-container">

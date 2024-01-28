@@ -38,17 +38,8 @@ const mainSpecialists =
       id: sp?.id,
       name: `${sp?.attributes?.firstName} ${sp?.attributes?.lastName}`,
       category: sp?.attributes?.position,
-      img: sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.thumbnail
-        ?.url
-        ? baseUrl +
-          sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.thumbnail
-            ?.url
-        : baseUrl + imagePlaceholders?.specialists,
-      imgBig: sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.small
-        ?.url
-        ? baseUrl +
-          sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.small?.url
-        : baseUrl + imagePlaceholders?.specialists,
+      img: sp?.attributes?.fotoSpecialist?.data?.attributes?.url,
+      alt: sp?.attributes?.fotoSpecialist?.data?.attributes?.alternativeText,
       description: sp?.attributes?.description,
       experience: {
         year: sp?.attributes?.meetingPerson?.dataMeeting?.[0]?.total,

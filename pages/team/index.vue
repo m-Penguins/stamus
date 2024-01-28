@@ -308,12 +308,11 @@ useHead({
                   specialist?.attributes?.firstName +
                   ' ' +
                   specialist?.attributes?.lastName,
-                img: specialist?.attributes?.fotoSpecialist?.data?.attributes
-                  ?.formats?.small?.url
-                  ? baseUrl +
-                    specialist?.attributes?.fotoSpecialist?.data?.attributes
-                      ?.formats?.small?.url
-                  : baseUrl + imagePlaceholders?.specialists,
+                img:
+                  specialist?.attributes?.fotoSpecialist?.data?.attributes
+                    ?.url ?? imagePlaceholders?.specialists,
+                alt: specialist?.attributes?.fotoSpecialist?.data?.attributes
+                  ?.alternativeText,
                 position: specialist?.attributes?.position,
                 achievements: specialist?.attributes?.achievements,
               }"

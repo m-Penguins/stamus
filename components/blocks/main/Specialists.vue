@@ -2,6 +2,10 @@
 const props = defineProps(["mainSpecialists"]);
 
 const selectedIndex = ref(0);
+
+const handleSmallClick = (index) => {
+  selectedIndex.value = index;
+};
 </script>
 
 <template>
@@ -20,12 +24,18 @@ const selectedIndex = ref(0);
           v-for="(person, index) in props.mainSpecialists"
           :key="person.id"
           :class="{ active: selectedIndex === index }"
-          @click="selectedIndex = index"
+          @click="handleSmallClick(index)"
           class="specialists-btn"
         >
           <div class="div-with-line" v-if="selectedIndex === index"></div>
           <div class="specialists-btn__img">
-            <img :src="person?.img" />
+            <NuxtImg
+              :src="person?.img"
+              provider="strapi"
+              :alt="person?.alt"
+              sizes="xs:60px"
+              format="webp"
+            />
           </div>
           <div class="specialists-box">
             <div class="specialists-box__name">{{ person?.name }}</div>
@@ -35,7 +45,13 @@ const selectedIndex = ref(0);
       </div>
       <div class="specialists-inner">
         <div class="specialists-inner__img">
-          <img :src="props.mainSpecialists?.[selectedIndex]?.imgBig" />
+          <NuxtImg
+            :src="props.mainSpecialists?.[selectedIndex]?.img"
+            provider="strapi"
+            :alt="props.mainSpecialists?.[selectedIndex]?.alt"
+            sizes="xs:400px"
+            format="webp"
+          />
         </div>
         <div class="specialists-inner__info">
           <div class="specialists-inner__info-name">
