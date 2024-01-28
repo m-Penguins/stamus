@@ -4,8 +4,6 @@ const baseDataStore = useBaseDataStore();
 const baseUrl = useRuntimeConfig()?.public?.baseUrl;
 
 const widgets = baseDataStore.footerData?.data?.attributes?.widget;
-
-console.log(baseDataStore.footerData);
 </script>
 
 <template>
