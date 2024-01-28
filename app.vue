@@ -17,6 +17,9 @@
     /></Teleport>
     <Teleport to="body"><elements-cookie-consent /></Teleport>
     <Teleport to="body"><ModalVideo /></Teleport>
+    <NuxtErrorBoundary
+      ><Teleport to="body"><BlocksWidget /></Teleport
+    ></NuxtErrorBoundary>
   </div>
 </template>
 
@@ -45,7 +48,8 @@ const servicesStore = useService();
 const [{ data: footerData }] = await Promise.all([
   useFetch(`${apiBaseUrl}footer`, {
     query: {
-      populate: "links.icon.*,privacy.*,license_stamus.*,license_stamusmed.*",
+      populate:
+        "links.icon.*,privacy.*,license_stamus.*,license_stamusmed.*,widget.icon.*",
     },
   }),
   baseDataStore.getClinics(),

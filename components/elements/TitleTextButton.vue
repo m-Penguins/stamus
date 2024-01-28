@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1
+      v-if="title"
       v-html="title"
       :class="{
         fontSize: fontSize ? 'fontSize' : '',

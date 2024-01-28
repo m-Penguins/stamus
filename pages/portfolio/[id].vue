@@ -15,8 +15,6 @@ const { data: portfolioData } = await useFetch(
   },
 );
 
-console.log(portfolioData.value);
-
 if (!portfolioData.value?.data) {
   throw createError({
     statusCode: 404,
@@ -152,7 +150,7 @@ useHead(getMetaObject(metaData, baseUrl));
         </div>
       </div>
     </div>
-    <blocks-gallery :arrayImg="gallery" v-if="gallery?.length > 0" />
+    <blocks-portfolio-gallery :arrayImg="gallery" v-if="gallery?.length > 0" />
     <div class="container-size">
       <dynamic-block-cases :block="samePortfolios" />
     </div>
