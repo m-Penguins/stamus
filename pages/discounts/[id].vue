@@ -47,12 +47,11 @@ const specialists = happyHours?.value?.data?.map((hh) => {
   const spec = {
     name: (firstName ?? "") + " " + (lastname ?? ""),
     position: hh?.attributes?.specialist?.data?.attributes?.position ?? "",
-    img: hh?.attributes?.specialist?.data?.attributes?.fotoSpecialist?.data
-      ?.attributes?.formats?.small?.url
-      ? baseUrl +
-        hh?.attributes?.specialist?.data?.attributes?.fotoSpecialist?.data
-          ?.attributes?.formats?.small?.url
-      : baseUrl + imagePlaceholders?.specialists,
+    img:
+      hh?.attributes?.specialist?.data?.attributes?.fotoSpecialist?.data
+        ?.attributes?.url ?? imagePlaceholders?.specialists,
+    alt: hh?.attributes?.specialist?.data?.attributes?.fotoSpecialist?.data
+      ?.attributes?.alternativeText,
     time: hh?.attributes?.time ?? [],
     address: addressData?.length ? `Прием на ${addressData?.join(", ")}` : "",
     description: hh?.attributes?.description ?? "",

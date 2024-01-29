@@ -6,12 +6,15 @@
       v-if="arrayImg.length === 2 || arrayImg.length === 4"
       class="gallery-two-img-container"
     >
-      <img
+      <NuxtImg
         v-for="item in arrayImg"
         :key="item"
         :src="item"
-        class="gall-img"
+        :provider="local ? '' : 'strapi'"
         alt="Галерея"
+        sizes="xs:400px md:600px"
+        format="webp"
+        class="gall-img"
       />
     </div>
 
@@ -19,21 +22,27 @@
       v-else-if="arrayImg.length === 3 || arrayImg.length === 5"
       class="gallery-three-img-container"
     >
-      <img
+      <NuxtImg
         v-for="item in arrayImg"
         :key="item"
         :src="item"
+        :provider="local ? '' : 'strapi'"
         alt="Галерея"
+        sizes="xs:400px md:600px"
+        format="webp"
         class="gall-img-three"
       />
     </div>
 
     <div class="container" v-else-if="arrayImg.length === 6">
-      <img
+      <NuxtImg
         v-for="(item, index) in arrayImg"
-        :key="index"
+        :key="item"
         :src="item"
+        :provider="local ? '' : 'strapi'"
         alt="Галерея"
+        sizes="xs:400px md:600px"
+        format="webp"
         :class="'img-' + index"
       />
     </div>
@@ -46,6 +55,10 @@ export default {
     arrayImg: {
       type: Array,
       default: [],
+    },
+    local: {
+      type: Boolean,
+      default: false,
     },
   },
 };

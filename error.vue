@@ -3,6 +3,13 @@
     <TheHeader />
     <div class="error">
       <div class="error-back">
+        <NuxtImg
+          src="images/error/404.png"
+          :alt="imgAlt"
+          sizes="xs:400px sm:600px md:1000px lg:1280px xl:1560 xxl:1920px "
+          format="webp"
+          class="banner-img"
+        />
         <div class="error-block">
           <h2 class="error-block__title">{{ error.statusCode }}</h2>
           <p v-if="error.statusCode === 404" class="error-block__text">
@@ -31,6 +38,20 @@ const goToMainPage = () => clearError({ redirect: "/" });
 
 <style lang="scss" scoped>
 @import "./assets/styles/style.scss";
+
+.banner-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: 0;
+
+  object-fit: cover;
+
+  filter: brightness(0.7);
+}
 .wrap {
   width: 100%;
   min-height: 100vh;
@@ -46,8 +67,6 @@ const goToMainPage = () => clearError({ redirect: "/" });
 }
 
 .error-back {
-  background: url("/assets/images/error/404.png");
-  background-size: cover;
   width: 100%;
   height: 900px;
   border-radius: 45px;
@@ -55,12 +74,18 @@ const goToMainPage = () => clearError({ redirect: "/" });
   align-items: center;
   justify-content: center;
   margin-bottom: 100px;
+
+  position: relative;
+
+  overflow: hidden;
 }
 
 .error-block {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  z-index: 3;
 
   &__title {
     @include body-160-medium;

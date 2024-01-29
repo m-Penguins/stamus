@@ -12,25 +12,20 @@ const props = defineProps(["clinicsData"]);
 
     <div class="areas-box">
       <div class="areas-box-temp">
-        <div
-          class="areas-box__img"
-          v-for="clinic in clinicsData?.data"
-          :style="{
-            backgroundImage: `url(${
-              clinic?.attributes?.photoBanner?.data?.attributes?.formats?.medium
-                ?.url
-                ? baseUrl +
-                  clinic?.attributes?.photoBanner?.data?.attributes?.formats
-                    ?.medium?.url
-                : baseUrl + imagePlaceholders?.services
-            })`,
-          }"
-          :class="{
-            'no-photo':
-              !clinic?.attributes?.photoBanner?.data?.attributes?.formats
-                ?.medium?.url,
-          }"
-        >
+        <div class="areas-box__img" v-for="clinic in clinicsData?.data">
+          <NuxtImg
+            :src="
+              clinic?.attributes?.photoBanner?.data?.attributes?.url ??
+              imagePlaceholders?.services
+            "
+            provider="strapi"
+            :alt="
+              clinic?.attributes?.photoBanner?.data?.attributes?.alternativeText
+            "
+            sizes="xs: 600px  md:800px"
+            format="webp"
+            class="banner-img"
+          />
           <h3>{{ clinic?.attributes?.heading }}</h3>
           <p class="areas-box-text">
             {{ clinic?.attributes?.address }}
@@ -49,15 +44,16 @@ const props = defineProps(["clinicsData"]);
 <style lang="scss" scoped>
 @import "@/assets/styles/style.scss";
 
-.areas-box__img {
-  background-size: cover;
-  background-repeat: no-repeat;
+.banner-img {
+  position: absolute;
+  top: 0%;
+  left: 0;
+  width: 100%;
+  height: 100%;
 
-  background-color: #cccccc;
-
-  &.no-photo {
-    background-size: contain;
-  }
+  object-fit: cover;
+  border-radius: 25px;
+  z-index: -1;
 }
 
 .clinics-block-title {
@@ -93,12 +89,12 @@ const props = defineProps(["clinicsData"]);
   gap: 16px;
 
   &__img {
+    position: relative;
+
     @include flex-column-end;
     padding: 40px;
     border-radius: 25px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+
     font-size: 14px;
     gap: 14px;
     height: 380px;

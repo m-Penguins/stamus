@@ -3,8 +3,15 @@
     <div class="gallery-title">Галерея</div>
 
     <div class="gallery-img-container">
-      <div class="single-img" v-for="item in arrayImg">
-        <img :key="item" :src="item" class="gall-img" alt="Галерея" />
+      <div class="single-img" v-for="item in arrayImg" :key="item">
+        <NuxtImg
+          :src="item"
+          provider="strapi"
+          alt="Галерея"
+          sizes="xs:400px md:600px"
+          format="webp"
+          class="gall-img"
+        />
       </div>
     </div>
   </div>

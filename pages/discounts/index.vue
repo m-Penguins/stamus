@@ -5,7 +5,7 @@ const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const assetsStore = useAssets();
-const bigImage = assetsStore.useAsset("images/big-images/discounts_new.png");
+const bigImage = "images/big-images/discounts_new.png";
 
 const imgAdaptiv = assetsStore.useAsset(
   "images/big-images/discounts-adaptiv_new.jpg",
@@ -71,7 +71,8 @@ useHead({
     title="Акции и скидки"
     text="А так же подарочные сертификаты и абонементы"
     :imgBg="bigImage"
-    :imgAdaptiv="imgAdaptiv"
+    imgAlt="Акции и Скидки"
+    local
     :isButtonBase="false"
     :breadcrumbs="[
       {

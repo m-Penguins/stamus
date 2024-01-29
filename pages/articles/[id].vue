@@ -18,11 +18,13 @@ const { data: articleData } = await useFetch(
 const heading = articleData.value?.data?.attributes?.heading;
 const tags = articleData.value?.data?.attributes?.tag_category;
 const text = articleData.value?.data?.attributes?.text;
-const img = articleData.value?.data?.attributes?.fotoArticles?.data?.attributes
-  ?.url
-  ? baseUrl +
-    articleData.value?.data?.attributes?.fotoArticles?.data?.attributes?.url
-  : baseUrl + imagePlaceholders?.articles;
+const img =
+  articleData.value?.data?.attributes?.fotoArticles?.data?.attributes?.url ??
+  imagePlaceholders?.articles;
+
+const imgAlt =
+  articleData.value?.data?.attributes?.fotoArticles?.data?.attributes
+    ?.alternativeText;
 
 const otherArticles = articleData.value?.data?.attributes?.other_articles;
 
@@ -52,12 +54,15 @@ useHead(getMetaObject(metaData, baseUrl));
         <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
         <div class="articles-dital-inner">
           <h1 class="articles-dital-title">{{ heading }}</h1>
-          <div
-            class="articles-dital-img"
-            :style="{
-              backgroundImage: `url(${img})`,
-            }"
-          >
+          <div class="articles-dital-img">
+            <NuxtImg
+              :src="img"
+              provider="strapi"
+              :alt="imgAlt"
+              sizes="xa:400px sm:600px md:1000px lg:1280px xl:1560 xxl:1920px "
+              format="webp"
+              class="banner-img"
+            />
             <div class="articles-dital-box">
               <!-- <div v-for="(item, index) in tags" :key="index">
                 <div class="articles-dital-box__item">
@@ -86,6 +91,18 @@ useHead(getMetaObject(metaData, baseUrl));
 
 <style lang="scss" scoped>
 @import "@/assets/styles/style.scss";
+
+.banner-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: 0;
+
+  object-fit: cover;
+}
 .section-wrapper {
   width: 100%;
   max-width: 1280px;
@@ -131,6 +148,8 @@ useHead(getMetaObject(metaData, baseUrl));
   background-repeat: no-repeat;
   height: 600px;
   position: relative;
+
+  overflow: hidden;
 }
 
 .articles-dital-container {

@@ -1,7 +1,15 @@
 <template>
   <div class="card-photo-name">
     <div class="card-photo-name-img">
-      <img :src="direction.img" alt="photo-name" />
+      <NuxtImg
+        :src="direction.img"
+        :alt="direction?.alt"
+        provider="strapi"
+        sizes="xs:400px md:600px"
+        format="webp"
+        class="banner-img"
+        loading="lazy"
+      />
     </div>
     <div v-if="isCategoryAndDescription" class="card-photo-name-container">
       <div>

@@ -1,10 +1,7 @@
 <script setup>
 const props = defineProps(["infoBlock"]);
-const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const image = props?.infoBlock?.image?.data?.attributes?.formats?.medium?.url
-  ? baseUrl + props.infoBlock?.image?.data?.attributes?.formats?.medium?.url
-  : "";
+const image = props?.infoBlock?.image?.data?.attributes?.url;
 
 const alt = props?.infoBlock?.image?.data?.attributes?.alternativeText;
 </script>
@@ -27,7 +24,13 @@ const alt = props?.infoBlock?.image?.data?.attributes?.alternativeText;
       </div>
     </div>
     <div class="image-container">
-      <img :src="image" :alt="alt" />
+      <NuxtImg
+        :src="image"
+        provider="strapi"
+        :alt="alt"
+        sizes="xs:400px md:600px"
+        format="webp"
+      />
     </div>
   </div>
 </template>

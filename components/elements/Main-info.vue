@@ -1,22 +1,31 @@
 <template>
   <div class="dentistry-wrapper">
-    <div
-      class="dentistry-container"
-      :style="`background-image:url(${imgBg})`"
-      :class="{ 'bg-dark': isBgDark }"
-      v-bind="$attrs"
-    >
+    <div class="dentistry-container" v-bind="$attrs">
+      <NuxtImg
+        :src="imgBg"
+        :alt="imgAlt"
+        :provider="local ? '' : 'strapi'"
+        sizes="lg:1280px xl:1560 xxl:1920px "
+        format="webp"
+        class="banner-img"
+        :class="{ 'bg-dark': isBgDark }"
+      />
       <div class="dentistry-box">
         <elements-bread-crumbs
           :breadcrumbs="breadcrumbs"
           :typeColorWhite="typeColorWhite"
         />
         <div class="mob">
-          <img
-            :src="imgAdaptiv"
-            :class="{ 'img-dital': isDital, img: !isDital }"
+          <NuxtImg
+            :src="imgBg"
+            :alt="imgAlt"
+            :provider="local ? '' : 'strapi'"
+            sizes="xs:600px"
+            format="webp"
             class="my-image"
+            :class="{ 'img-dital': isDital, img: !isDital }"
           />
+
           <div>
             <elements-title-text-button
               textButtonBase="Записаться онлайн"
@@ -56,7 +65,6 @@
 </template>
 
 <script>
-import { useAssets } from "../../stores/useAsset";
 export default {
   props: {
     title: {
@@ -71,10 +79,14 @@ export default {
       type: String,
       default: "",
     },
-    imgAdaptiv: {
+    imgAlt: {
       type: String,
-      default: "",
     },
+    local: {
+      type: Boolean,
+      default: false,
+    },
+
     breadcrumbs: {
       type: Array,
     },
@@ -111,12 +123,31 @@ export default {
 <style scoped lang="scss">
 @import "/assets/styles/style.scss";
 
+.banner-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: 0;
+
+  object-fit: cover;
+  border-radius: 45px;
+}
+
+@media (max-width: 1110px) {
+  .banner-img {
+    display: none;
+  }
+}
+
 .my-image {
   border-radius: 25px;
 }
 
 .bg-dark {
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
+  filter: brightness(0.7);
 }
 
 .img {
@@ -159,10 +190,6 @@ export default {
   height: 920px;
   border-radius: 45px;
 
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-
   margin-bottom: 100px;
   display: flex;
   justify-content: flex-start;
@@ -179,6 +206,7 @@ export default {
   width: 1280px;
   max-width: 100%;
   margin: 0 auto;
+  z-index: 3;
 }
 
 @media (max-width: 1475px) {

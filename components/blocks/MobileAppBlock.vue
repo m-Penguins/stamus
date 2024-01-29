@@ -1,29 +1,35 @@
 <template>
   <div class="mob-app-block-wrap">
     <div class="mob-app-block-box">
-      <h2 class="mob-app-block-box__title">Удобны интерфейс</h2>
+      <h2 class="mob-app-block-box__title">Удобный интерфейс</h2>
       <p class="mob-app-block-box__text">Для быстрой онлайн-записи в клинику</p>
     </div>
     <div class="mob-app-block-container">
       <div class="mob-app-block-inner first-block">
-        <img
-          src="../../assets/images/mob/mob1.png"
-          alt="mob"
+        <NuxtImg
+          src="images/mob/mob1.png"
+          alt="Мобильное приложение"
+          sizes="xs:400px md:800px"
+          format="webp"
           class="first-block-img my-image"
         />
       </div>
       <div class="mob-app-block-inner second-block">
-        <img
-          src="../../assets/images/mob/mob2.png"
-          alt="mob"
+        <NuxtImg
+          src="images/mob/mob2.png"
+          alt="Мобильное приложение"
+          sizes="xs:400px md:800px"
+          format="webp"
           class="second-block-img my-image"
         />
       </div>
       <div class="mob-app-block-inner third-block">
-        <img
-          src="../../assets/images/mob/mob3.png"
+        <NuxtImg
+          src="images/mob/mob3.png"
+          alt="Мобильное приложение"
+          sizes="xs:400px md:800px"
+          format="webp"
           class="third-block-img my-image"
-          alt="mob"
         />
       </div>
     </div>

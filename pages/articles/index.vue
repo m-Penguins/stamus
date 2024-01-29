@@ -100,10 +100,10 @@ const filteredArticles = computed(() =>
     return {
       id: art?.id,
       heading: art?.attributes?.heading,
-      img: art?.attributes?.fotoArticles?.data?.attributes?.formats?.small?.url
-        ? baseUrl +
-          art?.attributes?.fotoArticles?.data?.attributes?.formats?.small?.url
-        : baseUrl + imagePlaceholders?.articles,
+      img:
+        art?.attributes?.fotoArticles?.data?.attributes?.url ??
+        imagePlaceholders?.articles,
+      alt: art?.attributes?.fotoArticles?.data?.attributes?.alternativeText,
       text: art?.attributes?.text,
       tags: art?.attributes?.tag_category,
       description: art?.attributes?.description,

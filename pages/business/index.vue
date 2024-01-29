@@ -52,17 +52,13 @@ export default {
     ];
 
     const assetsStore = useAssets();
-    const bigImage = assetsStore.useAsset("images/big-images/business.png");
-
-    const imgAdaptiv = assetsStore.useAsset(
-      "images/big-images/business-adaptiv.png",
-    );
+    const bigImage = "images/big-images/business.png";
 
     const baseDataStore = useBaseDataStore();
 
     const mockArray = {
       name: "Клиника Стамус",
-      img: assetsStore.useAsset("images/specialists/main-doctor2.png"),
+      img: "images/specialists/main-doctor2.png",
       text: "Во всех клиниках Стамус врачи ведут прием по ДМС, а так же проводят лечение корпоративным клиентам. Это очень удобно, так как организации с которыми мы сотрудничаем имеют офисы по всему Краснодару и ваши сотрудники могут обратиться в ближайшую для себя клинику Стамус.<br /><br />Мы давно сотрудничаем с предприятиями, но всегда готовы подойти индивидуально к запросам организации.<br /><br />Постоплата предусмотрена для всех организаций.<br /><br />По ДМС мы предоставляем весь перечень услуг от лечения зубов до имплантации и протезирования. Сотрудничаем с большинством страховых компаний и ежемесячно заключаем договора с новыми.",
     };
 
@@ -106,7 +102,6 @@ export default {
       isOpenPopup,
       togglerPopup,
       bigImage,
-      imgAdaptiv,
       mockArray,
       baseDataStore,
     };
@@ -125,7 +120,8 @@ export default {
     title="Бизнесу и корпоративным клиентам"
     text="Все клиники Стамус работают с ДМС"
     :imgBg="bigImage"
-    :imgAdaptiv="imgAdaptiv"
+    local
+    imgAlt="Бизнес"
     :isButtonBase="false"
     :typeColorWhite="item"
     :typeColorWhiteText="item"

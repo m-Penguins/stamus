@@ -21,10 +21,15 @@
             />
           </div>
           <div class="banner-img">
-            <div class="banner-img-box">
-              <img
-                src="../../assets/images/img-banner/tooth.png"
+            <div
+              class="banner-img-box"
+              :style="{ backgroundImage: `url(${vector})` }"
+            >
+              <NuxtImg
+                src="images/img-banner/tooth.png"
                 alt="image"
+                sizes="xs:400px md:800px"
+                format="webp"
                 class="img"
               />
             </div>
@@ -35,28 +40,10 @@
   </div>
 </template>
 
-<script>
-import { useAssets } from "../../stores/useAsset";
-export default {
-  props: {
-    breadcrumbs: {
-      type: Array,
-    },
-    title: {
-      type: String,
-      default: "Счастливые часы",
-    },
-    description: {
-      type: String,
-    },
-  },
-  setup() {
-    const assetsStore = useAssets();
-    return {
-      assetsStore,
-    };
-  },
-};
+<script setup>
+import vector from "@/public/images/img-banner/vectors.png";
+
+defineProps(["breadcrumbs", "title", "description"]);
 </script>
 
 <style scoped lang="scss">
@@ -71,7 +58,6 @@ export default {
   align-items: flex-end;
   justify-content: center;
   max-width: 697px;
-  background-image: url(/_nuxt/assets/images/img-banner/vectors.png);
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: contain;

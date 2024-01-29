@@ -3,7 +3,7 @@
     :title="title"
     :text="text"
     :imgBg="imgBg"
-    :imgAdaptiv="imgAdaptiv"
+    imgAlt="Баннер"
     :breadcrumbs="breadcrumbs"
   />
   <blocks-main-seo :title="titleSeo" :text="textSeo" :img="imgSeo" />

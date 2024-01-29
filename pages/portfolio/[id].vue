@@ -39,25 +39,19 @@ const symptoms = portfolioData.value?.data?.attributes?.symptom
   ?.filter(Boolean);
 
 const solution = portfolioData.value?.data?.attributes?.solution ?? [];
-const solutionImage = portfolioData.value?.data?.attributes?.solutionImage?.data
-  ?.attributes?.formats?.medium?.url
-  ? baseUrl +
-    portfolioData.value?.data?.attributes?.solutionImage?.data?.attributes
-      ?.formats?.medium?.url
-  : baseUrl + imagePlaceholders?.portfoliosSmall;
+const solutionImage =
+  portfolioData.value?.data?.attributes?.solutionImage?.data?.attributes?.url ??
+  imagePlaceholders?.portfoliosSmall;
+const solutionAlt =
+  portfolioData.value?.data?.attributes?.solutionImage?.data?.attributes
+    ?.alternativeText;
+const bigImage =
+  portfolioData.value?.data?.attributes?.cardImage?.data?.attributes?.url ??
+  imagePlaceholders?.portfoliosBig;
 
-const bigImage = portfolioData.value?.data?.attributes?.cardImage?.data
-  ?.attributes?.url
-  ? baseUrl +
-    portfolioData.value?.data?.attributes?.cardImage?.data?.attributes?.url
-  : baseUrl + imagePlaceholders?.portfoliosBig;
-
-const smallImage = portfolioData.value?.data?.attributes?.cardImage?.data
-  ?.attributes?.formats?.small?.url
-  ? baseUrl +
-    portfolioData.value?.data?.attributes?.cardImage?.data?.attributes?.formats
-      ?.small?.url
-  : baseUrl + imagePlaceholders?.portfoliosSmall;
+const bigImgAlt =
+  portfolioData.value?.data?.attributes?.cardImage?.data?.attributes
+    ?.alternativeText;
 
 const specialists =
   portfolioData.value?.data?.attributes?.specialists?.data?.map((sp) => {
@@ -66,10 +60,10 @@ const specialists =
       name: `${sp?.attributes?.firstName} ${sp?.attributes?.lastName}`,
       position: sp?.attributes?.position,
       achievements: sp?.attributes?.achievements,
-      img: sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.small?.url
-        ? baseUrl +
-          sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.small?.url
-        : baseUrl + imagePlaceholders?.specialists,
+      img:
+        sp?.attributes?.fotoSpecialist?.data?.attributes?.url ??
+        imagePlaceholders?.specialists,
+      alt: sp?.attributes?.fotoSpecialist?.data?.attributes?.alternativeText,
       achievements: sp?.attributes?.achievements,
     };
   });
@@ -77,11 +71,7 @@ const specialists =
 const infoBlock = portfolioData.value?.data?.attributes?.infoBlockPort;
 
 const gallery = portfolioData.value?.data?.attributes?.galery?.data
-  ?.map((img) =>
-    img?.attributes?.formats?.medium?.url
-      ? baseUrl + img?.attributes?.formats?.medium?.url
-      : "",
-  )
+  ?.map((img) => img?.attributes?.url)
   ?.filter(Boolean);
 
 const metaData = portfolioData.value?.data?.attributes?.meta;
@@ -94,7 +84,7 @@ useHead(getMetaObject(metaData, baseUrl));
       :title="portfolioData?.data?.attributes?.heading"
       :text="portfolioData?.data?.attributes?.description"
       :imgBg="bigImage"
-      :imgAdaptiv="smallImage"
+      :imgAlt="bigImgAlt"
       :isDital="true"
       :isButtonBase="false"
       :isTimeAndPriceCard="true"
@@ -131,6 +121,7 @@ useHead(getMetaObject(metaData, baseUrl));
         title="Решение"
         :cards="solution"
         :image="solutionImage"
+        :alt="solutionAlt"
       />
     </div>
     <div class="attending-physicians-block" v-if="specialists?.length">

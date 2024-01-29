@@ -79,9 +79,11 @@ useHead({
           :isExternal="true"
         />
         <div class="stamus-app-img-box">
-          <img
-            src="../../assets/images/big-images/mob-app.png"
-            alt="mob"
+          <NuxtImg
+            src="images/big-images/mob-app.png"
+            alt="Мобильное приложение"
+            sizes="xs:400px md:800px"
+            format="webp"
             class="stamus-app-img-box-picture"
           />
         </div>

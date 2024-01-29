@@ -22,10 +22,12 @@
           <div class="banner-additional-text" v-html="additionalText"></div>
         </div>
         <div class="banner-images">
-          <img
+          <NuxtImg
+            :src="`images/img-banner/${img}`"
+            alt="image"
+            sizes="xs:400px md:800px"
+            format="webp"
             class="banner-img"
-            :src="assetsStore.useAsset(`images/img-banner/${img}`)"
-            alt="img"
           />
         </div>
       </div>
@@ -169,7 +171,7 @@ export default {
         width: 100%;
         // max-width: 697px;
         max-width: 628px;
-        background-image: url("@/assets/images/img-banner/vectors.png");
+        background-image: url("@/public/images/img-banner/vectors.png");
         background-position: bottom;
         background-repeat: no-repeat;
         background-size: contain;

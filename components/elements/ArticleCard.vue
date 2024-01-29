@@ -1,7 +1,15 @@
 <template>
   <div class="article-card">
     <div class="article-card__box">
-      <img :src="article?.img" alt="Articles" class="article-card__box-img" />
+      <NuxtImg
+        :src="article?.img"
+        provider="strapi"
+        :alt="article?.alt"
+        sizes="xs:400px md:600px"
+        format="webp"
+        class="article-card__box-img"
+        loading="lazy"
+      />
     </div>
     <div class="tags-box">
       <!-- <div

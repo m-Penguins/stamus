@@ -2,9 +2,11 @@
   <div class="chief-doctor-block">
     <div class="chief-doctor-block-wrap">
       <div class="chief-doctor-block-container">
-        <img
+        <NuxtImg
           :src="specialists?.img || fallBackImg"
-          alt="main doctor"
+          sizes="xs:400px md:600px"
+          format="webp"
+          alt="stamus med"
           class="chief-doctor-block-img"
         />
       </div>
@@ -33,9 +35,8 @@ export default {
   setup() {
     const assetsStore = useAssets();
 
-    const fallBackImg = assetsStore.useAsset(
-      "images/specialists/main-doctor2.png",
-    );
+    const fallBackImg = "images/specialists/main-doctor2.png";
+
     return {
       assetsStore,
       fallBackImg,

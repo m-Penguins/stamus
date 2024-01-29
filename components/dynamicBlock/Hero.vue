@@ -76,6 +76,8 @@ const buttonText = props?.link_text ? props?.link_text : "Записаться �
 
 .banner-img {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
 

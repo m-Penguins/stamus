@@ -161,7 +161,7 @@ const props = defineProps(["block"]);
   display: flex;
   justify-content: center;
 
-  background-image: url("@/assets/images/img-banner/vectors.png");
+  background-image: url("@/public/images/img-banner/vectors.png");
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: contain;

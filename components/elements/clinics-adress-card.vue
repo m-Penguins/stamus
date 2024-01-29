@@ -1,7 +1,14 @@
 <template>
   <div class="card-photo-name">
     <div class="card-photo-name-img">
-      <img :src="direction.img" alt="img" class="img" />
+      <NuxtImg
+        :src="direction.img"
+        provider="strapi"
+        :alt="direction?.alt"
+        sizes="xs:400px md:600px"
+        format="webp"
+        class="img"
+      />
     </div>
     <div class="card-photo-name-container">
       <div>

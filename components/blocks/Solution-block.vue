@@ -10,7 +10,14 @@ defineProps(["title", "cards", "image"]);
       </div>
       <div class="solution-block-container">
         <div class="solution-block-container__img">
-          <img :src="image" alt="solution" />
+          <NuxtImg
+            :src="image"
+            provider="strapi"
+            :alt="alt"
+            sizes="xs:400px md:600px"
+            format="webp"
+            class="banner-img"
+          />
         </div>
         <div class="solution-block-container__text">
           <elements-solution-card

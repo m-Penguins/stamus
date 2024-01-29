@@ -42,11 +42,7 @@ if (!clinicsData.value) {
 const pricesData = clinicData.value?.data?.attributes?.price;
 
 const galleryList = clinicData?.value?.data?.attributes?.galery?.data
-  ?.map((img) =>
-    img?.attributes?.formats?.medium?.url
-      ? baseUrl + img?.attributes?.formats?.medium?.url
-      : "",
-  )
+  ?.map((img) => img?.attributes?.url)
   ?.filter(Boolean);
 
 const chiefDoctor = computed(() => {
@@ -69,10 +65,10 @@ const otherClinics = computed(() =>
     .map((cl) => {
       return {
         name: cl?.attributes?.heading,
-        img: cl?.attributes?.photoBanner?.data?.attributes?.formats?.small?.url
-          ? baseUrl +
-            cl?.attributes?.photoBanner?.data?.attributes?.formats?.small?.url
-          : baseUrl + imagePlaceholders?.services,
+        img:
+          cl?.attributes?.photoBanner?.data?.attributes?.url ??
+          imagePlaceholders?.services,
+        alt: cl?.attributes?.photoBanner?.data?.attributes?.alternativeText,
         link: String(cl?.id),
       };
     }),
@@ -85,18 +81,13 @@ const infoBlock = clinicData.value?.data?.attributes?.infoBlock;
 const title = clinicData?.value?.data?.attributes?.heading;
 const address = clinicData?.value?.data?.attributes?.address;
 
-const bgImg = clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes
-  ?.url
-  ? baseUrl +
-    clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes?.url
-  : baseUrl + imagePlaceholders?.services;
+const bgImg =
+  clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes?.url ??
+  imagePlaceholders?.services;
 
-const imgAdaptive = clinicData?.value?.data?.attributes?.photoBanner?.data
-  ?.attributes?.formats?.small?.url
-  ? baseUrl +
-    clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes?.formats
-      ?.small?.url
-  : baseUrl + imagePlaceholders?.services;
+const imgAlt =
+  clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes
+    ?.alternativeText;
 
 const breadcrumbs = [
   {
@@ -121,7 +112,7 @@ useHead(getMetaObject(metaData, baseUrl));
     :title="title"
     :text="address"
     :imgBg="bgImg"
-    :imgAdaptiv="imgAdaptive"
+    :imgAlt="imgAlt"
     :isDital="true"
     :isButtonBase="false"
     :typeColorWhite="item"

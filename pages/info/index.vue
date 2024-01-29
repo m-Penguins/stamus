@@ -2,7 +2,8 @@
   <elements-main-info
     title="Информация <br/> для пациентов"
     :imgBg="bigImage"
-    :imgAdaptiv="imgAdaptiv"
+    imgAlt="Информация для пациентов"
+    local
     :isButtonBase="false"
     :breadcrumbs="[
       {
@@ -49,7 +50,7 @@
 
 <script setup>
 const assetsStore = useAssets();
-const bigImage = assetsStore.useAsset("images/big-images/info.jpg");
+const bigImage = "images/big-images/info.jpg";
 
 const imgAdaptiv = assetsStore.useAsset("images/big-images/info-adaptiv.jpg");
 

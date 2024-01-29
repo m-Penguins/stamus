@@ -130,10 +130,10 @@ const portfolios = computed(() =>
       name: p?.attributes?.heading,
       category: p?.attributes?.direction?.directions,
       description: p?.attributes?.description,
-      img: p?.attributes?.photoBanner?.data?.attributes?.formats?.small?.url
-        ? baseUrl +
-          p?.attributes?.photoBanner?.data?.attributes?.formats?.small?.url
-        : baseUrl + imagePlaceholders?.portfoliosSmall,
+      img:
+        p?.attributes?.photoBanner?.data?.attributes?.url ??
+        imagePlaceholders?.portfoliosSmall,
+      alt: p?.attributes?.photoBanner?.data?.attributes?.alternativeText,
     };
   }),
 );
@@ -157,9 +157,7 @@ const breadcrumbs = [
   },
 ];
 
-const mockGallery = portfolioGallery.map((img) =>
-  assetsStore.useAsset(`images/gallery/${img}`),
-);
+const mockGallery = portfolioGallery.map((img) => `images/gallery/${img}`);
 
 useHead({
   title: "Портфолио клиник Стамус. Работы До - После врачей",
@@ -242,7 +240,7 @@ useHead({
         :total-pages="totalPages"
         @update:current-page="handlePageClick"
       />
-      <blocks-gallery :arrayImg="mockGallery" />
+      <blocks-gallery :arrayImg="mockGallery" local />
       <blocks-main-form />
     </div>
   </div>
