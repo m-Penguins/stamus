@@ -1,7 +1,9 @@
-<script setup lang="ts">
+<script setup>
 const props = defineProps(["block"]);
 
-const reviews = mapReviews(props?.block?.reviews?.data);
+const reviews = mapReviews(props?.block?.reviews?.data)?.filter(
+  (el) => el?.publishedAt,
+);
 </script>
 
 <template>

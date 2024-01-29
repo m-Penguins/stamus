@@ -8,6 +8,7 @@ if (props.blockSpecialists) {
 
 <template>
   <elements-slider-our-specialists
+    v-if="block?.specialists?.data?.length"
     :programs="block?.specialists?.data"
     :title="block?.title ?? 'Наши врачи'"
   />
