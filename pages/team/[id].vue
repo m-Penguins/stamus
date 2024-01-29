@@ -102,16 +102,28 @@ const blockServices = specialist.value?.data?.attributes?.services;
           </div>
         </div>
         <div class="stamus-app-img-box">
-          <img
+          <NuxtImg
+            v-if="
+              specialist?.data?.attributes?.fotoSpecialist?.data?.attributes
+                ?.url
+            "
             :src="
               specialist?.data?.attributes?.fotoSpecialist?.data?.attributes
                 ?.url
-                ? baseUrl +
-                  specialist?.data?.attributes?.fotoSpecialist?.data?.attributes
-                    ?.url
-                : assetsStore.useAsset('images/icons/logo.svg')
             "
-            alt="mob"
+            provider="strapi"
+            :alt="
+              specialist?.data?.attributes?.fotoSpecialist?.data?.attributes
+                ?.alternativeText
+            "
+            sizes="xs:600px md:800px"
+            format="webp"
+            class="stamus-app-img-box-picture"
+          />
+          <img
+            v-else
+            :src="assetsStore.useAsset('images/icons/logo.svg')"
+            alt="logo"
             class="stamus-app-img-box-picture"
           />
         </div>
