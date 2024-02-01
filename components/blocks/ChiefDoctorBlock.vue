@@ -88,7 +88,7 @@ export default {
 
 .chief-doctor-block-img {
   max-width: 100%;
-  height: auto;
+  height: 100%;
   border-radius: 15px;
 
   object-fit: contain;
