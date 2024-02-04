@@ -1,6 +1,7 @@
 <script setup>
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
-const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const placeholdersStore = usePlaceholdersStore();
 
 const route = useRoute();
 
@@ -102,7 +103,7 @@ const filteredArticles = computed(() =>
       heading: art?.attributes?.heading,
       img:
         art?.attributes?.fotoArticles?.data?.attributes?.url ??
-        imagePlaceholders?.articles,
+        placeholdersStore?.imagePlaceholders?.articles,
       alt: art?.attributes?.fotoArticles?.data?.attributes?.alternativeText,
       text: art?.attributes?.text,
       tags: art?.attributes?.tag_category,

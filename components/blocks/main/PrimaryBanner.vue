@@ -35,24 +35,7 @@ const props = defineProps(["title", "description", "twoDirections"]);
                         ?.large?.url,
                   }"
                 />
-                <!-- <img
-                  :src="
-                    item?.attributes?.photoBanner?.data?.attributes?.formats
-                      ?.large?.url
-                      ? `${baseUrl}${item?.attributes?.photoBanner?.data?.attributes?.formats?.large?.url}`
-                      : baseUrl + imagePlaceholders?.services
-                  "
-                  :alt="
-                    item?.attributes?.photoBanner?.data?.attributes
-                      ?.alternativeText
-                  "
-                  class="banner-image"
-                  :class="{
-                    'no-photo':
-                      !item?.attributes?.photoBanner?.data?.attributes?.formats
-                        ?.large?.url,
-                  }"
-                /> -->
+
                 <div class="primary-banner-btn">
                   {{ item?.attributes?.heading }}
                 </div>

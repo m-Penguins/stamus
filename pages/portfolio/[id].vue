@@ -1,6 +1,5 @@
 <script setup>
-import imagePlaceholders from "~/utils/imagePlaceholders";
-
+const placeholdersStore = usePlaceholdersStore();
 const route = useRoute();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
@@ -41,13 +40,13 @@ const symptoms = portfolioData.value?.data?.attributes?.symptom
 const solution = portfolioData.value?.data?.attributes?.solution ?? [];
 const solutionImage =
   portfolioData.value?.data?.attributes?.solutionImage?.data?.attributes?.url ??
-  imagePlaceholders?.portfoliosSmall;
+  placeholdersStore?.imagePlaceholders?.portfoliosSmall;
 const solutionAlt =
   portfolioData.value?.data?.attributes?.solutionImage?.data?.attributes
     ?.alternativeText;
 const bigImage =
   portfolioData.value?.data?.attributes?.cardImage?.data?.attributes?.url ??
-  imagePlaceholders?.portfoliosBig;
+  placeholdersStore?.imagePlaceholders?.portfoliosBig;
 
 const bigImgAlt =
   portfolioData.value?.data?.attributes?.cardImage?.data?.attributes
@@ -62,7 +61,7 @@ const specialists =
       achievements: sp?.attributes?.achievements,
       img:
         sp?.attributes?.fotoSpecialist?.data?.attributes?.url ??
-        imagePlaceholders?.specialists,
+        placeholdersStore?.imagePlaceholders?.specialists,
       alt: sp?.attributes?.fotoSpecialist?.data?.attributes?.alternativeText,
       achievements: sp?.attributes?.achievements,
     };

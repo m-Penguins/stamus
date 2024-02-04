@@ -1,8 +1,6 @@
 <script setup>
-const assetsStore = useAssets();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
-const baseUrl = useRuntimeConfig().public.baseUrl;
-
+const placeholdersStore = usePlaceholdersStore();
 const route = useRoute();
 
 const pageSize = ref(12);
@@ -132,7 +130,7 @@ const portfolios = computed(() =>
       description: p?.attributes?.description,
       img:
         p?.attributes?.photoBanner?.data?.attributes?.url ??
-        imagePlaceholders?.portfoliosSmall,
+        placeholdersStore?.imagePlaceholders?.portfoliosSmall,
       alt: p?.attributes?.photoBanner?.data?.attributes?.alternativeText,
     };
   }),

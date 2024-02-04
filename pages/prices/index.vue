@@ -1,6 +1,5 @@
 <script setup>
-import imagePlaceholders from "~/utils/imagePlaceholders";
-
+const placeholdersStore = usePlaceholdersStore();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
@@ -73,7 +72,7 @@ const handleInputChange = (value) => {
   searchInput.value = value;
 };
 
-const priceLink = baseUrl + imagePlaceholders?.priceListPDF;
+const priceLink = baseUrl + placeholdersStore?.imagePlaceholders?.priceListPDF;
 
 const breadcrumbs = [
   {

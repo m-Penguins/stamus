@@ -1,6 +1,6 @@
 <script setup>
 const item = ref(true);
-
+const placeholdersStore = usePlaceholdersStore();
 const checkScreenSize = () => {
   item.value = window.innerWidth <= 1110 ? false : true;
 };
@@ -67,7 +67,7 @@ const otherClinics = computed(() =>
         name: cl?.attributes?.heading,
         img:
           cl?.attributes?.photoBanner?.data?.attributes?.url ??
-          imagePlaceholders?.services,
+          placeholdersStore?.imagePlaceholders?.services,
         alt: cl?.attributes?.photoBanner?.data?.attributes?.alternativeText,
         link: String(cl?.id),
       };
@@ -83,7 +83,7 @@ const address = clinicData?.value?.data?.attributes?.address;
 
 const bgImg =
   clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes?.url ??
-  imagePlaceholders?.services;
+  placeholdersStore?.imagePlaceholders?.services;
 
 const imgAlt =
   clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes

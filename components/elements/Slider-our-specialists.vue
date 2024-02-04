@@ -4,9 +4,11 @@ import { Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import imagePlaceholders from "~/utils/imagePlaceholders";
 
 const props = defineProps(["programs", "title"]);
+
+const placeholdersStore = usePlaceholdersStore();
+
 const prev = ref(null);
 const next = ref(null);
 
@@ -46,7 +48,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
                   item?.attributes?.lastName,
                 img:
                   item?.attributes?.fotoSpecialist?.data?.attributes?.url ??
-                  imagePlaceholders?.specialists,
+                  placeholdersStore?.imagePlaceholders?.specialists,
                 alt: item?.attributes?.fotoSpecialist?.data?.attributes
                   ?.alternativeText,
                 position: item?.attributes?.position,

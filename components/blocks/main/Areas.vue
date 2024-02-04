@@ -1,6 +1,6 @@
 <script setup>
 const baseUrl = useRuntimeConfig().public.baseUrl;
-
+const placeholdersStore = usePlaceholdersStore();
 defineProps(["directionsData"]);
 </script>
 
@@ -20,7 +20,7 @@ defineProps(["directionsData"]);
                 ? baseUrl +
                   direction?.attributes?.photoBanner?.data?.attributes?.formats
                     ?.medium?.url
-                : baseUrl + imagePlaceholders?.services
+                : baseUrl + placeholdersStore?.imagePlaceholders?.services
             })`,
           }"
           :class="{

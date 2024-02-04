@@ -1,7 +1,5 @@
 <script setup>
-import imagePlaceholders from "~/utils/imagePlaceholders";
-
-const baseUrl = useRuntimeConfig().public.baseUrl;
+const placeholdersStore = usePlaceholdersStore();
 
 const props = defineProps(["clinicsData"]);
 </script>
@@ -16,7 +14,7 @@ const props = defineProps(["clinicsData"]);
           <NuxtImg
             :src="
               clinic?.attributes?.photoBanner?.data?.attributes?.url ??
-              imagePlaceholders?.services
+              placeholdersStore?.imagePlaceholders?.services
             "
             provider="strapi"
             :alt="

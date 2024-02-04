@@ -4,14 +4,13 @@ import { Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import imagePlaceholders from "~/utils/imagePlaceholders";
 
 defineProps(["block"]);
 
 const prev = ref(null);
 const next = ref(null);
 
-const baseUrl = useRuntimeConfig().public?.baseUrl;
+const placeholdersStore = usePlaceholdersStore();
 </script>
 
 <template>
@@ -53,7 +52,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
                 <NuxtImg
                   :src="
                     article?.attributes?.fotoArticles?.data?.attributes?.url ??
-                    imagePlaceholders?.articles
+                    placeholdersStore?.imagePlaceholders?.articles
                   "
                   provider="strapi"
                   :alt="

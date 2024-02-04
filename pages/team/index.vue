@@ -2,7 +2,7 @@
 const route = useRoute();
 
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
-const baseUrl = useRuntimeConfig().public.baseUrl;
+const placeholdersStore = usePlaceholdersStore();
 
 const pageSize = ref(12);
 const currentPage = ref(route.query.page ?? 1);
@@ -310,7 +310,7 @@ useHead({
                   specialist?.attributes?.lastName,
                 img:
                   specialist?.attributes?.fotoSpecialist?.data?.attributes
-                    ?.url ?? imagePlaceholders?.specialists,
+                    ?.url ?? placeholdersStore?.imagePlaceholders?.specialists,
                 alt: specialist?.attributes?.fotoSpecialist?.data?.attributes
                   ?.alternativeText,
                 position: specialist?.attributes?.position,

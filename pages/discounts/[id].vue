@@ -19,7 +19,8 @@
 
 <script setup>
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
-const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const placeholdersStore = usePlaceholdersStore();
 
 const [{ data: happyHours }, { data: headerData }] = await Promise.all([
   useFetch(`${apiBaseUrl}lucky-times`, {
@@ -49,7 +50,7 @@ const specialists = happyHours?.value?.data?.map((hh) => {
     position: hh?.attributes?.specialist?.data?.attributes?.position ?? "",
     img:
       hh?.attributes?.specialist?.data?.attributes?.fotoSpecialist?.data
-        ?.attributes?.url ?? imagePlaceholders?.specialists,
+        ?.attributes?.url ?? placeholdersStore?.imagePlaceholders?.specialists,
     alt: hh?.attributes?.specialist?.data?.attributes?.fotoSpecialist?.data
       ?.attributes?.alternativeText,
     time: hh?.attributes?.time ?? [],

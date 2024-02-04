@@ -2,6 +2,8 @@
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
+const placeholdersStore = usePlaceholdersStore();
+
 const route = useRoute();
 
 const directionSlug = route?.params?.direction;
@@ -25,7 +27,8 @@ if (!directionData?.value?.data?.length) {
 const mainInfo = directionData?.value?.data?.[0]?.attributes;
 
 const mainImg =
-  mainInfo?.photoBanner?.data?.attributes?.url ?? imagePlaceholders?.services;
+  mainInfo?.photoBanner?.data?.attributes?.url ??
+  placeholdersStore?.imagePlaceholders?.services;
 
 const mainImgAlt = mainInfo?.photoBanner?.data?.attributes?.alternativeText;
 

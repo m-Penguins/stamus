@@ -1,5 +1,5 @@
 <script setup>
-import imagePlaceholders from "~/utils/imagePlaceholders";
+const placeholdersStore = usePlaceholdersStore();
 
 const route = useRoute();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
@@ -20,7 +20,7 @@ const tags = articleData.value?.data?.attributes?.tag_category;
 const text = articleData.value?.data?.attributes?.text;
 const img =
   articleData.value?.data?.attributes?.fotoArticles?.data?.attributes?.url ??
-  imagePlaceholders?.articles;
+  placeholdersStore?.imagePlaceholders?.articles;
 
 const imgAlt =
   articleData.value?.data?.attributes?.fotoArticles?.data?.attributes

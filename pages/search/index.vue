@@ -1,10 +1,8 @@
 <script setup>
-import imagePlaceholders from "~/utils/imagePlaceholders";
-
+const placeholdersStore = usePlaceholdersStore();
 const route = useRoute();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
-const assetsStore = useAssets();
 
 const searchTerm = ref(route.query.term ?? "");
 
@@ -75,7 +73,7 @@ const getSearchData = async () => {
       ? baseUrl +
         sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.thumbnail
           ?.url
-      : baseUrl + imagePlaceholders?.specialists,
+      : baseUrl + placeholdersStore?.imagePlaceholders?.specialists,
     position: sp?.attributes?.position,
     achievements: sp?.attributes?.achievements,
     link: `/team/${sp?.id}`,

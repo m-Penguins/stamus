@@ -44,6 +44,7 @@ const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 
 const baseDataStore = useBaseDataStore();
 const servicesStore = useService();
+const placeholdersStore = usePlaceholdersStore();
 
 const [{ data: footerData }] = await Promise.all([
   useFetch(`${apiBaseUrl}footer`, {
@@ -56,6 +57,7 @@ const [{ data: footerData }] = await Promise.all([
   baseDataStore.getDirections(),
   baseDataStore.getPopularServices(),
   servicesStore.fetchdataService(apiBaseUrl),
+  placeholdersStore.getImagePlaceholders(),
 ]);
 
 baseDataStore.footerData = footerData.value;

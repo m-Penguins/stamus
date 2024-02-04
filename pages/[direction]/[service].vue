@@ -4,6 +4,8 @@ const route = useRoute();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
+const placeholdersStore = usePlaceholdersStore();
+
 const { data: serviceData } = await useFetch(`${apiBaseUrl}services`, {
   query: {
     "filters[slug][$eq]": route.params?.service,
@@ -23,7 +25,8 @@ const mainInfo = serviceData?.value?.data?.[0]?.attributes;
 const serviceId = serviceData?.value?.data?.[0]?.id;
 
 const mainImg =
-  mainInfo?.photoBanner?.data?.attributes?.url ?? imagePlaceholders?.services;
+  mainInfo?.photoBanner?.data?.attributes?.url ??
+  placeholdersStore?.imagePlaceholders?.services;
 
 const mainImgAlt = mainInfo?.photoBanner?.data?.attributes?.alternativeText;
 

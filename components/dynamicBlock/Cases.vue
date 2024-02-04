@@ -4,14 +4,13 @@ import { Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import imagePlaceholders from "~/utils/imagePlaceholders";
 
 const props = defineProps(["block", "serviceId"]);
 
+const placeholdersStore = usePlaceholdersStore();
+
 const prev = ref(null);
 const next = ref(null);
-
-const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const allCasesLink = props?.serviceId
   ? `/portfolio?dir=${props?.serviceId}`
@@ -52,7 +51,7 @@ const allCasesLink = props?.serviceId
               <NuxtImg
                 :src="
                   portfolio?.attributes?.photoBanner?.data?.attributes?.url ??
-                  imagePlaceholders?.portfoliosSmall
+                  placeholdersStore?.imagePlaceholders?.portfoliosSmall
                 "
                 provider="strapi"
                 :alt="
