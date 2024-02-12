@@ -65,7 +65,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
       :key="item?.id"
       class="info-card"
       :class="{
-        open: openItem === item?.id || isNDFL,
+        open: openItem === item?.id,
         ndfl: item?.id === 'ndfl',
       }"
       :id="item?.id === 'ndfl' ? 'ndfl' : ''"
@@ -124,13 +124,13 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
         </div>
       </div>
 
-      <transition>
+      <transition name="dop-info">
         <div
           v-if="item?.id !== 'ndfl'"
           v-show="openItem === item?.id"
           v-html="item?.content"
         ></div>
-        <div v-else v-show="openItem === 'ndfl'" class="">
+        <div v-else v-show="openItem === 'ndfl' || isNDFL">
           <p class="accordion-content-text">
             Вы можете сделать налоговый вычет за медицинские услуги,
             предоставленные лично вам, вашему мужу (жене), детям и подопечным до
@@ -271,7 +271,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
 
 @media (max-width: 740px) {
   .info-card {
-    max-height: 300px;
+    max-height: 2000px;
   }
 }
 
@@ -282,7 +282,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
 }
 
 .info-card.open {
-  max-height: 900px;
+  max-height: 2000px;
 }
 
 .info-links-box {
@@ -300,12 +300,13 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
   .accordion-content {
     max-height: 0px;
     opacity: 0;
-    transition: max-height 0.4s ease, opacity 0.6s ease, margin-top 0.3s ease;
+    transition: max-height 0.4s ease-in-out, opacity 0.6s ease-in-out,
+      margin-top 0.3s ease-in-out;
   }
   &.open {
-    .accordion-content {
+    & .accordion-content {
       margin-top: 16px;
-      max-height: 900px;
+      max-height: 2000px;
       opacity: 1;
     }
   }
@@ -410,7 +411,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
 }
 
 .info-card.open {
-  max-height: 500px;
+  max-height: 2000px;
 }
 
 .accordion-title {
@@ -464,17 +465,18 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
     scroll-margin-top: 160px;
   }
 
-  .accordion-content {
+  & .accordion-content {
     max-height: 0px;
     opacity: 0;
-    transition: max-height 0.4s ease, opacity 0.6s ease, margin-top 0.3s ease;
-    overflow-y: auto;
+    transition: max-height 0.4s ease-in-out, opacity 0.6s ease-in-out,
+      margin-top 0.3s ease-in-out;
+    /* overflow-y: auto; */
     width: 100%;
   }
   &.open {
-    .accordion-content {
+    & .accordion-content {
       margin-top: 16px;
-      max-height: 300px;
+      max-height: 2000px;
       opacity: 1;
       padding-right: 10px;
     }
@@ -539,5 +541,17 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
   .info-card {
     max-height: 300px;
   }
+}
+
+.dop-info-enter-active,
+.dop-info-leave-active {
+  transition: all 0.5s ease-in-out;
+  max-height: 6000px;
+}
+
+.dop-info-enter-from,
+.dop-info-leave-to {
+  opacity: 0;
+  max-height: 0;
 }
 </style>
