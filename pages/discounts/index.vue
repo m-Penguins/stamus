@@ -5,11 +5,9 @@ const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const assetsStore = useAssets();
-const bigImage = assetsStore.useAsset("images/big-images/discounts_new.png");
+const bigImage = assetsStore.useAsset("big-images/discounts_new.png");
 
-const imgAdaptiv = assetsStore.useAsset(
-  "images/big-images/discounts-adaptiv_new.jpg",
-);
+const imgAdaptiv = assetsStore.useAsset("big-images/discounts-adaptiv_new.jpg");
 const togglerPopup = (state) => {
   isOpenPopup.value = state;
 };

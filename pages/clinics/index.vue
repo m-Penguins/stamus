@@ -36,9 +36,9 @@ if (!specialistsData.value) {
 
 const assetsStore = useAssets();
 
-const bigImage = assetsStore.useAsset("images/big-images/clinics.jpg");
+const bigImage = assetsStore.useAsset("big-images/clinics.jpg");
 
-const imgAdaptiv = assetsStore.useAsset("images/big-images/clinics.jpg");
+const imgAdaptiv = assetsStore.useAsset("big-images/clinics.jpg");
 
 const arrayImg = [
   "clinic-gallery1.jpg",
@@ -46,11 +46,11 @@ const arrayImg = [
   "clinic-gallery3.jpg",
   "clinic-gallery4.jpg",
   "clinic-gallery5.jpg",
-].map((item) => assetsStore.useAsset(`images/gallery/${item}`));
+].map((item) => assetsStore.useAsset(`gallery/${item}`));
 
 const mockArray = {
   name: "Миссия и ценности клиник Стамус",
-  img: assetsStore.useAsset("images/specialists/main-doctor2.png"),
+  img: assetsStore.useAsset("specialists/main-doctor2.png"),
   text: `Миссия нашей сети клиник:  обеспечить пациентов экспертным медицинским сопровождением в любом районе Краснодара. Главная ценность – понять каждого пациента: сделать результат, о котором он мечтал.<br /><br />Новым пациентам мы обеспечиваем комфорт пребывания в клинике, понятные цены и планы лечения; анестезия и другие сопутствующие услуги не требуют доплаты. <br /><br />Наши пациенты доверяют Стамус – при повышении цен они продолжают идти по плану лечения с прежними ценами. Мы реагируем на замечания пациентов и исправляем их, будь то размер бахил, фоновая музыка, или пол ассистента и врача. <br /><br />И наконец, нам доверяют врачи других клиник – направляют пациентов при сложных медицинских случаях: перелечивания, отягощенного анамнеза, патологий.`,
 };
 

@@ -38,7 +38,7 @@ export const useFormStore = defineStore("form-store", () => {
 
   const isPhoneValidInfo = computed(() => {
     if (startValidation.value) {
-      return phoneField.value.substring(0, 16).length === 16;
+      return phoneField.value.length === 18;
     }
     return true;
   });

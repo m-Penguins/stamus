@@ -59,6 +59,8 @@ export default defineNuxtConfig({
   modules: [
     "@pinia/nuxt",
     "@vueuse/nuxt",
+    "nuxt-simple-robots",
+    "@nuxtjs/sitemap",
     [
       "nuxt-mail",
       {
@@ -79,6 +81,10 @@ export default defineNuxtConfig({
     ],
     "vue-yandex-maps/nuxt",
   ],
+  site: {
+    url: "https://stamus.ru",
+    name: "STAMUS",
+  },
   yandexMaps: {
     apikey: process.env.YANDEX_API_KEY,
   },

@@ -49,9 +49,9 @@
 
 <script setup>
 const assetsStore = useAssets();
-const bigImage = assetsStore.useAsset("images/big-images/info.jpg");
+const bigImage = assetsStore.useAsset("big-images/info.jpg");
 
-const imgAdaptiv = assetsStore.useAsset("images/big-images/info-adaptiv.jpg");
+const imgAdaptiv = assetsStore.useAsset("big-images/info-adaptiv.jpg");
 
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 

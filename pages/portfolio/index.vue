@@ -158,7 +158,7 @@ const breadcrumbs = [
 ];
 
 const mockGallery = portfolioGallery.map((img) =>
-  assetsStore.useAsset(`images/gallery/${img}`),
+  assetsStore.useAsset(`gallery/${img}`),
 );
 
 useHead({

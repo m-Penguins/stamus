@@ -39,7 +39,7 @@ const handleVideoClick = (link) => {
         />
         <img
           class="utube"
-          :src="assetsStore.useAsset('images/icons/play.svg')"
+          :src="assetsStore.useAsset('icons/play.svg')"
           alt="Play"
         />
       </div>

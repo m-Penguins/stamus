@@ -109,7 +109,7 @@ const blockServices = specialist.value?.data?.attributes?.services;
                 ? baseUrl +
                   specialist?.data?.attributes?.fotoSpecialist?.data?.attributes
                     ?.url
-                : assetsStore.useAsset('images/icons/logo.svg')
+                : assetsStore.useAsset('icons/logo.svg')
             "
             alt="mob"
             class="stamus-app-img-box-picture"

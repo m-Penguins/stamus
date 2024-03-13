@@ -24,7 +24,7 @@
         <div class="banner-images">
           <img
             class="banner-img"
-            :src="assetsStore.useAsset(`images/img-banner/${img}`)"
+            :src="assetsStore.useAsset(`img-banner/${img}`)"
             alt="img"
           />
         </div>

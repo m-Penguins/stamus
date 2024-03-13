@@ -33,9 +33,7 @@ export default {
   setup() {
     const assetsStore = useAssets();
 
-    const fallBackImg = assetsStore.useAsset(
-      "images/specialists/main-doctor2.png",
-    );
+    const fallBackImg = assetsStore.useAsset("specialists/main-doctor2.png");
     return {
       assetsStore,
       fallBackImg,

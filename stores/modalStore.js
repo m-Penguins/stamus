@@ -30,7 +30,7 @@ export const useModalStore = defineStore("modal-store", () => {
 
   const isPhoneValid = computed(() => {
     if (startValidation.value) {
-      return phoneField.value.substring(0, 16).length === 16;
+      return phoneField.value.length === 18;
     }
     return true;
   });
@@ -79,7 +79,7 @@ export const useModalStore = defineStore("modal-store", () => {
     if (isNameValid.value && isPhoneValid.value) {
       const formData = {
         name: nameField.value,
-        phone: phoneField.value.substring(0, 16),
+        phone: phoneField.value,
         clinic:
           clinicSelect.value === "Выберите клинику"
             ? null
