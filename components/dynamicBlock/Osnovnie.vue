@@ -25,7 +25,12 @@ const getServiceLink = (item) => {
       {{ block?.title ?? "Основные виды деятельности" }}
     </h2>
     <div class="activities-block-box">
-      <div v-for="(item, index) in block?.services?.data" :key="item?.id">
+      <div
+        v-for="(item, index) in block?.services?.data?.filter(
+          (el) => el?.attributes?.publishedAt,
+        )"
+        :key="item?.id"
+      >
         <NuxtLink class="activities-card" :to="getServiceLink(item)">
           <div class="activities-card-container">
             <p class="activities-card-num">{{ index + 1 }}.</p>
