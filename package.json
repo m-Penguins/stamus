@@ -26,6 +26,7 @@
     "nuxt-mail": "^4.0.1",
     "pinia": "^2.1.6",
     "swiper": "^10.1.0",
+    "vue-awesome-paginate": "^1.1.46",
     "vue-template-compiler": "^2.7.14",
     "vue-yandex-maps": "^2.0.0-rc.5"
   }
