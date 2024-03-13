@@ -138,8 +138,8 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
             оплате медицинских услуг для предоставления в налоговую инспекцию.
             Для получения такой справки вам необходимо заполнить заявку на нашем
             сайте или обратиться к администраторам на ресепшн клиники. Срок
-            подготовки справки — до 14 рабочих дней с момента обращения. Вместе
-            со справкой мы выдаем копию лицензии на ведение медицинской
+            подготовки справки — от 14 до 21 рабочих дней с момента обращения.
+            Вместе со справкой мы выдаем копию лицензии на ведение медицинской
             деятельности (она также понадобится в налоговой)
           </p>
           <form class="accordion-content-inputs" @submit.prevent="sendData">
@@ -236,7 +236,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
 .info-card {
   display: flex;
   width: 100%;
-  padding: 14px 20px;
+  padding: 16px 20px;
   justify-content: space-between;
   align-items: flex-start;
   flex-direction: column;
@@ -250,6 +250,11 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
     width: 100%;
     gap: 20px;
     cursor: pointer;
+
+    & svg {
+      height: 44px;
+      width: 44px;
+    }
   }
 }
 
@@ -277,7 +282,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
 
 .info-card {
   overflow: hidden;
-  max-height: 78px;
+  max-height: 84px;
   transition: max-height 0.9s ease-in-out;
 }
 
@@ -321,6 +326,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
 }
 
 .accordion-content-text {
+  padding-top: 14px;
   display: flex;
   flex-direction: column;
   gap: 14px;
