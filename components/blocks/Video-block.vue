@@ -383,6 +383,7 @@ export default {
 
   .video-block-rectangle {
     height: 64px;
+    min-height: unset;
     width: 100%;
     flex-direction: row-reverse;
     align-items: center;
