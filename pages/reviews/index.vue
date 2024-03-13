@@ -114,7 +114,7 @@ const filteredReviews = computed(() => mapReviews(reviewsData?.value?.data));
 const allSpecialists = specialistsData.value?.data
   ?.map((spec) => ({
     id: spec?.id,
-    name: spec?.attributes?.firstName + spec?.attributes?.lastName,
+    name: spec?.attributes?.firstName + " " + spec?.attributes?.lastName,
   }))
   .filter((el) => el.name);
 

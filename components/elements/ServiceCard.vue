@@ -86,6 +86,8 @@ const store = useModalStore();
     &__price {
       @include body-18-regular;
       color: $hover;
+
+      text-align-last: left;
     }
 
     &__type {
