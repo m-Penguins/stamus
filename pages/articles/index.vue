@@ -25,18 +25,18 @@ const handlePageClick = async (page) => {
 
   clearObjectFields(searchQuery);
 
+  await navigateTo({
+    path: `${route.fullPath}`,
+    query: searchQuery,
+    replace: true,
+  });
+
   if (window) {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   }
-
-  await navigateTo({
-    path: `${route.fullPath}`,
-    query: searchQuery,
-    replace: true,
-  });
 };
 
 const handleTagClick = async (tag) => {
@@ -220,10 +220,21 @@ useHead({
         </div>
       </div>
       <div v-else :style="{ textAlign: 'center' }">Ничего не найдено</div>
-      <elements-pagination
-        :current-page="currentPage"
-        :total-pages="totalPages"
-        @update:current-page="handlePageClick"
+      <vue-awesome-paginate
+        v-model="currentPage"
+        :total-items="totalItems"
+        :items-per-page="pageSize"
+        :max-pages-shown="3"
+        :on-click="handlePageClick"
+        paginate-buttons-class="btn"
+        active-page-class="btn-active"
+        back-button-class="back-btn"
+        next-button-class="next-btn"
+        :show-breakpoint-buttons="true"
+        :hide-prev-next="true"
+        type="link"
+        link-url="/articles?page=[page]"
+        class="pagination"
       />
       <blocks-main-form />
     </div>
@@ -232,6 +243,39 @@ useHead({
 
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
+
+/* Pagination */
+.pagination-container {
+  width: 100%;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 40px 0 90px;
+}
+.pagination:deep(.btn) {
+  @include body-14-regular;
+  height: 30px;
+  width: 38px;
+  cursor: pointer;
+  color: $gray-text;
+  display: flex;
+  justify-content: center;
+  align-items: center !important;
+  transition: all 0.2s ease-in-out;
+  &:not(.active):hover {
+    border-radius: 5px;
+    background: #f0f0f0;
+    color: #232d5b;
+  }
+}
+.pagination:deep(.btn-active) {
+  border-radius: 5px;
+  border: 1px solid var(--dissabled, #cfd5e1);
+  padding: 4px 10px;
+  cursor: default;
+}
+/* End of Pagination */
 
 .contacts-page-text {
   @include body-20-regular;
