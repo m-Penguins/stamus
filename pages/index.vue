@@ -16,7 +16,7 @@ const [{ data: mainData }, { data: directionsData }] = await Promise.all([
     },
   }),
   useFetch(`${apiBaseUrl}main-derections`, {
-    query: { populate: "photoBanner.*" },
+    query: { populate: "photoBanner.*", sort: "order:asc" },
   }),
 ]);
 
