@@ -171,7 +171,7 @@ export default {
         width: 100%;
         // max-width: 697px;
         max-width: 628px;
-        background-image: url("@/public/images/img-banner/vectors.png");
+        background-image: url("/images/img-banner/vectors.png");
         background-position: bottom;
         background-repeat: no-repeat;
         background-size: contain;

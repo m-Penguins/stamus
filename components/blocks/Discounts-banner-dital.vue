@@ -23,7 +23,9 @@
           <div class="banner-img">
             <div
               class="banner-img-box"
-              :style="{ backgroundImage: `url(${vector})` }"
+              :style="{
+                backgroundImage: `url(/images/img-banner/vectors.png)`,
+              }"
             >
               <NuxtImg
                 src="images/img-banner/tooth.png"
@@ -41,8 +43,6 @@
 </template>
 
 <script setup>
-import vector from "@/public/images/img-banner/vectors.png";
-
 defineProps(["breadcrumbs", "title", "description"]);
 </script>
 
