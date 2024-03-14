@@ -82,6 +82,9 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
 .image {
   border-radius: 45px;
   width: 60%;
+
+  object-fit: cover;
+  object-position: center;
 }
 
 .seo-block-text {
@@ -101,7 +104,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
   .image {
     width: 50%;
     object-fit: cover;
-    object-position: 21% 10%;
+    object-position: center;
     border-radius: 20px;
   }
   .seo-block {
@@ -111,7 +114,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .seo-block.reversed {
     flex-direction: column-reverse;
   }
