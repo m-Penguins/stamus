@@ -32,6 +32,7 @@ const getSearchData = async () => {
     searchTerm.value?.charAt(0)?.toUpperCase() +
     searchTerm.value?.slice(1)?.toLowerCase();
   const lowerSearch = searchTerm.value?.toLowerCase();
+  const upperSearch = searchTerm.value?.toUpperCase();
 
   const [
     { data: specialistsData },
@@ -43,24 +44,27 @@ const getSearchData = async () => {
         "filters[fullName][$contains][0]": searchTerm.value,
         "filters[fullName][$contains][1]": lowerSearch,
         "filters[fullName][$contains][2]": capitalSearch,
+        "filters[fullName][$contains][3]": upperSearch,
         "sort[0]": "order:asc",
-        populate: "deep",
+        populate: "fotoSpecialist.*,achievements.*",
       },
     }),
     useFetch(`${apiBaseUrl}services`, {
       query: {
-        "filters[heading][$contains][0]": searchTerm.value,
-        "filters[heading][$contains][1]": lowerSearch,
-        "filters[heading][$contains][2]": capitalSearch,
+        "filters[heading][$contains][4]": searchTerm.value,
+        "filters[heading][$contains][5]": lowerSearch,
+        "filters[heading][$contains][6]": capitalSearch,
+        "filters[heading][$contains][7]": upperSearch,
         populate: "category.napravleniya_uslug_1_col.*",
       },
     }),
     useFetch(`${apiBaseUrl}articles`, {
       query: {
-        "filters[heading][$contains][0]": searchTerm.value,
-        "filters[heading][$contains][1]": lowerSearch,
-        "filters[heading][$contains][2]": capitalSearch,
-        populate: "deep",
+        "filters[heading][$contains][8]": searchTerm.value,
+        "filters[heading][$contains][9]": lowerSearch,
+        "filters[heading][$contains][10]": capitalSearch,
+        "filters[heading][$contains][11]": upperSearch,
+        populate: "heading.*",
       },
     }),
   ]);
@@ -165,7 +169,7 @@ useHead({
             url: '/search',
           },
           {
-            title: `${searchTerm}`,
+            title: `${searchTerm ?? ''}`,
             url: `/`,
           },
         ]"
