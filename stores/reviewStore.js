@@ -16,7 +16,7 @@ export const useReviewStore = defineStore("review-store", () => {
       clinic: clinic.value,
       rating: pickedRating.value,
       name: nameField.value,
-      phone: phoneField.value.substring(0, 16),
+      phone: phoneField.value,
       comment: commentField.value,
       date: dateField.value,
     };

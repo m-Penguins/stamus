@@ -4,6 +4,22 @@ const route = useRoute();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
+const directionSlug = route?.params?.direction;
+const { data: directionData } = await useFetch(`${apiBaseUrl}main-derections`, {
+  query: {
+    "filters[slug][$eq]": directionSlug,
+    populate: blocksQuey,
+    sort: "order:asc",
+  },
+});
+if (!directionData?.value?.data?.length) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page Not Found",
+    fatal: true,
+  });
+}
+
 const placeholdersStore = usePlaceholdersStore();
 
 const { data: serviceData } = await useFetch(`${apiBaseUrl}services`, {

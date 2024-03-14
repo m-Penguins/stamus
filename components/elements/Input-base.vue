@@ -1,5 +1,4 @@
 <script setup>
-import { IMaskComponent } from 'vue-imask';
 const props = defineProps({
   showError: Boolean,
   errorMessage: String,
@@ -8,12 +7,12 @@ const props = defineProps({
   dopText: String,
   tagType: {
     type: String,
-    default: "input" | "textarea" | "phoneMask" | "email"
+    default: "input" | "textarea" | "phoneMask" | "email",
   },
   modelValue: {
     type: String,
-    default: '' 
-  }
+    default: "",
+  },
 });
 
 const emit = defineEmits(["update:modelValue"]);
@@ -37,10 +36,7 @@ const onBlur = (e) => {
 </script>
 
 <template>
-  <div
-    v-if="tagType === 'textarea'"
-    class="form-group"
-  >
+  <div v-if="tagType === 'textarea'" class="form-group">
     <label
       ref="labelEl"
       :for="label"
@@ -57,8 +53,9 @@ const onBlur = (e) => {
       :value="modelValue"
       @focus="onFocus($event)"
       @blur="onBlur($event)"
-      @input="updateInputValue"/>
-      <p v-if="dopText" v-html="dopText" class="dop-text"></p>
+      @input="updateInputValue"
+    />
+    <p v-if="dopText" v-html="dopText" class="dop-text"></p>
   </div>
   <div v-else-if="tagType === 'email'" class="input-base form-group">
     <label
@@ -73,8 +70,9 @@ const onBlur = (e) => {
       :placeholder="placeholder"
       class="form-input input"
       :class="{
-      'focused-input': isFocused || modelValue.length,
-      'focused-input-color':  isFocused}"
+        'focused-input': isFocused || modelValue.length,
+        'focused-input-color': isFocused,
+      }"
       @input="updateInputValue"
       :value="modelValue"
       @focus="onFocus($event)"
@@ -97,8 +95,9 @@ const onBlur = (e) => {
       :placeholder="placeholder"
       class="form-input input"
       :class="{
-      'focused-input': isFocused || modelValue.length,
-      'focused-input-color':  isFocused}"
+        'focused-input': isFocused || modelValue.length,
+        'focused-input-color': isFocused,
+      }"
       @input="updateInputValue"
       :value="modelValue"
       @focus="onFocus($event)"
@@ -116,15 +115,17 @@ const onBlur = (e) => {
       class="form-label"
       >{{ label }}</label
     >
-    <IMaskComponent
+    <input
+      v-maska
       v-bind="$attrs"
       :placeholder="placeholder"
       class="form-input input"
       :class="{
-      'focused-input': isFocused || modelValue.length,
-      'focused-input-color':  isFocused}"
-      :mask="'+{7}(000)000-00-00'"
-      :unmask="true"
+        'focused-input': isFocused || modelValue.length,
+        'focused-input-color': isFocused,
+      }"
+      data-maska="+7 (###) ###-##-##"
+      :data-maska-tokens="{ '#': { pattern: /[0-9]/ } }"
       @input="updateInputValue"
       :value="modelValue"
       @focus="onFocus($event)"
@@ -137,7 +138,7 @@ const onBlur = (e) => {
 </template>
 
 <style scoped lang="scss">
-@import '/assets/styles/style.scss';
+@import "/assets/styles/style.scss";
 .focused-input-color {
   color: #525660 !important;
 }
@@ -182,7 +183,7 @@ const onBlur = (e) => {
   position: absolute;
   bottom: -16px;
   @include body-10-regular;
-  color: #F53636;
+  color: #f53636;
   opacity: 0.7;
   padding-left: 20px;
 }
@@ -193,5 +194,4 @@ const onBlur = (e) => {
   opacity: 0.7;
   padding: 6px 0 0px 20px;
 }
-
 </style>
