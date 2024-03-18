@@ -22,8 +22,8 @@ const averageGrade = average ? average?.toFixed(1) : average;
   <div class="main-events-block">
     <div class="slider-title">
       <div class="slider-title__box">
-        <h2 class="slider-title__box-title">Отзывы с</h2>
-        <img src="@/assets/images/img-text/prodoctorov.svg" alt="Текст" />
+        <h2 class="slider-title__box-title">Отзывы</h2>
+        <!-- <img src="@/assets/images/img-text/prodoctorov.svg" alt="Текст" /> -->
       </div>
       <div class="slider-title__grade">
         <div v-if="averageGrade" class="grey-point-text">
