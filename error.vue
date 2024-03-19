@@ -31,6 +31,9 @@
       </div>
     </div>
     <TheFooter :footerData="footerData" />
+    <Teleport to="body"
+      ><blocks-main-popap-modal-form :clinics="baseDataStore.clinics"
+    /></Teleport>
   </div>
 </template>
 
