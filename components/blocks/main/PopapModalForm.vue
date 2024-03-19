@@ -132,10 +132,18 @@
           >
             <elements-button-base
               :onClick="sendData"
-              :disabled="!store.isSubmitActiveBid"
+              :disabled="!store.isSubmitActiveBid || store.isLoading"
               title="Отправить"
               class="popup-btn"
             />
+
+            <div v-if="store.isError" class="error-text">
+              Что-то пошло не так, попробуйте еще раз чуть позже.
+            </div>
+            <div v-if="store.isSuccess" class="success-text">
+              Спасибо, Ваша заявка отправлена.
+            </div>
+
             <div class="popup-text">
               Нажимая кнопку отправить, вы соглашаетесь с
               <a :href="privacyLink" target="_blank"
@@ -195,8 +203,14 @@
               title="Отправить"
               class="popup-btn"
               :onClick="sendData"
-              :disabled="!store.isSubmitActive"
+              :disabled="!store.isSubmitActive || store.isLoading"
             />
+            <div v-if="store.isError" class="error-text">
+              Что-то пошло не так, попробуйте еще раз чуть позже.
+            </div>
+            <div v-if="store.isSuccess" class="success-text">
+              Спасибо, Ваша заявка отправлена.
+            </div>
             <div class="popup-text">
               Нажимая кнопку отправить, вы соглашаетесь с
               <a :href="privacyLink" target="_blank"
@@ -286,6 +300,22 @@ function setIsOpen() {
 
 <style lang="scss">
 @import "/assets/styles/style.scss";
+
+.error-text {
+  @include body-16-regular;
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.success-text {
+  @include body-16-regular;
+  color: rgb(32, 196, 32);
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
 
 .price {
   padding-bottom: 40px;

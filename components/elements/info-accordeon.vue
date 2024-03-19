@@ -209,8 +209,16 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
                 type="submit"
                 title="Отправить"
                 class="form-btn"
-                :disabled="!store.isSubmitActivePersonalIncomeTax"
+                :disabled="
+                  !store.isSubmitActivePersonalIncomeTax || store.isLoading
+                "
               />
+              <div v-if="store.isError" class="error-text">
+                Что-то пошло не так, попробуйте еще раз чуть позже.
+              </div>
+              <div v-if="store.isSuccess" class="success-text">
+                Спасибо, Ваша заявка отправлена.
+              </div>
               <div class="info-dop-card-subtext">
                 Нажимая кнопку отправить, вы соглашаетесь с
                 <a :href="privacyLink" target="_blank"
@@ -227,6 +235,20 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
 
 <style lang="scss" scoped>
 @import "@/assets/styles/style.scss";
+
+.error-text {
+  @include body-18-regular;
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.success-text {
+  @include body-18-regular;
+  color: rgb(32, 196, 32);
+  text-align: center;
+  margin-bottom: 10px;
+}
 .info {
   display: flex;
   flex-direction: column;

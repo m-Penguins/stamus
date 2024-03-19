@@ -1,6 +1,11 @@
 import { defineStore } from "pinia";
 
 export const useModalStore = defineStore("modal-store", () => {
+  // vars for sending form state
+  const isLoading = ref(false);
+  const isError = ref(false);
+  const isSuccess = ref(false);
+
   const nameField = ref("");
   const phoneField = ref("");
   const emailField = ref("");
@@ -77,6 +82,8 @@ export const useModalStore = defineStore("modal-store", () => {
     startValidation.value = true;
 
     if (isNameValid.value && isPhoneValid.value) {
+      isLoading.value = true;
+
       const formData = {
         name: nameField.value,
         phone: phoneField.value,
@@ -118,13 +125,17 @@ export const useModalStore = defineStore("modal-store", () => {
         });
 
         resetForm();
+        isSuccess.value = true;
       } catch (error) {
         console.log(error);
         isError.value = true;
       } finally {
+        isLoading.value = false;
         setTimeout(() => {
           closeModal();
-        }, 1500);
+          isError.value = false;
+          isSuccess.value = false;
+        }, 2000);
       }
 
       return formData;
@@ -160,5 +171,8 @@ export const useModalStore = defineStore("modal-store", () => {
     isEmailVaild,
     isSubmitActiveBid,
     clinicSelect,
+    isError,
+    isLoading,
+    isSuccess,
   };
 });

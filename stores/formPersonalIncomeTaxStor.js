@@ -1,6 +1,11 @@
 import { defineStore } from "pinia";
 
 export const useFormStore = defineStore("form-store", () => {
+  // vars for sending form state
+  const isLoading = ref(false);
+  const isError = ref(false);
+  const isSuccess = ref(false);
+
   const getterNameField = ref("");
   const digitField = ref("");
   const phoneField = ref("");
@@ -57,6 +62,13 @@ export const useFormStore = defineStore("form-store", () => {
     phoneField.value = "";
     digitField.value = "";
     startValidation.value = false;
+    checkBoxes.value = [];
+  }
+
+  function resetSendingState() {
+    isError.value = false;
+    isLoading.value = false;
+    isSuccess.value = false;
   }
 
   async function submitModal() {
@@ -69,6 +81,8 @@ export const useFormStore = defineStore("form-store", () => {
       isNamePatientFieldValid.value &&
       isNameInfoValid.value
     ) {
+      isLoading.value = true;
+
       const mail = useMail();
 
       const getterNameFieldValue = getterNameField.value
@@ -116,9 +130,12 @@ export const useFormStore = defineStore("form-store", () => {
         });
 
         resetForm();
+        isSuccess.value = true;
       } catch (error) {
         console.log(error);
         isError.value = true;
+      } finally {
+        isLoading.value = false;
       }
     }
   }
@@ -138,5 +155,10 @@ export const useFormStore = defineStore("form-store", () => {
     isSubmitActivePersonalIncomeTax,
     submitModal,
     isNamePatientFieldValid,
+
+    isLoading,
+    isSuccess,
+    isError,
+    resetSendingState,
   };
 });
