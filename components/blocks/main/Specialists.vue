@@ -12,11 +12,11 @@ const handleSmallClick = (index) => {
   <div class="container-size specialists">
     <div class="specialists-subject">
       <h2 class="specialists-heading-title">Наши врачи</h2>
-      <elements-link-with-arrow
+      <!-- <elements-link-with-arrow
         type
         title="Смотреть всех врачей"
         link="/team"
-      />
+      /> -->
     </div>
     <div class="specialists-container">
       <div class="specialists-list">
@@ -80,6 +80,11 @@ const handleSmallClick = (index) => {
               :to="`/portfolio?specialist=${props.mainSpecialists?.[selectedIndex]?.id}`"
             />
           </div>
+          <elements-link-with-arrow
+            type
+            title="Смотреть всех врачей"
+            link="/team"
+          />
         </div>
       </div>
     </div>
@@ -194,16 +199,39 @@ const handleSmallClick = (index) => {
 .specialists-box {
   @include flex-column-start;
   gap: 10px;
+  width: 100%;
 
   &__name {
     @include body-18-regular;
     color: $dark-blue-subtitle;
+
+    word-wrap: break-word;
+    text-align: left;
   }
 
   &__spec {
     @include body-14-regular;
     opacity: 0.7;
     color: $gray-text;
+
+    width: 100%;
+    word-wrap: break-word;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 734px) {
+  .specialists-btn {
+    width: 300px;
+  }
+  .specialists-box {
+    width: 210px;
+  }
+
+  .specialists-container {
+    .specialists-list {
+      white-space: unset !important;
+    }
   }
 }
 
@@ -288,7 +316,8 @@ const handleSmallClick = (index) => {
       gap: 10px;
     }
     .specialists-list::-webkit-scrollbar {
-      display: none;
+      /* display: none; */
+      height: 3px;
     }
   }
 
@@ -316,6 +345,8 @@ const handleSmallClick = (index) => {
 
 @media (max-width: 734px) {
   .specialists-inner {
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     gap: 14px;
 
@@ -334,14 +365,20 @@ const handleSmallClick = (index) => {
       }
     }
   }
+
+  /* .specialists-btn {
+    width: 70vw;
+  } */
 }
 
 @media (max-width: 734px) {
+  .specialists-list {
+    white-space: unset;
+  }
   .specialists {
     margin: 0 auto 80px !important;
   }
   .specialists-btn-base {
-    width: 80%;
     height: auto;
   }
   .specialists-inner__info-btn {
@@ -352,6 +389,10 @@ const handleSmallClick = (index) => {
     width: 100%;
     gap: 10px;
 
+    &__info {
+      align-self: flex-start;
+    }
+
     &__img {
       width: 50%;
     }
@@ -359,10 +400,6 @@ const handleSmallClick = (index) => {
 }
 
 @media (max-width: 585px) {
-  .specialists-btn-base {
-    width: 100%;
-  }
-
   .specialists-inner {
     &__img {
       width: 67%;
@@ -380,7 +417,8 @@ const handleSmallClick = (index) => {
     }
 
     &__info-btn {
-      flex-wrap: nowrap;
+      flex-wrap: wrap;
+      width: 100%;
     }
   }
   .specialists-btn-base {
