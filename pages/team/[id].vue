@@ -51,7 +51,7 @@ useHead(getMetaObject(metaData, baseUrl));
 
 const blocks = specialist.value?.data?.attributes?.blocks;
 
-const blockServices = specialist.value?.data?.attributes?.services;
+// const blockServices = specialist.value?.data?.attributes?.services;
 </script>
 
 <template>
@@ -150,7 +150,7 @@ const blockServices = specialist.value?.data?.attributes?.services;
       </div>
     </div>
   </div>
-  <BlocksMapper :blocks="blocks" :block-services="blockServices" />
+  <BlocksMapper :blocks="blocks" />
 </template>
 
 <style lang="scss" scoped>

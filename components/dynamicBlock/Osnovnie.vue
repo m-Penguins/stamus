@@ -17,20 +17,19 @@ const getServiceLink = (item) => {
   }
   return "/";
 };
+
+const services = props.block?.services?.data?.filter(
+  (el) => el?.attributes?.publishedAt,
+);
 </script>
 
 <template>
-  <div class="activities-block-wrap">
+  <div class="activities-block-wrap" v-if="services.length">
     <h2 class="activities-block-title">
       {{ block?.title ?? "Основные виды деятельности" }}
     </h2>
     <div class="activities-block-box">
-      <div
-        v-for="(item, index) in block?.services?.data?.filter(
-          (el) => el?.attributes?.publishedAt,
-        )"
-        :key="item?.id"
-      >
+      <div v-for="(item, index) in services" :key="item?.id">
         <NuxtLink class="activities-card" :to="getServiceLink(item)">
           <div class="activities-card-container">
             <p class="activities-card-num">{{ index + 1 }}.</p>
