@@ -68,8 +68,6 @@ const getSpecialistsData = async () => {
 
 const specialists = await getSpecialistsData();
 
-console.log(specialists.value);
-
 const baseDataStore = useBaseDataStore();
 
 const allClinics = baseDataStore.clinics?.data?.map((cl) => ({
