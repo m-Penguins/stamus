@@ -1,7 +1,11 @@
 <template>
   <div class="wrap">
-    <TheHeader />
-    <div class="error">
+    <TheHeader
+      :showMenuPatients="showMenuPatients"
+      @toggleMenu="toggleMenu"
+      :phone="footerData?.data?.attributes?.phone"
+    />
+    <div class="error" @click="closeMenu">
       <div class="error-back">
         <NuxtImg
           src="images/error/404.png"
@@ -26,7 +30,7 @@
         </div>
       </div>
     </div>
-    <TheFooter />
+    <TheFooter :footerData="footerData" />
   </div>
 </template>
 
@@ -34,6 +38,44 @@
 defineProps(["error"]);
 
 const goToMainPage = () => clearError({ redirect: "/" });
+
+const showMenuPatients = ref(false);
+
+const toggleMenu = () => (showMenuPatients.value = !showMenuPatients.value);
+
+const closeMenu = () => (showMenuPatients.value = false);
+
+const route = useRoute();
+const reviewStore = useReviewStore();
+watch(
+  () => route.fullPath,
+  () => {
+    if (reviewStore.currentStep > 0) reviewStore.resetStore();
+    showMenuPatients.value = false;
+  },
+);
+
+const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+
+const baseDataStore = useBaseDataStore();
+const servicesStore = useService();
+const placeholdersStore = usePlaceholdersStore();
+
+const [{ data: footerData }] = await Promise.all([
+  useFetch(`${apiBaseUrl}footer`, {
+    query: {
+      populate:
+        "links.icon.*,privacy.*,license_stamus.*,license_stamusmed.*,widget.icon.*",
+    },
+  }),
+  baseDataStore.getClinics(),
+  baseDataStore.getDirections(),
+  baseDataStore.getPopularServices(),
+  servicesStore.fetchdataService(apiBaseUrl),
+  placeholdersStore.getImagePlaceholders(),
+]);
+
+baseDataStore.footerData = footerData.value;
 </script>
 
 <style lang="scss" scoped>
