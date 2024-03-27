@@ -1,3 +1,5 @@
+import microTags from "@/utils/microTags.json";
+
 export default (metaData, baseUrl) => {
   return {
     title: metaData?.metaTitle ?? "stamus.ru",
@@ -24,6 +26,14 @@ export default (metaData, baseUrl) => {
         content: metaData?.metaTitle,
       },
       {
+        property: "og:url",
+        content: "https://stamus.ru",
+      },
+      {
+        property: "og:type",
+        content: "website",
+      },
+      {
         property: "og:description",
         content: metaData?.metaDescription,
       },
@@ -32,6 +42,12 @@ export default (metaData, baseUrl) => {
         content: metaData?.metaImage?.data?.attributes?.url
           ? baseUrl + metaData?.metaImage?.data?.attributes?.url
           : "",
+      },
+    ],
+    script: [
+      {
+        type: "application/ld+json",
+        children: microTags,
       },
     ],
   };

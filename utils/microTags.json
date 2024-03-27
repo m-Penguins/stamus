@@ -1,0 +1,17 @@
+{
+  "@context": "http://www.schema.org",
+  "@type": "Organization",
+  "name": "STAMUS",
+  "url": "https://stamus.ru",
+  "description": "some description",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "ул. Хакурате 34",
+    "postOfficeBoxNumber": "stamus.dent@yandex.ru"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+7 (861) 212 - 07 - 07",
+    "contactType": "Главный офис"
+  }
+}
