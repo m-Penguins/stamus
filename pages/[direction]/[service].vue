@@ -25,7 +25,13 @@ const placeholdersStore = usePlaceholdersStore();
 const { data: serviceData } = await useFetch(`${apiBaseUrl}services`, {
   query: {
     "filters[slug][$eq]": route.params?.service,
-    populate: blocksQuey + ",specialists.fotoSpecialist.*",
+    "populate[0]": blocksQuey + ",specialists.fotoSpecialist.*,specialists.*",
+    "populate[1]": {
+      specialists: {
+        sort: "order:desc",
+      },
+    },
+    // "specialists[sort]": "order:desc",
   },
 });
 
