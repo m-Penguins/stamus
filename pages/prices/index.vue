@@ -350,6 +350,9 @@ hr {
   .prices-box {
     padding: 0 0 20px;
     margin-top: 60px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 
   hr {
