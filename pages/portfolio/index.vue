@@ -100,6 +100,7 @@ const getPortfoliosData = async () => {
     "filters[heading][$contains][2]":
       searchFilter.value?.charAt(0)?.toUpperCase() +
       searchFilter.value?.slice(1)?.toLowerCase(),
+    "sort[publishedAt]": "desc",
   };
 
   clearObjectFields(strapiQuery);
@@ -114,6 +115,7 @@ const getPortfoliosData = async () => {
 };
 
 const portfoliosData = await getPortfoliosData();
+console.log(portfoliosData.value);
 
 const baseDataStore = useBaseDataStore();
 
