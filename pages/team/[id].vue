@@ -177,7 +177,10 @@ const blocks = specialist.value?.data?.attributes?.blocks;
 
 .stamus-app-img-box-picture {
   width: 100%;
+  height: 100%;
   object-fit: cover;
+  object-position: bottom;
+  font-size: 0;
 }
 
 .service-title {
