@@ -525,7 +525,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 376px;
+  max-width: 450px;
 }
 
 .accordion-content-id1-box {

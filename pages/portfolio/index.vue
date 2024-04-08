@@ -21,11 +21,14 @@ const totalPages = computed(() =>
 
 const handlePageClick = async (page) => {
   currentPage.value = page;
-  const searchQuery = {
-    page,
-    dir: dirFilter.value,
-    search: searchFilter.value,
-  };
+  let searchQuery = "";
+  if (page != 1) {
+    searchQuery = {
+      page,
+      dir: dirFilter.value,
+      search: searchFilter.value,
+    };
+  }
 
   clearObjectFields(searchQuery);
 

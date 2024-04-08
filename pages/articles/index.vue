@@ -18,10 +18,13 @@ const totalPages = computed(() =>
 
 const handlePageClick = async (page) => {
   currentPage.value = page;
-  const searchQuery = {
-    page,
-    tag: tagFilter.value,
-  };
+  let searchQuery = "";
+  if (page != 1) {
+    searchQuery = {
+      page,
+      tag: tagFilter.value,
+    };
+  }
 
   clearObjectFields(searchQuery);
 

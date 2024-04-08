@@ -85,6 +85,7 @@ export default defineNuxtConfig({
   site: {
     url: "https://stamus.ru",
     name: "STAMUS",
+    trailingSlash: true,
   },
   yandexMaps: {
     apikey: process.env.YANDEX_API_KEY,

@@ -3,16 +3,18 @@ const route = useRoute();
 
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
-
 const directionSlug = route?.params?.direction;
-const { data: directionData } = await useFetch(`${apiBaseUrl}main-derections`, {
-  query: {
-    "filters[slug][$eq]": directionSlug,
-    populate: blocksQuey,
-    sort: "order:asc",
+
+const { data: firstLvlDirection } = await useFetch(
+  `${apiBaseUrl}main-derections`,
+  {
+    query: {
+      "filters[slug][$eq]": directionSlug,
+    },
   },
-});
-if (!directionData?.value?.data?.length) {
+);
+
+if (!firstLvlDirection?.value?.data?.length) {
   throw createError({
     statusCode: 404,
     statusMessage: "Page Not Found",
@@ -20,18 +22,11 @@ if (!directionData?.value?.data?.length) {
   });
 }
 
-const placeholdersStore = usePlaceholdersStore();
-
 const { data: serviceData } = await useFetch(`${apiBaseUrl}services`, {
   query: {
     "filters[slug][$eq]": route.params?.service,
-    "populate[0]": blocksQuey + ",specialists.fotoSpecialist.*,specialists.*",
-    "populate[1]": {
-      specialists: {
-        sort: "order:desc",
-      },
-    },
-    // "specialists[sort]": "order:desc",
+    sort: "specialists.order:asc",
+    populate: blocksQuey + ",specialists.fotoSpecialist.*",
   },
 });
 
@@ -46,11 +41,14 @@ const mainInfo = serviceData?.value?.data?.[0]?.attributes;
 
 const serviceId = serviceData?.value?.data?.[0]?.id;
 
-const mainImg =
-  mainInfo?.photoBanner?.data?.attributes?.url ??
-  placeholdersStore?.imagePlaceholders?.services;
+const mainBigImg = mainInfo?.photoBanner?.data?.attributes?.url
+  ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.url
+  : baseUrl + imagePlaceholders?.services;
 
-const mainImgAlt = mainInfo?.photoBanner?.data?.attributes?.alternativeText;
+const mainAdaptiveImg = mainInfo?.photoBanner?.data?.attributes?.formats?.medium
+  ?.url
+  ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.formats?.medium?.url
+  : baseUrl + imagePlaceholders?.services;
 
 const serviceBlocks = mainInfo?.blocks;
 
@@ -83,8 +81,8 @@ useHead(getMetaObject(metaData, baseUrl));
   <DynamicBlockHero
     :title="mainInfo?.heading"
     :text="mainInfo?.description"
-    :imgBg="mainImg"
-    :imgAlt="mainImgAlt"
+    :imgBg="mainBigImg"
+    :imgAdaptive="mainAdaptiveImg"
     :breadcrumbs="breadcrumbs"
     :link="mainInfo?.link"
     :link_text="mainInfo?.link_text"

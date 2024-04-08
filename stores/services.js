@@ -40,7 +40,7 @@ export const useService = defineStore("useServices", {
       const { data } = await useFetch(`${apiBaseUrl}services`, {
         query: {
           populate: "category.uslugas.*,category.napravleniya_uslug_1_col.*",
-          sort: "order:desc",
+          sort: "order:asc",
           "pagination[pageSize]": 300,
         },
       });

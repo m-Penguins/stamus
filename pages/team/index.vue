@@ -42,7 +42,7 @@ const getSpecialistsData = async () => {
 
   const strapiQuery = {
     populate: "fotoSpecialist.*,direction.*,clinic.*,achievements.icon.*",
-    sort: "order:desc",
+    sort: "order:asc",
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
     "filters[clinics][id]": clinicFilter.value,
@@ -96,12 +96,15 @@ const totalPages = computed(() =>
 
 const handlePageClick = async (page) => {
   currentPage.value = page;
-  const searchQuery = {
-    page,
-    dir: clinicFilter.value,
-    clinic: clinicFilter.value,
-    search: searchFilter.value,
-  };
+  let searchQuery = "";
+  if (page != 1) {
+    searchQuery = {
+      page,
+      dir: clinicFilter.value,
+      clinic: clinicFilter.value,
+      search: searchFilter.value,
+    };
+  }
 
   clearObjectFields(searchQuery);
 
