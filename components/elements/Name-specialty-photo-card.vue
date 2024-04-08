@@ -1,5 +1,5 @@
 <template>
-  <div class="card-photo-name">
+  <NuxtLink :to="`/team/${specialists.id}`" class="card-photo-name">
     <div class="card-photo-name-img">
       <NuxtImg
         :src="specialists?.img"
@@ -45,13 +45,15 @@
         </span>
       </div>
     </div>
-    <elements-link-with-arrow
-      v-if="isLink"
-      type
-      title="Подробнее о враче"
-      :link="`/team/${specialists.id}`"
-      :clickHandler="handleLinkClick"
-    />
+    <object>
+      <elements-link-with-arrow
+        v-if="isLink"
+        type
+        title="Подробнее о враче"
+        :link="`/team/${specialists.id}`"
+        :clickHandler="handleLinkClick"
+      />
+    </object>
 
     <div v-if="specialists?.address" class="card-photo-name-box-discount">
       <p class="card-photo-name-box-discount__addres">
@@ -86,7 +88,7 @@
       class="button-base card-photo-name-box-discount__btn my-button"
       >Записаться</NuxtLink
     >
-  </div>
+  </NuxtLink>
 </template>
 
 <script setup>
