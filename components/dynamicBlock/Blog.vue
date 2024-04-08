@@ -4,13 +4,13 @@ import { Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
+import imagePlaceholders from "~/utils/imagePlaceholders";
 
 defineProps(["block"]);
 
 const prev = ref(null);
 const next = ref(null);
 
-const assetsStore = useAssets();
 const baseUrl = useRuntimeConfig().public?.baseUrl;
 </script>
 
@@ -28,7 +28,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
           <elements-link-with-arrow
             type="type"
             title="Все статьи"
-            href="/articles"
+            link="/articles"
           />
         </div>
       </div>
@@ -51,10 +51,14 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
             <div class="article-card">
               <div class="article-card__box">
                 <img
-                  v-if="
-                    article?.attributes?.fotoArticles?.data?.attributes?.url
+                  :src="
+                    article?.attributes?.fotoArticles?.data?.attributes?.formats
+                      ?.small?.url
+                      ? baseUrl +
+                        article?.attributes?.fotoArticles?.data?.attributes
+                          ?.formats?.small?.url
+                      : baseUrl + imagePlaceholders?.articles
                   "
-                  :src="`${baseUrl}${article?.attributes?.fotoArticles?.data?.attributes?.url}`"
                   alt="Article"
                   class="article-card__box-img"
                 />
@@ -75,7 +79,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
               <elements-link-with-arrow
                 type="type"
                 title="Читать"
-                @click="$router.push(`/articles/` + article?.id)"
+                :link="`/articles/${article?.id}`"
               />
             </div>
           </swiper-slide>

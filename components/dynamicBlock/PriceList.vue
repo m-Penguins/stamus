@@ -10,11 +10,7 @@ const mappedPriceList = mapPriceList(props?.block?.price_lists?.data);
   <div v-if="mappedPriceList?.length > 0">
     <div class="service-title">
       <h2 class="popular-service__title">Услуги</h2>
-      <elements-link-with-arrow
-        type="true"
-        link="/prices"
-        title="Посмотреть все"
-      />
+      <elements-link-with-arrow type link="/prices" title="Посмотреть все" />
     </div>
     <div v-for="service in mappedPriceList" class="popular-service__list">
       <h2 class="popular-service__title">{{ service.title }}</h2>

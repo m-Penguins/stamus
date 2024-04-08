@@ -68,14 +68,15 @@ export default {
 }
 .container {
   img {
-    height: 380px;
+    height: 100%;
     width: 100%;
     object-fit: cover;
+    object-position: center;
     border-radius: 15px;
   }
   img:nth-child(3),
   img:nth-child(4) {
-    height: 190px;
+    height: 100%;
   }
 }
 

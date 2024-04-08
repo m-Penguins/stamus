@@ -10,17 +10,15 @@
 </template>
 
 <script setup>
-const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+const baseDataStore = useBaseDataStore();
 
-const { data, error } = await useFetch(
-  `${apiBaseUrl}popular-service?populate=deep`,
+const popularServicesData = ref(
+  baseDataStore?.popularServices?.data?.attributes?.popularService,
 );
-
-const popularServicesData = ref(data?.value?.data?.attributes?.popularService);
 </script>
 
 <style lang="scss" scoped>
-@import "/assets/styles/style.scss";
+@import "@/assets/styles/style.scss";
 
 .popular-service {
   padding: 40px 0;

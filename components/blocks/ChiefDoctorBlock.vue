@@ -3,17 +3,20 @@
     <div class="chief-doctor-block-wrap">
       <div class="chief-doctor-block-container">
         <img
-          :src="specialists.img"
+          :src="specialists?.img || fallBackImg"
           alt="main doctor"
           class="chief-doctor-block-img"
         />
       </div>
       <div class="chief-doctor-block-box">
-        <h2 class="chief-doctor-block-box__title">{{ specialists.name }}</h2>
+        <h2 class="chief-doctor-block-box__title">{{ specialists?.name }}</h2>
         <p class="chief-doctor-block-box__category">
-          {{ specialists.category }}
+          {{ specialists?.category }}
         </p>
-        <p class="chief-doctor-block-box__text">{{ specialists.text }}</p>
+        <div
+          class="chief-doctor-block-box__text"
+          v-html="specialists?.text"
+        ></div>
       </div>
     </div>
   </div>
@@ -29,8 +32,11 @@ export default {
   },
   setup() {
     const assetsStore = useAssets();
+
+    const fallBackImg = assetsStore.useAsset("specialists/main-doctor2.png");
     return {
       assetsStore,
+      fallBackImg,
     };
   },
 };
@@ -77,6 +83,14 @@ export default {
   }
 }
 
+.chief-doctor-block-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+
+  object-fit: contain;
+}
+
 .chief-doctor-block-container {
   min-width: 268px;
   width: 268px;
@@ -97,10 +111,10 @@ export default {
     height: 303px;
   }
 
-  .chief-doctor-block-img {
+  /* .chief-doctor-block-img {
     width: 303px;
     height: 303px;
-  }
+  } */
 
   .chief-doctor-block-box {
     width: 100%;

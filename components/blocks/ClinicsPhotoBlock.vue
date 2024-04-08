@@ -1,14 +1,13 @@
 <script setup>
-const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+import imagePlaceholders from "~/utils/imagePlaceholders";
+
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const { data: clinicsData, error } = await useFetch(
-  `${apiBaseUrl}clinics?populate=deep`,
-);
+const props = defineProps(["clinicsData"]);
 </script>
 
 <template>
-  <div v-if="clinicsData.data && !error" class="container-size areas-wrapper">
+  <div v-if="clinicsData?.data" class="container-size areas-wrapper">
     <h2 class="clinics-block-title">Наши клиники</h2>
 
     <div class="areas-box">
@@ -18,8 +17,18 @@ const { data: clinicsData, error } = await useFetch(
           v-for="clinic in clinicsData?.data"
           :style="{
             backgroundImage: `url(${
-              baseUrl + clinic?.attributes?.photoBanner?.data?.attributes?.url
+              clinic?.attributes?.photoBanner?.data?.attributes?.formats?.medium
+                ?.url
+                ? baseUrl +
+                  clinic?.attributes?.photoBanner?.data?.attributes?.formats
+                    ?.medium?.url
+                : baseUrl + imagePlaceholders?.services
             })`,
+          }"
+          :class="{
+            'no-photo':
+              !clinic?.attributes?.photoBanner?.data?.attributes?.formats
+                ?.medium?.url,
           }"
         >
           <h3>{{ clinic?.attributes?.heading }}</h3>
@@ -29,7 +38,7 @@ const { data: clinicsData, error } = await useFetch(
           <elements-link-with-arrow
             :type="false"
             title="Перейти"
-            :href="'/clinics/' + clinic?.id"
+            :link="'/clinics/' + clinic?.id"
           />
         </div>
       </div>
@@ -38,7 +47,18 @@ const { data: clinicsData, error } = await useFetch(
 </template>
 
 <style lang="scss" scoped>
-@import "/assets/styles/style.scss";
+@import "@/assets/styles/style.scss";
+
+.areas-box__img {
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  background-color: #cccccc;
+
+  &.no-photo {
+    background-size: contain;
+  }
+}
 
 .clinics-block-title {
   padding-top: 40px;
@@ -93,7 +113,11 @@ const { data: clinicsData, error } = await useFetch(
     display: flex;
     width: 49%;
   }
-  &__img:nth-child(n + 3) {
+  &__img:nth-child(n + 6) {
+    display: flex;
+    width: 49%;
+  }
+  &__img:nth-child(n + 3):nth-child(-n + 5) {
     display: flex;
     width: 32.2%;
   }

@@ -6,13 +6,13 @@
           <div class="grey-point-container">
             <div
               class="service-card-category grey-point-container"
-              v-for="(item, index) in service?.tags"
+              v-for="(item, index) in service?.tags?.split(' | ')"
               :key="item"
             >
               <p class="grey-point-text">{{ item }}</p>
               <div
                 class="grey-point"
-                v-if="index < service?.tags.length - 1"
+                v-if="index < service?.tags?.split(' | ')?.length - 1"
               ></div>
             </div>
           </div>
@@ -86,6 +86,8 @@ const store = useModalStore();
     &__price {
       @include body-18-regular;
       color: $hover;
+
+      text-align-last: left;
     }
 
     &__type {

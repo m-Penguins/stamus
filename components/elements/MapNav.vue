@@ -2,55 +2,57 @@
   <div class="map-nav">
     <ul>
       <li class="map-nav-item">
-        <img src="../../assets/images/icons/clock.svg" alt="icon"/>
+        <img src="../../assets/images/icons/clock.svg" alt="icon" />
         <div>
           <div class="map-nav-title">Режим работы</div>
-          <div class="map-nav-info">{{ info.hours }}</div>
+          <div class="map-nav-info">{{ tab?.hours }}</div>
         </div>
       </li>
       <!-- <img class="map-nav-line" src="../../assets/images/icons/line.svg" alt="icon"/> -->
-      <hr/>
+      <hr />
       <li class="map-nav-item">
-        <img src="../../assets/images/icons/phone.svg" alt="icon"/>
+        <img src="../../assets/images/icons/phone.svg" alt="icon" />
         <div>
           <div class="map-nav-title">Номер телефона</div>
-          <a class="map-nav-info header-nav-item" href="tel:+79998887766">{{ info.tel }}</a>
+          <a
+            class="map-nav-info header-nav-item"
+            :href="`tel:+${tab?.phone?.replace(/\D/g, '')}`"
+            >{{ tab?.phone }}</a
+          >
         </div>
       </li>
-      <hr/>
+      <hr />
       <!-- <img class="map-nav-line" src="../../assets/images/icons/line.svg" alt="icon"/> -->
       <li class="map-nav-item">
         <img src="../../assets/images/icons/email.svg" alt="icon" />
         <div>
           <div class="map-nav-title">E-mail</div>
-          <a class="map-nav-info header-nav-item" href="mailto:hakurate@stamus-info.ru">{{ info.email }}</a>
+          <a
+            class="map-nav-info header-nav-item"
+            :href="`mailto:${tab?.email}`"
+            >{{ tab?.email }}</a
+          >
         </div>
       </li>
-      <hr/>
+      <hr />
       <!-- <img class="map-nav-line" src="../../assets/images/icons/line.svg" alt="icon"/> -->
       <li class="map-nav-item">
         <img src="../../assets/images/icons/addres.svg" alt="icon" />
         <div>
           <div class="map-nav-title">Адрес</div>
-          <div class="map-nav-info">{{ info.address }}</div>
+          <div class="map-nav-info">{{ tab?.address }}</div>
         </div>
       </li>
     </ul>
   </div>
 </template>
 
-<script>
-  export default {
-    props: {
-      info: {
-        type: Object
-      },
-    },
-  }
+<script setup>
+defineProps(["tab"]);
 </script>
 
 <style scoped lang="scss">
-@import '/assets/styles/style.scss';
+@import "/assets/styles/style.scss";
 .map-nav {
   position: absolute;
   top: calc(50% - 34%);
@@ -62,7 +64,7 @@
   align-items: flex-start;
   gap: 10px;
   border-radius: 10px;
-  background: #FFF;
+  background: #fff;
 }
 
 .map-nav-item {
@@ -75,7 +77,7 @@
 }
 
 .map-nav-item:hover {
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -106,12 +108,11 @@ hr {
 
 @media (max-width: 1000px) {
   .map-nav {
-    position: initial; 
+    position: initial;
     border-radius: 10px;
-    border: 1px solid var(--stroke, #E9E9E9);
+    border: 1px solid var(--stroke, #e9e9e9);
     width: 100%;
     height: 100%;
   }
 }
-
 </style>

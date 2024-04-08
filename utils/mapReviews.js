@@ -5,6 +5,7 @@ export default function (reviews) {
       grade: el?.attributes?.review,
       date: el?.attributes?.date,
       text: el?.attributes?.text,
+      publishedAt: el?.attributes?.publishedAt,
     })) ?? []
   );
 }

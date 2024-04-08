@@ -11,14 +11,16 @@
       "
     >
       <div>
-        <div class="card-photo-name-title">{{ specialists?.name }}</div>
-        <div class="card-photo-name-text">{{ specialists?.position }}</div>
+        <div class="card-photo-name-title">{{ specialists?.name ?? "" }}</div>
+        <div class="card-photo-name-text">
+          {{ specialists?.position ?? "" }}
+        </div>
       </div>
       <div
         v-if="isTooltip && specialists?.achievements?.length > 0"
         class="tooltip"
       >
-        <img src="../../assets/images/icons/icons-badge.svg" />
+        <img src="@/assets/images/icons/icons-badge.svg" />
         <span class="info">
           <div
             class="tooltip-box"
@@ -26,6 +28,7 @@
             :key="item"
           >
             <img
+              v-if="item?.icon?.data?.attributes?.url"
               :src="baseUrl + item?.icon?.data?.attributes?.url"
               alt="icon"
             />
@@ -36,16 +39,20 @@
     </div>
     <elements-link-with-arrow
       v-if="isLink"
-      type="true"
+      type
       title="Подробнее о враче"
-      :link="`/specialists/${specialists.id}`"
+      :link="`/team/${specialists.id}`"
       :clickHandler="handleLinkClick"
     />
+
     <div v-if="specialists?.address" class="card-photo-name-box-discount">
       <p class="card-photo-name-box-discount__addres">
         {{ specialists?.address }}
       </p>
-      <p v-if="specialists?.description" class="">
+      <p
+        v-if="specialists?.description"
+        class="card-photo-name-box-discount__addres"
+      >
         {{ specialists?.description }}
       </p>
       <div v-if="specialists?.time" class="time__container">
@@ -57,13 +64,20 @@
           {{ time }}
         </div>
       </div>
-      <elements-button-base
+      <!-- <elements-button-base
         title="Записаться"
         class="card-photo-name-box-discount__btn"
         @click="openStartupModal"
-      />
+      /> -->
       <!-- :link="specialists?.link ?? ''" -->
     </div>
+    <NuxtLink
+      v-if="props.link"
+      :to="link"
+      target="_blank"
+      class="button-base card-photo-name-box-discount__btn my-button"
+      >Записаться</NuxtLink
+    >
   </div>
 </template>
 
@@ -82,6 +96,12 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 <style scoped lang="scss">
 @import "/assets/styles/style.scss";
 
+.my-button {
+  width: 100%;
+  height: max-content;
+  margin-top: 16px;
+}
+
 .time__container {
   display: flex;
   gap: 6px;
@@ -95,6 +115,12 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
   width: 100%;
   object-fit: contain;
 }
+.card-photo-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
 
 .card-photo-name-container-discount {
   display: flex;
@@ -103,6 +129,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 }
 
 .card-photo-name-box-discount {
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   gap: 20px;

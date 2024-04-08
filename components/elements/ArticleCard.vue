@@ -4,12 +4,15 @@
       <img :src="article?.img" alt="Articles" class="article-card__box-img" />
     </div>
     <div class="tags-box">
-      <div
+      <!-- <div
         v-for="(tag, index) in article?.tags"
         :key="index"
         class="article-card__category"
       >
         {{ tag }}
+      </div> -->
+      <div class="article-card__category" v-if="article?.tags">
+        {{ article?.tags }}
       </div>
     </div>
     <h2 class="article-card__name">{{ article?.heading }}</h2>
@@ -17,7 +20,7 @@
     <elements-link-with-arrow
       type="type"
       title="Читать"
-      @click="$router.push(`/articles/` + article.id)"
+      :link="`/articles/${article?.id}`"
     />
   </div>
 </template>

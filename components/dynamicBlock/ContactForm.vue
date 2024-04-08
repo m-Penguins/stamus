@@ -21,7 +21,7 @@ const sendData = () => {
     ></div>
     <div v-else class="form-wrapper__subtitle subtitle-gray">
       <p>Перезвоним в течении 15 минут и уточним</p>
-      <p>удобную для вас поликлинику и дату</p>
+      <p>удобную для вас клинику и дату</p>
     </div>
     <div class="form-wrapper__box">
       <elements-input-base
@@ -141,6 +141,7 @@ const sendData = () => {
 
 @media (max-width: 744px) {
   .form-wrapper {
+    border-radius: 25px;
     &__title {
       padding-top: 40px;
       font-size: 22px;

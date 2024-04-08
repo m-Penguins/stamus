@@ -5,7 +5,7 @@
     </h2>
     <p class="form-wrapper__subtitle subtitle-gray">
       Перезвоним в течении 15 минут и уточним <br />
-      удобную для вас поликлинику и дату
+      удобную для вас клинику и дату
     </p>
     <div class="form-wrapper__box">
       <elements-input-base
@@ -32,9 +32,7 @@
     </div>
     <p class="form-wrapper__text text-gray-opacity p-bt-112 p-t-14">
       Нажимая кнопку отправить, вы соглашаетесь с
-      <a
-        href="http://176.99.11.245:1338/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf"
-        target="_blank"
+      <a :href="privacyLink" target="_blank"
         >Политикой обработки персональных данных</a
       >
     </p>
@@ -42,6 +40,15 @@
 </template>
 
 <script setup>
+const baseDataStore = useBaseDataStore();
+const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
+  ?.attributes?.url
+  ? baseUrl +
+    baseDataStore?.footerData?.data?.attributes?.privacy?.data?.attributes?.url
+  : "";
+
 const store = useModalStore();
 const sendData = () => {
   store.submitModal();

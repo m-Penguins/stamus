@@ -25,18 +25,18 @@ const handlePageClick = async (page) => {
 
   clearObjectFields(searchQuery);
 
+  await navigateTo({
+    path: `${route.fullPath}`,
+    query: searchQuery,
+    replace: true,
+  });
+
   if (window) {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   }
-
-  await navigateTo({
-    path: `${route.fullPath}`,
-    query: searchQuery,
-    replace: true,
-  });
 };
 
 const handleSpecChange = async (spec) => {
@@ -96,23 +96,29 @@ const getReviewsData = async () => {
   return reviewsData;
 };
 
-const reviewsData = await getReviewsData();
-
-const filteredReviews = computed(() => reviewsData?.value?.data);
-
-const [{ data: specialistsData }, { data: servicesData }] = await Promise.all([
-  useFetch(`${apiBaseUrl}specialists`),
-  useFetch(`${apiBaseUrl}services`),
+const [{ data: specialistsData }, reviewsData] = await Promise.all([
+  useFetch(`${apiBaseUrl}specialists`, {
+    query: {
+      "pagination[pageSize]": 300,
+    },
+  }),
+  getReviewsData(),
 ]);
+
+const baseDataStore = useBaseDataStore();
+
+const servicesData = baseDataStore.allServices;
+
+const filteredReviews = computed(() => mapReviews(reviewsData?.value?.data));
 
 const allSpecialists = specialistsData.value?.data
   ?.map((spec) => ({
     id: spec?.id,
-    name: spec?.attributes?.firstName + spec?.attributes?.lastName,
+    name: spec?.attributes?.firstName + " " + spec?.attributes?.lastName,
   }))
   .filter((el) => el.name);
 
-const allServices = servicesData.value?.data
+const allServices = servicesData?.data
   ?.map((serv) => ({
     id: serv?.id,
     name: serv?.attributes?.heading,
@@ -137,6 +143,40 @@ const breadcrumbs = [
     url: "/",
   },
 ];
+
+useHead({
+  title: "Более 2 000 отзывов о стоматологии Стамус в Краснодаре",
+  meta: [
+    {
+      name: "twitter:title",
+      content: "Более 2 000 отзывов о стоматологии Стамус в Краснодаре",
+    },
+    {
+      property: "og:title",
+      content: "Более 2 000 отзывов о стоматологии Стамус в Краснодаре",
+    },
+    {
+      name: "description",
+      content:
+        "Стоматология Стамус – Победитель в номинации “Лучшая частная стоматология Южного Федерального округа 2023 по мнению пациентов независимого портала ПроДокторов",
+    },
+    {
+      name: "twitter:description",
+      content:
+        "Стоматология Стамус – Победитель в номинации “Лучшая частная стоматология Южного Федерального округа 2023 по мнению пациентов независимого портала ПроДокторов",
+    },
+    {
+      property: "og:description",
+      content:
+        "Стоматология Стамус – Победитель в номинации “Лучшая частная стоматология Южного Федерального округа 2023 по мнению пациентов независимого портала ПроДокторов",
+    },
+    {
+      name: "keywords",
+      content:
+        "Стамус отзывы, стоматология отзывы, стоматология краснодар отзывы, детская стоматология отзывы, отзывы о врачах стоматология",
+    },
+  ],
+});
 </script>
 
 <template>
@@ -144,12 +184,18 @@ const breadcrumbs = [
     <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
     <div class="reviews-header">
       <h1 class="prices-title">Отзывы</h1>
-      <p class="prices-text">Небольшое описание в несколько строчек</p>
+      <p v-if="totalItems" class="prices-text">
+        {{ pluralize(totalItems, ["история", "истории", "историй"]) }} наших
+        пациентов
+      </p>
+      <NuxtLink to="/leave-review" class="button-base review-btn"
+        >Оставить отзыв</NuxtLink
+      >
     </div>
     <div class="filters-box">
       <elements-custom-select
         :options="allSpecialists"
-        label="Выберите специалиста"
+        label="Выберите врача"
         class="select"
         @select="handleSpecChange"
         :selectedId="specFilter"
@@ -167,32 +213,82 @@ const breadcrumbs = [
         <ElementsReviewCard
           v-for="review in filteredReviews"
           :key="review?.id"
-          :review="review?.attributes"
+          :review="review"
         />
       </div>
     </template>
     <div v-else :style="{ textAlign: 'center' }">Ничего не найдено</div>
-    <elements-pagination
-      :current-page="currentPage"
-      :total-pages="totalPages"
-      @update:current-page="handlePageClick"
+
+    <vue-awesome-paginate
+      v-model="currentPage"
+      :total-items="totalItems"
+      :items-per-page="pageSize"
+      :max-pages-shown="3"
+      :on-click="handlePageClick"
+      paginate-buttons-class="btn"
+      active-page-class="btn-active"
+      back-button-class="back-btn"
+      next-button-class="next-btn"
+      :show-breakpoint-buttons="true"
+      :hide-prev-next="true"
+      type="link"
+      link-url="/reviews?page=[page]"
+      class="pagination"
     />
-    <BlocksMainBanner
-      :title="'Уже были у нас?'"
-      :text="'Оставьте отзыв, будем очень вам благодарны'"
-      :titleLink="'Оставить отзыв'"
-      link="https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/"
-      bgColor="grey"
-      type="true"
-      img="mobile.svg"
-      bigImg="true"
-    />
+
     <blocks-main-form />
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
+
+/* Pagination */
+
+.pagination-container {
+  width: 100%;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 40px 0 90px;
+}
+
+.pagination:deep(.btn) {
+  @include body-14-regular;
+  height: 30px;
+  width: 38px;
+  cursor: pointer;
+  color: $gray-text;
+
+  display: flex;
+  justify-content: center;
+  align-items: center !important;
+
+  transition: all 0.2s ease-in-out;
+
+  &:not(.active):hover {
+    border-radius: 5px;
+    background: #f0f0f0;
+    color: #232d5b;
+  }
+}
+
+.pagination:deep(.btn-active) {
+  border-radius: 5px;
+  border: 1px solid var(--dissabled, #cfd5e1);
+  padding: 4px 10px;
+
+  cursor: default;
+}
+
+/* End of Pagination */
+
+.review-btn {
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+}
 
 .reviews {
   display: flex;

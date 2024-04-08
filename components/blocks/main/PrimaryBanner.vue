@@ -1,3 +1,9 @@
+<script setup>
+const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const props = defineProps(["title", "description", "twoDirections"]);
+</script>
+
 <template>
   <div class="primary-banner">
     <div class="primary-banner-container">
@@ -5,63 +11,38 @@
         :fontSize="false"
         textButtonBase="Записаться онлайн"
         :customClick="redirectToExternalApp"
-        title="5 клиник СТАМУС в Краснодаре"
-        text="Результат с гарантией. Цены «под ключ»"
+        :title="title"
+        :text="description"
       />
       <div class="primary-banner-box">
         <div class="primary-banner-wrap">
-          <router-link
-            :to="linkTransform('Детская стоматология')"
-            class="desktop-link"
-          >
-            <div class="primary-banner-img desktop card_main_kids">
-              <div class="primary-banner-btn">Детская стоматология</div>
-            </div>
-          </router-link>
-          <router-link
-            :to="linkTransform('Детская стоматология')"
-            class="tablet-link m-r-14 m-r-14-mob"
-          >
-            <div class="primary-banner-img tablet card_main_kids-tab">
-              <div class="primary-banner-btn">Детская стоматология</div>
-            </div>
-          </router-link>
-          <router-link
-            :to="linkTransform('Детская стоматология')"
-            class="mob-link m-r-14-mob"
-          >
-            <img
-              class="primary-banner-img mob"
-              src="@/assets/images/img-banner/card_main_kids-2.png"
-              alt="Фотография матери и ребёнка"
-            />
-          </router-link>
-          <router-link
-            :to="linkTransform('Стоматологические услуги')"
-            class="desktop-link"
-          >
-            <div class="primary-banner-img desktop card_main">
-              <div class="primary-banner-btn">Взрослая стоматология</div>
-            </div>
-          </router-link>
-          <router-link
-            :to="linkTransform('Стоматологические услуги')"
-            class="tablet-link"
-          >
-            <div class="primary-banner-img tablet card_main-tab">
-              <div class="primary-banner-btn">Взрослая стоматология</div>
-            </div>
-          </router-link>
-          <router-link
-            :to="linkTransform('Стоматологические услуги')"
-            class="mob-link"
-          >
-            <img
-              class="primary-banner-img mob"
-              src="@/assets/images/img-banner/card_main-2.png"
-              alt="Фотография зубного врача"
-            />
-          </router-link>
+          <template v-for="item in twoDirections">
+            <NuxtLink :to="item?.attributes?.slug" class="desktop-link">
+              <div class="primary-banner-img">
+                <img
+                  :src="
+                    item?.attributes?.photoBanner?.data?.attributes?.formats
+                      ?.large?.url
+                      ? `${baseUrl}${item?.attributes?.photoBanner?.data?.attributes?.formats?.large?.url}`
+                      : baseUrl + imagePlaceholders?.services
+                  "
+                  :alt="
+                    item?.attributes?.photoBanner?.data?.attributes
+                      ?.alternativeText
+                  "
+                  class="banner-image"
+                  :class="{
+                    'no-photo':
+                      !item?.attributes?.photoBanner?.data?.attributes?.formats
+                        ?.large?.url,
+                  }"
+                />
+                <div class="primary-banner-btn">
+                  {{ item?.attributes?.heading }}
+                </div>
+              </div>
+            </NuxtLink>
+          </template>
         </div>
       </div>
     </div>
@@ -71,210 +52,121 @@
 <style scoped lang="scss">
 @import "/assets/styles/style.scss";
 
-.card_main_kids {
-  margin-right: 14px;
-  background-image: url("../../../assets/images/img-banner/card_main_kids3.png");
+$tablet: 1358px;
+$mobile: 680px;
+
+.primary-banner {
+  padding: 195px 0;
+
+  background-color: #f9f9fa;
+
+  border-radius: 45px;
+
+  margin-top: 20px;
+  margin-bottom: 100px;
+
+  @include media($tablet) {
+    background-color: transparent;
+    margin-top: 0;
+    padding: 118px 0 0;
+  }
 }
 
-.card_main {
-  background-image: url("../../../assets/images/img-banner/card_main3.png");
+.primary-banner-container {
+  width: 100%;
+  max-width: 1290px;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include media($tablet) {
+    flex-direction: column;
+    gap: 60px;
+    align-items: flex-start;
+  }
 }
 
-.card_main_kids-tab {
-  margin-right: 14px;
-  background-image: url("../../../assets/images/img-banner/card_main_kids4.png");
+.primary-banner-img {
+  position: relative;
+
+  background-color: #cccccc;
+  height: 100%;
+
+  border-radius: 45px;
+  overflow: hidden;
+  overflow: clip;
+
+  @include media(900px) {
+    border-radius: 25px;
+  }
 }
 
-.card_main-tab {
-  background-image: url("../../../assets/images/img-banner/card_main4.png");
+.primary-banner-img:hover .banner-image {
+  transform: scale(1.05);
+}
+
+.banner-image {
+  object-fit: cover;
+  object-position: center;
+  height: 100%;
+  width: 100%;
+
+  transition: all 0.3s ease-in-out;
+
+  &.no-photo {
+    object-fit: contain;
+  }
 }
 
 .primary-banner-btn {
-  width: 284px;
-  height: 49px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 100%;
+  max-width: max-content;
+  padding: 14px 20px;
   border-radius: 45px;
   background: $white;
   color: $dark-blue-subtitle;
   @include flex-center-center;
   @include body-22-medium-Neue;
+
+  @include media(900px) {
+    @include body-16-regular;
+    font-weight: 500;
+  }
 }
 
-.desktop {
-  @include flex-column-end;
-  align-items: center;
-  width: 390px;
-  height: 650px;
-  padding-bottom: 20px;
-  border-radius: 45px;
-  background-size: cover;
-}
-
-.tablet {
-  display: none;
-}
-
-.mob {
-  display: none;
+.primary-banner-box {
+  width: 100%;
 }
 
 .primary-banner-wrap {
-  display: flex;
-}
-.primary-banner {
-  @include flex-column-center;
   width: 100%;
-  max-width: 100%;
-  margin: 20px auto 100px auto;
-  border-radius: 45px;
-  background-color: $light-gray;
 
-  .primary-banner-container {
-    @include flex-between-center;
-    width: 1280px;
-    max-width: 100%;
+  display: flex;
+  gap: 14px;
 
-    .primary-banner-box {
-      display: flex;
-      gap: 14px;
-      padding: 195px 0;
-    }
-
-    .desktop {
-      width: 390px;
-      height: 650px;
-      transition: width 500ms cubic-bezier(1, 1, 0, 0) 0ms;
-    }
-
-    .desktop:hover {
-      width: 440px;
-    }
+  @include media($mobile) {
+    flex-direction: column;
   }
 }
 
-@media screen and (max-width: 1400px) {
-  .primary-banner {
-    background: none;
-  }
-}
+.desktop-link {
+  width: 390px;
+  height: 650px;
 
-@media screen and (max-width: 1357px) {
-  .primary-banner {
-    margin: 20px auto 0px auto;
-    .primary-banner-container .primary-banner-box {
-      padding: 100px 0;
-    }
+  @include media($tablet) {
+    width: 100%;
   }
-}
 
-@media screen and (max-width: 1290px) {
-  .tablet {
-    @include flex-column-end;
-    align-items: center;
-    width: 343px;
+  @include media(900px) {
     height: 280px;
-    padding-bottom: 20px;
-    border-radius: 20px;
-    background-size: cover;
-
-    .primary-banner-btn {
-      width: 229px;
-      height: 43px;
-      font-size: 16px;
-    }
-  }
-
-  .desktop {
-    display: none;
-  }
-
-  .primary-banner {
-    margin: 118px auto 100px auto;
-
-    .primary-banner-container {
-      .primary-banner-box {
-        padding: 60px 0 0;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 1096px) {
-  .primary-banner-wrap {
-    width: 100%;
-    gap: 0;
-  }
-
-  .primary-banner {
-    .primary-banner-container {
-      flex-wrap: wrap;
-      .primary-banner-box {
-        width: 850px;
-      }
-    }
-  }
-  .m-r-14 {
-    margin-right: 14px;
-  }
-  .tablet-link {
-    width: 50%;
-  }
-  .tablet {
-    width: 100%;
-    background-position: 50%;
-  }
-}
-
-@media screen and (max-width: 735px) {
-  .primary-banner-box {
-    padding: 60px 0 100px;
-  }
-}
-
-@media screen and (max-width: 570px) {
-  .tablet {
-    width: 100%;
-    height: 280px;
-    padding-bottom: 16px;
-
-    .primary-banner-btn {
-      width: 186px;
-      height: 34px;
-      font-size: 14px;
-    }
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .primary-banner .primary-banner-container .primary-banner-box {
-    padding-bottom: 80px;
-  }
-  .primary-banner {
-    margin: 138px auto 0px auto;
-  }
-  .primary-banner-wrap {
-    flex-wrap: wrap;
-  }
-
-  .tablet-link {
-    display: flex;
-    width: 100%;
-  }
-  .mob-link {
-    display: none;
-  }
-  .m-r-14 {
-    margin: 0 0 14px;
-  }
-  .card_main_kids-tab {
-    margin-right: 0;
-  }
-
-  .tablet {
-    .primary-banner-btn {
-      width: 229px;
-      height: 43px;
-      font-size: 16px;
-    }
   }
 }
 </style>

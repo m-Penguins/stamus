@@ -14,15 +14,23 @@ onBeforeUnmount(() => {
   window.removeEventListener("resize", checkScreenSize);
 });
 
-const assetsStore = useAssets();
-
 const route = useRoute();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const { data: clinicsData } = await useFetch(
-  `${apiBaseUrl}clinics?populate=deep`,
-);
+const [{ data: clinicsData }, { data: clinicData }] = await Promise.all([
+  useFetch(`${apiBaseUrl}clinics`, {
+    query: {
+      populate: "photoBanner.*",
+    },
+  }),
+  useFetch(`${apiBaseUrl}clinics/${route.params?.id}`, {
+    query: {
+      populate:
+        "reviews.*,clinics.*,price.services.category.napravleniya_uslug_1_col.*,photoBanner.*,direction.*,specialists.fotoSpecialist.*,specialists.achievements.icon.*,articles.*,infoBlock.image.*,infoBlock.video.*,chiefDoctor.image.*,galery.*,meta.metaImage.*",
+    },
+  }),
+]);
 
 if (!clinicsData.value) {
   throw createError({
@@ -31,17 +39,7 @@ if (!clinicsData.value) {
     fatal: true,
   });
 }
-
-const clinicDataID = clinicsData.value?.data?.find(
-  (cl) => String(cl.id) === String(route.params.id),
-)?.id;
-
-const { data: clinicData } = await useFetch(
-  `${apiBaseUrl}clinics/${clinicDataID}?populate=reviews.*,clinics.*,price_lists.*,photoBanner.*,direction.*,specialists.fotoSpecialist.*,specialists.achievements.icon.*,articles.*,infoBlock.image.*,infoBlock.video.*,chiefDoctor.image.*,galery.*,meta.metaImage.*`,
-);
-
-const metaData = clinicData.value?.data?.attributes?.meta;
-useHead(getMetaObject(metaData, baseUrl));
+const pricesData = clinicData.value?.data?.attributes?.price;
 
 const galleryList = clinicData?.value?.data?.attributes?.galery?.data
   ?.map((img) =>
@@ -51,32 +49,16 @@ const galleryList = clinicData?.value?.data?.attributes?.galery?.data
   )
   ?.filter(Boolean);
 
-const singleServices = ref(
-  clinicsData?.value?.data
-    ?.find((cl) => String(cl.id) === String(route.params.id))
-    ?.attributes?.price_lists?.data?.flatMap((el) => {
-      const item = el?.attributes?.servicePrice?.map((single) => {
-        return {
-          id: single?.id,
-          heading: single?.heading,
-          price: single?.price,
-          Sale_popular: single?.Sale_popular,
-          tags: single?.tags,
-          link: "/prices",
-        };
-      });
-      return item;
-    }),
-);
-
 const chiefDoctor = computed(() => {
   return {
     name: clinicData.value?.data?.attributes?.chiefDoctor?.heading,
     category: clinicData.value?.data?.attributes?.chiefDoctor?.position,
-    img:
-      baseUrl +
-      clinicData.value?.data?.attributes?.chiefDoctor?.image?.data?.attributes
-        ?.url,
+    img: clinicData.value?.data?.attributes?.chiefDoctor?.image?.data
+      ?.attributes?.url
+      ? baseUrl +
+        clinicData.value?.data?.attributes?.chiefDoctor?.image?.data?.attributes
+          ?.url
+      : "",
     text: clinicData.value?.data?.attributes?.chiefDoctor?.text,
   };
 });
@@ -87,13 +69,34 @@ const otherClinics = computed(() =>
     .map((cl) => {
       return {
         name: cl?.attributes?.heading,
-        img: baseUrl + cl?.attributes?.photoBanner?.data?.attributes?.url,
+        img: cl?.attributes?.photoBanner?.data?.attributes?.formats?.small?.url
+          ? baseUrl +
+            cl?.attributes?.photoBanner?.data?.attributes?.formats?.small?.url
+          : baseUrl + imagePlaceholders?.services,
         link: String(cl?.id),
       };
     }),
 );
 
 const reviews = mapReviews(clinicData?.value?.data?.attributes?.reviews?.data);
+
+const infoBlock = clinicData.value?.data?.attributes?.infoBlock;
+
+const title = clinicData?.value?.data?.attributes?.heading;
+const address = clinicData?.value?.data?.attributes?.address;
+
+const bgImg = clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes
+  ?.url
+  ? baseUrl +
+    clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes?.url
+  : baseUrl + imagePlaceholders?.services;
+
+const imgAdaptive = clinicData?.value?.data?.attributes?.photoBanner?.data
+  ?.attributes?.formats?.small?.url
+  ? baseUrl +
+    clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes?.formats
+      ?.small?.url
+  : baseUrl + imagePlaceholders?.services;
 
 const breadcrumbs = [
   {
@@ -109,22 +112,8 @@ const breadcrumbs = [
     url: `/clinics/${route.params.id}`,
   },
 ];
-
-const title = clinicData?.value?.data?.attributes?.heading;
-const address = clinicData?.value?.data?.attributes?.address;
-
-const bgImg = clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes
-  ?.url
-  ? baseUrl +
-    clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes?.url
-  : assetsStore.useAsset("images/big-images/info.png");
-
-const imgAdaptive = clinicData?.value?.data?.attributes?.photoBanner?.data
-  ?.attributes?.formats?.small?.url
-  ? baseUrl +
-    clinicData?.value?.data?.attributes?.photoBanner?.data?.attributes?.formats
-      ?.small?.url
-  : assetsStore.useAsset("images/big-images/info.png");
+const metaData = clinicData.value?.data?.attributes?.meta;
+useHead(getMetaObject(metaData, baseUrl));
 </script>
 
 <template>
@@ -139,47 +128,28 @@ const imgAdaptive = clinicData?.value?.data?.attributes?.photoBanner?.data
     :typeColorWhiteText="item"
     :breadcrumbs="breadcrumbs"
     :isBgDark="true"
+    :style="{ backgroundSize: 'cover' }"
   />
-  <blocks-video-block
-    v-if="clinicData?.data?.attributes?.infoBlock"
-    :title="clinicData?.data?.attributes?.infoBlock?.heading"
-    :text="clinicData?.data?.attributes?.infoBlock?.text"
-    :link="clinicData?.data?.attributes?.infoBlock?.link"
-    :problemImg="
-      clinicData?.data?.attributes?.infoBlock?.image?.data?.attributes?.url
-        ? baseUrl +
-          clinicData?.data?.attributes?.infoBlock?.image?.data?.attributes?.url
-        : ''
-    "
-    :video="
-      clinicData?.data?.attributes?.infoBlock?.video?.data?.attributes?.url
-        ? baseUrl +
-          clinicData?.data?.attributes?.infoBlock?.video?.data?.attributes?.url
-        : ''
-    "
-    :videoThumbnail="
-      clinicData?.data?.attributes?.infoBlock?.image?.data?.attributes?.url
-        ? baseUrl +
-          clinicData?.data?.attributes?.infoBlock?.image?.data?.attributes?.url
-        : ''
-    "
+  <dynamic-block-opisanie
+    v-if="infoBlock"
+    :block="infoBlock"
+    class="infoBlock"
   />
+
   <blocks-chief-doctor-block
     v-if="chiefDoctor.name"
     :specialists="chiefDoctor"
   />
 
-  <blocks-services-block
-    v-if="singleServices?.length > 0"
-    :singleServices="singleServices"
-    title="Оказываемые услуги"
-    :isLink="false"
-  />
+  <div class="osnovnie-block" v-if="pricesData">
+    <DynamicBlockOsnovnie :block="pricesData" />
+  </div>
+
   <blocks-gallery v-if="galleryList?.length > 0" :arrayImg="galleryList" />
 
   <blocks-our-specialists
     v-if="clinicData?.data?.attributes?.specialists?.data"
-    title="Наши специалисты"
+    title="Наши врачи"
     :data="clinicData?.data?.attributes?.specialists?.data"
   />
   <BlocksMainBanner
@@ -188,7 +158,7 @@ const imgAdaptive = clinicData?.value?.data?.attributes?.photoBanner?.data
     :titleLink="'Узнать подробнее'"
     link="#"
     bgColor="light-blue"
-    type="true"
+    type
     img="cards2.png"
     bigImg="true"
     :handleLinkClick="openBidModal"
@@ -207,3 +177,15 @@ const imgAdaptive = clinicData?.value?.data?.attributes?.photoBanner?.data
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
 }
 </style> -->
+
+<style scoped lang="scss">
+@import "@/assets/styles/style.scss";
+
+.infoBlock {
+  margin-bottom: 100px;
+}
+
+.osnovnie-block {
+  margin-bottom: 100px;
+}
+</style>

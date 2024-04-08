@@ -11,6 +11,9 @@ export default {
       type: Boolean,
       default: false,
     },
+    phone: {
+      type: String,
+    },
   },
   data() {
     return {
@@ -23,7 +26,7 @@ export default {
       thirdBlockMobMenu: false,
       // showMenuPatients: false,
       // directionTitle: '',
-      clinic: "",
+      activeDirection: "",
       activeClass: "",
       showServicesAll: false,
       storeS: useService(),
@@ -32,8 +35,7 @@ export default {
         { id: 2, title: "Наше приложение", path: "/stamusapp" },
         { id: 3, title: "Информация для пациентов", path: "/info" },
         { id: 4, title: "Налоговый вычет", path: "/info" },
-        { id: 5, title: "Отзывы", path: "/reviews" },
-        { id: 6, title: "Статьи", path: "/articles" },
+        { id: 5, title: "Статьи", path: "/articles" },
       ],
     };
   },
@@ -59,7 +61,7 @@ export default {
 
     changeActiveClass(cls, title) {
       this.activeClass = cls;
-      this.clinic = title;
+      this.activeDirection = title;
     },
 
     closeSearch() {
@@ -74,18 +76,10 @@ export default {
     const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
     const directionTitle = ref("");
     let activeClass2 = "";
+    const modalStore = useModalStore();
 
     const togglerPopup = (state) => {
       isOpenPopup.value = state;
-    };
-
-    onMounted(async () => {
-      await storeServices.fetchdataService(apiBaseUrl);
-    });
-
-    const navigateToRoute = (serv, dir) => {
-      const newRoute = `/${serv}/${linkTransform(dir)}`;
-      router.replace(newRoute);
     };
 
     const defaultServices = () => {
@@ -105,8 +99,10 @@ export default {
     const store = useActuveLink();
     const isOpenPopup = ref(false);
     const navigation = [
-      { title: "Специалисты", path: "/specialists" },
+      { title: "Врачи", path: "/team" },
       { title: "Пациентам", path: "" },
+      { title: "Отзывы", path: "/reviews" },
+
       { title: "Акции и скидки", path: "/discounts" },
       { title: "Портфолио", path: "/portfolio" },
       { title: "Цены", path: "/prices" },
@@ -125,8 +121,8 @@ export default {
       directionTitle,
       activeClass2,
       defaultServices,
-      navigateToRoute,
       router,
+      modalStore,
     };
   },
 };
@@ -160,7 +156,7 @@ export default {
           >
             <img
               style="width: 59px; height: 34px"
-              :src="assetsStore.useAsset('images/icons/logo.svg')"
+              src="@/assets/images/icons/logo.svg"
               alt="Logo"
             />
           </NuxtLink>
@@ -257,7 +253,7 @@ export default {
                         <NuxtLink
                           v-for="(elem, index) in navigationPatients"
                           :key="elem"
-                          :to="elem.path + (index === 3 ? '#middle' : '')"
+                          :to="elem.path + (index === 3 ? '#ndfl' : '')"
                           class="menu-patients-items"
                         >
                           <li class="menu-patients-items-link">
@@ -273,6 +269,15 @@ export default {
                       </ul>
                     </div>
                   </div>
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink
+                  target="_blank"
+                  class="footer-text header-nav-item"
+                  :to="`tel:+${phone?.replace(/\D/g, '')}`"
+                >
+                  {{ phone }}
                 </NuxtLink>
               </li>
             </ul>
@@ -318,7 +323,7 @@ export default {
                 showSearch = false;
                 showServices = false;
                 showMenuPatients = false;
-                openStartupModal();
+                modalStore.openModal();
               "
               title="Перезвоните мне"
             />
@@ -397,7 +402,7 @@ export default {
               :key="navigationService.id"
               class="header-services-menu-item"
               @mouseover="
-                changeActiveClass(navigationService.id, navigationService.title)
+                changeActiveClass(navigationService.id, navigationService)
               "
             >
               <div
@@ -501,6 +506,13 @@ export default {
           class="header-nav-list"
           :class="{ 'display-none': !firstBlockMobMenu }"
         >
+          <NuxtLink
+            target="_blank"
+            class="header-nav-item-mob p-t-20"
+            :to="`tel:+${phone?.replace(/\D/g, '')}`"
+          >
+            {{ phone }}
+          </NuxtLink>
           <div
             :class="showMenuPatients ? 'menu-mob-modal-flex' : 'menu-mob-modal'"
           >
@@ -575,7 +587,7 @@ export default {
                         v-for="elem in navigationPatients"
                         @click="showMenuMob = false"
                         :key="elem"
-                        :to="elem.path + (elem.id === 4 ? '#middle' : '')"
+                        :to="elem.path + (elem.id === 4 ? '#ndfl' : '')"
                         class="menu-patients-items-mob"
                       >
                         <li>
@@ -597,7 +609,7 @@ export default {
                 :key="item?.id"
                 class="header-services-menu-item-mob"
                 @click="
-                  changeActiveClass(item?.id, item?.title);
+                  changeActiveClass(item?.id, item);
                   secondBlockMobMenu = true;
                   firstBlockMobMenu = false;
                 "
@@ -630,7 +642,7 @@ export default {
                 showSearch = false;
                 showServices = false;
                 showMenuPatients = false;
-                openStartupModal();
+                modalStore.openModal();
               "
               title="Перезвоните мне"
               class="header-services-menu-mob-button"
@@ -650,9 +662,11 @@ export default {
               Услуги
             </p>
             <p class="breadCrumbs-slash">/</p>
-            <p class="breadCrumbs-second-text">{{ clinic }}</p>
+            <p class="breadCrumbs-second-text">{{ activeDirection?.title }}</p>
           </div>
-          <div class="menu-mob-second-block-title">{{ clinic }}</div>
+          <div class="menu-mob-second-block-title">
+            {{ activeDirection?.title }}
+          </div>
           <div
             v-for="item in storeServices.getStateService"
             :key="item.id"
@@ -697,7 +711,7 @@ export default {
             <elements-link-with-arrow
               type="type"
               title="На страницу раздела"
-              :link="`/${linkTransform(clinic)}`"
+              :link="activeDirection?.path"
             />
           </div>
         </div>
@@ -723,7 +737,7 @@ export default {
                 thirdBlockMobMenu = false;
               "
             >
-              {{ clinic }}
+              {{ activeDirection?.title }}
             </p>
             <p class="breadCrumbs-slash">/</p>
             <p class="breadCrumbs-second-text">{{ directionTitle }}</p>
@@ -773,8 +787,8 @@ export default {
 .menu-mob-modal {
   display: grid;
   grid-gap: 18px;
-  grid-template-columns: repeat(2, 56%);
-  grid-template-rows: 15px 15px 15px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 15px 15px 15px 15px;
   grid-auto-flow: column;
   padding: 20px 0 60px;
 }
@@ -863,6 +877,8 @@ export default {
   align-items: center;
   gap: 6px;
   padding: 20px 0 40px;
+
+  overflow-x: clip;
 }
 
 .breadCrumbs-first-text {

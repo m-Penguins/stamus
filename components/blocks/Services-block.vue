@@ -5,7 +5,7 @@
       <elements-link-with-arrow
         v-if="isLink"
         link="/prices"
-        type="true"
+        type
         title="Посмотреть все"
         :isLink="isLink"
       />

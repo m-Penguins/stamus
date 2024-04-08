@@ -4,20 +4,31 @@ import { Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
+import imagePlaceholders from "~/utils/imagePlaceholders";
 
-defineProps(["block"]);
+const props = defineProps(["block", "serviceId"]);
 
 const prev = ref(null);
 const next = ref(null);
 
 const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const allCasesLink = props?.serviceId
+  ? `/portfolio?dir=${props?.serviceId}`
+  : "/portfolio";
 </script>
 
 <template>
-  <div class="main-events-block">
+  <div
+    class="main-events-block"
+    id="portfolio"
+    v-if="block?.portofolios?.data?.length"
+  >
     <div class="slider-title">
       <div class="slider-title__box">
-        <h2 class="slider-title__box-title">Похожие работы</h2>
+        <h2 class="slider-title__box-title">
+          {{ block?.title ?? "Портфолио" }}
+        </h2>
       </div>
     </div>
     <div class="wrapper-swiper">
@@ -39,13 +50,16 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
           <div class="card-photo-name">
             <div class="card-photo-name-img">
               <img
-                v-if="portfolio?.attributes?.photoBanner?.data?.attributes?.url"
-                :src="`${baseUrl}${portfolio?.attributes?.photoBanner?.data?.attributes?.url}`"
+                :src="
+                  portfolio?.attributes?.photoBanner?.data?.attributes?.formats
+                    ?.small?.url
+                    ? `${baseUrl}${portfolio?.attributes?.photoBanner?.data?.attributes?.formats?.small?.url}`
+                    : baseUrl + imagePlaceholders?.portfoliosSmall
+                "
                 :alt="
                   portfolio?.attributes?.photoBanner?.data?.attributes
                     ?.alternativeText ?? 'photo-name'
                 "
-                class="card-photo-name-img"
               />
             </div>
             <div class="card-photo-name-container">
@@ -63,9 +77,9 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
             </div>
 
             <elements-link-with-arrow
-              type="true"
+              type
               title="Смотреть кейс"
-              :href="`/portfolio/${portfolio?.id}`"
+              :link="`/portfolio/${portfolio?.id}`"
             />
           </div>
         </swiper-slide>
@@ -118,7 +132,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
       </div>
     </div>
     <div class="slider-base-btn">
-      <NuxtLink to="/portfolio" class="button-base"
+      <NuxtLink :to="allCasesLink" class="button-base"
         >Смотреть все работы</NuxtLink
       >
     </div>
@@ -248,7 +262,24 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
   width: 100%;
   object-fit: cover;
   border-radius: 20px;
-  height: 346px;
+  /* height: 308px; */
+
+  aspect-ratio: 1;
+
+  @supports not (aspect-ratio: 1/1) {
+    padding-top: 100%;
+    height: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  & img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    border-radius: 20px;
+  }
 }
 
 .card-photo-name-container {

@@ -1,74 +1,132 @@
 <script setup>
-  const cardMobAppMock = [
-    {title: 'Скачать в App Store', link: 'https://apps.apple.com/ru/app/stamus/id1472150990?roistat_visit=295807'},
-    {title: 'Скачать в Google Play', link: 'https://play.google.com/store/apps/details?id=com.denta.network27'},
-    ];
-  const breadcrumbs = [{
-          title: 'Главная',
-          url: '/'
-        },
-        {
-          title: 'Мобильное приложение',
-          url: '/stamusapp'
-        }] 
-        
-  const redirectToAppStore = () => {
-    const externalAppLink = 'https://apps.apple.com/ru/app/stamus/id1472150990?roistat_visit=295807';
-    window.open(externalAppLink, '_blank');
-  }
+const cardMobAppMock = [
+  {
+    title: "Скачать в App Store",
+    link: "https://apps.apple.com/ru/app/stamus/id1472150990?roistat_visit=295807",
+  },
+  {
+    title: "Скачать в Google Play",
+    link: "https://play.google.com/store/apps/details?id=com.denta.network27",
+  },
+];
+const breadcrumbs = [
+  {
+    title: "Главная",
+    url: "/",
+  },
+  {
+    title: "Мобильное приложение",
+    url: "/stamusapp",
+  },
+];
+
+const redirectToAppStore = () => {
+  const externalAppLink =
+    "https://apps.apple.com/ru/app/stamus/id1472150990?roistat_visit=295807";
+  window.open(externalAppLink, "_blank");
+};
+
+useHead({
+  title: "Приложение Stamus: Выбрать врача и записаться онлайн",
+  meta: [
+    {
+      name: "twitter:title",
+      content: "Приложение Stamus: Выбрать врача и записаться онлайн",
+    },
+    {
+      property: "og:title",
+      content: "Приложение Stamus: Выбрать врача и записаться онлайн",
+    },
+    {
+      name: "description",
+      content:
+        "Приложение стоматологии Стамус позволяет выбрать врача и записаться онлайн. Посмотреть историю приемов, узнать о новых акциях и ознакомиться с документами",
+    },
+    {
+      name: "twitter:description",
+      content:
+        "Приложение стоматологии Стамус позволяет выбрать врача и записаться онлайн. Посмотреть историю приемов, узнать о новых акциях и ознакомиться с документами",
+    },
+    {
+      property: "og:description",
+      content:
+        "Приложение стоматологии Стамус позволяет выбрать врача и записаться онлайн. Посмотреть историю приемов, узнать о новых акциях и ознакомиться с документами",
+    },
+    {
+      name: "keywords",
+      content:
+        "приложение стамус, приложение stamus, записаться онлайн стамус, записаться онлайн детский стоматолог",
+    },
+  ],
+});
 </script>
 
 <template>
   <div class="base-wrapper-grey">
     <div class="base-container-grey">
-      <elements-bread-crumbs :breadcrumbs="breadcrumbs"/>
+      <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
       <div class="stamus-app-container">
         <elements-title-text-button
-          font-size="true" 
-          textButtonBase="Скачать в App Store" 
-          title="Мобильное приложение" 
-          text="Сети клиник “Стамус”" 
+          :font-size="true"
+          textButtonBase="Скачать в App Store"
+          title="Мобильное приложение"
+          text="Сети клиник “Стамус”"
           :isLinkWithArrow="true"
           textLinkWithArrow="Скачать в Google Play"
           class="stamus-app-title"
           :customClick="redirectToAppStore"
           link="https://play.google.com/store/apps/details?id=com.denta.network27"
           :isExternal="true"
+        />
+        <div class="stamus-app-img-box">
+          <img
+            src="../../assets/images/big-images/mob-app.png"
+            alt="mob"
+            class="stamus-app-img-box-picture"
           />
-          <div class="stamus-app-img-box">
-            <img src="../../assets/images/big-images/mob-app.png" alt="mob" class="stamus-app-img-box-picture">
-          </div>
+        </div>
       </div>
     </div>
   </div>
   <div class="base-container-grey stamus-app">
     <div class="stamus-app-info">
-      <div class="stamus-app-info-inner">
-        Зачем скачивать приложение?
-      </div>
+      <div class="stamus-app-info-inner">Зачем скачивать приложение?</div>
       <div class="stamus-app-info-box">
         <div class="stamus-app-info-box__item">
-          <span><img src="../../assets/images/icons/frame1.svg" alt="icon"></span>
-          Запись онлайн без звонка в клинику
+          <span
+            ><img src="../../assets/images/icons/frame1.svg" alt="icon"
+          /></span>
+          Онлайн запись без звонка в клинику
         </div>
         <div class="stamus-app-info-box__item">
-          <span><img src="../../assets/images/icons/frame2.svg" alt="icon"></span>
-          Актуальные акции и скидки
-          </div>
+          <span
+            ><img src="../../assets/images/icons/frame2.svg" alt="icon"
+          /></span>
+          Актуальные акции клиник
+        </div>
         <div class="stamus-app-info-box__item">
-          <span><img src="../../assets/images/icons/present.svg" alt="icon"></span>
+          <span
+            ><img src="../../assets/images/icons/present.svg" alt="icon"
+          /></span>
           Программа лояльности и бонусы
-          </div>
+        </div>
         <div class="stamus-app-info-box__item">
-          <span><img src="../../assets/images/icons/clock2.svg" alt="icon"></span>
-          История визитов и оплат</div>
+          <span
+            ><img src="../../assets/images/icons/clock2.svg" alt="icon"
+          /></span>
+          История визитов и оплат
+        </div>
       </div>
     </div>
     <blocks-mobile-app-block />
-    <blocks-mob-app-banner />
+    <!-- <blocks-mob-app-banner /> -->
     <div class="stamus-app-links">
-      <div v-for="item in cardMobAppMock" :key="item.title" class="stamus-app-link">
-        <elements-mob-link-card :mobCardLink="item"/>
+      <div
+        v-for="item in cardMobAppMock"
+        :key="item.title"
+        class="stamus-app-link"
+      >
+        <elements-mob-link-card :mobCardLink="item" />
       </div>
     </div>
     <blocks-main-form />
@@ -76,31 +134,31 @@
 </template>
 
 <script>
-  export default {
-    setup() {
-      const breadcrumbs = [
-        {
-          title: 'Главная',
-          url: '/'
-        },
-        {
-          title: 'Пациентам',
-          url: '#'
-        },
-        {
-          title: 'Мобильное приложение',
-          url: `/stamusapp`
-        }
-      ]
-      return {
-        breadcrumbs,
-      }
-    }
-  }
+export default {
+  setup() {
+    const breadcrumbs = [
+      {
+        title: "Главная",
+        url: "/",
+      },
+      {
+        title: "Пациентам",
+        url: "#",
+      },
+      {
+        title: "Мобильное приложение",
+        url: `/stamusapp`,
+      },
+    ];
+    return {
+      breadcrumbs,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/styles/style.scss';
+@import "../../assets/styles/style.scss";
 .stamus-app {
   margin: 0 auto;
 }
@@ -113,9 +171,9 @@
   display: flex;
   gap: 200px;
 }
-
 .stamus-app-img-box-picture {
-  height: 752px;
+  height: 100%;
+  object-fit: contain;
 }
 
 .stamus-app-info {
@@ -123,7 +181,7 @@
   display: flex;
   gap: 11%;
   width: 100%;
-} 
+}
 
 .stamus-app-info-box {
   display: flex;
@@ -137,15 +195,15 @@
     @include body-16-regular;
     color: $gray-text;
     border-radius: 10px;
-    border: 1px solid var(--stroke, #E9E9E9);
+    border: 1px solid var(--stroke, #e9e9e9);
     padding: 14px 20px;
     width: fit-content;
 
-      span {
-        display: flex;
-      }
+    span {
+      display: flex;
+    }
   }
-}  
+}
 
 .stamus-app-info-inner {
   width: 50%;
@@ -172,7 +230,6 @@
   .stamus-app-title {
     padding-top: 80px;
   }
-  
 }
 
 @media screen and (max-width: 1110px) {
@@ -216,14 +273,13 @@
     width: 334px;
     height: 334px;
     border-radius: 25px;
-    background: #F9F9FA;
+    background: #f9f9fa;
     display: flex;
     align-items: flex-end;
   }
 
   .stamus-app-img-box-picture {
     height: 300px;
-    width: 200px;
     margin: 0 auto;
   }
 }
@@ -270,6 +326,5 @@
   .stamus-app-link {
     width: 100%;
   }
-
 }
 </style>

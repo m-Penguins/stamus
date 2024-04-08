@@ -1,11 +1,11 @@
 <template>
   <div class="partners-card">
-    <img :src="assetsStore.useAsset(`images/partners/${images.img}`)" alt="icons">
+    <img :src="assetsStore.useAsset(`partners/${images.img}`)" alt="partner" />
   </div>
 </template>
 
 <script>
-import { useAssets } from '../../stores/useAsset'
+import { useAssets } from "../../stores/useAsset";
 export default {
   props: {
     images: Object,
@@ -13,15 +13,14 @@ export default {
   setup() {
     const assetsStore = useAssets();
     return {
-      assetsStore
-    }
-  }
-}
-
+      assetsStore,
+    };
+  },
+};
 </script>
 
 <style scoped lang="scss">
-@import '../../assets/styles/style.scss';
+@import "@/assets/styles/style.scss";
 
 .partners-card {
   display: flex;
@@ -31,7 +30,12 @@ export default {
   justify-content: center;
   align-items: center;
   border-radius: 15px;
-  background: var(--light_bg, #F9F9FA);
-}
+  background: var(--light_bg, #f9f9fa);
 
+  & img {
+    height: 100%;
+
+    object-fit: contain;
+  }
+}
 </style>

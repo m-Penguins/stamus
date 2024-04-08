@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1
+      v-if="title"
       v-html="title"
       :class="{
         fontSize: fontSize ? 'fontSize' : '',
@@ -27,7 +28,7 @@
       />
       <elements-link-with-arrow
         v-if="isLinkWithArrow && textLinkWithArrow"
-        type="true"
+        type
         :title="textLinkWithArrow"
         :link="link"
         :isExternal="isExternal"
@@ -115,8 +116,9 @@ export default {
 }
 
 .container {
+  width: 100%;
   // width: 431px;
-  width: 481px;
+  max-width: 481px;
 
   .container-text {
     @include body-20-regular;

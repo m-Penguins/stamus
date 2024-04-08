@@ -5,11 +5,9 @@ const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const assetsStore = useAssets();
-const bigImage = assetsStore.useAsset("images/big-images/discounts.png");
+const bigImage = assetsStore.useAsset("big-images/discounts_new.png");
 
-const imgAdaptiv = assetsStore.useAsset(
-  "images/big-images/discounts-adaptiv.png",
-);
+const imgAdaptiv = assetsStore.useAsset("big-images/discounts-adaptiv_new.jpg");
 const togglerPopup = (state) => {
   isOpenPopup.value = state;
 };
@@ -28,12 +26,48 @@ if (!discountsData?.value?.data?.length) {
     fatal: true,
   });
 }
+
+useHead({
+  title: "Акции и Скидки в стоматологиях Стамус и детской клинике СтамусМед",
+  meta: [
+    {
+      name: "twitter:title",
+      content:
+        "Акции и Скидки в стоматологиях Стамус и детской клинике СтамусМед",
+    },
+    {
+      property: "og:title",
+      content:
+        "Акции и Скидки в стоматологиях Стамус и детской клинике СтамусМед",
+    },
+    {
+      name: "description",
+      content:
+        "В клиниках Стамус доступные цены. Посмотреть актуальные акции и скидки. Счастливые часы – ежедневно.",
+    },
+    {
+      name: "twitter:description",
+      content:
+        "В клиниках Стамус доступные цены. Посмотреть актуальные акции и скидки. Счастливые часы – ежедневно.",
+    },
+    {
+      property: "og:description",
+      content:
+        "В клиниках Стамус доступные цены. Посмотреть актуальные акции и скидки. Счастливые часы – ежедневно.",
+    },
+    {
+      name: "keywords",
+      content:
+        "Акции стоматологии, скидки стоматологии, акции стамус, скидки стамус, счастливые часы в стамус, скидка на проф гигиену",
+    },
+  ],
+});
 </script>
 
 <template>
   <elements-main-info
     title="Акции и скидки"
-    text="Небольшое описание в несколько строчек"
+    text="А так же подарочные сертификаты и абонементы"
     :imgBg="bigImage"
     :imgAdaptiv="imgAdaptiv"
     :isButtonBase="false"
@@ -47,15 +81,6 @@ if (!discountsData?.value?.data?.length) {
         url: '/discounts',
       },
     ]"
-  />
-  <BlocksMainBanner
-    :title="'Счастливые часы'"
-    :text="'Скидки до 50%'"
-    :titleLink="'Воспользоваться акцией'"
-    :link="`/discounts/${linkTransform('Счастливые часы')}`"
-    bgColor="dark-blue-gradient"
-    img="tooth.png"
-    bigImg="true"
   />
 
   <template v-for="item in discountsData?.data">

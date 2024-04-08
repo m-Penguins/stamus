@@ -33,24 +33,41 @@ export default defineNuxtConfig({
         {
           rel: "mask-icon",
           href: "/favicon/safari-pinned-tab.svg",
-          color: "#5bbad5",
+          color: "#232D5B",
+        },
+        {
+          rel: "stylesheet",
+          href: "/bvi.css",
+          type: "text/css",
         },
       ],
       meta: [
-        { name: "msapplication-TileColor", content: "#2b5797" },
+        { name: "msapplication-TileColor", content: "#232D5B" },
         { name: "theme-color", content: "#ffffff" },
         { name: "msapplication-config", content: "/favicon/browserconfig.xml" },
+      ],
+      script: [
+        {
+          src: "/bvi.js",
+          tagPosition: "bodyClose",
+          type: "text/javascript",
+          defer: true,
+        },
       ],
     },
   },
   modules: [
     "@pinia/nuxt",
+    "@vueuse/nuxt",
+    "nuxt-simple-robots",
+    "@nuxtjs/sitemap",
     [
       "nuxt-mail",
       {
         message: [
           { name: "form", to: process.env.MAIL_TO },
           { name: "ndfl", to: process.env.MAIL_TO_TAXES },
+          { name: "review", to: process.env.MAIL_TO_REVIEW },
         ],
         smtp: {
           host: "smtp.yandex.ru",
@@ -62,7 +79,15 @@ export default defineNuxtConfig({
         },
       },
     ],
+    "vue-yandex-maps/nuxt",
   ],
+  site: {
+    url: "https://stamus.ru",
+    name: "STAMUS",
+  },
+  yandexMaps: {
+    apikey: process.env.YANDEX_API_KEY,
+  },
   css: ["@/assets/styles/global.scss"],
   runtimeConfig: {
     public: {
@@ -73,7 +98,7 @@ export default defineNuxtConfig({
   imports: {
     dirs: ["stores", "utils"],
   },
-  plugins: [{ src: "~/plugins/ymapPlugin.js", mode: "client" }],
+  // plugins: [{ src: "~/plugins/ymapPlugin.js", mode: "client" }],
   // plugins: [
   //   { src: '~/plugins/bvi.js', ssr: false },
   // ]

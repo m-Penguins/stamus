@@ -1,4 +1,6 @@
 <script setup>
+import imagePlaceholders from "~/utils/imagePlaceholders";
+
 const route = useRoute();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
@@ -14,7 +16,26 @@ const articles = ref(null);
 
 const totalResults = ref(0);
 
+const getServiceLink = (item) => {
+  const direction =
+    item?.attributes?.category?.data?.attributes?.napravleniya_uslug_1_col?.data
+      ?.attributes?.slug;
+
+  const service = item?.attributes?.slug;
+
+  if (direction && service) {
+    return `/${direction}/${service}`;
+  }
+  return "/";
+};
+
 const getSearchData = async () => {
+  const capitalSearch =
+    searchTerm.value?.charAt(0)?.toUpperCase() +
+    searchTerm.value?.slice(1)?.toLowerCase();
+  const lowerSearch = searchTerm.value?.toLowerCase();
+  const upperSearch = searchTerm.value?.toUpperCase();
+
   const [
     { data: specialistsData },
     { data: servicesData },
@@ -23,32 +44,29 @@ const getSearchData = async () => {
     useFetch(`${apiBaseUrl}specialists`, {
       query: {
         "filters[fullName][$contains][0]": searchTerm.value,
-        "filters[fullName][$contains][1]": searchTerm.value?.toLowerCase(),
-        "filters[fullName][$contains][2]":
-          searchTerm.value?.charAt(0)?.toUpperCase() +
-          searchTerm.value?.slice(1)?.toLowerCase(),
+        "filters[fullName][$contains][1]": lowerSearch,
+        "filters[fullName][$contains][2]": capitalSearch,
+        "filters[fullName][$contains][3]": upperSearch,
         "sort[0]": "order:asc",
-        populate: "deep",
+        populate: "fotoSpecialist.*,achievements.*",
       },
     }),
     useFetch(`${apiBaseUrl}services`, {
       query: {
-        "filters[heading][$contains][0]": searchTerm.value,
-        "filters[heading][$contains][1]": searchTerm.value?.toLowerCase(),
-        "filters[heading][$contains][2]":
-          searchTerm.value?.charAt(0)?.toUpperCase() +
-          searchTerm.value?.slice(1)?.toLowerCase(),
-        populate: "deep",
+        "filters[heading][$contains][4]": searchTerm.value,
+        "filters[heading][$contains][5]": lowerSearch,
+        "filters[heading][$contains][6]": capitalSearch,
+        "filters[heading][$contains][7]": upperSearch,
+        populate: "category.napravleniya_uslug_1_col.*",
       },
     }),
     useFetch(`${apiBaseUrl}articles`, {
       query: {
-        "filters[heading][$contains][0]": searchTerm.value,
-        "filters[heading][$contains][1]": searchTerm.value?.toLowerCase(),
-        "filters[heading][$contains][2]":
-          searchTerm.value?.charAt(0)?.toUpperCase() +
-          searchTerm.value?.slice(1)?.toLowerCase(),
-        populate: "deep",
+        "filters[heading][$contains][8]": searchTerm.value,
+        "filters[heading][$contains][9]": lowerSearch,
+        "filters[heading][$contains][10]": capitalSearch,
+        "filters[heading][$contains][11]": upperSearch,
+        populate: "heading.*",
       },
     }),
   ]);
@@ -56,21 +74,24 @@ const getSearchData = async () => {
   specialists.value = specialistsData?.value?.data?.map((sp) => ({
     id: sp?.id,
     name: sp?.attributes?.firstName + " " + sp?.attributes?.lastName,
-    img: sp?.attributes?.fotoSpecialist?.data?.attributes?.url
-      ? baseUrl + sp?.attributes?.fotoSpecialist?.data?.attributes?.url
-      : assetsStore.useAsset("images/no-photo.png"),
+    img: sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.thumbnail
+      ?.url
+      ? baseUrl +
+        sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.thumbnail
+          ?.url
+      : baseUrl + imagePlaceholders?.specialists,
     position: sp?.attributes?.position,
     achievements: sp?.attributes?.achievements,
-    link: `/specialists/${sp?.id}`,
+    link: `/team/${sp?.id}`,
   }));
 
-  services.value = servicesData?.value?.data?.map((serv) => ({
-    id: serv?.id,
-    title: serv?.attributes?.heading,
-    link: `/${linkTransform(serv?.attributes?.category)}/${linkTransform(
-      serv?.attributes?.heading,
-    )}`,
+  services.value = servicesData?.value?.data?.map((singleService) => ({
+    id: singleService?.id,
+    title: singleService?.attributes?.heading,
+    link: getServiceLink(singleService),
   }));
+
+  console.log(articlesData.value);
 
   articles.value = articlesData?.value?.data?.map((art) => ({
     id: art?.id,
@@ -103,6 +124,39 @@ watch(
     getSearchData();
   },
 );
+
+useHead({
+  title: "Удобный поиск на сайте сети клиник Стамус",
+  meta: [
+    {
+      name: "twitter:title",
+      content: "Удобный поиск на сайте сети клиник Стамус",
+    },
+    {
+      property: "og:title",
+      content: "Удобный поиск на сайте сети клиник Стамус",
+    },
+    {
+      name: "description",
+      content:
+        "Через поиск на сайте Стамус вы можете узнать всю необходимую информацию о врачах, ценах, услугах, а также полезные материалы из блога клиники",
+    },
+    {
+      name: "twitter:description",
+      content:
+        "Через поиск на сайте Стамус вы можете узнать всю необходимую информацию о врачах, ценах, услугах, а также полезные материалы из блога клиники",
+    },
+    {
+      property: "og:description",
+      content:
+        "Через поиск на сайте Стамус вы можете узнать всю необходимую информацию о врачах, ценах, услугах, а также полезные материалы из блога клиники",
+    },
+    {
+      name: "keywords",
+      content: "Информация о стамус, информация о клинике стамус",
+    },
+  ],
+});
 </script>
 
 <template>
@@ -119,8 +173,8 @@ watch(
             url: '/search',
           },
           {
-            title: `${searchTerm}`,
-            url: `/search/`,
+            title: `${searchTerm ?? ''}`,
+            url: `/`,
           },
         ]"
       />
@@ -163,7 +217,7 @@ watch(
         </div>
 
         <div v-if="specialists?.length > 0" class="search-block">
-          <h4 class="search-subtitle">Подходящие специалисты</h4>
+          <h4 class="search-subtitle">Подходящие врачи</h4>
           <hr class="hr" />
           <div v-for="item in specialists" :key="item" class="search-inner">
             <elements-search-specialist-card :spesialistCard="item" />

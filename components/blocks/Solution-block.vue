@@ -10,11 +10,7 @@ defineProps(["title", "cards", "image"]);
       </div>
       <div class="solution-block-container">
         <div class="solution-block-container__img">
-          <img
-            :src="image"
-            alt="img"
-            class="solution-block-container-picture"
-          />
+          <img :src="image" alt="solution" />
         </div>
         <div class="solution-block-container__text">
           <elements-solution-card
@@ -33,8 +29,8 @@ defineProps(["title", "cards", "image"]);
 
 .solution-block {
   display: flex;
-  width: 1280px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 1280px;
   justify-content: space-between;
   margin: 0 auto 100px;
 }
@@ -52,9 +48,26 @@ defineProps(["title", "cards", "image"]);
   text-align: center;
 }
 
-.solution-block-container-picture {
-  min-width: 334px;
-  min-height: 334px;
+.solution-block-container__img {
+  width: 100%;
+  max-width: 334px;
+  border-radius: 20px;
+
+  aspect-ratio: 1/1;
+
+  @supports not (aspect-ratio: 1/1) {
+    padding-top: 100%;
+    height: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  & img {
+    width: 100%;
+
+    object-fit: cover;
+    border-radius: 20px;
+  }
 }
 
 .solution-block-container {
@@ -78,14 +91,10 @@ defineProps(["title", "cards", "image"]);
     &__text {
       width: 100%;
     }
-
-    &__img {
-      width: 100%;
-    }
   }
 
-  .solution-block-container-picture {
-    width: 100%;
+  .solution-block-container__img {
+    margin: 0 auto;
   }
 }
 </style>

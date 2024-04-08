@@ -4,14 +4,13 @@ import { Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
+import imagePlaceholders from "~/utils/imagePlaceholders";
 
 const props = defineProps(["programs", "title"]);
 const prev = ref(null);
 const next = ref(null);
 
 const baseUrl = useRuntimeConfig().public.baseUrl;
-
-const assetsStore = useAssets();
 </script>
 
 <template>
@@ -45,10 +44,12 @@ const assetsStore = useAssets();
                   item?.attributes?.firstName +
                   ' ' +
                   item?.attributes?.lastName,
-                img: item?.attributes?.fotoSpecialist?.data?.attributes?.url
+                img: item?.attributes?.fotoSpecialist?.data?.attributes?.formats
+                  ?.small?.url
                   ? baseUrl +
-                    item?.attributes?.fotoSpecialist?.data?.attributes?.url
-                  : assetsStore.useAsset('images/no-photo.png'),
+                    item?.attributes?.fotoSpecialist?.data?.attributes?.formats
+                      ?.small?.url
+                  : baseUrl + imagePlaceholders?.specialists,
                 position: item?.attributes?.position,
                 id: item?.id,
                 achievements: item?.attributes?.achievements,
@@ -106,14 +107,13 @@ const assetsStore = useAssets();
       </div>
     </div>
     <div class="slider-base-btn">
-      <NuxtLink class="button-base" to="/specialists">Смотреть всех специалистов</NuxtLink>
+      <NuxtLink class="button-base" to="/team">Смотреть всех врачей</NuxtLink>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
-
 
 .slider-title {
   padding: 20px 0 40px 0;

@@ -3,13 +3,29 @@ const route = useRoute();
 
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
+const directionSlug = route?.params?.direction;
 
-const assetsStore = useAssets();
+const { data: firstLvlDirection } = await useFetch(
+  `${apiBaseUrl}main-derections`,
+  {
+    query: {
+      "filters[slug][$eq]": directionSlug,
+    },
+  },
+);
+
+if (!firstLvlDirection?.value?.data?.length) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page Not Found",
+    fatal: true,
+  });
+}
 
 const { data: serviceData } = await useFetch(`${apiBaseUrl}services`, {
   query: {
     "filters[slug][$eq]": route.params?.service,
-    populate: blocksQuey,
+    populate: blocksQuey + ",specialists.fotoSpecialist.*",
   },
 });
 
@@ -22,16 +38,20 @@ if (!serviceData?.value?.data?.length) {
 }
 const mainInfo = serviceData?.value?.data?.[0]?.attributes;
 
+const serviceId = serviceData?.value?.data?.[0]?.id;
+
 const mainBigImg = mainInfo?.photoBanner?.data?.attributes?.url
   ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.url
-  : assetsStore.useAsset("images/big-images/removal-tooth.png");
+  : baseUrl + imagePlaceholders?.services;
 
-const mainAdaptiveImg = mainInfo?.photoBanner?.data?.attributes?.formats?.small
+const mainAdaptiveImg = mainInfo?.photoBanner?.data?.attributes?.formats?.medium
   ?.url
-  ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.formats?.small?.url
-  : assetsStore.useAsset("images/big-images/removal-tooth.png");
+  ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.formats?.medium?.url
+  : baseUrl + imagePlaceholders?.services;
 
 const serviceBlocks = mainInfo?.blocks;
+
+const blockSpecialists = mainInfo?.specialists;
 
 const directionName =
   mainInfo?.category?.data?.attributes?.napravleniya_uslug_1_col?.data
@@ -66,7 +86,11 @@ useHead(getMetaObject(metaData, baseUrl));
     :link="mainInfo?.link"
     :link_text="mainInfo?.link_text"
   />
-  <BlocksMapper :blocks="serviceBlocks" />
+  <BlocksMapper
+    :blocks="serviceBlocks"
+    :serviceId="serviceId"
+    :block-specialists="blockSpecialists"
+  />
 </template>
 
 <style lang="scss" scoped></style>

@@ -46,10 +46,13 @@ defineProps(["block"]);
   color: $gray-text;
   border-radius: 10px;
   border: 1px solid $border-card;
-  display: flex;
   padding: 14px 20px;
-  align-items: flex-start;
   gap: 10px;
+
+  text-wrap: pretty;
+  word-break: break-all;
+  width: 100%;
+  max-width: 100%;
 }
 
 @media screen and (max-width: 800px) {

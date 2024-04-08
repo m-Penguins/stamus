@@ -22,9 +22,9 @@
     img="tooth.png"
     bigImg="true"
   />
-  <blocks-our-specialists title="Наши специалисты" :data="data" />
+  <blocks-our-specialists title="Наши врачи" :data="data" />
   <blocks-main-feedback />
-  <blocks-map :dataInfo="infoData" text="Контакты" />
+  <blocks-map />
   <blocks-gallery />
   <blocks-main-form />
 </template>
@@ -81,40 +81,10 @@ export default {
   setup() {
     const assetsStore = useAssets();
     const textAboutImportant = textAboutImportantArray;
-    const mockArrayDirection = [
-      {
-        name: "Название кейса",
-        category: "Взрослая стоматология",
-        img: "avatar1.png",
-        description:
-          "Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись",
-      },
-      {
-        name: "Название кейса",
-        category: "Взрослая стоматология",
-        img: "avatar2.png",
-        description:
-          "Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись",
-      },
-      {
-        name: "Название кейса",
-        category: "Взрослая стоматология",
-        img: "avatar3.png",
-        description:
-          "Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись",
-      },
-      {
-        name: "Название кейса",
-        category: "Взрослая стоматология",
-        img: "avatar4.png",
-        description:
-          "Небольшое описание кейса. Сложности и проблемы, с которыми столкнулись",
-      },
-    ];
+
     return {
       assetsStore,
       textAboutImportant,
-      mockArrayDirection,
     };
   },
 };

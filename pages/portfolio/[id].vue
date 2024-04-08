@@ -1,22 +1,19 @@
 <script setup>
+import imagePlaceholders from "~/utils/imagePlaceholders";
+
 const route = useRoute();
-const assetsStore = useAssets();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const [{ data: portfolioData }, { data: allCasesData }] = await Promise.all([
-  useFetch(`${apiBaseUrl}portofolios/${route.params.id}`, {
+const { data: portfolioData } = await useFetch(
+  `${apiBaseUrl}portofolios/${route.params.id}`,
+  {
     query: {
       populate:
-        "infoBlock.image.*,infoBlock.video.*,gallery.*,specialists.fotoSpecialist.*,photoBanner.*,solutionImage.*,services.*, meta.metaImage.*,solution.*,napravleniya_uslug_1.*",
+        "infoBlockPort.image.*,infoBlockPort.description.*,galery.*,specialists.fotoSpecialist.*,photoBanner.*,solutionImage.*,services.*, meta.metaImage.*,solution.*,napravleniya_uslug_1.*,same_portfolios.photoBanner.*,cardImage.*",
     },
-  }),
-  useFetch(`${apiBaseUrl}portofolios`, {
-    query: {
-      populate: "deep",
-    },
-  }),
-]);
+  },
+);
 
 if (!portfolioData.value?.data) {
   throw createError({
@@ -25,6 +22,13 @@ if (!portfolioData.value?.data) {
     fatal: true,
   });
 }
+
+const samePortfolios = {
+  portofolios: portfolioData.value?.data?.attributes?.same_portfolios,
+  title: "Другие кейсы",
+};
+
+const symptomTitle = portfolioData.value?.data?.attributes?.symptom_title;
 
 const symptoms = portfolioData.value?.data?.attributes?.symptom
   ?.split("|")
@@ -36,23 +40,24 @@ const symptoms = portfolioData.value?.data?.attributes?.symptom
 
 const solution = portfolioData.value?.data?.attributes?.solution ?? [];
 const solutionImage = portfolioData.value?.data?.attributes?.solutionImage?.data
+  ?.attributes?.formats?.medium?.url
+  ? baseUrl +
+    portfolioData.value?.data?.attributes?.solutionImage?.data?.attributes
+      ?.formats?.medium?.url
+  : baseUrl + imagePlaceholders?.portfoliosSmall;
+
+const bigImage = portfolioData.value?.data?.attributes?.cardImage?.data
   ?.attributes?.url
   ? baseUrl +
-    portfolioData.value?.data?.attributes?.solutionImage?.data?.attributes?.url
-  : assetsStore.useAsset("images/solution/solution1.png");
+    portfolioData.value?.data?.attributes?.cardImage?.data?.attributes?.url
+  : baseUrl + imagePlaceholders?.portfoliosBig;
 
-const bigImage = portfolioData.value?.data?.attributes?.photoBanner?.data
-  ?.attributes?.url
-  ? baseUrl +
-    portfolioData.value?.data?.attributes?.photoBanner?.data?.attributes?.url
-  : assetsStore.useAsset("images/big-images/portfolio-category.png");
-
-const smallImage = portfolioData.value?.data?.attributes?.photoBanner?.data
+const smallImage = portfolioData.value?.data?.attributes?.cardImage?.data
   ?.attributes?.formats?.small?.url
   ? baseUrl +
-    portfolioData.value?.data?.attributes?.photoBanner?.data?.attributes
-      ?.formats?.small?.url
-  : assetsStore.useAsset("images/big-images/portfolio-category-adaptiv.png");
+    portfolioData.value?.data?.attributes?.cardImage?.data?.attributes?.formats
+      ?.small?.url
+  : baseUrl + imagePlaceholders?.portfoliosSmall;
 
 const specialists =
   portfolioData.value?.data?.attributes?.specialists?.data?.map((sp) => {
@@ -61,28 +66,15 @@ const specialists =
       name: `${sp?.attributes?.firstName} ${sp?.attributes?.lastName}`,
       position: sp?.attributes?.position,
       achievements: sp?.attributes?.achievements,
-      img: sp?.attributes?.fotoSpecialist?.data?.attributes?.url
-        ? baseUrl + sp?.attributes?.fotoSpecialist?.data?.attributes?.url
-        : assetsStore.useAsset("images/no-photo.png"),
+      img: sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.small?.url
+        ? baseUrl +
+          sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.small?.url
+        : baseUrl + imagePlaceholders?.specialists,
       achievements: sp?.attributes?.achievements,
     };
   });
 
-const infoBlock = portfolioData.value?.data?.attributes?.infoBlock;
-
-const otherCases = allCasesData.value?.data
-  ?.filter((c) => String(c?.id) !== String(route.params.id))
-  .map((p) => {
-    return {
-      id: p?.id,
-      name: p?.attributes?.heading,
-      category: p?.attributes?.direction?.directions,
-      description: p?.attributes?.description,
-      img: p?.attributes?.photoBanner?.data?.attributes?.url
-        ? baseUrl + p?.attributes?.photoBanner?.data?.attributes?.url
-        : assetsStore.useAsset("images/no-photo.png"),
-    };
-  });
+const infoBlock = portfolioData.value?.data?.attributes?.infoBlockPort;
 
 const gallery = portfolioData.value?.data?.attributes?.galery?.data
   ?.map((img) =>
@@ -124,20 +116,16 @@ useHead(getMetaObject(metaData, baseUrl));
       ]"
     />
     <blocks-symptoms-block
-      title="Симптомы, с которыми обратился клиент"
+      v-if="symptoms && symptoms?.length"
+      :title="symptomTitle ?? 'Симптомы, с которыми обратился клиент'"
       :cards="symptoms"
     />
-    <blocks-video-block
-      :title="infoBlock?.heading"
-      :text="infoBlock?.text"
-      :isProblems="true"
-      :link="infoBlock?.link"
-      :problemImg="
-        infoBlock?.image?.data?.attributes?.url
-          ? baseUrl + infoBlock?.image?.data?.attributes?.url
-          : assetsStore.useAsset('images/problems/problem1.png')
-      "
+    <blocks-case-info-block
+      v-if="infoBlock"
+      :infoBlock="infoBlock"
+      class="infoBlock"
     />
+
     <div>
       <blocks-solution-block
         title="Решение"
@@ -145,7 +133,7 @@ useHead(getMetaObject(metaData, baseUrl));
         :image="solutionImage"
       />
     </div>
-    <div class="attending-physicians-block">
+    <div class="attending-physicians-block" v-if="specialists?.length">
       <h3 class="attending-physicians-block-title">Лечащие врачи</h3>
       <div class="attending-physicians-block-cards">
         <div
@@ -156,19 +144,31 @@ useHead(getMetaObject(metaData, baseUrl));
           <elements-name-specialty-photo-card
             :isTooltip="true"
             :specialists="specialist"
-            @click="$router.push(`/specialists/` + specialist.id)"
+            @click="$router.push(`/team/` + specialist.id)"
+            class="spec-card"
           />
         </div>
       </div>
     </div>
-    <blocks-gallery :arrayImg="gallery" v-if="gallery?.length > 0" />
-    <blocks-cases-direction text="Другие кейсы" :dataDirection="otherCases" />
+    <blocks-portfolio-gallery :arrayImg="gallery" v-if="gallery?.length > 0" />
+    <div class="container-size">
+      <dynamic-block-cases :block="samePortfolios" />
+    </div>
+
     <blocks-main-form />
   </div>
 </template>
 
 <style scoped lang="scss">
-@import "../../assets/styles/style.scss";
+@import "@/assets/styles/style.scss";
+
+.spec-card {
+  cursor: pointer;
+}
+
+.infoBlock {
+  margin-bottom: 100px;
+}
 .attending-physicians-block {
   width: 1280px;
   max-width: 100%;

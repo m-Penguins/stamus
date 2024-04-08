@@ -19,34 +19,51 @@ export default {
 
 .solution-card {
   position: relative;
-  border-left: 1px solid #e9e9e9;
-  padding-left: 10px;
-  &:last-of-type {
-    border-left: 1px solid transparent;
+  padding-left: 18px;
+  &:last-of-type::after {
+    height: 0;
   }
 }
 
-.solution-card-title {
-  @include body-16-regular;
-  color: $gray-text;
-  padding-bottom: 10px;
-}
-
-.solution-card-title::before {
+.solution-card::before {
   content: "";
   position: absolute;
   width: 7px;
   height: 7px;
   background: white;
-  border-radius: 999px;
-  left: -6px;
-  top: 4px;
-  border: 2px solid #cfd5e1;
+  border-radius: 100%;
+
+  top: 13px;
+  left: 0;
+
+  transform: translate(-50%, -50%);
+
+  border: 1px solid #cfd5e1;
+}
+
+.solution-card::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 100%;
+
+  background-color: #e9e9e9;
+
+  top: 13px;
+  left: 0;
+
+  transform: translateX(-50%);
+}
+
+.solution-card-title {
+  @include body-20-regular;
+  color: $gray-text;
+  padding-bottom: 20px;
 }
 
 .solution-card-text {
-  @include body-12-regular;
+  @include body-16-regular;
   color: $placeholder;
-  padding-bottom: 20px;
+  padding-bottom: 26px;
 }
 </style>

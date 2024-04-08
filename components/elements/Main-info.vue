@@ -1,20 +1,29 @@
 <template>
   <div class="dentistry-wrapper">
-    <div class="dentistry-container" :style="`background-image:url(${imgBg})`" :class="{'bg-dark': isBgDark}">
+    <div
+      class="dentistry-container"
+      :style="`background-image:url(${imgBg})`"
+      :class="{ 'bg-dark': isBgDark }"
+      v-bind="$attrs"
+    >
       <div class="dentistry-box">
         <elements-bread-crumbs
           :breadcrumbs="breadcrumbs"
           :typeColorWhite="typeColorWhite"
         />
         <div class="mob">
-            <img :src="imgAdaptiv" :class="{'img-dital': isDital, 'img': !isDital}" />
+          <img
+            :src="imgAdaptiv"
+            :class="{ 'img-dital': isDital, img: !isDital }"
+            class="my-image"
+          />
           <div>
             <elements-title-text-button
               textButtonBase="Записаться онлайн"
               :customClick="redirectToExternalApp"
               :isButtonBase="isButtonBase"
               :title="title"
-              font-size="true"
+              :font-size="true"
               :text="text"
               :class="isTimeAndPriceCard ? 'main-info-width' : ''"
             />
@@ -39,7 +48,7 @@
       <elements-analitic-card
         :time="time"
         :money="money"
-        v-if="isTimeAndPriceCard"
+        v-if="isTimeAndPriceCard && time && money"
         class="desktop"
       />
     </div>
@@ -102,6 +111,10 @@ export default {
 <style scoped lang="scss">
 @import "/assets/styles/style.scss";
 
+.my-image {
+  border-radius: 25px;
+}
+
 .bg-dark {
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
 }
@@ -145,8 +158,11 @@ export default {
   width: 100%;
   height: 920px;
   border-radius: 45px;
+
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
+
   margin-bottom: 100px;
   display: flex;
   justify-content: flex-start;

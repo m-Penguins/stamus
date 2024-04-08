@@ -4,19 +4,58 @@
       v-for="(item, index) in mockInfoMain"
       :key="item.id"
       class="info-card"
-      :class="{ 'open': item.isOpen }">
-      <div class="info-card__box"  @click="toggleAccordion(index)">
+      :class="{ open: item.isOpen }"
+    >
+      <div class="info-card__box" @click="toggleAccordion(index)">
         <h3 class="accordion-title">{{ item.title }}</h3>
         <div v-if="!item.isOpen">
-          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path class="card-img-fill" d="M12 22L32 22.003M22 12V32" stroke="#525660" stroke-linecap="round"/>
-          <rect class="card-img-stroke" x="0.5" y="0.5" width="43" height="43" rx="21.5" stroke="#E9E9E9"/>
+          <svg
+            width="44"
+            height="44"
+            viewBox="0 0 44 44"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              class="card-img-fill"
+              d="M12 22L32 22.003M22 12V32"
+              stroke="#525660"
+              stroke-linecap="round"
+            />
+            <rect
+              class="card-img-stroke"
+              x="0.5"
+              y="0.5"
+              width="43"
+              height="43"
+              rx="21.5"
+              stroke="#E9E9E9"
+            />
           </svg>
         </div>
         <div v-else>
-          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path class="card-img-fill" d="M12 21.9985L32 22.0015" stroke="#525660" stroke-linecap="round"/>
-          <rect class="card-img-stroke" x="0.5" y="0.5" width="43" height="43" rx="21.5" stroke="#E9E9E9"/>
+          <svg
+            width="44"
+            height="44"
+            viewBox="0 0 44 44"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              class="card-img-fill"
+              d="M12 21.9985L32 22.0015"
+              stroke="#525660"
+              stroke-linecap="round"
+            />
+            <rect
+              class="card-img-stroke"
+              x="0.5"
+              y="0.5"
+              width="43"
+              height="43"
+              rx="21.5"
+              stroke="#E9E9E9"
+            />
           </svg>
         </div>
       </div>
@@ -36,15 +75,40 @@
           <div v-else-if="item.id === 2">
             <div class="accordion-content-text">
               <p class="accordion-content-title">{{ item.text }}</p>
-              <a href="http://176.99.11.245:1338/uploads/Svidetelstvo_o_postanovke_na_uchet_147c73f991.pdf" target="_blank" class="header-nav-item link-info-doc">{{ item.text2 }}</a>
-              <a href="http://176.99.11.245:1338/uploads/Svidetelstvo_o_registraczii_14ee6f1027.pdf" target="_blank" class="header-nav-item link-info-doc">{{ item.text3 }}</a>
-              <a href="http://176.99.11.245:1338/uploads/Svedeniya_ob_uchreditelyah_cd5661957f.pdf" target="_blank" class="header-nav-item link-info-doc">{{ item.text4 }}</a>
-              <a href="http://176.99.11.245:1338/uploads/OOO_STAMUS_vypiska_s_podpisyu_ot_2021_10_07_eaf2a14d54.pdf" target="_blank" class="header-nav-item link-info-doc">{{ item.text5 }}</a>
+              <a
+                href="http://176.99.11.245:1338/uploads/Svidetelstvo_o_postanovke_na_uchet_147c73f991.pdf"
+                target="_blank"
+                class="header-nav-item link-info-doc"
+                >{{ item.text2 }}</a
+              >
+              <a
+                href="http://176.99.11.245:1338/uploads/Svidetelstvo_o_registraczii_14ee6f1027.pdf"
+                target="_blank"
+                class="header-nav-item link-info-doc"
+                >{{ item.text3 }}</a
+              >
+              <a
+                href="http://176.99.11.245:1338/uploads/Svedeniya_ob_uchreditelyah_cd5661957f.pdf"
+                target="_blank"
+                class="header-nav-item link-info-doc"
+                >{{ item.text4 }}</a
+              >
+              <a
+                href="http://176.99.11.245:1338/uploads/OOO_STAMUS_vypiska_s_podpisyu_ot_2021_10_07_eaf2a14d54.pdf"
+                target="_blank"
+                class="header-nav-item link-info-doc"
+                >{{ item.text5 }}</a
+              >
             </div>
           </div>
           <div v-else-if="item.id === 3">
             <div class="accordion-content-text">
-              <elements-link-with-arrow type="true" title="Открыть" target="_blank" href="http://176.99.11.245:1338/uploads/Struktura_OOO_Stamus08102021_5c80a6636e.pdf"/>
+              <elements-link-with-arrow
+                type
+                title="Открыть"
+                target="_blank"
+                href="http://176.99.11.245:1338/uploads/Struktura_OOO_Stamus08102021_5c80a6636e.pdf"
+              />
             </div>
           </div>
           <div v-else-if="item.id === 4">
@@ -56,7 +120,12 @@
           </div>
           <div v-else-if="item.id === 5">
             <div class="accordion-content-text">
-              <elements-link-with-arrow type="true" title="Открыть" target="_blank" href="http://176.99.11.245:1338/uploads/Scan20211011125012_21d8928265.pdf"/>
+              <elements-link-with-arrow
+                type
+                title="Открыть"
+                target="_blank"
+                href="http://176.99.11.245:1338/uploads/Scan20211011125012_21d8928265.pdf"
+              />
             </div>
           </div>
           <div v-else-if="item.id === 6">
@@ -83,10 +152,20 @@
           </div>
           <div v-else-if="item.id === 8" class="info-links-box">
             <div class="accordion-content-text">
-              <elements-link-with-arrow type="true" title="Открыть" target="_blank" href="http://176.99.11.245:1338/uploads/L041_01126_23_00370271_21f6e36bee.pdf"/>
+              <elements-link-with-arrow
+                type
+                title="Открыть"
+                target="_blank"
+                href="http://176.99.11.245:1338/uploads/L041_01126_23_00370271_21f6e36bee.pdf"
+              />
             </div>
             <div class="accordion-content-text">
-              <elements-link-with-arrow type="true" title="Открыть" target="_blank" href="http://176.99.11.245:1338/uploads/Liczenziya_ot_26_07_2023_g_4a153f143d.pdf"/>
+              <elements-link-with-arrow
+                type
+                title="Открыть"
+                target="_blank"
+                href="http://176.99.11.245:1338/uploads/Liczenziya_ot_26_07_2023_g_4a153f143d.pdf"
+              />
             </div>
           </div>
           <div v-else-if="item.id === 9">
@@ -104,40 +183,65 @@
           </div>
           <div v-else-if="item.id === 10">
             <div class="accordion-content-text">
-              <elements-link-with-arrow type="true" title="Открыть" href="https://disk.yandex.ru/d/KVMGriYcVDOHgg" isExternal/>
+              <elements-link-with-arrow
+                type
+                title="Открыть"
+                href="https://disk.yandex.ru/d/KVMGriYcVDOHgg"
+                isExternal
+              />
             </div>
           </div>
           <div v-else-if="item.id === 11" class="info-links-box">
             <div class="accordion-content-text">
-              <elements-link-with-arrow type="true" title="Открыть" target="_blank" href="http://176.99.11.245:1338/uploads/Sanitarno_epidemiologicheskoe_zaklyuchenie_4445ef740a.pdf"/>
+              <elements-link-with-arrow
+                type
+                title="Открыть"
+                target="_blank"
+                href="http://176.99.11.245:1338/uploads/Sanitarno_epidemiologicheskoe_zaklyuchenie_4445ef740a.pdf"
+              />
             </div>
             <div class="accordion-content-text">
-              <elements-link-with-arrow type="true" title="Детская клиника" target="_blank" href="http://176.99.11.245:1338/uploads/SEZ_STAMUSMED_3966c864fd.pdf"/>
+              <elements-link-with-arrow
+                type
+                title="Детская клиника"
+                target="_blank"
+                href="http://176.99.11.245:1338/uploads/SEZ_STAMUSMED_3966c864fd.pdf"
+              />
             </div>
           </div>
           <div v-else-if="item.id === 12">
             <div class="accordion-content-text">
-              <elements-link-with-arrow type="true" title="Открыть" target="_blank" href="http://176.99.11.245:1338/uploads/Polozhenie_o_personalnyh_dannyh_80e96e55d0.pdf"/>
+              <elements-link-with-arrow
+                type
+                title="Открыть"
+                target="_blank"
+                href="http://176.99.11.245:1338/uploads/Polozhenie_o_personalnyh_dannyh_80e96e55d0.pdf"
+              />
             </div>
           </div>
           <div v-else-if="item.id === 13">
             <div class="accordion-content-text">
-              <elements-link-with-arrow type="true" title="Открыть" target="_blank" href="http://176.99.11.245:1338/uploads/svodnaya_vedomost_rezultatov_provedennoj_SOUT_Mitrofana_Sedina_195_Hakurate_34_899124bc89.pdf"/>
+              <elements-link-with-arrow
+                type
+                title="Открыть"
+                target="_blank"
+                href="http://176.99.11.245:1338/uploads/svodnaya_vedomost_rezultatov_provedennoj_SOUT_Mitrofana_Sedina_195_Hakurate_34_899124bc89.pdf"
+              />
             </div>
           </div>
         </div>
-    </transition>
+      </transition>
     </div>
   </div>
 </template>
 
 <script>
-import { mockInfoMain } from '../../stores/mockData'
+import { mockInfoMain } from "../../stores/mockData";
 export default {
   props: {
     data: Array,
   },
- data() {
+  data() {
     return {
       mockInfoMain: [],
     };
@@ -154,13 +258,13 @@ export default {
           item.isOpen = false;
         }
       });
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
-@import '../../assets/styles/style.scss';
+@import "../../assets/styles/style.scss";
 .info-card {
   overflow: hidden;
   max-height: 78px;
@@ -238,7 +342,7 @@ export default {
   align-items: flex-start;
   flex-direction: column;
   border-radius: 10px;
-  border: 1px solid var(--stroke, #E9E9E9);
+  border: 1px solid var(--stroke, #e9e9e9);
 
   &__box {
     display: flex;
@@ -251,13 +355,13 @@ export default {
 }
 
 .info-card:hover {
-  border: 1px solid var(--stroke, #CFD5E1);
+  border: 1px solid var(--stroke, #cfd5e1);
   .card-img-fill {
-    stroke: #232D5B;
-    }
-    .card-img-stroke {
-      stroke: #CFD5E1;
-    }
+    stroke: #232d5b;
+  }
+  .card-img-stroke {
+    stroke: #cfd5e1;
+  }
 }
 
 @media (max-width: 900px) {
@@ -271,5 +375,4 @@ export default {
     max-height: 300px;
   }
 }
-
 </style>

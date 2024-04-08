@@ -1,7 +1,4 @@
 <script setup>
-// hides this page
-// remove to give access
-const assetsStore = useAssets();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
@@ -10,7 +7,7 @@ const route = useRoute();
 const pageSize = ref(12);
 const currentPage = ref(route.query.page ?? 1);
 
-const dirFilter = ref(route.query.dir);
+const tagFilter = ref(route.query.tag ?? []);
 
 const totalItems = ref(0);
 
@@ -22,10 +19,16 @@ const handlePageClick = async (page) => {
   currentPage.value = page;
   const searchQuery = {
     page,
-    dir: dirFilter.value,
+    tag: tagFilter.value,
   };
 
   clearObjectFields(searchQuery);
+
+  await navigateTo({
+    path: `${route.fullPath}`,
+    query: searchQuery,
+    replace: true,
+  });
 
   if (window) {
     window.scrollTo({
@@ -33,29 +36,40 @@ const handlePageClick = async (page) => {
       behavior: "smooth",
     });
   }
-
-  await navigateTo({
-    path: `${route.fullPath}`,
-    query: searchQuery,
-    replace: true,
-  });
 };
 
-const handleDirChange = async (dir) => {
-  dirFilter.value = dir?.id;
-  currentPage.value = 1;
-  const searchQuery = {
-    page: currentPage.value,
-    dir: dir?.id,
-  };
+const handleTagClick = async (tag) => {
+  if (!tagFilter.value?.includes(tag)) {
+    tagFilter.value.push(tag);
+    currentPage.value = 1;
+    const searchQuery = {
+      page: currentPage.value,
+      tag: tagFilter.value,
+    };
 
-  clearObjectFields(searchQuery);
+    clearObjectFields(searchQuery);
 
-  await navigateTo({
-    path: `${route.fullPath}`,
-    query: searchQuery,
-    replace: true,
-  });
+    await navigateTo({
+      path: `${route.fullPath}`,
+      query: searchQuery,
+      replace: true,
+    });
+  } else {
+    tagFilter.value = tagFilter.value?.filter((el) => el !== tag);
+    currentPage.value = 1;
+    const searchQuery = {
+      page: currentPage.value,
+      tag: tagFilter.value,
+    };
+
+    clearObjectFields(searchQuery);
+
+    await navigateTo({
+      path: `${route.fullPath}`,
+      query: searchQuery,
+      replace: true,
+    });
+  }
 };
 
 const getArticlesData = async () => {
@@ -63,7 +77,7 @@ const getArticlesData = async () => {
     populate: "napravleniya_uslug_1.*, fotoArticles.*, services.*",
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
-    "filters[napravleniya_uslug_1][id][$eq][1]": dirFilter.value,
+    "filters[tag_category][$in]": tagFilter.value,
   };
 
   clearObjectFields(strapiQuery);
@@ -81,36 +95,27 @@ const getArticlesData = async () => {
 
 const articlesData = await getArticlesData();
 
-const { data: directionsData } = await useFetch(
-  `${apiBaseUrl}main-derections`,
-  {
-    query: {
-      populate: "deep",
-    },
-  },
-);
-
-const allDirections = directionsData.value?.data
-  ?.map((dir) => ({
-    id: dir?.id,
-    name: dir?.attributes?.heading,
-  }))
-  .filter((el) => el.name);
-
 const filteredArticles = computed(() =>
   articlesData.value?.data?.map((art) => {
     return {
       id: art?.id,
       heading: art?.attributes?.heading,
-      img: art?.attributes?.fotoArticles?.data?.attributes?.url
-        ? baseUrl + art?.attributes?.fotoArticles?.data?.attributes?.url
-        : assetsStore.useAsset("images/articles/articles-dital.png"),
+      img: art?.attributes?.fotoArticles?.data?.attributes?.formats?.small?.url
+        ? baseUrl +
+          art?.attributes?.fotoArticles?.data?.attributes?.formats?.small?.url
+        : baseUrl + imagePlaceholders?.articles,
       text: art?.attributes?.text,
-      tags: art?.attributes?.tags,
+      tags: art?.attributes?.tag_category,
       description: art?.attributes?.description,
     };
   }),
 );
+
+const allTags = articlesData.value?.data
+  ?.map((art) => art?.attributes?.tag_category)
+  ?.filter(Boolean);
+
+const uniqueTags = [...new Set(allTags)];
 
 watch(
   () => route.query,
@@ -130,6 +135,40 @@ const breadcrumbs = [
     url: "/articles",
   },
 ];
+
+useHead({
+  title: "Статьи для пациентов в детской и взрослой стоматологии",
+  meta: [
+    {
+      name: "twitter:title",
+      content: "Статьи для пациентов в детской и взрослой стоматологии",
+    },
+    {
+      property: "og:title",
+      content: "Статьи для пациентов в детской и взрослой стоматологии",
+    },
+    {
+      name: "description",
+      content:
+        "Блог Стамус о стоматологии и детской стоматологии. Рекомендации врачей детской клиники СтамусМед, а также новости из жизни клиник Стамус",
+    },
+    {
+      name: "twitter:description",
+      content:
+        "Блог Стамус о стоматологии и детской стоматологии. Рекомендации врачей детской клиники СтамусМед, а также новости из жизни клиник Стамус",
+    },
+    {
+      property: "og:description",
+      content:
+        "Блог Стамус о стоматологии и детской стоматологии. Рекомендации врачей детской клиники СтамусМед, а также новости из жизни клиник Стамус",
+    },
+    {
+      name: "keywords",
+      content:
+        "Блог стамус, блог стамусмед, статьи стамус, блог детской стоматологии, рекомендации стоматологии. рекомендации детской стоматологии",
+    },
+  ],
+});
 </script>
 
 <template>
@@ -137,26 +176,21 @@ const breadcrumbs = [
     <div class="articles-page-wrap">
       <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
       <div class="articles-page-title">Статьи</div>
-      <div class="filters-box">
-        <elements-custom-select
-          :options="allDirections"
-          label="Выберите направление"
-          class="select"
-          @select="handleDirChange"
-          :selectedId="dirFilter"
-        />
-      </div>
-      <!-- <div class="articles-page-btns">
+      <p class="contacts-page-text">
+        Отвечаем на актуальные медицинские вопросы, <br />
+        рассказываем о жизни клиник и делимся новостями.
+      </p>
+      <div class="articles-page-btns">
         <button
-          v-for="tab in tabs"
-          :key="tab.id"
-          :class="{ active: selectedButton === tab.id }"
-          @click="() => selectButton(tab.id)"
+          v-for="(tag, index) in uniqueTags"
+          :key="index"
+          :class="{ active: tagFilter?.includes(tag) }"
+          @click.stop="handleTagClick(tag)"
           class="articles-page-btn"
         >
-          {{ tab.title }}
+          {{ tag }}
           <div
-            v-if="selectedButton === tab.id"
+            v-if="tagFilter?.includes(tag)"
             class="articles-page-icon-active"
           >
             <svg
@@ -174,7 +208,7 @@ const breadcrumbs = [
             </svg>
           </div>
         </button>
-      </div> -->
+      </div>
       <div class="articles-page-cards" v-if="filteredArticles?.length">
         <div
           v-for="item in filteredArticles"
@@ -185,11 +219,24 @@ const breadcrumbs = [
         </div>
       </div>
       <div v-else :style="{ textAlign: 'center' }">Ничего не найдено</div>
-      <elements-pagination
-        :current-page="currentPage"
-        :total-pages="totalPages"
-        @update:current-page="handlePageClick"
+
+      <vue-awesome-paginate
+        v-model="currentPage"
+        :total-items="totalItems"
+        :items-per-page="pageSize"
+        :max-pages-shown="3"
+        :on-click="handlePageClick"
+        paginate-buttons-class="btn"
+        active-page-class="btn-active"
+        back-button-class="back-btn"
+        next-button-class="next-btn"
+        :show-breakpoint-buttons="true"
+        :hide-prev-next="true"
+        type="link"
+        link-url="/articles?page=[page]"
+        class="pagination"
       />
+
       <blocks-main-form />
     </div>
   </div>
@@ -197,6 +244,65 @@ const breadcrumbs = [
 
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
+
+/* Pagination */
+
+.pagination-container {
+  width: 100%;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 40px 0 90px;
+}
+
+.pagination:deep(.btn) {
+  @include body-14-regular;
+  height: 30px;
+  width: 38px;
+  cursor: pointer;
+  color: $gray-text;
+
+  display: flex;
+  justify-content: center;
+  align-items: center !important;
+
+  transition: all 0.2s ease-in-out;
+
+  &:not(.active):hover {
+    border-radius: 5px;
+    background: #f0f0f0;
+    color: #232d5b;
+  }
+}
+
+.pagination:deep(.btn-active) {
+  border-radius: 5px;
+  border: 1px solid var(--dissabled, #cfd5e1);
+  padding: 4px 10px;
+
+  cursor: default;
+}
+
+/* End of Pagination */
+
+.contacts-page-text {
+  @include body-20-regular;
+  color: $gray-text;
+  padding-bottom: 100px;
+}
+
+@media (max-width: 904px) {
+  .contacts-page-text {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 676px) {
+  .contacts-page-text {
+    padding: 0 0 60px;
+  }
+}
 
 .filters-box {
   width: 100%;

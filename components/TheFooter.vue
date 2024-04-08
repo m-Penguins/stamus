@@ -13,8 +13,8 @@
                 exact
                 active-class="active-link"
                 class="header-nav-item footer-text"
-                to="/specialists"
-                >Специалисты</NuxtLink
+                to="/team"
+                >Врачи</NuxtLink
               >
               <NuxtLink
                 exact
@@ -61,7 +61,7 @@
           <NuxtLink
             target="_blank"
             class="footer-text header-nav-item"
-            :to="`tel:${phone?.replaceAll(' ', '')}`"
+            :to="`tel:+${phone?.replace(/\D/g, '')}`"
           >
             {{ phone }}
           </NuxtLink>
@@ -80,7 +80,7 @@
             >
               <img
                 :src="`${baseUrl}${social?.icon?.data?.attributes?.url}`"
-                alt="social"
+                :alt="social?.icon?.data?.attributes?.alternativeText"
                 class="footer-img"
               />
             </NuxtLink>
@@ -91,7 +91,7 @@
           <div class="footer-address__container">
             <div class="footer-address__container-link">
               <NuxtLink
-                v-for="clinic in clinicsData?.data?.slice(
+                v-for="clinic in baseDataStore.clinics?.data?.slice(
                   0,
                   clinicColumnNumber,
                 )"
@@ -100,16 +100,14 @@
               >
                 <p class="footer-text">{{ clinic?.attributes?.address }}</p>
               </NuxtLink>
-
-              <!-- <NuxtLink @click="$router.push(`clinics/${linkTransform('ул. Черкасская 17')}`)" class="footer-text" to="#">
-                <p class="footer-text">ул. Черкасская 17</p>
-              </NuxtLink> -->
             </div>
           </div>
         </div>
         <div class="p-r-18 address">
           <NuxtLink
-            v-for="clinic in clinicsData?.data?.slice(clinicColumnNumber)"
+            v-for="clinic in baseDataStore.clinics?.data?.slice(
+              clinicColumnNumber,
+            )"
             :key="clinic?.id"
             :to="`/clinics/${clinic?.id}`"
           >
@@ -127,13 +125,22 @@
         >
           Политика конфидециальности
         </NuxtLink>
-        <NuxtLink
-          :to="license"
-          target="_blank"
-          class="footer-text display-block"
-        >
-          Лицензия
-        </NuxtLink>
+        <div>
+          <NuxtLink
+            :to="licenseStamus"
+            target="_blank"
+            class="footer-text display-block"
+          >
+            Лицензия Стамус
+          </NuxtLink>
+          <NuxtLink
+            :to="licenseStamusMed"
+            target="_blank"
+            class="footer-text display-block"
+          >
+            Лицензия СтамусМед
+          </NuxtLink>
+        </div>
         <a href="#" class="bvi-open footer-text display-block" data-bvi="close"
           >Версия для слабовидящих</a
         >
@@ -145,9 +152,19 @@
           <NuxtLink :to="policy" target="_blank" class="footer-text">
             Политика конфидециальности
           </NuxtLink>
-          <NuxtLink :to="license" target="_blank" class="footer-text">
-            Лицензия
-          </NuxtLink>
+          <div class="footer-text">
+            <NuxtLink :to="licenseStamus" target="_blank" class="footer-text">
+              Лицензия Стамус
+            </NuxtLink>
+            /
+            <NuxtLink
+              :to="licenseStamusMed"
+              target="_blank"
+              class="footer-text"
+            >
+              Лицензия СтамусМед
+            </NuxtLink>
+          </div>
 
           <a href="#" class="bvi-open footer-text" data-bvi="close"
             >Версия для слабовидящих</a
@@ -172,46 +189,42 @@
 // Затем активируйте "bvi" при клике
 // bvi.activate();
 // };
-const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+
+const props = defineProps(["footerData"]);
+
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
-const [{ data: clinicsData }, { data: footerData }] = await Promise.all([
-  useFetch(`${apiBaseUrl}clinics`, {}),
-  useFetch(`${apiBaseUrl}footer`, {
-    query: {
-      populate: "links.icon.*,privacy.*,license.*",
-    },
-  }),
-]);
+const baseDataStore = useBaseDataStore();
 
-console.log(footerData.value);
+const phone = props?.footerData?.data?.attributes?.phone;
+const email = props?.footerData?.data?.attributes?.email;
 
-const phone = footerData?.value?.data?.attributes?.phone;
-const email = footerData?.value?.data?.attributes?.email;
+const socials = props?.footerData?.data?.attributes?.links;
 
-const socials = footerData.value?.data?.attributes?.links;
-
-const license = footerData.value?.data?.attributes?.license?.data?.attributes
-  ?.url
-  ? baseUrl + footerData.value?.data?.attributes?.license?.data?.attributes?.url
+const licenseStamus = props?.footerData?.data?.attributes?.license_stamus?.data
+  ?.attributes?.url
+  ? baseUrl +
+    props?.footerData?.data?.attributes?.license_stamus?.data?.attributes?.url
+  : "";
+const licenseStamusMed = props?.footerData?.data?.attributes?.license_stamusmed
+  ?.data?.attributes?.url
+  ? baseUrl +
+    props?.footerData?.data?.attributes?.license_stamusmed?.data?.attributes
+      ?.url
   : "";
 
-const policy = footerData.value?.data?.attributes?.privacy?.data?.attributes
+const policy = props?.footerData?.data?.attributes?.privacy?.data?.attributes
   ?.url
-  ? baseUrl + footerData.value?.data?.attributes?.privacy?.data?.attributes?.url
+  ? baseUrl +
+    props?.footerData?.data?.attributes?.privacy?.data?.attributes?.url
   : "";
 
 const clinicColumnNumber = computed(() => {
-  return clinicsData.value?.data?.length > 5 ? 4 : 3;
+  return baseDataStore.clinics?.data?.length > 5 ? 4 : 3;
 });
 
 const route = useRoute();
 const router = useRouter();
-
-const navigateToRoute = (str) => {
-  const newRoute = `/clinics/${linkTransform(str)}`;
-  router.replace(newRoute);
-};
 </script>
 
 <style lang="scss" scoped>

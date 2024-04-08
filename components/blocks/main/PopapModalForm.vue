@@ -138,9 +138,7 @@
             />
             <div class="popup-text">
               Нажимая кнопку отправить, вы соглашаетесь с
-              <a
-                href="http://176.99.11.245:1338/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf"
-                target="_blank"
+              <a :href="privacyLink" target="_blank"
                 >Политикой обработки персональных данных</a
               >
             </div>
@@ -167,7 +165,7 @@
               />
             </div>
             <elements-select
-              :options="clinics"
+              :options="dynamicClinics"
               :default="'Выберите клинику'"
               class="select"
               :dopText="true"
@@ -201,9 +199,7 @@
             />
             <div class="popup-text">
               Нажимая кнопку отправить, вы соглашаетесь с
-              <a
-                href="http://176.99.11.245:1338/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf"
-                target="_blank"
+              <a :href="privacyLink" target="_blank"
                 >Политикой обработки персональных данных</a
               >
             </div>
@@ -214,95 +210,78 @@
   </transition>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      isExpanded: false,
-    };
+<script setup>
+const props = defineProps(["isOpen", "addresData", "clinics"]);
+
+const baseDataStore = useBaseDataStore();
+const baseUrl = useRuntimeConfig().public.baseUrl;
+
+const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
+  ?.attributes?.url
+  ? baseUrl +
+    baseDataStore?.footerData?.data?.attributes?.privacy?.data?.attributes?.url
+  : "";
+
+const isExpanded = ref(false);
+
+const clinics = [
+  {
+    name: "Клиника на Гимназической",
+    address: "ул. Гимназическая 85",
   },
-  props: {
-    isOpen: {
-      type: Boolean,
-    },
-    // isDiscounts: {
-    //   type: Boolean,
-    // },
-    // isPriceForm: {
-    //   type: Boolean,
-    //   default: false
-    // },
-    addresData: Array,
+  {
+    name: "Клиника на Мачуги",
+    address: "ул. Мачуги 1/1",
   },
-  methods: {
-    toggleExpansion() {
-      this.isExpanded = !this.isExpanded;
-    },
+  {
+    name: "Клиника на Московской",
+    address: "ул. Московская 140",
   },
-  setup(props, context) {
-    const clinics = [
-      {
-        name: "Клиника на Гимназической",
-        address: "ул. Гимназическая 85",
-      },
-      {
-        name: "Клиника на Мачуги",
-        address: "ул. Мачуги 1/1",
-      },
-      {
-        name: "Клиника на Московской",
-        address: "ул. Московская 140",
-      },
-      {
-        name: "Клиника на Платановом бульваре",
-        address: "Платановый бульвар 19/3",
-      },
-      {
-        name: "Клиника на Хакурате",
-        address: "ул. Хакурате 34",
-      },
-    ];
-    // const value = ref();
-    // const valuePhone = ref();
-    const valueText = ref("");
-    const store = useModalStore();
-
-    const sendData = () => {
-      store.submitModal();
-    };
-
-    const handleEscapePress = (e) => {
-      if (
-        e.key === "Escape" &&
-        (store.isModalOpen || store.isModalOpenDiscounts)
-      ) {
-        store.closeModal();
-      }
-    };
-
-    onMounted(() => {
-      window.addEventListener("keydown", handleEscapePress);
-    });
-
-    onBeforeUnmount(() => {
-      window.removeEventListener("keydown", handleEscapePress);
-    });
-
-    function setIsOpen() {
-      context.emit("togglerPopup", false);
-      store.resetForm();
-    }
-
-    return {
-      clinics,
-      setIsOpen,
-      mockAddresses,
-      valueText,
-      store,
-      sendData,
-    };
+  {
+    name: "Клиника на Платановом бульваре",
+    address: "Платановый бульвар 19/3",
   },
+  {
+    name: "Клиника на Хакурате",
+    address: "ул. Хакурате 34",
+  },
+];
+
+const dynamicClinics = props?.clinics
+  ? props?.clinics?.data?.map((cl) => ({
+      name: cl?.attributes?.heading,
+      address: cl?.attributes?.address,
+    }))
+  : clinics;
+
+const toggleExpansion = () => (isExpanded.value = !isExpanded.value);
+
+const store = useModalStore();
+
+const sendData = () => {
+  store.submitModal();
 };
+
+const handleEscapePress = (e) => {
+  if (e.key === "Escape" && (store.isModalOpen || store.isModalOpenDiscounts)) {
+    store.closeModal();
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("keydown", handleEscapePress);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("keydown", handleEscapePress);
+});
+
+const emits = defineEmits(["togglerPopup"]);
+
+function setIsOpen() {
+  emits("togglerPopup", false);
+  store.resetForm();
+}
 </script>
 
 <style lang="scss">
@@ -319,6 +298,7 @@ export default {
 .popup-wrap {
   width: 100%;
   height: 100vh;
+  height: 100svh;
   position: fixed;
   top: 0;
   left: 0;
@@ -389,6 +369,11 @@ export default {
   max-width: 416px;
   width: 100%;
   z-index: 902;
+
+  height: 100%;
+  max-height: 700px;
+
+  overflow: auto;
 }
 
 .popup-close {

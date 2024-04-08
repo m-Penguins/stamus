@@ -1,6 +1,6 @@
 <script setup>
 defineProps(["block"]);
-const assetsStore = useAssets();
+
 const baseUrl = useRuntimeConfig().public?.baseUrl;
 </script>
 
@@ -12,15 +12,18 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
       :src="`${baseUrl}${block?.image?.data?.attributes?.url}`"
       :alt="block?.image?.data?.attributes?.alternativeText ?? 'Изображение'"
     />
-    <img
-      v-else
-      class="image"
-      :src="assetsStore.useAsset(`images/blocks/${img}`)"
-      alt="rectangle"
-    />
+
     <div class="seo-block-text">
-      <h2 class="seo-block-text__title p-bt-14" v-html="block?.title"></h2>
-      <div class="seo-block-text__text" v-html="block?.description"></div>
+      <h2
+        class="seo-block-text__title p-bt-14"
+        v-if="block?.title"
+        v-html="block?.title"
+      ></h2>
+      <div
+        class="seo-block-text__text"
+        v-if="block?.description"
+        v-html="block?.description"
+      ></div>
     </div>
   </div>
 </template>
@@ -59,6 +62,11 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
     &__text {
       @include body-14-regular;
       color: $gray-text;
+      width: 100%;
+
+      &:deep(figure) {
+        width: 100% !important;
+      }
     }
   }
 }
@@ -71,6 +79,8 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
 .image {
   border-radius: 45px;
   width: 60%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .seo-block-text {
@@ -90,7 +100,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
   .image {
     width: 50%;
     object-fit: cover;
-    object-position: 21% 10%;
+    object-position: center;
     border-radius: 20px;
   }
   .seo-block {
@@ -100,7 +110,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .seo-block.reversed {
     flex-direction: column-reverse;
   }

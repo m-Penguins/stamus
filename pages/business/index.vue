@@ -37,21 +37,66 @@ export default {
       { img: "partner4.png" },
       { img: "partner5.png" },
       { img: "partner6.png" },
+      { img: "partner7.png" },
+      { img: "partner8.png" },
+      { img: "partner9.png" },
+      { img: "partner10.png" },
+      { img: "partner11.png" },
+      { img: "partner12.svg" },
+      { img: "partner13.svg" },
+      { img: "partner14.svg" },
+      { img: "partner15.svg" },
+      { img: "partner16.svg" },
+      { img: "partner17.svg" },
+      { img: "partner18.svg" },
     ];
 
     const assetsStore = useAssets();
-    const bigImage = assetsStore.useAsset("images/big-images/business.png");
+    const bigImage = assetsStore.useAsset("big-images/business.png");
 
-    const imgAdaptiv = assetsStore.useAsset(
-      "images/big-images/business-adaptiv.png",
-    );
+    const imgAdaptiv = assetsStore.useAsset("big-images/business-adaptiv.png");
+
+    const baseDataStore = useBaseDataStore();
 
     const mockArray = {
-      name: "Овсоян Григорий",
-      category: "Челюстно-лицевой хирург",
-      img: assetsStore.useAsset("images/specialists/main-doctor.png"),
-      text: "Лишь элементы политического процесса неоднозначны и будут призваны к ответу. Кстати,  элементы политического процесса набирают популярность среди определенных слоев населения, а значит, должны быть в равной степени предоставлены сами себе. Таким образом, сложившаяся структура организации способствует повышению качества своевременного выполнения сверхзадачи. Мы вынуждены отталкиваться от того, что сплочённость команды профессионалов прекрасно подходит для реализации как самодостаточных, так и внешне зависимых концептуальных решений. И нет сомнений, что независимые государства, инициированные исключительно синтетически.",
+      name: "Клиника Стамус",
+      img: assetsStore.useAsset("specialists/main-doctor2.png"),
+      text: "Во всех клиниках Стамус врачи ведут прием по ДМС, а так же проводят лечение корпоративным клиентам. Это очень удобно, так как организации с которыми мы сотрудничаем имеют офисы по всему Краснодару и ваши сотрудники могут обратиться в ближайшую для себя клинику Стамус.<br /><br />Мы давно сотрудничаем с предприятиями, но всегда готовы подойти индивидуально к запросам организации.<br /><br />Постоплата предусмотрена для всех организаций.<br /><br />По ДМС мы предоставляем весь перечень услуг от лечения зубов до имплантации и протезирования. Сотрудничаем с большинством страховых компаний и ежемесячно заключаем договора с новыми.",
     };
+
+    useHead({
+      title: "Лечение по ДМС. Взрослая и детская стоматология Стамус",
+      meta: [
+        {
+          name: "twitter:title",
+          content: "Лечение по ДМС. Взрослая и детская стоматология Стамус",
+        },
+        {
+          property: "og:title",
+          content: "Лечение по ДМС. Взрослая и детская стоматология Стамус",
+        },
+        {
+          name: "description",
+          content:
+            "Все филиалы сети стоматологий «СТАМУС» в Краснодаре оказывают услуги по системе ДМС. А так же предоставляют выгодные условия корпоративным клиентам",
+        },
+        {
+          name: "twitter:description",
+          content:
+            "Все филиалы сети стоматологий «СТАМУС» в Краснодаре оказывают услуги по системе ДМС. А так же предоставляют выгодные условия корпоративным клиентам",
+        },
+        {
+          property: "og:description",
+          content:
+            " дмс стоматология, дмс стоматология краснодар, полис дмс стоматлогия, лмс стоматология для физических, согаз дмс стоматология",
+        },
+        {
+          name: "keywords",
+          content:
+            "оставить отзыв стамус, оставить отзыв стамусмед, оставить отзыв stamus",
+        },
+      ],
+    });
     return {
       mockArrayImg,
       mockBusinessCards,
@@ -61,6 +106,7 @@ export default {
       bigImage,
       imgAdaptiv,
       mockArray,
+      baseDataStore,
     };
   },
 };
@@ -71,10 +117,11 @@ export default {
     :isPriceForm="true"
     @togglerPopup="togglerPopup"
     :isOpen="isOpenPopup"
+    :clinics="baseDataStore.clinics"
   />
   <elements-main-info
-    title="Бизнесу и корпортивным клиентам"
-    text="Небольшое описание в несколько строчек"
+    title="Бизнесу и корпоративным клиентам"
+    text="Все клиники Стамус работают с ДМС"
     :imgBg="bigImage"
     :imgAdaptiv="imgAdaptiv"
     :isButtonBase="false"
@@ -94,14 +141,14 @@ export default {
   <blocks-business-block :data="mockBusinessCards" />
   <BlocksMainBanner
     :title="'Корпоративные цены'"
-    :text="'Для организаций предусмотрен лояльный прайс лист на все базовые услуги'"
+    :text="'Индивидуальный прайс для организаций, система лояльности для ваших сотрудников'"
     :titleLink="'Оставить заявку'"
     link="#"
     :handleLinkClick="openBidModal"
-    bgColor="light-blue"
-    type="true"
+    bgColor="business"
     img="price.png"
     bigImg="true"
+    :type="false"
   />
   <blocks-chief-doctor-block :specialists="mockArray" />
   <blocks-partners-block :data="mockArrayImg" />
