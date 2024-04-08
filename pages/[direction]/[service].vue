@@ -25,6 +25,7 @@ if (!firstLvlDirection?.value?.data?.length) {
 const { data: serviceData } = await useFetch(`${apiBaseUrl}services`, {
   query: {
     "filters[slug][$eq]": route.params?.service,
+    "sort": "specialists.order:asc",
     populate: blocksQuey + ",specialists.fotoSpecialist.*",
   },
 });

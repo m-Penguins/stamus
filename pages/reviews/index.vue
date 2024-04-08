@@ -17,12 +17,14 @@ const totalPages = computed(() =>
 
 const handlePageClick = async (page) => {
   currentPage.value = page;
-  const searchQuery = {
-    page,
-    service: serviceFilter.value,
-    spec: specFilter.value,
-  };
-
+  let searchQuery = ''
+  if(page != 1) {
+    searchQuery = {
+      page,
+      service: serviceFilter.value,
+      spec: specFilter.value,
+    };
+  }
   clearObjectFields(searchQuery);
 
   await navigateTo({
