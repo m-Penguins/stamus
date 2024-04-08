@@ -116,7 +116,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
 
 @media (max-width: 900px) {
   .seo-block.reversed {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
   .seo-block {
     display: flex;
