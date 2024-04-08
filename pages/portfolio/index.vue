@@ -160,6 +160,8 @@ const breadcrumbs = [
 
 const mockGallery = portfolioGallery.map((img) => `images/gallery/${img}`);
 
+console.log(route.fullPath);
+
 useHead({
   title: "Портфолио клиник Стамус. Работы До - После врачей",
   meta: [
@@ -192,6 +194,7 @@ useHead({
         "портфолио стоматолог, портфолио стамус, работы до после стоматолога, работы до после стамус",
     },
   ],
+  link: [{ rel: "canonical", href: "https://stamus.ru" + route.path }],
 });
 </script>
 
