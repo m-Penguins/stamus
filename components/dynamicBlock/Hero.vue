@@ -5,7 +5,7 @@
         :src="imgBg"
         provider="strapi"
         :alt="imgAlt"
-        sizes="lg:1280px xl:1560 xxl:1920px "
+        sizes="xl:1920px xxl:2560px"
         format="webp"
         class="banner-img"
       />
