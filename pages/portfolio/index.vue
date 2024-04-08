@@ -115,7 +115,6 @@ const getPortfoliosData = async () => {
 };
 
 const portfoliosData = await getPortfoliosData();
-console.log(portfoliosData.value);
 
 const baseDataStore = useBaseDataStore();
 
