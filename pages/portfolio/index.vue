@@ -160,8 +160,6 @@ const breadcrumbs = [
 
 const mockGallery = portfolioGallery.map((img) => `images/gallery/${img}`);
 
-console.log(route.fullPath);
-
 useHead({
   title: "Портфолио клиник Стамус. Работы До - После врачей",
   meta: [

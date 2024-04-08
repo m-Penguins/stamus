@@ -113,12 +113,13 @@ const servicesData = baseDataStore.allServices;
 
 const filteredReviews = computed(() => mapReviews(reviewsData?.value?.data));
 
-const allSpecialists = specialistsData.value?.data
+const allSpecialists = [...specialistsData.value?.data]
   ?.map((spec) => ({
     id: spec?.id,
     name: spec?.attributes?.firstName + " " + spec?.attributes?.lastName,
   }))
-  .filter((el) => el.name);
+  ?.filter((el) => el.name)
+  ?.sort((a, b) => a.name?.localeCompare(b.name));
 
 const allServices = servicesData?.data
   ?.map((serv) => ({
