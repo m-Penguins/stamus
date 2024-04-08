@@ -103,7 +103,7 @@
 
               <!-- <NuxtLink @click="$router.push(`clinics/${linkTransform('ул. Черкасская 17')}`)" class="footer-text" to="#">
                 <p class="footer-text">ул. Черкасская 17</p>
-              </NuxtLink>
+              </NuxtLink> -->
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@
 
           <!-- <NuxtLink @click="navigateToRoute('ул. Средняя 1-3')" class="footer-text" to="#">
             <p class="footer-text">ул. Средняя 1/3</p>
-          </NuxtLink>
+          </NuxtLink> -->
         </div>
         <NuxtLink
           :to="policy"

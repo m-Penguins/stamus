@@ -7,15 +7,10 @@
           <client-only>
             <yandex-map
               :settings="settings"
-              :coords="[45.085805, 39.002218]"
-              :detailed-controls="detailedControls"
-              :controls="controls"
-              map-type="map"
-              zoom="10"
             >
               <ymap-marker
                 v-for="(item, index) in tabs"
-                :key="item?.name"
+                :key="index"
                 :coords="item?.coordinates"
                 :marker-id="item?.name"
                 @click="activeTab = index"
@@ -28,7 +23,7 @@
         </div>
         <elements-map-nav :info="tabs?.[activeTab]" />
       </div>
-      <!-- <img class="tab-map" :src="assetsStore.useAsset(`images/${tab.image}`)" alt=""> -->
+      
     </div>
   </div>
 </template>
@@ -70,6 +65,7 @@ const settings = {
   lang: "ru_RU",
   coordorder: "latlong",
   version: "2.1",
+  debug: true
 };
 
 const tabs = [
@@ -139,6 +135,7 @@ const tabs = [
 const assetsStore = useAssets();
 const coordinates = [45.085805, 39.002218];
 const controls = ["fullscreenControl"];
+const zoom = 10;
 const detailedControls = {
   zoomControl: { position: { right: 10, top: 50 } },
 };
