@@ -5,23 +5,24 @@ const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const directionSlug = route?.params?.direction;
 
-const { data: firstLvlDirection } = await useFetch(
-  `${apiBaseUrl}main-derections`,
-  {
-    query: {
-      "filters[slug][$eq]": directionSlug,
-    },
-  },
+const { data: directionData } = await useFetch(`${apiBaseUrl}main-derections`, {
+  query: {
+    "filters[slug][$eq]": directionSlug,
+    populate: blocksQuey,
+    sort: "order:asc",
+  }
+  }
 );
 
-if (!firstLvlDirection?.value?.data?.length) {
+
+if (!directionData?.value?.data?.length) {
   throw createError({
     statusCode: 404,
     statusMessage: "Page Not Found",
     fatal: true,
   });
 }
-
+const placeholdersStore = usePlaceholdersStore();
 const { data: serviceData } = await useFetch(`${apiBaseUrl}services`, {
   query: {
     "filters[slug][$eq]": route.params?.service,
@@ -41,14 +42,11 @@ const mainInfo = serviceData?.value?.data?.[0]?.attributes;
 
 const serviceId = serviceData?.value?.data?.[0]?.id;
 
-const mainBigImg = mainInfo?.photoBanner?.data?.attributes?.url
-  ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.url
-  : baseUrl + imagePlaceholders?.services;
+const mainImg =
+  mainInfo?.photoBanner?.data?.attributes?.url ??
+  placeholdersStore?.imagePlaceholders?.services;
 
-const mainAdaptiveImg = mainInfo?.photoBanner?.data?.attributes?.formats?.medium
-  ?.url
-  ? baseUrl + mainInfo?.photoBanner?.data?.attributes?.formats?.medium?.url
-  : baseUrl + imagePlaceholders?.services;
+const mainImgAlt = mainInfo?.photoBanner?.data?.attributes?.alternativeText;
 
 const serviceBlocks = mainInfo?.blocks;
 
@@ -81,8 +79,8 @@ useHead(getMetaObject(metaData, baseUrl));
   <DynamicBlockHero
     :title="mainInfo?.heading"
     :text="mainInfo?.description"
-    :imgBg="mainBigImg"
-    :imgAdaptive="mainAdaptiveImg"
+    :imgBg="mainImg"
+    :imgAlt="mainImgAlt"
     :breadcrumbs="breadcrumbs"
     :link="mainInfo?.link"
     :link_text="mainInfo?.link_text"
