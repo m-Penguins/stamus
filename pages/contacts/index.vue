@@ -125,7 +125,7 @@
 // link="https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/#otzivi"
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
-
+const route = useRoute();
 const assetsStore = useAssets();
 
 const { data: contactsData } = await useFetch(`${apiBaseUrl}contact`, {

@@ -3,7 +3,7 @@ defineProps(["isDiscounts"]);
 
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
-
+const route = useRoute();
 const assetsStore = useAssets();
 const bigImage = "images/big-images/discounts_new.png";
 

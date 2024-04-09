@@ -1,6 +1,6 @@
 <script setup>
 const reviewStore = useReviewStore();
-
+const route = useRoute();
 const baseDataStore = useBaseDataStore();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 

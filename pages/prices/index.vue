@@ -2,7 +2,7 @@
 const placeholdersStore = usePlaceholdersStore();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
-
+const route = useRoute();
 const searchInput = ref("");
 const serviceFilter = ref(null);
 

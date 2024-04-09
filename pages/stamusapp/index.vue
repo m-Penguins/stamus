@@ -1,4 +1,5 @@
 <script setup>
+const route = useRoute();
 const cardMobAppMock = [
   {
     title: "Скачать в App Store",

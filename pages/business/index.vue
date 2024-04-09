@@ -25,6 +25,7 @@ export default {
     },
   },
   setup() {
+    const route = useRoute();
     const togglerPopup = (state) => {
       isOpenPopup.value = state;
     };

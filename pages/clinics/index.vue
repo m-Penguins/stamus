@@ -1,6 +1,6 @@
 <script setup>
 const item = ref(true);
-
+const route = useRoute();
 const checkScreenSize = () => {
   item.value = window.innerWidth <= 1110 ? false : true;
 };
