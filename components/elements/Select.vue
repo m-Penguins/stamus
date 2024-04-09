@@ -267,7 +267,7 @@ hr {
   top: 62px;
   z-index: 12;
   overflow-y: scroll;
-  height: 188px;
+  height: 250px;
 }
 
 .custom-select .items div {

@@ -303,7 +303,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
 }
 
 .info-card {
-  overflow: hidden;
+  // overflow: hidden;
   max-height: 84px;
   transition: max-height 0.9s ease-in-out;
 }
@@ -433,7 +433,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
   }
 }
 .info-card {
-  overflow: hidden;
+  // overflow: hidden;
   max-height: 100px;
   transition: max-height 0.9s ease-in-out;
 }
