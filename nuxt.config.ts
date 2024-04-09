@@ -1,7 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  // ... other options
+  router: {
+    trailingSlash: false,
+  },
   app: {
     head: {
       charset: "utf-8",
@@ -85,7 +87,7 @@ export default defineNuxtConfig({
   site: {
     url: "https://stamus.ru",
     name: "STAMUS",
-    trailingSlash: true,
+    trailingSlash: false,
   },
   yandexMaps: {
     apikey: process.env.YANDEX_API_KEY,
