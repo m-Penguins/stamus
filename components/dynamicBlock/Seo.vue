@@ -6,15 +6,16 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
 
 <template>
   <div class="seo-block" :class="{ reversed: block?.reverse }">
-    <NuxtImg
-      v-if="block?.image?.data?.attributes?.url"
-      :src="block?.image?.data?.attributes?.url"
-      provider="strapi"
-      :alt="block?.image?.data?.attributes?.alternativeText"
-      sizes="xs:400px sm:600px md:1000px lg:1200px xl:1920px"
-      format="webp"
-      class="image"
-    />
+    <div class="image">
+      <NuxtImg
+        v-if="block?.image?.data?.attributes?.url"
+        :src="block?.image?.data?.attributes?.url"
+        provider="strapi"
+        :alt="block?.image?.data?.attributes?.alternativeText"
+        sizes="xs:400px sm:600px md:1000px lg:1200px xl:1920px"
+        format="webp"
+      />
+    </div>
 
     <div class="seo-block-text">
       <h2
@@ -57,6 +58,8 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
     padding: 20px 40px;
     border-radius: 45px;
 
+    flex-basis: 40%;
+
     &__title {
       @include body-22-medium-Neue;
       color: $dark-blue-subtitle;
@@ -81,10 +84,17 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
 
 .image {
   border-radius: 45px;
-  width: 60%;
+  flex-basis: 60%;
+  width: 100%;
 
-  object-fit: cover;
-  object-position: center;
+  overflow: hidden;
+
+  & img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .seo-block-text {
