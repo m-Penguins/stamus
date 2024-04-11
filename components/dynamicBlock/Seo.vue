@@ -58,7 +58,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
     padding: 20px 40px;
     border-radius: 45px;
 
-    flex-basis: 40%;
+    flex-basis: 70%;
 
     &__title {
       @include body-22-medium-Neue;
@@ -84,7 +84,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
 
 .image {
   border-radius: 45px;
-  flex-basis: 60%;
+  flex-basis: 30%;
   width: 100%;
 
   overflow: hidden;
