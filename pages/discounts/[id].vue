@@ -77,6 +77,8 @@ const breadcrumbs = [
   },
 ];
 
+const route = useRoute();
+
 useHead({
   title: "Счастливые часы в клиниках Стамус и СтамусМед. Успей записаться",
   meta: [
