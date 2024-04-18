@@ -89,6 +89,11 @@ export default defineNuxtConfig({
     name: "STAMUS",
     trailingSlash: false,
   },
+  sitemap: {
+    sitemaps: {
+      index: [{ sitemap: "https://stamus.ru/server/api/sitemap/index.xml" }],
+    },
+  },
   yandexMaps: {
     apikey: process.env.YANDEX_API_KEY,
   },
