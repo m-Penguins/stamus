@@ -65,6 +65,13 @@ export default defineNuxtConfig({
     "nuxt-simple-robots",
     "@nuxtjs/sitemap",
     [
+      "yandex-metrika-module-nuxt3",
+      {
+        id: "49742548",
+        webvisor: true,
+      },
+    ],
+    [
       "nuxt-mail",
       {
         message: [
@@ -84,6 +91,10 @@ export default defineNuxtConfig({
     ],
     "vue-yandex-maps/nuxt",
   ],
+  yandexMetrika: {
+    id: "49742548",
+    // ...
+  },
   site: {
     url: "https://stamus.ru",
     name: "STAMUS",
