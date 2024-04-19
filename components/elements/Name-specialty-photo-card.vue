@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="`/team/${specialists.id}`" class="card-photo-name">
+  <a :to="`/team/${specialists.id}`" class="card-photo-name">
     <div class="card-photo-name-img">
       <NuxtImg
         :src="specialists?.img"
@@ -81,14 +81,14 @@
       /> -->
       <!-- :link="specialists?.link ?? ''" -->
     </div>
-    <NuxtLink
+    <a
       v-if="props.link"
-      :to="link"
+      :href="link"
       target="_blank"
       class="button-base card-photo-name-box-discount__btn my-button"
-      >Записаться</NuxtLink
+      >Записаться</a
     >
-  </NuxtLink>
+  </a>
 </template>
 
 <script setup>
