@@ -298,7 +298,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
 
 @media (max-width: 740px) {
   .info-card {
-    max-height: 2000px;
+    max-height: 10000px;
   }
 }
 
@@ -309,7 +309,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
 }
 
 .info-card.open {
-  max-height: 2000px;
+  max-height: 10000px;
 }
 
 .info-links-box {
@@ -333,7 +333,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
   &.open {
     & .accordion-content {
       margin-top: 16px;
-      max-height: 2000px;
+      max-height: 10000px;
       opacity: 1;
     }
   }
@@ -439,7 +439,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
 }
 
 .info-card.open {
-  max-height: 2000px;
+  max-height: 10000px;
 }
 
 .accordion-title {
@@ -504,7 +504,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
   &.open {
     & .accordion-content {
       margin-top: 16px;
-      max-height: 2000px;
+      max-height: 10000px;
       opacity: 1;
       padding-right: 10px;
     }
@@ -574,7 +574,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
 .dop-info-enter-active,
 .dop-info-leave-active {
   transition: all 0.5s ease-in-out;
-  max-height: 6000px;
+  max-height: 10000px;
 }
 
 .dop-info-enter-from,
