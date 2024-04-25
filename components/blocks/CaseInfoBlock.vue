@@ -195,7 +195,7 @@ const alt = props?.infoBlock?.image?.data?.attributes?.alternativeText;
 .video-block-rectangle {
   width: 220px;
   min-height: 348px;
-  height: 100%;
+  //height: 100%;
   border-radius: 15px;
   background: var(--text, #525660);
   position: relative;

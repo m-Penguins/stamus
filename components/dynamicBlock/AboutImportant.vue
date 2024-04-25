@@ -50,7 +50,7 @@ defineProps(["block"]);
   gap: 10px;
 
   text-wrap: pretty;
-  word-break: break-all;
+  // word-break: break-all;
   width: 100%;
   max-width: 100%;
 }

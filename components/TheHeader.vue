@@ -33,9 +33,10 @@ export default {
       navigationPatients: [
         { id: 1, title: "Клиники", path: "/clinics" },
         { id: 2, title: "Наше приложение", path: "/stamusapp" },
-        { id: 3, title: "Информация для пациентов", path: "/info" },
-        { id: 4, title: "Налоговый вычет", path: "/info" },
-        { id: 5, title: "Статьи", path: "/articles" },
+        { id: 3, title: "Корпоративным клиентам", path: "/business" },
+        { id: 4, title: "Информация для пациентов", path: "/info" },
+        { id: 5, title: "Налоговый вычет", path: "/info" },
+        { id: 6, title: "Статьи", path: "/articles" },
       ],
     };
   },

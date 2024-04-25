@@ -236,7 +236,7 @@ const handleVideoClick = (link) => {
 .video-block-rectangle {
   width: 220px;
   min-height: 348px;
-  height: 100%;
+  // height: 100%;
   border-radius: 15px;
   background: var(--text, #525660);
   position: relative;
@@ -300,7 +300,7 @@ const handleVideoClick = (link) => {
     }
   }
   .video-block-rectangle {
-    height: 100%;
+    // height: 100%;
     width: 50%;
   }
   .video-block-rectangle-video {
@@ -365,7 +365,7 @@ const handleVideoClick = (link) => {
 
   .video-block-rectangle {
     width: 100%;
-    height: 100%;
+    // height: 100%;
     min-height: fit-content;
     flex-direction: row-reverse;
     align-items: center;

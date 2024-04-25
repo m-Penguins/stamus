@@ -30,10 +30,12 @@ const allPositions = [
       ?.map((el) => el?.attributes?.position)
       ?.filter(Boolean),
   ),
-]?.map((el, index) => ({
-  id: index + 1,
-  name: el,
-}));
+]
+  ?.sort()
+  .map((el, index) => ({
+    id: index + 1,
+    name: el,
+  }));
 
 const getSpecialistsData = async () => {
   const positionQ = allPositions?.find(
