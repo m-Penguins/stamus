@@ -24,6 +24,15 @@ if (!specialist.value?.data) {
   });
 }
 
+const openDoctorLink = (link) => {
+  console.log(link);
+  if (link) {
+    window.open(link, "_blank");
+  } else {
+    redirectToExternalApp();
+  }
+};
+
 const breadcrumbs = [
   {
     title: "Главная",
@@ -66,7 +75,9 @@ const blocks = specialist.value?.data?.attributes?.blocks;
             :category="specialist?.data?.attributes?.position ?? ''"
             textButtonBase="Записаться онлайн"
             :isButtonBase="true"
-            :customClick="redirectToExternalApp"
+            :customClick="
+              () => openDoctorLink(specialist?.data?.attributes?.bookingLink)
+            "
             :title="
               specialist?.data?.attributes?.lastName +
               ' ' +
