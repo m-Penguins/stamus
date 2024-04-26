@@ -82,7 +82,9 @@ const allDirections = baseDataStore.directions?.data
     id: dir?.id,
     name: dir?.attributes?.heading,
   }))
-  .filter((el) => el.name);
+  .filter((el) => el.name && el?.id !== 4);
+
+console.log(allDirections);
 
 watch(
   () => route.query,
