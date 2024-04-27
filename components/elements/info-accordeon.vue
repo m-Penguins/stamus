@@ -11,13 +11,6 @@ const toggleOpenItem = (itemId) => {
   }
 };
 
-const route = useRoute();
-const isNDFL = computed(() => route.hash === "#ndfl");
-
-if (isNDFL.value) {
-  openItem.value = "ndfl";
-}
-
 const store = useFormStore();
 const mockCheckBoxes = [
   "Проходил лечение в 2021 г",

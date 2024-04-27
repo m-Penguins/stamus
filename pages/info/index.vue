@@ -64,15 +64,7 @@ const { data: infoData } = await useFetch(`${apiBaseUrl}information`, {
 
 const about = infoData.value?.data?.attributes?.about;
 
-const additional = infoData.value?.data?.attributes?.additional;
-
-const additionalCards = [
-  ...additional,
-  {
-    id: "ndfl",
-    title: "Документы на возврат НДФЛ",
-  },
-];
+const additionalCards = infoData.value?.data?.attributes?.additional;
 
 useHead({
   title: "Налоговый вычет в Стамус. Верните до 13% от стоимости лечения.",

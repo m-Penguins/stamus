@@ -35,7 +35,7 @@ export default {
         { id: 2, title: "Наше приложение", path: "/stamusapp" },
         { id: 3, title: "Корпоративным клиентам", path: "/business" },
         { id: 4, title: "Информация для пациентов", path: "/info" },
-        { id: 5, title: "Налоговый вычет", path: "/info" },
+        { id: 5, title: "Налоговый вычет", path: "/nalog-vichet" },
         { id: 6, title: "Статьи", path: "/articles" },
       ],
     };
@@ -254,7 +254,7 @@ export default {
                         <NuxtLink
                           v-for="(elem, index) in navigationPatients"
                           :key="elem"
-                          :to="elem.path + (index === 3 ? '#ndfl' : '')"
+                          :to="elem.path"
                           class="menu-patients-items"
                         >
                           <li class="menu-patients-items-link">
@@ -588,7 +588,7 @@ export default {
                         v-for="elem in navigationPatients"
                         @click="showMenuMob = false"
                         :key="elem"
-                        :to="elem.path + (elem.id === 4 ? '#ndfl' : '')"
+                        :to="elem.path"
                         class="menu-patients-items-mob"
                       >
                         <li>
