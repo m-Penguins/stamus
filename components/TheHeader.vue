@@ -256,6 +256,7 @@ export default {
                           :key="elem"
                           :to="elem.path"
                           class="menu-patients-items"
+                          @click="showMenuPatients = false"
                         >
                           <li class="menu-patients-items-link">
                             <div>
