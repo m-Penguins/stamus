@@ -41,12 +41,16 @@ const getSearchData = async () => {
   ] = await Promise.all([
     useFetch(`${apiBaseUrl}specialists`, {
       query: {
-        "filters[fullName][$contains][0]": searchTerm.value,
-        "filters[fullName][$contains][1]": lowerSearch,
-        "filters[fullName][$contains][2]": capitalSearch,
-        "filters[fullName][$contains][3]": upperSearch,
+        "filters[$or][0][fullName][$contains]": searchTerm.value,
+        "filters[$or][1][fullName][$contains]": lowerSearch,
+        "filters[$or][2][fullName][$contains]": capitalSearch,
+        "filters[$or][3][fullName][$contains]": upperSearch,
+        "filters[$or][40][position][$contains]": searchTerm.value,
+        "filters[$or][41][position][$contains]": lowerSearch,
+        "filters[$or][42][position][$contains]": capitalSearch,
+        "filters[$or][43][position][$contains]": upperSearch,
         "sort[0]": "order:asc",
-        populate: "fotoSpecialist.*,achievements.*",
+        populate: "fotoSpecialist.*,achievements.*,position.*",
       },
     }),
     useFetch(`${apiBaseUrl}services`, {
@@ -60,11 +64,15 @@ const getSearchData = async () => {
     }),
     useFetch(`${apiBaseUrl}articles`, {
       query: {
-        "filters[heading][$contains][8]": searchTerm.value,
-        "filters[heading][$contains][9]": lowerSearch,
-        "filters[heading][$contains][10]": capitalSearch,
-        "filters[heading][$contains][11]": upperSearch,
-        populate: "heading.*",
+        "filters[$or][8][heading][$contains]": searchTerm.value,
+        "filters[$or][9][heading][$contains]": lowerSearch,
+        "filters[$or][10][heading][$contains]": capitalSearch,
+        "filters[$or][11][heading][$contains]": upperSearch,
+        "filters[$or][58][description][$contains]": searchTerm.value,
+        "filters[$or][59][description][$contains]": lowerSearch,
+        "filters[$or][50][description][$contains]": capitalSearch,
+        "filters[$or][51][description][$contains]": upperSearch,
+        populate: "heading.*,description.*",
       },
     }),
   ]);
@@ -96,9 +104,9 @@ const getSearchData = async () => {
   }));
 
   totalResults.value =
-    services?.value?.length +
-    specialists?.value?.length +
-    articles?.value?.length;
+    (services?.value?.length || 0) +
+    (specialists?.value?.length || 0) +
+    (articles?.value?.length || 0);
 
   if (totalResults.value === 0) {
     nothingFound.value = true;
