@@ -51,8 +51,8 @@
                 active-class="active-link"
                 class="header-nav-item footer-text"
                 to="/contacts"
-                >Контакты
-              </NuxtLink>
+                >Контакты</NuxtLink
+              >
             </div>
           </div>
         </div>
@@ -147,7 +147,7 @@
         <NuxtLink to="/business" class="footer-text display-block">
           Бизнесу и корпоративным клиентам
         </NuxtLink>
-        <a href="#" class="bvi-open">Включить режим доступности</a>
+        <!-- <a href="#" class="bvi-open">Включить режим доступности</a> -->
         <div class="display">
           <NuxtLink :to="policy" target="_blank" class="footer-text">
             Политика конфидециальности

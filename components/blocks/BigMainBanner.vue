@@ -3,12 +3,12 @@
     <div
       class="dentistry-container"
       :style="`background-image:url(${assetsStore.useAsset(
-        `big-images/${imgBg}`,
+        `images/big-images/${imgBg}`,
       )})`"
     >
       <div class="dentistry-box">
         <div class="mob">
-          <img :src="assetsStore.useAsset(`big-images/${imgAdaptiv}`)" />
+          <img :src="assetsStore.useAsset(`images/big-images/${imgAdaptiv}`)" />
         </div>
         <elements-title-text-button
           textButtonBase="Записаться онлайн"

@@ -1,6 +1,9 @@
 <template>
   <div class="partners-card">
-    <img :src="assetsStore.useAsset(`partners/${images.img}`)" alt="partner" />
+    <img
+      :src="assetsStore.useAsset(`images/partners/${images.img}`)"
+      alt="partner"
+    />
   </div>
 </template>
 

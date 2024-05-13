@@ -17,13 +17,8 @@ const totalPages = computed(() =>
 
 const handlePageClick = async (page) => {
   currentPage.value = page;
-<<<<<<< HEAD
   let searchQuery = "";
   if (page != 1) {
-=======
-  let searchQuery = ''
-  if(page != 1) {
->>>>>>> a32cc7504d371827e54429370578101f655096b2
     searchQuery = {
       page,
       service: serviceFilter.value,
@@ -118,21 +113,13 @@ const servicesData = baseDataStore.allServices;
 
 const filteredReviews = computed(() => mapReviews(reviewsData?.value?.data));
 
-<<<<<<< HEAD
 const allSpecialists = [...specialistsData.value?.data]
-=======
-const allSpecialists = specialistsData.value?.data
->>>>>>> a32cc7504d371827e54429370578101f655096b2
   ?.map((spec) => ({
     id: spec?.id,
     name: spec?.attributes?.firstName + " " + spec?.attributes?.lastName,
   }))
-<<<<<<< HEAD
   ?.filter((el) => el.name)
   ?.sort((a, b) => a.name?.localeCompare(b.name));
-=======
-  .filter((el) => el.name);
->>>>>>> a32cc7504d371827e54429370578101f655096b2
 
 const allServices = servicesData?.data
   ?.map((serv) => ({
@@ -186,7 +173,6 @@ useHead({
       content:
         "Стоматология Стамус – Победитель в номинации “Лучшая частная стоматология Южного Федерального округа 2023 по мнению пациентов независимого портала ПроДокторов",
     },
-<<<<<<< HEAD
     // {
     //   name: "keywords",
     //   content:
@@ -194,14 +180,6 @@ useHead({
     // },
   ],
   link: [{ rel: "canonical", href: "https://stamus.ru" + route.path }],
-=======
-    {
-      name: "keywords",
-      content:
-        "Стамус отзывы, стоматология отзывы, стоматология краснодар отзывы, детская стоматология отзывы, отзывы о врачах стоматология",
-    },
-  ],
->>>>>>> a32cc7504d371827e54429370578101f655096b2
 });
 </script>
 
@@ -244,10 +222,6 @@ useHead({
       </div>
     </template>
     <div v-else :style="{ textAlign: 'center' }">Ничего не найдено</div>
-<<<<<<< HEAD
-=======
-
->>>>>>> a32cc7504d371827e54429370578101f655096b2
     <vue-awesome-paginate
       v-model="currentPage"
       :total-items="totalItems"
@@ -273,10 +247,6 @@ useHead({
 @import "/assets/styles/style.scss";
 
 /* Pagination */
-<<<<<<< HEAD
-=======
-
->>>>>>> a32cc7504d371827e54429370578101f655096b2
 .pagination-container {
   width: 100%;
   display: flex !important;
@@ -285,53 +255,28 @@ useHead({
   gap: 6px;
   padding: 40px 0 90px;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> a32cc7504d371827e54429370578101f655096b2
 .pagination:deep(.btn) {
   @include body-14-regular;
   height: 30px;
   width: 38px;
   cursor: pointer;
   color: $gray-text;
-<<<<<<< HEAD
   display: flex;
   justify-content: center;
   align-items: center !important;
   transition: all 0.2s ease-in-out;
-=======
-
-  display: flex;
-  justify-content: center;
-  align-items: center !important;
-
-  transition: all 0.2s ease-in-out;
-
->>>>>>> a32cc7504d371827e54429370578101f655096b2
   &:not(.active):hover {
     border-radius: 5px;
     background: #f0f0f0;
     color: #232d5b;
   }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> a32cc7504d371827e54429370578101f655096b2
 .pagination:deep(.btn-active) {
   border-radius: 5px;
   border: 1px solid var(--dissabled, #cfd5e1);
   padding: 4px 10px;
-<<<<<<< HEAD
   cursor: default;
 }
-=======
-
-  cursor: default;
-}
-
->>>>>>> a32cc7504d371827e54429370578101f655096b2
 /* End of Pagination */
 
 .review-btn {
