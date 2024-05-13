@@ -1,6 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
+  routeRules: {
+    "/5otzivov": { redirect: "/leave-review" },
+  },
   router: {
     trailingSlash: false,
   },
