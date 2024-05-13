@@ -2,7 +2,11 @@
 const route = useRoute();
 
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+<<<<<<< HEAD
 const placeholdersStore = usePlaceholdersStore();
+=======
+const baseUrl = useRuntimeConfig().public.baseUrl;
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 
 const pageSize = ref(12);
 const currentPage = ref(route.query.page ?? 1);
@@ -30,12 +34,19 @@ const allPositions = [
       ?.map((el) => el?.attributes?.position)
       ?.filter(Boolean),
   ),
+<<<<<<< HEAD
 ]
   ?.sort()
   .map((el, index) => ({
     id: index + 1,
     name: el,
   }));
+=======
+]?.map((el, index) => ({
+  id: index + 1,
+  name: el,
+}));
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 
 const getSpecialistsData = async () => {
   const positionQ = allPositions?.find(
@@ -82,9 +93,13 @@ const allDirections = baseDataStore.directions?.data
     id: dir?.id,
     name: dir?.attributes?.heading,
   }))
+<<<<<<< HEAD
   .filter((el) => el.name && el?.id !== 4);
 
 console.log(allDirections);
+=======
+  .filter((el) => el.name);
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 
 watch(
   () => route.query,
@@ -100,6 +115,7 @@ const totalPages = computed(() =>
 
 const handlePageClick = async (page) => {
   currentPage.value = page;
+<<<<<<< HEAD
   let searchQuery = "";
   if (page != 1) {
     searchQuery = {
@@ -108,6 +124,16 @@ const handlePageClick = async (page) => {
       clinic: clinicFilter.value,
       search: searchFilter.value,
     };
+=======
+  let searchQuery = ''
+  if(page != 1) {
+    searchQuery = {
+    page,
+    dir: clinicFilter.value,
+    clinic: clinicFilter.value,
+    search: searchFilter.value,
+  };
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
   }
 
   clearObjectFields(searchQuery);
@@ -249,6 +275,7 @@ useHead({
       content:
         "Врачи стоматологи Стамус многократно побеждали в номинациях лучших стоматологов Краснодара. Запись онлайн или по телефону. Смотреть портфолио",
     },
+<<<<<<< HEAD
     // {
     //   name: "keywords",
     //   content:
@@ -256,6 +283,14 @@ useHead({
     // },
   ],
   link: [{ rel: "canonical", href: "https://stamus.ru" + route.path }],
+=======
+    {
+      name: "keywords",
+      content:
+        "Врачи стоматологии, врачи стоматологии краснодар, детская стоматология врачи, врачи стамус, стоматологи краснодар, детские стоматологи краснодар, стоматологи стамус",
+    },
+  ],
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 });
 </script>
 
@@ -316,11 +351,20 @@ useHead({
                   specialist?.attributes?.firstName +
                   ' ' +
                   specialist?.attributes?.lastName,
+<<<<<<< HEAD
                 img:
                   specialist?.attributes?.fotoSpecialist?.data?.attributes
                     ?.url ?? placeholdersStore?.imagePlaceholders?.specialists,
                 alt: specialist?.attributes?.fotoSpecialist?.data?.attributes
                   ?.alternativeText,
+=======
+                img: specialist?.attributes?.fotoSpecialist?.data?.attributes
+                  ?.formats?.small?.url
+                  ? baseUrl +
+                    specialist?.attributes?.fotoSpecialist?.data?.attributes
+                      ?.formats?.small?.url
+                  : baseUrl + imagePlaceholders?.specialists,
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
                 position: specialist?.attributes?.position,
                 achievements: specialist?.attributes?.achievements,
               }"
@@ -330,6 +374,10 @@ useHead({
         </template>
         <div v-else :style="{ textAlign: 'center' }">Никого не найдено</div>
       </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
       <vue-awesome-paginate
         v-model="currentPage"
         :total-items="totalItems"
@@ -346,6 +394,10 @@ useHead({
         link-url="/team?page=[page]"
         class="pagination"
       />
+<<<<<<< HEAD
+=======
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
       <blocks-main-popular-services />
       <blocks-main-form />
     </div>
@@ -356,6 +408,10 @@ useHead({
 @import "@/assets/styles/style.scss";
 
 /* Pagination */
+<<<<<<< HEAD
+=======
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 .pagination-container {
   width: 100%;
   display: flex !important;
@@ -364,28 +420,53 @@ useHead({
   gap: 6px;
   padding: 40px 0 90px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 .pagination:deep(.btn) {
   @include body-14-regular;
   height: 30px;
   width: 38px;
   cursor: pointer;
   color: $gray-text;
+<<<<<<< HEAD
   display: flex;
   justify-content: center;
   align-items: center !important;
   transition: all 0.2s ease-in-out;
+=======
+
+  display: flex;
+  justify-content: center;
+  align-items: center !important;
+
+  transition: all 0.2s ease-in-out;
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
   &:not(.active):hover {
     border-radius: 5px;
     background: #f0f0f0;
     color: #232d5b;
   }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 .pagination:deep(.btn-active) {
   border-radius: 5px;
   border: 1px solid var(--dissabled, #cfd5e1);
   padding: 4px 10px;
+<<<<<<< HEAD
   cursor: default;
 }
+=======
+
+  cursor: default;
+}
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 /* End of Pagination */
 
 .width-style {

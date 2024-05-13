@@ -1,7 +1,11 @@
 <script setup>
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+<<<<<<< HEAD
 
 const placeholdersStore = usePlaceholdersStore();
+=======
+const baseUrl = useRuntimeConfig().public.baseUrl;
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 
 const route = useRoute();
 
@@ -18,6 +22,7 @@ const totalPages = computed(() =>
 
 const handlePageClick = async (page) => {
   currentPage.value = page;
+<<<<<<< HEAD
   let searchQuery = "";
   if (page != 1) {
     searchQuery = {
@@ -25,6 +30,16 @@ const handlePageClick = async (page) => {
       tag: tagFilter.value,
     };
   }
+=======
+  let searchQuery = ''
+  if(page != 1) {
+    searchQuery = {
+      page,
+      tag: tagFilter.value,
+  };
+  }
+  
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 
   clearObjectFields(searchQuery);
 
@@ -104,10 +119,17 @@ const filteredArticles = computed(() =>
     return {
       id: art?.id,
       heading: art?.attributes?.heading,
+<<<<<<< HEAD
       img:
         art?.attributes?.fotoArticles?.data?.attributes?.url ??
         placeholdersStore?.imagePlaceholders?.articles,
       alt: art?.attributes?.fotoArticles?.data?.attributes?.alternativeText,
+=======
+      img: art?.attributes?.fotoArticles?.data?.attributes?.formats?.small?.url
+        ? baseUrl +
+          art?.attributes?.fotoArticles?.data?.attributes?.formats?.small?.url
+        : baseUrl + imagePlaceholders?.articles,
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
       text: art?.attributes?.text,
       tags: art?.attributes?.tag_category,
       description: art?.attributes?.description,
@@ -166,6 +188,7 @@ useHead({
       content:
         "Блог Стамус о стоматологии и детской стоматологии. Рекомендации врачей детской клиники СтамусМед, а также новости из жизни клиник Стамус",
     },
+<<<<<<< HEAD
     // {
     //   name: "keywords",
     //   content:
@@ -173,6 +196,14 @@ useHead({
     // },
   ],
   link: [{ rel: "canonical", href: "https://stamus.ru" + route.path }],
+=======
+    {
+      name: "keywords",
+      content:
+        "Блог стамус, блог стамусмед, статьи стамус, блог детской стоматологии, рекомендации стоматологии. рекомендации детской стоматологии",
+    },
+  ],
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 });
 </script>
 
@@ -224,6 +255,10 @@ useHead({
         </div>
       </div>
       <div v-else :style="{ textAlign: 'center' }">Ничего не найдено</div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
       <vue-awesome-paginate
         v-model="currentPage"
         :total-items="totalItems"
@@ -240,6 +275,10 @@ useHead({
         link-url="/articles?page=[page]"
         class="pagination"
       />
+<<<<<<< HEAD
+=======
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
       <blocks-main-form />
     </div>
   </div>
@@ -249,6 +288,10 @@ useHead({
 @import "/assets/styles/style.scss";
 
 /* Pagination */
+<<<<<<< HEAD
+=======
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 .pagination-container {
   width: 100%;
   display: flex !important;
@@ -257,28 +300,53 @@ useHead({
   gap: 6px;
   padding: 40px 0 90px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 .pagination:deep(.btn) {
   @include body-14-regular;
   height: 30px;
   width: 38px;
   cursor: pointer;
   color: $gray-text;
+<<<<<<< HEAD
   display: flex;
   justify-content: center;
   align-items: center !important;
   transition: all 0.2s ease-in-out;
+=======
+
+  display: flex;
+  justify-content: center;
+  align-items: center !important;
+
+  transition: all 0.2s ease-in-out;
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
   &:not(.active):hover {
     border-radius: 5px;
     background: #f0f0f0;
     color: #232d5b;
   }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 .pagination:deep(.btn-active) {
   border-radius: 5px;
   border: 1px solid var(--dissabled, #cfd5e1);
   padding: 4px 10px;
+<<<<<<< HEAD
   cursor: default;
 }
+=======
+
+  cursor: default;
+}
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 /* End of Pagination */
 
 .contacts-page-text {

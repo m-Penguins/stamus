@@ -1,6 +1,13 @@
 <script setup>
+<<<<<<< HEAD
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const placeholdersStore = usePlaceholdersStore();
+=======
+const assetsStore = useAssets();
+const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+const baseUrl = useRuntimeConfig().public.baseUrl;
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 const route = useRoute();
 
 const pageSize = ref(12);
@@ -21,8 +28,13 @@ const totalPages = computed(() =>
 
 const handlePageClick = async (page) => {
   currentPage.value = page;
+<<<<<<< HEAD
   let searchQuery = "";
   if (page != 1) {
+=======
+  let searchQuery = ''
+  if(page != 1) {
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
     searchQuery = {
       page,
       dir: dirFilter.value,
@@ -100,7 +112,10 @@ const getPortfoliosData = async () => {
     "filters[heading][$contains][2]":
       searchFilter.value?.charAt(0)?.toUpperCase() +
       searchFilter.value?.slice(1)?.toLowerCase(),
+<<<<<<< HEAD
     "sort[publishedAt]": "desc",
+=======
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
   };
 
   clearObjectFields(strapiQuery);
@@ -132,10 +147,17 @@ const portfolios = computed(() =>
       name: p?.attributes?.heading,
       category: p?.attributes?.direction?.directions,
       description: p?.attributes?.description,
+<<<<<<< HEAD
       img:
         p?.attributes?.photoBanner?.data?.attributes?.url ??
         placeholdersStore?.imagePlaceholders?.portfoliosSmall,
       alt: p?.attributes?.photoBanner?.data?.attributes?.alternativeText,
+=======
+      img: p?.attributes?.photoBanner?.data?.attributes?.formats?.small?.url
+        ? baseUrl +
+          p?.attributes?.photoBanner?.data?.attributes?.formats?.small?.url
+        : baseUrl + imagePlaceholders?.portfoliosSmall,
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
     };
   }),
 );
@@ -159,7 +181,13 @@ const breadcrumbs = [
   },
 ];
 
+<<<<<<< HEAD
 const mockGallery = portfolioGallery.map((img) => `images/gallery/${img}`);
+=======
+const mockGallery = portfolioGallery.map((img) =>
+  assetsStore.useAsset(`gallery/${img}`),
+);
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 
 useHead({
   title: "Портфолио клиник Стамус. Работы До - После врачей",
@@ -187,6 +215,7 @@ useHead({
       content:
         "Портфолио врачей Стамус одно из самых больших в России. Работы До - После стоматологов клиник Стамус. Кейсы по имплантации, протезированию и другим услугам.",
     },
+<<<<<<< HEAD
     // {
     //   name: "keywords",
     //   content:
@@ -194,6 +223,14 @@ useHead({
     // },
   ],
   link: [{ rel: "canonical", href: "https://stamus.ru" + route.path }],
+=======
+    {
+      name: "keywords",
+      content:
+        "портфолио стоматолог, портфолио стамус, работы до после стоматолога, работы до после стамус",
+    },
+  ],
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 });
 </script>
 
@@ -254,7 +291,11 @@ useHead({
         link-url="/portfolio?page=[page]"
         class="pagination"
       />
+<<<<<<< HEAD
       <blocks-gallery :arrayImg="mockGallery" local />
+=======
+      <blocks-gallery :arrayImg="mockGallery" />
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
       <blocks-main-form />
     </div>
   </div>
@@ -264,6 +305,10 @@ useHead({
 @import "../../assets/styles/style.scss";
 
 /* Pagination */
+<<<<<<< HEAD
+=======
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 .pagination-container {
   width: 100%;
   display: flex !important;
@@ -272,28 +317,53 @@ useHead({
   gap: 6px;
   padding: 40px 0 90px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 .pagination:deep(.btn) {
   @include body-14-regular;
   height: 30px;
   width: 38px;
   cursor: pointer;
   color: $gray-text;
+<<<<<<< HEAD
   display: flex;
   justify-content: center;
   align-items: center !important;
   transition: all 0.2s ease-in-out;
+=======
+
+  display: flex;
+  justify-content: center;
+  align-items: center !important;
+
+  transition: all 0.2s ease-in-out;
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
   &:not(.active):hover {
     border-radius: 5px;
     background: #f0f0f0;
     color: #232d5b;
   }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 .pagination:deep(.btn-active) {
   border-radius: 5px;
   border: 1px solid var(--dissabled, #cfd5e1);
   padding: 4px 10px;
+<<<<<<< HEAD
   cursor: default;
 }
+=======
+
+  cursor: default;
+}
+
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
 /* End of Pagination */
 .input-search {
   width: 308px;

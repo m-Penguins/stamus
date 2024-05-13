@@ -2,7 +2,7 @@
   <div class="seo-block">
     <img
       class="image"
-      :src="assetsStore.useAsset(`images/blocks/${img}`)"
+      :src="assetsStore.useAsset(`blocks/${img}`)"
       alt="rectangle"
     />
     <div class="seo-block-text">

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "nuxt-app",
   "private": true,
@@ -35,3 +36,38 @@
     "yandex-metrika-module-nuxt3": "^1.5.3"
   }
 }
+=======
+{
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "heroku-postbuild": "npm run build"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/sitemap": "^5.1.2",
+    "@types/node": "^18.17.1",
+    "nuxt": "^3.6.5",
+    "nuxt-simple-robots": "^4.0.0-rc.14",
+    "sass": "^1.64.2",
+    "sass-loader": "^13.3.2"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.4.11",
+    "@vueuse/nuxt": "^10.7.0",
+    "maska": "^2.1.11",
+    "nuxt-mail": "^4.0.1",
+    "pinia": "^2.1.6",
+    "swiper": "^10.1.0",
+    "vue-awesome-paginate": "^1.1.46",
+    "vue-template-compiler": "^2.7.14",
+    "vue-yandex-maps": "^2.0.0-rc.5"
+  }
+}
+>>>>>>> a32cc7504d371827e54429370578101f655096b2
