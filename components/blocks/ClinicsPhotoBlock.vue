@@ -12,6 +12,10 @@ const props = defineProps(["clinicsData"]);
       <div class="areas-box-temp">
         <div class="areas-box__img" v-for="clinic in clinicsData?.data">
           <NuxtImg
+            v-if="
+              clinic?.attributes?.photoBanner?.data?.attributes?.url ??
+              placeholdersStore?.imagePlaceholders?.services
+            "
             :src="
               clinic?.attributes?.photoBanner?.data?.attributes?.url ??
               placeholdersStore?.imagePlaceholders?.services

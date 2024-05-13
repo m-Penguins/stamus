@@ -11,6 +11,7 @@ defineProps(["title", "cards", "image"]);
       <div class="solution-block-container">
         <div class="solution-block-container__img">
           <NuxtImg
+            v-if="image"
             :src="image"
             provider="strapi"
             :alt="alt"

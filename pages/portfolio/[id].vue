@@ -41,16 +41,17 @@ const solution = portfolioData.value?.data?.attributes?.solution ?? [];
 const solutionImage =
   portfolioData.value?.data?.attributes?.solutionImage?.data?.attributes?.url ??
   placeholdersStore?.imagePlaceholders?.portfoliosSmall;
+
 const solutionAlt =
   portfolioData.value?.data?.attributes?.solutionImage?.data?.attributes
-    ?.alternativeText;
+    ?.alternativeText ?? "";
 const bigImage =
   portfolioData.value?.data?.attributes?.cardImage?.data?.attributes?.url ??
   placeholdersStore?.imagePlaceholders?.portfoliosBig;
 
 const bigImgAlt =
   portfolioData.value?.data?.attributes?.cardImage?.data?.attributes
-    ?.alternativeText;
+    ?.alternativeText ?? "";
 
 const specialists =
   portfolioData.value?.data?.attributes?.specialists?.data?.map((sp) => {
@@ -61,8 +62,9 @@ const specialists =
       achievements: sp?.attributes?.achievements,
       img:
         sp?.attributes?.fotoSpecialist?.data?.attributes?.url ??
-        placeholdersStore?.imagePlaceholders?.specialists,
-      alt: sp?.attributes?.fotoSpecialist?.data?.attributes?.alternativeText,
+        placeholdersStore?.imagePlaceholders?.specialists
+      alt:
+        sp?.attributes?.fotoSpecialist?.data?.attributes?.alternativeText ?? "",
       achievements: sp?.attributes?.achievements,
     };
   });
@@ -140,9 +142,15 @@ useHead(getMetaObject(metaData, baseUrl));
         </div>
       </div>
     </div>
-    <blocks-portfolio-gallery :arrayImg="gallery" v-if="gallery?.length > 0" />
+    <blocks-portfolio-gallery
+      v-if="gallery && gallery?.length > 0"
+      :arrayImg="gallery"
+    />
     <div class="container-size">
-      <dynamic-block-cases :block="samePortfolios" />
+      <dynamic-block-cases
+        v-if="samePortfolios.portofolios?.data?.length"
+        :block="samePortfolios"
+      />
     </div>
 
     <blocks-main-form />

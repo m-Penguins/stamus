@@ -20,6 +20,7 @@ const props = defineProps(["title", "description", "twoDirections"]);
             <NuxtLink :to="item?.attributes?.slug" class="desktop-link">
               <div class="primary-banner-img">
                 <NuxtImg
+                  v-if="item?.attributes?.photoBanner?.data?.attributes?.url"
                   :src="item?.attributes?.photoBanner?.data?.attributes?.url"
                   provider="strapi"
                   :alt="

@@ -30,6 +30,7 @@ const handleSmallClick = (index) => {
           <div class="div-with-line" v-if="selectedIndex === index"></div>
           <div class="specialists-btn__img">
             <NuxtImg
+              v-if="person?.img"
               :src="person?.img"
               provider="strapi"
               :alt="person?.alt"
@@ -46,6 +47,7 @@ const handleSmallClick = (index) => {
       <div class="specialists-inner">
         <div class="specialists-inner__img">
           <NuxtImg
+            v-if="props.mainSpecialists?.[selectedIndex]?.img"
             :src="props.mainSpecialists?.[selectedIndex]?.img"
             provider="strapi"
             :alt="props.mainSpecialists?.[selectedIndex]?.alt"

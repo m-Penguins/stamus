@@ -2,6 +2,7 @@
   <a :to="`/team/${specialists.id}`" class="card-photo-name">
     <div class="card-photo-name-img">
       <NuxtImg
+        v-if="specialists?.img"
         :src="specialists?.img"
         provider="strapi"
         :alt="specialists?.alt"

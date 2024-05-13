@@ -2,6 +2,7 @@
   <div class="article-card">
     <div class="article-card__box">
       <NuxtImg
+        v-if="article?.img"
         :src="article?.img"
         provider="strapi"
         :alt="article?.alt"

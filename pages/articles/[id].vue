@@ -56,6 +56,7 @@ useHead(getMetaObject(metaData, baseUrl));
           <h1 class="articles-dital-title">{{ heading }}</h1>
           <div class="articles-dital-img">
             <NuxtImg
+              v-if="img"
               :src="img"
               provider="strapi"
               :alt="imgAlt"

@@ -2,6 +2,7 @@
   <div class="dentistry-wrapper">
     <div class="dentistry-container" :class="{ 'bg-dark': false }">
       <NuxtImg
+        v-if="imgBg"
         :src="imgBg"
         provider="strapi"
         :alt="imgAlt"
@@ -16,6 +17,7 @@
         />
         <div class="mob">
           <NuxtImg
+            v-if="imgBg"
             :src="imgBg"
             provider="strapi"
             :alt="imgAlt"

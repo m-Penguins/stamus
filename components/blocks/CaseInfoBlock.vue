@@ -25,6 +25,7 @@ const alt = props?.infoBlock?.image?.data?.attributes?.alternativeText;
     </div>
     <div class="image-container">
       <NuxtImg
+        v-if="image"
         :src="image"
         provider="strapi"
         :alt="alt"

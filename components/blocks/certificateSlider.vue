@@ -32,6 +32,7 @@ const closeCert = () => {
       <div class="popup-wrap" v-if="isCertOpen" @click="closeCert">
         <div class="popup" @click.stop>
           <NuxtImg
+            v-if="popupImg"
             :src="popupImg"
             provider="strapi"
             alt="Сертификат"
@@ -88,6 +89,7 @@ const closeCert = () => {
             @click="openCert(item)"
           >
             <NuxtImg
+              v-if="item"
               :src="item"
               provider="strapi"
               alt="Cертификат"

@@ -3,6 +3,7 @@
     <div class="chief-doctor-block-wrap">
       <div class="chief-doctor-block-container">
         <NuxtImg
+          v-if="specialists?.img || fallBackImg"
           :src="specialists?.img || fallBackImg"
           sizes="xs:400px md:600px"
           format="webp"

@@ -45,6 +45,7 @@ const handleVideoClick = (link) => {
             <div class="ss-card" @click="handleVideoClick(video?.videoLink)">
               <div class="ss-image">
                 <NuxtImg
+                  v-if="video?.videoPreview?.data?.attributes?.url"
                   :src="video?.videoPreview?.data?.attributes?.url"
                   provider="strapi"
                   :alt="video?.videoPreview?.data?.attributes?.alternativeText"

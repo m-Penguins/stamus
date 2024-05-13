@@ -50,6 +50,10 @@ const placeholdersStore = usePlaceholdersStore();
             <div class="article-card">
               <div class="article-card__box">
                 <NuxtImg
+                  v-if="
+                    article?.attributes?.fotoArticles?.data?.attributes?.url ??
+                    placeholdersStore?.imagePlaceholders?.articles
+                  "
                   :src="
                     article?.attributes?.fotoArticles?.data?.attributes?.url ??
                     placeholdersStore?.imagePlaceholders?.articles

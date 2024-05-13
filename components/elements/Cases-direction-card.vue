@@ -2,6 +2,7 @@
   <div class="card-photo-name">
     <div class="card-photo-name-img">
       <NuxtImg
+        v-if="direction.img"
         :src="direction.img"
         :alt="direction?.alt"
         provider="strapi"

@@ -49,6 +49,10 @@ const allCasesLink = props?.serviceId
           <div class="card-photo-name">
             <div class="card-photo-name-img">
               <NuxtImg
+                v-if="
+                  portfolio?.attributes?.photoBanner?.data?.attributes?.url ??
+                  placeholdersStore?.imagePlaceholders?.portfoliosSmall
+                "
                 :src="
                   portfolio?.attributes?.photoBanner?.data?.attributes?.url ??
                   placeholdersStore?.imagePlaceholders?.portfoliosSmall

@@ -5,6 +5,7 @@
     <div class="gallery-img-container">
       <div class="single-img" v-for="item in arrayImg" :key="item">
         <NuxtImg
+          v-if="item"
           :src="item"
           provider="strapi"
           alt="Галерея"

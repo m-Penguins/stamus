@@ -6,45 +6,48 @@
       v-if="arrayImg.length === 2 || arrayImg.length === 4"
       class="gallery-two-img-container"
     >
-      <NuxtImg
-        v-for="item in arrayImg"
-        :key="item"
-        :src="item"
-        :provider="local ? '' : 'strapi'"
-        alt="Галерея"
-        sizes="xs:400px md:600px"
-        format="webp"
-        class="gall-img"
-      />
+      <template v-for="item in arrayImg" :key="item">
+        <NuxtImg
+          v-if="item"
+          :src="item"
+          :provider="local ? '' : 'strapi'"
+          alt="Галерея"
+          sizes="xs:400px md:600px"
+          format="webp"
+          class="gall-img"
+        />
+      </template>
     </div>
 
     <div
       v-else-if="arrayImg.length === 3 || arrayImg.length === 5"
       class="gallery-three-img-container"
     >
-      <NuxtImg
-        v-for="item in arrayImg"
-        :key="item"
-        :src="item"
-        :provider="local ? '' : 'strapi'"
-        alt="Галерея"
-        sizes="xs:400px md:600px"
-        format="webp"
-        class="gall-img-three"
-      />
+      <template v-for="item in arrayImg" :key="item">
+        <NuxtImg
+          v-if="item"
+          :src="item"
+          :provider="local ? '' : 'strapi'"
+          alt="Галерея"
+          sizes="xs:400px md:600px"
+          format="webp"
+          class="gall-img-three"
+        />
+      </template>
     </div>
 
     <div class="container" v-else-if="arrayImg.length === 6">
-      <NuxtImg
-        v-for="(item, index) in arrayImg"
-        :key="item"
-        :src="item"
-        :provider="local ? '' : 'strapi'"
-        alt="Галерея"
-        sizes="xs:400px md:600px"
-        format="webp"
-        :class="'img-' + index"
-      />
+      <template v-for="(item, index) in arrayImg" :key="item">
+        <NuxtImg
+          v-if="item"
+          :src="item"
+          :provider="local ? '' : 'strapi'"
+          alt="Галерея"
+          sizes="xs:400px md:600px"
+          format="webp"
+          :class="'img-' + index"
+        />
+      </template>
     </div>
   </div>
 </template>

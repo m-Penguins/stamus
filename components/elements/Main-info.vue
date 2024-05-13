@@ -2,6 +2,7 @@
   <div class="dentistry-wrapper">
     <div class="dentistry-container" v-bind="$attrs">
       <NuxtImg
+        v-if="imgBg"
         :src="imgBg"
         :alt="imgAlt"
         :provider="local ? '' : 'strapi'"
@@ -17,6 +18,7 @@
         />
         <div class="mob">
           <NuxtImg
+            v-if="imgBg"
             :src="imgBg"
             :alt="imgAlt"
             :provider="local ? '' : 'strapi'"

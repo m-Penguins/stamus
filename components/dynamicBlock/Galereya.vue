@@ -5,6 +5,7 @@
     <div v-if="arrayImg?.length === 1" class="gallery-two-img-container">
       <template v-for="item in arrayImg" :key="item?.id">
         <NuxtImg
+          v-if="item?.attributes?.url"
           :src="item?.attributes?.url"
           provider="strapi"
           :alt="item?.attributes?.alternativeText ?? 'галерея'"
@@ -21,6 +22,7 @@
     >
       <template v-for="item in arrayImg" :key="item?.id">
         <NuxtImg
+          v-if="item?.attributes?.url"
           :src="item?.attributes?.url"
           provider="strapi"
           :alt="item?.attributes?.alternativeText ?? 'галерея'"
@@ -37,6 +39,7 @@
     >
       <template v-for="item in arrayImg" :key="item?.id">
         <NuxtImg
+          v-if="item?.attributes?.url"
           :src="item?.attributes?.url"
           provider="strapi"
           :alt="item?.attributes?.alternativeText ?? 'галерея'"
@@ -50,6 +53,7 @@
     <div class="container" v-else-if="arrayImg?.length === 6">
       <template v-for="(item, index) in arrayImg" :key="item?.id">
         <NuxtImg
+          v-if="item?.attributes?.url"
           :src="item?.attributes?.url"
           provider="strapi"
           :alt="item?.attributes?.alternativeText ?? 'галерея'"
