@@ -62,7 +62,7 @@ const specialists =
       achievements: sp?.attributes?.achievements,
       img:
         sp?.attributes?.fotoSpecialist?.data?.attributes?.url ??
-        placeholdersStore?.imagePlaceholders?.specialists
+        placeholdersStore?.imagePlaceholders?.specialists,
       alt:
         sp?.attributes?.fotoSpecialist?.data?.attributes?.alternativeText ?? "",
       achievements: sp?.attributes?.achievements,
