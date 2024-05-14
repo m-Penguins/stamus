@@ -11,7 +11,7 @@ const { data: specialist } = await useFetch(
       populate:
         "portofolios.photoBanner.*,fotoSpecialist.*,education.*,additionalEducation.*,docsPhoto.*,video.*,clinics.*,services.category.napravleniya_uslug_1_col.*,reviews.*,price_lists.*,achievements.*,areasOfActivity.*,meetingPerson.*" +
         blocksQuey,
-      "_where[status]": "published",
+      "filter[publishedAt][$notNull]": "true",
     },
   },
 );
