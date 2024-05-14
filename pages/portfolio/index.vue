@@ -195,6 +195,8 @@ useHead({
   ],
   link: [{ rel: "canonical", href: "https://stamus.ru" + route.path }],
 });
+
+currentPage.value = parseInt(currentPage.value);
 </script>
 
 <template>

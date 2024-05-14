@@ -16,7 +16,7 @@ const totalPages = computed(() =>
 );
 
 const handlePageClick = async (page) => {
-  currentPage.value = page;
+  currentPage.value = parseInt(page);
   let searchQuery = "";
   if (page != 1) {
     searchQuery = {
@@ -181,6 +181,8 @@ useHead({
   ],
   link: [{ rel: "canonical", href: "https://stamus.ru" + route.path }],
 });
+
+currentPage.value = parseInt(currentPage.value);
 </script>
 
 <template>
