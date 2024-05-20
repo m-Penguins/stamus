@@ -866,6 +866,8 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  order: -1;
+  padding: 15px 0 0;
 }
 
 .header-services-menu-mob-container {
@@ -1049,7 +1051,18 @@ export default {
     .header-nav-list {
       display: flex;
       align-items: center;
+      @media screen and (max-width: 540px) {
+        flex-direction: column;
+      }
     }
+  }
+}
+
+.header-nav-list {
+  @media screen and (max-width: 1360px) {
+    display: flex;
+    // align-items: center;
+    flex-direction: column;
   }
 }
 

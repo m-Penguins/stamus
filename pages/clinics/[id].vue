@@ -39,6 +39,7 @@ if (!clinicsData.value) {
     fatal: true,
   });
 }
+
 const pricesData = clinicData.value?.data?.attributes?.price;
 
 const galleryList = clinicData?.value?.data?.attributes?.galery?.data
@@ -73,6 +74,27 @@ const otherClinics = computed(() =>
       };
     }),
 );
+
+// console.log(clinicData)
+const sortSpecialistsByOrder = (data) => {
+  if (
+    data.attributes &&
+    data.attributes.specialists &&
+    data.attributes.specialists.data
+  ) {
+    data.attributes.specialists.data.sort((a, b) => {
+      const orderA = a.attributes.order;
+      const orderB = b.attributes.order;
+      return (
+        (orderA !== null ? orderA : Number.MAX_SAFE_INTEGER) -
+        (orderB !== null ? orderB : Number.MAX_SAFE_INTEGER)
+      );
+    });
+  }
+  return data;
+};
+
+const sortedData = sortSpecialistsByOrder(clinicData.value);
 
 const reviews = mapReviews(clinicData?.value?.data?.attributes?.reviews?.data);
 
@@ -141,7 +163,7 @@ useHead(getMetaObject(metaData, baseUrl));
   <blocks-our-specialists
     v-if="clinicData?.data?.attributes?.specialists?.data"
     title="Наши врачи"
-    :data="clinicData?.data?.attributes?.specialists?.data"
+    :data="sortedData?.data?.attributes?.specialists?.data"
   />
   <BlocksMainBanner
     :title="'Добровольное медицинское страхование'"

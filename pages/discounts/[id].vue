@@ -57,6 +57,7 @@ const specialists = happyHours?.value?.data?.map((hh) => {
     address: addressData?.length ? `Прием на ${addressData?.join(", ")}` : "",
     description: hh?.attributes?.description ?? "",
     link: hh?.attributes?.link,
+    sale: hh?.attributes?.sale,
   };
 
   return spec;

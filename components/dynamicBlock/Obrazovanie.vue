@@ -2,6 +2,7 @@
 const props = defineProps(["block"]);
 
 const eduBlocks = props?.block?.education;
+eduBlocks.sort((a, b) => new Date(b.years) - new Date(a.years));
 </script>
 
 <template>

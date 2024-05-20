@@ -63,6 +63,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
     &__title {
       @include body-22-medium-Neue;
       color: $dark-blue-subtitle;
+      margin: 0 0 15px;
     }
 
     &__text {

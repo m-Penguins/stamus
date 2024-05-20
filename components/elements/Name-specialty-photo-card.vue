@@ -11,6 +11,7 @@
         class="card-img"
         loading="lazy"
       />
+      <span class="sale-value">{{ specialists?.sale }}</span>
     </div>
     <div
       :class="
@@ -99,6 +100,7 @@ const props = defineProps([
   "isLink",
   "isTooltip",
   "handleLinkClick",
+  "sale",
 ]);
 
 const baseUrl = useRuntimeConfig().public.baseUrl;
@@ -131,6 +133,17 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+}
+
+.sale-value {
+  position: absolute;
+  right: 25px;
+  bottom: 65px;
+  background: #f9f9fa;
+  padding: 5px;
+  font-size: 28px;
+  color: #232d5b;
+  border-radius: 5px;
 }
 
 .card-photo-name-container-discount {
@@ -233,6 +246,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 
 .card-photo-name-img {
   padding-bottom: 30px;
+  position: relative;
 }
 
 .card-photo-name-container {

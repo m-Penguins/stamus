@@ -83,6 +83,7 @@ const getReviewsData = async () => {
     "pagination[pageSize]": pageSize.value,
     "filters[specialists][id][$eq][0]": specFilter.value,
     "filters[services][id][$eq][1]": serviceFilter.value,
+    "sort[0]": "date:desc",
   };
 
   clearObjectFields(strapiQuery);

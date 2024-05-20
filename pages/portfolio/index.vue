@@ -118,8 +118,14 @@ const portfoliosData = await getPortfoliosData();
 
 const baseDataStore = useBaseDataStore();
 
-const allServices = baseDataStore.allServices?.data
-  ?.map((dir) => ({
+let allServices = baseDataStore.allServices?.data?.filter((obj) => {
+  return obj.attributes.blocks.some(
+    (block) => block.__component === "blocks-story.kejsy",
+  );
+});
+
+allServices = allServices
+  .map((dir) => ({
     id: dir?.id,
     name: dir?.attributes?.heading,
   }))
