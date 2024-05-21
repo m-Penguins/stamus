@@ -25,7 +25,7 @@ if (!specialist.value?.data) {
 }
 
 const openDoctorLink = (link) => {
-  console.log(link);
+  // console.log(link);
   if (link) {
     window.open(link, "_blank");
   } else {

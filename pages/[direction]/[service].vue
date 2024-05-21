@@ -67,7 +67,7 @@ const serviceBlocks = mainInfo?.blocks;
 
 const blockSpecialists = mainInfo?.specialists;
 
-console.log(blockSpecialists);
+// console.log(blockSpecialists);
 
 const directionName =
   mainInfo?.category?.data?.attributes?.napravleniya_uslug_1_col?.data

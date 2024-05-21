@@ -92,7 +92,6 @@ useHead(getMetaObject(metaData, baseUrl));
 
 <style lang="scss" scoped>
 @import "@/assets/styles/style.scss";
-
 .banner-img {
   position: absolute;
   top: 0;
@@ -164,6 +163,8 @@ useHead(getMetaObject(metaData, baseUrl));
   }
 
   a {
+    text-decoration: underline;
+    text-decoration-color: #232d5b;
   }
 
   h1 {

@@ -75,26 +75,38 @@ const otherClinics = computed(() =>
     }),
 );
 
-// console.log(clinicData)
 const sortSpecialistsByOrder = (data) => {
   if (
     data.attributes &&
     data.attributes.specialists &&
     data.attributes.specialists.data
   ) {
-    data.attributes.specialists.data.sort((a, b) => {
-      const orderA = a.attributes.order;
-      const orderB = b.attributes.order;
-      return (
-        (orderA !== null ? orderA : Number.MAX_SAFE_INTEGER) -
-        (orderB !== null ? orderB : Number.MAX_SAFE_INTEGER)
-      );
+    // Разделение элементов на те, что с null и не null order
+    const withOrder = [];
+    const withoutOrder = [];
+
+    data.attributes.specialists.data.forEach((item) => {
+      if (item.attributes.order === null) {
+        withoutOrder.push(item);
+      } else {
+        withOrder.push(item);
+      }
     });
+
+    // Сортировка элементов с order по убыванию
+    withOrder.sort(
+      (a, b) =>
+        parseInt(a.attributes.order, 10) - parseInt(b.attributes.order, 10),
+    );
+
+    // Объединение массивов: сначала без order, затем с отсортированным order
+    data.attributes.specialists.data = [...withoutOrder, ...withOrder];
   }
   return data;
 };
+const newSpec = clinicData.value;
 
-const sortedData = sortSpecialistsByOrder(clinicData.value);
+const sortedData = sortSpecialistsByOrder(newSpec.data);
 
 const reviews = mapReviews(clinicData?.value?.data?.attributes?.reviews?.data);
 
@@ -163,7 +175,7 @@ useHead(getMetaObject(metaData, baseUrl));
   <blocks-our-specialists
     v-if="clinicData?.data?.attributes?.specialists?.data"
     title="Наши врачи"
-    :data="sortedData?.data?.attributes?.specialists?.data"
+    :data="sortedData?.attributes?.specialists?.data"
   />
   <BlocksMainBanner
     :title="'Добровольное медицинское страхование'"

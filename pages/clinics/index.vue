@@ -34,6 +34,39 @@ if (!specialistsData.value) {
   });
 }
 
+const sortSpecialistsByOrder = (data) => {
+  if (
+    data.attributes &&
+    data.attributes.specialists &&
+    data.attributes.specialists.data
+  ) {
+    // Разделение элементов на те, что с null и не null order
+    const withOrder = [];
+    const withoutOrder = [];
+
+    data.attributes.specialists.data.forEach((item) => {
+      if (item.attributes.order === null) {
+        withoutOrder.push(item);
+      } else {
+        withOrder.push(item);
+      }
+    });
+
+    // Сортировка элементов с order по убыванию
+    withOrder.sort(
+      (a, b) =>
+        parseInt(a.attributes.order, 10) - parseInt(b.attributes.order, 10),
+    );
+
+    // Объединение массивов: сначала без order, затем с отсортированным order
+    data.attributes.specialists.data = [...withoutOrder, ...withOrder];
+  }
+  return data;
+};
+// const newSpec = specialistsData.data;
+
+const sortedData = sortSpecialistsByOrder(specialistsData.value.data);
+
 const assetsStore = useAssets();
 
 const bigImage = "images/big-images/clinics.jpg";
@@ -54,30 +87,32 @@ const mockArray = {
 };
 
 useHead({
-  title: " 6 клиник Стамус в Краснодаре, Адреса",
+  title: "Все стоматологические клиники Стамус: адреса и контактная информация",
   meta: [
     {
       name: "twitter:title",
-      content: " 6 клиник Стамус в Краснодаре, Адреса",
+      content:
+        "Все стоматологические клиники Стамус: адреса и контактная информация",
     },
     {
       property: "og:title",
-      content: " 6 клиник Стамус в Краснодаре, Адреса",
+      content:
+        "Все стоматологические клиники Стамус: адреса и контактная информация",
     },
     {
       name: "description",
       content:
-        "Сеть клиник Стамус представлена в каждом районе города Краснодара, Детская клиника находится на Юбилейном",
+        "Сеть клиник Стамус представлена в каждом районе города Краснодара. Узнайте на сайте адреса и контактную информацию интересующей вас стоматологии.",
     },
     {
       name: "twitter:description",
       content:
-        "Сеть клиник Стамус представлена в каждом районе города Краснодара, Детская клиника находится на Юбилейном",
+        "Сеть клиник Стамус представлена в каждом районе города Краснодара. Узнайте на сайте адреса и контактную информацию интересующей вас стоматологии.",
     },
     {
       property: "og:description",
       content:
-        "Сеть клиник Стамус представлена в каждом районе города Краснодара, Детская клиника находится на Юбилейном",
+        "Сеть клиник Стамус представлена в каждом районе города Краснодара. Узнайте на сайте адреса и контактную информацию интересующей вас стоматологии.",
     },
     // {
     //   name: "keywords",
@@ -118,7 +153,7 @@ useHead({
   <blocks-gallery :arrayImg="arrayImg" :local="true" />
   <blocks-our-specialists
     v-if="specialistsData.data"
-    :data="specialistsData.data"
+    :data="sortedData"
     title="Наши врачи"
   />
   <BlocksMainBanner
