@@ -67,7 +67,6 @@ export default defineNuxtConfig({
     "/uslugi/dental-prosthetics/veneers/keramicheskie/": {
       redirect: "/uslugi/keramicheskie-koronki",
     },
-    "/uslugi/gigiena/": { redirect: "/uslugi/gigiena" },
     "/uslugi/gigiena/chistka-zubnogo-kamnya/": { redirect: "/uslugi/gigiena" },
     "/uslugi/gigiena/ultrazvukovaya-chistka-zubov/": {
       redirect: "/uslugi/gigiena",
