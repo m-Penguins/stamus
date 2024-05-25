@@ -6,117 +6,82 @@
       </div>
       <div class="footer__box">
         <div class="footer-menu">
-          <h3 class="footer-subtitle">Меню</h3>
           <div class="footer-menu-container">
             <div class="footer-menu-container__link">
               <NuxtLink
-                exact
-                active-class="active-link"
-                class="header-nav-item footer-text"
-                to="/team"
-                >Врачи</NuxtLink
+                  target="_blank"
+                  class="footer-text header-nav-item"
+                  :to="`tel:+${phone?.replace(/\D/g, '')}`"
               >
+                {{ phone }}
+              </NuxtLink>
               <NuxtLink
-                exact
-                active-class="active-link"
-                class="header-nav-item footer-text"
-                to="/info"
-                >Пациентам</NuxtLink
+                  target="_blank"
+                  class="footer-text header-nav-item"
+                  :to="`mailto:${email}`"
               >
+                {{ email }}
+              </NuxtLink>
+              <p class="footer-text display-block">Ежедневно 09:00-21:00</p>
               <NuxtLink
-                exact
-                active-class="active-link"
-                class="header-nav-item footer-text"
-                to="/discounts"
-                >Акции и скидки</NuxtLink
+                  target="_blank"
+                  class="footer-text header-nav-item"
+                  :to="`mailto:${email}`"
               >
-            </div>
-            <div class="footer-menu-container__link">
-              <NuxtLink
-                exact
-                active-class="active-link"
-                class="header-nav-item footer-text"
-                to="/portfolio"
-                >Портфолио</NuxtLink
-              >
-              <NuxtLink
-                exact
-                active-class="active-link"
-                class="header-nav-item footer-text"
-                to="/prices"
-                >Цены</NuxtLink
-              >
-              <NuxtLink
-                exact
-                active-class="active-link"
-                class="header-nav-item footer-text"
-                to="/contacts"
-                >Контакты</NuxtLink
-              >
+                Написать руководителю
+              </NuxtLink>
+              <div class="footer-social">
+                <NuxtLink
+                    v-for="social in socials"
+                    :key="social?.id"
+                    :to="social?.link"
+                    class="footer-social-link"
+                >
+                  <img
+                      :src="`${baseUrl}${social?.icon?.data?.attributes?.url}`"
+                      :alt="social?.icon?.data?.attributes?.alternativeText"
+                      class="footer-img"
+                  />
+                </NuxtLink>
+              </div>
             </div>
           </div>
         </div>
         <div class="footer-contacts">
-          <h3 class="footer-subtitle">Контакты</h3>
+          <h3 class="footer-subtitle">Услуги</h3>
           <NuxtLink
+            v-for="navigationService in storeServices.getStateService"
             target="_blank"
             class="footer-text header-nav-item"
-            :to="`tel:+${phone?.replace(/\D/g, '')}`"
+            :to="`${navigationService.path}`"
           >
-            {{ phone }}
+            {{ navigationService.title }}
           </NuxtLink>
-          <NuxtLink
-            target="_blank"
-            class="footer-text header-nav-item"
-            :to="`mailto:${email}`"
-            >{{ email }}</NuxtLink
-          >
-          <div class="footer-social">
-            <NuxtLink
-              v-for="social in socials"
-              :key="social?.id"
-              :to="social?.link"
-              class="footer-social-link"
-            >
-              <img
-                :src="`${baseUrl}${social?.icon?.data?.attributes?.url}`"
-                :alt="social?.icon?.data?.attributes?.alternativeText"
-                class="footer-img"
-              />
-            </NuxtLink>
-          </div>
         </div>
         <div class="footer-address">
-          <h3 class="footer-subtitle">Наши адреса</h3>
+          <h3 class="footer-subtitle">Пациентам</h3>
           <div class="footer-address__container">
             <div class="footer-address__container-link">
               <NuxtLink
-                v-for="clinic in baseDataStore.clinics?.data?.slice(
-                  0,
-                  clinicColumnNumber,
-                )"
-                :key="clinic?.id"
-                :to="`/clinics/${clinic?.id}`"
+                v-for="link in navigationPatients"
+                :key="link.id"
+                :to="link.path"
+                class="footer-text header-nav-item"
               >
-                <p class="footer-text">{{ clinic?.attributes?.address }}</p>
+                {{ link.title}}
               </NuxtLink>
             </div>
           </div>
         </div>
-        <div class="p-r-18 address">
+        <div class="footer-contacts last-column">
           <NuxtLink
-            v-for="clinic in baseDataStore.clinics?.data?.slice(
-              clinicColumnNumber,
-            )"
-            :key="clinic?.id"
-            :to="`/clinics/${clinic?.id}`"
+            v-for="link in lastColumnNavigation"
+            :key="link.id"
+            :to="link.path"
+            class="footer-text header-nav-item"
           >
-            <p class="footer-text">{{ clinic?.attributes?.address }}</p>
+            {{ link.title }}
           </NuxtLink>
-
-          <!-- <NuxtLink @click="navigateToRoute('ул. Средняя 1-3')" class="footer-text" to="#">
-            <p class="footer-text">ул. Средняя 1/3</p>
-          </NuxtLink> -->
         </div>
         <NuxtLink
           :to="policy"
@@ -126,13 +91,6 @@
           Политика конфидециальности
         </NuxtLink>
         <div>
-          <NuxtLink
-            :to="licenseStamus"
-            target="_blank"
-            class="footer-text display-block"
-          >
-            Лицензия Стамус
-          </NuxtLink>
           <NuxtLink
             :to="licenseStamusMed"
             target="_blank"
@@ -153,10 +111,6 @@
             Политика конфидециальности
           </NuxtLink>
           <div class="footer-text">
-            <NuxtLink :to="licenseStamus" target="_blank" class="footer-text">
-              Лицензия Стамус
-            </NuxtLink>
-            /
             <NuxtLink
               :to="licenseStamusMed"
               target="_blank"
@@ -190,7 +144,9 @@
 // bvi.activate();
 // };
 
+
 const props = defineProps(["footerData"]);
+const storeServices = useService();
 
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
@@ -225,6 +181,23 @@ const clinicColumnNumber = computed(() => {
 
 const route = useRoute();
 const router = useRouter();
+
+const navigationPatients = [
+  { id: 1, title: "Адреса", path: "/clinics" },
+  { id: 2, title: "Врачи", path: "/team" },
+  { id: 3, title: "Цены", path: "/prices" },
+  { id: 4, title: "Лечение по ДМС", path: "/business" },
+  { id: 5, title: "Акции и скидки", path: "/discounts" },
+];
+
+const lastColumnNavigation = [
+  { id: 1, title: "Правовая информация", path: "/info" },
+  { id: 2, title: "Статьи", path: "/articles" },
+  { id: 3, title: "Отзывы", path: "/reviews" },
+  { id: 4, title: "Портфолио", path: "/portfolio" },
+  { id: 5, title: "Контакты", path: "/contacts" },
+];
+
 </script>
 
 <style lang="scss" scoped>
@@ -275,6 +248,10 @@ const router = useRouter();
   flex-direction: column;
 }
 
+.last-column {
+  margin-top: auto;
+}
+
 .footer {
   @include flex-column-center;
   width: 100%;
@@ -323,6 +300,8 @@ const router = useRouter();
 
     &__container-link {
       padding-right: 38px;
+      display: flex;
+      flex-direction: column;
     }
   }
 

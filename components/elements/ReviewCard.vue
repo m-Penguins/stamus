@@ -23,6 +23,8 @@ defineProps(["review"]);
   padding: 20px;
   border-radius: 10px;
   border: 1px solid $border-card;
+  height: 300px;
+  overflow: auto;
 
   &__title {
     @include body-18-regular;
