@@ -138,7 +138,7 @@ useHead(getMetaObject(metaData, baseUrl));
   align-self: flex-start;
   gap: 5px;
   color: #525660;
-  font-size: 20px;
+  font-size: 18px;
   margin-top: 40px;
   cursor: pointer;
   svg {

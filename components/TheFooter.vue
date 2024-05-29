@@ -24,9 +24,8 @@
               </NuxtLink>
               <p class="footer-text display-block">Ежедневно 09:00-21:00</p>
               <NuxtLink
-                  target="_blank"
                   class="footer-text header-nav-item"
-                  :to="`mailto:${email}`"
+                  to="/leave-review?toManager=true"
               >
                 Написать руководителю
               </NuxtLink>

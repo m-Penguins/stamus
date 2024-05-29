@@ -120,6 +120,12 @@ useHead({
   ],
   link: [{ rel: "canonical", href: "https://stamus.ru" + route.path }],
 });
+
+onBeforeMount(() => {
+  if (route.query.toManager) {
+    reviewStore.moveStep2();
+  }
+});
 </script>
 
 <template>
@@ -199,7 +205,15 @@ useHead({
             class="popup-form-input"
             v-model="reviewStore.commentField"
           />
+          <elements-input-base
+            v-if="route.query.toManager"
+            tag-type="input"
+            label="Электронная почта"
+            class="popup-form-input"
+            v-model="reviewStore.emailField"
+          />
           <input
+            v-else
             type="date"
             v-model="reviewStore.dateField"
             class="date-picker"
