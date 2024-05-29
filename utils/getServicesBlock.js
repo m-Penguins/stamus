@@ -14,6 +14,7 @@ import Map from "@/components/blocks/Map.client.vue";
 import Galereya from "@/components/dynamicBlock/Galereya.vue";
 import Certificaty from "@/components/dynamicBlock/Certificaty.vue";
 import Obrazovanie from "@/components/dynamicBlock/Obrazovanie.vue";
+import Achievements from "@/components/dynamicBlock/Achievements.vue";
 
 export default function (component) {
   switch (component) {
@@ -49,7 +50,8 @@ export default function (component) {
       return Certificaty;
     case "blocks-story.obrazovanie":
       return Obrazovanie;
-
+    case "blocks-story.achievements":
+      return Achievements;
     default:
       "";
   }
