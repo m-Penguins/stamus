@@ -352,7 +352,6 @@ currentPage.value = parseInt(currentPage.value);
 .reviews-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 1fr;
   gap: 14px;
 }
 

@@ -10,6 +10,7 @@ export const useReviewStore = defineStore("review-store", () => {
   const phoneField = ref("");
   const commentField = ref("");
   const dateField = ref(null);
+  const emailField = ref("")
 
   async function submitModal() {
     const formData = {
@@ -19,6 +20,7 @@ export const useReviewStore = defineStore("review-store", () => {
       phone: phoneField.value,
       comment: commentField.value,
       date: dateField.value,
+      email: emailField.value
     };
 
     const mail = useMail();
@@ -28,14 +30,14 @@ export const useReviewStore = defineStore("review-store", () => {
     const rating = formData.rating ? `Оценка: ${formData.rating}` : null;
     const name = formData.name ? `Имя: ${formData.name}` : null;
     const phone = formData.phone ? `Телефон: ${formData.phone}` : null;
-
+    const email = formData.email ? `Почта ${formData.email}` : null;
     const comment = formData.comment
       ? `Комментарий: ${formData.comment}`
       : null;
 
     const date = formData.date ? `Дата посещения: ${formData.date}` : null;
-
-    const msg = [clinicData, rating, name, phone, comment, date]
+    console.log(mail)
+    const msg = [clinicData, rating, name, phone, comment, date, email]
       .filter(Boolean)
       .join("\n");
 
@@ -87,6 +89,7 @@ export const useReviewStore = defineStore("review-store", () => {
     phoneField,
     commentField,
     dateField,
+    emailField,
 
     submitModal,
   };
