@@ -9,37 +9,37 @@
           <div class="footer-menu-container">
             <div class="footer-menu-container__link">
               <NuxtLink
-                  target="_blank"
-                  class="footer-text header-nav-item"
-                  :to="`tel:+${phone?.replace(/\D/g, '')}`"
+                target="_blank"
+                class="footer-text header-nav-item"
+                :to="`tel:+${phone?.replace(/\D/g, '')}`"
               >
                 {{ phone }}
               </NuxtLink>
               <NuxtLink
-                  target="_blank"
-                  class="footer-text header-nav-item"
-                  :to="`mailto:${email}`"
+                target="_blank"
+                class="footer-text header-nav-item"
+                :to="`mailto:${email}`"
               >
                 {{ email }}
               </NuxtLink>
               <p class="footer-text display-block">Ежедневно 09:00-21:00</p>
               <NuxtLink
-                  class="footer-text header-nav-item"
-                  to="/leave-review?toManager=true"
+                class="footer-text header-nav-item"
+                to="/leave-review?toManager=true"
               >
                 Написать руководителю
               </NuxtLink>
               <div class="footer-social">
                 <NuxtLink
-                    v-for="social in socials"
-                    :key="social?.id"
-                    :to="social?.link"
-                    class="footer-social-link"
+                  v-for="social in socials"
+                  :key="social?.id"
+                  :to="social?.link"
+                  class="footer-social-link"
                 >
                   <img
-                      :src="`${baseUrl}${social?.icon?.data?.attributes?.url}`"
-                      :alt="social?.icon?.data?.attributes?.alternativeText"
-                      class="footer-img"
+                    :src="`${baseUrl}${social?.icon?.data?.attributes?.url}`"
+                    :alt="social?.icon?.data?.attributes?.alternativeText"
+                    class="footer-img"
                   />
                 </NuxtLink>
               </div>
@@ -67,12 +67,12 @@
                 :to="link.path"
                 class="footer-text header-nav-item"
               >
-                {{ link.title}}
+                {{ link.title }}
               </NuxtLink>
             </div>
           </div>
         </div>
-        <div class="footer-contacts last-column">
+        <div class="footer-contacts">
           <NuxtLink
             v-for="link in lastColumnNavigation"
             :key="link.id"
@@ -83,11 +83,11 @@
           </NuxtLink>
         </div>
         <NuxtLink
-          :to="policy"
+          :to="licenseStamus"
           target="_blank"
           class="footer-text display-block"
         >
-          Политика конфидециальности
+          Лицензия Стамус
         </NuxtLink>
         <div>
           <NuxtLink
@@ -101,8 +101,13 @@
         <a href="#" class="bvi-open footer-text display-block" data-bvi="close"
           >Версия для слабовидящих</a
         >
-        <NuxtLink to="/business" class="footer-text display-block">
-          Бизнесу и корпоративным клиентам
+
+        <NuxtLink
+          :to="policy"
+          target="_blank"
+          class="footer-text display-block"
+        >
+          Политика конфидециальности
         </NuxtLink>
         <!-- <a href="#" class="bvi-open">Включить режим доступности</a> -->
         <div class="display">
@@ -142,7 +147,6 @@
 // Затем активируйте "bvi" при клике
 // bvi.activate();
 // };
-
 
 const props = defineProps(["footerData"]);
 const storeServices = useService();
@@ -196,7 +200,6 @@ const lastColumnNavigation = [
   { id: 4, title: "Портфолио", path: "/portfolio" },
   { id: 5, title: "Контакты", path: "/contacts" },
 ];
-
 </script>
 
 <style lang="scss" scoped>
@@ -247,9 +250,9 @@ const lastColumnNavigation = [
   flex-direction: column;
 }
 
-.last-column {
-  margin-top: auto;
-}
+// .last-column {
+//   margin-top: auto;
+// }
 
 .footer {
   @include flex-column-center;
@@ -268,11 +271,13 @@ const lastColumnNavigation = [
   .footer__box {
     display: grid;
     // grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-columns: 248px 200px 183px 261px;
+    grid-template-columns: 260px 220px 220px 260px;
     width: 100%;
-    height: 100%;
+    // height: 100%;
     grid-column-gap: 89px;
     grid-row-gap: 36px;
+    gap: 40px;
+    grid-gap: 40px;
   }
 
   .footer-menu {
@@ -368,7 +373,7 @@ const lastColumnNavigation = [
 
 @media (max-width: 758px) {
   .footer {
-    padding: 40px 0 40px;
+    padding: 40px 16px 40px;
     .footer__box {
       .footer-contacts {
         margin-right: 100px;
