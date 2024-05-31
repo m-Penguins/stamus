@@ -11,7 +11,9 @@
         class="card-img"
         loading="lazy"
       />
-      <span class="sale-value">{{ specialists?.sale }}</span>
+      <span v-if="specialists?.sale" class="sale-value">{{
+        specialists?.sale
+      }}</span>
     </div>
     <div
       :class="
@@ -26,15 +28,12 @@
           {{ specialists?.position ?? "" }}
         </div>
       </div>
-      <div
-        v-if="isTooltip && specialists?.achievements?.length > 0"
-        class="tooltip"
-      >
+      <div v-if="isTooltip && specialists?.achievements" class="tooltip">
         <img src="@/assets/images/icons/icons-badge.svg" />
         <span class="info">
           <div
             class="tooltip-box"
-            v-for="item in specialists?.achievements"
+            v-for="item in specialists?.achievements.item"
             :key="item"
           >
             <img
@@ -42,7 +41,7 @@
               :src="baseUrl + item?.icon?.data?.attributes?.url"
               alt="icon"
             />
-            <p class="tooltip-text">{{ item?.achievement }}</p>
+            <p class="tooltip-text">{{ item?.text }}</p>
           </div>
         </span>
       </div>
@@ -101,7 +100,7 @@ const props = defineProps([
   "handleLinkClick",
   "sale",
 ]);
-
+console.log(props.specialists.achievements);
 const baseUrl = useRuntimeConfig().public.baseUrl;
 </script>
 
@@ -251,6 +250,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 .card-photo-name-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding-bottom: 30px;
 }
 

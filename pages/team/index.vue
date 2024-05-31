@@ -43,7 +43,8 @@ const getSpecialistsData = async () => {
   )?.name;
 
   const strapiQuery = {
-    populate: "fotoSpecialist.*,direction.*,clinic.*,achievements.icon.*",
+    populate:
+      "fotoSpecialist.*,direction.*,clinic.*,achievements.icon.*,blocks.item.*,blocks.item.icon.*",
     sort: "order:asc",
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
@@ -257,7 +258,7 @@ useHead({
   ],
   link: [{ rel: "canonical", href: "https://stamus.ru" + route.path }],
 });
-
+console.log(specialists.value);
 currentPage.value = parseInt(currentPage.value);
 </script>
 
@@ -268,13 +269,13 @@ currentPage.value = parseInt(currentPage.value);
       <div class="spicialists-page-title">Наши Врачи</div>
       <div class="specialist-form">
         <div class="specialist-box">
-          <elements-custom-select
+          <!-- <elements-custom-select
             :options="allDirections"
             label="Направление"
             class="select"
             @select="handleDirChange"
             :selectedId="dirFilter"
-          />
+          /> -->
 
           <elements-custom-select
             :options="allClinics"
@@ -324,7 +325,10 @@ currentPage.value = parseInt(currentPage.value);
                 alt: specialist?.attributes?.fotoSpecialist?.data?.attributes
                   ?.alternativeText,
                 position: specialist?.attributes?.position,
-                achievements: specialist?.attributes?.achievements,
+                achievements: specialist?.attributes?.blocks?.find(
+                  (component) =>
+                    component.__component === 'blocks-story.achievements',
+                ),
               }"
               :isTooltip="true"
             />

@@ -119,9 +119,12 @@ const portfoliosData = await getPortfoliosData();
 const baseDataStore = useBaseDataStore();
 
 let allServices = baseDataStore.allServices?.data?.filter((obj) => {
-  return obj.attributes.blocks.some(
-    (block) => block.__component === "blocks-story.kejsy",
-  );
+  return obj.attributes.blocks.some((block) => {
+    return (
+      block.__component === "blocks-story.kejsy" &&
+      block.portofolios.data.length > 0
+    );
+  });
 });
 
 allServices = allServices
