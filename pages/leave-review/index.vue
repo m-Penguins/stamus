@@ -217,6 +217,7 @@ onBeforeMount(() => {
             type="date"
             v-model="reviewStore.dateField"
             class="date-picker"
+            :placeholder="!reviewStore.dateField ? 'Выберите дату' : ''"
           />
         </div>
         <div
@@ -554,6 +555,16 @@ onBeforeMount(() => {
     position: static;
     margin-top: 60px;
   }
+
+  .date-picker[type="date"]:before {
+    content: attr(placeholder) !important;
+    color: #aaa;
+    margin-right: 0.5em;
+  }
+  .date-picker[type="date"]:focus:before,
+  .date-picker[type="date"]:valid:before {
+    content: "";
+  }
 }
 
 /* Date Picker */
@@ -561,10 +572,11 @@ onBeforeMount(() => {
   padding: 15px;
   @include body-16-regular;
   color: #525660;
-
   outline: 1px solid transparent;
   border: 1px solid #e9e9e9;
-
   border-radius: 45px;
+  width: 100%;
+  -webkit-appearance : none;
 }
+
 </style>
