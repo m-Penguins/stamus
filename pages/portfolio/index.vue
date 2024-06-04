@@ -62,6 +62,9 @@ const handleDirChange = async (dir) => {
     query: searchQuery,
     replace: true,
   });
+  console.log(searchFilter.value);
+  console.log(dirFilter);
+  console.log(portfoliosData);
 };
 
 const handleSearchChange = async () => {
@@ -94,7 +97,7 @@ const getPortfoliosData = async () => {
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
     "filters[specialists][id][$eq][4]": specFilter.value,
-    "filters[services][id][$eq][1]": dirFilter.value,
+    "filters[services][id][$eq][3]": dirFilter.value,
     "filters[heading][$contains][0]": searchFilter.value?.toLowerCase(),
     "filters[heading][$contains][1]": searchFilter.value?.toUpperCase(),
     "filters[heading][$contains][2]":

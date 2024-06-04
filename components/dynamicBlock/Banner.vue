@@ -132,8 +132,8 @@ const props = defineProps(["block"]);
 .banner-container {
   display: grid;
 
-  height: 100%;
-  max-height: 480px;
+  // height: 100%;
+  height: 480px;
 
   grid-template-columns: [text-start bg-start] 1fr [text-end image-start] 1fr [image-end bg-end];
 
