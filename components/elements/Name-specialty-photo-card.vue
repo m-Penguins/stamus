@@ -100,7 +100,7 @@ const props = defineProps([
   "handleLinkClick",
   "sale",
 ]);
-console.log(props.specialists.achievements);
+// console.log(props.specialists.achievements);
 const baseUrl = useRuntimeConfig().public.baseUrl;
 </script>
 

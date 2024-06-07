@@ -62,9 +62,9 @@ const handleDirChange = async (dir) => {
     query: searchQuery,
     replace: true,
   });
-  console.log(searchFilter.value);
-  console.log(dirFilter);
-  console.log(portfoliosData);
+  // console.log(searchFilter.value);
+  // console.log(dirFilter);
+  // console.log(portfoliosData);
 };
 
 const handleSearchChange = async () => {

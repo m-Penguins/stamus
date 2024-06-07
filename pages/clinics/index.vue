@@ -40,7 +40,6 @@ const sortSpecialistsByOrder = (data) => {
     data.attributes.specialists &&
     data.attributes.specialists.data
   ) {
-    // Разделение элементов на те, что с null и не null order
     const withOrder = [];
     const withoutOrder = [];
 
@@ -58,7 +57,6 @@ const sortSpecialistsByOrder = (data) => {
         parseInt(a.attributes.order, 10) - parseInt(b.attributes.order, 10),
     );
 
-    // Объединение массивов: сначала без order, затем с отсортированным order
     data.attributes.specialists.data = [...withoutOrder, ...withOrder];
   }
   return data;

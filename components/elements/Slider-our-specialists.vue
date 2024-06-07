@@ -12,6 +12,34 @@ const placeholdersStore = usePlaceholdersStore();
 const prev = ref(null);
 const next = ref(null);
 
+const sortSpecialistsByOrder = (data) => {
+  if (data.length > 0) {
+    const withOrder = [];
+    const withoutOrder = [];
+
+    data.forEach((item) => {
+      if (item.attributes.order === null) {
+        withoutOrder.push(item);
+      } else {
+        withOrder.push(item);
+      }
+    });
+
+    // Сортировка элементов с order по убыванию
+    withOrder.sort(
+      (a, b) =>
+        parseInt(a.attributes.order, 10) - parseInt(b.attributes.order, 10),
+    );
+
+    data = [...withoutOrder, ...withOrder];
+  }
+  return data;
+};
+// const newSpec = specialistsData.data;
+
+const sortedData = sortSpecialistsByOrder(props.programs);
+console.log(props.programs);
+console.log(sortedData);
 const baseUrl = useRuntimeConfig().public.baseUrl;
 </script>
 
@@ -35,7 +63,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
       >
         <template v-if="programs.length">
           <swiper-slide
-            v-for="item in programs"
+            v-for="item in sortedData"
             :key="item.id"
             class="swiper-slide"
           >
