@@ -68,7 +68,7 @@ $mobile: 680px;
   @include media($tablet) {
     background-color: transparent;
     margin-top: 0;
-    padding: 118px 0 0;
+    padding: 140px 0 0;
   }
 }
 

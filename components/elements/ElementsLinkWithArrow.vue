@@ -48,7 +48,7 @@
 export default {
   props: {
     title: {
-      type: Boolean,
+      type: String,
       default: false,
     },
     isExternal: {

@@ -93,7 +93,7 @@ export default {
 .breadcrumbs {
   position: relative;
   width: 100%;
-  margin-top: 138px;
+  margin-top: 180px;
 
   @media screen and (max-width: 600px) {
     margin-top: 50px;
