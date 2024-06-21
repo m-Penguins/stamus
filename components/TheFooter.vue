@@ -165,6 +165,7 @@ const licenseStamus = props?.footerData?.data?.attributes?.license_stamus?.data
   ? baseUrl +
     props?.footerData?.data?.attributes?.license_stamus?.data?.attributes?.url
   : "";
+
 const licenseStamusMed = props?.footerData?.data?.attributes?.license_stamusmed
   ?.data?.attributes?.url
   ? baseUrl +

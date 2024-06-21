@@ -2,71 +2,73 @@
   <div class="dentistry-wrapper">
     <div class="dentistry-container" v-bind="$attrs">
       <NuxtImg
-        v-if="imgBg"
-        :src="imgBg"
-        :alt="imgAlt"
-        :provider="local ? '' : 'strapi'"
-        sizes="lg:1280px xl:1560 xxl:1920px "
-        format="webp"
-        class="banner-img"
-        :class="{ 'bg-dark': isBgDark }"
+          v-if="imgBg"
+          :src="imgBg"
+          :alt="imgAlt"
+          :provider="local ? '' : 'strapi'"
+          sizes="lg:1280px xl:1560 xxl:1920px "
+          format="webp"
+          class="banner-img"
+          :class="{ 'bg-dark': isBgDark }"
       />
       <div class="dentistry-box">
         <elements-bread-crumbs
-          :breadcrumbs="breadcrumbs"
-          :typeColorWhite="typeColorWhite"
+            :breadcrumbs="breadcrumbs"
+            :typeColorWhite="typeColorWhite"
         />
-        <div class="mob">
+        <div v-if="isMobileView" class="mob">
           <NuxtImg
-            v-if="imgBg"
-            :src="imgBg"
-            :alt="imgAlt"
-            :provider="local ? '' : 'strapi'"
-            sizes="xs:600px"
-            format="webp"
-            class="my-image"
-            :class="{ 'img-dital': isDital, img: !isDital }"
+              v-if="imgBg"
+              :src="imgBg"
+              :alt="imgAlt"
+              :provider="local ? '' : 'strapi'"
+              sizes="xs:600px"
+              format="webp"
+              class="my-image"
+              :class="{ 'img-dital': isDital, img: !isDital }"
           />
-
           <div>
             <elements-title-text-button
-              textButtonBase="Записаться онлайн"
-              :customClick="redirectToExternalApp"
-              :isButtonBase="isButtonBase"
-              :title="title"
-              :font-size="true"
-              :text="text"
-              :class="isTimeAndPriceCard ? 'main-info-width' : ''"
+                textButtonBase="Записаться онлайн"
+                :customClick="redirectToExternalApp"
+                :isButtonBase="isButtonBase"
+                :title="title"
+                :font-size="true"
+                :text="text"
+                :class="isTimeAndPriceCard ? 'main-info-width' : ''"
             />
             <elements-analitic-card
-              :time="time"
-              :money="money"
-              v-if="isTimeAndPriceCard"
-              class="elements-analitic-card-mob"
+                :time="time"
+                :money="money"
+                v-if="isTimeAndPriceCard"
+                class="elements-analitic-card-mob"
             />
           </div>
         </div>
         <elements-title-text-button
-          :typeColorWhiteText="typeColorWhiteText"
-          :customClick="redirectToExternalApp"
-          textButtonBase="Записаться онлайн"
-          :isButtonBase="isButtonBase"
-          :title="title"
-          :text="text"
-          class="height-50 desktop"
+            v-if="!isMobileView"
+            :typeColorWhiteText="typeColorWhiteText"
+            :customClick="redirectToExternalApp"
+            textButtonBase="Записаться онлайн"
+            :isButtonBase="isButtonBase"
+            :title="title"
+            :text="text"
+            class="height-50 desktop"
         />
       </div>
       <elements-analitic-card
-        :time="time"
-        :money="money"
-        v-if="isTimeAndPriceCard && time && money"
-        class="desktop"
+          :time="time"
+          :money="money"
+          v-if="isTimeAndPriceCard && time && money"
+          class="desktop"
       />
     </div>
   </div>
 </template>
 
 <script>
+import { ref, onMounted, onUnmounted } from 'vue';
+
 export default {
   props: {
     title: {
@@ -88,7 +90,6 @@ export default {
       type: Boolean,
       default: false,
     },
-
     breadcrumbs: {
       type: Array,
     },
@@ -119,6 +120,24 @@ export default {
     time: String,
     money: String,
   },
+  setup() {
+    const isMobileView = ref(false);
+
+    const checkScreenWidth = () => {
+      isMobileView.value = window.innerWidth <= 1110;
+    };
+
+    onMounted(() => {
+      checkScreenWidth();
+      window.addEventListener('resize', checkScreenWidth);
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener('resize', checkScreenWidth);
+    });
+
+    return { isMobileView };
+  },
 };
 </script>
 
@@ -131,9 +150,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-
   z-index: 0;
-
   object-fit: cover;
   border-radius: 45px;
 }
@@ -187,11 +204,11 @@ export default {
   margin: 20px auto 0 auto;
   border-radius: 45px;
 }
+
 .dentistry-container {
   width: 100%;
   height: 920px;
   border-radius: 45px;
-
   margin-bottom: 100px;
   display: flex;
   justify-content: flex-start;
@@ -241,7 +258,6 @@ export default {
     width: 100%;
     gap: 34px;
     align-items: center;
-
     img {
       // width: 51%;
     }
@@ -250,15 +266,12 @@ export default {
     height: 100%;
     background: none !important;
   }
-
   .desktop {
     display: none;
   }
-
   .dentistry-box {
     margin-left: 0;
   }
-
   .breadcrumbs {
     margin-top: 108px;
   }
@@ -300,7 +313,6 @@ export default {
     align-items: flex-start;
     justify-content: flex-start;
   }
-
   .mob {
     width: 100%;
   }

@@ -266,7 +266,7 @@ currentPage.value = parseInt(currentPage.value);
   <div class="spicialists-page">
     <div class="spicialists-page-wrap">
       <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
-      <div class="spicialists-page-title">Наши Врачи</div>
+      <h1 class="spicialists-page-title">Наши Врачи</h1>
       <div class="specialist-form">
         <div class="specialist-box">
           <!-- <elements-custom-select

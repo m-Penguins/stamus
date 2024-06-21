@@ -8,7 +8,7 @@
         />
         <div class="banner-box">
           <div class="banner-container">
-            <h2 v-if="title" class="banner-title">{{ title }}</h2>
+            <h1 v-if="title" class="banner-title">{{ title }}</h1>
             <div
               v-if="description"
               v-html="description"

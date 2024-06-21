@@ -215,7 +215,7 @@ currentPage.value = parseInt(currentPage.value);
   <div class="portfolio-page">
     <div class="portfolio-page-wrap">
       <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
-      <div class="portfolio-page-title">Портфолио</div>
+      <h1 class="portfolio-page-title">Портфолио</h1>
       <div class="portfolio-page-text">
         На странице представлены работы наших клиник. <br />
         Вы можете отфильтровать их по услуге или ввести свой запрос в поиск
