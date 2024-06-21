@@ -2,7 +2,7 @@
   <div class="contacts-page">
     <div class="contacts-page-wrap">
       <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
-      <div class="contacts-page-title">Контакты</div>
+      <h1 class="contacts-page-title">Контакты</h1>
       <div class="contacts-page-text">Сети клиник “Стамус”</div>
 
       <div class="video-block-wrap">
