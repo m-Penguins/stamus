@@ -606,6 +606,7 @@ export default {
             class="elements-input-search"
             placeholder="Введите запрос"
             @enterPressed="closeSearch"
+            :autofocus="showSearch"
           />
         </div>
       </div>

@@ -6,6 +6,8 @@
         :placeholder="placeholder"
         v-model="searchTerm"
         class="input bg"
+        :autofocus="autofocus"
+        ref="searchInput"
       />
     </form>
     <button @click="search" class="btn-search">
@@ -18,14 +20,14 @@
 </template>
 
 <script setup>
-defineProps(["placeholder"]);
+const props = defineProps(["placeholder", "autofocus"]);
 
 const emit = defineEmits(["enterPressed"]);
 
 const router = useRouter();
 
 const searchTerm = ref("");
-
+const searchInput = ref(null);
 const search = () => {
   if (searchTerm.value) {
     router.push({
@@ -39,6 +41,15 @@ const search = () => {
 const clearInput = () => {
   searchTerm.value = "";
 };
+
+watch(() => props.autofocus, (newVal) => {
+  if (newVal) {
+    nextTick(() => {
+      searchInput.value.focus();
+    });
+  }
+});
+
 </script>
 
 <style scoped lang="scss">
