@@ -13,6 +13,7 @@ const selectedItem = computed(
 const handleSelect = (option) => {
   isOpen.value = false;
   currentItem.value = option.attributes.address;
+  emits('select', option)
 };
 
 const handleScroll = () => {

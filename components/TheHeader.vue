@@ -137,13 +137,16 @@ export default {
       });
     };
 
+    const handleServiceChange = ({id}) => {
+      router.push(`/clinics/${id}`)
+    }
+
     const store = useActuveLink();
     const isOpenPopup = ref(false);
     const navigation = [
       { title: "Врачи", path: "/team" },
       { title: "Пациентам", path: "" },
       { title: "Отзывы", path: "/reviews" },
-
       { title: "Акции и скидки", path: "/discounts" },
       { title: "Портфолио", path: "/portfolio" },
       { title: "Цены", path: "/prices" },
@@ -169,6 +172,7 @@ export default {
       defaultServices,
       router,
       modalStore,
+      handleServiceChange,
     };
   },
 };
@@ -382,15 +386,15 @@ export default {
                   </div>
                 </NuxtLink>
               </li>
-              <li>
-                <NuxtLink
-                  target="_blank"
-                  class="footer-text header-nav-item"
-                  :to="`tel:+${phone?.replace(/\D/g, '')}`"
-                >
-                  {{ phone }}
-                </NuxtLink>
-              </li>
+<!--              <li>-->
+<!--                <NuxtLink-->
+<!--                  target="_blank"-->
+<!--                  class="footer-text header-nav-item"-->
+<!--                  :to="`tel:+${phone?.replace(/\D/g, '')}`"-->
+<!--                >-->
+<!--                  {{ phone }}-->
+<!--                </NuxtLink>-->
+<!--              </li>-->
             </ul>
           </nav>
           <div class="header-btn-base">
@@ -606,6 +610,7 @@ export default {
             class="elements-input-search"
             placeholder="Введите запрос"
             @enterPressed="closeSearch"
+            :autofocus="showSearch"
           />
         </div>
       </div>
@@ -617,13 +622,13 @@ export default {
           class="header-nav-list"
           :class="{ 'display-none': !firstBlockMobMenu }"
         >
-          <NuxtLink
-            target="_blank"
-            class="header-nav-item-mob p-t-20"
-            :to="`tel:+${phone?.replace(/\D/g, '')}`"
-          >
-            {{ phone }}
-          </NuxtLink>
+<!--          <NuxtLink-->
+<!--            target="_blank"-->
+<!--            class="header-nav-item-mob p-t-20"-->
+<!--            :to="`tel:+${phone?.replace(/\D/g, '')}`"-->
+<!--          >-->
+<!--            {{ phone }}-->
+<!--          </NuxtLink>-->
           <div
             :class="showMenuPatients ? 'menu-mob-modal-flex' : 'menu-mob-modal'"
           >
@@ -982,10 +987,6 @@ export default {
     display: flex;
     align-items: center;
     @include body-12-bold;
-    @media screen and (max-width: 500px) {
-      flex-direction: column;
-      align-items: flex-start;
-    }
   }
   &__time {
     @include body-12-regular;
@@ -998,6 +999,10 @@ export default {
     display: flex;
     gap: 5px;
     align-items: center;
+
+    @media screen and (max-width: 777px) {
+      display: none;
+    }
   }
   &__links {
     display: flex;
