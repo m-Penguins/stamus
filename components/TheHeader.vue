@@ -1007,7 +1007,7 @@ export default {
   &__links {
     display: flex;
     gap: 5px;
-    @media screen and (max-width: 777px) {
+    @media screen and (max-width: 1360px) {
       display: none;
     }
   }
