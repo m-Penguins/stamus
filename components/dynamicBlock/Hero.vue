@@ -15,7 +15,7 @@
           :breadcrumbs="breadcrumbs"
           :typeColorWhite="false"
         />
-        <div class="mob">
+        <div v-if="isMobileView" class="mob">
           <NuxtImg
             v-if="imgBg"
             :src="imgBg"
@@ -37,6 +37,7 @@
           </div>
         </div>
         <elements-title-text-button
+          v-if="!isMobileView"
           :customClick="heroClick"
           :textButtonBase="buttonText"
           isButtonBase
@@ -61,6 +62,7 @@ const props = defineProps([
 ]);
 
 const modalStore = useModalStore();
+const isMobileView = ref(false);
 
 const heroClick = () => {
   if (props?.link) {
@@ -71,6 +73,19 @@ const heroClick = () => {
 };
 
 const buttonText = props?.link_text ? props?.link_text : "Записаться онлайн";
+
+const checkScreenWidth = () => {
+  isMobileView.value = window.innerWidth <= 1110;
+};
+
+onMounted(() => {
+  checkScreenWidth();
+  window.addEventListener('resize', checkScreenWidth);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkScreenWidth);
+});
 </script>
 
 <style scoped lang="scss">

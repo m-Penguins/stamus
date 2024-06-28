@@ -103,7 +103,6 @@ useHead(getMetaObject(metaData, baseUrl));
   <section class="section-wrapper" v-if="articles?.data?.length">
     <DynamicBlockBlog :block="{ articles: articles }" />
   </section>
-
   <section class="section-wrapper" v-if="seoData">
     <DynamicBlockSeo :block="seoData" />
   </section>

@@ -6,7 +6,8 @@ Allow: /*.css
 Allow: *.woff
 Allow: *.ttf
 Disallow: /wp-admin/
-Clean-param: p&yandex-source&from&utm&clckid&clid&text&yclid&erid&gclid&ref&term&utm_source&utm_campaign&utm_medium&utm_content
+Disallow: *.html
+Clean-param: p&yandex-source&from&utm&clckid&clid&text&yclid&erid&gclid&ref&term&utm_source&utm_campaign&utm_medium&utm_content&etext&hhtmFrom
 
 User-agent: Googlebot
 Disallow: */search
@@ -16,6 +17,7 @@ Allow: /*.css
 Allow: *.woff
 Allow: *.ttf
 Disallow: /wp-admin/
+Disallow: *.html
 Allow: *?page
 Disallow: *?p
 Disallow: *?yandex-source
@@ -30,6 +32,8 @@ Disallow: *?erid
 Disallow: *?gclid
 Disallow: *?ref
 Disallow: *?term
+Disallow: *?etext
+Disallow: *?hhtmFrom
 
 User-agent: *
 Disallow: */search
@@ -38,6 +42,7 @@ Allow: /*.js
 Allow: /*.css
 Allow: *.woff
 Allow: *.ttf
+Disallow: *.html
 Disallow: /wp-admin/
 Allow: *?page
 Disallow: *?p
@@ -53,5 +58,7 @@ Disallow: *?erid
 Disallow: *?gclid
 Disallow: *?ref
 Disallow: *?term
+Disallow: *?etext
+Disallow: *?hhtmFrom
 
 Sitemap: https://stamus.ru/server/api/sitemap/index.xml
