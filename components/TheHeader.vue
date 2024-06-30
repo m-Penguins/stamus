@@ -725,7 +725,10 @@ export default {
                 :key="item?.id"
                 class="header-services-menu-item-mob"
                 @click.stop="handleFirstClick(item.id)"
-                :class="{ 'display-none': secondBlockMobMenu }"
+                :class="{
+                  'display-none': secondBlockMobMenu,
+                  'second-block': activeItem === item.id
+                }"
               >
                 <div class="menu-mob-first-block-title">
                   <div class="header-nav-item-mob m-r-20">
@@ -754,7 +757,7 @@ export default {
                     :key="direction.id"
                   >
                     <div
-                      class="header-services-menu-item-mob"
+                      class="header-services-menu-item-mob second-block"
                       @click.stop="handleSecondClick(item.id, direction.id)"
                     >
                       <div class="menu-mob-second-block-title">
@@ -1179,6 +1182,10 @@ export default {
   .a2 {
     display: block;
   }
+
+  &.second-block {
+    gap: 25px;
+  }
 }
 
 .display-none {
@@ -1406,7 +1413,6 @@ export default {
   justify-content: space-between;
   padding: 14px 20px;
   align-items: flex-start;
-  gap: 25px;
   position: relative;
   cursor: pointer;
 

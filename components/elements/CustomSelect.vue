@@ -136,7 +136,7 @@ hr {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 323px;
+  max-width: 255px;
 }
 
 .custom-select .selected {
@@ -229,6 +229,7 @@ hr {
 
 @media (max-width: 900px) {
   .select-margin {
+    max-width: 325px;
   }
 }
 
