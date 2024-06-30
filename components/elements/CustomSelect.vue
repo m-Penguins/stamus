@@ -136,7 +136,7 @@ hr {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 255px;
+  max-width: 241px;
 }
 
 .custom-select .selected {
