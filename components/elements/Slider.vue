@@ -5,7 +5,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-const props = defineProps(["programs", "link"]);
+const props = defineProps(["programs", "link", "title"]);
 
 const prev = ref(null);
 const next = ref(null);
@@ -22,7 +22,7 @@ const averageGrade = average ? average?.toFixed(1) : average;
   <div class="main-events-block">
     <div class="slider-title">
       <div class="slider-title__box">
-        <h2 class="slider-title__box-title">Отзывы</h2>
+        <h2 class="slider-title__box-title">{{ title ? title : 'Отзывы' }}</h2>
         <!-- <img src="@/assets/images/img-text/prodoctorov.svg" alt="Текст" /> -->
       </div>
       <div class="slider-title__grade">

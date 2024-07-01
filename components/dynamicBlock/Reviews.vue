@@ -8,8 +8,8 @@ const reviews = mapReviews(props?.block?.reviews?.data)?.filter(
 
 <template>
   <template v-if="reviews?.length > 0">
-    <elements-slider :programs="reviews"
-  /></template>
+    <elements-slider :title="block.title" :programs="reviews"/>
+  </template>
 </template>
 
 <style lang="scss" scoped></style>
