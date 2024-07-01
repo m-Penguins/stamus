@@ -30,12 +30,15 @@
         class="form-btn"
       />
     </div>
-    <p class="form-wrapper__text text-gray-opacity p-bt-112 p-t-14">
+    <div class="form-wrapper__text text-gray-opacity p-bt-112 p-t-14">
       Нажимая кнопку отправить, вы соглашаетесь с
       <a :href="privacyLink" target="_blank"
         >Политикой обработки персональных данных</a
-      >
-    </p>
+        >
+      <div v-if="store.isSuccess" class="success-text">
+        Спасибо, Ваша заявка отправлена.
+      </div>
+    </div>
   </div>
 </template>
 
@@ -77,7 +80,7 @@ const sendData = () => {
 
   &__text {
     padding-bottom: 112px;
-
+    position: relative;
     & a {
       color: inherit;
       font-size: inherit;
@@ -94,6 +97,18 @@ const sendData = () => {
     flex-wrap: wrap;
   }
 }
+
+.success-text {
+  @include body-16-regular;
+  color: rgb(32, 196, 32);
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+
 
 @media (max-width: 1280px) {
   .form-wrapper {
@@ -132,7 +147,7 @@ const sendData = () => {
     }
 
     &__text {
-      padding-bottom: 50px;
+      padding-bottom: 100px;
     }
   }
 }
@@ -163,7 +178,7 @@ const sendData = () => {
     }
 
     &__text {
-      padding-bottom: 20px;
+      padding-bottom: 50px;
     }
   }
 }
@@ -195,7 +210,7 @@ const sendData = () => {
     }
 
     &__text {
-      padding-bottom: 14px;
+      padding-bottom: 60px;
     }
 
     &__box {
