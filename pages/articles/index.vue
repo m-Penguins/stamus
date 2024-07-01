@@ -82,6 +82,7 @@ const getArticlesData = async () => {
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
     "filters[tag_category][$in]": tagFilter.value,
+    "sort": "createdAt:desc"
   };
 
   clearObjectFields(strapiQuery);
