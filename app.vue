@@ -50,7 +50,7 @@ const [{ data: footerData }] = await Promise.all([
   useFetch(`${apiBaseUrl}footer`, {
     query: {
       populate:
-        "links.icon.*,privacy.*,license_stamus.*,license_stamusmed.*,widget.icon.*",
+        "links.icon.*,privacy.*,license_stamus.*,license_stamusmed.*,widget.icon.*, header_widget.icon.*",
     },
   }),
   baseDataStore.getClinics(),
