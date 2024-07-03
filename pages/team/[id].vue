@@ -107,7 +107,9 @@ const blocks = specialist.value?.data?.attributes?.blocks;
                 :key="item.id"
                 class="specialists-addres-list__item"
               >
-                {{ item?.attributes?.address }}
+                <span v-if="item?.attributes?.publishedAt != null">
+                  {{ item?.attributes?.address }}
+                </span>
               </li>
             </ul>
           </div>
@@ -154,7 +156,9 @@ const blocks = specialist.value?.data?.attributes?.blocks;
               :key="item"
               class="specialists-addres-list__item"
             >
-              {{ item?.attributes?.address }}
+              <span v-if="item?.attributes?.publishedAt != null">
+                {{ item?.attributes?.address }}
+              </span>
             </div>
           </div>
         </div>

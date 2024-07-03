@@ -18,10 +18,12 @@ const sortSpecialistsByOrder = (data) => {
     const withoutOrder = [];
 
     data.forEach((item) => {
-      if (item.attributes.order === null) {
-        withoutOrder.push(item);
-      } else {
-        withOrder.push(item);
+      if (item.attributes.publishedAt != null) {
+        if (item.attributes.order === null) {
+          withoutOrder.push(item);
+        } else {
+          withOrder.push(item);
+        }
       }
     });
 
