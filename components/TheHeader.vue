@@ -137,9 +137,9 @@ export default {
       });
     };
 
-    const handleServiceChange = ({id}) => {
-      router.push(`/clinics/${id}`)
-    }
+    const handleServiceChange = ({ id }) => {
+      router.push(`/clinics/${id}`);
+    };
 
     const store = useActuveLink();
     const isOpenPopup = ref(false);
@@ -152,7 +152,7 @@ export default {
       { title: "Цены", path: "/prices" },
       { title: "Контакты", path: "/contacts" },
     ];
-    console.log(base)
+    // console.log(base)
     return {
       assetsStore,
       navigation,
@@ -174,7 +174,7 @@ export default {
       router,
       modalStore,
       handleServiceChange,
-      apiBaseUrl
+      apiBaseUrl,
     };
   },
 };
@@ -219,9 +219,13 @@ export default {
         :to="widget.link"
       >
         <img
-            :src="widget?.icon?.data?.attributes?.url ? apiBaseUrl + widget?.icon?.data?.attributes?.url : ''"
-            :alt="widget?.icon?.data?.attributes?.alternativeText ?? 'Icon'"
-        >
+          :src="
+            widget?.icon?.data?.attributes?.url
+              ? apiBaseUrl + widget?.icon?.data?.attributes?.url
+              : ''
+          "
+          :alt="widget?.icon?.data?.attributes?.alternativeText ?? 'Icon'"
+        />
       </NuxtLink>
     </div>
   </div>
@@ -369,15 +373,15 @@ export default {
                   </div>
                 </NuxtLink>
               </li>
-<!--              <li>-->
-<!--                <NuxtLink-->
-<!--                  target="_blank"-->
-<!--                  class="footer-text header-nav-item"-->
-<!--                  :to="`tel:+${phone?.replace(/\D/g, '')}`"-->
-<!--                >-->
-<!--                  {{ phone }}-->
-<!--                </NuxtLink>-->
-<!--              </li>-->
+              <!--              <li>-->
+              <!--                <NuxtLink-->
+              <!--                  target="_blank"-->
+              <!--                  class="footer-text header-nav-item"-->
+              <!--                  :to="`tel:+${phone?.replace(/\D/g, '')}`"-->
+              <!--                >-->
+              <!--                  {{ phone }}-->
+              <!--                </NuxtLink>-->
+              <!--              </li>-->
             </ul>
           </nav>
           <div class="header-btn-base">
@@ -605,13 +609,13 @@ export default {
           class="header-nav-list"
           :class="{ 'display-none': !firstBlockMobMenu }"
         >
-<!--          <NuxtLink-->
-<!--            target="_blank"-->
-<!--            class="header-nav-item-mob p-t-20"-->
-<!--            :to="`tel:+${phone?.replace(/\D/g, '')}`"-->
-<!--          >-->
-<!--            {{ phone }}-->
-<!--          </NuxtLink>-->
+          <!--          <NuxtLink-->
+          <!--            target="_blank"-->
+          <!--            class="header-nav-item-mob p-t-20"-->
+          <!--            :to="`tel:+${phone?.replace(/\D/g, '')}`"-->
+          <!--          >-->
+          <!--            {{ phone }}-->
+          <!--          </NuxtLink>-->
           <div
             :class="showMenuPatients ? 'menu-mob-modal-flex' : 'menu-mob-modal'"
           >
@@ -710,7 +714,7 @@ export default {
                 @click.stop="handleFirstClick(item.id)"
                 :class="{
                   'display-none': secondBlockMobMenu,
-                  'second-block': activeItem === item.id
+                  'second-block': activeItem === item.id,
                 }"
               >
                 <div class="menu-mob-first-block-title">
