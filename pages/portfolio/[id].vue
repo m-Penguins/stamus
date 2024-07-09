@@ -52,9 +52,10 @@ const bigImage =
 const bigImgAlt =
   portfolioData.value?.data?.attributes?.cardImage?.data?.attributes
     ?.alternativeText ?? "";
-
-const specialists =
-  portfolioData.value?.data?.attributes?.specialists?.data?.map((sp) => {
+// console.log(portfolioData.value?.data?.attributes?.specialists);
+const specialists = portfolioData.value?.data?.attributes?.specialists?.data
+  ?.filter((sp) => sp?.attributes?.publishedAt != null)
+  ?.map((sp) => {
     return {
       id: sp?.id,
       name: `${sp?.attributes?.firstName} ${sp?.attributes?.lastName}`,
