@@ -159,11 +159,14 @@ export default defineNuxtConfig({
       ],
     },
   },
+  // robots: {
+  //   credits: false,
+  // },
   modules: [
     "@nuxt/image",
     "@pinia/nuxt",
     "@vueuse/nuxt",
-    "nuxt-simple-robots",
+    // "nuxt-simple-robots",
     "@nuxtjs/sitemap",
     [
       "yandex-metrika-module-nuxt3",
