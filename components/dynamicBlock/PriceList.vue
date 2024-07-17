@@ -10,7 +10,6 @@ const mappedPriceList = mapPriceList(props?.block?.price_lists?.data);
   <div v-if="mappedPriceList?.length > 0">
     <div class="service-title">
       <h2 class="popular-service__title">Услуги</h2>
-      <elements-link-with-arrow type link="/prices" title="Посмотреть все" />
     </div>
     <div v-for="service in mappedPriceList" class="popular-service__list">
       <h2 class="popular-service__title">{{ service.title }}</h2>
@@ -18,12 +17,15 @@ const mappedPriceList = mapPriceList(props?.block?.price_lists?.data);
         <elements-service-card :service="item" />
       </div>
     </div>
+    <elements-button-base type link="/prices" title="Все цены" />
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "@/assets/styles/style.scss";
-
+.button-base {
+  margin: 0 auto;
+}
 .service-title {
   display: flex;
   align-items: baseline;
@@ -43,6 +45,7 @@ const mappedPriceList = mapPriceList(props?.block?.price_lists?.data);
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin: 0 0 40px;
     &:not(:last-of-type) {
       margin-bottom: 40px;
     }
