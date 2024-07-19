@@ -73,6 +73,7 @@
           </div>
         </div>
         <div class="footer-contacts">
+          <h3 class="footer-subtitle">&nbsp;</h3>
           <NuxtLink
             v-for="link in lastColumnNavigation"
             :key="link.id"
