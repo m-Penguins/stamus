@@ -10,14 +10,15 @@ const { data: articleData } = await useFetch(
   {
     query: {
       populate:
-        "fotoArticles.*,meta.metaImage.*,napravleniya_uslug_1.*,other_articles.fotoArticles.*",
+        blocksQuey +
+        "fotoArticles.*,meta.metaImage.*,napravleniya_uslug_1.*,other_articles.fotoArticles.*,blocks.*",
     },
   },
 );
-
+console.log(articleData);
 const heading = articleData.value?.data?.attributes?.heading;
 const tags = articleData.value?.data?.attributes?.tag_category;
-const text = articleData.value?.data?.attributes?.text;
+const blocks = articleData.value?.data?.attributes?.blocks;
 const img =
   articleData.value?.data?.attributes?.fotoArticles?.data?.attributes?.url ??
   placeholdersStore?.imagePlaceholders?.articles;
@@ -65,11 +66,6 @@ useHead(getMetaObject(metaData, baseUrl));
               class="banner-img"
             />
             <div class="articles-dital-box">
-              <!-- <div v-for="(item, index) in tags" :key="index">
-                <div class="articles-dital-box__item">
-                  {{ item }}
-                </div>
-              </div> -->
               <div>
                 <div class="articles-dital-box__item">
                   {{ tags }}
@@ -78,7 +74,18 @@ useHead(getMetaObject(metaData, baseUrl));
             </div>
           </div>
         </div>
-        <div class="articles-dital-container" v-html="text"></div>
+        <div class="articles-digital-wrapper">
+          <div class="articles-digital-left">
+            <BlocksMapper :blocks="blocks" />
+          </div>
+          <div class="articles-digital-right">
+            <div v-for="(block, index) in blocks">
+              <NuxtLink :to="'#' + block.id">
+                {{ index + 1 + ". " + block.title }}
+              </NuxtLink>
+            </div>
+          </div>
+        </div>
       </div>
       <NuxtLink class="back-btn" to="/articles">
         <svg
@@ -109,6 +116,34 @@ useHead(getMetaObject(metaData, baseUrl));
 <style lang="scss" scoped>
 @import "@/assets/styles/style.scss";
 
+.articles-digital-left {
+  max-width: 900px;
+  width: 100%;
+}
+.articles-digital-wrapper {
+  display: flex;
+  position: relative;
+  gap: 5%;
+}
+.articles-digital-right {
+  position: sticky;
+  top: 20%;
+  height: 100%;
+  width: 100%;
+  padding: 20px 2%;
+  border: 1px solid #dfdfdf;
+  border-radius: 20px;
+  background: #232d5b;
+  & div {
+    margin: 20px 0;
+    font-size: 16px;
+    // text-decoration: underline;
+    color: #fff;
+  }
+}
+.service-section-block {
+  border: 1px solid #dfdfdf;
+}
 .banner-img {
   position: absolute;
   top: 0;
@@ -199,6 +234,9 @@ useHead(getMetaObject(metaData, baseUrl));
   & :deep(visited) {
     text-decoration: underline !important;
     text-decoration-color: #232d5b;
+  }
+  & :deep(.seo-block, .gallery) {
+    margin-bottom: 0;
   }
 
   h1 {
