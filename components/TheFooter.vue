@@ -22,7 +22,7 @@
               >
                 {{ email }}
               </NuxtLink>
-              <p class="footer-text display-block">Ежедневно 09:00-21:00</p>
+              <p class="footer-text">Ежедневно 09:00-21:00</p>
               <NuxtLink
                 class="footer-text header-nav-item"
                 to="/leave-review?toManager=true"
@@ -73,6 +73,7 @@
           </div>
         </div>
         <div class="footer-contacts">
+          <h3 class="footer-subtitle">&nbsp;</h3>
           <NuxtLink
             v-for="link in lastColumnNavigation"
             :key="link.id"
@@ -111,8 +112,8 @@
         </NuxtLink>
         <!-- <a href="#" class="bvi-open">Включить режим доступности</a> -->
         <div class="display">
-          <NuxtLink :to="policy" target="_blank" class="footer-text">
-            Политика конфидециальности
+          <NuxtLink :to="licenseStamus" target="_blank" class="footer-text">
+            Лицензия Стамус
           </NuxtLink>
           <div class="footer-text">
             <NuxtLink
@@ -127,9 +128,9 @@
           <a href="#" class="bvi-open footer-text" data-bvi="close"
             >Версия для слабовидящих</a
           >
-          <NuxtLink to="/business" class="footer-text"
-            >Бизнесу и корпоративным клиентам</NuxtLink
-          >
+          <NuxtLink :to="policy" target="_blank" class="footer-text">
+            Политика конфидециальности
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -408,6 +409,7 @@ const lastColumnNavigation = [
   .footer {
     .footer__box {
       gap: 20px 40px;
+      flex-direction: column;
     }
   }
   .address {
