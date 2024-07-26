@@ -64,6 +64,7 @@ export default defineNuxtConfig({
     },
     "/uslugi/dental-prosthetics/veneers/": { redirect: "/uslugi/viniry" },
     "/uslugi/dental-prosthetics/veneers/emax/": { redirect: "/uslugi/viniry" },
+    "/general": { redirect: "leave-review" },
     "/uslugi/dental-prosthetics/veneers/keramicheskie/": {
       redirect: "/uslugi/keramicheskie-koronki",
     },
