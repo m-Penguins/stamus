@@ -29,6 +29,24 @@ const imgAlt =
 
 const otherArticles = articleData.value?.data?.attributes?.other_articles;
 
+const shouldShowBlock = (block) => {
+  const excludedComponents = [
+    "blocks-story.galereya",
+    "blocks-story.o-vazhnom",
+  ];
+  return !excludedComponents.includes(block.__component);
+};
+
+const getVisibleIndex = (currentIndex) => {
+  let count = 0;
+  for (let i = 0; i <= currentIndex; i++) {
+    if (shouldShowBlock(blocks[i])) {
+      count++;
+    }
+  }
+  return count;
+};
+
 const breadcrumbs = [
   {
     title: "Главная",
@@ -79,9 +97,9 @@ useHead(getMetaObject(metaData, baseUrl));
             <BlocksMapper :blocks="blocks" />
           </div>
           <div class="articles-digital-right">
-            <div v-for="(block, index) in blocks">
-              <NuxtLink :to="'#' + block.id">
-                {{ index + 1 + ". " + block.title }}
+            <div v-for="(block, index) in blocks" :key="block.id">
+              <NuxtLink v-if="shouldShowBlock(block)" :to="'#' + block.id">
+                {{ getVisibleIndex(index) + ". " + block.title }}
               </NuxtLink>
             </div>
           </div>
