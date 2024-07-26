@@ -15,7 +15,6 @@ import Galereya from "@/components/dynamicBlock/Galereya.vue";
 import Certificaty from "@/components/dynamicBlock/Certificaty.vue";
 import Obrazovanie from "@/components/dynamicBlock/Obrazovanie.vue";
 import Achievements from "@/components/dynamicBlock/Achievements.vue";
-import BaseText from "@/components/dynamicBlock/Basetext.vue";
 
 export default function (component) {
   switch (component) {
@@ -53,8 +52,6 @@ export default function (component) {
       return Obrazovanie;
     case "blocks-story.achievements":
       return Achievements;
-    case "blocks-story.tekst-bazovyj":
-      return BaseText;
     default:
       "";
   }

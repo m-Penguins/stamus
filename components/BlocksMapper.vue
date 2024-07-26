@@ -10,7 +10,6 @@ defineProps(["blocks", "serviceId", "blockServices", "blockSpecialists"]);
       :serviceId="serviceId"
       :blockServices="blockServices"
       :blockSpecialists="blockSpecialists"
-      :id="block.id"
     />
   </section>
 </template>

@@ -6,7 +6,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
 
 <template>
   <div class="seo-block" :class="{ reversed: block?.reverse }">
-    <div class="image" v-if="block?.image?.data?.attributes?.url">
+    <div class="image">
       <NuxtImg
         v-if="block?.image?.data?.attributes?.url"
         :src="block?.image?.data?.attributes?.url"
