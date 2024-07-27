@@ -16,7 +16,7 @@ import Certificaty from "@/components/dynamicBlock/Certificaty.vue";
 import Obrazovanie from "@/components/dynamicBlock/Obrazovanie.vue";
 import Achievements from "@/components/dynamicBlock/Achievements.vue";
 import Expert from "@/components/dynamicBlock/Expert.vue";
-import BaseText from "@/components/dynamicBlock/Basetext.vue";
+import BaseText from "@/components/dynamicBlock/BaseText.vue";
 
 export default function (component) {
   switch (component) {
