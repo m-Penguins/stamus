@@ -88,7 +88,7 @@ export default defineNuxtConfig({
       redirect: "/uslugi/lechenie-zubov-pod-mikroskopom",
     },
     "/detskaya-stomatologiya/lechenie-zubov-pod-narkozom/": {
-      redirect: "/detskaya-stomatologiya/lechenie-zubov-pod-sedaciej",
+      redirect: "/detskaya-stomatologiya/lechenie-zubov-detyam-vo-sne",
     },
     "/dms/": { redirect: "/business" },
     "/otzivy/": { redirect: "/reviews" },

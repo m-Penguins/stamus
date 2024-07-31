@@ -8,7 +8,13 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
   <div class="expert-wrapper">
     <div class="expert-container">
       <div class="expert-content">
-        <h2>{{ block.title }}</h2>
+        <h2>
+          {{
+            block.title
+              ? block.title
+              : "Содержание данной страницы проверено экспертом:"
+          }}
+        </h2>
         <p>{{ block?.spec?.data?.attributes?.fullName }}</p>
         <p>{{ block?.spec?.data?.attributes?.position }}</p>
         <p>{{ block?.spec?.data?.attributes?.description }}</p>
@@ -34,6 +40,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 .expert-container {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
   @media screen and (max-width: 600px) {
     flex-direction: column-reverse;
   }

@@ -18,7 +18,7 @@ const { data: articleData } = await useFetch(
 const heading = articleData.value?.data?.attributes?.heading;
 const tags = articleData.value?.data?.attributes?.tag_category;
 const blocks = articleData.value?.data?.attributes?.blocks;
-console.log(blocks);
+// console.log(blocks);
 const img =
   articleData.value?.data?.attributes?.fotoArticles?.data?.attributes?.url ??
   placeholdersStore?.imagePlaceholders?.articles;
@@ -33,6 +33,7 @@ const shouldShowBlock = (block) => {
   const excludedComponents = [
     "blocks-story.galereya",
     "blocks-story.o-vazhnom",
+    "blocks-story.expert",
   ];
   return !excludedComponents.includes(block.__component);
 };
