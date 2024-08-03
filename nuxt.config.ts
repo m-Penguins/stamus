@@ -6,105 +6,185 @@ export default defineNuxtConfig({
     "~/server/middleware/trailing-slash.global",
   ],
   routeRules: {
-    "/5otzivov": { redirect: "/leave-review" },
+    "/5otzivov": { redirect: { to: "/leave-review", statusCode: 301 } },
     "/chelyustno-licevoj-hirurgii/": {
-      redirect: "/chelyustno-liczevaya-hirurgiya",
+      redirect: { to: "/chelyustno-liczevaya-hirurgiya", statusCode: 301 },
     },
     "/chelyustno-licevoj-hirurgii/consultation/": {
-      redirect: "/chelyustno-liczevaya-hirurgiya",
+      redirect: { to: "/chelyustno-liczevaya-hirurgiya", statusCode: 301 },
     },
     "/detskaya-stomatologiya/crown/": {
-      redirect: "/detskaya-stomatologiya/koronki-dlya-detej",
+      redirect: {
+        to: "/detskaya-stomatologiya/koronki-dlya-detej",
+        statusCode: 301,
+      },
     },
     "/detskaya-stomatologiya/detskaya-hirurgiya/": {
-      redirect: "/detskaya-stomatologiya/",
+      redirect: { to: "/detskaya-stomatologiya/", statusCode: 301 },
     },
     "/detskaya-stomatologiya/detskaya-hirurgiya/udalenie-molochnogo-zuba/": {
-      redirect: "/detskaya-stomatologiya/udalenie-molochnogo-zuba",
+      redirect: {
+        to: "/detskaya-stomatologiya/udalenie-molochnogo-zuba",
+        statusCode: 301,
+      },
     },
     "/detskaya-stomatologiya/lechenie-molochnykh-zubov/": {
-      redirect: "/detskaya-stomatologiya/lechenie-molochnyh-zubov",
+      redirect: {
+        to: "/detskaya-stomatologiya/lechenie-molochnyh-zubov",
+        statusCode: 301,
+      },
     },
     "/detskaya-stomatologiya/lechenie-molochnykh-zubov/lechenie-kariesa/": {
-      redirect: "/detskaya-stomatologiya/lechenie-kariesa-molochnyh-zubov",
+      redirect: {
+        to: "/detskaya-stomatologiya/lechenie-kariesa-molochnyh-zubov",
+        statusCode: 301,
+      },
     },
     "/detskaya-stomatologiya/lechenie-pulpita/": {
-      redirect: "/detskaya-stomatologiya/lechenie-pulpita-molochnyh-zubov",
+      redirect: {
+        to: "/detskaya-stomatologiya/lechenie-pulpita-molochnyh-zubov",
+        statusCode: 301,
+      },
     },
     "/osteotomiya-chelyusti/": {
-      redirect: "/chelyustno-liczevaya-hirurgiya/orthognathic",
+      redirect: {
+        to: "/chelyustno-liczevaya-hirurgiya/orthognathic",
+        statusCode: 301,
+      },
     },
     "/perelom-chelyusti/": {
-      redirect: "/chelyustno-liczevaya-hirurgiya/Lechenie-pereloma-chelyusti",
+      redirect: {
+        to: "/chelyustno-liczevaya-hirurgiya/Lechenie-pereloma-chelyusti",
+        statusCode: 301,
+      },
     },
     "/plastika-uzdechki-guby/": {
-      redirect: "/detskaya-stomatologiya/plastika-uzdechki-guby",
+      redirect: {
+        to: "/detskaya-stomatologiya/plastika-uzdechki-guby",
+        statusCode: 301,
+      },
     },
     "/plastika-uzdechki-yazyka/": {
-      redirect: "/detskaya-stomatologiya/plastika-uzdechki-yazyka",
+      redirect: {
+        to: "/detskaya-stomatologiya/plastika-uzdechki-yazyka",
+        statusCode: 301,
+      },
     },
     "/rhinoplasty/": {
-      redirect: "/chelyustno-liczevaya-hirurgiya/rhinoplasty",
+      redirect: {
+        to: "/chelyustno-liczevaya-hirurgiya/rhinoplasty",
+        statusCode: 301,
+      },
     },
     "/sedation/": {
-      redirect: "/detskaya-stomatologiya/lechenie-zubov-pod-sedaciej",
+      redirect: {
+        to: "/detskaya-stomatologiya/lechenie-zubov-pod-sedaciej",
+        statusCode: 301,
+      },
     },
-    "/snimok-trg/": { redirect: "/uslugi/snimok-trg" },
-    "/staff-detstvo/": { redirect: "/team?page=1&position=2" },
-    "/staff-ortodonty/": { redirect: "/team?page=1&position=1" },
-    "/tomografiya-zuba/": { redirect: "/uslugi/panoramnyj-snimok-zubov" },
+    "/snimok-trg/": {
+      redirect: { to: "/uslugi/snimok-trg", statusCode: 301 },
+    },
+    "/staff-detstvo/": {
+      redirect: { to: "/team?page=1&position=2", statusCode: 301 },
+    },
+    "/staff-ortodonty/": {
+      redirect: { to: "/team?page=1&position=1", statusCode: 301 },
+    },
+    "/tomografiya-zuba/": {
+      redirect: { to: "/uslugi/panoramnyj-snimok-zubov", statusCode: 301 },
+    },
     "/uslugi/dental-prosthetics/crown/": {
-      redirect: "/uslugi/dental-prosthetics",
+      redirect: { to: "/uslugi/dental-prosthetics", statusCode: 301 },
     },
     "/uslugi/dental-prosthetics/crown/na-implanty/": {
-      redirect: "/uslugi/koronki-na-implanty",
+      redirect: { to: "/uslugi/koronki-na-implanty", statusCode: 301 },
     },
     "/uslugi/dental-prosthetics/removable-dentures/": {
-      redirect: "/uslugi/semnye-protezy",
+      redirect: { to: "/uslugi/semnye-protezy", statusCode: 301 },
     },
-    "/uslugi/dental-prosthetics/veneers/": { redirect: "/uslugi/viniry" },
-    "/uslugi/dental-prosthetics/veneers/emax/": { redirect: "/uslugi/viniry" },
-    "/general": { redirect: "/leave-review" },
+    "/uslugi/dental-prosthetics/veneers/": {
+      redirect: { to: "/uslugi/viniry", statusCode: 301 },
+    },
+    "/uslugi/dental-prosthetics/veneers/emax/": {
+      redirect: { to: "/uslugi/viniry", statusCode: 301 },
+    },
+    "/general": {
+      redirect: { to: "/leave-review", statusCode: 301 },
+    },
     "/uslugi/dental-prosthetics/veneers/keramicheskie/": {
-      redirect: "/uslugi/keramicheskie-koronki",
+      redirect: { to: "/uslugi/keramicheskie-koronki", statusCode: 301 },
     },
-    "/uslugi/gigiena/chistka-zubnogo-kamnya/": { redirect: "/uslugi/gigiena" },
+    "/uslugi/gigiena/chistka-zubnogo-kamnya/": {
+      redirect: { to: "/uslugi/gigiena", statusCode: 301 },
+    },
     "/uslugi/gigiena/ultrazvukovaya-chistka-zubov/": {
-      redirect: "/uslugi/gigiena",
+      redirect: { to: "/uslugi/gigiena", statusCode: 301 },
     },
-    "/uslugi/implantationstar/": { redirect: "/uslugi/implantaciya" },
+    "/uslugi/implantationstar/": {
+      redirect: { to: "/uslugi/implantaciya", statusCode: 301 },
+    },
     "/uslugi/implantationstar/one-stage-implantation/": {
-      redirect: "/uslugi/odnomomentnaya-implantaciya",
+      redirect: { to: "/uslugi/odnomomentnaya-implantaciya", statusCode: 301 },
     },
-    "/uslugi/orthodontics/aligners/": { redirect: "/uslugi/elajnery" },
+    "/uslugi/orthodontics/aligners/": {
+      redirect: { to: "/uslugi/elajnery", statusCode: 301 },
+    },
     "/uslugi/orthodontics/samoligiruyushchie-brekety/": {
-      redirect: "/uslugi/samoligiruyushchie-brekety",
+      redirect: { to: "/uslugi/samoligiruyushchie-brekety", statusCode: 301 },
     },
     "/uslugi/surgery/udalenie-zuba-mudrosti/": {
-      redirect: "/uslugi/udalenie-zuba-mudrosti",
+      redirect: { to: "/uslugi/udalenie-zuba-mudrosti", statusCode: 301 },
     },
-    "/uslugi/therapy/": { redirect: "/uslugi" },
+    "/uslugi/therapy/": {
+      redirect: { to: "/uslugi", statusCode: 301 },
+    },
     "/uslugi/therapy/microscope/": {
-      redirect: "/uslugi/lechenie-zubov-pod-mikroskopom",
+      redirect: {
+        to: "/uslugi/lechenie-zubov-pod-mikroskopom",
+        statusCode: 301,
+      },
     },
     "/detskaya-stomatologiya/lechenie-zubov-pod-narkozom/": {
-      redirect: "/detskaya-stomatologiya/lechenie-zubov-detyam-vo-sne",
+      redirect: {
+        to: "/detskaya-stomatologiya/lechenie-zubov-detyam-vo-sne",
+        statusCode: 301,
+      },
     },
-    "/dms/": { redirect: "/business" },
-    "/otzivy/": { redirect: "/reviews" },
-    "/staff/": { redirect: "/team" },
-    "/price/": { redirect: "/prices" },
+    "/dms/": {
+      redirect: { to: "/business", statusCode: 301 },
+    },
+    "/otzivy/": {
+      redirect: { to: "/reviews", statusCode: 301 },
+    },
+    "/staff/": {
+      redirect: { to: "/team", statusCode: 301 },
+    },
+    "/price/": {
+      redirect: { to: "/prices", statusCode: 301 },
+    },
     "/rhinoplasty/": {
-      redirect: "/chelyustno-liczevaya-hirurgiya/rhinoplasty",
+      redirect: {
+        to: "/chelyustno-liczevaya-hirurgiya/rhinoplasty",
+        statusCode: 301,
+      },
     },
-    "/sale/": { redirect: "/discounts" },
+    "/sale/": {
+      redirect: { to: "/discounts", statusCode: 301 },
+    },
     "/sedation/": {
-      redirect: "/lechenie-zubov-pod-narkozom/lechenie-zubov-vo-sne",
+      redirect: {
+        to: "/lechenie-zubov-pod-narkozom/lechenie-zubov-vo-sne",
+        statusCode: 301,
+      },
     },
-    "/uslugi/orthodontics/lingual-braces/": { redirect: "/uslugi/brekety" },
+    "/uslugi/orthodontics/lingual-braces/": {
+      redirect: { to: "/uslugi/brekety", statusCode: 301 },
+    },
   },
   router: {
     trailingSlash: false,
+    middleware: ["redirect"],
   },
   app: {
     head: {
