@@ -11,10 +11,11 @@ const { data: articleData } = await useFetch(
     query: {
       populate:
         blocksQuey +
-        "fotoArticles.*,meta.metaImage.*,napravleniya_uslug_1.*,other_articles.fotoArticles.*,blocks.*,blocks.expert.*",
+        ",meta.metaImage.*,napravleniya_uslug_1.*,other_articles.fotoArticles.*,blocks.*,blocks.expert.*,fotoArticles.*",
     },
   },
 );
+console.log(articleData)
 const heading = articleData.value?.data?.attributes?.heading;
 const tags = articleData.value?.data?.attributes?.tag_category;
 const blocks = articleData.value?.data?.attributes?.blocks;
