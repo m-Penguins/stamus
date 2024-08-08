@@ -1,12 +1,10 @@
-import { defineEventHandler, H3Event } from "h3";
+// middleware/redirect.js
 
-export default defineEventHandler((event: H3Event) => {
-  const host = event.node.req.headers.host;
+export default function ({ route, redirect }) {
+  const path = route.fullPath;
+  const newPath = path.replace(/\/+$/, "/"); // Заменить все конечные слеши на один
 
-  if (host && host.startsWith("www.")) {
-    const newHost = host.replace(/^www\./, "");
-    const newUrl = `https://${newHost}${event.node.req.url}`;
-    event.node.res.writeHead(301, { Location: newUrl });
-    event.node.res.end();
+  if (path !== newPath) {
+    return redirect(301, newPath);
   }
-});
+}
