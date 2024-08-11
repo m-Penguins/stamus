@@ -25,5 +25,6 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
 * :deep(*) {
   list-style-type: unset;
   list-style-position: inside;
+  line-height: normal;
 }
 </style>

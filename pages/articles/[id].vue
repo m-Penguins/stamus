@@ -18,6 +18,7 @@ const { data: articleData } = await useFetch(
 console.log(articleData)
 const heading = articleData.value?.data?.attributes?.heading;
 const tags = articleData.value?.data?.attributes?.tag_category;
+const date = articleData.value?.data?.attributes?.date;
 const blocks = articleData.value?.data?.attributes?.blocks;
 // console.log(blocks);
 const img =
@@ -107,22 +108,25 @@ useHead(getMetaObject(metaData, baseUrl));
           </div>
         </div>
       </div>
-      <NuxtLink class="back-btn" to="/articles">
-        <svg
-          width="25"
-          height="9"
-          viewBox="0 0 18 9"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            class="svg"
-            d="M1 4C0.723858 4 0.5 4.22386 0.5 4.5C0.5 4.77614 0.723858 5 1 5V4ZM17.3536 4.85355C17.5488 4.65829 17.5488 4.34171 17.3536 4.14645L14.1716 0.964466C13.9763 0.769204 13.6597 0.769204 13.4645 0.964466C13.2692 1.15973 13.2692 1.47631 13.4645 1.67157L16.2929 4.5L13.4645 7.32843C13.2692 7.52369 13.2692 7.84027 13.4645 8.03553C13.6597 8.2308 13.9763 8.2308 14.1716 8.03553L17.3536 4.85355ZM1 5H17V4H1V5Z"
-            fill="#525660"
-          />
-        </svg>
-        <span>Все статьи</span>
-      </NuxtLink>
+      <div style="width: 100%;">
+        <div class="articles-dital-box__item">{{ date }}</div>
+        <NuxtLink class="back-btn" to="/articles">
+          <svg
+            width="25"
+            height="9"
+            viewBox="0 0 18 9"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              class="svg"
+              d="M1 4C0.723858 4 0.5 4.22386 0.5 4.5C0.5 4.77614 0.723858 5 1 5V4ZM17.3536 4.85355C17.5488 4.65829 17.5488 4.34171 17.3536 4.14645L14.1716 0.964466C13.9763 0.769204 13.6597 0.769204 13.4645 0.964466C13.2692 1.15973 13.2692 1.47631 13.4645 1.67157L16.2929 4.5L13.4645 7.32843C13.2692 7.52369 13.2692 7.84027 13.4645 8.03553C13.6597 8.2308 13.9763 8.2308 14.1716 8.03553L17.3536 4.85355ZM1 5H17V4H1V5Z"
+              fill="#525660"
+            />
+          </svg>
+          <span>Все статьи</span>
+        </NuxtLink>
+      </div>
     </div>
     <section class="section-wrapper" v-if="otherArticles?.data?.length">
       <DynamicBlockBlog
