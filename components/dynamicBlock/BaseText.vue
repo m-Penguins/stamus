@@ -26,5 +26,6 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
   list-style-type: unset;
   list-style-position: inside;
   line-height: normal;
+  font-family: Manrope;
 }
 </style>

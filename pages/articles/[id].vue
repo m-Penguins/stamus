@@ -101,9 +101,9 @@ useHead(getMetaObject(metaData, baseUrl));
           </div>
           <div class="articles-digital-right">
             <div v-for="(block, index) in blocks" :key="block.id">
-              <NuxtLink v-if="shouldShowBlock(block)" :to="'#' + block.id">
+              <a v-if="shouldShowBlock(block)" :href="'#' + block.id">
                 {{ getVisibleIndex(index) + ". " + block.title }}
-              </NuxtLink>
+              </a>
             </div>
           </div>
         </div>
@@ -161,6 +161,7 @@ useHead(getMetaObject(metaData, baseUrl));
   border: 1px solid #dfdfdf;
   border-radius: 20px;
   background: #232d5b;
+  max-width: 35%;
   & div {
     margin: 20px 0;
     font-size: 16px;
