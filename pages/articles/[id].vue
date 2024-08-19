@@ -161,7 +161,7 @@ useHead(getMetaObject(metaData, baseUrl));
   border: 1px solid #dfdfdf;
   border-radius: 20px;
   background: #232d5b;
-  max-width: 35%;
+  max-width: 316px;
   & div {
     margin: 20px 0;
     font-size: 16px;

@@ -35,6 +35,7 @@ const search = () => {
       query: { term: searchTerm.value },
       replace: true,
     });
+    searchTerm.value = ""
     emit("enterPressed");
   }
 };
