@@ -21,7 +21,7 @@ const handleSelect = (option) => {
 </script>
 
 <template>
-  <div class="custom-select" :tabindex="1" @blur="isOpen = false">
+  <div class="custom-select" :tabindex="1">
     <div class="selected" :class="{ open: isOpen }" @click="isOpen = !isOpen">
       <div v-if="selectedId" class="label">{{ label }}</div>
       <div
