@@ -154,6 +154,7 @@ const handleInputChange = (value) => {
 };
 
 const handleClinicChange = async (clinic) => {
+  console.log('clinik')
   clinicFilter.value = clinic?.id;
   currentPage.value = 1;
   const searchQuery = {
@@ -174,6 +175,7 @@ const handleClinicChange = async (clinic) => {
 };
 
 const handleDirChange = async (dir) => {
+  
   dirFilter.value = dir?.id;
   currentPage.value = 1;
   const searchQuery = {
@@ -194,6 +196,7 @@ const handleDirChange = async (dir) => {
 };
 
 const handlePositionChange = async (position) => {
+  console.log('pos')
   positionFilter.value = position?.id;
   currentPage.value = 1;
   const searchQuery = {
