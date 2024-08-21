@@ -15,7 +15,6 @@ const resetChosen = () => {
 };
 
 const handleSelect = (option) => {
-  console.log('click')
   isOpen.value = false;
   emits("select", option);
 };
