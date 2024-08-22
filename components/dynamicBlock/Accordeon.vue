@@ -1,17 +1,26 @@
 <script setup>
-defineProps(["block"]);
-
+const props = defineProps(["block"]);
+const {block} = props
 const openItem = ref(null);
-
+const shouldMap = !props.block?.content
 const toggleOpenItem = (itemId) => {
+  if (!shouldMap) {
     openItem.value = !openItem.value;
+  } else {
+    if (openItem.value === itemId) {
+      openItem.value = null;
+    } else {
+      openItem.value = itemId;
+    }
+  }
 };
 
 </script>
 
 <template>
   <div class="info">
-    <div
+    <h3 v-if="shouldMap" class="info-title">{{ block.title }}</h3>
+    <div v-if="!shouldMap"
         class="info-card"
         :class="{
         open: openItem,
@@ -78,25 +87,83 @@ const toggleOpenItem = (itemId) => {
         ></div>
       </transition>
     </div>
+    <div v-else
+        v-for="(item, index) in block.items"
+        :key="item?.id"
+        class="info-card"
+        :class="{
+        open: openItem === item?.id,
+      }"
+    >
+      <div class="info-card__box" @click="toggleOpenItem(item?.id)">
+        <h3 class="accordion-title">{{ item.title }}</h3>
+        <div v-if="openItem !== item?.id">
+          <svg
+              width="44"
+              height="44"
+              viewBox="0 0 44 44"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+                class="card-img-fill"
+                d="M12 22L32 22.003M22 12V32"
+                stroke="#525660"
+                stroke-linecap="round"
+            />
+            <rect
+                class="card-img-stroke"
+                x="0.5"
+                y="0.5"
+                width="43"
+                height="43"
+                rx="21.5"
+                stroke="#E9E9E9"
+            />
+          </svg>
+        </div>
+        <div v-else>
+          <svg
+              width="44"
+              height="44"
+              viewBox="0 0 44 44"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+                class="card-img-fill"
+                d="M12 21.9985L32 22.0015"
+                stroke="#525660"
+                stroke-linecap="round"
+            />
+            <rect
+                class="card-img-stroke"
+                x="0.5"
+                y="0.5"
+                width="43"
+                height="43"
+                rx="21.5"
+                stroke="#E9E9E9"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <transition name="dop-info">
+        <div
+            v-if="item?.id"
+            v-show="openItem === item?.id"
+            v-html="item?.content"
+        ></div>
+      </transition>
+    </div>
+
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "@/assets/styles/style.scss";
 
-.error-text {
-  @include body-18-regular;
-  color: red;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.success-text {
-  @include body-18-regular;
-  color: rgb(32, 196, 32);
-  text-align: center;
-  margin-bottom: 10px;
-}
 .info {
   display: flex;
   flex-direction: column;
@@ -126,6 +193,12 @@ const toggleOpenItem = (itemId) => {
       width: 44px;
     }
   }
+}
+
+.info-title {
+  font-size: 22px;
+  font-weight: 500;
+  padding-bottom: 20px;
 }
 
 .info-card:hover {
@@ -160,17 +233,6 @@ const toggleOpenItem = (itemId) => {
   max-height: 10000px;
 }
 
-.info-links-box {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-}
-
-.link-info-doc {
-  width: fit-content;
-}
-
 .info-card {
   .accordion-content {
     max-height: 0px;
@@ -187,101 +249,13 @@ const toggleOpenItem = (itemId) => {
   }
 }
 
-.accordion-content-subtitle {
-  margin: 24px 0 24px;
-}
-
-.accordion-content-subtext {
-  @include body-12-regular;
-  color: $placeholder;
-}
-
-.accordion-content-text {
-  padding-top: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  @include body-14-regular;
-  color: $gray-text;
-}
-
-.accordion-content-title {
-  padding-bottom: 10px;
-}
-
 .accordion-title {
   @include body-18-regular;
   color: $dark-blue-subtitle;
   width: 95%;
 }
 
-.checkbox {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-}
-
-.checkbox input[type="checkbox"] {
-  display: none;
-}
-
-.checkmark {
-  width: 20px;
-  height: 20px;
-  border-radius: 3px;
-  border: 1px solid #7f838c;
-  margin-right: 8px;
-  display: inline-block;
-  position: relative;
-}
-
-.checkbox input[type="checkbox"]:checked + .checkmark:after {
-  content: "✓";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 12px;
-  color: #fff;
-}
-
-.checkbox:hover .checkmark {
-  border-color: #525660;
-}
-
-.label-text {
-  @include body-16-regular;
-  color: #7f838c;
-}
-
-.checkbox input[type="checkbox"]:checked + .checkmark {
-  background-color: #232d5b;
-  border-color: #232d5b;
-}
-
-.checkbox:hover .label-text {
-  color: #525660;
-}
-
-.checkbox.checked .label-text {
-  color: #232d5b;
-}
-.ndfl.open {
-  scroll-margin-top: 160px;
-  max-height: 1500px !important;
-  .accordion-content {
-    overflow-y: hidden !important;
-  }
-}
-
-.ndfl.open {
-  .accordion-content {
-    max-height: 1500px !important;
-  }
-}
 .info-card {
-  // overflow: hidden;
   max-height: 100px;
   transition: max-height 0.9s ease-in-out;
 }
@@ -294,25 +268,6 @@ const toggleOpenItem = (itemId) => {
   @include body-18-regular;
   color: $dark-blue-subtitle;
   width: 95%;
-}
-
-.form-btn {
-  width: 100%;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-.info-dop-card-subtext {
-  @include body-12-regular;
-  color: $gray-text;
-  opacity: 0.7;
-  text-align: center;
-
-  & a {
-    color: inherit;
-    font-size: inherit;
-    text-decoration: underline;
-  }
 }
 
 .info {
@@ -361,42 +316,6 @@ const toggleOpenItem = (itemId) => {
 
 .info-card:hover {
   border: 1px solid var(--stroke, #cfd5e1);
-}
-
-.accordion-content-text {
-  @include body-14-regular;
-  color: $gray-text;
-  padding-bottom: 16px;
-}
-
-.accordion-content-inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-width: 450px;
-}
-
-.accordion-content-id1-box {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.accordion-content-id1-title {
-  @include body-18-medium;
-  color: $dark-blue-subtitle;
-  padding-bottom: 4px;
-}
-
-.accordion-content-id1-subtitle {
-  @include body-16-regular;
-  font-weight: 500;
-  color: $dark-blue-subtitle;
-  padding-bottom: 4px;
-}
-
-.link-info-doc {
-  width: fit-content;
 }
 
 @media (max-width: 1356px) {

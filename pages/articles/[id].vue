@@ -11,16 +11,15 @@ const { data: articleData } = await useFetch(
     query: {
       populate:
         blocksQuey +
-        ",meta.metaImage.*,napravleniya_uslug_1.*,other_articles.fotoArticles.*,blocks.*,blocks.expert.*,fotoArticles.*",
+          ",meta.metaImage.*,napravleniya_uslug_1.*,other_articles.fotoArticles.*,blocks.*,blocks.expert.*,blocks.items.*,fotoArticles.*",
     },
   },
 );
-console.log(articleData)
+
 const heading = articleData.value?.data?.attributes?.heading;
 const tags = articleData.value?.data?.attributes?.tag_category;
 const date = articleData.value?.data?.attributes?.date;
 const blocks = articleData.value?.data?.attributes?.blocks;
-// console.log(blocks);
 const img =
   articleData.value?.data?.attributes?.fotoArticles?.data?.attributes?.url ??
   placeholdersStore?.imagePlaceholders?.articles;

@@ -102,10 +102,10 @@
           </NuxtLink>
         </div>
       </div>
-      <div class="requisite">
+      <div v-if="stamus || stamusMed" class="requisite">
         <h2 class="requisite-title">Реквизиты</h2>
-        <dynamic-block-accordeon :block="stamusBlock"/>
-        <dynamic-block-accordeon :block="stamusmedBlock"/>
+        <dynamic-block-accordeon :block="stamus"/>
+        <dynamic-block-accordeon :block="stamusMed"/>
       </div>
 
       <LazyBlocksMap />
@@ -135,22 +135,14 @@ const assetsStore = useAssets();
 
 const { data: contactsData } = await useFetch(`${apiBaseUrl}contact`, {
   query: {
-    populate: "items.*,docs.file.*",
+    populate: "items.*,docs.file.*,Stamus.*,stamusMed.*",
   },
 });
 
 
-const stamusBlock = {
-  id: 101,
-  title: 'Стамус',
-  content: '<h1>Реквизиты стамус</h1>'
-}
 
-const stamusmedBlock = {
-    id: 102,
-    title: 'СТАМУСМЕД',
-    content: '<h1>Реквизиты СТАМУСМЕД</h1>'
-}
+const stamus = contactsData.value?.data?.attributes.Stamus
+const stamusMed = contactsData.value?.data?.attributes?.stamusMed
 
 
 const contactsMainInfo = contactsData.value?.data?.attributes;
@@ -257,7 +249,7 @@ useHead({
   &-title {
     font-size: 22px;
     font-weight: 500;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
   }
 }
 
