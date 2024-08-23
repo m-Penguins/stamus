@@ -42,13 +42,13 @@
                     class="footer-img"
                   />
                 </NuxtLink>
-                <NuxtLink
+                <!-- <NuxtLink
           :to="policy"
           target="_blank"
           class="footer-text display-block"
         >
           Разработка сайта
-        </NuxtLink>
+        </NuxtLink> -->
               </div>
             </div>
           </div>
@@ -139,9 +139,9 @@
           <NuxtLink :to="policy" target="_blank" class="footer-text">
             Политика конфидециальности
           </NuxtLink>
-          <NuxtLink :to="policy" target="_blank" class="footer-text">
+          <!-- <NuxtLink :to="policy" target="_blank" class="footer-text">
             Разработка сайта
-          </NuxtLink>
+          </NuxtLink> -->
         </div>
       </div>
     </div>
