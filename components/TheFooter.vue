@@ -42,6 +42,13 @@
                     class="footer-img"
                   />
                 </NuxtLink>
+                <NuxtLink
+          :to="policy"
+          target="_blank"
+          class="footer-text display-block"
+        >
+          Разработка сайта
+        </NuxtLink>
               </div>
             </div>
           </div>
@@ -110,6 +117,7 @@
         >
           Политика конфидециальности
         </NuxtLink>
+        
         <!-- <a href="#" class="bvi-open">Включить режим доступности</a> -->
         <div class="display">
           <NuxtLink :to="licenseStamus" target="_blank" class="footer-text">
@@ -130,6 +138,9 @@
           >
           <NuxtLink :to="policy" target="_blank" class="footer-text">
             Политика конфидециальности
+          </NuxtLink>
+          <NuxtLink :to="policy" target="_blank" class="footer-text">
+            Разработка сайта
           </NuxtLink>
         </div>
       </div>

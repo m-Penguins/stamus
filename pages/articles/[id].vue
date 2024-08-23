@@ -15,6 +15,13 @@ const { data: articleData } = await useFetch(
     },
   },
 );
+if (!articleData.value?.data) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page Not Found",
+    fatal: true,
+  });
+}
 console.log(articleData)
 const heading = articleData.value?.data?.attributes?.heading;
 const tags = articleData.value?.data?.attributes?.tag_category;
