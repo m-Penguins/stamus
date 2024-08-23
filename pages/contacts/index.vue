@@ -102,6 +102,11 @@
           </NuxtLink>
         </div>
       </div>
+      <div v-if="stamus || stamusMed" class="requisite">
+        <h2 class="requisite-title">Реквизиты</h2>
+        <dynamic-block-accordeon :block="stamus"/>
+        <dynamic-block-accordeon :block="stamusMed"/>
+      </div>
 
       <LazyBlocksMap />
       <div class="doc-block">
@@ -130,9 +135,15 @@ const assetsStore = useAssets();
 
 const { data: contactsData } = await useFetch(`${apiBaseUrl}contact`, {
   query: {
-    populate: "items.*,docs.file.*",
+    populate: "items.*,docs.file.*,Stamus.*,stamusMed.*",
   },
 });
+
+
+
+const stamus = contactsData.value?.data?.attributes.Stamus
+const stamusMed = contactsData.value?.data?.attributes?.stamusMed
+
 
 const contactsMainInfo = contactsData.value?.data?.attributes;
 
@@ -228,6 +239,18 @@ useHead({
 
 .doc-block-item {
   width: 100%;
+}
+
+.requisite {
+  margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  &-title {
+    font-size: 22px;
+    font-weight: 500;
+    padding-bottom: 20px;
+  }
 }
 
 @media (max-width: 1100px) {
