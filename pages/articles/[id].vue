@@ -36,11 +36,11 @@ const imgAlt =
     ?.alternativeText;
 
 const otherArticles = articleData.value?.data?.attributes?.other_articles;
-console.log(otherArticles)
+// console.log(otherArticles)
 const filterArticles = {
   data: otherArticles.data.filter(item => item.attributes.publishedAt !== null)
 }
-console.log(filterArticles)
+// console.log(filterArticles)
 
 
 const shouldShowBlock = (block) => {
