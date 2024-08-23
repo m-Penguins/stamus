@@ -15,14 +15,14 @@ const { data: articleData } = await useFetch(
     },
   },
 );
-if (!articleData.value?.data) {
+if (!articleData.value?.data || articleData.value?.data?.attributes?.publishedAt == null) {
   throw createError({
     statusCode: 404,
     statusMessage: "Page Not Found",
     fatal: true,
   });
 }
-console.log(articleData)
+// console.log(articleData)
 const heading = articleData.value?.data?.attributes?.heading;
 const tags = articleData.value?.data?.attributes?.tag_category;
 const date = articleData.value?.data?.attributes?.date;
@@ -36,6 +36,12 @@ const imgAlt =
     ?.alternativeText;
 
 const otherArticles = articleData.value?.data?.attributes?.other_articles;
+console.log(otherArticles)
+const filterArticles = {
+  data: otherArticles.data.filter(item => item.attributes.publishedAt !== null)
+}
+console.log(filterArticles)
+
 
 const shouldShowBlock = (block) => {
   const excludedComponents = [
@@ -43,6 +49,11 @@ const shouldShowBlock = (block) => {
     "blocks-story.o-vazhnom",
     "blocks-story.expert",
   ];
+
+  if (!block.title || block.title.trim() === "") {
+    return false;
+  }
+
   return !excludedComponents.includes(block.__component);
 };
 
@@ -134,9 +145,9 @@ useHead(getMetaObject(metaData, baseUrl));
         </NuxtLink>
       </div>
     </div>
-    <section class="section-wrapper" v-if="otherArticles?.data?.length">
+    <section class="section-wrapper" v-if="filterArticles">
       <DynamicBlockBlog
-        :block="{ articles: otherArticles, title: 'Другие статьи' }"
+        :block="{ articles: filterArticles, title: 'Другие статьи' }"
       />
     </section>
     <blocks-main-form />
