@@ -1,8 +1,8 @@
 <script setup>
 const props = defineProps(["block"]);
-const {block} = props
+const { block } = props;
 const openItem = ref(null);
-const shouldMap = !props.block?.content
+const shouldMap = !props.block?.content;
 const toggleOpenItem = (itemId) => {
   if (!shouldMap) {
     openItem.value = !openItem.value;
@@ -14,15 +14,15 @@ const toggleOpenItem = (itemId) => {
     }
   }
 };
-
 </script>
 
 <template>
   <div class="info">
     <h3 v-if="shouldMap" class="info-title">{{ block.title }}</h3>
-    <div v-if="!shouldMap"
-        class="info-card"
-        :class="{
+    <div
+      v-if="!shouldMap"
+      class="info-card"
+      :class="{
         open: openItem,
       }"
     >
@@ -30,68 +30,66 @@ const toggleOpenItem = (itemId) => {
         <h3 class="accordion-title">{{ block.title }}</h3>
         <div v-if="!openItem">
           <svg
-              width="44"
-              height="44"
-              viewBox="0 0 44 44"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            width="44"
+            height="44"
+            viewBox="0 0 44 44"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
-                class="card-img-fill"
-                d="M12 22L32 22.003M22 12V32"
-                stroke="#525660"
-                stroke-linecap="round"
+              class="card-img-fill"
+              d="M12 22L32 22.003M22 12V32"
+              stroke="#525660"
+              stroke-linecap="round"
             />
             <rect
-                class="card-img-stroke"
-                x="0.5"
-                y="0.5"
-                width="43"
-                height="43"
-                rx="21.5"
-                stroke="#E9E9E9"
+              class="card-img-stroke"
+              x="0.5"
+              y="0.5"
+              width="43"
+              height="43"
+              rx="21.5"
+              stroke="#E9E9E9"
             />
           </svg>
         </div>
         <div v-else>
           <svg
-              width="44"
-              height="44"
-              viewBox="0 0 44 44"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            width="44"
+            height="44"
+            viewBox="0 0 44 44"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
-                class="card-img-fill"
-                d="M12 21.9985L32 22.0015"
-                stroke="#525660"
-                stroke-linecap="round"
+              class="card-img-fill"
+              d="M12 21.9985L32 22.0015"
+              stroke="#525660"
+              stroke-linecap="round"
             />
             <rect
-                class="card-img-stroke"
-                x="0.5"
-                y="0.5"
-                width="43"
-                height="43"
-                rx="21.5"
-                stroke="#E9E9E9"
+              class="card-img-stroke"
+              x="0.5"
+              y="0.5"
+              width="43"
+              height="43"
+              rx="21.5"
+              stroke="#E9E9E9"
             />
           </svg>
         </div>
       </div>
 
       <transition name="dop-info">
-        <div
-            v-show="openItem"
-            v-html="block.content"
-        ></div>
+        <div v-show="openItem" v-html="block.content"></div>
       </transition>
     </div>
-    <div v-else
-        v-for="(item, index) in block.items"
-        :key="item?.id"
-        class="info-card"
-        :class="{
+    <div
+      v-else
+      v-for="(item, index) in block.items"
+      :key="item?.id"
+      class="info-card"
+      :class="{
         open: openItem === item?.id,
       }"
     >
@@ -99,51 +97,51 @@ const toggleOpenItem = (itemId) => {
         <h3 class="accordion-title">{{ item.title }}</h3>
         <div v-if="openItem !== item?.id">
           <svg
-              width="44"
-              height="44"
-              viewBox="0 0 44 44"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            width="44"
+            height="44"
+            viewBox="0 0 44 44"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
-                class="card-img-fill"
-                d="M12 22L32 22.003M22 12V32"
-                stroke="#525660"
-                stroke-linecap="round"
+              class="card-img-fill"
+              d="M12 22L32 22.003M22 12V32"
+              stroke="#525660"
+              stroke-linecap="round"
             />
             <rect
-                class="card-img-stroke"
-                x="0.5"
-                y="0.5"
-                width="43"
-                height="43"
-                rx="21.5"
-                stroke="#E9E9E9"
+              class="card-img-stroke"
+              x="0.5"
+              y="0.5"
+              width="43"
+              height="43"
+              rx="21.5"
+              stroke="#E9E9E9"
             />
           </svg>
         </div>
         <div v-else>
           <svg
-              width="44"
-              height="44"
-              viewBox="0 0 44 44"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            width="44"
+            height="44"
+            viewBox="0 0 44 44"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
-                class="card-img-fill"
-                d="M12 21.9985L32 22.0015"
-                stroke="#525660"
-                stroke-linecap="round"
+              class="card-img-fill"
+              d="M12 21.9985L32 22.0015"
+              stroke="#525660"
+              stroke-linecap="round"
             />
             <rect
-                class="card-img-stroke"
-                x="0.5"
-                y="0.5"
-                width="43"
-                height="43"
-                rx="21.5"
-                stroke="#E9E9E9"
+              class="card-img-stroke"
+              x="0.5"
+              y="0.5"
+              width="43"
+              height="43"
+              rx="21.5"
+              stroke="#E9E9E9"
             />
           </svg>
         </div>
@@ -151,19 +149,23 @@ const toggleOpenItem = (itemId) => {
 
       <transition name="dop-info">
         <div
-            v-if="item?.id"
-            v-show="openItem === item?.id"
-            v-html="item?.content"
+          v-if="item?.id"
+          v-show="openItem === item?.id"
+          v-html="item?.content"
         ></div>
       </transition>
     </div>
-
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "@/assets/styles/style.scss";
-
+* :deep(p) {
+  list-style-type: unset;
+  list-style-position: inside;
+  line-height: normal;
+  font-family: Manrope;
+}
 .info {
   display: flex;
   flex-direction: column;
@@ -238,7 +240,7 @@ const toggleOpenItem = (itemId) => {
     max-height: 0px;
     opacity: 0;
     transition: max-height 0.4s ease-in-out, opacity 0.6s ease-in-out,
-    margin-top 0.3s ease-in-out;
+      margin-top 0.3s ease-in-out;
   }
   &.open {
     & .accordion-content {
@@ -300,7 +302,7 @@ const toggleOpenItem = (itemId) => {
     max-height: 0px;
     opacity: 0;
     transition: max-height 0.4s ease-in-out, opacity 0.6s ease-in-out,
-    margin-top 0.3s ease-in-out;
+      margin-top 0.3s ease-in-out;
     /* overflow-y: auto; */
     width: 100%;
   }

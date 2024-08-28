@@ -1381,7 +1381,7 @@ export default {
   gap: 10px;
   position: relative;
   cursor: pointer;
-
+  
   &:hover {
     border: 1px solid var(--dissabled, #cfd5e1);
   }
@@ -1482,7 +1482,7 @@ export default {
   @include body-14-regular;
   color: $placeholder;
   cursor: pointer;
-
+text-wrap: wrap;
   &:hover {
     color: #232d5b;
   }

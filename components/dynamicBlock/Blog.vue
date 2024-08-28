@@ -5,7 +5,10 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-defineProps(["block"]);
+const props = defineProps(["block"]);
+
+const filteredAtr = props.block.articles?.data.filter(item => item.attributes.publishedAt !== null)
+console.log(filteredAtr) 
 
 const prev = ref(null);
 const next = ref(null);
@@ -16,7 +19,7 @@ const placeholdersStore = usePlaceholdersStore();
 <template>
   <div
     class="container-size container-article"
-    v-if="block?.articles?.data?.length"
+    v-if="filteredAtr.length"
   >
     <div class="main-events-block">
       <div class="slider-title">
@@ -43,7 +46,7 @@ const placeholdersStore = usePlaceholdersStore();
           }"
         >
           <swiper-slide
-            v-for="(article, index) in block?.articles?.data"
+            v-for="(article, index) in filteredAtr"
             :key="index"
             class="swiper-slide custom-size"
           >

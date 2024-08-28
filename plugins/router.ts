@@ -1,33 +1,51 @@
-import { defineNuxtPlugin } from "#app";
-import { useRouter } from "vue-router";
+export default defineNuxtPlugin((nuxtApp) => {
+  if (process.client) {
+    const router = useRouter();
+    let lastHash = ""; // Переменная для хранения последнего хэша
 
-export default defineNuxtPlugin(() => {
-  const router = useRouter();
+    const handleScroll = async (hash: string) => {
+      if (hash) {
+        await new Promise((resolve) => setTimeout(resolve, 300)); // Небольшая задержка для отрисовки контента
 
-  router.options.scrollBehavior = (to, from, savedPosition) => {
-    if (savedPosition) {
-      return savedPosition;
-    } else if (to.hash) {
-      return {
-        el: to.hash,
-        top: 100,
-        behavior: "smooth",
-      };
-    } else {
-      return { top: 0 };
-    }
-  };
-
-  router.afterEach((to) => {
-    if (to.hash) {
-      const element = document.getElementById(to.hash.slice(1));
-      console.log(element)
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-        setTimeout(() => {
-          window.scrollBy(0, -120); // Чтобы компенсировать фиксированный верхний отступ, если он есть
-        }, 300);
+        const element = document.getElementById(hash.slice(1));
+        if (element) {
+          const top =
+            element.getBoundingClientRect().top + window.scrollY - 120;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
       }
-    }
-  });
+    };
+
+    router.options.scrollBehavior = async (to, from, savedPosition) => {
+      if (savedPosition) {
+        return savedPosition;
+      }
+
+      if (to.hash) {
+        await handleScroll(to.hash);
+        lastHash = to.hash; // Обновляем последний хэш
+      }
+
+      return { left: 0, top: 0 };
+    };
+
+    nuxtApp.hook("page:finish", () => {
+      const currentHash = window.location.hash;
+      if (currentHash !== lastHash) {
+        handleScroll(currentHash);
+        lastHash = currentHash; // Обновляем последний хэш
+      }
+    });
+
+    window.addEventListener("hashchange", () => {
+      const currentHash = window.location.hash;
+      if (currentHash === lastHash) {
+        // Принудительно обрабатываем скролл, если хэш не изменился
+        handleScroll(currentHash);
+      } else {
+        handleScroll(currentHash);
+        lastHash = currentHash; // Обновляем последний хэш
+      }
+    });
+  }
 });
