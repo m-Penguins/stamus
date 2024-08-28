@@ -71,9 +71,8 @@ const specialists = portfolioData.value?.data?.attributes?.specialists?.data
   });
 
 const infoBlock = portfolioData.value?.data?.attributes?.infoBlockPort;
-
 const gallery = portfolioData.value?.data?.attributes?.galery?.data
-  ?.map((img) => img?.attributes?.url)
+  ?.map((img) => img?.attributes)
   ?.filter(Boolean);
 
 const metaData = portfolioData.value?.data?.attributes?.meta;

@@ -3,30 +3,40 @@
     <div class="gallery-title">Галерея</div>
 
     <div class="gallery-img-container">
-      <div class="single-img" v-for="item in arrayImg" :key="item">
+      <div v-for="item in arrayImg" class="single-img" :class="{isVideo: item.caption}"  :key="item" @click="handleVideoClick(item.caption)">
         <NuxtImg
-          v-if="item"
-          :src="item"
+          v-if="item.url"
+          :src="item.url"
           provider="strapi"
           alt="Галерея"
           sizes="xs:400px md:600px"
           format="webp"
           class="gall-img"
         />
+        <img
+            v-if="item.caption"
+            class="utube"
+            :src="assetsStore.useAsset('images/icons/play.svg')"
+            alt="Play"
+        />
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    arrayImg: {
-      type: Array,
-      default: [],
-    },
-  },
-};
+<script setup>
+defineProps(["arrayImg"]);
+
+const assetsStore = useAssets();
+const videoStore = useModalVideoStore();
+
+const handleVideoClick = (link) => {
+  if (!link) {
+    return
+  }
+  videoStore.isModalOpen = true;
+  videoStore.link = link;
+}
 </script>
 
 <style scoped lang="scss">
@@ -49,6 +59,7 @@ export default {
 .single-img {
   width: 100%;
   aspect-ratio: 1;
+  position: relative;
 
   @supports not (aspect-ratio: 1/1) {
     padding-top: 100%;
@@ -67,8 +78,8 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
   cursor: pointer;
-  width: 40px;
 }
 
 .gall-img {
