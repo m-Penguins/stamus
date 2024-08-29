@@ -124,7 +124,7 @@ export const useFormStore = defineStore("form-store", () => {
       try {
         await mail.send({
           config: "ndfl",
-          from: "dev@sloy.design",
+          from: patientNameFieldValue,
           subject: "Заявка на возврат НДФЛ",
           text: msg,
         });
