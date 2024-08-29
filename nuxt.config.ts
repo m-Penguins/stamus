@@ -265,10 +265,10 @@ export default defineNuxtConfig({
           { name: "review", to: process.env.MAIL_TO_REVIEW },
         ],
         smtp: {
-          host: "smtp.stamus.ru",
+          host: "smtp.yandex.ru",
           port: 465,
           auth: {
-            user: "ndfl@stamus.ru",
+            user: "dev@sloy.design",
             pass: process.env.MAIL_PASS,
           },
         },
