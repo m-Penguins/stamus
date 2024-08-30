@@ -125,6 +125,9 @@ useHead(getMetaObject(metaData, baseUrl));
           </div>
         </div>
       </div>
+      <div class="share">
+        <BlocksShare/>
+      </div>
       <div style="width: 100%;">
         <div class="articles-dital-box__item">{{ date }}</div>
         <NuxtLink class="back-btn" to="/articles">
@@ -208,6 +211,15 @@ useHead(getMetaObject(metaData, baseUrl));
 
   @include media(680px) {
     margin: 0 auto 80px;
+  }
+}
+
+.share {
+  width: 100%;
+  margin: 40px 0;
+
+  @media screen and (max-width: 640px) {
+    margin: 0 0 40px;
   }
 }
 
