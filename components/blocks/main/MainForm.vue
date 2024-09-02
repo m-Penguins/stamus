@@ -26,7 +26,7 @@
       <elements-button-base
         :onClick="sendData"
         :disabled="!store.isSubmitActive"
-        title="Записаться"
+        title="Отправить"
         class="form-btn"
       />
     </div>
