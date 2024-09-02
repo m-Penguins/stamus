@@ -199,6 +199,12 @@
                 : 'popup-button-box',
             ]"
           >
+            <div class="popup-text">
+              Нажимая кнопку отправить, вы соглашаетесь с
+              <a class="popup-text-link" :href="privacyLink" target="_blank"
+              >Политикой обработки персональных данных</a
+              >
+            </div>
             <elements-button-base
               title="Отправить"
               class="popup-btn"
@@ -210,12 +216,6 @@
             </div>
             <div v-if="store.isSuccess" class="success-text">
               Спасибо, Ваша заявка отправлена.
-            </div>
-            <div class="popup-text">
-              Нажимая кнопку отправить, вы соглашаетесь с
-              <a :href="privacyLink" target="_blank"
-                >Политикой обработки персональных данных</a
-              >
             </div>
           </div>
         </div>
@@ -469,13 +469,13 @@ function setIsOpen() {
   @include body-12-regular;
   color: $gray-text;
   opacity: 0.7;
-  padding-top: 14px;
+  padding-bottom: 14px;
   text-align: center;
 
-  & a {
+  &-link {
     color: inherit;
     font-size: inherit;
-    text-decoration: underline;
+    text-decoration: underline !important;
   }
 }
 

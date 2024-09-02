@@ -18,6 +18,7 @@ import Achievements from "@/components/dynamicBlock/Achievements.vue";
 import Expert from "@/components/dynamicBlock/Expert.vue";
 import BaseText from "@/components/dynamicBlock/BaseText.vue";
 import Accordeon from "@/components/dynamicBlock/Accordeon.vue";
+import DocumentationCard from "@/components/dynamicBlock/DocumentationCard.vue";
 
 export default function (component) {
   switch (component) {
@@ -61,6 +62,8 @@ export default function (component) {
       return Expert;
     case "repeat.akkordeon":
       return Accordeon;
+    case "repeat.docs":
+      return DocumentationCard;
     default:
       "";
   }
