@@ -7,6 +7,15 @@
       Перезвоним в течении 15 минут и уточним <br />
       удобную для вас клинику и дату
     </p>
+    <div class="form-wrapper__text text-gray-opacity p-bt-14 p-t-14">
+      Нажимая кнопку отправить, вы соглашаетесь с
+      <a :href="privacyLink" target="_blank"
+      >Политикой обработки персональных данных</a
+      >
+      <div v-if="store.isSuccess" class="success-text">
+        Спасибо, Ваша заявка отправлена.
+      </div>
+    </div>
     <div class="form-wrapper__box">
       <elements-input-base
         tag-type="input"
@@ -29,15 +38,6 @@
         title="Отправить"
         class="form-btn"
       />
-    </div>
-    <div class="form-wrapper__text text-gray-opacity p-bt-112 p-t-14">
-      Нажимая кнопку отправить, вы соглашаетесь с
-      <a :href="privacyLink" target="_blank"
-        >Политикой обработки персональных данных</a
-        >
-      <div v-if="store.isSuccess" class="success-text">
-        Спасибо, Ваша заявка отправлена.
-      </div>
     </div>
   </div>
 </template>
@@ -75,11 +75,10 @@ const sendData = () => {
   }
 
   &__subtitle {
-    padding-bottom: 60px;
+    padding-bottom: 50px;
   }
 
   &__text {
-    padding-bottom: 112px;
     position: relative;
     & a {
       color: inherit;
@@ -89,6 +88,7 @@ const sendData = () => {
   }
 
   &__box {
+    padding-bottom: 112px;
     margin: 0 auto;
     display: flex;
     gap: 20px;
