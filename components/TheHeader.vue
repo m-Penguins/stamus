@@ -32,6 +32,7 @@ export default {
       showServicesAll: false,
       storeS: useService(),
       navigationPatients: [
+        { id: 7, title: "О нас", path: "/about" },
         { id: 1, title: "Клиники", path: "/clinics" },
         { id: 2, title: "Наше приложение", path: "/stamusapp" },
         { id: 3, title: "Корпоративным клиентам", path: "/business" },
@@ -1381,7 +1382,7 @@ export default {
   gap: 10px;
   position: relative;
   cursor: pointer;
-  
+
   &:hover {
     border: 1px solid var(--dissabled, #cfd5e1);
   }
