@@ -1,11 +1,11 @@
 <script setup lang="ts">
-defineProps(["block", "handleLinkClick"]);
-
+const props = defineProps(["block", "handleLinkClick"]);
+const showBlock = !!props.block?.spec?.data;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 </script>
 
 <template>
-  <div class="expert-wrapper">
+  <div v-if="showBlock" class="expert-wrapper">
     <div class="expert-container">
       <div class="expert-content">
         <h2>
