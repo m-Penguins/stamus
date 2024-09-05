@@ -117,7 +117,7 @@
         >
           Политика конфидециальности
         </NuxtLink>
-        
+
         <!-- <a href="#" class="bvi-open">Включить режим доступности</a> -->
         <div class="display">
           <NuxtLink :to="licenseStamus" target="_blank" class="footer-text">
@@ -143,6 +143,12 @@
             Разработка сайта
           </NuxtLink> -->
         </div>
+      </div>
+    </div>
+    <div class="under-footer">
+      <div class="under-footer-wrap">
+        <div>2006-{{ currentYear }} Стамус</div>
+        <div>Разработка и поддержка — Минимаснева</div>
       </div>
     </div>
   </footer>
@@ -213,6 +219,11 @@ const lastColumnNavigation = [
   { id: 4, title: "Портфолио", path: "/portfolio" },
   { id: 5, title: "Контакты", path: "/contacts" },
 ];
+
+const currentYear = ref('')
+onMounted(() => {
+  currentYear.value = new Date().getFullYear()
+})
 </script>
 
 <style lang="scss" scoped>
@@ -270,7 +281,7 @@ const lastColumnNavigation = [
 .footer {
   @include flex-column-center;
   width: 100%;
-  padding: 60px 0 40px;
+  padding: 60px 0 0;
   box-sizing: border-box;
   background: $light-gray;
 
@@ -279,6 +290,26 @@ const lastColumnNavigation = [
     flex-direction: column;
     width: 1160px;
     max-width: 95%;
+  }
+
+  .under-footer {
+    width: 100%;
+    background: #1F2957;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    color: #fff;
+    font-size: 14px;
+
+    &-wrap {
+      display: flex;
+      width: 1160px;
+      max-width: 95%;
+      padding-right: 3%;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 
   .footer__box {
@@ -371,11 +402,20 @@ const lastColumnNavigation = [
 
 @media (max-width: 900px) {
   .footer {
-    padding: 40px 0 40px;
+    padding: 40px 0 0;
     .footer__box {
       .footer-contacts {
         margin-right: 300px;
         padding-bottom: 14px;
+      }
+    }
+
+    .under-footer {
+      padding: 0 19px;
+      &-wrap {
+        padding-right: 0;
+        max-width: 1160px;
+        width: 100%;
       }
     }
   }
@@ -386,7 +426,15 @@ const lastColumnNavigation = [
 
 @media (max-width: 758px) {
   .footer {
-    padding: 40px 16px 40px;
+    padding: 40px 0 0;
+    .footer-wrap {
+      padding: 0 16px 40px;
+    }
+    .under-footer {
+      &-wrap {
+        max-width: 95%;
+      }
+    }
     .footer__box {
       .footer-contacts {
         margin-right: 100px;
@@ -411,6 +459,14 @@ const lastColumnNavigation = [
     .footer__box {
       .footer-contacts {
         margin-right: 0px;
+      }
+    }
+    .under-footer {
+      height: 50px;
+      &-wrap {
+        flex-direction: column;
+        align-items: start;
+        gap: 5px;
       }
     }
   }
