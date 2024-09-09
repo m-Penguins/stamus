@@ -56,6 +56,18 @@ export default {
     position: relative;
     overflow: hidden;
   }
+
+  &.isVideo {
+    cursor: pointer;
+  }
+}
+
+.utube {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
 }
 
 .gall-img {
