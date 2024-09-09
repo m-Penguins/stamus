@@ -4,15 +4,23 @@
 
     <div v-if="arrayImg?.length === 1" class="gallery-two-img-container">
       <template v-for="item in arrayImg" :key="item?.id">
-        <NuxtImg
-          v-if="item?.attributes?.url"
-          :src="item?.attributes?.url"
-          provider="strapi"
-          :alt="item?.attributes?.alternativeText ?? 'галерея'"
-          sizes="xs:400px sm:600px md:1200px lg:1920px"
-          format="webp"
-          class="gall-img-solo"
-        />
+        <div class="gall-img-solo" @click="handleVideoClick(item?.attributes?.caption)">
+          <NuxtImg
+              v-if="item?.attributes?.url"
+              :src="item?.attributes?.url"
+              provider="strapi"
+              :alt="item?.attributes?.alternativeText ?? 'галерея'"
+              sizes="xs:400px sm:600px md:1200px lg:1920px"
+              format="webp"
+              class="gallery-img"
+          />
+          <img
+              v-if="item?.attributes?.caption"
+              class="utube"
+              :src="assetsStore.useAsset('images/icons/play.svg')"
+              alt="Play"
+          />
+        </div>
       </template>
     </div>
 
@@ -21,15 +29,23 @@
       class="gallery-two-img-container"
     >
       <template v-for="item in arrayImg" :key="item?.id">
-        <NuxtImg
-          v-if="item?.attributes?.url"
-          :src="item?.attributes?.url"
-          provider="strapi"
-          :alt="item?.attributes?.alternativeText ?? 'галерея'"
-          sizes="xs:400px md:600px"
-          format="webp"
-          class="gall-img"
-        />
+        <div class="gall-img" @click="handleVideoClick(item?.attributes?.caption)">
+          <NuxtImg
+              v-if="item?.attributes?.url"
+              :src="item?.attributes?.url"
+              provider="strapi"
+              :alt="item?.attributes?.alternativeText ?? 'галерея'"
+              sizes="xs:400px md:600px"
+              format="webp"
+              class="gallery-img"
+          />
+          <img
+              v-if="item?.attributes?.caption"
+              class="utube"
+              :src="assetsStore.useAsset('images/icons/play.svg')"
+              alt="Play"
+          />
+        </div>
       </template>
     </div>
 
@@ -38,29 +54,45 @@
       class="gallery-three-img-container"
     >
       <template v-for="item in arrayImg" :key="item?.id">
-        <NuxtImg
-          v-if="item?.attributes?.url"
-          :src="item?.attributes?.url"
-          provider="strapi"
-          :alt="item?.attributes?.alternativeText ?? 'галерея'"
-          sizes="xs:400px md:600px"
-          format="webp"
-          class="gall-img-three"
-        />
+        <div class="gall-img-three" @click="handleVideoClick(item?.attributes?.caption)">
+          <NuxtImg
+              v-if="item?.attributes?.url"
+              :src="item?.attributes?.url"
+              provider="strapi"
+              :alt="item?.attributes?.alternativeText ?? 'галерея'"
+              sizes="xs:400px md:600px"
+              format="webp"
+              class="gallery-img"
+          />
+          <img
+              v-if="item?.attributes?.caption"
+              class="utube"
+              :src="assetsStore.useAsset('images/icons/play.svg')"
+              alt="Play"
+          />
+        </div>
       </template>
     </div>
 
     <div class="container" v-else-if="arrayImg?.length === 6">
       <template v-for="(item, index) in arrayImg" :key="item?.id">
-        <NuxtImg
-          v-if="item?.attributes?.url"
-          :src="item?.attributes?.url"
-          provider="strapi"
-          :alt="item?.attributes?.alternativeText ?? 'галерея'"
-          sizes="xs:400px md:600px"
-          format="webp"
-          :class="'img-' + index"
-        />
+        <div class="img-array-6" :class="'img-' + index" @click="handleVideoClick(item?.attributes?.caption)">
+          <NuxtImg
+              v-if="item?.attributes?.url"
+              :src="item?.attributes?.url"
+              provider="strapi"
+              :alt="item?.attributes?.alternativeText ?? 'галерея'"
+              sizes="xs:400px md:600px"
+              format="webp"
+              class="gallery-img"
+          />
+          <img
+              v-if="item?.attributes?.caption"
+              class="utube"
+              :src="assetsStore.useAsset('images/icons/play.svg')"
+              alt="Play"
+          />
+        </div>
       </template>
     </div>
   </div>
@@ -70,6 +102,16 @@
 const props = defineProps(["block"]);
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const arrayImg = props?.block?.gallery?.data;
+const assetsStore = useAssets();
+const videoStore = useModalVideoStore();
+
+const handleVideoClick = (link) => {
+  if (!link) {
+    return
+  }
+  videoStore.isModalOpen = true;
+  videoStore.link = link;
+}
 </script>
 
 <style scoped lang="scss">
@@ -84,11 +126,11 @@ const arrayImg = props?.block?.gallery?.data;
     "img-0 img-1 img-3"
     "img-4 img-5 img-5";
   grid-template-columns: 416px 524px 1fr;
-  grid-template-rows: 1fr 185px 2fr;
+  grid-template-rows: 185px 185px 2fr;
   grid-gap: 16px;
 }
 .container {
-  img {
+  .gallery-img {
     height: 380px;
     width: 100%;
     object-fit: cover;
@@ -99,7 +141,10 @@ const arrayImg = props?.block?.gallery?.data;
     height: 190px;
   }
 }
+.img-array-6 {
+  position: relative;
 
+}
 .img-0 {
   grid-area: img-0;
 }
@@ -132,6 +177,16 @@ const arrayImg = props?.block?.gallery?.data;
   width: 33%;
 }
 
+.utube {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+}
+
 .gallery-three-img-container {
   display: flex;
   width: 100%;
@@ -144,6 +199,13 @@ const arrayImg = props?.block?.gallery?.data;
   border-radius: 15px;
   width: 32%;
   height: 380px;
+  position: relative;
+  .gallery-img {
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .gall-img-three:nth-child(n + 4) {
@@ -159,17 +221,31 @@ const arrayImg = props?.block?.gallery?.data;
 }
 
 .gall-img {
+  position: relative;
   object-fit: cover;
   border-radius: 15px;
   width: 49%;
   height: 380px;
+
+  .gallery-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+  }
 }
 
 .gall-img-solo {
-  object-fit: cover;
   border-radius: 15px;
   width: 100%;
   height: auto;
+  position: relative;
+  .gallery-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+  }
 }
 
 .gallery {

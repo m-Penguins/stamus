@@ -1,11 +1,12 @@
 <script setup lang="ts">
-defineProps(["block", "handleLinkClick"]);
-
+const props = defineProps(["block", "handleLinkClick"]);
+const showBlock = !!props.block?.spec?.data;
+const isNotDraft = !!props.block?.spec?.data?.attributes?.publishedAt
 const baseUrl = useRuntimeConfig().public.baseUrl;
 </script>
 
 <template>
-  <div class="expert-wrapper">
+  <div v-if="showBlock && isNotDraft" class="expert-wrapper">
     <div class="expert-container">
       <div class="expert-content">
         <h2>

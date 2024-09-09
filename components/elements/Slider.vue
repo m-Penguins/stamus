@@ -5,7 +5,9 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
+const route = useRoute();
 const props = defineProps(["programs", "link", "title"]);
+const showReviewIcon = route.href.includes('/team')
 
 const prev = ref(null);
 const next = ref(null);
@@ -22,8 +24,8 @@ const averageGrade = average ? average?.toFixed(1) : average;
   <div class="main-events-block">
     <div class="slider-title">
       <div class="slider-title__box">
-        <h2 class="slider-title__box-title">{{ title ? title : 'Отзывы' }}</h2>
-        <!-- <img src="@/assets/images/img-text/prodoctorov.svg" alt="Текст" /> -->
+        <h2 class="slider-title__box-title">{{ title ? title : 'Отзывы с' }}</h2>
+        <a v-if="showReviewIcon" :href="link || '#'" class="slider-title__box-prodoc"><img src="@/assets/images/img-text/prodoctorov.svg" alt="Текст" /> </a>
       </div>
       <div class="slider-title__grade">
         <div v-if="averageGrade" class="grey-point-text">
@@ -121,7 +123,22 @@ const averageGrade = average ? average?.toFixed(1) : average;
       @include body-22-medium-Neue;
       color: $dark-blue-subtitle;
     }
+
+    &-prodoc {
+      display: flex;
+      align-items: center;
+      max-width: 204px;
+      width: 100%;
+      img {
+        width: 100%;
+      }
+
+      @media screen and (max-width: 350px) {
+        max-width: 178px;
+      }
+    }
   }
+
 
   &__grade {
     display: flex;
