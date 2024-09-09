@@ -23,6 +23,14 @@ const sendData = () => {
       <p>Перезвоним в течении 15 минут и уточним</p>
       <p>удобную для вас клинику и дату</p>
     </div>
+    <p class="form-wrapper__text text-gray-opacity p-bt-14 p-t-14">
+      Нажимая кнопку отправить, вы соглашаетесь с
+      <a
+          :href="`${baseUrl}/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf`"
+          target="_blank"
+      >Политикой обработки персональных данных</a
+      >
+    </p>
     <div class="form-wrapper__box">
       <elements-input-base
         tag-type="input"
@@ -46,14 +54,6 @@ const sendData = () => {
         class="form-btn"
       />
     </div>
-    <p class="form-wrapper__text text-gray-opacity p-bt-112 p-t-14">
-      Нажимая кнопку отправить, вы соглашаетесь с
-      <a
-        :href="`${baseUrl}/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf`"
-        target="_blank"
-        >Политикой обработки персональных данных</a
-      >
-    </p>
   </div>
 </template>
 
@@ -74,11 +74,10 @@ const sendData = () => {
   }
 
   &__subtitle {
-    padding-bottom: 60px;
+    padding-bottom: 50px;
   }
 
   &__text {
-    padding-bottom: 112px;
 
     & a {
       color: inherit;
@@ -88,6 +87,7 @@ const sendData = () => {
   }
 
   &__box {
+    padding-bottom: 112px;
     margin: 0 auto;
     display: flex;
     gap: 20px;
@@ -166,7 +166,7 @@ const sendData = () => {
     }
 
     &__text {
-      padding-bottom: 20px;
+      padding-bottom: 20px !important;
     }
   }
 }
@@ -198,7 +198,7 @@ const sendData = () => {
     }
 
     &__text {
-      padding-bottom: 14px;
+      padding-bottom: 14px !important;
     }
 
     &__box {

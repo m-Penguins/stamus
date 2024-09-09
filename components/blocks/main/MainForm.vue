@@ -178,7 +178,7 @@ const sendData = () => {
     }
 
     &__text {
-      padding-bottom: 50px;
+      padding-bottom: 50px !important;
     }
   }
 }
@@ -210,7 +210,7 @@ const sendData = () => {
     }
 
     &__text {
-      padding-bottom: 60px;
+      padding-bottom: 60px !important;
     }
 
     &__box {
