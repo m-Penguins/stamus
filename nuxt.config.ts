@@ -1,10 +1,23 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import compression from "compression";
+
 export default defineNuxtConfig({
   devtools: { enabled: false },
   serverMiddleware: [
     "~/server/middleware/redirect-www.ts",
     "~/server/middleware/trailing-slash.global",
   ],
+  buildModules: [
+    [
+      "@nuxt-modules/compression",
+      {
+        algorithm: "brotliCompress",
+      },
+    ],
+  ],
+  compression: {
+    algorithm: 'brotliCompress',
+  },
   routeRules: {
     "/5otzivov": { redirect: { to: "/leave-review", statusCode: 301 } },
     "/chelyustno-licevoj-hirurgii/": {
@@ -176,6 +189,18 @@ export default defineNuxtConfig({
   },
   nitro: {
     compressPublicAssets: true,
+    middleware: {
+      // Добавляем middleware для сжатия
+      compression: compression(),
+    },
+    routeRules: {
+      "/_nuxt/**": {
+        headers: { "Cache-Control": "public, max-age=31536000, immutable" },
+      },
+      "/images/**": {
+        headers: { "Cache-Control": "public, max-age=31536000, immutable" },
+      },
+    },
   },
   app: {
     head: {

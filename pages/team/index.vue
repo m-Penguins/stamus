@@ -258,7 +258,7 @@ useHead({
   ],
   link: [{ rel: "canonical", href: "https://stamus.ru" + route.path }],
 });
-console.log(specialists.value);
+// console.log(specialists.value);
 currentPage.value = parseInt(currentPage.value);
 </script>
 
