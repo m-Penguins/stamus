@@ -60,5 +60,15 @@ Disallow: *?ref
 Disallow: *?term
 Disallow: *?etext
 Disallow: *?hhtmFrom
+Disallow: /*?*page=*
+Disallow: /*?*dir=*
+Disallow: /*?*specialist=*
+Disallow: /*?*search=*
+Disallow: /*?*term=*
+Disallow: /*?*clinic=*
+Disallow: /*?*position=*
+Disallow: /*?*spec=*
+Disallow: /*?*service=*
+Disallow: /*?*tag=*
 
 Sitemap: https://stamus.ru/server/api/sitemap/index.xml
