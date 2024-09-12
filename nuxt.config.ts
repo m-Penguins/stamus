@@ -163,20 +163,8 @@ export default defineNuxtConfig({
     "/price/": {
       redirect: { to: "/prices", statusCode: 301 },
     },
-    "/rhinoplasty/": {
-      redirect: {
-        to: "/chelyustno-liczevaya-hirurgiya/rhinoplasty",
-        statusCode: 301,
-      },
-    },
     "/sale/": {
       redirect: { to: "/discounts", statusCode: 301 },
-    },
-    "/sedation/": {
-      redirect: {
-        to: "/lechenie-zubov-pod-narkozom/lechenie-zubov-vo-sne",
-        statusCode: 301,
-      },
     },
     "/uslugi/orthodontics/lingual-braces/": {
       redirect: { to: "/uslugi/brekety", statusCode: 301 },
@@ -185,6 +173,9 @@ export default defineNuxtConfig({
   router: {
     trailingSlash: false,
     middleware: ["redirect"],
+  },
+  nitro: {
+    compressPublicAssets: true,
   },
   app: {
     head: {
