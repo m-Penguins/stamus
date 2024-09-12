@@ -1,6 +1,8 @@
 <script setup>
 const props = defineProps(["mainSpecialists"]);
 
+const baseUrl = process.env.BASE_URL
+
 const selectedIndex = ref(0);
 
 const handleSmallClick = (index) => {
@@ -29,9 +31,9 @@ const handleSmallClick = (index) => {
         >
           <div class="div-with-line" v-if="selectedIndex === index"></div>
           <div class="specialists-btn__img">
-            <NuxtImg
+            <img
               v-if="person?.img"
-              :src="person?.img"
+              :src="baseUrl + person?.img"
               provider="strapi"
               :alt="person?.alt"
               sizes="xs:60px"
@@ -46,9 +48,9 @@ const handleSmallClick = (index) => {
       </div>
       <div class="specialists-inner">
         <div class="specialists-inner__img">
-          <NuxtImg
+          <img
             v-if="props.mainSpecialists?.[selectedIndex]?.img"
-            :src="props.mainSpecialists?.[selectedIndex]?.img"
+            :src="baseUrl + props.mainSpecialists?.[selectedIndex]?.img"
             provider="strapi"
             :alt="props.mainSpecialists?.[selectedIndex]?.alt"
             sizes="xs:400px"

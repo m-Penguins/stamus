@@ -4,6 +4,8 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
+const baseUrl = process.env.BASE_URL
+
 const pagination = {
   clickable: false,
 };
@@ -106,9 +108,9 @@ const props = defineProps(["block"]);
             </NuxtLink>
           </div>
           <div class="banner-images">
-            <NuxtImg
+            <img
               v-if="banner?.image?.data?.attributes?.url"
-              :src="banner?.image?.data?.attributes?.url"
+              :src="baseUrl + banner?.image?.data?.attributes?.url"
               provider="strapi"
               :alt="banner?.image?.data?.attributes?.alternativeText"
               sizes="xs:400px md:600px"

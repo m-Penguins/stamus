@@ -19,9 +19,9 @@ const props = defineProps(["title", "description", "twoDirections"]);
           <template v-for="item in twoDirections">
             <NuxtLink :to="item?.attributes?.slug" class="desktop-link">
               <div class="primary-banner-img">
-                <NuxtImg
+                <img
                   v-if="item?.attributes?.photoBanner?.data?.attributes?.url"
-                  :src="item?.attributes?.photoBanner?.data?.attributes?.url"
+                  :src="baseUrl + item?.attributes?.photoBanner?.data?.attributes?.url"
                   provider="strapi"
                   :alt="
                     item?.attributes?.photoBanner?.data?.attributes

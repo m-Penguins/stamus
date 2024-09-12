@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 const props = defineProps(["block"]);
 
 const filteredAtr = props.block.articles?.data.filter(item => item.attributes.publishedAt !== null)
-console.log(filteredAtr) 
+const baseUrl = process.env.BASE_URL
 
 const prev = ref(null);
 const next = ref(null);
@@ -52,12 +52,12 @@ const placeholdersStore = usePlaceholdersStore();
           >
             <div class="article-card">
               <div class="article-card__box">
-                <NuxtImg
+                <img
                   v-if="
                     article?.attributes?.fotoArticles?.data?.attributes?.url ??
                     placeholdersStore?.imagePlaceholders?.articles
                   "
-                  :src="
+                  :src="baseUrl +
                     article?.attributes?.fotoArticles?.data?.attributes?.url ??
                     placeholdersStore?.imagePlaceholders?.articles
                   "

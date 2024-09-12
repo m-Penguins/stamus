@@ -7,9 +7,9 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
 <template>
   <div class="seo-block" :class="{ reversed: block?.reverse }">
     <div class="image">
-      <NuxtImg
+      <img
         v-if="block?.image?.data?.attributes?.url"
-        :src="block?.image?.data?.attributes?.url"
+        :src="baseUrl + block?.image?.data?.attributes?.url"
         provider="strapi"
         :alt="block?.image?.data?.attributes?.alternativeText"
         sizes="xs:400px sm:600px md:1000px lg:1200px xl:1920px"
