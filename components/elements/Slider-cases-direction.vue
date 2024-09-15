@@ -2,7 +2,8 @@
 <div class="main-events-block">
   <div class="slider-title">
     <div class="slider-title__box">
-      <h2 class="slider-title__box-title" v-html="text"></h2>
+      <h2 v-if="text" class="slider-title__box-title" v-html="text"></h2>
+      <h2 v-else class="slider-title__box-title">Портфолио</h2>
     </div>
   </div>
   <div class="wrapper-swiper">
@@ -16,7 +17,7 @@
           nextEl: next,
       }"
     >
-      <swiper-slide v-for="(item, index) in programs" :key="index" class="swiper-slide">
+      <swiper-slide v-for="(item, index) in portfolios" :key="index" class="swiper-slide">
         <elements-cases-direction-card :direction="item" :isCategoryAndDescription="isCategoryAndDescription"/>
       </swiper-slide>
     </Swiper>
@@ -45,7 +46,7 @@
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation } from 'swiper/modules';
 
- 
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -67,13 +68,26 @@ export default {
       default: true
     }
   },
-  setup() {
+  setup(props) {
     const prev = ref(null);
     const next = ref(null);
+    const portfolios = props.programs.map((p) => {
+          return {
+            id: p?.id,
+            name: p?.attributes?.heading,
+            category: p?.attributes?.direction?.directions,
+            description: p?.attributes?.description,
+            img:
+                p?.attributes?.photoBanner?.data?.attributes?.url ??
+                placeholdersStore?.imagePlaceholders?.portfoliosSmall,
+            alt: p?.attributes?.photoBanner?.data?.attributes?.alternativeText,
+          };
+        })
     return {
       modules: [Navigation],
       prev,
       next,
+      portfolios,
     };
   },
 };
@@ -114,7 +128,7 @@ export default {
       position: absolute;
       top: 13px;
       right: 0;
-      
+
 
       div {
         width: 44px;
