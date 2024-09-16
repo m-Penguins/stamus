@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 const props = defineProps(["block"]);
 
 const filteredAtr = props.block.articles?.data.filter(item => item.attributes.publishedAt !== null)
-console.log(filteredAtr) 
+// console.log(filteredAtr) 
 
 const prev = ref(null);
 const next = ref(null);

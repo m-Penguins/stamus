@@ -36,7 +36,7 @@ export const useReviewStore = defineStore("review-store", () => {
       : null;
 
     const date = formData.date ? `Дата посещения: ${formData.date}` : null;
-    console.log(mail)
+    // console.log(mail)
     const msg = [clinicData, rating, name, phone, comment, date, email]
       .filter(Boolean)
       .join("\n");

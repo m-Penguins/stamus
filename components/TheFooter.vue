@@ -148,7 +148,7 @@
     <div class="under-footer">
       <div class="under-footer-wrap">
         <div>2006-{{ currentYear }} Стамус</div>
-        <a href="https://minimasneva.com/?ysclid=m0pum5wd3t294359078" target="_blank">Разработка и поддержка</a>
+        <div>Разработка и поддержка — Минимаснева</div>
       </div>
     </div>
   </footer>

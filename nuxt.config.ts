@@ -1,10 +1,23 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import compression from "compression";
+
 export default defineNuxtConfig({
   devtools: { enabled: false },
   serverMiddleware: [
     "~/server/middleware/redirect-www.ts",
     "~/server/middleware/trailing-slash.global",
   ],
+  buildModules: [
+    [
+      "@nuxt-modules/compression",
+      {
+        algorithm: "brotliCompress",
+      },
+    ],
+  ],
+  compression: {
+    algorithm: "brotliCompress",
+  },
   routeRules: {
     "/5otzivov": { redirect: { to: "/leave-review", statusCode: 301 } },
     "/chelyustno-licevoj-hirurgii/": {
@@ -163,20 +176,8 @@ export default defineNuxtConfig({
     "/price/": {
       redirect: { to: "/prices", statusCode: 301 },
     },
-    "/rhinoplasty/": {
-      redirect: {
-        to: "/chelyustno-liczevaya-hirurgiya/rhinoplasty",
-        statusCode: 301,
-      },
-    },
     "/sale/": {
       redirect: { to: "/discounts", statusCode: 301 },
-    },
-    "/sedation/": {
-      redirect: {
-        to: "/lechenie-zubov-pod-narkozom/lechenie-zubov-vo-sne",
-        statusCode: 301,
-      },
     },
     "/uslugi/orthodontics/lingual-braces/": {
       redirect: { to: "/uslugi/brekety", statusCode: 301 },
@@ -185,6 +186,21 @@ export default defineNuxtConfig({
   router: {
     trailingSlash: false,
     middleware: ["redirect"],
+  },
+  nitro: {
+    compressPublicAssets: true,
+    middleware: {
+      // Добавляем middleware для сжатия
+      compression: compression(),
+    },
+    routeRules: {
+      "/_nuxt/**": {
+        headers: { "Cache-Control": "public, max-age=31536000, immutable" },
+      },
+      "/images/**": {
+        headers: { "Cache-Control": "public, max-age=31536000, immutable" },
+      },
+    },
   },
   app: {
     head: {
@@ -233,6 +249,12 @@ export default defineNuxtConfig({
       script: [
         {
           src: "/bvi.js",
+          tagPosition: "bodyClose",
+          type: "text/javascript",
+          defer: true,
+        },
+        {
+          src: "/roistat.js",
           tagPosition: "bodyClose",
           type: "text/javascript",
           defer: true,

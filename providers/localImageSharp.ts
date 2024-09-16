@@ -4,7 +4,7 @@ import { createOperationsGenerator } from "#image";
 
 export const getImage: ProviderGetImage = (
   src,
-  { modifiers, baseURL = "http://localhost:1337/uploads" } = {},
+  { modifiers, baseURL = "https://stamus.ru/server/uploads" } = {},
 ) => {
   const operationsGenerator = createOperationsGenerator({
     keyMap: {
