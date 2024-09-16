@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     ],
   ],
   compression: {
-    algorithm: 'brotliCompress',
+    algorithm: "brotliCompress",
   },
   routeRules: {
     "/5otzivov": { redirect: { to: "/leave-review", statusCode: 301 } },
@@ -249,6 +249,12 @@ export default defineNuxtConfig({
       script: [
         {
           src: "/bvi.js",
+          tagPosition: "bodyClose",
+          type: "text/javascript",
+          defer: true,
+        },
+        {
+          src: "/roistat.js",
           tagPosition: "bodyClose",
           type: "text/javascript",
           defer: true,
