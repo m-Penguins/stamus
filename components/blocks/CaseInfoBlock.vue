@@ -28,7 +28,7 @@ const alt = props?.infoBlock?.image?.data?.attributes?.alternativeText;
         v-if="image"
         :src="image"
         provider="strapi"
-        :alt="alt"
+        :alt="alt ?? 'image'"
         sizes="xs:400px md:600px"
         format="webp"
       />

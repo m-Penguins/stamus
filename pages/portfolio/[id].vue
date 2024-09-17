@@ -122,7 +122,7 @@ useHead(getMetaObject(metaData, baseUrl));
         title="Решение"
         :cards="solution"
         :image="solutionImage"
-        :alt="solutionAlt"
+        :alt="solutionAlt ?? 'image'"
       />
     </div>
     <div class="attending-physicians-block" v-if="specialists?.length">

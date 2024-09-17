@@ -14,7 +14,7 @@ defineProps(["title", "cards", "image"]);
             v-if="image"
             :src="image"
             provider="strapi"
-            :alt="alt"
+            :alt="alt ?? 'image'"
             sizes="xs:400px md:600px"
             format="webp"
             class="banner-img"

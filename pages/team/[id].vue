@@ -127,7 +127,7 @@ const blocks = specialist.value?.data?.attributes?.blocks;
             provider="strapi"
             :alt="
               specialist?.data?.attributes?.fotoSpecialist?.data?.attributes
-                ?.alternativeText
+                ?.alternativeText ?? 'image'
             "
             sizes="xs:600px md:800px"
             format="webp"

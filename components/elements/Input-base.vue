@@ -47,6 +47,7 @@ const onBlur = (e) => {
     <textarea
       :id="label"
       rows="5"
+      :name="label"
       class="form-textarea textarea-base"
       :class="isFocused ? 'focused-input-color' : ''"
       :placeholder="placeholder"
@@ -68,6 +69,7 @@ const onBlur = (e) => {
     <input
       v-bind="$attrs"
       :placeholder="placeholder"
+      :name="label"
       class="form-input input"
       :class="{
         'focused-input': isFocused || modelValue.length,
@@ -92,6 +94,7 @@ const onBlur = (e) => {
     >
     <input
       v-bind="$attrs"
+      :name="label"
       :placeholder="placeholder"
       class="form-input input"
       :class="{
@@ -118,6 +121,7 @@ const onBlur = (e) => {
     <input
       v-maska
       v-bind="$attrs"
+      :name="label"
       :placeholder="placeholder"
       class="form-input input"
       :class="{

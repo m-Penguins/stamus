@@ -33,7 +33,7 @@ const handleSmallClick = (index) => {
               v-if="person?.img"
               :src="person?.img"
               provider="strapi"
-              :alt="person?.alt"
+              :alt="person?.alt ?? 'image'"
               sizes="xs:60px"
               format="webp"
             />
@@ -50,7 +50,7 @@ const handleSmallClick = (index) => {
             v-if="props.mainSpecialists?.[selectedIndex]?.img"
             :src="props.mainSpecialists?.[selectedIndex]?.img"
             provider="strapi"
-            :alt="props.mainSpecialists?.[selectedIndex]?.alt"
+            :alt="props.mainSpecialists?.[selectedIndex]?.alt ?? 'image'"
             sizes="xs:400px"
             format="webp"
           />

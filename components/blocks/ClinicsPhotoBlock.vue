@@ -22,7 +22,7 @@ const props = defineProps(["clinicsData"]);
             "
             provider="strapi"
             :alt="
-              clinic?.attributes?.photoBanner?.data?.attributes?.alternativeText
+              clinic?.attributes?.photoBanner?.data?.attributes?.alternativeText ?? 'image'
             "
             sizes="xs: 600px  md:800px"
             format="webp"

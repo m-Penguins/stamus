@@ -38,7 +38,7 @@
                 >
                   <img
                     :src="`${baseUrl}${social?.icon?.data?.attributes?.url}`"
-                    :alt="social?.icon?.data?.attributes?.alternativeText"
+                    :alt="social?.icon?.data?.attributes?.alternativeText ?? 'image'"
                     class="footer-img"
                   />
                 </NuxtLink>
