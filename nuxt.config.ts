@@ -267,7 +267,7 @@ export default defineNuxtConfig({
   // },
   modules: [
     "@nuxt/image",
-    "nuxt-purgecss",
+    // "nuxt-purgecss",
     "@pinia/nuxt",
     "@vueuse/nuxt",
     // "nuxt-simple-robots",
