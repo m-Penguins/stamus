@@ -88,6 +88,10 @@ useHead(getMetaObject(metaData, baseUrl));
 
   <blocks-main-popularServices />
 
+  <section class="section-wrapper">
+    <BlocksCompanyRating />
+  </section>
+
   <section class="section-wrapper" v-if="thirdBanner">
     <DynamicBlockBanner :block="thirdBanner" />
   </section>
