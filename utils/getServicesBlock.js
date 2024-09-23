@@ -19,6 +19,7 @@ import Expert from "@/components/dynamicBlock/Expert.vue";
 import BaseText from "@/components/dynamicBlock/BaseText.vue";
 import Accordeon from "@/components/dynamicBlock/Accordeon.vue";
 import DocumentationCard from "@/components/dynamicBlock/DocumentationCard.vue";
+import CompanyRating from "@/components/dynamicBlock/CompanyRating.vue";
 
 export default function (component) {
   switch (component) {
@@ -64,6 +65,8 @@ export default function (component) {
       return Accordeon;
     case "repeat.docs":
       return DocumentationCard;
+    case "blocks-story.extenral-ratings":
+      return CompanyRating;
     default:
       "";
   }
