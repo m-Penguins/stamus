@@ -99,7 +99,7 @@ useHead(getMetaObject(metaData, baseUrl));
               v-if="img"
               :src="img"
               provider="strapi"
-              :alt="imgAlt"
+              :alt="imgAlt ?? 'image'"
               sizes="xa:400px sm:600px md:1000px lg:1280px xl:1560 xxl:1920px "
               format="webp"
               class="banner-img"

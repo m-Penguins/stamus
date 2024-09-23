@@ -4,7 +4,7 @@
       <NuxtImg
           v-if="imgBg"
           :src="imgBg"
-          :alt="imgAlt"
+          :alt="imgAlt ?? 'image'"
           :provider="local ? '' : 'strapi'"
           sizes="lg:1280px xl:1560 xxl:1920px "
           format="webp"
@@ -20,7 +20,7 @@
           <NuxtImg
               v-if="imgBg"
               :src="imgBg"
-              :alt="imgAlt"
+              :alt="imgAlt ?? 'image'"
               :provider="local ? '' : 'strapi'"
               sizes="xs:600px"
               format="webp"

@@ -38,7 +38,7 @@
                 >
                   <img
                     :src="`${baseUrl}${social?.icon?.data?.attributes?.url}`"
-                    :alt="social?.icon?.data?.attributes?.alternativeText"
+                    :alt="social?.icon?.data?.attributes?.alternativeText ?? 'image'"
                     class="footer-img"
                   />
                 </NuxtLink>
@@ -148,7 +148,7 @@
     <div class="under-footer">
       <div class="under-footer-wrap">
         <div>2006-{{ currentYear }} Стамус</div>
-        <div>Разработка и поддержка — Минимаснева</div>
+        <a href="https://minimasneva.com/?ysclid=m0pum5wd3t294359078" target="_blank">Разработка и поддержка</a>
       </div>
     </div>
   </footer>

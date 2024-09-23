@@ -11,7 +11,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
         v-if="block?.image?.data?.attributes?.url"
         :src="block?.image?.data?.attributes?.url"
         provider="strapi"
-        :alt="block?.image?.data?.attributes?.alternativeText"
+        :alt="block?.image?.data?.attributes?.alternativeText ?? 'image'"
         sizes="xs:400px sm:600px md:1000px lg:1200px xl:1920px"
         format="webp"
       />

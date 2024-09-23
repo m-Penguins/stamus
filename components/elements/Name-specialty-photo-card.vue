@@ -5,7 +5,7 @@
         v-if="specialists?.img"
         :src="specialists?.img"
         provider="strapi"
-        :alt="specialists?.alt"
+        :alt="specialists?.alt ?? 'image'"
         sizes="xs:400px md:600px"
         format="webp"
         class="card-img"

@@ -15,6 +15,7 @@
     "@nuxtjs/sitemap": "^5.1.2",
     "@types/node": "^18.17.1",
     "nuxt": "^3.6.5",
+    "nuxt-purgecss": "^2.0.0",
     "nuxt-simple-robots": "^4.0.0-rc.14",
     "sass": "^1.64.2",
     "sass-loader": "^13.3.2"

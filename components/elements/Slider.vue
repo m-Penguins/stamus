@@ -8,7 +8,6 @@ import "swiper/css/navigation";
 const route = useRoute();
 const props = defineProps(["programs", "link", "title"]);
 const showReviewIcon = route.href.includes('/team')
-
 const prev = ref(null);
 const next = ref(null);
 
@@ -25,7 +24,7 @@ const averageGrade = average ? average?.toFixed(1) : average;
     <div class="slider-title">
       <div class="slider-title__box">
         <h2 class="slider-title__box-title">{{ title ? title : (showReviewIcon ? 'Отзывы с' : 'Отзывы') }}</h2>
-        <a v-if="showReviewIcon" :href="link || '#'" class="slider-title__box-prodoc"><img src="@/assets/images/img-text/prodoctorov.svg" alt="Текст" /> </a>
+        <a v-if="showReviewIcon" :href="link ?? '#'" class="slider-title__box-prodoc" target="_blank"><img src="@/assets/images/img-text/prodoctorov.svg" alt="Текст" /> </a>
       </div>
       <div class="slider-title__grade">
         <div v-if="averageGrade" class="grey-point-text">

@@ -5,7 +5,7 @@
         v-if="article?.img"
         :src="article?.img"
         provider="strapi"
-        :alt="article?.alt"
+        :alt="article?.alt ?? 'image'"
         sizes="xs:400px md:600px"
         format="webp"
         class="article-card__box-img"

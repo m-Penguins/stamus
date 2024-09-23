@@ -5,7 +5,7 @@
         v-if="direction.img"
         :src="direction.img"
         provider="strapi"
-        :alt="direction?.alt"
+        :alt="direction?.alt ?? 'image'"
         sizes="xs:400px md:600px"
         format="webp"
         class="img"

@@ -60,7 +60,7 @@ const allCasesLink = props?.serviceId
                 provider="strapi"
                 :alt="
                   portfolio?.attributes?.photoBanner?.data?.attributes
-                    ?.alternativeText
+                    ?.alternativeText ?? 'image'
                 "
                 sizes="xs:400px md:600px"
                 format="webp"

@@ -4,7 +4,7 @@
       <NuxtImg
         v-if="direction.img"
         :src="direction.img"
-        :alt="direction?.alt"
+        :alt="direction?.alt ?? 'image'"
         provider="strapi"
         sizes="xs:400px md:600px"
         format="webp"

@@ -48,7 +48,7 @@ const handleVideoClick = (link) => {
                   v-if="video?.videoPreview?.data?.attributes?.url"
                   :src="video?.videoPreview?.data?.attributes?.url"
                   provider="strapi"
-                  :alt="video?.videoPreview?.data?.attributes?.alternativeText"
+                  :alt="video?.videoPreview?.data?.attributes?.alternativeText ?? 'image'"
                   sizes="xs:400px md:600px"
                   format="webp"
                   class="problems__image"

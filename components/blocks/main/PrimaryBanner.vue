@@ -24,10 +24,10 @@ const props = defineProps(["title", "description", "twoDirections"]);
                   :src="item?.attributes?.photoBanner?.data?.attributes?.url"
                   provider="strapi"
                   :alt="
-                    item?.attributes?.photoBanner?.data?.attributes
-                      ?.alternativeText
+                    item?.attributes?.photoBanner?.data?.attributes?.alternativeText ?? 'image'
                   "
-                  sizes="xs:560px md:1000"
+                  sizes="xs:260px md:400px xl:1000px"
+                  loading="lazy"
                   format="webp"
                   class="banner-image"
                   :class="{

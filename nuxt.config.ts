@@ -237,7 +237,7 @@ export default defineNuxtConfig({
         },
         {
           rel: "stylesheet",
-          href: "/bvi.css",
+          href: "/bvi.min.css",
           type: "text/css",
         },
       ],
@@ -267,6 +267,7 @@ export default defineNuxtConfig({
   // },
   modules: [
     "@nuxt/image",
+    // "nuxt-purgecss",
     "@pinia/nuxt",
     "@vueuse/nuxt",
     // "nuxt-simple-robots",
