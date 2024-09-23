@@ -8,7 +8,7 @@ const reviews = mapReviews(props?.block?.reviews?.data)?.filter(
 
 <template>
   <template v-if="reviews?.length > 0">
-    <elements-slider :title="block.title" :programs="reviews"/>
+    <elements-slider :title="block.title" :link="block.link" :programs="reviews"/>
   </template>
 </template>
 
