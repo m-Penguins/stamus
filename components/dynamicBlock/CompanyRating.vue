@@ -73,7 +73,7 @@
       </Swiper>
     </div>
     <div class="services">
-      <ElementsServiceReviewCard v-for="item in new Array(3)"/>
+      <ElementsServiceReviewCard v-for="review in reviews" :review="review" :key="review.id"/>
     </div>
   </div>
 </template>
@@ -89,7 +89,29 @@ const pagination = {
 };
 const modalStore = useModalStore();
 const assetsStore = useAssets();
-
+const reviews = [
+  {
+    id: 1,
+    name: '2ГИС',
+    quantity: 1500,
+    image: '2gis.svg',
+    link: 'https://2gis.ru/krasnodar/branches/70000001062988515'
+  },
+  {
+    id: 2,
+    name: 'ПроДокторов',
+    quantity: 2000,
+    image: 'prodoctorov.svg',
+    link: 'https://prodoctorov.ru/krasnodar/set/1642-stomatologiya-stamus/'
+  },
+  {
+    id: 3,
+    name: 'Яндекс Карты',
+    quantity: 1500,
+    image: 'yandexmaps.svg',
+    link: 'https://yandex.ru/maps/35/krasnodar/chain/stamus/34932941871/?ll=39.019517%2C45.050172&sll=38.985680%2C45.066115&sspn=0.401241%2C0.175505&z=13.39'
+  }
+]
 const togglerPopup = (state) => {
   isOpenPopup.value = state;
 };
@@ -220,5 +242,10 @@ const props = defineProps(["block"]);
 .services {
   display: flex;
   gap: 16px;
+
+  @media screen and (max-width: 965px) {
+    flex-direction: column;
+    margin-top: 16px;
+  }
 }
 </style>
