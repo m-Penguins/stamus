@@ -257,7 +257,6 @@ export default defineNuxtConfig({
           src: "/roistat.js",
           tagPosition: "bodyClose",
           type: "text/javascript",
-          defer: true,
         },
       ],
     },
