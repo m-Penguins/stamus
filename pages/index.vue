@@ -12,7 +12,7 @@ const [{ data: mainData }, { data: directionsData }] = await Promise.all([
   useFetch(`${apiBaseUrl}glavnaya`, {
     query: {
       populate:
-        "two_directions.photoBanner.*,first_banner.banner.image.*,second_banner.banner.image.*,third_banner.banner.image.*,fourth_banner.banner.image.*,meta.metaImage.*,articles.fotoArticles.*,reviews.*,specialists.fotoSpecialist.*,seo_block.image.*",
+        "two_directions.photoBanner.*,first_banner.banner.image.*,second_banner.banner.image.*,third_banner.banner.image.*,fourth_banner.banner.image.*,meta.metaImage.*,articles.fotoArticles.*,reviews.*,specialists.fotoSpecialist.*,seo_block.image.*,portfolio.*,portfolio.photoBanner.* ",
     },
   }),
   useFetch(`${apiBaseUrl}main-derections`, {
@@ -31,6 +31,8 @@ const thirdBanner = mainData.value?.data?.attributes?.third_banner;
 const fourthBanner = mainData.value?.data?.attributes?.fourth_banner;
 
 const reviews = mainData.value?.data?.attributes;
+const portfolios = mainData.value?.data?.attributes?.portfolio?.data;
+
 
 const mainSpecialists =
   mainData.value?.data?.attributes?.specialists?.data?.map((sp) => {
@@ -98,6 +100,10 @@ useHead(getMetaObject(metaData, baseUrl));
 
   <section class="section-wrapper" v-if="reviews">
     <DynamicBlockReviews :block="reviews" />
+  </section>
+
+  <section class="section-wrapper" v-if="reviews">
+    <ElementsSliderCasesDirection :programs="portfolios" />
   </section>
 
   <section class="section-wrapper" v-if="fourthBanner">
