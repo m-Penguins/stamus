@@ -64,7 +64,7 @@ const mainImg =
 const mainImgAlt = mainInfo?.photoBanner?.data?.attributes?.alternativeText;
 
 const serviceBlocks = mainInfo?.blocks;
-console.log(serviceBlocks)
+// console.log(serviceBlocks)
 
 const blockSpecialists = mainInfo?.specialists;
 
