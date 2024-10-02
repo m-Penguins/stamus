@@ -51,7 +51,7 @@ const props = defineProps(["block"]);
             <div :style="{color: banner?.text_color}" class="title-dark-blue banner-title">
               {{ banner?.title }}
             </div>
-            <div class="banner-text" v-html="banner?.description"></div>
+            <div :style="{color: banner?.text_color}" class="banner-text" v-html="banner?.description"></div>
 
             <NuxtLink
               v-if="banner?.link && !banner?.isPopupCall"
