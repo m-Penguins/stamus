@@ -19,7 +19,7 @@
       }"
       class="container-text p-bt-30 text"
     ></p>
-    <div class="title-text-btn-container">
+    <div v-if="!none_btn" class="title-text-btn-container">
       <elements-button-base
         v-if="isButtonBase"
         class="fontSize4 container-btn"
@@ -91,6 +91,10 @@ export default {
       default: false,
     },
     customClick: Function,
+    none_btn : {
+      type: Boolean,
+      default: false,
+    }
   },
 };
 </script>
