@@ -3,7 +3,6 @@ const props = defineProps(["block"]);
 const { block } = props;
 const openItem = ref(null);
 const shouldMap = !props.block?.content;
-console.log(block)
 const toggleOpenItem = (itemId) => {
   if (!shouldMap) {
     openItem.value = !openItem.value;
