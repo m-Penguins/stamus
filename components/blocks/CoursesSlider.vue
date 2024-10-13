@@ -9,7 +9,19 @@ const props = defineProps(["courses"]);
 const filteredAtr = props.courses.data
 const prev = ref(null);
 const next = ref(null);
-console.log(props)
+const getCategoryTag = (category: string) => {
+  switch (category) {
+    case 'pacient':
+      return 'пациентам';
+    case 'doctor':
+      return 'врачам';
+    case 'manager':
+      return 'менеджерам';
+    default:
+      return ''; // Return an empty string if no matching category is found
+  }
+};
+
 const placeholdersStore = usePlaceholdersStore();
 </script>
 
@@ -39,14 +51,14 @@ const placeholdersStore = usePlaceholdersStore();
               <div class="article-card__box">
                 <NuxtImg
                     v-if="
-                    article?.attributes?.photoBanner?.data[0].attributes?.url
+                    article?.attributes?.cardImage?.data.attributes?.url
                   "
                     :src="
-                    article?.attributes?.photoBanner?.data[0].attributes?.url
+                    article?.attributes?.cardImage?.data.attributes?.url
                   "
                     provider="strapi"
                     :alt="
-                    article?.attributes?.photoBanner?.data?.attributes?.alternativeText || 'Курс'
+                    article?.attributes?.cardImage?.data?.attributes?.alternativeText || 'Курс'
                   "
                     sizes="xs:400px md:600px"
                     format="webp"
@@ -56,11 +68,15 @@ const placeholdersStore = usePlaceholdersStore();
               </div>
               <div class="tags-box">
                 <div
-                    v-for="(tag, index) in article?.attributes?.tags"
-                    :key="index"
                     class="article-card__category"
                 >
-                  {{ tag }}
+                  {{ getCategoryTag(article?.attributes?.category) }}
+                </div>
+                <div
+                    v-if="article?.attributes?.archive"
+                    class="article-card__category"
+                >
+                  архив
                 </div>
               </div>
               <h2 class="article-card__name">

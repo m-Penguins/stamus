@@ -14,22 +14,30 @@
     </div>
     <div class="tags-box">
       <div
-          v-for="(tag, index) in direction.tags"
-          :key="index"
+          v-if="categoryTag"
           class="article-card__category"
       >
-        {{ tag }}
+        {{ categoryTag }}
+      </div>
+      <div
+          v-if="direction.archive"
+          class="article-card__category"
+      >
+        Архив
       </div>
     </div>
     <h2 class="article-card__name">
       {{ direction.title}}
     </h2>
     <p class="text-article">{{ direction.description }}</p>
-    <elements-link-with-arrow
-        type="type"
-        title="Подробнее"
-        :link="`/education/${direction.id}`"
-    />
+    <div class="under-card">
+      <p>{{direction.data}}</p>
+      <elements-link-with-arrow
+          type="type"
+          title="Подробнее"
+          :link="`/education/${direction.id}`"
+      />
+    </div>
   </div>
 </template>
 
@@ -45,13 +53,25 @@ export default {
       default: true,
     },
   },
-  setup() {
+  setup(props) {
     const router = useRouter();
-
     const assetsStore = useAssets();
+    const categoryTag = computed(() => {
+      switch (props.direction.category) {
+        case 'pacient':
+          return 'пациентам';
+        case 'doctor':
+          return 'врачам';
+        case 'manager':
+          return 'менеджерам';
+        default:
+          return ''; // Return an empty string if no matching category is found
+      }
+    });
     return {
       assetsStore,
       router,
+      categoryTag
     };
   },
 };
@@ -98,5 +118,11 @@ export default {
     border-radius: 20px;
     height: 346px;
   }
+}
+
+.under-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 </style>

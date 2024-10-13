@@ -30,7 +30,6 @@ const { data: companyData } = await useFetch(`${apiBaseUrl}o-kompanii`, {
 
 const mainInfo = companyData?.value?.data?.attributes;
 const blocks = mainInfo?.blocks;
-console.log(blocks)
 const breadcrumbs = [
   {
     title: "Главная",

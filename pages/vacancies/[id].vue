@@ -5,11 +5,12 @@
       :imgBg="mainImg"
       :imgAlt="mainImgAlt"
       :isDital="true"
-      :isButtonBase="false"
-      :time="mainInfo.data_start"
-      :money="mainInfo.price"
+      :isButtonBase="true"
+      textButtonBase="Отклинуться"
+      :time="mainInfo.experience"
+      :money="mainInfo.salary"
       :lector="mainInfo?.lector"
-      :showCourseCard="true"
+      :showVacancyCard="true"
       :breadcrumbs="breadcrumbs"
   />
   <div class="about-page">
@@ -26,12 +27,11 @@ const route = useRoute();
 const placeholdersStore = usePlaceholdersStore();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
-const { data: educationData } = await useFetch(
-    `${apiBaseUrl}study-centers/${route.params.id}`,
+const { data: vacancyData } = await useFetch(
+    `${apiBaseUrl}vacancies/${route.params.id}`,
     {
       query: {
-        populate:
-            blocksQuey
+        populate: blocksQuey
       },
     },
 );
@@ -41,15 +41,15 @@ const breadcrumbs = [
     url: "/",
   },
   {
-    title: "Учебный центр",
-    url: "/education",
+    title: "Вакансии",
+    url: "/vacancies",
   },
   {
-    title: educationData.value?.data?.attributes?.title,
-    url: `/education/${route.params.id}`,
+    title: vacancyData.value?.data?.attributes?.title,
+    url: `/vacancies/${route.params.id}`,
   },
 ];
-const mainInfo = educationData?.value?.data?.attributes;
+const mainInfo = vacancyData?.value?.data?.attributes;
 const blocks = mainInfo?.blocks;
 const mainImg =
     mainInfo?.photoBanner?.data[0]?.attributes?.url ??

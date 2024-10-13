@@ -139,7 +139,6 @@ const getArchiveCourses = async () => {
 
 const courseData = await getCourses()
 const archiveCourseData = await getArchiveCourses()
-
 const courses = computed(() =>
     courseData.value?.data?.map((c) => {
       return {
@@ -148,14 +147,14 @@ const courses = computed(() =>
         category: c?.attributes?.category,
         description: c?.attributes?.description,
         data: c?.attributes?.data_start,
-        img: c?.attributes?.photoBanner?.data[0].attributes?.url,
-        alt: c?.attributes?.photoBanner?.data?.attributes?.alternativeText,
+        img: c?.attributes?.cardImage?.data?.attributes?.url,
+        alt: c?.attributes?.cardImage?.data?.attributes?.alternativeText,
         publishedAt: c?.attributes?.publishedAt,
         tags: c?.attributes?.tags,
+        archive: c?.attributes?.archive,
       };
     }),
 );
-
 
 watch(
     () => ({
@@ -218,7 +217,12 @@ const handleArchiveInputChange = (value) => {
 }
 
 const handleOptionChange = async (value) => {
-  selectedOption.value = value
+  if (selectedOption.value === value) {
+    selectedOption.value = null;
+  } else {
+    selectedOption.value = value;
+  }
+
   const searchQuery = {
     category: selectedOption.value,
     search: searchFilter.value,
@@ -236,7 +240,12 @@ const handleOptionChange = async (value) => {
 }
 
 const handleArchiveOptionChange = async (value) => {
-  archiveSelectedOption.value = value
+  if (archiveSelectedOption.value === value) {
+    archiveSelectedOption.value = null; // Сбрасываем фильтр при повторном выборе
+  } else {
+    archiveSelectedOption.value = value;
+  }
+
   const searchQuery = {
     category: selectedOption.value,
     search: searchFilter.value,
@@ -252,7 +261,6 @@ const handleArchiveOptionChange = async (value) => {
     replace: true,
   });
 }
-
 const metaData = mainInfo?.meta;
 useHead(getMetaObject(metaData, baseUrl));
 </script>
