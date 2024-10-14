@@ -66,6 +66,10 @@ defineProps(["breadcrumbs", "title", "description"]);
   @include body-60-medium;
   color: #1e2433;
   padding-top: 60px;
+
+  @media (max-width: 1120px) {
+    padding-top: 0;
+  }
 }
 
 .banner-text {
