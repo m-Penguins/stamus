@@ -58,7 +58,7 @@
         </div>
       </div>
       <BlocksEducationForm/>
-      <LazyBlocksMap />
+      <LazyBlocksClinicMap :clinic-index="4" />
     </div>
   </div>
 </template>

@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-defineProps(["tab"]);
+const props = defineProps(["tab"]);
 </script>
 
 <style scoped lang="scss">
