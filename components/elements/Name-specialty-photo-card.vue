@@ -235,6 +235,10 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
   display: flex;
   align-items: center;
   gap: 10px;
+  & img {
+    max-width: 25px;
+    object-fit: contain;
+  }
 }
 
 .tooltip-text {
