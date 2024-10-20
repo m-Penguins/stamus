@@ -68,15 +68,11 @@ const breadcrumbs = [
   },
 ];
 
-const { data: specialistsPositions } = await useFetch(
-    `${apiBaseUrl}specialists`,
-    {
-      query: {
-        populate: "position",
-        "pagination[pageSize]": 1000,
-      },
-    },
-);
+const {data: positions} = await useFetch(`${apiBaseUrl}vacancies`, {
+  query: {
+    populate: "position"
+  }
+});
 
 const { data: clinicsData } = await useFetch(`${apiBaseUrl}clinics`, {
     query: {
@@ -88,7 +84,7 @@ const { data: clinicsData } = await useFetch(`${apiBaseUrl}clinics`, {
 
 const allPositions = [
   ...new Set(
-      specialistsPositions.value?.data
+      positions.value?.data
           ?.map((el) => el?.attributes?.position)
           ?.filter(Boolean),
   ),
@@ -104,6 +100,7 @@ const { data: vacancyData } = await useFetch(`${apiBaseUrl}vakansii`, {
     populate: blocksQuey + 'title.*, about.*, about.image.*, image.*, articles.*, articles.articles.*, gallery.*, gallery.gallery.*',
   },
 });
+
 
 const mainInfo = vacancyData?.value?.data?.attributes;
 const articles = mainInfo.articles?.articles
@@ -124,9 +121,13 @@ const baseDataStore = useBaseDataStore();
 const currentPage = ref(route.query.page ?? 1);
 
 const getVacanciesData = async () => {
+  const positionQ = allPositions?.find(
+      (el) => el?.id === Number(positionFilter.value),
+  )?.name;
   const strapiQuery = {
     populate: blocksQuey + 'title.*, about.*, about.image.*, image.*, clinic.*, clinics.*',
     "filters[clinics][id]": clinicFilter.value,
+    "filters[position][$eq][21]": positionQ,
     "filters[title][$contains][0]": searchFilter.value?.toUpperCase(),
     "filters[title][$contains][1]": searchFilter.value?.toLowerCase(),
     "filters[title][$contains][2]":

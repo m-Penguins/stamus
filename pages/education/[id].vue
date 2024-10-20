@@ -12,6 +12,7 @@
       :lector="mainInfo?.lector"
       :showCourseCard="true"
       :breadcrumbs="breadcrumbs"
+      :custom-click="educationStore.openModal"
   />
   <div class="about-page">
     <div class="about-page-wrap">
@@ -20,9 +21,11 @@
       />
     </div>
   </div>
+  <Teleport to="body"><ElementsEducationModal/></Teleport>
 </template>
 
 <script setup>
+const educationStore = useModalEducationStore();
 const route = useRoute();
 const placeholdersStore = usePlaceholdersStore();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;

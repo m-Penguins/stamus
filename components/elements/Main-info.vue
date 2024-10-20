@@ -29,8 +29,8 @@
           />
           <div>
             <elements-title-text-button
-                :textButtonBase="textButtonBase ? textButtonBase : 'Записаться онлайн'"
-                :customClick="redirectToExternalApp"
+                :textButtonBase="textButtonBase || 'Записаться онлайн'"
+                :customClick="customClick || redirectToExternalApp"
                 :isButtonBase="isButtonBase"
                 :title="title"
                 :font-size="true"
@@ -62,8 +62,8 @@
         <elements-title-text-button
             v-if="!isMobileView"
             :typeColorWhiteText="typeColorWhiteText"
-            :customClick="redirectToExternalApp"
-            :textButtonBase="textButtonBase ? textButtonBase : 'Записаться онлайн'"
+            :customClick="customClick || redirectToExternalApp"
+            :textButtonBase="textButtonBase || 'Записаться онлайн'"
             :isButtonBase="isButtonBase"
             :title="title"
             :text="text"
@@ -158,6 +158,7 @@ export default {
     },
     textButtonBase: String,
     address: String,
+    customClick: Function,
   },
   setup() {
     const isMobileView = ref(false);

@@ -5,14 +5,12 @@
         Записаться на курс
       </h2>
       <p class="form-wrapper__subtitle subtitle-gray">
-        Если не нашли желаемый курс, дайте <br/> нам об этом знать
+        Если не нашли желаемый курс, дайте <br /> нам об этом знать
       </p>
       <div class="form-wrapper__text text-gray-opacity p-bt-14 p-t-14">
         Нажимая кнопку отправить, вы соглашаетесь с
-        <a :href="privacyLink" target="_blank"
-        >Политикой обработки персональных данных</a
-        >
-        <div v-if="store.isSuccess" class="success-text">
+        <a>Политикой обработки персональных данных</a>
+        <div v-if="isSuccess" class="success-text">
           Спасибо, Ваша заявка отправлена.
         </div>
       </div>
@@ -21,44 +19,63 @@
             tag-type="input"
             class="form-input"
             label="Имя"
-            v-model="store.nameField"
-            :error-message="store.isNameValid ? '' : '*Минимум 2 символа'"
+            v-model="formData.name"
         />
         <elements-input-base
             label="Номер телефона"
             tag-type="phoneMask"
             type="tel"
-            v-model="store.phoneField"
+            v-model="formData.phone"
             class="form-input"
-            :error-message="store.isPhoneValid ? '' : '*Неверный формат'"
         />
         <elements-button-base
             :onClick="sendData"
-            :disabled="!store.isSubmitActive"
+            :disabled="!isSubmitActive"
             title="Отправить"
             class="form-btn"
         />
       </div>
     </div>
-    <BlocksShare/>
+    <BlocksShare />
   </div>
 </template>
 
 <script setup>
-const baseDataStore = useBaseDataStore();
-const baseUrl = useRuntimeConfig().public.baseUrl;
+const formData = ref({
+  name: '',
+  phone: ''
+});
 
-const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
-    ?.attributes?.url
-    ? baseUrl +
-    baseDataStore?.footerData?.data?.attributes?.privacy?.data?.attributes?.url
-    : "";
+const isSuccess = ref(false);
+const isSubmitActive = computed(() => {
+  return formData.value.name.trim() !== '' && formData.value.phone.trim() !== '';
+});
 
-const store = useModalStore();
-const sendData = () => {
-  store.submitModal();
+const sendData = async () => {
+  if (isSubmitActive.value) {
+    try {
+      const mail = useMail();
+      const message = `Имя: ${formData.value.name}
+      Телефон: ${formData.value.phone}`;
+
+      await mail.send({
+        config: "form",
+        from: "dev@sloy.design",
+        to: "stamus.ed@yandex.ru",
+        subject: "Заявка на курс",
+        text: message
+      });
+
+      isSuccess.value = true;
+      formData.value.name = '';
+      formData.value.phone = '';
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  }
 };
 </script>
+
 
 <style lang="scss" scoped>
 @import "/assets/styles/style.scss";
