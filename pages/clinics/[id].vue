@@ -27,10 +27,11 @@ const [{ data: clinicsData }, { data: clinicData }] = await Promise.all([
   useFetch(`${apiBaseUrl}clinics/${route.params?.id}`, {
     query: {
       populate:
-        "reviews.*,clinics.*,price.services.category.napravleniya_uslug_1_col.*,photoBanner.*,direction.*,specialists.fotoSpecialist.*,specialists.achievements.icon.*,articles.*,infoBlock.image.*,infoBlock.video.*,chiefDoctor.image.*,galery.*,meta.metaImage.*",
+        "reviews.*,clinics.*,price.services.category.napravleniya_uslug_1_col.*,photoBanner.*,direction.*,specialists.fotoSpecialist.*,specialists.achievements.icon.*,articles.*,infoBlock.image.*,infoBlock.video.*,chiefDoctor.image.*,galery.*,meta.metaImage.*, certificates.certificates.*",
     },
   }),
 ]);
+
 
 if (!clinicsData.value) {
   throw createError({
@@ -41,7 +42,7 @@ if (!clinicsData.value) {
 }
 
 const pricesData = clinicData.value?.data?.attributes?.price;
-
+const certificates = clinicData.value?.data.attributes?.certificates[0];
 const galleryList = clinicData?.value?.data?.attributes?.galery?.data
   ?.map((img) => img?.attributes?.url)
   ?.filter(Boolean);
@@ -191,6 +192,7 @@ useHead(getMetaObject(metaData, baseUrl));
     :handleLinkClick="openBidModal"
   />
   <blocks-main-feedback :reviews="reviews" />
+  <dynamic-block-certificaty v-if="certificates" :block="certificates"/>
   <blocks-clinics-adress
     v-if="otherClinics"
     text="Другие клиники"

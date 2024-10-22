@@ -1,16 +1,20 @@
 <template>
   <div class="article-card">
     <div class="article-card__box">
-      <NuxtImg
-        v-if="article?.img"
-        :src="article?.img"
-        provider="strapi"
-        :alt="article?.alt ?? 'image'"
-        sizes="xs:400px md:600px"
-        format="webp"
-        class="article-card__box-img"
-        loading="lazy"
-      />
+      <NuxtLink
+        :to="`/articles/${article?.id}`"
+      >
+        <NuxtImg
+            v-if="article?.img"
+            :src="article?.img"
+            provider="strapi"
+            :alt="article?.alt ?? 'image'"
+            sizes="xs:400px md:600px"
+            format="webp"
+            class="article-card__box-img"
+            loading="lazy"
+        />
+      </NuxtLink>
     </div>
     <div class="tags-box">
       <!-- <div
