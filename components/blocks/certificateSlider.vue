@@ -46,6 +46,7 @@ const closeCert = () => {
                 prevEl: popupPrev,
                 nextEl: popupNext,
               }"
+              :auto-height="true"
           >
             <swiper-slide
                 v-for="(item, index) in imagesScroll"
@@ -261,6 +262,7 @@ const closeCert = () => {
 }
 
 .popup {
+  height: fit-content;
   display: flex;
   position: relative;
   padding: 10px;
@@ -311,6 +313,9 @@ const closeCert = () => {
 
 .swiper-slide-popup {
   width: 100% !important;
+  overflow-y: auto;
+  max-height: 90vh;
+  max-height: 90svh;
 }
 
 .swiper-img {
