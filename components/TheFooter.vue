@@ -476,7 +476,7 @@ onMounted(() => {
   .footer {
     .footer__box {
       gap: 20px 40px;
-      flex-direction: column;
+      //flex-direction: column;
     }
   }
   .address {
