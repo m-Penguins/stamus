@@ -157,7 +157,7 @@ export default {
       default: false
     },
     textButtonBase: String,
-    address: String,
+    address: Array,
     customClick: Function,
   },
   setup() {

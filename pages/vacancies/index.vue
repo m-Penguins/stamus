@@ -145,6 +145,11 @@ const getVacanciesData = async () => {
 const vacanciesData = await getVacanciesData()
 const vacancies = computed(() =>
     vacanciesData.value?.data?.map((v) => {
+      const clinics = v?.attributes?.clinics?.data;
+      const clinicCount = clinics?.length || 0;
+      const clinicDisplay = clinicCount === 1
+          ? clinics[0]?.attributes?.heading
+          : `${clinicCount} клиник${clinicCount % 10 === 1 && clinicCount % 100 !== 11 ? "а" : clinicCount % 10 >= 2 && clinicCount % 10 <= 4 && (clinicCount % 100 < 10 || clinicCount % 100 >= 20) ? "и" : ""}`;
       return {
         id: v?.id,
         title: v?.attributes?.title,
@@ -153,7 +158,7 @@ const vacancies = computed(() =>
             v?.attributes?.image?.data?.attributes?.url ??
             placeholdersStore?.imagePlaceholders?.portfoliosSmall,
         alt: v?.attributes?.image?.data?.attributes?.alternativeText,
-        clinic: v?.attributes?.clinics?.data[0]?.attributes?.heading,
+        clinic: clinicDisplay,
         salary: v?.attributes?.salary,
       };
     }),

@@ -76,14 +76,13 @@ const props = defineProps(['vacancy'])
     height: 30px;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
     padding: 6px 10px;
     color: #232D5B;
     max-width: 152px;
     border-radius: 5px;
     margin-top: 40px;
     font-size: 12px;
-    justify-content: space-between;
   }
 
   &-under {

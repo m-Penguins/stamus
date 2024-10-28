@@ -5,7 +5,7 @@
         Откликнуться на вакансию
       </h2>
       <p class="form-wrapper__subtitle subtitle-gray">
-        Заполните форму и наш HR-менеджер свяжется с вами в случае <br/> заинтересованности
+        Заполните форму и наш HR-менеджер свяжется с вами в случае <br /> заинтересованности
       </p>
       <div class="form-wrapper__box">
         <elements-input-base
@@ -13,7 +13,7 @@
             class="form-input"
             label="Имя"
             v-model="formData.name"
-            :error-message="store.isNameValid ? '' : '*Минимум 2 символа'"
+            :error-message="isNameValid ? '' : '*Минимум два символа'"
         />
         <elements-input-base
             label="Номер телефона"
@@ -21,7 +21,7 @@
             type="tel"
             v-model="formData.phone"
             class="form-input"
-            :error-message="store.isPhoneValid ? '' : '*Неверный формат'"
+            :error-message="isPhoneValid ? '' : '*Неверный формат'"
         />
         <elements-input-base
             label="Какая у вас должность?*"
@@ -31,49 +31,109 @@
         />
         <elements-file-uploader
             label="Прикрепить резюме"
-            tag-type="phoneMask"
-            type="tel"
             v-model="formData.cv"
             class="form-input"
         />
         <elements-input-base
             label="Сопроводительное сообщение (пришлите здесь ссылку на резюме если не получится прикрепить файл)"
             tag-type="textarea"
-            type="tel"
             class="form-textarea"
             v-model="formData.letter"
-            :error-message="store.isPhoneValid ? '' : '*Неверный формат'"
         />
         <elements-button-base
             :onClick="submit"
-            :disabled="!store.isSubmitActive"
+            :disabled="!isSubmitActive"
             title="Отправить"
             class="form-btn"
         />
         <NuxtLink class="hh-link">Посмотреть вакансию на HeadHunter</NuxtLink>
+        <p v-if="isSuccess" class="success-text" >Ваша заявка успешно отправлена!</p>
       </div>
     </div>
-    <BlocksShare/>
+    <BlocksFormContacts />
   </div>
 </template>
 
 <script setup>
-const baseDataStore = useBaseDataStore();
-const baseUrl = useRuntimeConfig().public.baseUrl;
+
 const formData = ref({
   name: '',
   phone: '',
   position: '',
   cv: null,
   letter: ''
-})
-
-const submit = () => {
-  console.log(true)
-}
-
+});
+const startValidation = ref(false);
+const isError = ref(false)
+const isSubmitActive = computed(() => {
+  return formData.value.name.length && formData.value.phone.length > 0;
+});
 const store = useModalStore();
+const isSuccess = ref(false);
+const isNameValid = computed(() => {
+  if (startValidation.value) {
+    return formData.value.name.length > 1;
+  }
+  return true;
+});
 
+const isPhoneValid = computed(() => {
+  if (startValidation.value) {
+    return formData.value.phone.length === 18;
+  }
+  return true;
+});
+
+const resetForm = () => {
+  formData.value = { name: '', phone: '', position: '', cv: null, letter: '' };
+  startValidation.value = false;
+};
+
+const submit = async () => {
+  startValidation.value = true;
+
+  if (isSubmitActive.value) {
+    const mailData = {
+      name: formData.value.name ? `Имя: ${formData.value.name}` : null,
+      phone: formData.value.phone ? `Телефон: ${formData.value.phone}` : null,
+      position: formData.value.position ? `Должность: ${formData.value.position}` : null,
+      letter: formData.value.letter ? `Сообщение: ${formData.value.letter}` : null,
+    };
+
+    console.log(formData.value.cv)
+
+    const subject = "Отклик на вакансию";
+    const msg = Object.values(mailData).filter(Boolean).join("\n");
+
+    const mail = useMail();
+
+    try {
+      await mail.send({
+        config: "form",
+        from: "stamus.ed@yandex.ru",
+        subject,
+        text: msg,
+        // attachments: [
+        //   {
+        //     filename: 'Резюме.pdf',
+        //     content: formData.value.cv,
+        //   },
+        // ],
+      });
+
+      resetForm();
+      isSuccess.value = true;
+    } catch (error) {
+      console.error(error);
+      isError.value = true;
+    } finally {
+      setTimeout(() => {
+        isError.value = false;
+        isSuccess.value = false;
+      }, 2000);
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -134,9 +194,8 @@ const store = useModalStore();
   text-align: center;
   margin-bottom: 10px;
   margin-top: 10px;
-  position: absolute;
   width: 100%;
-  text-align: center;
+  grid-column: span 2;
 }
 
 .hh-link {

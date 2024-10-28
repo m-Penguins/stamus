@@ -1,5 +1,6 @@
 <script setup>
 const props = defineProps(["block"]);
+const baseUrl = useRuntimeConfig().public.baseUrl;
 </script>
 
 <template>
@@ -11,7 +12,7 @@ const props = defineProps(["block"]);
       <div class="solution-block-container">
         <div class="solution-block-container__img">
           <NuxtImg
-              v-if="block.image"
+              v-if="block.image?.data?.attributes?.url"
               :src="block.image?.data?.attributes?.url"
               provider="strapi"
               :alt="block.image?.data?.attributes?.alternativeText ?? 'image'"

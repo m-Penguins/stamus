@@ -93,6 +93,7 @@ export default {
     background: rgba(35, 45, 91, 0.05);
     color: $hover;
     text-align: center;
+    text-transform: uppercase;
     @include body-12-regular;
   }
 

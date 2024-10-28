@@ -12,6 +12,7 @@
       :lector="mainInfo?.lector"
       :showVacancyCard="true"
       :breadcrumbs="breadcrumbs"
+      :address="mainInfo.clinics.data"
   />
   <div class="about-page">
     <div class="about-page-wrap">
@@ -31,7 +32,7 @@ const { data: vacancyData } = await useFetch(
     `${apiBaseUrl}vacancies/${route.params.id}`,
     {
       query: {
-        populate: blocksQuey
+        populate: blocksQuey + 'title.*, about.*, about.image.*, image.*, clinics.*'
       },
     },
 );
@@ -52,9 +53,9 @@ const breadcrumbs = [
 const mainInfo = vacancyData?.value?.data?.attributes;
 const blocks = mainInfo?.blocks;
 const mainImg =
-    mainInfo?.photoBanner?.data[0]?.attributes?.url ??
+    mainInfo?.image?.data?.attributes?.url ??
     placeholdersStore?.imagePlaceholders?.services;
-const mainImgAlt = mainInfo?.photoBanner?.data[0]?.attributes?.alternativeText;
+const mainImgAlt = mainInfo?.image?.data?.attributes?.alternativeText;
 </script>
 
 <style lang="scss" scoped>

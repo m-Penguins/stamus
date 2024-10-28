@@ -2,9 +2,13 @@
   <div class="dop-block">
     <div class="left-block">
       <p class="dop-block-title">Принимает по адресу:</p>
-      <div class="dop-block-container">
+      <div v-if="address.length" v-for="clinic in address" :key="clinic.id" class="dop-block-container">
         <img src="../../assets/images/icons/addres.svg" alt="icon">
-        <p v-html="address" class="dop-block-text"></p>
+        <p v-html="clinic.attributes.address" class="dop-block-text"></p>
+      </div>
+      <div v-else="address.length" v-for="clinic in address" :key="clinic.id" class="dop-block-container">
+        <img src="../../assets/images/icons/addres.svg" alt="icon">
+        <p class="dop-block-text">не указано</p>
       </div>
     </div>
     <div class="right-block">
@@ -28,21 +32,15 @@
 
 </template>
 
-<script>
-export default {
-  props: {
-    time: String,
-    money: String,
-    address: String
-  }
-}
+<script setup>
+const props = defineProps(["money", "time", "address"])
 </script>
 
 <style scoped lang="scss">
 @import '/assets/styles/style.scss';
 .dop-block {
   position: absolute;
-  top: 80%;
+  top: 75%;
   right: 10%;
   left: 15%;
   display: flex;
@@ -60,8 +58,12 @@ export default {
     flex-direction: column;
     right: 10%;
     left: auto;
-    top: 60%;
+    top: 55%;
     gap: 10px;
+  }
+
+  @media (max-width: 1300px) {
+    top: 45%;
   }
 
   @media (max-width: 1110px) {
@@ -76,6 +78,7 @@ export default {
   border: 1px solid var(--stroke, #E9E9E9);
   background: var(--white, #FFF);
   padding: 10px;
+  max-height: 100px;
 }
 
 .left-block {
@@ -86,9 +89,13 @@ export default {
   border-radius: 10px;
   border: 1px solid var(--stroke, #E9E9E9);
   background: var(--white, #FFF);
-  padding: 16px 20px;
+  padding: 8px 20px;
   @media (max-width: 1400px) {
     max-width: none;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 15px 20px;
   }
 }
 
@@ -99,18 +106,24 @@ export default {
 .dop-block-container {
   display: flex;
   align-items: center;
-  gap: 12px
+  gap: 12px;
 }
 
 .dop-block-title {
   @include body-12-regular;
   color: $placeholder;
-  padding-bottom: 15px
+  padding-bottom: 5px
 }
 
 .dop-block-text {
   @include body-16-regular;
   color: $dark-blue-subtitle;
+  font-size: 16px;
+  line-height: 20px;
+
+  @media screen and (max-width: 600px) {
+    line-height: 21px;
+  }
 }
 
 .vertical-line {
