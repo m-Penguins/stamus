@@ -48,25 +48,27 @@ const allCasesLink = props?.serviceId
         >
           <div class="card-photo-name">
             <div class="card-photo-name-img">
-              <NuxtImg
-                v-if="
+              <NuxtLink :to="`/portfolio/${portfolio?.id}`">
+                <NuxtImg
+                    v-if="
                   portfolio?.attributes?.photoBanner?.data?.attributes?.url ??
                   placeholdersStore?.imagePlaceholders?.portfoliosSmall
                 "
-                :src="
+                    :src="
                   portfolio?.attributes?.photoBanner?.data?.attributes?.url ??
                   placeholdersStore?.imagePlaceholders?.portfoliosSmall
                 "
-                provider="strapi"
-                :alt="
+                    provider="strapi"
+                    :alt="
                   portfolio?.attributes?.photoBanner?.data?.attributes
                     ?.alternativeText ?? 'image'
                 "
-                sizes="xs:400px md:600px"
-                format="webp"
-                class="banner-img"
-                loading="lazy"
-              />
+                    sizes="xs:400px md:600px"
+                    format="webp"
+                    class="banner-img"
+                    loading="lazy"
+                />
+              </NuxtLink>
             </div>
             <div class="card-photo-name-container">
               <div>
