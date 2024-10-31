@@ -100,6 +100,17 @@ const getArticlesData = async () => {
 
 const articlesData = await getArticlesData();
 
+const { data: tags } = await useFetch(
+    `${apiBaseUrl}articles`,
+    {
+      query: {
+        populate: "tag_category",
+        "pagination[pageSize]": 1000,
+      },
+    },
+);
+
+
 const filteredArticles = computed(() =>
   articlesData.value?.data?.map((art) => {
     return {
@@ -116,7 +127,7 @@ const filteredArticles = computed(() =>
   }),
 );
 
-const allTags = articlesData.value?.data
+const allTags = tags.value?.data
   ?.map((art) => art?.attributes?.tag_category)
   ?.filter(Boolean);
 
