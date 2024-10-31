@@ -10,7 +10,7 @@ defineProps(["directionsData"]);
 
     <div class="areas-box">
       <div class="areas-box-temp">
-        <div
+        <NuxtLink
           class="areas-box__img"
           v-for="direction in directionsData?.data"
           :style="{
@@ -28,6 +28,7 @@ defineProps(["directionsData"]);
               !direction?.attributes?.photoBanner?.data?.attributes?.formats
                 ?.medium?.url,
           }"
+          :to="`/${direction?.attributes?.slug}`"
         >
           <h3>{{ direction?.attributes?.heading }}</h3>
           <p class="areas-box-text">
@@ -38,7 +39,7 @@ defineProps(["directionsData"]);
             title="Перейти"
             :link="`/${direction?.attributes?.slug}`"
           />
-        </div>
+        </NuxtLink>
       </div>
     </div>
   </div>
