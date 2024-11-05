@@ -258,6 +258,11 @@ export default defineNuxtConfig({
           tagPosition: "bodyClose",
           type: "text/javascript",
         },
+        {
+          src: "https://app.uiscom.ru/static/cs.min.js?k=Xgr_IlOKaHUkeiyyxViCnscurZwf6Nkk",
+          // tagPosition: "bodyClose",
+          type: "text/javascript"
+        },
       ],
     },
   },
