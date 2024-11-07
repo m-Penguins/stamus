@@ -1,26 +1,26 @@
 <template>
   <div class="share-block">
-    <NuxtLink class="share-item">
+    <a href="https://wa.me/79284217386" class="share-item" target="_blank">
       <span>Написать в WhatsApp</span>
       <img
           :src="assetsStore.useAsset('images/icons/shareWhatsapp.svg')"
           alt="Logo"
       />
-    </NuxtLink>
-    <NuxtLink class="share-item">
+    </a>
+    <a href="https://t.me/+79284217386" class="share-item" target="_blank">
       <span>Написать в Telegram</span>
       <img
           :src="assetsStore.useAsset('images/icons/shareTg.svg')"
           alt="Logo"
       />
-    </NuxtLink>
-    <NuxtLink class="share-item">
+    </a>
+    <a href="tel:+79284217386" class="share-item">
       <span>Позвонить на телефон</span>
       <img
-          :src="assetsStore.useAsset('images/icons/shareVk.svg')"
+          :src="assetsStore.useAsset('images/icons/formPhone.svg')"
           alt="Logo"
       />
-    </NuxtLink>
+    </a>
   </div>
 </template>
 

@@ -12,11 +12,11 @@ const next = ref(null);
 const getCategoryTag = (category: string) => {
   switch (category) {
     case 'pacient':
-      return 'пациентам';
+      return 'Пациентам';
     case 'doctor':
-      return 'врачам';
+      return 'Врачам';
     case 'manager':
-      return 'менеджерам';
+      return 'Менеджерам';
     default:
       return ''; // Return an empty string if no matching category is found
   }
@@ -47,48 +47,50 @@ const placeholdersStore = usePlaceholdersStore();
               :key="index"
               class="swiper-slide custom-size"
           >
-            <div class="article-card">
-              <div class="article-card__box">
-                <NuxtImg
-                    v-if="
+            <NuxtLink :to="`/education/${article?.id}`">
+              <div class="article-card">
+                <div class="article-card__box">
+                  <NuxtImg
+                      v-if="
                     article?.attributes?.cardImage?.data.attributes?.url
                   "
-                    :src="
+                      :src="
                     article?.attributes?.cardImage?.data.attributes?.url
                   "
-                    provider="strapi"
-                    :alt="
+                      provider="strapi"
+                      :alt="
                     article?.attributes?.cardImage?.data?.attributes?.alternativeText || 'Курс'
                   "
-                    sizes="xs:400px md:600px"
-                    format="webp"
-                    class="article-card__box-img"
-                    loading="lazy"
+                      sizes="xs:400px md:600px"
+                      format="webp"
+                      class="article-card__box-img"
+                      loading="lazy"
+                  />
+                </div>
+                <div class="tags-box">
+                  <div
+                      class="article-card__category"
+                  >
+                    {{ getCategoryTag(article?.attributes?.category) }}
+                  </div>
+                  <div
+                      v-if="article?.attributes?.archive"
+                      class="article-card__category"
+                  >
+                    Архив
+                  </div>
+                </div>
+                <h2 class="article-card__name">
+                  {{ article?.attributes?.title}}
+                </h2>
+                <p class="text-article">{{ article?.attributes?.description }}</p>
+                <elements-link-with-arrow
+                    type="type"
+                    title="Подробнее"
+                    :link="`/education/${article?.id}`"
                 />
               </div>
-              <div class="tags-box">
-                <div
-                    class="article-card__category"
-                >
-                  {{ getCategoryTag(article?.attributes?.category) }}
-                </div>
-                <div
-                    v-if="article?.attributes?.archive"
-                    class="article-card__category"
-                >
-                  архив
-                </div>
-              </div>
-              <h2 class="article-card__name">
-                {{ article?.attributes?.title}}
-              </h2>
-              <p class="text-article">{{ article?.attributes?.description }}</p>
-              <elements-link-with-arrow
-                  type="type"
-                  title="Подробнее"
-                  :link="`/education/${article?.id}`"
-              />
-            </div>
+            </NuxtLink>
           </swiper-slide>
         </swiper>
         <div class="wrapper-btn">
@@ -314,7 +316,6 @@ const placeholdersStore = usePlaceholdersStore();
     background: rgba(35, 45, 91, 0.05);
     color: $hover;
     text-align: center;
-    text-transform: uppercase;
     @include body-12-regular;
   }
 

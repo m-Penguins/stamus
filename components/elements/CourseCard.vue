@@ -1,44 +1,47 @@
 <template>
-  <div class="article-card">
-    <div class="article-card__box">
-      <NuxtImg
-          v-if="direction.img"
-          :src="direction.img"
-          provider="strapi"
-          :alt="direction.alt || 'Курс'"
-          sizes="xs:400px md:600px"
-          format="webp"
-          class="article-card__box-img"
-          loading="lazy"
-      />
-    </div>
-    <div class="tags-box">
-      <div
-          v-if="categoryTag"
-          class="article-card__category"
-      >
-        {{ categoryTag }}
+  <NuxtLink :to="`/education/${direction.id}`">
+    <div class="article-card">
+      <div class="article-card__box">
+        <NuxtImg
+            v-if="direction.img"
+            :src="direction.img"
+            provider="strapi"
+            :alt="direction.alt || 'Курс'"
+            sizes="xs:400px md:600px"
+            format="webp"
+            class="article-card__box-img"
+            loading="lazy"
+        />
       </div>
-      <div
-          v-if="direction.archive"
-          class="article-card__category"
-      >
-        Архив
+      <div class="tags-box">
+        <div
+            v-if="categoryTag"
+            class="article-card__category"
+        >
+          {{ categoryTag }}
+        </div>
+        <div
+            v-if="direction.archive"
+            class="article-card__category"
+        >
+          Архив
+        </div>
+      </div>
+      <h2 class="article-card__name">
+        {{ direction.title}}
+      </h2>
+      <p class="text-article">{{ direction.description }}</p>
+      <div class="under-card">
+        <p>{{direction.data}}</p>
+        <elements-link-with-arrow
+            type="type"
+            title="Подробнее"
+            :link="`/education/${direction.id}`"
+        />
       </div>
     </div>
-    <h2 class="article-card__name">
-      {{ direction.title}}
-    </h2>
-    <p class="text-article">{{ direction.description }}</p>
-    <div class="under-card">
-      <p>{{direction.data}}</p>
-      <elements-link-with-arrow
-          type="type"
-          title="Подробнее"
-          :link="`/education/${direction.id}`"
-      />
-    </div>
-  </div>
+
+  </NuxtLink>
 </template>
 
 <script>
@@ -59,13 +62,13 @@ export default {
     const categoryTag = computed(() => {
       switch (props.direction.category) {
         case 'pacient':
-          return 'пациентам';
+          return 'Пациентам';
         case 'doctor':
-          return 'врачам';
+          return 'Врачам';
         case 'manager':
-          return 'менеджерам';
+          return 'Менеджерам';
         default:
-          return ''; // Return an empty string if no matching category is found
+          return '';
       }
     });
     return {
@@ -93,7 +96,6 @@ export default {
     background: rgba(35, 45, 91, 0.05);
     color: $hover;
     text-align: center;
-    text-transform: uppercase;
     @include body-12-regular;
   }
 

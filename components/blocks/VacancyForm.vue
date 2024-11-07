@@ -46,7 +46,7 @@
             title="Отправить"
             class="form-btn"
         />
-        <NuxtLink class="hh-link">Посмотреть вакансию на HeadHunter</NuxtLink>
+        <a href="tel:+79284217386" class="hh-link">Посмотреть вакансию на HeadHunter</a>
         <p v-if="isSuccess" class="success-text" >Ваша заявка успешно отправлена!</p>
       </div>
     </div>
@@ -120,7 +120,6 @@ const submit = async () => {
         //   },
         // ],
       });
-
       resetForm();
       isSuccess.value = true;
     } catch (error) {
