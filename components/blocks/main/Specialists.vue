@@ -46,14 +46,16 @@ const handleSmallClick = (index) => {
       </div>
       <div class="specialists-inner">
         <div class="specialists-inner__img">
-          <NuxtImg
-            v-if="props.mainSpecialists?.[selectedIndex]?.img"
-            :src="props.mainSpecialists?.[selectedIndex]?.img"
-            provider="strapi"
-            :alt="props.mainSpecialists?.[selectedIndex]?.alt ?? 'image'"
-            sizes="xs:400px"
-            format="webp"
-          />
+          <NuxtLink :to="`/team/${props.mainSpecialists?.[selectedIndex]?.id}`">
+            <NuxtImg
+                v-if="props.mainSpecialists?.[selectedIndex]?.img"
+                :src="props.mainSpecialists?.[selectedIndex]?.img"
+                provider="strapi"
+                :alt="props.mainSpecialists?.[selectedIndex]?.alt ?? 'image'"
+                sizes="xs:400px"
+                format="webp"
+            />
+          </NuxtLink>
         </div>
         <div class="specialists-inner__info">
           <div class="specialists-inner__info-name">

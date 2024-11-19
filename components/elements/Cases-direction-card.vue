@@ -1,16 +1,18 @@
 <template>
   <div class="card-photo-name">
     <div class="card-photo-name-img">
-      <NuxtImg
-        v-if="direction.img"
-        :src="direction.img"
-        :alt="direction?.alt ?? 'image'"
-        provider="strapi"
-        sizes="xs:400px md:600px"
-        format="webp"
-        class="banner-img"
-        loading="lazy"
-      />
+      <NuxtLink :to="`/portfolio/${direction.id}`">
+        <NuxtImg
+            v-if="direction.img"
+            :src="direction.img"
+            :alt="direction?.alt ?? 'image'"
+            provider="strapi"
+            sizes="xs:400px md:600px"
+            format="webp"
+            class="banner-img"
+            loading="lazy"
+        />
+      </NuxtLink>
     </div>
     <div v-if="isCategoryAndDescription" class="card-photo-name-container">
       <div>

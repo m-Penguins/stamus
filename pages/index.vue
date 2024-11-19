@@ -102,7 +102,7 @@ useHead(getMetaObject(metaData, baseUrl));
     <DynamicBlockReviews :block="reviews" />
   </section>
 
-  <section class="section-wrapper" v-if="reviews">
+  <section class="section-wrapper" v-if="portfolios">
     <ElementsSliderCasesDirection :programs="portfolios" />
   </section>
 

@@ -2,6 +2,8 @@
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const placeholdersStore = usePlaceholdersStore();
 defineProps(["directionsData"]);
+const router = useRouter();
+
 </script>
 
 <template>
@@ -28,6 +30,7 @@ defineProps(["directionsData"]);
               !direction?.attributes?.photoBanner?.data?.attributes?.formats
                 ?.medium?.url,
           }"
+          @click="router.push(`/${direction?.attributes?.slug}`)"
         >
           <h3>{{ direction?.attributes?.heading }}</h3>
           <p class="areas-box-text">
@@ -101,7 +104,7 @@ defineProps(["directionsData"]);
     gap: 14px;
     height: 380px;
     box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
-
+    cursor: pointer;
     h3 {
       @include body-22-semi-bold;
       color: $white;

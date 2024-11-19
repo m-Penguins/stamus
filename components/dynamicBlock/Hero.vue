@@ -44,6 +44,7 @@
           :title="title"
           :text="text"
           class="height-50 desktop"
+          :none_btn="noneBtn"
         />
       </div>
     </div>
@@ -59,6 +60,7 @@ const props = defineProps([
   "breadcrumbs",
   "link",
   "link_text",
+  "noneBtn"
 ]);
 
 const modalStore = useModalStore();

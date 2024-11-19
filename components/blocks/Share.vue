@@ -95,6 +95,13 @@ const copyLink = () => {
   }
 }
 
+@media screen and (max-width: 1018px) {
+  .share-item {
+    max-width: none;
+  }
+}
+
+
 @media screen and (max-width: 744px) {
   .share-block {
     display: grid;
@@ -104,9 +111,6 @@ const copyLink = () => {
     align-items: center;
   }
 
-  .share-item {
-    max-width: 333px;
-  }
 }
 
 @media screen and (max-width: 640px) {

@@ -29,8 +29,8 @@
           />
           <div>
             <elements-title-text-button
-                textButtonBase="Записаться онлайн"
-                :customClick="redirectToExternalApp"
+                :textButtonBase="textButtonBase || 'Записаться онлайн'"
+                :customClick="customClick || redirectToExternalApp"
                 :isButtonBase="isButtonBase"
                 :title="title"
                 :font-size="true"
@@ -43,13 +43,27 @@
                 v-if="isTimeAndPriceCard"
                 class="elements-analitic-card-mob"
             />
+            <elements-course-info-card
+                v-if="showCourseCard"
+                :time="time"
+                :money="money"
+                :lector="'lector'"
+                class="elements-analitic-card-mob"
+            />
+            <elements-vacancy-info-card
+                v-if="showVacancyCard"
+                :time="time"
+                :money="money"
+                :address="address ? address : 'не указано'"
+                class="elements-analitic-card-mob"
+            />
           </div>
         </div>
         <elements-title-text-button
             v-if="!isMobileView"
             :typeColorWhiteText="typeColorWhiteText"
-            :customClick="redirectToExternalApp"
-            textButtonBase="Записаться онлайн"
+            :customClick="customClick || redirectToExternalApp"
+            :textButtonBase="textButtonBase || 'Записаться онлайн'"
             :isButtonBase="isButtonBase"
             :title="title"
             :text="text"
@@ -60,6 +74,20 @@
           :time="time"
           :money="money"
           v-if="isTimeAndPriceCard && time && money"
+          class="desktop"
+      />
+      <elements-course-info-card
+        v-if="showCourseCard"
+        :time="time"
+        :money="money"
+        :lector="'lector'"
+        class="desktop"
+      />
+      <elements-vacancy-info-card
+          v-if="showVacancyCard"
+          :time="time"
+          :money="money"
+          :address="address ? address : 'не указано'"
           class="desktop"
       />
     </div>
@@ -119,6 +147,18 @@ export default {
     },
     time: String,
     money: String,
+    lector: String,
+    showCourseCard: {
+      type: Boolean,
+      default: false
+    },
+    showVacancyCard: {
+      type: Boolean,
+      default: false
+    },
+    textButtonBase: String,
+    address: Array,
+    customClick: Function,
   },
   setup() {
     const isMobileView = ref(false);

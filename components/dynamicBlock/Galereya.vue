@@ -208,6 +208,12 @@ const handleVideoClick = (link) => {
   }
 }
 
+.img-2, .img-3 {
+  img {
+    height: 180px !important;
+  }
+}
+
 .gall-img-three:nth-child(n + 4) {
   width: 49%;
 }

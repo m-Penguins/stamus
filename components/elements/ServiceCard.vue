@@ -124,6 +124,7 @@ const store = useModalStore();
 
       &__type {
         margin-bottom: 10px;
+        width: 100%;
       }
     }
   }
