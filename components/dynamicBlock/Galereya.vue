@@ -1,6 +1,6 @@
 <template>
   <div class="gallery">
-    <div class="gallery-title">{{ block?.title ?? "Галерея" }}</div>
+    <div class="gallery-title">{{ block?.title ?? "" }}</div>
 
     <div v-if="arrayImg?.length === 1" class="gallery-two-img-container">
       <template v-for="item in arrayImg" :key="item?.id">
