@@ -9,7 +9,8 @@ export const useFormStore = defineStore("form-store", () => {
   const getterNameField = ref("");
   const digitField = ref("");
   const phoneField = ref("");
-
+  const birthDate = ref("");
+  const dateOfIssue = ref("")
   const checkBoxes = ref([]);
   const whoIsGettingDocument = ref(null);
   const patientNameField = ref("");
@@ -41,6 +42,24 @@ export const useFormStore = defineStore("form-store", () => {
     return true;
   });
 
+  const isDateBirthValidInfo = computed(() => {
+    if (startValidation.value) {
+      return (
+        !!digitField.value?.length
+      );
+    }
+    return true;
+  });
+
+  const isDateOfIssueValidInfo = computed(() => {
+    if (startValidation.value) {
+      return (
+         !!digitField.value?.length
+      );
+    }
+    return true;
+  });
+
   const isPhoneValidInfo = computed(() => {
     if (startValidation.value) {
       return phoneField.value.length === 18;
@@ -63,6 +82,8 @@ export const useFormStore = defineStore("form-store", () => {
     digitField.value = "";
     startValidation.value = false;
     checkBoxes.value = [];
+    birthDate.value = "";
+    dateOfIssue.value = "";
   }
 
   function resetSendingState() {
@@ -73,13 +94,14 @@ export const useFormStore = defineStore("form-store", () => {
 
   async function submitModal() {
     startValidation.value = true;
-
     if (
       isSubmitActivePersonalIncomeTax.value &&
       isPhoneValidInfo.value &&
       isDigitValidInfo.value &&
       isNamePatientFieldValid.value &&
-      isNameInfoValid.value
+      isNameInfoValid.value &&
+      birthDate.value &&
+      dateOfIssue.value
     ) {
       isLoading.value = true;
 
@@ -91,6 +113,12 @@ export const useFormStore = defineStore("form-store", () => {
       const digitFieldValue = digitField.value
         ? `ИНН: ${digitField.value}`
         : "";
+      const birthDateFieldValue = birthDate.value
+         ? `Дата рождения налогоплательщика: ${birthDate.value}`
+         : "";
+      const dateOfIssueFieldValue = dateOfIssue.value
+         ? `Дата выдачи паспорта налогоплательщика: ${dateOfIssue.value}`
+         : "";
       const phoneFieldValue = phoneField.value
         ? `Телефон: ${phoneField.value}`
         : "";
@@ -112,6 +140,8 @@ export const useFormStore = defineStore("form-store", () => {
       const msg = [
         getterNameFieldValue,
         digitFieldValue,
+        birthDateFieldValue,
+        dateOfIssueFieldValue,
         phoneFieldValue,
         checkBoxesValue,
         whoIsGettingDocumentValue,
@@ -132,7 +162,6 @@ export const useFormStore = defineStore("form-store", () => {
         resetForm();
         isSuccess.value = true;
       } catch (error) {
-        console.log(error);
         isError.value = true;
       } finally {
         isLoading.value = false;
@@ -155,10 +184,13 @@ export const useFormStore = defineStore("form-store", () => {
     isSubmitActivePersonalIncomeTax,
     submitModal,
     isNamePatientFieldValid,
-
+    birthDate,
+    dateOfIssue,
     isLoading,
     isSuccess,
     isError,
+    isDateBirthValidInfo,
+    isDateOfIssueValidInfo,
     resetSendingState,
   };
 });

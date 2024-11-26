@@ -121,7 +121,7 @@ useHead({
           <elements-input-base
             minlength="10"
             tag-type="input"
-            label="Введите ИНН"
+            label="Введите ИНН налогоплательщика"
             v-model="store.digitField"
             :errorMessage="
               store.isDigitValidInfo
@@ -130,12 +130,32 @@ useHead({
             "
           />
           <elements-input-base
+              tag-type="date"
+              label="Дата рождения налогоплательщика"
+              v-model="store.birthDate"
+              :errorMessage="
+              store.isDateBirthValidInfo
+                ? ''
+                : '*Заполните поле'
+            "
+          />
+          <elements-input-base
+              minlength="10"
+              tag-type="date"
+              label="Дата выдачи паспорта налогоплательщика"
+              v-model="store.dateOfIssue"
+              :errorMessage="
+              store.isDateBirthValidInfo
+                ? ''
+                : '*Заполните поле'
+            "
+          />
+          <elements-input-base
             tag-type="phoneMask"
             label="Контактный номер телефона"
             v-model="store.phoneField"
             :errorMessage="store.isPhoneValidInfo ? '' : '*Неверный формат'"
           />
-
           <label
             v-for="(box, index) in mockCheckBoxes"
             :key="index"

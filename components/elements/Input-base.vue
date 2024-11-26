@@ -7,7 +7,7 @@ const props = defineProps({
   dopText: String,
   tagType: {
     type: String,
-    default: "input" | "textarea" | "phoneMask" | "email",
+    default: "input" | "textarea" | "phoneMask" | "email" | "date",
   },
   modelValue: {
     type: String,
@@ -139,6 +139,33 @@ const onBlur = (e) => {
       {{ errorMessage }}
     </p>
   </div>
+  <div v-else-if="tagType === 'date'" class="input-base form-group">
+    <label
+        ref="labelEl"
+        :for="label"
+        :class="isFocused || modelValue.length ? 'focused' : ''"
+        class="form-label date"
+    >{{ label }}</label
+    >
+    <input
+        type="date"
+        v-bind="$attrs"
+        :name="label"
+        :placeholder="placeholder"
+        class="form-input input"
+        :class="{
+        'focused-input': isFocused || modelValue.length,
+        'focused-input-color': isFocused,
+      }"
+        @input="updateInputValue"
+        :value="modelValue"
+        @focus="onFocus($event)"
+        @blur="onBlur($event)"
+    />
+    <p v-if="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </p>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -162,6 +189,10 @@ const onBlur = (e) => {
   z-index: 10;
   transition: transform 150ms ease-out, font-size 150ms ease-out;
   transition: 150ms;
+  &.date {
+    font-size: 12px;
+    top: 0;
+  }
 }
 
 .form-label.focused {
@@ -169,6 +200,11 @@ const onBlur = (e) => {
   padding-left: 3px;
   @include body-10-regular;
   padding-top: 10px;
+  &.date {
+    font-size: 8px;
+    top: 0;
+    padding-top: 25px;
+  }
 }
 
 .form-input {
