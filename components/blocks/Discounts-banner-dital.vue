@@ -65,7 +65,6 @@ defineProps(["breadcrumbs", "title", "description"]);
 .banner-title {
   @include body-60-medium;
   color: #1e2433;
-  padding-top: 60px;
 
   @media (max-width: 1120px) {
     padding-top: 0;
@@ -134,12 +133,12 @@ defineProps(["breadcrumbs", "title", "description"]);
   .banner-wrap {
     margin-top: 110px;
   }
+  .bread-crumbs-discounts {
+    margin: 88px 0 20px 0;
+  }
 }
 
 @media (max-width: 950px) {
-  .bread-crumbs-discounts {
-    margin: 88px 0 60px 0;
-  }
   .banner-wrap {
     background: none;
     height: 100%;
