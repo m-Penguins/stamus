@@ -42,7 +42,7 @@
     link="/leave-review"
     bgColor="grey"
     type
-    img="baloons.png"
+    img="heart.png"
     bigImg="true"
   />
   <blocks-main-form />
