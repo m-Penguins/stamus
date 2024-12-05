@@ -262,7 +262,7 @@ export default {
 <!--                alt="Logo"-->
 <!--            />-->
             <img
-              style="width: 59px;"
+              style="max-height: 50px"
               src="../assets/images/icons/NYlogo.png"
               alt="Logo"
             />
