@@ -256,9 +256,14 @@ export default {
               showMenuMob = false;
             "
           >
+<!--            <img-->
+<!--                style="width: 59px; height: 34px"-->
+<!--                :src="assetsStore.useAsset('images/icons/logo.svg')"-->
+<!--                alt="Logo"-->
+<!--            />-->
             <img
-              style="width: 59px; height: 34px"
-              :src="assetsStore.useAsset('images/icons/logo.svg')"
+              style="width: 59px;"
+              src="../assets/images/icons/NYlogo.png"
               alt="Logo"
             />
           </NuxtLink>
