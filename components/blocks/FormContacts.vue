@@ -14,7 +14,7 @@
           alt="Logo"
       />
     </a>
-    <a href="tel:+79284217386" class="share-item">
+    <a :href="`tel:${phone}`" class="share-item">
       <span>Позвонить на телефон</span>
       <img
           :src="assetsStore.useAsset('images/icons/formPhone.svg')"
@@ -26,6 +26,7 @@
 
 <script setup>
 const assetsStore = useAssets();
+defineProps(['phone'])
 </script>
 
 <style lang="scss" scoped>

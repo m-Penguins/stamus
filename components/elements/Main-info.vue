@@ -80,7 +80,7 @@
         v-if="showCourseCard"
         :time="time"
         :money="money"
-        :lector="'lector'"
+        :lector="lector"
         class="desktop"
       />
       <elements-vacancy-info-card
