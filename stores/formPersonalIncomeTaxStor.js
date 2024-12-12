@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 
 export const useFormStore = defineStore("form-store", () => {
-  // vars for sending form state
   const isLoading = ref(false);
   const isError = ref(false);
   const isSuccess = ref(false);
@@ -10,80 +9,110 @@ export const useFormStore = defineStore("form-store", () => {
   const digitField = ref("");
   const phoneField = ref("");
   const birthDate = ref("");
-  const dateOfIssue = ref("")
+  const dateOfIssue = ref("");
+  const passportSeries = ref("");
+
+  const patientNameField = ref("");
+  const patientBirthDate = ref("");
+  const patientPassportSeries = ref("");
+  const patientDateOfIssue = ref("");
+  const patientINN = ref("");
+
   const checkBoxes = ref([]);
   const whoIsGettingDocument = ref(null);
-  const patientNameField = ref("");
   const address = ref("");
+  const selectedYear = ref("");
 
   const startValidation = ref(false);
+
   const digitRegex = /^[0-9]+$/;
 
   const isNameInfoValid = computed(() => {
-    if (startValidation.value) {
-      return getterNameField.value.length > 1;
-    }
-    return true;
-  });
-
-  const isNamePatientFieldValid = computed(() => {
-    if (startValidation.value) {
-      return patientNameField.value.length > 1;
-    }
-    return true;
+    return !startValidation.value || getterNameField.value.length > 1;
   });
 
   const isDigitValidInfo = computed(() => {
-    if (startValidation.value) {
-      return (
-        digitRegex.test(digitField.value) && digitField.value?.length >= 10
-      );
-    }
-    return true;
+    return (
+       !startValidation.value ||
+       (digitRegex.test(digitField.value) && digitField.value.length >= 10)
+    );
   });
 
   const isDateBirthValidInfo = computed(() => {
-    if (startValidation.value) {
-      return (
-        !!digitField.value?.length
-      );
-    }
-    return true;
+    return !startValidation.value || birthDate.value.length > 0;
   });
 
   const isDateOfIssueValidInfo = computed(() => {
-    if (startValidation.value) {
-      return (
-         !!digitField.value?.length
-      );
-    }
-    return true;
+    return !startValidation.value || dateOfIssue.value.length > 0;
+  });
+
+  const isPassportSeriesValid = computed(() => {
+    return !startValidation.value || passportSeries.value.length > 0;
   });
 
   const isPhoneValidInfo = computed(() => {
-    if (startValidation.value) {
-      return phoneField.value.length === 18;
-    }
-    return true;
+    return !startValidation.value || phoneField.value.length === 18;
+  });
+
+  const isNamePatientFieldValid = computed(() => {
+    return !startValidation.value || patientNameField.value.length > 1;
+  });
+
+  const isPatientBirthDateValid = computed(() => {
+    return !startValidation.value || patientBirthDate.value.length > 0;
+  });
+
+  const isPatientPassportValid = computed(() => {
+    return !startValidation.value || patientPassportSeries.value.length > 0;
+  });
+
+  const isPatientDateValid = computed(() => {
+    return !startValidation.value || patientDateOfIssue.value.length > 0;
+  });
+
+  const isPatientINNValid = computed(() => {
+    return (
+       !startValidation.value ||
+       (digitRegex.test(patientINN.value) && patientINN.value.length >= 10)
+    );
   });
 
   const isSubmitActivePersonalIncomeTax = computed(() => {
     return (
-      getterNameField.value.length &&
-      phoneField.value.length > 0 &&
-      digitField.value.length > 0 &&
-      patientNameField.value.length > 0
+       getterNameField.value.length > 0 &&
+       phoneField.value.length > 0 &&
+       digitField.value.length > 0 &&
+       patientNameField.value.length > 0 &&
+       birthDate.value &&
+       dateOfIssue.value &&
+       passportSeries.value.length > 0 &&
+       patientBirthDate.value &&
+       patientPassportSeries.value.length > 0 &&
+       patientDateOfIssue.value &&
+       patientINN.value.length > 0
     );
   });
 
   function resetForm() {
     getterNameField.value = "";
-    phoneField.value = "";
     digitField.value = "";
-    startValidation.value = false;
-    checkBoxes.value = [];
+    phoneField.value = "";
     birthDate.value = "";
     dateOfIssue.value = "";
+    passportSeries.value = "";
+
+    patientNameField.value = "";
+    patientBirthDate.value = "";
+    patientPassportSeries.value = "";
+    patientDateOfIssue.value = "";
+    patientINN.value = "";
+
+    address.value = "";
+    checkBoxes.value = [];
+    whoIsGettingDocument.value = null;
+    selectedYear.value = "";
+
+    startValidation.value = false;
   }
 
   function resetSendingState() {
@@ -95,61 +124,36 @@ export const useFormStore = defineStore("form-store", () => {
   async function submitModal() {
     startValidation.value = true;
     if (
-      isSubmitActivePersonalIncomeTax.value &&
-      isPhoneValidInfo.value &&
-      isDigitValidInfo.value &&
-      isNamePatientFieldValid.value &&
-      isNameInfoValid.value &&
-      birthDate.value &&
-      dateOfIssue.value
+       isSubmitActivePersonalIncomeTax.value &&
+       isPhoneValidInfo.value &&
+       isDigitValidInfo.value &&
+       isNamePatientFieldValid.value &&
+       isNameInfoValid.value &&
+       isDateBirthValidInfo.value &&
+       isDateOfIssueValidInfo.value
     ) {
       isLoading.value = true;
 
       const mail = useMail();
 
-      const getterNameFieldValue = getterNameField.value
-        ? `ФИО налогоплательщика: ${getterNameField.value}`
-        : "";
-      const digitFieldValue = digitField.value
-        ? `ИНН: ${digitField.value}`
-        : "";
-      const birthDateFieldValue = birthDate.value
-         ? `Дата рождения налогоплательщика: ${birthDate.value}`
-         : "";
-      const dateOfIssueFieldValue = dateOfIssue.value
-         ? `Дата выдачи паспорта налогоплательщика: ${dateOfIssue.value}`
-         : "";
-      const phoneFieldValue = phoneField.value
-        ? `Телефон: ${phoneField.value}`
-        : "";
-
-      const checkBoxesValue =
-        checkBoxes.value?.length > 0
-          ? `Когда проходил лечение: ${checkBoxes.value?.join(", ")}`
-          : "";
-      const whoIsGettingDocumentValue = whoIsGettingDocument.value
-        ? `Для кого получает справку: ${whoIsGettingDocument.value}`
-        : "";
-      const patientNameFieldValue = patientNameField.value
-        ? `ФИО пациента: ${patientNameField.value}`
-        : "";
-      const addressValue = address.value
-        ? `Как хочет получить справку: ${address.value}`
-        : "";
-
       const msg = [
-        getterNameFieldValue,
-        digitFieldValue,
-        birthDateFieldValue,
-        dateOfIssueFieldValue,
-        phoneFieldValue,
-        checkBoxesValue,
-        whoIsGettingDocumentValue,
-        patientNameFieldValue,
-        addressValue,
+        `ФИО налогоплательщика: ${getterNameField.value}`,
+        `ИНН: ${digitField.value}`,
+        `Дата рождения: ${birthDate.value}`,
+        `Серия и номер паспорта: ${passportSeries.value}`,
+        `Дата выдачи паспорта: ${dateOfIssue.value}`,
+        `ФИО пациента: ${patientNameField.value}`,
+        `Дата рождения пациента: ${patientBirthDate.value}`,
+        `Серия и номер паспорта пациента: ${patientPassportSeries.value}`,
+        `Дата выдачи паспорта пациента: ${patientDateOfIssue.value}`,
+        `ИНН пациента: ${patientINN.value}`,
+        `Телефон: ${phoneField.value}`,
+        `Когда проходил лечение: ${checkBoxes.value?.join(", ")}`,
+        `Для кого получает справку: ${whoIsGettingDocument.value}`,
+        `Как хочет получить справку: ${address.value}`,
       ]
-        .filter(Boolean)
-        .join("\n");
+         .filter(Boolean)
+         .join("\n");
 
       try {
         await mail.send({
@@ -174,23 +178,35 @@ export const useFormStore = defineStore("form-store", () => {
     whoIsGettingDocument,
     address,
     getterNameField,
-    phoneField,
-    patientNameField,
     digitField,
+    phoneField,
+    birthDate,
+    dateOfIssue,
+    passportSeries,
+    patientNameField,
+    patientBirthDate,
+    patientPassportSeries,
+    patientDateOfIssue,
+    patientINN,
+    selectedYear,
     isNameInfoValid,
     isDigitValidInfo,
     isPhoneValidInfo,
-    startValidation,
-    isSubmitActivePersonalIncomeTax,
-    submitModal,
     isNamePatientFieldValid,
-    birthDate,
-    dateOfIssue,
-    isLoading,
-    isSuccess,
-    isError,
     isDateBirthValidInfo,
     isDateOfIssueValidInfo,
+    isPassportSeriesValid,
+    isPatientBirthDateValid,
+    isPatientPassportValid,
+    isPatientDateValid,
+    isPatientINNValid,
+    startValidation,
+    isSubmitActivePersonalIncomeTax,
+    resetForm,
     resetSendingState,
+    submitModal,
+    isLoading,
+    isError,
+    isSuccess,
   };
 });
