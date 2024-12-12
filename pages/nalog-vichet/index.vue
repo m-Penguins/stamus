@@ -4,30 +4,25 @@ const route = useRoute();
 const store = useFormStore();
 const baseDataStore = useBaseDataStore();
 
-const mockCheckBoxes = [
-  "Проходил лечение в 2021 г",
-  "Проходил лечение в 2022 г",
-  "Проходил лечение в 2023 г",
-  "Проходил лечение в 2024 г",
-];
+const mockCheckBoxes = Array.from({ length: new Date().getFullYear() - 2021 + 1 }, (_, i) => ({
+  name: (2021 + i).toString()
+}));
 const optionsData = [
   { name: "Получаю справку за себя" },
-  { name: "Получаю справку за ребенка" },
-  { name: "Получаю справку за супруга(-и)" },
-  { name: "Получаю справку за родителя" },
+  { name: "Получаю справку за другого" },
 ];
 
 const optionsDoc = baseDataStore.clinics?.data
-  ?.map((el) => {
-    const address = el?.attributes?.address;
+    ?.map((el) => {
+      const address = el?.attributes?.address;
 
-    if (address) {
-      return {
-        name: `Заберу справку на ${el?.attributes?.address}`,
-      };
-    }
-  })
-  ?.filter(Boolean);
+      if (address) {
+        return {
+          name: `Заберу справку на ${el?.attributes?.address}`,
+        };
+      }
+    })
+    ?.filter(Boolean);
 
 const sendData = () => {
   store.submitModal();
@@ -36,10 +31,10 @@ const sendData = () => {
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
-  ?.attributes?.url
-  ? baseUrl +
+    ?.attributes?.url
+    ? baseUrl +
     baseDataStore?.footerData?.data?.attributes?.privacy?.data?.attributes?.url
-  : "";
+    : "";
 const bigImage = "images/big-images/info.jpg";
 
 useHead({
@@ -56,23 +51,18 @@ useHead({
     {
       name: "description",
       content:
-        "На сайте можно заполнить онлайн заявку на получение налогового вычета в сеть стоматологий Стамус. Срок готовности справки до 14 рабочих дней.",
+          "На сайте можно заполнить онлайн заявку на получение налогового вычета в сеть стоматологий Стамус. Срок готовности справки до 14 рабочих дней.",
     },
     {
       name: "twitter:description",
       content:
-        "На сайте можно заполнить онлайн заявку на получение налогового вычета в сеть стоматологий Стамус. Срок готовности справки до 14 рабочих дней.",
+          "На сайте можно заполнить онлайн заявку на получение налогового вычета в сеть стоматологий Стамус. Срок готовности справки до 14 рабочих дней.",
     },
     {
       property: "og:description",
       content:
-        "На сайте можно заполнить онлайн заявку на получение налогового вычета в сеть стоматологий Стамус. Срок готовности справки до 14 рабочих дней.",
+          "На сайте можно заполнить онлайн заявку на получение налогового вычета в сеть стоматологий Стамус. Срок готовности справки до 14 рабочих дней.",
     },
-    // {
-    //   name: "keywords",
-    //   content:
-    //     "ндфл стамус, ндфл стамусмед, налоговый вычет за лечение зубов, налоговый вычет стамус, налоговый вычет стамусмед, налоговый вычет имплантация",
-    // },
   ],
   link: [{ rel: "canonical", href: "https://stamus.ru" + route.path }],
 });
@@ -80,12 +70,12 @@ useHead({
 
 <template>
   <elements-main-info
-    title="Налоговый <br/>вычет"
-    :imgBg="bigImage"
-    imgAlt="Налоговый вычет"
-    local
-    :isButtonBase="false"
-    :breadcrumbs="[
+      title="Налоговый <br/>вычет"
+      :imgBg="bigImage"
+      imgAlt="Налоговый вычет"
+      local
+      :isButtonBase="false"
+      :breadcrumbs="[
       {
         title: 'Главная',
         url: '/',
@@ -100,105 +90,115 @@ useHead({
   <div class="info">
     <div class="info-card">
       <div class="wrapper">
-        <p class="accordion-content-text">
-          Вы можете сделать налоговый вычет за медицинские услуги,
-          предоставленные лично вам, вашему мужу (жене), детям и подопечным до
-          18 лет, родителям. В наших клиниках вы можете получить справку об
-          оплате медицинских услуг для предоставления в налоговую инспекцию. Для
-          получения такой справки вам необходимо заполнить заявку на нашем сайте
-          или обратиться к администраторам на ресепшн клиники. Срок подготовки
-          справки — от 14 до 21 рабочих дней с момента обращения. Вместе со
-          справкой мы выдаем копию лицензии на ведение медицинской деятельности
-          (она также понадобится в налоговой)
-        </p>
         <form class="accordion-content-inputs" @submit.prevent="sendData">
+          <h3>Налогоплательщик</h3>
           <elements-input-base
-            tag-type="input"
-            label="ФИО налогоплательщика"
-            v-model="store.getterNameField"
-            :errorMessage="store.isNameInfoValid ? '' : '*Минимум 2 символа'"
-          />
-          <elements-input-base
-            minlength="10"
-            tag-type="input"
-            label="Введите ИНН налогоплательщика"
-            v-model="store.digitField"
-            :errorMessage="
-              store.isDigitValidInfo
-                ? ''
-                : '*Проверьте правильность заполнения данных'
-            "
+              tag-type="input"
+              label="ФИО налогоплательщика"
+              v-model="store.getterNameField"
+              :errorMessage="store.isNameInfoValid ? '' : '*Минимум 2 символа'"
           />
           <elements-input-base
               tag-type="date"
               label="Дата рождения налогоплательщика"
               v-model="store.birthDate"
-              :errorMessage="
-              store.isDateBirthValidInfo
-                ? ''
-                : '*Заполните поле'
-            "
+              :errorMessage="store.isDateBirthValidInfo ? '' : '*Заполните поле'"
+          />
+          <elements-input-base
+              tag-type="input"
+              label="Номер и серия паспорта налогоплательщика"
+              v-model="store.passportSeries"
+              :errorMessage="store.isPassportSeriesValid ? '' : '*Заполните поле'"
+          />
+          <elements-input-base
+              tag-type="date"
+              label="Дата выдачи паспорта"
+              v-model="store.dateOfIssue"
+              :errorMessage="store.isDateBirthValidInfo ? '' : '*Заполните поле'"
           />
           <elements-input-base
               minlength="10"
-              tag-type="date"
-              label="Дата выдачи паспорта налогоплательщика"
-              v-model="store.dateOfIssue"
+              tag-type="input"
+              label="Введите ИНН налогоплательщика"
+              v-model="store.digitField"
               :errorMessage="
-              store.isDateBirthValidInfo
+              store.isDigitValidInfo
                 ? ''
-                : '*Заполните поле'
+                : '*Проверьте правильность заполнения данных'
             "
           />
-          <elements-input-base
-            tag-type="phoneMask"
-            label="Контактный номер телефона"
-            v-model="store.phoneField"
-            :errorMessage="store.isPhoneValidInfo ? '' : '*Неверный формат'"
-          />
-          <label
-            v-for="(box, index) in mockCheckBoxes"
-            :key="index"
-            :for="box"
-            class="checkbox"
-          >
-            <input
-              v-model="store.checkBoxes"
-              type="checkbox"
-              :id="box"
-              :value="box"
-            />
-            <span class="checkmark"></span>
-            <span class="label-text">{{ box }}</span>
-          </label>
 
-          <elements-select
-            :options="optionsData"
-            :default="'Получаю справку'"
-            class="select"
-            @input="(v) => (store.whoIsGettingDocument = v?.name ?? '')"
-          />
+          <h3>Пациент</h3>
           <elements-input-base
-            tag-type="input"
-            label="ФИО пациента"
-            v-model="store.patientNameField"
-            :errorMessage="
+              tag-type="input"
+              label="ФИО пациента"
+              v-model="store.patientNameField"
+              :errorMessage="
               store.isNamePatientFieldValid ? '' : '*Минимум 2 символа'
             "
           />
+          <elements-input-base
+              tag-type="date"
+              label="Дата рождения пациента"
+              v-model="store.patientBirthDate"
+              :errorMessage="store.isPatientBirthDateValid ? '' : '*Заполните поле'"
+          />
+          <elements-input-base
+              tag-type="input"
+              label="Номер и серия паспорта/свидетельство о рождении"
+              v-model="store.patientPassportSeries"
+              :errorMessage="store.isPatientPassportValid ? '' : '*Заполните поле'"
+          />
+          <elements-input-base
+              tag-type="date"
+              label="Дата выдачи паспорта"
+              v-model="store.patientDateOfIssue"
+              :errorMessage="store.isPatientDateValid ? '' : '*Заполните поле'"
+          />
+          <elements-input-base
+              minlength="10"
+              tag-type="input"
+              label="Введите ИНН пациента"
+              v-model="store.patientINN"
+              :errorMessage="
+              store.isPatientINNValid
+                ? ''
+                : '*Проверьте правильность заполнения данных'
+            "
+          />
+          <elements-input-base
+              tag-type="phoneMask"
+              label="Контактный номер телефона"
+              v-model="store.phoneField"
+              :errorMessage="store.isPhoneValidInfo ? '' : '*Неверный формат'"
+          />
+
+          <h3>Общая информация</h3>
           <elements-select
-            :options="optionsDoc"
-            :default="'Как хотите получить справку'"
-            class="select"
-            @input="(v) => (store.address = v?.name ?? '')"
+              :options="optionsData"
+              :default="'Получаю справку за'"
+              class="select"
+              @input="(v) => (store.whoIsGettingDocument = v?.name ?? '')"
+          />
+          <elements-select
+              :options="optionsDoc"
+              :default="'Как хотите получить справку'"
+              class="select"
+              @input="(v) => (store.address = v?.name ?? '')"
+          />
+          <elements-select
+              :options="mockCheckBoxes"
+              :default="'Проходил лечение в'"
+              class="select"
+              @input="(v) => (store.selectedYear = v)"
           />
 
           <div>
             <elements-button-base
-              type="submit"
-              title="Отправить"
-              class="form-btn"
-              :disabled="
+                type="submit"
+                title="Отправить"
+                class="form-btn"
+                :disabled="
                 !store.isSubmitActivePersonalIncomeTax || store.isLoading
               "
             />
@@ -211,7 +211,7 @@ useHead({
             <div class="info-dop-card-subtext">
               Нажимая кнопку отправить, вы соглашаетесь с
               <a :href="privacyLink" target="_blank"
-                >Политикой обработки персональных данных</a
+              >Политикой обработки персональных данных</a
               >
             </div>
           </div>
@@ -452,6 +452,10 @@ useHead({
   width: 100%;
   max-width: 450px;
   padding-top: 20px;
+
+  h3 {
+    font-weight: 500;
+  }
 }
 
 .accordion-content-id1-box {
