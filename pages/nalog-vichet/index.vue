@@ -94,32 +94,32 @@ useHead({
           <h3>Налогоплательщик</h3>
           <elements-input-base
               tag-type="input"
-              label="ФИО налогоплательщика"
+              label="ФИО"
               v-model="store.getterNameField"
               :errorMessage="store.isNameInfoValid ? '' : '*Минимум 2 символа'"
           />
           <elements-input-base
               tag-type="date"
-              label="Дата рождения налогоплательщика"
+              label="Дата рождения"
               v-model="store.birthDate"
               :errorMessage="store.isDateBirthValidInfo ? '' : '*Заполните поле'"
           />
           <elements-input-base
               tag-type="input"
-              label="Номер и серия паспорта налогоплательщика"
+              label="Номер и серия паспорта"
               v-model="store.passportSeries"
               :errorMessage="store.isPassportSeriesValid ? '' : '*Заполните поле'"
           />
           <elements-input-base
               tag-type="date"
-              label="Дата выдачи паспорта"
+              label="Дата выдачи документа"
               v-model="store.dateOfIssue"
               :errorMessage="store.isDateBirthValidInfo ? '' : '*Заполните поле'"
           />
           <elements-input-base
               minlength="10"
               tag-type="input"
-              label="Введите ИНН налогоплательщика"
+              label="ИНН"
               v-model="store.digitField"
               :errorMessage="
               store.isDigitValidInfo
@@ -131,7 +131,7 @@ useHead({
           <h3>Пациент</h3>
           <elements-input-base
               tag-type="input"
-              label="ФИО пациента"
+              label="ФИО"
               v-model="store.patientNameField"
               :errorMessage="
               store.isNamePatientFieldValid ? '' : '*Минимум 2 символа'
@@ -139,7 +139,7 @@ useHead({
           />
           <elements-input-base
               tag-type="date"
-              label="Дата рождения пациента"
+              label="Дата рождения"
               v-model="store.patientBirthDate"
               :errorMessage="store.isPatientBirthDateValid ? '' : '*Заполните поле'"
           />
@@ -151,14 +151,14 @@ useHead({
           />
           <elements-input-base
               tag-type="date"
-              label="Дата выдачи паспорта"
+              label="Дата выдачи документа"
               v-model="store.patientDateOfIssue"
               :errorMessage="store.isPatientDateValid ? '' : '*Заполните поле'"
           />
           <elements-input-base
               minlength="10"
               tag-type="input"
-              label="Введите ИНН пациента"
+              label="ИНН"
               v-model="store.patientINN"
               :errorMessage="
               store.isPatientINNValid
@@ -454,7 +454,15 @@ useHead({
   padding-top: 20px;
 
   h3 {
-    font-weight: 500;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16.2px;
+    color: #7F838C;
+
+    @media (max-width: 800px) {
+      font-size: 12px;
+    }
   }
 }
 
