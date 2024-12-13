@@ -140,6 +140,24 @@ useHead({
             "
           />
           <elements-input-base
+              tag-type="date"
+              label="Дата рождения"
+              v-model="store.patientBirthDate"
+              :errorMessage="store.isPatientBirthDateValid ? '' : '*Заполните поле'"
+          />
+          <elements-input-base
+              tag-type="input"
+              label="Номер и серия документа"
+              v-model="store.patientPassportSeries"
+              :errorMessage="store.isPatientPassportValid ? '' : '*Заполните поле'"
+          />
+          <elements-input-base
+              tag-type="date"
+              label="Дата выдачи документа"
+              v-model="store.patientDateOfIssue"
+              :errorMessage="store.isPatientDateValid ? '' : '*Заполните поле'"
+          />
+          <elements-input-base
               minlength="10"
               tag-type="date"
               label="Дата выдачи паспорта налогоплательщика"
