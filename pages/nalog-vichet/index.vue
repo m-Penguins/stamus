@@ -145,7 +145,7 @@ useHead({
           />
           <elements-input-base
               tag-type="input"
-              label="Номер и серия паспорта/свидетельство о рождении"
+              label="Номер и серия паспорта/свидетельства о рождении"
               v-model="store.patientPassportSeries"
               :errorMessage="store.isPatientPassportValid ? '' : '*Заполните поле'"
           />
