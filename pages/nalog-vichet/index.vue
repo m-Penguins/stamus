@@ -113,26 +113,44 @@ useHead({
         </p>
         <form class="accordion-content-inputs" @submit.prevent="sendData">
           <elements-input-base
-            tag-type="input"
-            label="ФИО налогоплательщика"
-            v-model="store.getterNameField"
-            :errorMessage="store.isNameInfoValid ? '' : '*Минимум 2 символа'"
+              tag-type="input"
+              label="ФИО"
+              v-model="store.getterNameField"
+              :errorMessage="store.isNameInfoValid ? '' : '*Минимум 2 символа'"
           />
           <elements-input-base
-            minlength="10"
-            tag-type="input"
-            label="Введите ИНН налогоплательщика"
-            v-model="store.digitField"
-            :errorMessage="
+              tag-type="date"
+              label="Дата рождения"
+              v-model="store.birthDate"
+              :errorMessage="store.isDateBirthValidInfo ? '' : '*Заполните поле'"
+          />
+          <elements-input-base
+              tag-type="input"
+              label="Номер и серия паспорта"
+              v-model="store.passportSeries"
+              :errorMessage="store.isPassportSeriesValid ? '' : '*Заполните поле'"
+          />
+          <elements-input-base
+              tag-type="date"
+              label="Дата выдачи документа"
+              v-model="store.dateOfIssue"
+              :errorMessage="store.isDateBirthValidInfo ? '' : '*Заполните поле'"
+          />
+          <elements-input-base
+              minlength="10"
+              tag-type="input"
+              label="ИНН"
+              v-model="store.digitField"
+              :errorMessage="
               store.isDigitValidInfo
                 ? ''
                 : '*Проверьте правильность заполнения данных'
             "
           />
           <elements-input-base
-              tag-type="date"
-              label="Дата рождения налогоплательщика"
-              v-model="store.birthDate"
+              tag-type="input"
+              label="ФИО"
+              v-model="store.patientNameField"
               :errorMessage="
               store.isDateBirthValidInfo
                 ? ''
@@ -159,9 +177,9 @@ useHead({
           />
           <elements-input-base
               minlength="10"
-              tag-type="date"
-              label="Дата выдачи паспорта налогоплательщика"
-              v-model="store.dateOfIssue"
+              tag-type="input"
+              label="ИНН"
+              v-model="store.patientINN"
               :errorMessage="
               store.isDateBirthValidInfo
                 ? ''
@@ -470,6 +488,18 @@ useHead({
   width: 100%;
   max-width: 450px;
   padding-top: 20px;
+
+  h3 {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16.2px;
+    color: #7F838C;
+
+    @media (max-width: 800px) {
+      font-size: 12px;
+    }
+  }
 }
 
 .accordion-content-id1-box {

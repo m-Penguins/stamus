@@ -203,7 +203,7 @@ const onBlur = (e) => {
   &.date {
     font-size: 8px;
     top: 0;
-    padding-top: 25px;
+    padding-top: 65px;
   }
 }
 
