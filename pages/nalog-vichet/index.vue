@@ -165,7 +165,11 @@ useHead({
           />
           <elements-input-base
               tag-type="input"
+<<<<<<< HEAD
               label="Номер и серия документа"
+=======
+              label="Номер и серия паспорта/свидетельства о рождении"
+>>>>>>> 3139b71 (fix)
               v-model="store.patientPassportSeries"
               :errorMessage="store.isPatientPassportValid ? '' : '*Заполните поле'"
           />
