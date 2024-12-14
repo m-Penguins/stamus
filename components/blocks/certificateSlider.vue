@@ -242,7 +242,7 @@ const closeCert = () => {
   top: 16px;
   right: 20px;
   cursor: pointer;
-
+  z-index: 10;
   & svg {
     width: 30px;
     height: 30px;
@@ -266,7 +266,7 @@ const closeCert = () => {
   display: flex;
   position: relative;
   padding: 10px;
-  background: #ffffff;
+  background: transparent;
   border-radius: 20px;
   max-width: 1216px;
   width: fit-content;
@@ -313,9 +313,9 @@ const closeCert = () => {
 
 .swiper-slide-popup {
   width: 100% !important;
-  overflow-y: auto;
   max-height: 90vh;
   max-height: 90svh;
+  display: flex;
 }
 
 .swiper-img {
