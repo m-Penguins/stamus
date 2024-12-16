@@ -94,7 +94,6 @@ useHead({
           <h3>Налогоплательщик</h3>
           <elements-input-base
               tag-type="input"
-<<<<<<< HEAD
               label="ФИО"
               v-model="store.getterNameField"
               :errorMessage="store.isNameInfoValid ? '' : '*Минимум 2 символа'"
@@ -146,15 +145,9 @@ useHead({
           />
           <elements-input-base
               tag-type="input"
-<<<<<<< HEAD
-<<<<<<< HEAD
               label="Номер и серия документа"
-=======
               label="Номер и серия паспорта/свидетельства о рождении"
->>>>>>> 3139b71 (fix)
-=======
               label="Номер и серия паспорта/свидетельства о рождении"
->>>>>>> 3139b71 (fix)
               v-model="store.patientPassportSeries"
               :errorMessage="store.isPatientPassportValid ? '' : '*Заполните поле'"
           />
@@ -169,7 +162,6 @@ useHead({
               tag-type="input"
               label="ИНН"
               v-model="store.patientINN"
-=======
               label="ФИО налогоплательщика"
               v-model="store.getterNameField"
               :errorMessage="store.isNameInfoValid ? '' : '*Минимум 2 символа'"
@@ -197,7 +189,6 @@ useHead({
               tag-type="input"
               label="Введите ИНН налогоплательщика"
               v-model="store.digitField"
->>>>>>> 2c512e9 (nalog form fix)
               :errorMessage="
               store.isDigitValidInfo
                 ? ''
