@@ -127,14 +127,14 @@ useHead({
                 : '*Проверьте правильность заполнения данных'
             "
           />
+
+          <h3>Пациент</h3>
           <elements-input-base
               tag-type="input"
               label="ФИО"
               v-model="store.patientNameField"
               :errorMessage="
-              store.isDateBirthValidInfo
-                ? ''
-                : '*Заполните поле'
+              store.isNamePatientFieldValid ? '' : '*Минимум 2 символа'
             "
           />
           <elements-input-base
@@ -146,8 +146,6 @@ useHead({
           <elements-input-base
               tag-type="input"
               label="Номер и серия документа"
-              label="Номер и серия паспорта/свидетельства о рождении"
-              label="Номер и серия паспорта/свидетельства о рождении"
               v-model="store.patientPassportSeries"
               :errorMessage="store.isPatientPassportValid ? '' : '*Заполните поле'"
           />
@@ -161,72 +159,6 @@ useHead({
               minlength="10"
               tag-type="input"
               label="ИНН"
-              v-model="store.patientINN"
-              label="ФИО налогоплательщика"
-              v-model="store.getterNameField"
-              :errorMessage="store.isNameInfoValid ? '' : '*Минимум 2 символа'"
-          />
-          <elements-input-base
-              tag-type="date"
-              label="Дата рождения налогоплательщика"
-              v-model="store.birthDate"
-              :errorMessage="store.isDateBirthValidInfo ? '' : '*Заполните поле'"
-          />
-          <elements-input-base
-              tag-type="input"
-              label="Номер и серия паспорта налогоплательщика"
-              v-model="store.passportSeries"
-              :errorMessage="store.isPassportSeriesValid ? '' : '*Заполните поле'"
-          />
-          <elements-input-base
-              tag-type="date"
-              label="Дата выдачи паспорта"
-              v-model="store.dateOfIssue"
-              :errorMessage="store.isDateBirthValidInfo ? '' : '*Заполните поле'"
-          />
-          <elements-input-base
-              minlength="10"
-              tag-type="input"
-              label="Введите ИНН налогоплательщика"
-              v-model="store.digitField"
-              :errorMessage="
-              store.isDigitValidInfo
-                ? ''
-                : '*Проверьте правильность заполнения данных'
-            "
-          />
-
-          <h3>Пациент</h3>
-          <elements-input-base
-              tag-type="input"
-              label="ФИО пациента"
-              v-model="store.patientNameField"
-              :errorMessage="
-              store.isNamePatientFieldValid ? '' : '*Минимум 2 символа'
-            "
-          />
-          <elements-input-base
-              tag-type="date"
-              label="Дата рождения пациента"
-              v-model="store.patientBirthDate"
-              :errorMessage="store.isPatientBirthDateValid ? '' : '*Заполните поле'"
-          />
-          <elements-input-base
-              tag-type="input"
-              label="Номер и серия паспорта/свидетельство о рождении"
-              v-model="store.patientPassportSeries"
-              :errorMessage="store.isPatientPassportValid ? '' : '*Заполните поле'"
-          />
-          <elements-input-base
-              tag-type="date"
-              label="Дата выдачи паспорта"
-              v-model="store.patientDateOfIssue"
-              :errorMessage="store.isPatientDateValid ? '' : '*Заполните поле'"
-          />
-          <elements-input-base
-              minlength="10"
-              tag-type="input"
-              label="Введите ИНН пациента"
               v-model="store.patientINN"
               :errorMessage="
               store.isPatientINNValid
@@ -522,7 +454,6 @@ useHead({
   padding-top: 20px;
 
   h3 {
-<<<<<<< HEAD
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -532,9 +463,6 @@ useHead({
     @media (max-width: 800px) {
       font-size: 12px;
     }
-=======
-    font-weight: 500;
->>>>>>> 2c512e9 (nalog form fix)
   }
 }
 
