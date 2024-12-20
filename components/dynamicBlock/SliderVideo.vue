@@ -17,8 +17,7 @@ const next = ref(null);
 const videoStore = useModalVideoStore();
 
 const handleVideoClick = (link) => {
-  videoStore.isModalOpen = true;
-  videoStore.link = link;
+  videoStore.openModal(link)
 };
 </script>
 

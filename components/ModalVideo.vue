@@ -5,7 +5,7 @@
       class="modal-mask"
       @click="videoStore.closeModal"
     >
-      <div class="modal-container" @click.stop v-html="videoStore?.link"></div>
+      <div class="modal-container" :class="videoStore.videoOrientation" @click.stop v-html="videoStore?.link"></div>
     </div>
   </transition>
 </template>
@@ -69,18 +69,21 @@ onBeforeUnmount(() => {
   // aspect-ratio: 16/9;
   overflow: hidden;
   border-radius: 20px;
-  @media all and (orientation: landscape) {
-    height: 70vh;
-    width: calc(70vh / 9 * 16);
+  &.horizontal {
+      width: 70vw;
+      height: calc(90vw / 16 * 9);
   }
-  @media all and (orientation: portrait) {
-    width: 90vw;
-    height: calc(90vw / 16 * 9);
-    // max-width: 1340px;
 
-    // height: auto;
-    // max-height: 80%;
+  &.vertical {
+      height: 100vh;
+      width: calc(40vh / 9 * 16);
+    @media (max-width: 600px) {
+      height: 60vh;
+      width: calc(30vh / 9 * 16);
+    }
   }
+
+
   // @supports not (aspect-ratio: 16 / 9) {
   //   &::before {
   //     float: left;
@@ -103,6 +106,7 @@ onBeforeUnmount(() => {
     height: 100%;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.53);
   }
+
 }
 
 .modal-enter-from,
