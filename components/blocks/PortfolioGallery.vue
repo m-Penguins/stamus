@@ -34,8 +34,7 @@ const handleVideoClick = (link) => {
   if (!link) {
     return
   }
-  videoStore.isModalOpen = true;
-  videoStore.link = link;
+  videoStore.openModal(link)
 }
 </script>
 
