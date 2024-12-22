@@ -119,7 +119,7 @@ export const useModalStore = defineStore("modal-store", () => {
       try {
         await mail.send({
           config: "form",
-          from: "dev@sloy.design",
+          from: name + " <dev@sloy.design>",
           subject: subject(),
           text: msg,
         });
