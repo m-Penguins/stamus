@@ -146,7 +146,6 @@ export const useFormStore = defineStore("form-store", () => {
         `Дата рождения пациента: ${patientBirthDate.value}`,
         `Серия и номер паспорта пациента: ${patientPassportSeries.value}`,
         `Дата выдачи паспорта пациента: ${patientDateOfIssue.value}`,
-        `ИНН пациента: ${patientINN.value}`,
         `Телефон: ${phoneField.value}`,
         `Когда проходил лечение: ${checkBoxes.value?.join(", ")}`,
         `Для кого получает справку: ${whoIsGettingDocument.value}`,
@@ -159,7 +158,7 @@ export const useFormStore = defineStore("form-store", () => {
         await mail.send({
           config: "ndfl",
           from: "dev@sloy.design",
-          subject: "Заявка на возврат НДФЛ",
+          subject: `${getterNameField.value} Заявка на возврат НДФЛ`,
           text: msg,
         });
 
