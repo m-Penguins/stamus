@@ -9,7 +9,7 @@
       @closeMenuDoctors="closeMenuDoctors"
       :phone="footerData?.data?.attributes?.phone"
     />
-    <div class="main" @click="closeMenu">
+    <div class="main" @click="closeAllMenu">
       <main>
         <NuxtLoadingIndicator color="#232D5B" :throttle="0" :height="8" />
         <NuxtPage />
@@ -30,7 +30,10 @@
 <script setup>
 const showMenuPatients = ref(false);
 const showMenuDoctors = ref(false);
-
+const closeAllMenu = () => {
+  showMenuPatients.value = false
+  showMenuDoctors.value = false
+}
 const toggleMenu = () => (showMenuPatients.value = !showMenuPatients.value);
 const toggleMenuDoctors = () => (showMenuDoctors.value = !showMenuDoctors.value);
 const closeMenu = () => (showMenuPatients.value = false);
