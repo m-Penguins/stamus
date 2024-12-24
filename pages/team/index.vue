@@ -187,27 +187,6 @@ const handleDirChange = async (dir) => {
   });
 };
 
-const handlePositionChange = async (position) => {
-  positionFilter.value = position?.slug || null;
-  positionMeta.value = position?.meta || null;
-  currentPage.value = 1;
-
-  const searchQuery = {
-    page: currentPage.value,
-    dir: dirFilter.value,
-    clinic: clinicFilter.value,
-    position: positionFilter.value,
-    search: searchFilter.value,
-  };
-
-  clearObjectFields(searchQuery);
-
-  await navigateTo({
-    path: `${route.fullPath}`,
-    query: searchQuery,
-    replace: true,
-  });
-};
 // Генерация мета-данных
 const generateMeta = (positionMeta) => ({
   title: positionMeta?.metaTitle || "Врачи стоматологи Стамус в Краснодаре",
@@ -246,7 +225,6 @@ watch(
     positionMeta,
     (newMeta) => {
       if (newMeta) {
-        console.log(newMeta)
         useHead(generateMeta(newMeta));
       }
     },
@@ -279,14 +257,6 @@ useHead(generateMeta(positionMeta.value));
             class="select"
             @select="handleClinicChange"
             :selectedId="clinicFilter"
-          />
-          <elements-custom-select
-            :options="allPositions"
-            label="Специальность"
-            class="select"
-            @select="handlePositionChange"
-            :selectedId="positionFilter"
-            key-field="slug"
           />
         </div>
         <div class="specialist-box width-style">

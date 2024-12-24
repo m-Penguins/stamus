@@ -2,7 +2,11 @@
   <div class="wrap">
     <TheHeader
       :showMenuPatients="showMenuPatients"
+      :showMenuDoctors="showMenuDoctors"
       @toggleMenu="toggleMenu"
+      @toggleMenuDoctors="toggleMenuDoctors"
+      @closeMenu="closeMenu"
+      @closeMenuDoctors="closeMenuDoctors"
       :phone="footerData?.data?.attributes?.phone"
     />
     <div class="main" @click="closeMenu">
@@ -25,11 +29,12 @@
 
 <script setup>
 const showMenuPatients = ref(false);
+const showMenuDoctors = ref(false);
 
 const toggleMenu = () => (showMenuPatients.value = !showMenuPatients.value);
-
+const toggleMenuDoctors = () => (showMenuDoctors.value = !showMenuDoctors.value);
 const closeMenu = () => (showMenuPatients.value = false);
-
+const closeMenuDoctors = () => (showMenuDoctors.value = false);
 const route = useRoute();
 const reviewStore = useReviewStore();
 watch(

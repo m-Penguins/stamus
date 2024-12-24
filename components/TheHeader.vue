@@ -11,6 +11,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    showMenuDoctors: {
+      type: Boolean,
+      default: false,
+    },
     phone: {
       type: String,
     },
@@ -54,6 +58,10 @@ export default {
       this.$emit("toggleMenu");
     },
 
+    toggleMenuDoctors() {
+      this.$emit("toggleMenuDoctors");
+    },
+
     closeMenu(event) {
       if (event.target.classList.contains("modal-menu")) {
         this.showServices = false;
@@ -70,8 +78,18 @@ export default {
     closeSearch() {
       this.showSearch = false;
     },
+
+    toggleDropDown(title) {
+      if (title === 'Врачи') {
+        this.$emit("toggleMenuDoctors");
+        this.$emit("closeMenu");
+      } else if (title === 'Пациентам') {
+        this.$emit("toggleMenu");
+        this.$emit("closeMenuDoctors");
+      }
+    }
   },
-  setup() {
+  async setup() {
     const assetsStore = useAssets();
     const storeServices = useService();
     const base = useBaseDataStore();
@@ -82,6 +100,17 @@ export default {
     let activeClass2 = "";
     const modalStore = useModalStore();
     const scrolled = ref(false);
+    const { data: newPositions } = await useFetch(`${apiBaseUrl}/api/speczialnostis`, {
+      query: {
+        populate: blocksQuey,
+      },
+    });
+    const positions = newPositions.value?.data?.map((el) => ({
+      slug: el?.attributes?.slug,
+      title: el?.attributes?.title,
+      id: el?.id,
+      meta: el?.attributes?.meta,
+    }));
 
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -138,22 +167,21 @@ export default {
       });
     };
 
-    const handleServiceChange = ({ id }) => {
+    const handleServiceChange = ({id}) => {
       router.push(`/clinics/${id}`);
     };
 
     const store = useActuveLink();
     const isOpenPopup = ref(false);
     const navigation = [
-      { title: "Врачи", path: "/team" },
-      { title: "Пациентам", path: "" },
-      { title: "Отзывы", path: "/reviews" },
-      { title: "Акции и скидки", path: "/discounts" },
-      { title: "Портфолио", path: "/portfolio" },
-      { title: "Цены", path: "/prices" },
-      { title: "Контакты", path: "/contacts" },
+      {title: "Врачи", path: ""},
+      {title: "Пациентам", path: ""},
+      {title: "Отзывы", path: "/reviews"},
+      {title: "Акции и скидки", path: "/discounts"},
+      {title: "Портфолио", path: "/portfolio"},
+      {title: "Цены", path: "/prices"},
+      {title: "Контакты", path: "/contacts"},
     ];
-    // console.log(base)
     return {
       assetsStore,
       navigation,
@@ -176,6 +204,7 @@ export default {
       modalStore,
       handleServiceChange,
       apiBaseUrl,
+      positions,
     };
   },
 };
@@ -306,18 +335,18 @@ export default {
                   :to="item.path"
                 >
                   <div
-                    v-if="item.title !== 'Пациентам'"
-                    @click="showMenuPatients = false"
+                    v-if="item.title !== 'Пациентам' && item.title !== 'Врачи'"
+                    @click="showMenuPatients = false; showMenuDoctors = false"
                   >
                     {{ item.title }}
                   </div>
                   <div
-                    v-else
+                    v-if="item.title === 'Пациентам'"
                     class="header-arrow-icon"
                     @click="
                       showSearch = false;
                       showServices = false;
-                      toggleMenu();
+                      toggleDropDown(item.title);
                     "
                   >
                     <div>{{ item.title }}</div>
@@ -358,19 +387,85 @@ export default {
                     <div v-if="showMenuPatients" class="menu-patients">
                       <ul class="menu-patients-list">
                         <NuxtLink
-                          v-for="(elem, index) in navigationPatients"
-                          :key="elem"
-                          :to="elem.path"
-                          class="menu-patients-items"
-                          @click="showMenuPatients = false"
+                            v-for="(elem, index) in navigationPatients"
+                            :key="elem"
+                            :to="elem.path"
+                            class="menu-patients-items"
+                            @click="showMenuPatients = false"
                         >
                           <li class="menu-patients-items-link">
                             <div>
                               {{ elem.title }}
                             </div>
                             <hr
-                              class="menu-patients-line"
-                              v-if="index < navigationPatients.length - 1"
+                                class="menu-patients-line"
+                                v-if="index < navigationPatients.length - 1"
+                            />
+                          </li>
+                        </NuxtLink>
+                      </ul>
+                    </div>
+                  </div>
+                  <div
+                      v-if="item.title === 'Врачи'"
+                      class="header-arrow-icon"
+                      @click="
+                      showSearch = false;
+                      showServices = false;
+                      toggleDropDown(item.title);
+                    "
+                  >
+                    <div>{{ item.title }}</div>
+                    <div v-if="item.title === 'Врачи'" class="arrow-icon">
+                      <div v-if="!showMenuDoctors" class="timeline-svg">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                        >
+                          <path
+                              d="M6 8L10 12L14 8"
+                              stroke="#7F838C"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                          />
+                        </svg>
+                      </div>
+                      <div v-else class="timeline-svg">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                        >
+                          <path
+                              d="M6 12L10 8L14 12"
+                              stroke="#232D5B"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <div v-if="showMenuDoctors" class="menu-patients">
+                      <ul class="menu-patients-list">
+                        <NuxtLink
+                            v-for="(elem, index) in positions"
+                            :key="elem.id"
+                            :to="`/team?position=${elem.slug}`"
+                            class="menu-patients-items"
+                            @click="showMenuPatients = false"
+                        >
+                          <li class="menu-patients-items-link">
+                            <div>
+                              {{ elem.title }}
+                            </div>
+                            <hr
+                                class="menu-patients-line"
+                                v-if="index < navigationPatients.length - 1"
                             />
                           </li>
                         </NuxtLink>
@@ -636,18 +731,19 @@ export default {
                 :to="item.path"
               >
                 <div
-                  v-if="item.title !== 'Пациентам'"
+                  v-if="item.title !== 'Пациентам' && item.title !== 'Врачи'"
                   @click="
                     showMenuPatients = false;
                     showMenuMob = false;
+                    showMenuDoctors = false;
                   "
                 >
                   {{ item.title }}
                 </div>
                 <div
-                  v-else
+                  v-if="item.title === 'Пациентам'"
                   @click="
-                    showMenuPatients = !showMenuPatients;
+                    toggleDropDown(item.title)
                     showSearch = false;
                     showServices = false;
                   "
@@ -707,6 +803,70 @@ export default {
                     </ul>
                   </div>
                 </div>
+                <div
+                    v-if="item.title === 'Врачи'"
+                    @click="
+                    toggleDropDown(item.title)
+                    showSearch = false;
+                    showServices = false;
+                  "
+                    class="menu-mob-first-block"
+                >
+                  <div class="menu-patients-container">
+                    <div class="p-bt-14">{{ item.title }}</div>
+                    <div v-if="item.title === 'Врачи'" class="arrow-icon">
+                      <div v-if="!showMenuDoctors" class="timeline-svg">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                        >
+                          <path
+                              d="M6 8L10 12L14 8"
+                              stroke="#7F838C"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                          />
+                        </svg>
+                      </div>
+                      <div v-else class="timeline-svg">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                        >
+                          <path
+                              d="M6 12L10 8L14 12"
+                              stroke="#232D5B"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="showMenuDoctors">
+                    <ul class="menu-patients-list-mob">
+                      <NuxtLink
+                          v-for="elem in positions"
+                          @click="showMenuMob = false"
+                          :to="`/team?position=${elem.slug}`"
+                          :key="elem.id"
+                          class="menu-patients-items-mob"
+                      >
+                        <li>
+                          <div>{{ elem.title }}</div>
+                          <!-- <hr class="menu-patients-line" v-if="index < navigationPatients.length - 1"/> -->
+                        </li>
+                      </NuxtLink>
+                    </ul>
+                  </div>
+                </div>
+
               </NuxtLink>
             </li>
           </div>
