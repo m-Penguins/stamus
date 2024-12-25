@@ -144,11 +144,12 @@ const onBlur = (e) => {
         ref="labelEl"
         :for="label"
         :class="isFocused || modelValue.length ? 'focused' : ''"
-        class="form-label date"
+        class="form-label"
     >{{ label }}</label
     >
     <input
-        type="date"
+        v-maska
+        data-maska="##.##.####"
         v-bind="$attrs"
         :name="label"
         :placeholder="placeholder"
