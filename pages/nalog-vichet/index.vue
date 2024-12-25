@@ -156,17 +156,6 @@ useHead({
               :errorMessage="store.isPatientDateValid ? '' : '*Заполните поле'"
           />
           <elements-input-base
-              minlength="10"
-              tag-type="input"
-              label="ИНН"
-              v-model="store.patientINN"
-              :errorMessage="
-              store.isPatientINNValid
-                ? ''
-                : '*Проверьте правильность заполнения данных'
-            "
-          />
-          <elements-input-base
               tag-type="phoneMask"
               label="Контактный номер телефона"
               v-model="store.phoneField"
@@ -178,19 +167,19 @@ useHead({
               :options="optionsData"
               :default="'Получаю справку за'"
               class="select"
-              @input="(v) => (store.whoIsGettingDocument = v?.name ?? '')"
+              @input="(v) => (store.selectOnChange('forWho', v.name))"
           />
           <elements-select
               :options="optionsDoc"
               :default="'Как хотите получить справку'"
               class="select"
-              @input="(v) => (store.address = v?.name ?? '')"
+              @input="(v) => (store.selectOnChange('howToGet', v.name))"
           />
           <elements-select
               :options="mockCheckBoxes"
               :default="'Проходил лечение в'"
               class="select"
-              @input="(v) => (store.selectedYear = v)"
+              @input="(v) => (store.selectOnChange('year', v.name))"
           />
 
           <div>

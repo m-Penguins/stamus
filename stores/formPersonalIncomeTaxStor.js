@@ -27,6 +27,16 @@ export const useFormStore = defineStore("form-store", () => {
 
   const digitRegex = /^[0-9]+$/;
 
+  function selectOnChange (which, value) {
+    if (which === 'forWho') {
+      whoIsGettingDocument.value = value
+    } else if (which === 'howToGet') {
+      address.value = value
+    } else if (which === 'year'){
+      selectedYear.value = value
+    }
+  }
+
   const isNameInfoValid = computed(() => {
     return !startValidation.value || getterNameField.value.length > 1;
   });
@@ -88,8 +98,7 @@ export const useFormStore = defineStore("form-store", () => {
        passportSeries.value.length > 0 &&
        patientBirthDate.value &&
        patientPassportSeries.value.length > 0 &&
-       patientDateOfIssue.value &&
-       patientINN.value.length > 0
+       patientDateOfIssue.value
     );
   });
 
@@ -105,7 +114,6 @@ export const useFormStore = defineStore("form-store", () => {
     patientBirthDate.value = "";
     patientPassportSeries.value = "";
     patientDateOfIssue.value = "";
-    patientINN.value = "";
 
     address.value = "";
     checkBoxes.value = [];
@@ -147,12 +155,14 @@ export const useFormStore = defineStore("form-store", () => {
         `Серия и номер паспорта пациента: ${patientPassportSeries.value}`,
         `Дата выдачи паспорта пациента: ${patientDateOfIssue.value}`,
         `Телефон: ${phoneField.value}`,
-        `Когда проходил лечение: ${checkBoxes.value?.join(", ")}`,
+        `Когда проходил лечение: ${selectedYear.value}`,
         `Для кого получает справку: ${whoIsGettingDocument.value}`,
         `Как хочет получить справку: ${address.value}`,
       ]
          .filter(Boolean)
          .join("\n");
+
+      console.log(msg)
 
       try {
         await mail.send({
@@ -207,5 +217,6 @@ export const useFormStore = defineStore("form-store", () => {
     isLoading,
     isError,
     isSuccess,
+    selectOnChange
   };
 });
