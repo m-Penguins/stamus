@@ -115,11 +115,12 @@ export const useModalStore = defineStore("modal-store", () => {
         }
         return "Заявка на прием Стамус";
       };
+      const fromStr = formData.name + " <dev@sloy.design>";
 
       try {
         await mail.send({
           config: "form",
-          from: "dev@sloy.design",
+          from: fromStr,
           subject: subject(),
           text: msg,
         });
