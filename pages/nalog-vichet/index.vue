@@ -4,12 +4,14 @@ const route = useRoute();
 const store = useFormStore();
 const baseDataStore = useBaseDataStore();
 
-const mockCheckBoxes = Array.from({ length: new Date().getFullYear() - 2021 + 1 }, (_, i) => ({
-  name: (2021 + i).toString()
+const mockCheckBoxes = Array.from({ length: new Date().getFullYear() - 2022 + 1 }, (_, i) => ({
+  name: (2022 + i).toString()
 }));
+
 const optionsData = [
   { name: "Получаю справку за себя" },
-  { name: "Получаю справку за другого" },
+  { name: "Получаю справку за ребенка" },
+  { name: "Получаю справку за супруга" }
 ];
 
 const optionsDoc = baseDataStore.clinics?.data

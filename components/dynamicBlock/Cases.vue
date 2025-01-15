@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation } from "swiper/modules";
 
@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 const props = defineProps(["block", "serviceId"]);
 
 const placeholdersStore = usePlaceholdersStore();
-
+const portfolios = props?.block?.portofolios?.data?.filter(item => item?.attributes?.publishedAt !== null)
 const prev = ref(null);
 const next = ref(null);
 
@@ -42,54 +42,57 @@ const allCasesLink = props?.serviceId
         }"
       >
         <swiper-slide
-          v-for="(portfolio, index) in block?.portofolios?.data"
+          v-for="(portfolio, index) in portfolios"
+          v-if="portfolio?.attributes?.publishedAt !== null"
           :key="index"
           class="swiper-slide"
         >
-          <div class="card-photo-name">
-            <div class="card-photo-name-img">
-              <NuxtLink :to="`/portfolio/${portfolio?.id}`">
-                <NuxtImg
-                    v-if="
+          <template >
+            <div class="card-photo-name">
+              <div class="card-photo-name-img">
+                <NuxtLink :to="`/portfolio/${portfolio?.id}`">
+                  <NuxtImg
+                      v-if="
                   portfolio?.attributes?.photoBanner?.data?.attributes?.url ??
                   placeholdersStore?.imagePlaceholders?.portfoliosSmall
                 "
-                    :src="
+                      :src="
                   portfolio?.attributes?.photoBanner?.data?.attributes?.url ??
                   placeholdersStore?.imagePlaceholders?.portfoliosSmall
                 "
-                    provider="strapi"
-                    :alt="
+                      provider="strapi"
+                      :alt="
                   portfolio?.attributes?.photoBanner?.data?.attributes
                     ?.alternativeText ?? 'image'
                 "
-                    sizes="xs:400px md:600px"
-                    format="webp"
-                    class="banner-img"
-                    loading="lazy"
-                />
-              </NuxtLink>
-            </div>
-            <div class="card-photo-name-container">
-              <div>
-                <div class="card-photo-name-title">
-                  {{ portfolio?.attributes?.heading }}
-                </div>
-                <div class="card-photo-name-text">
-                  {{ portfolio?.attributes?.direction?.directions }}
+                      sizes="xs:400px md:600px"
+                      format="webp"
+                      class="banner-img"
+                      loading="lazy"
+                  />
+                </NuxtLink>
+              </div>
+              <div class="card-photo-name-container">
+                <div>
+                  <div class="card-photo-name-title">
+                    {{ portfolio?.attributes?.heading }}
+                  </div>
+                  <div class="card-photo-name-text">
+                    {{ portfolio?.attributes?.direction?.directions }}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="card-photo-name-description">
-              {{ portfolio?.attributes?.description }}
-            </div>
+              <div class="card-photo-name-description">
+                {{ portfolio?.attributes?.description }}
+              </div>
 
-            <elements-link-with-arrow
-              type
-              title="Смотреть кейс"
-              :link="`/portfolio/${portfolio?.id}`"
-            />
-          </div>
+              <elements-link-with-arrow
+                  type
+                  title="Смотреть кейс"
+                  :link="`/portfolio/${portfolio?.id}`"
+              />
+            </div>
+          </template>
         </swiper-slide>
       </Swiper>
       <div class="wrapper-btn">

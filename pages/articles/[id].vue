@@ -27,6 +27,7 @@ const heading = articleData.value?.data?.attributes?.heading;
 const tags = articleData.value?.data?.attributes?.tag_category;
 const date = articleData.value?.data?.attributes?.date;
 const blocks = articleData.value?.data?.attributes?.blocks;
+
 const img =
   articleData.value?.data?.attributes?.fotoArticles?.data?.attributes?.url ??
   placeholdersStore?.imagePlaceholders?.articles;

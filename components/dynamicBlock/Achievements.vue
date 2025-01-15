@@ -1,5 +1,6 @@
 <script setup lang="ts">
 defineProps(["block"]);
+const baseUrl = useRuntimeConfig().public.baseUrl;
 </script>
 
 <template>
@@ -11,7 +12,11 @@ defineProps(["block"]);
           v-for="item in block?.item"
           :key="item?.id"
       >
-        <img src="@/assets/images/icons/icons-badge.svg" />
+        <img
+            v-if="item?.icon?.data?.attributes?.url"
+             :src="baseUrl + item?.icon?.data?.attributes?.url"
+             alt="icon"
+        />
         {{item?.text}}
       </div>
     </div>
@@ -55,6 +60,10 @@ defineProps(["block"]);
   max-width: 100%;
   display: flex;
   align-items: center;
+  & img {
+    max-width: 25px;
+    object-fit: contain;
+  }
 }
 
 @media screen and (max-width: 800px) {
