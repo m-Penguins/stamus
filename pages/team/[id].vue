@@ -9,7 +9,7 @@ const { data: specialist } = await useFetch(
   {
     query: {
       populate:
-        "portofolios.photoBanner.*,fotoSpecialist.*,education.*,additionalEducation.*,docsPhoto.*,video.*,clinics.*,services.category.napravleniya_uslug_1_col.*,reviews.*,price_lists.*,achievements.*,areasOfActivity.*,meetingPerson.*" +
+        "portofolios.photoBanner.*,fotoSpecialist.*,education.*,additionalEducation.*,docsPhoto.*,video.*,clinics.*,services.category.napravleniya_uslug_1_col.*,reviews.*,price_lists.*,achievements.*,areasOfActivity.*,meetingPerson.*, blocks.item.icon.*" +
         blocksQuey,
       "filter[publishedAt][$notNull]": "true",
     },
@@ -59,6 +59,7 @@ const metaData = specialist.value?.data?.attributes?.meta;
 useHead(getMetaObject(metaData, baseUrl));
 
 const blocks = specialist.value?.data?.attributes?.blocks;
+console.log(blocks)
 
 // const blockServices = specialist.value?.data?.attributes?.services;
 </script>
