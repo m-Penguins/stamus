@@ -1,5 +1,5 @@
 export const redirectToExternalApp = () => {
   const externalAppLink =
-    "https://app.1denta.ru/booking/booking?&orgid=13993#/network";
+    "https://app.denta-crm.ru/booking/testing?&orgid=3832";
   window.open(externalAppLink, "_blank");
 };
