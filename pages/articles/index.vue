@@ -92,7 +92,7 @@ const getArticlesData = async () => {
       ...strapiQuery,
     },
   });
-
+  placeholdersStore.artiTotalPages = articlesData?.value?.meta?.pagination?.pageCount;
   totalItems.value = articlesData?.value?.meta?.pagination?.total ?? 0;
 
   return articlesData;

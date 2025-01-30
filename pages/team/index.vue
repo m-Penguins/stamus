@@ -63,7 +63,7 @@ const getSpecialistsData = async () => {
   const { data: specialistsData } = await useFetch(`${apiBaseUrl}specialists`, {
     query: { ...strapiQuery },
   });
-
+  placeholdersStore.teamTotalPages = specialistsData?.value?.meta?.pagination?.pageCount;
   totalItems.value = specialistsData?.value?.meta?.pagination?.total ?? 0;
 
   return specialistsData;

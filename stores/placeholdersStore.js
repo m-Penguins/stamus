@@ -2,7 +2,9 @@ import { defineStore, acceptHMRUpdate } from "pinia";
 
 export const usePlaceholdersStore = defineStore("placeholders-store", () => {
   const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
-
+  const portTotalPages= ref()
+  const teamTotalPages = ref();
+  const artiTotalPages = ref();
   const imagePlaceholders = ref({
     articles: "",
     portfoliosBig: "",
@@ -39,6 +41,9 @@ export const usePlaceholdersStore = defineStore("placeholders-store", () => {
   };
 
   return {
+    portTotalPages,
+    teamTotalPages,
+    artiTotalPages,
     imagePlaceholders,
     getImagePlaceholders,
   };

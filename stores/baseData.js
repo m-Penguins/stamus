@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 
 export const useBaseDataStore = defineStore("base-data-store", () => {
   const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+  const reviTotalPages = ref()
   const clinics = ref(null);
   const directions = ref(null);
   const popularServices = ref(null);
@@ -43,6 +44,7 @@ export const useBaseDataStore = defineStore("base-data-store", () => {
   return {
     footerData,
     clinics,
+    reviTotalPages,
     directions,
     popularServices,
     allServices,
