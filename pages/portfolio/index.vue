@@ -112,6 +112,7 @@ const getPortfoliosData = async () => {
     query: { ...strapiQuery },
   });
 
+  placeholdersStore.portTotalPages = portfoliosData?.value?.meta?.pagination?.pageCount;
   totalItems.value = portfoliosData?.value?.meta?.pagination?.total ?? 0;
 
   return portfoliosData;
@@ -159,6 +160,7 @@ watch(
     portfoliosData.value = data.value;
   },
 );
+
 
 const breadcrumbs = [
   {

@@ -75,6 +75,7 @@ const handleServiceChange = async (service) => {
     replace: true,
   });
 };
+const baseDataStore = useBaseDataStore();
 
 const getReviewsData = async () => {
   const strapiQuery = {
@@ -93,7 +94,7 @@ const getReviewsData = async () => {
       ...strapiQuery,
     },
   });
-
+  baseDataStore.reviTotalPages = reviewsData?.value?.meta?.pagination?.pageCount;
   totalItems.value = reviewsData?.value?.meta?.pagination?.total ?? 0;
 
   return reviewsData;
@@ -108,7 +109,6 @@ const [{ data: specialistsData }, reviewsData] = await Promise.all([
   getReviewsData(),
 ]);
 
-const baseDataStore = useBaseDataStore();
 
 const servicesData = baseDataStore.allServices;
 

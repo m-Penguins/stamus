@@ -11,7 +11,7 @@ const placeholdersStore = usePlaceholdersStore();
 const portfolios = props?.block?.portofolios?.data?.filter(item => item?.attributes?.publishedAt !== null)
 const prev = ref(null);
 const next = ref(null);
-
+console.log(props.block)
 const allCasesLink = props?.serviceId
   ? `/portfolio?dir=${props?.serviceId}`
   : "/portfolio";
