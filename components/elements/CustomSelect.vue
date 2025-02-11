@@ -1,11 +1,19 @@
 <script setup>
-const props = defineProps(["label", "options", "selectedId"]);
+const props = defineProps({
+  label: String,
+  options: Array,
+  selectedId: [String, Number],
+  keyField: {
+    type: String,
+    default: "id",
+  },
+});
 const emits = defineEmits(["select"]);
 const isOpen = ref(false);
 
 const selectedItem = computed(
   () =>
-    props.options?.find((el) => String(el?.id) === String(props?.selectedId))
+    props.options?.find((el) => String(el?.[props.keyField]) === String(props?.selectedId))
       ?.name,
 );
 
@@ -15,6 +23,7 @@ const resetChosen = () => {
 };
 
 const handleSelect = (option) => {
+  console.log(option)
   isOpen.value = false;
   emits("select", option);
 };

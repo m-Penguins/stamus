@@ -10,9 +10,6 @@
       <div class="form-wrapper__text text-gray-opacity p-bt-14 p-t-14">
         Нажимая кнопку отправить, вы соглашаетесь с
         <a>Политикой обработки персональных данных</a>
-        <div v-if="isSuccess" class="success-text">
-          Спасибо, Ваша заявка отправлена.
-        </div>
       </div>
       <div class="form-wrapper__box">
         <elements-input-base
@@ -35,8 +32,11 @@
             class="form-btn"
         />
       </div>
+      <div v-if="isSuccess" class="success-text">
+        Спасибо, Ваша заявка отправлена.
+      </div>
     </div>
-    <BlocksShare />
+    <BlocksFormContacts phone="+7 (993) 307-89-29" />
   </div>
 </template>
 
@@ -87,6 +87,7 @@ const sendData = async () => {
   text-align: center;
   margin: 0 auto 24px;
   padding: 0 20px;
+  position: relative;
 
   &__title {
     padding-top: 112px;
@@ -120,10 +121,9 @@ const sendData = async () => {
   @include body-16-regular;
   color: rgb(32, 196, 32);
   text-align: center;
-  margin-bottom: 10px;
-  margin-top: 10px;
   position: absolute;
   width: 100%;
+  bottom: 30px;
 }
 
 .wrapper {

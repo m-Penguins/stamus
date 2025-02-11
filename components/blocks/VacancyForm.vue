@@ -46,11 +46,11 @@
             title="Отправить"
             class="form-btn"
         />
-        <a href="tel:+79284217386" class="hh-link">Посмотреть вакансию на HeadHunter</a>
+        <a href="https://hh.ru/employer/5034648?from=share_ios" class="hh-link">Посмотреть вакансию на HeadHunter</a>
         <p v-if="isSuccess" class="success-text" >Ваша заявка успешно отправлена!</p>
       </div>
     </div>
-    <BlocksFormContacts />
+    <BlocksFormContacts phone="+7-928-421-73-86" />
   </div>
 </template>
 
@@ -100,17 +100,16 @@ const submit = async () => {
       letter: formData.value.letter ? `Сообщение: ${formData.value.letter}` : null,
     };
 
-    console.log(formData.value.cv)
-
     const subject = "Отклик на вакансию";
     const msg = Object.values(mailData).filter(Boolean).join("\n");
 
     const mail = useMail();
 
     try {
-      await mail.send({
+      const data = await mail.send({
         config: "form",
-        from: "stamus.ed@yandex.ru",
+        from: "dev@sloy.design",
+        to: "kadristamus@yandex.ru",
         subject,
         text: msg,
         // attachments: [

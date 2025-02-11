@@ -2,6 +2,7 @@
 const route = useRoute();
 
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+const baseUrl = useRuntimeConfig().public.baseUrl;
 const placeholdersStore = usePlaceholdersStore();
 
 const pageSize = ref(12);
@@ -11,35 +12,34 @@ const clinicFilter = ref(route.query.clinic);
 const dirFilter = ref(route.query.dir);
 const positionFilter = ref(route.query.position);
 const searchFilter = ref(route.query.search);
+const positionMeta = ref(null);
 
 const totalItems = ref(0);
 
-const { data: specialistsPositions } = await useFetch(
-  `${apiBaseUrl}specialists`,
-  {
-    query: {
-      populate: "position",
-      "pagination[pageSize]": 1000,
-    },
+const { data: newPositions } = await useFetch(`${apiBaseUrl}speczialnostis`, {
+  query: {
+    populate: blocksQuey,
   },
-);
+});
 
-const allPositions = [
-  ...new Set(
-    specialistsPositions.value?.data
-      ?.map((el) => el?.attributes?.position)
-      ?.filter(Boolean),
-  ),
-]
-  ?.sort()
-  .map((el, index) => ({
-    id: index + 1,
-    name: el,
-  }));
+const allPositions = newPositions.value?.data?.map((el) => ({
+  slug: el?.attributes?.slug,
+  name: el?.attributes?.title,
+  id: el?.id,
+  meta: el?.attributes?.meta,
+}));
 
+if (positionFilter.value) {
+  const currentPosition = allPositions?.find(
+      (position) => position.slug === positionFilter.value
+  );
+  if (currentPosition) {
+    positionMeta.value = currentPosition.meta;
+  }
+}
 const getSpecialistsData = async () => {
   const positionQ = allPositions?.find(
-    (el) => el?.id === Number(positionFilter.value),
+      (el) => el?.id === Number(positionFilter.value)
   )?.name;
 
   const strapiQuery = {
@@ -54,8 +54,8 @@ const getSpecialistsData = async () => {
     "filters[fullName][$contains][0]": searchFilter.value?.toUpperCase(),
     "filters[fullName][$contains][1]": searchFilter.value?.toLowerCase(),
     "filters[fullName][$contains][2]":
-      searchFilter.value?.charAt(0)?.toUpperCase() +
-      searchFilter.value?.slice(1)?.toLowerCase(),
+        searchFilter.value?.charAt(0)?.toUpperCase() +
+        searchFilter.value?.slice(1)?.toLowerCase(),
   };
 
   clearObjectFields(strapiQuery);
@@ -79,37 +79,34 @@ const allClinics = baseDataStore.clinics?.data?.map((cl) => ({
 }));
 
 const allDirections = baseDataStore.directions?.data
-  ?.map((dir) => ({
-    id: dir?.id,
-    name: dir?.attributes?.heading,
-  }))
-  .filter((el) => el.name && el?.id !== 4);
-
-// console.log(allDirections);
+    ?.map((dir) => ({
+      id: dir?.id,
+      name: dir?.attributes?.heading,
+    }))
+    .filter((el) => el.name && el?.id !== 4);
 
 watch(
-  () => route.query,
-  async () => {
-    const data = await getSpecialistsData();
-    specialists.value = data.value;
-  },
+    () => route.query,
+    async () => {
+      const data = await getSpecialistsData();
+      specialists.value = data.value;
+    }
 );
 
 const totalPages = computed(() =>
-  Math.ceil(specialists.value?.meta?.pagination?.total / pageSize.value),
+    Math.ceil(specialists.value?.meta?.pagination?.total / pageSize.value)
 );
 
 const handlePageClick = async (page) => {
   currentPage.value = page;
-  let searchQuery = "";
-  if (page != 1) {
-    searchQuery = {
-      page,
-      dir: clinicFilter.value,
-      clinic: clinicFilter.value,
-      search: searchFilter.value,
-    };
-  }
+  const searchQuery = page !== 1
+      ? {
+        page,
+        dir: dirFilter.value,
+        clinic: clinicFilter.value,
+        search: searchFilter.value,
+      }
+      : {};
 
   clearObjectFields(searchQuery);
 
@@ -120,10 +117,7 @@ const handlePageClick = async (page) => {
   });
 
   if (window) {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 };
 
@@ -131,7 +125,7 @@ const handleSearchChange = async () => {
   currentPage.value = 1;
   const searchQuery = {
     page: currentPage.value,
-    dir: clinicFilter.value,
+    dir: dirFilter.value,
     clinic: clinicFilter.value,
     position: positionFilter.value,
     search: searchFilter.value,
@@ -193,74 +187,54 @@ const handleDirChange = async (dir) => {
   });
 };
 
-const handlePositionChange = async (position) => {
-  positionFilter.value = position?.id;
-  currentPage.value = 1;
-  const searchQuery = {
-    page: currentPage.value,
-    dir: dirFilter.value,
-    clinic: clinicFilter.value,
-    position: positionFilter.value,
-    search: searchFilter.value,
-  };
-
-  clearObjectFields(searchQuery);
-
-  await navigateTo({
-    path: `${route.fullPath}`,
-    query: searchQuery,
-    replace: true,
-  });
-};
-
-const breadcrumbs = [
-  {
-    title: "Главная",
-    url: "/",
-  },
-  {
-    title: "Врачи",
-    url: "/team",
-  },
-];
-
-useHead({
-  title: "Врачи стоматологи Стамус в Краснодаре",
+// Генерация мета-данных
+const generateMeta = (positionMeta) => ({
+  title: positionMeta?.metaTitle || "Врачи стоматологи Стамус в Краснодаре",
   meta: [
     {
       name: "twitter:title",
-      content: "Врачи стоматологи Стамус в Краснодаре",
+      content: positionMeta?.metaTitle || "Врачи стоматологи Стамус в Краснодаре",
     },
     {
       property: "og:title",
-      content: "Врачи стоматологи Стамус в Краснодаре",
+      content: positionMeta?.metaTitle || "Врачи стоматологи Стамус в Краснодаре",
     },
     {
       name: "description",
       content:
-        "Врачи стоматологи Стамус в Краснодаре: все сотрудники стоматологической клиники.",
+          positionMeta?.metaDescription ||
+          "Врачи стоматологи Стамус в Краснодаре: все сотрудники стоматологической клиники.",
     },
     {
       name: "twitter:description",
       content:
-        "Врачи стоматологи Стамус в Краснодаре: все сотрудники стоматологической клиники.",
+          positionMeta?.metaDescription ||
+          "Врачи стоматологи Стамус в Краснодаре: все сотрудники стоматологической клиники.",
     },
     {
       property: "og:description",
       content:
-        "Врачи стоматологи Стамус в Краснодаре: все сотрудники стоматологической клиники.",
+          positionMeta?.metaDescription ||
+          "Врачи стоматологи Стамус в Краснодаре: все сотрудники стоматологической клиники.",
     },
-    // {
-    //   name: "keywords",
-    //   content:
-    //     "Врачи стоматологии, врачи стоматологии краснодар, детская стоматология врачи, врачи стамус, стоматологи краснодар, детские стоматологи краснодар, стоматологи стамус",
-    // },
   ],
-  link: [{ rel: "canonical", href: "https://stamus.ru" + route.path }],
+  link: [{ rel: "canonical", href: baseUrl + route.path }],
 });
-// console.log(specialists.value);
-currentPage.value = parseInt(currentPage.value);
+
+watch(
+    positionMeta,
+    (newMeta) => {
+      if (newMeta) {
+        useHead(generateMeta(newMeta));
+      }
+    },
+    { immediate: true }
+);
+
+
+useHead(generateMeta(positionMeta.value));
 </script>
+
 
 <template>
   <div class="spicialists-page">
@@ -283,13 +257,6 @@ currentPage.value = parseInt(currentPage.value);
             class="select"
             @select="handleClinicChange"
             :selectedId="clinicFilter"
-          />
-          <elements-custom-select
-            :options="allPositions"
-            label="Специальность"
-            class="select"
-            @select="handlePositionChange"
-            :selectedId="positionFilter"
           />
         </div>
         <div class="specialist-box width-style">

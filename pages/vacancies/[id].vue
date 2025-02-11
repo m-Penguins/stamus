@@ -13,6 +13,7 @@
       :showVacancyCard="true"
       :breadcrumbs="breadcrumbs"
       :address="mainInfo.clinics.data"
+      :custom-click="redirectToHh"
   />
   <div class="about-page">
     <div class="about-page-wrap">
@@ -56,6 +57,12 @@ const mainImg =
     mainInfo?.image?.data?.attributes?.url ??
     placeholdersStore?.imagePlaceholders?.services;
 const mainImgAlt = mainInfo?.image?.data?.attributes?.alternativeText;
+
+const redirectToHh = () => {
+  const hhLink =
+      "https://hh.ru/employer/5034648?from=share_ios";
+  window.open(hhLink, "_blank");
+}
 </script>
 
 <style lang="scss" scoped>
