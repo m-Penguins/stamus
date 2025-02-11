@@ -49,24 +49,21 @@ const props = defineProps(["money", "time", "address"])
   left: 0;
   right: 0;
 
-  @media (max-width: 1800px) {
-    left: 10%;
-  }
 
-  @media (max-width: 1580px) {
-    left: 5%;
-  }
 
   @media (max-width: 1400px) {
     flex-direction: column;
-    right: 10%;
+    right: 2%;
     left: auto;
     top: 55%;
     gap: 10px;
+    max-width: 700px;
   }
 
   @media (max-width: 1300px) {
-    top: 45%;
+    top: 50%;
+    max-width: 500px;
+    bottom: 0;
   }
 
   @media (max-width: 1110px) {
