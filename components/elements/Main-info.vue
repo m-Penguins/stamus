@@ -258,7 +258,6 @@ export default {
 
 .dentistry-box {
   display: flex;
-  height: 42%;
   justify-content: space-between;
   flex-direction: column;
   align-items: flex-start;

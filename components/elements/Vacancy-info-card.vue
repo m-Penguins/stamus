@@ -41,10 +41,13 @@ const props = defineProps(["money", "time", "address"])
 .dop-block {
   position: absolute;
   top: 75%;
-  right: 10%;
-  left: 15%;
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
 
   @media (max-width: 1800px) {
     left: 10%;

@@ -217,7 +217,8 @@ const lastColumnNavigation = [
   { id: 2, title: "Статьи", path: "/articles" },
   { id: 3, title: "Отзывы", path: "/reviews" },
   { id: 4, title: "Портфолио", path: "/portfolio" },
-  { id: 5, title: "Контакты", path: "/contacts" },
+  { id: 5, title: "Вакансии", path: "/vacancies" },
+  { id: 6, title: "Контакты", path: "/contacts" },
 ];
 
 const currentYear = ref('')

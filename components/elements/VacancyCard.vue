@@ -38,13 +38,16 @@ const props = defineProps(['vacancy'])
   width: 100%;
   max-width: 308px;
   height: 285px;
+  display: flex;
+  flex-direction: column;
   &-inner {
     background: #F9F9FA;
     display: flex;
     flex-direction: column;
     padding: 12px 8px;
     border-radius: 7px;
-  }
+    height: 171px;
+   }
   &-title {
     display: flex;
     align-items: center;
@@ -81,12 +84,12 @@ const props = defineProps(['vacancy'])
     color: #232D5B;
     max-width: 152px;
     border-radius: 5px;
-    margin-top: 40px;
+    margin-top: auto;
     font-size: 12px;
   }
 
   &-under {
-    margin-top: 32px;
+    margin-top: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;

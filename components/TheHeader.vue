@@ -180,6 +180,7 @@ export default {
       {title: "Акции и скидки", path: "/discounts"},
       {title: "Портфолио", path: "/portfolio"},
       {title: "Цены", path: "/prices"},
+      {title: "Вакансии", path: "/vacancies"},
       {title: "Контакты", path: "/contacts"},
     ];
     return {

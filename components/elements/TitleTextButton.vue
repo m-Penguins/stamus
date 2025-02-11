@@ -120,10 +120,13 @@ export default {
 }
 
 .container {
+  max-width: 600px;
   width: 100%;
   // width: 431px;
-  max-width: 481px;
-
+  background: rgba(255, 255, 255, 0.8);
+  height: 100% !important;
+  padding: 20px;
+  border-radius: 10px;
   .container-text {
     @include body-20-regular;
     color: $gray-text;
