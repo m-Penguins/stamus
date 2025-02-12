@@ -1,24 +1,26 @@
 <template>
   <div class="container">
-    <h1
-      v-if="title"
-      v-html="title"
-      :class="{
+    <div class="container-bg">
+      <h1
+          v-if="title"
+          v-html="title"
+          :class="{
         fontSize: fontSize ? 'fontSize' : '',
         typeColorWhiteText: typeColorWhiteText ? 'typeColorWhiteText' : '',
       }"
-      class="main-title-dark-blue p-bt-30 title"
-    ></h1>
-    <p v-if="isCategory" v-html="category" class="title-text-btn-category"></p>
-    <p
-      v-if="!!text"
-      v-text="text"
-      :class="{
+          class="main-title-dark-blue p-bt-30 title"
+      ></h1>
+      <p v-if="isCategory" v-html="category" class="title-text-btn-category"></p>
+      <p
+          v-if="!!text"
+          v-text="text"
+          :class="{
         isButtonBase: !isButtonBase ? 'isButtonBase' : '',
         typeColorWhiteText: typeColorWhiteText ? 'typeColorWhiteText' : '',
       }"
-      class="container-text p-bt-30 text"
-    ></p>
+          class="container-text p-bt-30 text"
+      ></p>
+    </div>
     <div v-if="!none_btn" class="title-text-btn-container">
       <elements-button-base
         v-if="isButtonBase"
@@ -122,17 +124,20 @@ export default {
 .container {
   max-width: 600px;
   width: 100%;
-  // width: 431px;
-  background: rgba(255, 255, 255, 0.8);
   height: 100% !important;
-  padding: 20px;
-  border-radius: 10px;
   .container-text {
     @include body-20-regular;
     color: $gray-text;
     padding-bottom: 40px;
     padding-right: 10px;
   }
+}
+
+.container-bg {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 1290px) {
