@@ -11,7 +11,6 @@ const placeholdersStore = usePlaceholdersStore();
 const portfolios = props?.block?.portofolios?.data?.filter(item => item?.attributes?.publishedAt !== null)
 const prev = ref(null);
 const next = ref(null);
-console.log(props.block)
 const allCasesLink = props?.serviceId
   ? `/portfolio?dir=${props?.serviceId}`
   : "/portfolio";
@@ -47,7 +46,6 @@ const allCasesLink = props?.serviceId
           :key="index"
           class="swiper-slide"
         >
-          <template >
             <div class="card-photo-name">
               <div class="card-photo-name-img">
                 <NuxtLink :to="`/portfolio/${portfolio?.id}`">
@@ -92,7 +90,6 @@ const allCasesLink = props?.serviceId
                   :link="`/portfolio/${portfolio?.id}`"
               />
             </div>
-          </template>
         </swiper-slide>
       </Swiper>
       <div class="wrapper-btn">

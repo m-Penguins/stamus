@@ -228,7 +228,7 @@ console.log(blocks)
   border: 1px solid var(--stroke, #e9e9e9);
   gap: 5px;
   padding: 10px 20px;
-  margin: 40px 0 150px;
+  margin: -100px 0 150px;
   width: fit-content;
 }
 
