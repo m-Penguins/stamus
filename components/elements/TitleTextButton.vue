@@ -138,6 +138,7 @@ export default {
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
+  margin-right: 20px;
 }
 
 @media screen and (max-width: 1290px) {
