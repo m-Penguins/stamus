@@ -49,7 +49,7 @@ const getSpecialistsData = async () => {
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
     "filters[clinics][id]": clinicFilter.value,
-    "filters[position][$eq][21]": positionQ,
+    "filters[speczialnosti][slug][$eq]": route.query.position,
     "filters[directions][id][$eq]": dirFilter.value,
     "filters[fullName][$contains][0]": searchFilter.value?.toUpperCase(),
     "filters[fullName][$contains][1]": searchFilter.value?.toLowerCase(),
@@ -105,9 +105,12 @@ const handlePageClick = async (page) => {
         dir: dirFilter.value,
         clinic: clinicFilter.value,
         search: searchFilter.value,
+        position: route.query.position,
       }
-      : {};
-
+      : {
+        position: route.query.position
+      };
+  console.log(searchQuery)
   clearObjectFields(searchQuery);
 
   await navigateTo({
@@ -127,7 +130,7 @@ const handleSearchChange = async () => {
     page: currentPage.value,
     dir: dirFilter.value,
     clinic: clinicFilter.value,
-    position: positionFilter.value,
+    position: route.query.position,
     search: searchFilter.value,
   };
 
@@ -154,7 +157,7 @@ const handleClinicChange = async (clinic) => {
     page: currentPage.value,
     dir: dirFilter.value,
     clinic: clinic?.id,
-    position: positionFilter.value,
+    position: route.query.position,
     search: searchFilter.value,
   };
 
@@ -231,6 +234,16 @@ watch(
     { immediate: true }
 );
 
+watch(
+    () => route.query.position,
+    async (newPosition, oldPosition) => {
+      if (newPosition !== oldPosition) {
+        currentPage.value = 1;
+        const data = await getSpecialistsData();
+        specialists.value = data.value;
+      }
+    }
+);
 
 useHead(generateMeta(positionMeta.value));
 </script>

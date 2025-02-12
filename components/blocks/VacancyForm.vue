@@ -91,7 +91,7 @@ const resetForm = () => {
 
 const submit = async () => {
   startValidation.value = true;
-
+  console.log(formData.value.cv)
   if (isSubmitActive.value) {
     const mailData = {
       name: formData.value.name ? `Имя: ${formData.value.name}` : null,
@@ -106,18 +106,26 @@ const submit = async () => {
     const mail = useMail();
 
     try {
+      let attachment = null;
+      if (formData.value.cv) {
+        attachment = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(formData.value.cv);
+          reader.onload = () => resolve({
+            filename: formData.value.cv.name,
+            content: reader.result.split(',')[1], // Получаем base64
+            encoding: "base64"
+          });
+          reader.onerror = reject;
+        });
+      }
       const data = await mail.send({
         config: "form",
         from: "dev@sloy.design",
         to: "kadristamus@yandex.ru",
         subject,
         text: msg,
-        // attachments: [
-        //   {
-        //     filename: 'Резюме.pdf',
-        //     content: formData.value.cv,
-        //   },
-        // ],
+        attachments: attachment ? [attachment] : [],
       });
       resetForm();
       isSuccess.value = true;

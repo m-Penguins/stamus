@@ -164,7 +164,6 @@ onUnmounted(() => {
 .dentistry-box {
   z-index: 3;
   display: flex;
-  height: 42%;
   justify-content: space-between;
   flex-direction: column;
   align-items: flex-start;
