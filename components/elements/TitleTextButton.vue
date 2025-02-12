@@ -122,8 +122,9 @@ export default {
 }
 
 .container {
+  width: fit-content;
+  // width: 431px;
   max-width: 600px;
-  width: 100%;
   height: 100% !important;
   .container-text {
     @include body-20-regular;
@@ -139,6 +140,7 @@ export default {
   padding: 20px;
   margin-bottom: 20px;
   margin-right: 20px;
+  width: fit-content;
 }
 
 @media screen and (max-width: 1290px) {
