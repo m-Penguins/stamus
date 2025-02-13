@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="container-bg">
+    <div class="container-bg" :class="{ 'no-bg': $route.path === '/' || $route.path.startsWith('/team/') || $route.path.startsWith('/articles/') }">
       <h1
           v-if="title"
           v-html="title"
@@ -141,6 +141,9 @@ export default {
   margin-bottom: 20px;
   margin-right: 20px;
   width: fit-content;
+  &.no-bg {
+    background: none;
+  }
 }
 
 @media screen and (max-width: 1290px) {
