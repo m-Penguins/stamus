@@ -10,7 +10,6 @@ const props = defineProps({
 });
 const emits = defineEmits(["select"]);
 const isOpen = ref(false);
-
 const selectedItem = computed(
   () =>
     props.options?.find((el) => String(el?.[props.keyField]) === String(props?.selectedId))

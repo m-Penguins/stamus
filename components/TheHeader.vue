@@ -410,15 +410,17 @@ export default {
                   <div
                       v-if="item.title === 'Врачи'"
                       class="header-arrow-icon"
-                      @click="
-                      showSearch = false;
-                      showServices = false;
-                      toggleDropDown(item.title);
-                    "
+                      @click="navigateTo('/team')"
                   >
                     <div>{{ item.title }}</div>
                     <div v-if="item.title === 'Врачи'" class="arrow-icon">
-                      <div v-if="!showMenuDoctors" class="timeline-svg">
+                      <div
+                          @click.stop="
+                          showSearch = false;
+                          showServices = false;
+                          toggleDropDown(item.title);
+                         "
+                            v-if="!showMenuDoctors" class="timeline-svg">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
@@ -434,7 +436,13 @@ export default {
                           />
                         </svg>
                       </div>
-                      <div v-else class="timeline-svg">
+                      <div
+                          @click.stop="
+                          showSearch = false;
+                          showServices = false;
+                          toggleDropDown(item.title);
+                         "
+                        v-else class="timeline-svg">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
@@ -458,7 +466,7 @@ export default {
                             :key="elem.id"
                             :to="`/team?position=${elem.slug}`"
                             class="menu-patients-items"
-                            @click="showMenuPatients = false"
+                            @click.stop="showMenuPatients = false"
                         >
                           <li class="menu-patients-items-link">
                             <div>
