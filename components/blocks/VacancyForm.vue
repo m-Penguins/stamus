@@ -91,7 +91,6 @@ const resetForm = () => {
 
 const submit = async () => {
   startValidation.value = true;
-  console.log(formData.value.cv)
   if (isSubmitActive.value) {
     const mailData = {
       name: formData.value.name ? `Имя: ${formData.value.name}` : null,
@@ -120,13 +119,14 @@ const submit = async () => {
         });
       }
       const data = await mail.send({
-        config: "form",
+        config: "vacancy",
         from: "dev@sloy.design",
         to: "kadristamus@yandex.ru",
         subject,
         text: msg,
         attachments: attachment ? [attachment] : [],
       });
+      console.log(data)
       resetForm();
       isSuccess.value = true;
     } catch (error) {
