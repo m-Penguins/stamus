@@ -466,7 +466,7 @@ export default {
                             :key="elem.id"
                             :to="`/team?position=${elem.slug}`"
                             class="menu-patients-items"
-                            @click="showMenuDoctors = false"
+                            @click.stop="showMenuDoctors = false"
                         >
                           <li class="menu-patients-items-link">
                             <div>
