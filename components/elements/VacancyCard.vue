@@ -50,7 +50,7 @@ const props = defineProps(['vacancy'])
    }
   &-title {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     margin-bottom: 12px;
     h5 {
@@ -62,8 +62,11 @@ const props = defineProps(['vacancy'])
     &-logo {
 
       img {
-        width: 18px;
-        height: 18px;
+        min-width: 18px;
+        min-height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-top: 5.5px;
       }
     }
   }

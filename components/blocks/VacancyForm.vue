@@ -118,14 +118,15 @@ const submit = async () => {
           reader.onerror = reject;
         });
       }
-      await mail.send({
-        config: "form",
+      const data = await mail.send({
+        config: "vacancy",
         from: "dev@sloy.design",
         to: "kadristamus@yandex.ru",
         subject,
         text: msg,
         attachments: attachment ? [attachment] : [],
       });
+      console.log(data)
       resetForm();
       isSuccess.value = true;
     } catch (error) {

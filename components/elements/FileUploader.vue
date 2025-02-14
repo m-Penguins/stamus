@@ -50,6 +50,18 @@ const handleFileChange = (event) => {
 const triggerFileInput = () => {
   fileInput.value.click();
 };
+
+watch(
+    () => props.modelValue,
+    (newVal) => {
+      if (!newVal) {
+        uploadedFile.value = null;
+        if (fileInput.value) {
+          fileInput.value.value = "";
+        }
+      }
+    }
+);
 </script>
 
 <style scoped lang="scss">
