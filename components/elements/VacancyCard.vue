@@ -62,8 +62,8 @@ const props = defineProps(['vacancy'])
     &-logo {
 
       img {
-        min-width: 18px;
-        min-height: 18px;
+        min-width: 16px;
+        min-height: 16px;
         max-width: 18px;
         max-height: 18px;
         margin-top: 5.5px;
