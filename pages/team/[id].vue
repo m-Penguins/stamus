@@ -9,12 +9,20 @@ const { data: specialist } = await useFetch(
   {
     query: {
       populate:
-        "portofolios.photoBanner.*,fotoSpecialist.*,education.*,additionalEducation.*,docsPhoto.*,video.*,clinics.*,services.category.napravleniya_uslug_1_col.*,reviews.*,price_lists.*,achievements.*,areasOfActivity.*,meetingPerson.*, blocks.item.icon.*" +
+        "portofolios.photoBanner.*,fotoSpecialist.*,education.*,additionalEducation.*,docsPhoto.*,video.*,clinics.*,services.category.napravleniya_uslug_1_col.*,reviews.*,price_lists.*,achievements.*,areasOfActivity.*,meetingPerson.*, blocks.item.icon.*, speczialnosti.*" +
         blocksQuey,
       "filter[publishedAt][$notNull]": "true",
     },
   },
 );
+
+const { data: specialistsByPosition } = await useFetch(`${apiBaseUrl}specialists`, {
+  query: {
+    populate: "fotoSpecialist.*",
+    "filters[speczialnosti][slug][$eq]": specialist?.value?.data?.attributes?.speczialnosti?.data?.attributes?.slug,
+    "pagination[limit]": -1
+  },
+});
 
 if (!specialist.value?.data) {
   throw createError({
@@ -25,7 +33,6 @@ if (!specialist.value?.data) {
 }
 
 const openDoctorLink = (link) => {
-  // console.log(link);
   if (link) {
     window.open(link, "_blank");
   } else {
@@ -59,9 +66,12 @@ const metaData = specialist.value?.data?.attributes?.meta;
 useHead(getMetaObject(metaData, baseUrl));
 
 const blocks = specialist.value?.data?.attributes?.blocks;
-console.log(blocks)
-
-// const blockServices = specialist.value?.data?.attributes?.services;
+const specialists = {
+    title: "Наши специалисты",
+    specialists: {
+      data: specialistsByPosition?.value?.data
+    }
+}
 </script>
 
 <template>
@@ -167,6 +177,9 @@ console.log(blocks)
     </div>
   </div>
   <BlocksMapper :blocks="blocks" />
+  <section class="service-section-block">
+   <DynamicBlockSliderSpecialists v-if="specialistsByPosition?.data?.length" :block="specialists"/>
+  </section>
 </template>
 
 <style lang="scss" scoped>
@@ -257,6 +270,13 @@ console.log(blocks)
   .stamus-app-title {
     width: 100%;
   }
+}
+
+.service-section-block {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-bottom: 100px;
 }
 
 @media screen and (max-width: 1400px) {
