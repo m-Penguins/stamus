@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 
 export const useFormStore = defineStore("form-store", () => {
+  const modalStore = useModalStore();
   const isLoading = ref(false);
   const isError = ref(false);
   const isSuccess = ref(false);
@@ -173,6 +174,7 @@ export const useFormStore = defineStore("form-store", () => {
         });
 
         resetForm();
+        modalStore.openModalApplicationAccepted()
         isSuccess.value = true;
       } catch (error) {
         isError.value = true;

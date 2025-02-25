@@ -14,6 +14,7 @@ export const useModalStore = defineStore("modal-store", () => {
 
   const startValidation = ref(false);
 
+  const isModalOpenApplicationAccepted = ref(false);
   const isModalOpen = ref(false);
   const isModalOpenDiscounts = ref(false);
   const isModalOpenBid = ref(false);
@@ -46,6 +47,12 @@ export const useModalStore = defineStore("modal-store", () => {
     document.body.classList.add("modal-open");
   }
 
+  function openModalApplicationAccepted() {
+    resetForm();
+    isModalOpenApplicationAccepted.value = true;
+    document.body.classList.add("modal-open");
+  }
+
   function openModalBid() {
     resetForm();
     isModalOpenBid.value = true;
@@ -63,6 +70,7 @@ export const useModalStore = defineStore("modal-store", () => {
     isModalOpen.value = false;
     isModalOpenDiscounts.value = false;
     isModalOpenBid.value = false;
+    isModalOpenApplicationAccepted.value = false;
     document.body.classList.remove("modal-open");
   }
 
@@ -167,6 +175,8 @@ export const useModalStore = defineStore("modal-store", () => {
     closeModal,
     openModalDiscounts,
     isModalOpenDiscounts,
+    isModalOpenApplicationAccepted,
+    openModalApplicationAccepted,
     openModalBid,
     isModalOpenBid,
     isEmailVaild,
