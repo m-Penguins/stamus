@@ -20,7 +20,7 @@ const sendData = () => {
       v-html="block?.text"
     ></div>
     <div v-else class="form-wrapper__subtitle subtitle-gray">
-      <p>Перезвоним в течении 15 минут и уточним</p>
+      <p>Перезвоним в течение 15 минут и уточним</p>
       <p>удобную для вас клинику и дату</p>
     </div>
     <p class="form-wrapper__text text-gray-opacity p-bt-14 p-t-14">
