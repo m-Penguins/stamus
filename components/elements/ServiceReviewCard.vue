@@ -1,7 +1,7 @@
 <template>
   <NuxtLink class="service-card" :to="review.link" target="_blank">
       <div>
-        <h6 class="service-card-title">{{ review.name }}</h6>
+        <p class="service-card-title">{{ review.name }}</p>
         <div class="ratings">
           <div class="stars" >
             <svg v-for="item in new Array(5)" :key="item" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">

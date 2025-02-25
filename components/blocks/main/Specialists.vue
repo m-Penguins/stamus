@@ -59,9 +59,9 @@ const handleSmallClick = (index) => {
         </div>
         <div class="specialists-inner__info">
           <div class="specialists-inner__info-name">
-            <h2 class="specialists-heading">
+            <p class="specialists-heading">
               {{ props.mainSpecialists?.[selectedIndex]?.name }}
-            </h2>
+            </p>
             <p class="specialists-desc">
               {{ props.mainSpecialists?.[selectedIndex]?.category }}
             </p>

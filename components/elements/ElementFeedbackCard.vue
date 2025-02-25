@@ -1,6 +1,6 @@
 <template>
   <div class="feedback-card">
-    <h3 class="feedback-card__title">{{ data?.name }}</h3>
+    <p class="feedback-card__title">{{ data?.name }}</p>
     <div class="feedback-card__box">
       <p v-if="data?.grade" class="feedback-card__box-grade">
         Оценка {{ data?.grade }}

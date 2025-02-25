@@ -83,9 +83,9 @@ const placeholdersStore = usePlaceholdersStore();
                   {{ tag }}
                 </div>
               </div>
-              <h2 class="article-card__name">
+              <p class="article-card__name">
                 {{ article?.attributes?.heading }}
-              </h2>
+              </p>
               <p class="text-article">{{ article?.attributes?.description }}</p>
               <elements-link-with-arrow
                 type="type"
