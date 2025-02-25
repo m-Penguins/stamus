@@ -237,6 +237,8 @@ watch(
     },
 );
 
+const metaData = vacancyData?.value?.data?.attributes?.meta;
+useHead(getMetaObject(metaData, baseUrl));
 </script>
 
 <style lang="scss" scoped>

@@ -49,7 +49,7 @@ const getSpecialistsData = async () => {
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
     "filters[clinics][id]": clinicFilter.value,
-    "filters[position][$eq][21]": positionQ,
+    "filters[speczialnosti][slug][$eq]": positionFilter.value,
     "filters[directions][id][$eq]": dirFilter.value,
     "filters[fullName][$contains][0]": searchFilter.value?.toUpperCase(),
     "filters[fullName][$contains][1]": searchFilter.value?.toLowerCase(),
@@ -105,8 +105,11 @@ const handlePageClick = async (page) => {
         dir: dirFilter.value,
         clinic: clinicFilter.value,
         search: searchFilter.value,
+        position: positionFilter.value,
       }
-      : {};
+      : {
+        position: positionFilter.value
+      };
 
   clearObjectFields(searchQuery);
 
@@ -167,6 +170,28 @@ const handleClinicChange = async (clinic) => {
   });
 };
 
+const handlePositionChange = async (position) => {
+  positionFilter.value = position?.slug || null;
+  positionMeta.value = position?.meta || null;
+  currentPage.value = 1;
+
+  const searchQuery = {
+    page: currentPage.value,
+    dir: dirFilter.value,
+    clinic: clinicFilter.value,
+    position: positionFilter.value,
+    search: searchFilter.value,
+  };
+
+  clearObjectFields(searchQuery);
+
+  await navigateTo({
+    path: `${route.fullPath}`,
+    query: searchQuery,
+    replace: true,
+  });
+};
+
 const handleDirChange = async (dir) => {
   dirFilter.value = dir?.id;
   currentPage.value = 1;
@@ -178,6 +203,24 @@ const handleDirChange = async (dir) => {
     search: searchFilter.value,
   };
 
+  clearObjectFields(searchQuery);
+
+  await navigateTo({
+    path: `${route.fullPath}`,
+    query: searchQuery,
+    replace: true,
+  });
+};
+
+
+const resetFilter = async () => {
+  clinicFilter.value = null;
+  dirFilter.value = null;
+  positionFilter.value = null;
+  searchFilter.value = null;
+  currentPage.value = 1;
+
+  const searchQuery = {};
   clearObjectFields(searchQuery);
 
   await navigateTo({
@@ -231,6 +274,17 @@ watch(
     { immediate: true }
 );
 
+watch(
+    () => route.query.position,
+    async (newPosition, oldPosition) => {
+      if (newPosition !== oldPosition) {
+        currentPage.value = 1;
+        positionFilter.value = route.query.position
+        const data = await getSpecialistsData();
+        specialists.value = data.value;
+      }
+    }
+);
 
 useHead(generateMeta(positionMeta.value));
 </script>
@@ -241,6 +295,7 @@ useHead(generateMeta(positionMeta.value));
     <div class="spicialists-page-wrap">
       <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
       <h1 class="spicialists-page-title">Наши Врачи</h1>
+      <button @click="resetFilter" class="spicialists-page-reset">Все врачи</button>
       <div class="specialist-form">
         <div class="specialist-box">
           <!-- <elements-custom-select
@@ -257,6 +312,14 @@ useHead(generateMeta(positionMeta.value));
             class="select"
             @select="handleClinicChange"
             :selectedId="clinicFilter"
+          />
+          <elements-custom-select
+              :options="allPositions"
+              label="Специальность"
+              class="select"
+              @select="handlePositionChange"
+              :selectedId="positionFilter"
+              key-field="slug"
           />
         </div>
         <div class="specialist-box width-style">
@@ -384,7 +447,22 @@ useHead(generateMeta(positionMeta.value));
 .spicialists-page-title {
   @include body-60-medium;
   color: $dark-blue-subtitle;
-  padding: 100px 0;
+  padding:100px 0 20px;
+}
+
+
+.spicialists-page-reset {
+  margin: 0 0 50px 5px;
+  background: none;
+  border: none;
+  color: #525660;
+  cursor: pointer;
+  font-size: 16px;
+  transition: .2s;
+  &:hover {
+    text-decoration: underline;
+  }
+
 }
 
 .specialist-form {

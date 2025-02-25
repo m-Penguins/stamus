@@ -1,24 +1,26 @@
 <template>
   <div class="container">
-    <h1
-      v-if="title"
-      v-html="title"
-      :class="{
+    <div class="container-bg" :class="{ 'no-bg': $route.path === '/' || $route.path.startsWith('/team/') || $route.path.startsWith('/articles/') }">
+      <h1
+          v-if="title"
+          v-html="title"
+          :class="{
         fontSize: fontSize ? 'fontSize' : '',
         typeColorWhiteText: typeColorWhiteText ? 'typeColorWhiteText' : '',
       }"
-      class="main-title-dark-blue p-bt-30 title"
-    ></h1>
-    <p v-if="isCategory" v-html="category" class="title-text-btn-category"></p>
-    <p
-      v-if="!!text"
-      v-text="text"
-      :class="{
+          class="main-title-dark-blue p-bt-30 title"
+      ></h1>
+      <p v-if="isCategory" v-html="category" class="title-text-btn-category"></p>
+      <p
+          v-if="!!text"
+          v-text="text"
+          :class="{
         isButtonBase: !isButtonBase ? 'isButtonBase' : '',
         typeColorWhiteText: typeColorWhiteText ? 'typeColorWhiteText' : '',
       }"
-      class="container-text p-bt-30 text"
-    ></p>
+          class="container-text p-bt-30 text"
+      ></p>
+    </div>
     <div v-if="!none_btn" class="title-text-btn-container">
       <elements-button-base
         v-if="isButtonBase"
@@ -120,15 +122,27 @@ export default {
 }
 
 .container {
-  width: 100%;
+  width: fit-content;
   // width: 431px;
-  max-width: 481px;
-
+  max-width: 600px;
+  height: 100% !important;
   .container-text {
     @include body-20-regular;
     color: $gray-text;
     padding-bottom: 40px;
     padding-right: 10px;
+  }
+}
+
+.container-bg {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  width: fit-content;
+  &.no-bg {
+    background: none;
   }
 }
 

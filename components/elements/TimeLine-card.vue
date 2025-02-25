@@ -1,53 +1,26 @@
 <template>
   <div class="timeline">
     <div
-      class="timeline-item"
-      v-for="(event, index) in displayedEvents"
-      :key="event?.id"
+        class="timeline-item"
+        v-for="(event, index) in displayedEvents"
+        :key="event?.id"
     >
-      <!-- <div class="lines">
-        <div class="dot" :class="{'last': event.years === 'н.в.'}"></div>
-        <div class="line" v-if="index !== events.length - 1 && index !== displayedEvents.length - 1"></div>
-      </div> -->
       <div class="cards">
-        <div class="timeline-date">{{ event.years }}</div>
+        <div class="timeline-date">{{ formatDate(event.years) }}</div>
         <div class="timeline-title">{{ event.educationalInstitution }}</div>
-        <!-- <h4 class="timeline-category">{{ event.category }}</h4> -->
       </div>
     </div>
     <div class="timeline-box" v-if="events.length >= 5">
       <button class="timeline-btn" @click="toggleShowMore">
         {{ showMoreText }}
         <div v-if="!showAll" class="timeline-svg">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-          >
-            <path
-              d="M6 8L10 12L14 8"
-              stroke="#7F838C"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M6 8L10 12L14 8" stroke="#7F838C" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </div>
         <div v-else class="timeline-svg">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-          >
-            <path
-              d="M6 12L10 8L14 12"
-              stroke="#232D5B"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M6 12L10 8L14 12" stroke="#232D5B" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </div>
       </button>
@@ -55,32 +28,24 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    events: Array,
-  },
-  data() {
-    return {
-      displayedEvents: this.events.slice(0, 4),
-      showAll: false,
-    };
-  },
-  computed: {
-    showMoreText() {
-      return this.showAll ? "Скрыть" : "Показать ещё";
-    },
-  },
-  methods: {
-    toggleShowMore() {
-      this.showAll = !this.showAll;
-      if (this.showAll) {
-        this.displayedEvents = this.events;
-      } else {
-        this.displayedEvents = this.events.slice(0, 4);
-      }
-    },
-  },
+<script setup>
+const props = defineProps({
+  events: Array,
+});
+
+const showAll = ref(false);
+const displayedEvents = ref(props.events.slice(0, 4));
+
+const showMoreText = computed(() => (showAll.value ? "Скрыть" : "Показать ещё"));
+
+const toggleShowMore = () => {
+  showAll.value = !showAll.value;
+  displayedEvents.value = showAll.value ? props.events : props.events.slice(0, 4);
+};
+
+const formatDate = (dateString) => {
+  const [year, month, day] = dateString.split('-');
+  return `${day}-${month}-${year}`;
 };
 </script>
 

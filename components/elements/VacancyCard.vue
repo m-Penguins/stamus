@@ -38,16 +38,19 @@ const props = defineProps(['vacancy'])
   width: 100%;
   max-width: 308px;
   height: 285px;
+  display: flex;
+  flex-direction: column;
   &-inner {
     background: #F9F9FA;
     display: flex;
     flex-direction: column;
     padding: 12px 8px;
     border-radius: 7px;
-  }
+    height: 171px;
+   }
   &-title {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     margin-bottom: 12px;
     h5 {
@@ -59,8 +62,11 @@ const props = defineProps(['vacancy'])
     &-logo {
 
       img {
-        width: 18px;
-        height: 18px;
+        min-width: 16px;
+        min-height: 16px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-top: 5.5px;
       }
     }
   }
@@ -81,12 +87,12 @@ const props = defineProps(['vacancy'])
     color: #232D5B;
     max-width: 152px;
     border-radius: 5px;
-    margin-top: 40px;
+    margin-top: auto;
     font-size: 12px;
   }
 
   &-under {
-    margin-top: 32px;
+    margin-top: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;

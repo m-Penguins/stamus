@@ -180,6 +180,7 @@ export default {
       {title: "Акции и скидки", path: "/discounts"},
       {title: "Портфолио", path: "/portfolio"},
       {title: "Цены", path: "/prices"},
+      {title: "Вакансии", path: "/vacancies"},
       {title: "Контакты", path: "/contacts"},
     ];
     return {
@@ -409,15 +410,17 @@ export default {
                   <div
                       v-if="item.title === 'Врачи'"
                       class="header-arrow-icon"
-                      @click="
-                      showSearch = false;
-                      showServices = false;
-                      toggleDropDown(item.title);
-                    "
+                      @click="navigateTo('/team')"
                   >
                     <div>{{ item.title }}</div>
                     <div v-if="item.title === 'Врачи'" class="arrow-icon">
-                      <div v-if="!showMenuDoctors" class="timeline-svg">
+                      <div
+                          @click.stop="
+                          showSearch = false;
+                          showServices = false;
+                          toggleDropDown(item.title);
+                         "
+                            v-if="!showMenuDoctors" class="timeline-svg">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
@@ -433,7 +436,13 @@ export default {
                           />
                         </svg>
                       </div>
-                      <div v-else class="timeline-svg">
+                      <div
+                          @click.stop="
+                          showSearch = false;
+                          showServices = false;
+                          toggleDropDown(item.title);
+                         "
+                        v-else class="timeline-svg">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
@@ -457,7 +466,7 @@ export default {
                             :key="elem.id"
                             :to="`/team?position=${elem.slug}`"
                             class="menu-patients-items"
-                            @click="showMenuPatients = false"
+                            @click.stop="showMenuDoctors = false"
                         >
                           <li class="menu-patients-items-link">
                             <div>
@@ -805,17 +814,26 @@ export default {
                 </div>
                 <div
                     v-if="item.title === 'Врачи'"
-                    @click="
-                    toggleDropDown(item.title)
-                    showSearch = false;
-                    showServices = false;
-                  "
                     class="menu-mob-first-block"
                 >
                   <div class="menu-patients-container">
-                    <div class="p-bt-14">{{ item.title }}</div>
+                    <div
+                        @click="
+                          showSearch = false;
+                          showServices = false;
+                          showMenuMob = false;
+                          navigateTo('/team')
+                        "
+                        class="p-bt-14"
+                    >
+                      {{ item.title }}
+                    </div>
                     <div v-if="item.title === 'Врачи'" class="arrow-icon">
-                      <div v-if="!showMenuDoctors" class="timeline-svg">
+                      <div  @click.stop="
+                            toggleDropDown(item.title)
+                            showSearch = false;
+                            showServices = false;
+                          " v-if="!showMenuDoctors" class="timeline-svg">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
@@ -831,7 +849,11 @@ export default {
                           />
                         </svg>
                       </div>
-                      <div v-else class="timeline-svg">
+                      <div  @click.stop="
+                    toggleDropDown(item.title)
+                    showSearch = false;
+                    showServices = false;
+                  " v-else class="timeline-svg">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
