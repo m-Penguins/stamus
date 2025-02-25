@@ -20,7 +20,7 @@
             selectedItem?.id || selectedItem?.name || isSelectedId,
         }"
       >
-        {{ selected }}
+        {{ value || selected }}
       </div>
       <div v-if="!selected" class="default">
         {{ default }}
@@ -72,6 +72,11 @@ export default {
       type: Array,
       required: true,
       default: () => [],
+    },
+    value: {
+      type: String,
+      required: false,
+      default: null,
     },
     default: {
       type: String,

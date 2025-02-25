@@ -98,7 +98,7 @@ export const useFormStore = defineStore("form-store", () => {
        passportSeries.value.length > 0 &&
        patientBirthDate.value &&
        patientPassportSeries.value.length > 0 &&
-       patientDateOfIssue.value
+       patientDateOfIssue.value && selectedYear.value && address.value && whoIsGettingDocument.value
     );
   });
 
