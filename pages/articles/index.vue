@@ -7,9 +7,9 @@ const route = useRoute();
 
 const pageSize = ref(12);
 const currentPage = ref(route.query.page ?? 1);
-
-const tagFilter = ref(route.query.tag ?? []);
-
+const tagFilter = ref(
+    Array.isArray(route.query.tag) ? route.query.tag : route.query.tag ? [route.query.tag] : []
+);
 const totalItems = ref(0);
 
 const totalPages = computed(() =>
