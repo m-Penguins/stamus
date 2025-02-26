@@ -35,6 +35,7 @@
     bigImg="true"
   />
   <blocks-map :block="{ title: 'Информация о клиниках' }" />
+  <BlocksMapper :blocks="blocks"/>
   <BlocksMainBanner
     :title="'Уже были у нас?'"
     :text="'Оставьте отзыв, будем очень вам благодарны'"
@@ -58,9 +59,11 @@ const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 
 const { data: infoData } = await useFetch(`${apiBaseUrl}information`, {
   query: {
-    populate: "about.*,additional.*",
+    populate: blocksQuey + "about.*,additional.*,blocks.articles.*",
   },
 });
+
+const blocks = infoData.value?.data?.attributes?.blocks
 
 const about = infoData.value?.data?.attributes?.about;
 
