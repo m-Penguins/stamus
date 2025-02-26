@@ -8,6 +8,12 @@ const mockCheckBoxes = Array.from({ length: new Date().getFullYear() - 2022 + 1 
   name: (2022 + i).toString()
 }));
 
+const selectedYears = reactive([])
+
+const mockCheckBoxesData = computed(() => {
+  return mockCheckBoxes.filter((el) => !selectedYears.includes(el.name));
+});
+
 const optionsData = [
   { name: "Получаю справку за себя" },
   { name: "Получаю справку за ребенка" },
@@ -28,6 +34,27 @@ const optionsDoc = baseDataStore.clinics?.data
 
 const sendData = () => {
   store.submitModal();
+};
+
+const onSelectCheckbox = (year) => {
+  if (!year?.name) {
+    selectedYears.splice(0);
+  } else {
+    const index = selectedYears.indexOf(year.name);
+    if (index !== -1) {
+      selectedYears.splice(index, 1);
+    } else {
+      const placeholderIndex = selectedYears.indexOf("Проходил лечение в");
+      if (placeholderIndex !== -1) {
+        selectedYears.splice(placeholderIndex, 1);
+      }
+      selectedYears.push(year.name);
+    }
+    if (selectedYears.length === 0) {
+      selectedYears.push("Проходил лечение в");
+    }
+  }
+  store.selectOnChange("year", selectedYears.join(", "));
 };
 
 const baseUrl = useRuntimeConfig().public.baseUrl;
@@ -169,19 +196,20 @@ useHead({
               :options="optionsData"
               :default="'Получаю справку за'"
               class="select"
-              @input="(v) => (store.selectOnChange('forWho', v.name))"
+              @input="(v) => (store.selectOnChange('forWho', v?.name ))"
           />
           <elements-select
               :options="optionsDoc"
               :default="'Как хотите получить справку'"
               class="select"
-              @input="(v) => (store.selectOnChange('howToGet', v.name))"
+              @input="(v) => (store.selectOnChange('howToGet', v?.name))"
           />
           <elements-select
-              :options="mockCheckBoxes"
+              :value="selectedYears.join(', ')"
+              :options="mockCheckBoxesData"
               :default="'Проходил лечение в'"
               class="select"
-              @input="(v) => (store.selectOnChange('year', v.name))"
+              @input="onSelectCheckbox"
           />
 
           <div>

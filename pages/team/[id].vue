@@ -178,6 +178,9 @@ const specialists = {
   </div>
   <BlocksMapper :blocks="blocks" />
   <section class="service-section-block">
+    <DynamicBlockContactForm :block="null"/>
+  </section>
+  <section class="service-section-block">
    <DynamicBlockSliderSpecialists v-if="specialistsByPosition?.data?.length" :block="specialists"/>
   </section>
 </template>
