@@ -5,10 +5,64 @@ const assetsStore = useAssets();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const videoStore = useModalVideoStore();
-
+let videoLink = props.block.videoLink;
+videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
+  return match.includes('js_api=1') ? match : match + '&js_api=1';
+});
 const handleVideoClick = (link) => {
   videoStore.openModal(link)
 };
+
+const vk = ref(null)
+
+const videoContainer = ref(null);
+const showVideo = ref(false)
+const handleIntersection = (entries) => {
+  entries.forEach((entry) => {
+    const iframe = videoContainer.value?.querySelector("iframe");
+    if (iframe) {
+      let src = iframe.getAttribute("src") || "";
+
+      if (entry.isIntersecting) {
+        if (!src.includes("&autoplay=")) {
+          src += "&autoplay=1";
+        } else {
+          src = src.replace("&autoplay=0", "&autoplay=1");
+        }
+
+        if (!src.includes("&muted=")) {
+          src += "&muted=1";
+        } else {
+          src = src.replace("&muted=0", "&muted=1");
+        }
+        showVideo.value = true;
+      } else {
+        src = src.replace("&autoplay=1", "&autoplay=0");
+        showVideo.value = false;
+      }
+      iframe.setAttribute("src", src);
+    }
+  });
+};
+
+onMounted(() => {
+  const observer = new IntersectionObserver(handleIntersection, {
+    threshold: 0.5,
+  });
+
+  if (videoContainer.value) observer.observe(videoContainer.value);
+
+  const script = document.createElement('script')
+  const iframe = videoContainer.value?.querySelector("iframe")
+  vk.value = window.VK
+  const player = vk.value.VideoPlayer(iframe);
+  player.mute()
+  document.head.appendChild(script)
+});
+
+onUnmounted(() => {
+  if (videoContainer.value) observer.unobserve(videoContainer.value);
+});
 </script>
 
 <template>
@@ -26,23 +80,19 @@ const handleVideoClick = (link) => {
     </div>
     <div class="video-block-inner">
       <div
-        v-if="block?.videoLink"
-        class="video-block-rectangle-video"
-        @click="handleVideoClick(block?.videoLink)"
+          v-if="videoLink"
+          class="video-block-rectangle-video"
+          ref="videoContainer"
+          @click="handleVideoClick(videoLink)"
       >
         <img
-          v-if="block?.image?.data?.attributes?.url"
-          :src="`${baseUrl}${block?.image?.data?.attributes?.url}`"
-          alt="Video"
-          class="problems__image"
+            v-show="!showVideo"
+            :src="`${baseUrl}${block?.image?.data?.attributes?.url}`"
+            alt="Video"
+            class="problems__image"
         />
-        <img
-          class="utube"
-          :src="assetsStore.useAsset('images/icons/play.svg')"
-          alt="Play"
-        />
+        <div v-show="showVideo" class="problems__image" v-html="videoLink"></div>
       </div>
-
       <NuxtLink
         v-if="block?.link"
         class="video-block-rectangle"
@@ -387,10 +437,15 @@ const handleVideoClick = (link) => {
 .problems__image {
   border-radius: 15px;
   height: 100%;
-  object-fit: cover;
   width: 100%;
   max-width: 100%;
-
   pointer-events: none;
+
+  & :deep(iframe) {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    volume: 0;
+  }
 }
 </style>

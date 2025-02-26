@@ -96,6 +96,11 @@ baseDataStore.footerData = footerData.value;
 //     },
 //   ],
 // });
+useHead({
+  script: [
+    { src: 'https://vk.com/js/api/videoplayer.js', async: true, defer: true }
+  ]
+})
 </script>
 
 <style lang="scss">
