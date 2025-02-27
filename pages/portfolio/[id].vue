@@ -144,7 +144,8 @@ useHead(getMetaObject(metaData, baseUrl));
     </div>
     <blocks-portfolio-gallery
       v-if="gallery && gallery?.length > 0"
-      :arrayImg="gallery"
+      :images="gallery"
+      title="Галерея"
     />
     <div class="container-size">
       <dynamic-block-cases

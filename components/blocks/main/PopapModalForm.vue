@@ -2,14 +2,14 @@
   <transition name="modal">
     <div
       v-if="
-        store.isModalOpen || store.isModalOpenDiscounts || store.isModalOpenBid
+        store.isModalOpen || store.isModalOpenDiscounts || store.isModalOpenBid || store.isModalOpenApplicationAccepted
       "
       @click="store.closeModal"
       class="popup-wrap"
       @keydown="handleEscapePress"
     >
       <div
-        :class="[store.isModalOpenDiscounts ? 'popup-discounts' : 'popup']"
+        :class="[store.isModalOpenDiscounts ? 'popup-discounts' : store.isModalOpenApplicationAccepted ? 'popup-alert' : 'popup']"
         @click.stop
       >
         <!-- Акция -->
@@ -150,6 +150,13 @@
                 >Политикой обработки персональных данных</a
               >
             </div>
+          </div>
+        </div>
+        <!-- Заявка принята -->
+        <div v-if="store.isModalOpenApplicationAccepted" class="popup-applications-accept">
+          <div class="popup-title">
+            <p>Ваша заявка принята.</p>
+            <p>По готовности с вами свяжется администратор</p>
           </div>
         </div>
         <!-- Основная форма -->
@@ -325,6 +332,20 @@ function setIsOpen() {
   display: none;
 }
 
+.popup-alert {
+  max-height: 20%;
+  display: flex;
+  position: relative;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 20px;
+  max-width: 416px;
+  width: 100%;
+  z-index: 902;
+  height: 100%;
+  overflow: auto;
+}
+
 .popup-wrap {
   width: 100%;
   height: 100vh;
@@ -359,6 +380,16 @@ function setIsOpen() {
 .popup-discounts-wrap {
   width: 565px;
   padding: 20px;
+}
+
+.popup-applications-accept{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .popup-title {
+    padding: 0;
+  }
 }
 
 .popup-discounts-logo {
