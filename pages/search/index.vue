@@ -11,7 +11,8 @@ const nothingFound = ref(false);
 const specialists = ref(null);
 const services = ref(null);
 const articles = ref(null);
-
+const specialistsMobile = ref(null)
+const isMobile = useMediaQuery('(max-width: 590px)');
 const totalResults = ref(0);
 
 const getServiceLink = (item) => {
@@ -50,7 +51,7 @@ const getSearchData = async () => {
         "filters[$or][42][position][$contains]": capitalSearch,
         "filters[$or][43][position][$contains]": upperSearch,
         "sort[0]": "order:asc",
-        populate: "fotoSpecialist.*,achievements.*,position.*",
+        populate: "fotoSpecialist.*,achievements.*,position.*, achievements.icon.*, blocks.item.*,blocks.item.icon.*",
       },
     }),
     useFetch(`${apiBaseUrl}services`, {
@@ -76,7 +77,7 @@ const getSearchData = async () => {
       },
     }),
   ]);
-
+  console.log(specialistsData.value)
   specialists.value = specialistsData?.value?.data?.map((sp) => ({
     id: sp?.id,
     name: sp?.attributes?.firstName + " " + sp?.attributes?.lastName,
@@ -90,6 +91,25 @@ const getSearchData = async () => {
     achievements: sp?.attributes?.achievements,
     link: `/team/${sp?.id}`,
   }));
+
+  specialistsMobile.value = specialistsData?.value?.data.map((sp) => ({
+    id: sp?.id,
+    name:
+        sp?.attributes?.firstName +
+        ' ' +
+        sp?.attributes?.lastName,
+    img:
+        sp?.attributes?.fotoSpecialist?.data?.attributes
+            ?.url ?? placeholdersStore?.imagePlaceholders?.specialists,
+    alt: sp?.attributes?.fotoSpecialist?.data?.attributes
+        ?.alternativeText,
+    position: sp?.attributes?.position,
+    achievements: sp?.attributes?.blocks?.find(
+        (component) =>
+            component.__component === 'blocks-story.achievements',
+    ),
+  }))
+  console.log(specialistsMobile)
 
   services.value = servicesData?.value?.data?.map((singleService) => ({
     id: singleService?.id,
@@ -224,9 +244,20 @@ useHead({
         <div v-if="specialists?.length > 0" class="search-block">
           <h4 class="search-subtitle">Подходящие врачи</h4>
           <hr class="hr" />
-          <div v-for="item in specialists" :key="item" class="search-inner">
-            <elements-search-specialist-card :spesialistCard="item" />
-          </div>
+          <template v-if="!isMobile">
+            <div v-for="item in specialists" :key="item" class="search-inner">
+              <elements-search-specialist-card :spesialistCard="item" />
+            </div>
+          </template>
+          <template v-else>
+            <div v-for="item in specialistsMobile" :key="item" class="search-inner">
+              <elements-name-specialty-photo-card
+                  :is-link="true"
+                  :specialists="item"
+                  :isTooltip="true"
+              />
+            </div>
+          </template>
         </div>
       </template>
       <h2 v-else class="search-title">По вашему запросу ничего не найдено</h2>
@@ -282,6 +313,9 @@ useHead({
 
 .search-inner {
   padding-bottom: 14px;
+  @media (max-width: 590px) {
+    margin-bottom: 20px;
+  }
 }
 
 .search-form {
