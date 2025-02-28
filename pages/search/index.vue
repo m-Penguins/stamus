@@ -77,7 +77,7 @@ const getSearchData = async () => {
       },
     }),
   ]);
-  console.log(specialistsData.value)
+
   specialists.value = specialistsData?.value?.data?.map((sp) => ({
     id: sp?.id,
     name: sp?.attributes?.firstName + " " + sp?.attributes?.lastName,
