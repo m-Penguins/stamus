@@ -5,7 +5,7 @@ const assetsStore = useAssets();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const videoStore = useModalVideoStore();
-let videoLink = props.block.videoLink;
+let videoLink = props.block.videoLink || '';
 videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
   return match.includes('js_api=1') ? match : match + '&js_api=1';
 });
@@ -54,9 +54,11 @@ onMounted(() => {
 
   const script = document.createElement('script')
   const iframe = videoContainer.value?.querySelector("iframe")
-  vk.value = window.VK
-  const player = vk.value.VideoPlayer(iframe);
-  player.mute()
+  if(iframe) {
+    vk.value = window.VK
+    const player = vk.value.VideoPlayer(iframe);
+    player.mute()
+  }
   document.head.appendChild(script)
 });
 
