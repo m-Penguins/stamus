@@ -5,6 +5,7 @@ const assetsStore = useAssets();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const videoStore = useModalVideoStore();
+<<<<<<< HEAD
 let videoLink = props.block?.videoLink;
 if (typeof videoLink === 'string' && videoLink.length > 0) {
   videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
@@ -13,6 +14,12 @@ if (typeof videoLink === 'string' && videoLink.length > 0) {
 } else {
   videoLink = '';
 }
+=======
+let videoLink = props.block.videoLink || '';
+videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
+  return match.includes('js_api=1') ? match : match + '&js_api=1';
+});
+>>>>>>> c031cec (#268)
 const handleVideoClick = (link) => {
   videoStore.openModal(link)
 };
@@ -52,20 +59,16 @@ const handleIntersection = (entries) => {
 onMounted(() => {
   if(videoLink) {
 
-    const observer = new IntersectionObserver(handleIntersection, {
-      threshold: 0.5,
-    });
-  
-    if (videoContainer.value) observer.observe(videoContainer.value);
-  
-    const script = document.createElement('script')
-    const iframe = videoContainer.value?.querySelector("iframe")
-    console.log(window.VK)
+  if (videoContainer.value) observer.observe(videoContainer.value);
+
+  const script = document.createElement('script')
+  const iframe = videoContainer.value?.querySelector("iframe")
+  if(iframe) {
     vk.value = window.VK
     const player = vk.value.VideoPlayer(iframe);
     player.mute()
-    document.head.appendChild(script)
   }
+  document.head.appendChild(script)
 });
 
 onUnmounted(() => {
