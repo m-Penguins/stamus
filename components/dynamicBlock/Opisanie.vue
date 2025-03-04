@@ -5,7 +5,7 @@ const assetsStore = useAssets();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const videoStore = useModalVideoStore();
-<<<<<<< HEAD
+
 let videoLink = props.block?.videoLink;
 if (typeof videoLink === 'string' && videoLink.length > 0) {
   videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
@@ -14,12 +14,12 @@ if (typeof videoLink === 'string' && videoLink.length > 0) {
 } else {
   videoLink = '';
 }
-=======
+
 let videoLink = props.block.videoLink || '';
 videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
   return match.includes('js_api=1') ? match : match + '&js_api=1';
 });
->>>>>>> c031cec (#268)
+
 const handleVideoClick = (link) => {
   videoStore.openModal(link)
 };
