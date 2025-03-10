@@ -5,10 +5,14 @@ const assetsStore = useAssets();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const videoStore = useModalVideoStore();
-let videoLink = props.block.videoLink;
-videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
-  return match.includes('js_api=1') ? match : match + '&js_api=1';
-});
+let videoLink = props.block?.videoLink;
+if (typeof videoLink === 'string' && videoLink.length > 0) {
+  videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
+    return match.includes('js_api=1') ? match : match + '&js_api=1';
+  });
+} else {
+  videoLink = '';
+}
 const handleVideoClick = (link) => {
   videoStore.openModal(link)
 };
@@ -46,18 +50,22 @@ const handleIntersection = (entries) => {
 };
 
 onMounted(() => {
-  const observer = new IntersectionObserver(handleIntersection, {
-    threshold: 0.5,
-  });
+  if(videoLink) {
 
-  if (videoContainer.value) observer.observe(videoContainer.value);
-
-  const script = document.createElement('script')
-  const iframe = videoContainer.value?.querySelector("iframe")
-  vk.value = window.VK
-  const player = vk.value.VideoPlayer(iframe);
-  player.mute()
-  document.head.appendChild(script)
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.5,
+    });
+  
+    if (videoContainer.value) observer.observe(videoContainer.value);
+  
+    const script = document.createElement('script')
+    const iframe = videoContainer.value?.querySelector("iframe")
+    console.log(window.VK)
+    vk.value = window.VK
+    const player = vk.value.VideoPlayer(iframe);
+    player.mute()
+    document.head.appendChild(script)
+  }
 });
 
 onUnmounted(() => {
@@ -78,7 +86,7 @@ onUnmounted(() => {
         <img src="@/assets/images/icons/video-logo-block.svg" alt="icon" />
       </div>
     </div>
-    <div class="video-block-inner">
+    <div class="video-block-inner" v-if="videoLink">
       <div
           v-if="videoLink"
           class="video-block-rectangle-video"
