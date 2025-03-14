@@ -44,10 +44,12 @@ export default {
         { id: 5, title: "Налоговый вычет", path: "/nalog-vichet" },
         { id: 6, title: "Статьи", path: "/articles" },
       ],
+      isHidden: false,
     };
   },
   mounted() {
     this.activeClass = this.storeS.getStateService?.[0]?.id;
+    this.observeElement();
   },
   methods: {
     openModal() {
@@ -87,6 +89,21 @@ export default {
         this.$emit("toggleMenu");
         this.$emit("closeMenuDoctors");
       }
+    },
+
+    observeElement() {
+      const target = this.$refs.clinicCount;
+      if (!target) return;
+
+      const observer = new IntersectionObserver(
+          ([entry]) => {
+            this.isHidden = !entry.isIntersecting;
+            console.log(this.isHidden)
+          },
+          { threshold: 0 }
+      );
+
+      observer.observe(target);
     }
   },
   async setup() {
@@ -213,7 +230,7 @@ export default {
 
 <template>
   <div class="header-additional">
-    <div class="header-additional__select">
+    <div ref="clinicCount" class="header-additional__select">
       <p>{{ base.clinics.data.length }} клиник в Краснодаре:</p>
       <elements-custom-select-menu
         :options="base.clinics.data"
@@ -271,6 +288,7 @@ export default {
         showMenuMob ? 'header-menu-mob' : '',
         'header',
         scrolled ? 'header-scrolled' : '',
+        isHidden ? 'header-hidden' : ''
       ]"
     >
       <div class="header-wrap">
@@ -1706,8 +1724,14 @@ text-wrap: wrap;
     padding: 22px 31px;
     overflow-x: scroll;
     white-space: nowrap;
+    &.header-hidden {
+      top: 0;
+    }
     .header-nav {
       display: none;
+    }
+    &.active {
+      top: 0;
     }
   }
   .header::-webkit-scrollbar {
