@@ -44,7 +44,7 @@ const getSpecialistsData = async () => {
 
   const strapiQuery = {
     populate:
-      "fotoSpecialist.*,direction.*,clinic.*,achievements.icon.*,blocks.item.*,blocks.item.icon.*",
+      "fotoSpecialist.*,direction.*,clinic.*,achievements.icon.*,blocks.item.*,blocks.item.icon.*,speczialnosti.*",
     sort: "order:asc",
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
@@ -354,7 +354,7 @@ useHead(generateMeta(positionMeta.value));
                     ?.url ?? placeholdersStore?.imagePlaceholders?.specialists,
                 alt: specialist?.attributes?.fotoSpecialist?.data?.attributes
                   ?.alternativeText,
-                position: specialist?.attributes?.position,
+                position: specialist?.attributes?.speczialnosti?.data?.attributes?.title,
                 achievements: specialist?.attributes?.blocks?.find(
                   (component) =>
                     component.__component === 'blocks-story.achievements',
