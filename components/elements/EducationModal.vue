@@ -173,7 +173,7 @@ async function submitModal() {
   try {
     const mail = useMail();
     await mail.send({
-      config: "form",
+      config: "course",
       from: "dev@sloy.design",
       to: "stamus.ed@yandex.ru",
       subject,
