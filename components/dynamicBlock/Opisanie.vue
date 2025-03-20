@@ -15,14 +15,14 @@ if (typeof videoLink === 'string' && videoLink.length > 0) {
   videoLink = '';
 }
 
-let videoLink = props.block.videoLink || '';
-videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
-  return match.includes('js_api=1') ? match : match + '&js_api=1';
-});
+// let videoLink = props.block.videoLink || '';
+// videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
+//   return match.includes('js_api=1') ? match : match + '&js_api=1';
+// });
 
 const handleVideoClick = (link) => {
   videoStore.openModal(link)
-};
+}
 
 const vk = ref(null)
 
@@ -69,8 +69,7 @@ onMounted(() => {
     player.mute()
   }
   document.head.appendChild(script)
-});
-
+}})
 onUnmounted(() => {
   if (videoContainer.value) observer.unobserve(videoContainer.value);
 });
