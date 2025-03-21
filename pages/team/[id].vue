@@ -359,6 +359,7 @@ const specialists = {
   .stamus-app-container {
     flex-wrap: wrap;
     flex-direction: column-reverse;
+    padding-top: 60px;
   }
 
   .stamus-app-img {
