@@ -25,7 +25,12 @@
       <div>
         <div class="card-photo-name-title">{{ specialists?.name ?? "" }}</div>
         <div class="card-photo-name-text">
-          {{ specialists?.position ?? "" }}
+          <p v-if="Array.isArray(specialists.position)" v-for="position in  specialists.position" :key="position?.id">
+            {{ position?.attributes?.title ?? '' }}
+          </p>
+          <p v-else>
+            {{ specialists?.position ?? "" }}
+          </p>
         </div>
       </div>
       <div v-if="isTooltip && specialists?.achievements" class="tooltip">
