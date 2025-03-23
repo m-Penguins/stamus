@@ -84,6 +84,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
                 position: item?.attributes?.position,
                 id: item?.id,
                 achievements: item?.attributes?.achievements,
+                description: item?.attributes?.description
               }"
               :isTooltip="true"
             />
@@ -222,11 +223,11 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 
 @media (max-width: 800px) {
   .slider-base-btn {
-    padding-bottom: 0px;
+    padding-bottom: 0;
   }
 
   .slider-title {
-    padding: 0px 0 40px 0;
+    padding: 0 0 40px 0;
   }
   .wrapper-btn {
     position: unset;

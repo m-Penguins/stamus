@@ -32,6 +32,15 @@
             {{ specialists?.position ?? "" }}
           </p>
         </div>
+        <div v-if="specialists?.description" class="card-photo-name-text p-t-10">
+          {{ specialists?.description ?? "" }}
+        </div>
+        <div v-if="specialists?.perMonth" class="p-t-10">
+            Проводит:
+            <span class="card-photo-name-text">
+              {{specialists?.perMonth ?? "zxczxczxc"}}
+            </span>
+        </div>
       </div>
       <div v-if="isTooltip && specialists?.achievements" class="tooltip">
         <img src="@/assets/images/icons/icons-badge.svg" />
