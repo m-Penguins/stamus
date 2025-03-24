@@ -25,7 +25,21 @@
       <div>
         <div class="card-photo-name-title">{{ specialists?.name ?? "" }}</div>
         <div class="card-photo-name-text">
-          {{ specialists?.position ?? "" }}
+          <p v-if="Array.isArray(specialists.position)" v-for="position in  specialists.position" :key="position?.id">
+            {{ position?.attributes?.title ?? '' }}
+          </p>
+          <p v-else>
+            {{ specialists?.position ?? "" }}
+          </p>
+        </div>
+        <div v-if="specialists?.description" class="card-photo-name-text p-t-10">
+          {{ specialists?.description ?? "" }}
+        </div>
+        <div v-if="specialists?.perMonth" class="p-t-10">
+            Проводит:
+            <span class="card-photo-name-text">
+              {{specialists?.perMonth ?? "zxczxczxc"}}
+            </span>
         </div>
       </div>
       <div v-if="isTooltip && specialists?.achievements" class="tooltip">

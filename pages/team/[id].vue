@@ -15,11 +15,13 @@ const { data: specialist } = await useFetch(
     },
   },
 );
+const specialistCategories = specialist.value?.data?.attributes?.speczialnosti.data.map((item) => item.attributes.title);
+const specialistSlugs = specialist.value?.data?.attributes?.speczialnosti.data.map((item) => item.attributes.slug);
 
 const { data: specialistsByPosition } = await useFetch(`${apiBaseUrl}specialists`, {
   query: {
     populate: "fotoSpecialist.*",
-    "filters[speczialnosti][slug][$eq]": specialist?.value?.data?.attributes?.speczialnosti?.data?.attributes?.slug,
+    "filters[speczialnosti][slug][$in]": specialistSlugs,
     "pagination[limit]": -1
   },
 });
@@ -83,7 +85,7 @@ const specialists = {
           <elements-title-text-button
             :font-size="true"
             isCategory
-            :category="specialist?.data?.attributes?.speczialnosti?.data?.attributes?.title ?? ''"
+            :category="specialistCategories.join(', ') ?? ''"
             textButtonBase="Записаться онлайн"
             :isButtonBase="true"
             :customClick="

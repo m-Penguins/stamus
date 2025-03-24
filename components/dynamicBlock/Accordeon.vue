@@ -3,6 +3,8 @@ const props = defineProps(["block"]);
 const { block } = props;
 const openItem = ref(null);
 const shouldMap = !props.block?.content;
+const slots = useSlots();
+
 const toggleOpenItem = (itemId) => {
   if (!shouldMap) {
     openItem.value = !openItem.value;
@@ -81,12 +83,15 @@ const toggleOpenItem = (itemId) => {
       </div>
 
       <transition name="dop-info">
-        <div v-show="openItem" v-html="block.content"></div>
+        <div class='info-card__slot' v-show="openItem" v-if="Object.keys(slots).length > 0">
+          <slot name="content" />
+        </div>
+        <div v-else v-show="openItem" v-html="block.content"></div>
       </transition>
     </div>
     <div
       v-else
-      v-for="(item, index) in block.items"
+      v-for="(item) in block.items"
       :key="item?.id"
       class="info-card"
       :class="{
@@ -164,7 +169,7 @@ const toggleOpenItem = (itemId) => {
   list-style-type: unset;
   list-style-position: inside;
   line-height: normal;
-  font-family: Manrope;
+  font-family: Manrope, serif;
 }
 .info {
   display: flex;
@@ -181,6 +186,14 @@ const toggleOpenItem = (itemId) => {
   flex-direction: column;
   border-radius: 10px;
   border: 1px solid var(--stroke, #e9e9e9);
+
+  &__slot {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 14px;
+  }
 
   &__box {
     display: flex;
@@ -237,7 +250,7 @@ const toggleOpenItem = (itemId) => {
 
 .info-card {
   .accordion-content {
-    max-height: 0px;
+    max-height: 0;
     opacity: 0;
     transition: max-height 0.4s ease-in-out, opacity 0.6s ease-in-out,
       margin-top 0.3s ease-in-out;
@@ -299,7 +312,7 @@ const toggleOpenItem = (itemId) => {
   }
 
   & .accordion-content {
-    max-height: 0px;
+    max-height: 0;
     opacity: 0;
     transition: max-height 0.4s ease-in-out, opacity 0.6s ease-in-out,
       margin-top 0.3s ease-in-out;

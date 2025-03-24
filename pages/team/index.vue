@@ -49,7 +49,7 @@ const getSpecialistsData = async () => {
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
     "filters[clinics][id]": clinicFilter.value,
-    "filters[speczialnosti][slug][$eq]": positionFilter.value,
+    "filters[speczialnosti][slug][$in]": positionFilter.value ? [positionFilter.value] : null,
     "filters[directions][id][$eq]": dirFilter.value,
     "filters[fullName][$contains][0]": searchFilter.value?.toUpperCase(),
     "filters[fullName][$contains][1]": searchFilter.value?.toLowerCase(),
@@ -354,7 +354,7 @@ useHead(generateMeta(positionMeta.value));
                     ?.url ?? placeholdersStore?.imagePlaceholders?.specialists,
                 alt: specialist?.attributes?.fotoSpecialist?.data?.attributes
                   ?.alternativeText,
-                position: specialist?.attributes?.speczialnosti?.data?.attributes?.title,
+                position: specialist?.attributes?.speczialnosti?.data,
                 achievements: specialist?.attributes?.blocks?.find(
                   (component) =>
                     component.__component === 'blocks-story.achievements',
