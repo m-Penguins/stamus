@@ -38,7 +38,7 @@
         <div v-if="specialists?.perMonth" class="p-t-10">
             Проводит:
             <span class="card-photo-name-text">
-              {{specialists?.perMonth ?? "zxczxczxc"}}
+              {{specialists?.perMonth ?? ""}}
             </span>
         </div>
       </div>

@@ -280,6 +280,9 @@ const toggleExpansion = () => (isExpanded.value = !isExpanded.value);
 const store = useModalStore();
 
 const sendData = () => {
+  if (window.ym) {
+    window.ym(49742548, "reachGoal", 'popup-form-send');
+  }
   store.submitModal();
 };
 
