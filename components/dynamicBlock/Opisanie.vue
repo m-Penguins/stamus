@@ -58,6 +58,8 @@ const handleIntersection = (entries) => {
 
 onMounted(() => {
   if(videoLink) {
+    const observer = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
+
 
   if (videoContainer.value) observer.observe(videoContainer.value);
 
@@ -69,6 +71,7 @@ onMounted(() => {
     player.mute()
   }
   document.head.appendChild(script)
+  console.log(videoLink)
 }})
 onUnmounted(() => {
   if (videoContainer.value) observer.unobserve(videoContainer.value);
