@@ -98,18 +98,17 @@ const submit = async () => {
     const msg = [
       `Имя: ${formData.value.name}`,
       `Номер телефона: ${formData.value.phone}`,
-      `Клиника: ${clinicFilter.value}`,
+      `Клиника: ${allClinics.find(clinic => clinic.id === clinicFilter.value).name}`,
       `Отзыв: ${formData.value.text}`,
       `Оценка: ${rating.value}`
     ]
         .filter(Boolean)
         .join("\n");
-
     try {
       await mail.send({
         config: "review",
         from: "dev@sloy.design",
-        subject: `${name.value} отзыв`,
+        subject: `${formData.value.name} отзыв`,
         text: msg,
       });
       resetForm();
