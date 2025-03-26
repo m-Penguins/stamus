@@ -84,7 +84,8 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
                 position: item?.attributes?.position,
                 id: item?.id,
                 achievements: item?.attributes?.achievements,
-                description: item?.attributes?.description
+                description: item?.attributes?.description,
+                perMonth: item?.attributes?.perMonth,
               }"
               :isTooltip="true"
             />

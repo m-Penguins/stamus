@@ -1,71 +1,73 @@
 <template>
   <NuxtLink :to="specialists.id ? `/team/${specialists.id}` : ''" class="card-photo-name">
-    <div class="card-photo-name-img">
-      <NuxtImg
-        v-if="specialists?.img"
-        :src="specialists?.img"
-        provider="strapi"
-        :alt="specialists?.alt ?? 'image'"
-        sizes="xs:400px md:600px"
-        format="webp"
-        class="card-img"
-        loading="lazy"
-      />
-      <span v-if="specialists?.sale" class="sale-value">{{
-        specialists?.sale
-      }}</span>
-    </div>
-    <div
-      :class="
+    <div>
+      <div class="card-photo-name-img">
+        <NuxtImg
+            v-if="specialists?.img"
+            :src="specialists?.img"
+            provider="strapi"
+            :alt="specialists?.alt ?? 'image'"
+            sizes="xs:400px md:600px"
+            format="webp"
+            class="card-img"
+            loading="lazy"
+        />
+        <span v-if="specialists?.sale" class="sale-value">{{
+            specialists?.sale
+          }}</span>
+      </div>
+      <div
+          :class="
         specialists?.address
           ? 'card-photo-name-container-discount'
           : 'card-photo-name-container'
       "
-    >
-      <div>
-        <div class="card-photo-name-title">{{ specialists?.name ?? "" }}</div>
-        <div class="card-photo-name-text">
-          <p v-if="Array.isArray(specialists.position)" v-for="position in  specialists.position" :key="position?.id">
-            {{ position?.attributes?.title ?? '' }}
-          </p>
-          <p v-else>
-            {{ specialists?.position ?? "" }}
-          </p>
-        </div>
-        <div v-if="specialists?.description" class="card-photo-name-text p-t-10">
-          {{ specialists?.description ?? "" }}
-        </div>
-        <div v-if="specialists?.perMonth" class="p-t-10">
+      >
+        <div>
+          <div class="card-photo-name-title">{{ specialists?.name ?? "" }}</div>
+          <div class="card-photo-name-text">
+            <p v-if="Array.isArray(specialists.position)" v-for="position in  specialists.position" :key="position?.id">
+              {{ position?.attributes?.title ?? '' }}
+            </p>
+            <p v-else>
+              {{ specialists?.position ?? "" }}
+            </p>
+          </div>
+          <div v-if="specialists?.description" class="card-photo-name-text p-t-10">
+            {{ specialists?.description ?? "" }}
+          </div>
+          <div v-if="specialists?.perMonth" class="p-t-10">
             Проводит:
             <span class="card-photo-name-text">
-              {{specialists?.perMonth ?? ""}}
+              {{specialists?.perMonth ?? ""}} Приемов в месяц
             </span>
+          </div>
         </div>
-      </div>
-      <div v-if="isTooltip && specialists?.achievements" class="tooltip">
-        <img src="@/assets/images/icons/icons-badge.svg" />
-        <span class="info">
+        <div v-if="isTooltip && specialists?.achievements" class="tooltip">
+          <img src="@/assets/images/icons/icons-badge.svg" />
+          <span class="info">
           <div
-            class="tooltip-box"
-            v-for="item in specialists?.achievements.item"
-            :key="item"
+              class="tooltip-box"
+              v-for="item in specialists?.achievements.item"
+              :key="item"
           >
             <img
-              v-if="item?.icon?.data?.attributes?.url"
-              :src="baseUrl + item?.icon?.data?.attributes?.url"
-              alt="icon"
+                v-if="item?.icon?.data?.attributes?.url"
+                :src="baseUrl + item?.icon?.data?.attributes?.url"
+                alt="icon"
             />
             <p class="tooltip-text">{{ item?.text }}</p>
           </div>
         </span>
+        </div>
       </div>
     </div>
     <object>
       <elements-link-with-arrow
-        type
-        title="Подробнее о враче"
-        :link="specialists.id ? `/team/${specialists.id}` : ''"
-        :clickHandler="handleLinkClick"
+          type
+          title="Подробнее о враче"
+          :link="specialists.id ? `/team/${specialists.id}` : ''"
+          :clickHandler="handleLinkClick"
       />
     </object>
 
@@ -74,16 +76,16 @@
         {{ specialists?.address }}
       </p>
       <p
-        v-if="specialists?.description"
-        class="card-photo-name-box-discount__addres"
+          v-if="specialists?.description"
+          class="card-photo-name-box-discount__addres"
       >
         {{ specialists?.description }}
       </p>
       <div v-if="specialists?.time" class="time__container">
         <div
-          v-for="(time, index) in specialists.time"
-          :key="index"
-          class="card-photo-name-box-discount__time"
+            v-for="(time, index) in specialists.time"
+            :key="index"
+            class="card-photo-name-box-discount__time"
         >
           {{ time }}
         </div>
@@ -96,11 +98,11 @@
       <!-- :link="specialists?.link ?? ''" -->
     </div>
     <a
-      v-if="props.link"
-      :href="link"
-      target="_blank"
-      class="button-base card-photo-name-box-discount__btn my-button"
-      >Записаться</a
+        v-if="props.link"
+        :href="link"
+        target="_blank"
+        class="button-base card-photo-name-box-discount__btn my-button"
+    >Записаться</a
     >
   </NuxtLink>
 </template>
