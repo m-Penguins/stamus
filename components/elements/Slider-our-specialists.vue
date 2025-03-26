@@ -43,7 +43,6 @@ const sortedData = sortSpecialistsByOrder(props.programs);
 // console.log(props.programs);
 // console.log(sortedData);
 const baseUrl = useRuntimeConfig().public.baseUrl;
-console.log(sortedData)
 </script>
 
 <template>
