@@ -1,13 +1,13 @@
 <template>
   <div class="share-block">
-    <a href="https://wa.me/79284217386" class="share-item" target="_blank">
+    <a href="https://wa.me/79933078929" class="share-item" target="_blank">
       <span>Написать в WhatsApp</span>
       <img
           :src="assetsStore.useAsset('images/icons/shareWhatsapp.svg')"
           alt="Logo"
       />
     </a>
-    <a href="https://t.me/+79284217386" class="share-item" target="_blank">
+    <a href="https://t.me/StamusEd" class="share-item" target="_blank">
       <span>Написать в Telegram</span>
       <img
           :src="assetsStore.useAsset('images/icons/shareTg.svg')"
