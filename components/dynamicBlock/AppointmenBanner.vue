@@ -92,7 +92,7 @@ const submit = async () => {
       justify-content: center;
       width: 100%;
       max-width: 700px;
-      padding: 30px;
+      padding: 80px 30px;
       h6 {
         font-size: 32px;
         line-height: 130%;
@@ -118,6 +118,12 @@ const submit = async () => {
         gap: 15px;
         p {
           width: 100%;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 16.2px;
+          color: #525660;
+          opacity: 0.7;
         }
         .button {
           max-width: 300px;
@@ -127,10 +133,10 @@ const submit = async () => {
     }
 
     &__specialist {
-      margin-left: auto;
-      max-width: 300px;
+      margin: auto 5% 0 auto;
+      max-width: 340px;
       width: 100%;
-      height: auto;
+      height: 90%;
     }
 
     @media (max-width: 900px) {
@@ -141,7 +147,7 @@ const submit = async () => {
       }
 
       &__specialist {
-        margin-left: 0;
+        margin: 20px 0 0;
       }
     }
 
