@@ -12,7 +12,7 @@ const mappedPriceList = mapPriceList(props?.block?.price_lists?.data);
       <h2 class="popular-service__title">Услуги</h2>
     </div>
     <div v-for="service in mappedPriceList" class="popular-service__list">
-      <dynamic-block-accordeon :block="{
+      <dynamic-block-accordeon :is-opened="!props?.block?.is_accordeon" :block="{
         title: service.title,
         content: [],
       }">

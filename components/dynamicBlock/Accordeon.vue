@@ -1,7 +1,7 @@
 <script setup>
-const props = defineProps(["block"]);
-const { block } = props;
-const openItem = ref(null);
+const props = defineProps(["block", 'isOpened']);
+const { block, isOpened } = props;
+const openItem = ref(isOpened);
 const shouldMap = !props.block?.content;
 const slots = useSlots();
 
