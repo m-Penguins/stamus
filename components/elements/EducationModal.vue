@@ -175,7 +175,6 @@ async function submitModal() {
     await mail.send({
       config: "course",
       from: "dev@sloy.design",
-      to: "stamus.ed@yandex.ru",
       subject,
       text: msg,
     });
