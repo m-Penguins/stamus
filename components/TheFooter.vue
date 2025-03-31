@@ -38,7 +38,9 @@
                 >
                   <img
                     :src="`${baseUrl}${social?.icon?.data?.attributes?.url}`"
-                    :alt="social?.icon?.data?.attributes?.alternativeText ?? 'image'"
+                    :alt="
+                      social?.icon?.data?.attributes?.alternativeText ?? 'image'
+                    "
                     class="footer-img"
                   />
                 </NuxtLink>
@@ -147,7 +149,11 @@
     <div class="under-footer">
       <div class="under-footer-wrap">
         <div>2006-{{ currentYear }} Стамус</div>
-        <a href="https://minimasneva.com/?ysclid=m0pum5wd3t294359078" target="_blank">Разработка и поддержка</a>
+        <a
+          href="https://minimasneva.com/?ysclid=m0pum5wd3t294359078"
+          target="_blank"
+          >Разработка и поддержка</a
+        >
       </div>
     </div>
   </footer>
@@ -220,10 +226,10 @@ const lastColumnNavigation = [
   { id: 6, title: "Контакты", path: "/contacts" },
 ];
 
-const currentYear = ref('')
+const currentYear = ref("");
 onMounted(() => {
-  currentYear.value = new Date().getFullYear()
-})
+  currentYear.value = new Date().getFullYear();
+});
 </script>
 
 <style lang="scss" scoped>
@@ -294,7 +300,7 @@ onMounted(() => {
 
   .under-footer {
     width: 100%;
-    background: #1F2957;
+    background: #1f2957;
     display: flex;
     justify-content: center;
     align-items: center;

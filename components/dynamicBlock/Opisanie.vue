@@ -5,13 +5,23 @@ const assetsStore = useAssets();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const videoStore = useModalVideoStore();
-let videoLink = props.block.videoLink || '';
-videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
-  return match.includes('js_api=1') ? match : match + '&js_api=1';
-});
+
+let videoLink = props.block?.videoLink;
+if (typeof videoLink === 'string' && videoLink.length > 0) {
+  videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
+    return match.includes('js_api=1') ? match : match + '&js_api=1';
+  });
+} else {
+  videoLink = '';
+}
+
+// let videoLink = props.block.videoLink || '';
+// videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
+//   return match.includes('js_api=1') ? match : match + '&js_api=1';
+// });
 const handleVideoClick = (link) => {
   videoStore.openModal(link)
-};
+}
 
 const vk = ref(null)
 
@@ -46,9 +56,9 @@ const handleIntersection = (entries) => {
 };
 
 onMounted(() => {
-  const observer = new IntersectionObserver(handleIntersection, {
-    threshold: 0.5,
-  });
+  if(videoLink) {
+    const observer = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
+
 
   if (videoContainer.value) observer.observe(videoContainer.value);
 
@@ -60,8 +70,8 @@ onMounted(() => {
     player.mute()
   }
   document.head.appendChild(script)
-});
-
+  console.log(videoLink)
+}})
 onUnmounted(() => {
   if (videoContainer.value) observer.unobserve(videoContainer.value);
 });
@@ -80,7 +90,7 @@ onUnmounted(() => {
         <img src="@/assets/images/icons/video-logo-block.svg" alt="icon" />
       </div>
     </div>
-    <div class="video-block-inner">
+    <div class="video-block-inner" v-if="videoLink">
       <div
           v-if="videoLink"
           class="video-block-rectangle-video"
