@@ -70,7 +70,6 @@ const getSpecialistsData = async () => {
 };
 
 const specialists = await getSpecialistsData();
-
 const baseDataStore = useBaseDataStore();
 
 const allClinics = baseDataStore.clinics?.data?.map((cl) => ({
@@ -354,7 +353,7 @@ useHead(generateMeta(positionMeta.value));
                     ?.url ?? placeholdersStore?.imagePlaceholders?.specialists,
                 alt: specialist?.attributes?.fotoSpecialist?.data?.attributes
                   ?.alternativeText,
-                position: specialist?.attributes?.speczialnosti?.data?.attributes?.title,
+                position: specialist?.attributes?.speczialnosti?.data[0]?.attributes?.title,
                 achievements: specialist?.attributes?.blocks?.find(
                   (component) =>
                     component.__component === 'blocks-story.achievements',
