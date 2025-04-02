@@ -60,13 +60,14 @@ const specialists = portfolioData.value?.data?.attributes?.specialists?.data
       id: sp?.id,
       name: `${sp?.attributes?.firstName} ${sp?.attributes?.lastName}`,
       position: sp?.attributes?.position,
-      achievements: sp?.attributes?.achievements,
       img:
         sp?.attributes?.fotoSpecialist?.data?.attributes?.url ??
         placeholdersStore?.imagePlaceholders?.specialists,
       alt:
         sp?.attributes?.fotoSpecialist?.data?.attributes?.alternativeText ?? "",
       achievements: sp?.attributes?.achievements,
+      description: sp?.attributes?.description,
+      perMonth: sp?.attributes?.perMonth,
     };
   });
 

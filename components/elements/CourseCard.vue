@@ -115,9 +115,12 @@ export default {
     box-orient: vertical;
   }
 
+  &__box {
+    width: 100%;
+  }
+
   &__box-img {
     width: 100%;
-    object-fit: cover;
     border-radius: 20px;
     height: 346px;
   }

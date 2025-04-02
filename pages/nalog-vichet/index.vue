@@ -17,7 +17,8 @@ const mockCheckBoxesData = computed(() => {
 const optionsData = [
   { name: "Получаю справку за себя" },
   { name: "Получаю справку за ребенка" },
-  { name: "Получаю справку за супруга" }
+  { name: "Получаю справку за супруга" },
+  { name: "Получаю справку за родителя" }
 ];
 
 const optionsDoc = baseDataStore.clinics?.data

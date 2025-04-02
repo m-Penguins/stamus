@@ -40,13 +40,14 @@
     :title="'Уже были у нас?'"
     :text="'Оставьте отзыв, будем очень вам благодарны'"
     :titleLink="'Оставить отзыв'"
-    link="/leave-review"
+    :handle-link-click="toggleModal"
     bgColor="grey"
     type
     img="heart.png"
     bigImg="true"
   />
   <blocks-main-form />
+  <elements-review-modal v-model="reviewModal"/>
 </template>
 
 <script setup>
@@ -54,6 +55,11 @@ const assetsStore = useAssets();
 const bigImage = "images/big-images/info.jpg";
 const route = useRoute();
 const imgAdaptiv = assetsStore.useAsset("images/big-images/info-adaptiv.jpg");
+const reviewModal = ref(false)
+
+const toggleModal = () => {
+  reviewModal.value = !reviewModal.value;
+};
 
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 

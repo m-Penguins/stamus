@@ -21,7 +21,7 @@ import Accordeon from "@/components/dynamicBlock/Accordeon.vue";
 import DocumentationCard from "@/components/dynamicBlock/DocumentationCard.vue";
 import CompanyRating from "@/components/dynamicBlock/CompanyRating.vue";
 import Solution from "@/components/dynamicBlock/Solution.vue";
-
+import AppointmenBanner from "@/components/dynamicBlock/AppointmenBanner.vue";
 export default function (component) {
   switch (component) {
     case "blocks-story.uslugi":
@@ -70,6 +70,8 @@ export default function (component) {
       return CompanyRating;
     case "blocks-story.programma-reshenie":
       return Solution;
+    case "blocks-story.booking-doctor":
+      return AppointmenBanner
     default:
       "";
   }

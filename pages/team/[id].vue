@@ -15,11 +15,13 @@ const { data: specialist } = await useFetch(
     },
   },
 );
+const specialistCategories = specialist.value?.data?.attributes?.speczialnosti.data.map((item) => item.attributes.title);
+const specialistSlugs = specialist.value?.data?.attributes?.speczialnosti.data.map((item) => item.attributes.slug);
 
 const { data: specialistsByPosition } = await useFetch(`${apiBaseUrl}specialists`, {
   query: {
     populate: "fotoSpecialist.*",
-    "filters[speczialnosti][slug][$eq]": specialist?.value?.data?.attributes?.speczialnosti?.data?.attributes?.slug,
+    "filters[speczialnosti][slug][$in]": specialistSlugs,
     "pagination[limit]": -1
   },
 });
@@ -359,6 +361,7 @@ const specialists = {
   .stamus-app-container {
     flex-wrap: wrap;
     flex-direction: column-reverse;
+    padding-top: 60px;
   }
 
   .stamus-app-img {

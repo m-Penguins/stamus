@@ -19,7 +19,6 @@ if (typeof videoLink === 'string' && videoLink.length > 0) {
 // videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
 //   return match.includes('js_api=1') ? match : match + '&js_api=1';
 // });
-
 const handleVideoClick = (link) => {
   videoStore.openModal(link)
 }

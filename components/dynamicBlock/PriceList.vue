@@ -12,8 +12,17 @@ const mappedPriceList = mapPriceList(props?.block?.price_lists?.data);
       <h2 class="popular-service__title">Услуги</h2>
     </div>
     <div v-for="service in mappedPriceList" class="popular-service__list">
-      <h2 class="popular-service__title">{{ service.title }}</h2>
-      <div v-for="(item, index) in service.services" :key="index">
+      <dynamic-block-accordeon closingIcon="Показать все цены" openingIcon="Скрыть цены" v-if="props?.block?.is_accordeon" :block="{
+        title: service.title,
+        content: [],
+      }">
+        <template #content>
+          <div v-for="(item, index) in service.services" :key="index">
+            <elements-service-card :service="item" />
+          </div>
+        </template>
+      </dynamic-block-accordeon>
+      <div v-else v-for="(item, index) in service.services" :key="index">
         <elements-service-card :service="item" />
       </div>
     </div>
