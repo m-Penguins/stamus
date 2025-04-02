@@ -85,7 +85,7 @@ const specialists = {
           <elements-title-text-button
             :font-size="true"
             isCategory
-            :category="specialist?.data?.attributes?.speczialnosti?.data?.attributes?.title ?? ''"
+            :category="specialist?.data?.attributes?.speczialnosti?.data ?? ''"
             textButtonBase="Записаться онлайн"
             :isButtonBase="true"
             :customClick="
