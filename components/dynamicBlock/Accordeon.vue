@@ -1,6 +1,6 @@
 <script setup>
-const props = defineProps(["block", 'isOpened']);
-const { block, isOpened } = props;
+const props = defineProps(["block", 'isOpened', 'openingIcon', 'closingIcon']);
+const { block, isOpened, openingIcon, closingIcon } = props;
 const openItem = ref(isOpened);
 const shouldMap = !props.block?.content;
 const slots = useSlots();
@@ -31,12 +31,16 @@ const toggleOpenItem = (itemId) => {
       <div class="info-card__box" @click="toggleOpenItem">
         <h3 class="accordion-title">{{ block.title }}</h3>
         <div v-if="!openItem">
+          <div v-if="closingIcon">
+            {{ closingIcon }}
+          </div>
           <svg
-            width="44"
-            height="44"
-            viewBox="0 0 44 44"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+              v-else
+              width="44"
+              height="44"
+              viewBox="0 0 44 44"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
           >
             <path
               class="card-img-fill"
@@ -56,12 +60,16 @@ const toggleOpenItem = (itemId) => {
           </svg>
         </div>
         <div v-else>
+          <div v-if="openingIcon">
+            {{ openingIcon }}
+          </div>
           <svg
-            width="44"
-            height="44"
-            viewBox="0 0 44 44"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+              v-else
+              width="44"
+              height="44"
+              viewBox="0 0 44 44"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
           >
             <path
               class="card-img-fill"
@@ -267,7 +275,6 @@ const toggleOpenItem = (itemId) => {
 .accordion-title {
   @include body-18-regular;
   color: $dark-blue-subtitle;
-  width: 95%;
 }
 
 .info-card {
@@ -282,7 +289,6 @@ const toggleOpenItem = (itemId) => {
 .accordion-title {
   @include body-18-regular;
   color: $dark-blue-subtitle;
-  width: 95%;
 }
 
 .info {
