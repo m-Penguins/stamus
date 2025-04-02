@@ -37,9 +37,8 @@
             {{ specialists?.description ?? "" }}
           </div>
           <div v-if="specialists?.perMonth" class="p-t-10">
-            Проводит:
             <span class="card-photo-name-text">
-              {{specialists?.perMonth ?? ""}} Приемов в месяц
+              {{specialists?.perMonth ?? ""}}
             </span>
           </div>
         </div>
