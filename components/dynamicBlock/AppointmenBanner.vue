@@ -92,7 +92,7 @@ const submit = async () => {
       justify-content: center;
       width: 100%;
       max-width: 700px;
-      padding: 80px 30px;
+      padding: 150px 30px;
       h6 {
         font-size: 32px;
         line-height: 130%;
@@ -133,8 +133,8 @@ const submit = async () => {
     }
 
     &__specialist {
-      margin: auto 5% 0 auto;
-      max-width: 340px;
+      margin: auto 10% 0 auto;
+      max-width: 465px;
       width: 100%;
       height: 90%;
     }
