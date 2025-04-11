@@ -69,6 +69,7 @@ const router = useRouter();
 }
 .areas-box-temp {
   display: flex;
+  justify-content: space-between;
   gap: 14px;
   max-width: 100%;
 

@@ -353,7 +353,7 @@ useHead(generateMeta(positionMeta.value));
                     ?.url ?? placeholdersStore?.imagePlaceholders?.specialists,
                 alt: specialist?.attributes?.fotoSpecialist?.data?.attributes
                   ?.alternativeText,
-                position: specialist?.attributes?.speczialnosti?.data[0]?.attributes?.title,
+                position: specialist?.attributes?.speczialnosti?.data,
                 achievements: specialist?.attributes?.blocks?.find(
                   (component) =>
                     component.__component === 'blocks-story.achievements',

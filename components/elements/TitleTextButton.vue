@@ -10,7 +10,11 @@
       }"
           class="main-title-dark-blue p-bt-30 title"
       ></h1>
-      <p v-if="isCategory" v-html="category" class="title-text-btn-category"></p>
+      <p v-if="isCategory" class="title-text-btn-category">
+      <span v-for="(item, index) in category" :key="index">
+        {{ item.attributes.title }}
+      </span>
+      </p>
       <p
           v-if="!!text"
           v-text="text"
@@ -39,66 +43,64 @@
   </div>
 </template>
 
-<script>
-import ElementsLinkWithArrow from "./ElementsLinkWithArrow.vue";
-export default {
-  components: { ElementsLinkWithArrow },
-  props: {
-    title: {
-      type: String,
-      default: "",
-    },
-    link: {
-      type: String,
-      default: "#",
-    },
-    textButtonBase: {
-      type: String,
-      default: "",
-    },
-    textLinkWithArrow: {
-      type: String,
-      default: "",
-    },
-    text: {
-      type: String,
-      default: "",
-    },
-    fontSize: {
-      type: Boolean,
-      default: true,
-    },
-    isButtonBase: {
-      type: Boolean,
-      default: true,
-    },
-    isLinkWithArrow: {
-      type: Boolean,
-      default: false,
-    },
-    isCategory: {
-      type: Boolean,
-      default: false,
-    },
-    category: {
-      type: String,
-      default: "",
-    },
-    typeColorWhiteText: {
-      type: Boolean,
-      default: false,
-    },
-    isExternal: {
-      type: Boolean,
-      default: false,
-    },
-    customClick: Function,
-    none_btn : {
-      type: Boolean,
-      default: false,
-    }
+<script setup>
+const props = defineProps({
+  title: {
+    type: String,
+    default: ""
   },
-};
+  link: {
+    type: String,
+    default: "#"
+  },
+  textButtonBase: {
+    type: String,
+    default: ""
+  },
+  textLinkWithArrow: {
+    type: String,
+    default: ""
+  },
+  text: {
+    type: String,
+    default: ""
+  },
+  fontSize: {
+    type: Boolean,
+    default: true
+  },
+  isButtonBase: {
+    type: Boolean,
+    default: true
+  },
+  isLinkWithArrow: {
+    type: Boolean,
+    default: false
+  },
+  isCategory: {
+    type: Boolean,
+    default: false
+  },
+  category: {
+    type: Array,
+    default: () => []  // Use function for array/object defaults
+  },
+  typeColorWhiteText: {
+    type: Boolean,
+    default: false
+  },
+  isExternal: {
+    type: Boolean,
+    default: false
+  },
+  customClick: Function,
+  none_btn: {
+    type: Boolean,
+    default: false
+  }
+});
+
+console.log(props.category);
 </script>
 
 <style scoped lang="scss">

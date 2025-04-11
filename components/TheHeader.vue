@@ -1473,6 +1473,9 @@ export default {
   box-shadow: 5px 5px 45px -5px rgba(30, 32, 40, 0.08);
   z-index: 900;
   transition: 0.5s;
+  &.header-hidden {
+    top: 10px;
+  }
   &.header-scrolled {
     top: 30px;
     @media screen and (max-width: 1365px) {
