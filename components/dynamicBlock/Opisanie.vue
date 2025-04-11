@@ -73,7 +73,7 @@ onMounted(() => {
   console.log(videoLink)
 }})
 onUnmounted(() => {
-  if (videoContainer.value) observer.unobserve(videoContainer.value);
+  if (videoContainer.value) observer.unobserve(videoContainer.value);np
 });
 </script>
 
