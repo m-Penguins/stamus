@@ -1,6 +1,6 @@
 <template>
   <div class="banner">
-    <div class="banner__content">
+    <div :class="['banner__content', { 'banner__content--uslugi': isUslugiPage }]">
       <h6>{{ block?.title }}</h6>
       <div class="banner__content-inputs">
         <elements-input-base
@@ -22,7 +22,7 @@
         <p>Нажимая записаться вы соглашаетесь с обработкой персональных данных</p>
       </div>
     </div>
-    <NuxtImg class="banner__specialist" :src="block?.spec?.data?.attributes?.fotoSpecialist?.data?.attributes?.url" provider="strapi"/>
+    <NuxtImg :class="['banner__specialist', { 'banner__specialist--uslugi': isUslugiPage }]" :src="block?.spec?.data?.attributes?.fotoSpecialist?.data?.attributes?.url" provider="strapi"/>
     <span class="message" :class="{ error: isError, success: isSuccess }">{{message}}</span>
   </div>
 </template>
@@ -34,6 +34,7 @@ const number = ref("")
 const isError = ref(false)
 const isSuccess = ref(false)
 const message = ref("")
+
 const resetForm = () => {
   name.value = ""
   number.value = ""
@@ -77,6 +78,7 @@ const submit = async () => {
   }
 }
 
+const isUslugiPage = props?.block?.spec?.data?.attributes?.uslugi
 </script>
 
 <style lang="scss" scoped>
@@ -93,6 +95,9 @@ const submit = async () => {
       width: 100%;
       max-width: 700px;
       padding: 150px 30px;
+      &--uslugi {
+        padding: 80px 30px;
+      }
       h6 {
         font-size: 32px;
         line-height: 130%;
@@ -137,6 +142,10 @@ const submit = async () => {
       max-width: 465px;
       width: 100%;
       height: 90%;
+      &--uslugi {
+        margin: auto 10% 0 auto;
+        max-width: 465px;
+      }
     }
 
     @media (max-width: 900px) {

@@ -63,7 +63,24 @@ const mainImg =
 
 const mainImgAlt = mainInfo?.photoBanner?.data?.attributes?.alternativeText;
 
-const serviceBlocks = mainInfo?.blocks;
+const serviceBlocks = mainInfo?.blocks.map((block) => {
+  if (block.__component === "blocks-story.booking-doctor" && block.spec?.data?.attributes) {
+    return {
+      ...block,
+      spec: {
+        ...block.spec,
+        data: {
+          ...block.spec.data,
+          attributes: {
+            ...block.spec.data.attributes,
+            uslugi: true
+          }
+        }
+      }
+    }
+  }
+  return block;
+});
 // console.log(serviceBlocks)
 
 const blockSpecialists = mainInfo?.specialists;
