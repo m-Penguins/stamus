@@ -33,9 +33,6 @@
               {{ specialists?.position ?? "" }}
             </p>
           </div>
-          <div v-if="specialists?.description" class="card-photo-name-text p-t-10">
-            {{ specialists?.description ?? "" }}
-          </div>
           <div v-if="specialists?.perMonth" class="p-t-10">
             <span class="card-photo-name-text">
               {{specialists?.perMonth ?? ""}}
