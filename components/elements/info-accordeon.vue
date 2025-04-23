@@ -292,6 +292,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
 @media (max-width: 740px) {
   .info-card {
     max-height: 10000px;
+    overflow-y: scroll;
   }
 }
 
@@ -303,6 +304,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
 
 .info-card.open {
   max-height: 10000px;
+  overflow-y: scroll;
 }
 
 .info-links-box {
@@ -326,6 +328,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
   &.open {
     & .accordion-content {
       margin-top: 16px;
+      overflow-y: scroll;
       max-height: 10000px;
       opacity: 1;
     }
@@ -432,6 +435,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
 }
 
 .info-card.open {
+  overflow-y: scroll;
   max-height: 10000px;
 }
 
@@ -496,6 +500,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
   }
   &.open {
     & .accordion-content {
+      overflow-y: scroll;
       margin-top: 16px;
       max-height: 10000px;
       opacity: 1;
@@ -568,6 +573,7 @@ const privacyLink = baseDataStore?.footerData?.data?.attributes?.privacy?.data
 .dop-info-leave-active {
   transition: all 0.5s ease-in-out;
   max-height: 10000px;
+  overflow-y: scroll;
 }
 
 .dop-info-enter-from,
