@@ -256,8 +256,6 @@ a {
 .button-base {
   @include body-16-regular;
   @include flex-center-center;
-  width: max-content;
-  height: 100%;
   padding: 14px 30px;
   box-sizing: border-box;
   background-color: $hover;
@@ -267,7 +265,7 @@ a {
   border-radius: 45px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-
+  display: block;
   &:hover:not(:disabled) {
     border: 1px solid $hover;
     background-color: $white;
