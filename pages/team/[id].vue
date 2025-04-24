@@ -15,16 +15,25 @@ const { data: specialist } = await useFetch(
     },
   },
 );
-const specialistCategories = specialist.value?.data?.attributes?.speczialnosti.data.map((item) => item.attributes.title);
-const specialistSlugs = specialist.value?.data?.attributes?.speczialnosti.data.map((item) => item.attributes.slug);
+const specialistCategories =
+  specialist.value?.data?.attributes?.speczialnosti.data.map(
+    (item) => item.attributes.title,
+  );
+const specialistSlugs =
+  specialist.value?.data?.attributes?.speczialnosti.data.map(
+    (item) => item.attributes.slug,
+  );
 
-const { data: specialistsByPosition } = await useFetch(`${apiBaseUrl}specialists`, {
-  query: {
-    populate: "fotoSpecialist.*",
-    "filters[speczialnosti][slug][$in]": specialistSlugs,
-    "pagination[limit]": -1
+const { data: specialistsByPosition } = await useFetch(
+  `${apiBaseUrl}specialists`,
+  {
+    query: {
+      populate: "fotoSpecialist.*",
+      "filters[speczialnosti][slug][$in]": specialistSlugs,
+      "pagination[limit]": -1,
+    },
   },
-});
+);
 
 if (!specialist.value?.data) {
   throw createError({
@@ -69,11 +78,43 @@ useHead(getMetaObject(metaData, baseUrl));
 
 const blocks = specialist.value?.data?.attributes?.blocks;
 const specialists = {
-    title: "Наши специалисты",
-    specialists: {
-      data: specialistsByPosition?.value?.data
-    }
-}
+  title: "Наши специалисты",
+  specialists: {
+    data: specialistsByPosition?.value?.data,
+  },
+};
+
+const medicalPhysicianData = {
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  name:
+    specialist?.data?.attributes?.lastName +
+    " " +
+    specialist?.data?.attributes?.firstName,
+  url: `${baseUrl}${route.fullPath}`,
+  description: specialist?.data?.attributes?.description ?? "",
+  medicalSpecialty: "Pediatric Dentistry",
+  affiliation: {
+    "@type": "MedicalOrganization",
+    name: "Стамус",
+    url: "https://stamus.ru/",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+7-861-205-92-38",
+    contactType: "customer service",
+    availableLanguage: ["Russian"],
+  },
+};
+
+useHead({
+  script: [
+    {
+      type: "application/ld+json",
+      json: JSON.stringify(medicalPhysicianData),
+    },
+  ],
+});
 </script>
 
 <template>
@@ -180,10 +221,13 @@ const specialists = {
   </div>
   <BlocksMapper :blocks="blocks" />
   <section class="service-section-block">
-    <DynamicBlockContactForm :block="null"/>
+    <DynamicBlockContactForm :block="null" />
   </section>
   <section class="service-section-block">
-   <DynamicBlockSliderSpecialists v-if="specialistsByPosition?.data?.length" :block="specialists"/>
+    <DynamicBlockSliderSpecialists
+      v-if="specialistsByPosition?.data?.length"
+      :block="specialists"
+    />
   </section>
 </template>
 
