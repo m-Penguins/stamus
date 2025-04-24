@@ -111,7 +111,7 @@ useHead({
   script: [
     {
       type: "application/ld+json",
-      json: JSON.stringify(medicalPhysicianData),
+      children: medicalPhysicianData,
     },
   ],
 });

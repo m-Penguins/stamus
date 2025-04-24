@@ -91,7 +91,7 @@ useHead({
   script: [
     {
       type: "application/ld+json",
-      json: JSON.stringify(schemaOrgData),
+      children: schemaOrgData,
     },
   ],
 });
