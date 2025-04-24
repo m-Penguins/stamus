@@ -88,9 +88,9 @@ const medicalPhysicianData = {
   "@context": "https://schema.org",
   "@type": "Physician",
   name:
-    specialist?.data?.attributes?.lastName +
+    specialist?.value?.data?.attributes?.lastName +
     " " +
-    specialist?.data?.attributes?.firstName,
+    specialist?.value?.data?.attributes?.firstName,
   url: `${baseUrl}${route.fullPath}`,
   description: specialist?.data?.attributes?.description ?? "",
   medicalSpecialty: "Pediatric Dentistry",
