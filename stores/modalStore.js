@@ -17,6 +17,7 @@ export const useModalStore = defineStore("modal-store", () => {
   const isModalOpenApplicationAccepted = ref(false);
   const isModalOpen = ref(false);
   const isModalOpenDiscounts = ref(false);
+  const isModalCommunicationInterruptions = ref(false);
   const isModalOpenBid = ref(false);
   const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -65,12 +66,19 @@ export const useModalStore = defineStore("modal-store", () => {
     document.body.classList.add("modal-open");
   }
 
+    function openModalCommunicationInterruptions() {
+      resetForm();
+      isModalCommunicationInterruptions.value = true;
+      document.body.classList.add("modal-open");
+    }
+
   function closeModal() {
     resetForm();
     isModalOpen.value = false;
     isModalOpenDiscounts.value = false;
     isModalOpenBid.value = false;
     isModalOpenApplicationAccepted.value = false;
+    isModalCommunicationInterruptions.value = false;
     document.body.classList.remove("modal-open");
   }
 
@@ -175,8 +183,10 @@ export const useModalStore = defineStore("modal-store", () => {
     closeModal,
     openModalDiscounts,
     isModalOpenDiscounts,
+    isModalCommunicationInterruptions,
     isModalOpenApplicationAccepted,
     openModalApplicationAccepted,
+    openModalCommunicationInterruptions,
     openModalBid,
     isModalOpenBid,
     isEmailVaild,

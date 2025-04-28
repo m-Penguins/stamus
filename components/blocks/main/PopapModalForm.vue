@@ -2,14 +2,14 @@
   <transition name="modal">
     <div
       v-if="
-        store.isModalOpen || store.isModalOpenDiscounts || store.isModalOpenBid || store.isModalOpenApplicationAccepted
+        store.isModalOpen || store.isModalOpenDiscounts || store.isModalOpenBid || store.isModalOpenApplicationAccepted || store.isModalCommunicationInterruptions
       "
       @click="store.closeModal"
       class="popup-wrap"
       @keydown="handleEscapePress"
     >
       <div
-        :class="[store.isModalOpenDiscounts ? 'popup-discounts' : store.isModalOpenApplicationAccepted ? 'popup-alert' : 'popup']"
+        :class="[store.isModalOpenDiscounts ? 'popup-discounts' : (store.isModalOpenApplicationAccepted || store.isModalCommunicationInterruptions) ? 'popup-alert' : 'popup']"
         @click.stop
       >
         <!-- Акция -->
@@ -157,6 +157,13 @@
           <div class="popup-title">
             <p>Ваша заявка принята.</p>
             <p>По готовности с вами свяжется администратор</p>
+          </div>
+        </div>
+        <!-- перебои в работе связи-->
+        <div class="popup-applications-accept" v-if="store.isModalCommunicationInterruptions">
+          <div class="popup-title">
+            <p>Из-за перебоев в работе связи просим писать в мессенджеры.</p>
+            <p>Звонки могут не проходить на нашу линию.</p>
           </div>
         </div>
         <!-- Основная форма -->
