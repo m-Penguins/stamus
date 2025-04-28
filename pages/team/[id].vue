@@ -3,6 +3,7 @@ const route = useRoute();
 const assetsStore = useAssets();
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 const baseUrl = useRuntimeConfig().public.baseUrl;
+const modalStore = useModalStore();
 
 const { data: specialist } = await useFetch(
   `${apiBaseUrl}specialists/${route.params.id}`,
@@ -33,14 +34,6 @@ if (!specialist.value?.data) {
     fatal: true,
   });
 }
-
-const openDoctorLink = (link) => {
-  if (link) {
-    window.open(link, "_blank");
-  } else {
-    redirectToExternalApp();
-  }
-};
 
 const breadcrumbs = [
   {
@@ -74,6 +67,14 @@ const specialists = {
       data: specialistsByPosition?.value?.data
     }
 }
+
+const heroClick = () => {
+  if (specialist?.data?.attributes?.bookingLink) {
+    window.open(specialist?.data?.attributes?.bookingLink, "_blank");
+  }else {
+    modalStore.openModal();
+  }
+};
 </script>
 
 <template>
@@ -88,9 +89,7 @@ const specialists = {
             :category="specialist?.data?.attributes?.speczialnosti?.data ?? ''"
             textButtonBase="Записаться онлайн"
             :isButtonBase="true"
-            :customClick="
-              () => openDoctorLink(specialist?.data?.attributes?.bookingLink)
-            "
+            :customClick="heroClick"
             :title="
               specialist?.data?.attributes?.lastName +
               ' ' +
