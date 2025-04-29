@@ -160,7 +160,7 @@
           </div>
         </div>
         <!-- перебои в работе связи-->
-        <div class="popup-applications-accept" v-if="store.isModalCommunicationInterruptions">
+        <div class="popup-applications-accept popup-communication" v-if="store.isModalCommunicationInterruptions">
           <div class="popup-title">
             <p>Из-за перебоев в работе связи просим писать в мессенджеры.</p>
             <p>Звонки могут не проходить на нашу линию.</p>
@@ -604,7 +604,11 @@ function setIsOpen() {
   .popup-discounts {
     padding: 16px 16px 0 16px;
   }
-
+  .popup-communication {
+    p {
+      font-size: 18px;
+    }
+  }
   .popup-input {
     flex-wrap: wrap;
     gap: 20px;
