@@ -17,9 +17,9 @@
       </main>
     </div>
     <TheFooter :footerData="footerData" />
-    <Teleport to="body"
-      ><blocks-main-popap-modal-form :clinics="baseDataStore.clinics"
-    /></Teleport>
+<!--    <Teleport to="body"-->
+<!--      ><blocks-main-popap-modal-form :clinics="baseDataStore.clinics"-->
+<!--    /></Teleport>-->
     <Teleport to="body"><elements-cookie-consent /></Teleport>
     <Teleport to="body"><ModalVideo /></Teleport>
     <NuxtErrorBoundary
@@ -74,9 +74,9 @@ const [{ data: footerData }] = await Promise.all([
 
 baseDataStore.footerData = footerData.value;
 
-onMounted(() => {
-  store.openModalCommunicationInterruptions();
-});
+// onMounted(() => {
+//   store.openModalCommunicationInterruptions();
+// });
 
 // useHead({
 //   link: [
