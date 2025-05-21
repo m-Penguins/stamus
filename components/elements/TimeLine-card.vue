@@ -56,7 +56,7 @@
 const props = defineProps({
   events: Array,
 });
-console.log(props.events);
+// console.log(props.events);
 const showAll = ref(false);
 const displayedEvents = ref(props.events.slice(0, 4));
 

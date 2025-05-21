@@ -5,49 +5,54 @@
         Откликнуться на вакансию
       </h2>
       <p class="form-wrapper__subtitle subtitle-gray">
-        Заполните форму и наш HR-менеджер свяжется с вами в случае <br /> заинтересованности
+        Заполните форму и наш HR-менеджер свяжется с вами в случае <br />
+        заинтересованности
       </p>
       <div class="form-wrapper__box">
         <elements-input-base
-            tag-type="input"
-            class="form-input"
-            label="Имя"
-            v-model="formData.name"
-            :error-message="isNameValid ? '' : '*Минимум два символа'"
+          tag-type="input"
+          class="form-input"
+          label="Имя"
+          v-model="formData.name"
+          :error-message="isNameValid ? '' : '*Минимум два символа'"
         />
         <elements-input-base
-            label="Номер телефона"
-            tag-type="phoneMask"
-            type="tel"
-            v-model="formData.phone"
-            class="form-input"
-            :error-message="isPhoneValid ? '' : '*Неверный формат'"
+          label="Номер телефона"
+          tag-type="phoneMask"
+          type="tel"
+          v-model="formData.phone"
+          class="form-input"
+          :error-message="isPhoneValid ? '' : '*Неверный формат'"
         />
         <elements-input-base
-            label="Какая у вас должность?*"
-            tag-type="input"
-            v-model="formData.position"
-            class="form-input"
+          label="Какая у вас должность?*"
+          tag-type="input"
+          v-model="formData.position"
+          class="form-input"
         />
         <elements-file-uploader
-            label="Прикрепить резюме"
-            v-model="formData.cv"
-            class="form-input"
+          label="Прикрепить резюме"
+          v-model="formData.cv"
+          class="form-input"
         />
         <elements-input-base
-            label="Сопроводительное сообщение (пришлите здесь ссылку на резюме если не получится прикрепить файл)"
-            tag-type="textarea"
-            class="form-textarea"
-            v-model="formData.letter"
+          label="Сопроводительное сообщение (пришлите здесь ссылку на резюме если не получится прикрепить файл)"
+          tag-type="textarea"
+          class="form-textarea"
+          v-model="formData.letter"
         />
         <elements-button-base
-            :onClick="submit"
-            :disabled="!isSubmitActive"
-            title="Отправить"
-            class="form-btn"
+          :onClick="submit"
+          :disabled="!isSubmitActive"
+          title="Отправить"
+          class="form-btn"
         />
-        <a href="https://hh.ru/employer/5034648?from=share_ios" class="hh-link">Посмотреть вакансию на HeadHunter</a>
-        <p v-if="isSuccess" class="success-text" >Ваша заявка успешно отправлена!</p>
+        <a href="https://hh.ru/employer/5034648?from=share_ios" class="hh-link"
+          >Посмотреть вакансию на HeadHunter</a
+        >
+        <p v-if="isSuccess" class="success-text">
+          Ваша заявка успешно отправлена!
+        </p>
       </div>
     </div>
     <BlocksFormContacts phone="+7-928-421-73-86" />
@@ -55,16 +60,15 @@
 </template>
 
 <script setup>
-
 const formData = ref({
-  name: '',
-  phone: '',
-  position: '',
+  name: "",
+  phone: "",
+  position: "",
   cv: null,
-  letter: ''
+  letter: "",
 });
 const startValidation = ref(false);
-const isError = ref(false)
+const isError = ref(false);
 const isSubmitActive = computed(() => {
   return formData.value.name.length && formData.value.phone.length > 0;
 });
@@ -85,7 +89,7 @@ const isPhoneValid = computed(() => {
 });
 
 const resetForm = () => {
-  formData.value = { name: '', phone: '', position: '', cv: null, letter: '' };
+  formData.value = { name: "", phone: "", position: "", cv: null, letter: "" };
   startValidation.value = false;
 };
 
@@ -95,8 +99,12 @@ const submit = async () => {
     const mailData = {
       name: formData.value.name ? `Имя: ${formData.value.name}` : null,
       phone: formData.value.phone ? `Телефон: ${formData.value.phone}` : null,
-      position: formData.value.position ? `Должность: ${formData.value.position}` : null,
-      letter: formData.value.letter ? `Сообщение: ${formData.value.letter}` : null,
+      position: formData.value.position
+        ? `Должность: ${formData.value.position}`
+        : null,
+      letter: formData.value.letter
+        ? `Сообщение: ${formData.value.letter}`
+        : null,
     };
 
     const subject = "Отклик на вакансию";
@@ -110,11 +118,12 @@ const submit = async () => {
         attachment = await new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.readAsDataURL(formData.value.cv);
-          reader.onload = () => resolve({
-            filename: formData.value.cv.name,
-            content: reader.result.split(',')[1], // Получаем base64
-            encoding: "base64"
-          });
+          reader.onload = () =>
+            resolve({
+              filename: formData.value.cv.name,
+              content: reader.result.split(",")[1], // Получаем base64
+              encoding: "base64",
+            });
           reader.onerror = reject;
         });
       }
@@ -126,7 +135,7 @@ const submit = async () => {
         text: msg,
         attachments: attachment ? [attachment] : [],
       });
-      console.log(data)
+      // console.log(data)
       resetForm();
       isSuccess.value = true;
     } catch (error) {
@@ -211,7 +220,6 @@ const submit = async () => {
   text-decoration: underline;
   color: #525660;
 }
-
 
 @media (max-width: 1280px) {
   .form-wrapper {

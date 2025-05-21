@@ -56,7 +56,7 @@ const bigImgAlt =
 const specialists = portfolioData.value?.data?.attributes?.specialists?.data
   ?.filter((sp) => sp?.attributes?.publishedAt != null)
   ?.map((sp) => {
-    console.log(sp);
+    // console.log(sp);
     return {
       id: sp?.id,
       name: `${sp?.attributes?.firstName} ${sp?.attributes?.lastName}`,

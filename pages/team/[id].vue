@@ -76,7 +76,7 @@ const specialists = {
     data: specialistsByPosition?.value?.data,
   },
 };
-console.log(specialists);
+// console.log(specialists);
 
 const medicalPhysicianData = {
   "@context": "https://schema.org",

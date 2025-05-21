@@ -12,8 +12,9 @@ const emits = defineEmits(["select"]);
 const isOpen = ref(false);
 const selectedItem = computed(
   () =>
-    props.options?.find((el) => String(el?.[props.keyField]) === String(props?.selectedId))
-      ?.name,
+    props.options?.find(
+      (el) => String(el?.[props.keyField]) === String(props?.selectedId),
+    )?.name,
 );
 
 const resetChosen = () => {
@@ -22,7 +23,7 @@ const resetChosen = () => {
 };
 
 const handleSelect = (option) => {
-  console.log(option)
+  // console.log(option)
   isOpen.value = false;
   emits("select", option);
 };
