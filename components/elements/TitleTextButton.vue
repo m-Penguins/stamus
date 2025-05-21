@@ -11,9 +11,9 @@
           class="main-title-dark-blue p-bt-30 title"
       ></h1>
       <p v-if="isCategory" class="title-text-btn-category">
-      <span v-for="(item, index) in category" :key="index">
-        {{ item.attributes.title }}
-      </span>
+     <span v-for="(item, index) in category" :key="index">
+       {{ item.attributes.title }}<span v-if="index < category.length - 1">, </span>
+     </span>
       </p>
       <p
           v-if="!!text"

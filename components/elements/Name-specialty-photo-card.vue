@@ -26,11 +26,8 @@
         <div>
           <div class="card-photo-name-title">{{ specialists?.name ?? "" }}</div>
           <div class="card-photo-name-text">
-            <p v-if="Array.isArray(specialists.position)" v-for="position in  specialists.position" :key="position?.id">
-              {{ position?.attributes?.title ?? '' }}
-            </p>
-            <p v-else>
-              {{ specialists?.position ?? "" }}
+            <p v-for="spec in specialists.speczialnosti">
+              {{spec?.attributes.title}}
             </p>
           </div>
           <div v-if="specialists?.perMonth" class="p-t-10">

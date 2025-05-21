@@ -25,7 +25,7 @@ const placeholdersStore = usePlaceholdersStore();
 const [{ data: happyHours }, { data: headerData }] = await Promise.all([
   useFetch(`${apiBaseUrl}lucky-times`, {
     query: {
-      populate: "specialist.fotoSpecialist.*,specialist.clinics.*,time.*",
+      populate: "specialist.fotoSpecialist.*,specialist.clinics.*,time.*, specialist.speczialnosti.*",
     },
   }),
   useFetch(`${apiBaseUrl}happy-hour`, {
@@ -57,7 +57,8 @@ const specialists = happyHours?.value?.data?.map((hh) => {
     description: hh?.attributes?.description ?? "",
     link: hh?.attributes?.link,
     sale: hh?.attributes?.sale,
-    id: hh?.attributes?.specialist?.data?.id
+    id: hh?.attributes?.specialist?.data?.id,
+    speczialnosti: hh?.attributes?.specialist?.data?.attributes?.speczialnosti?.data
   };
 
   return spec;
