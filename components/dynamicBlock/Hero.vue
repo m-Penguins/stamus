@@ -203,9 +203,6 @@ onUnmounted(() => {
     gap: 34px;
     align-items: center;
 
-    img {
-      // width: 51%;
-    }
   }
   .dentistry-container {
     height: 100%;
@@ -269,7 +266,6 @@ onUnmounted(() => {
 
 @media (min-width: 2560px) {
   .dentistry-container {
-    // background-size: contain;
     width: 2520px;
   }
 }

@@ -30,6 +30,8 @@
 <script setup>
 const showMenuPatients = ref(false);
 const showMenuDoctors = ref(false);
+const store = useModalStore();
+
 const closeAllMenu = () => {
   showMenuPatients.value = false
   showMenuDoctors.value = false
@@ -69,6 +71,10 @@ const [{ data: footerData }] = await Promise.all([
 ]);
 
 baseDataStore.footerData = footerData.value;
+
+// onMounted(() => {
+//   store.openModalCommunicationInterruptions();
+// });
 
 // useHead({
 //   link: [
