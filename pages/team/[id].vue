@@ -29,7 +29,7 @@ const { data: specialistsByPosition } = await useFetch(
   `${apiBaseUrl}specialists`,
   {
     query: {
-      populate: "fotoSpecialist.*",
+      populate: "fotoSpecialist.*, speczialnosti.*",
       "filters[speczialnosti][slug][$in]": specialistSlugs,
       "pagination[limit]": -1,
     },
@@ -76,6 +76,7 @@ const specialists = {
     data: specialistsByPosition?.value?.data,
   },
 };
+console.log(specialists);
 
 const medicalPhysicianData = {
   "@context": "https://schema.org",

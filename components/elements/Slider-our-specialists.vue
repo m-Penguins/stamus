@@ -81,7 +81,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
                   placeholdersStore?.imagePlaceholders?.specialists,
                 alt: item?.attributes?.fotoSpecialist?.data?.attributes
                   ?.alternativeText,
-                position: item?.attributes?.position,
+                position: item?.attributes?.speczialnosti.data,
                 id: item?.id,
                 achievements: item?.attributes?.achievements,
                 description: item?.attributes?.description,

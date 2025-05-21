@@ -1,28 +1,37 @@
 <template>
   <div class="container">
-    <div class="container-bg" :class="{ 'no-bg': $route.path === '/' || $route.path.startsWith('/team/') || $route.path.startsWith('/articles/') }">
-      <h1
-          v-if="title"
-          v-html="title"
-          :class="{
-        fontSize: fontSize ? 'fontSize' : '',
-        typeColorWhiteText: typeColorWhiteText ? 'typeColorWhiteText' : '',
+    <div
+      class="container-bg"
+      :class="{
+        'no-bg':
+          $route.path === '/' ||
+          $route.path.startsWith('/team/') ||
+          $route.path.startsWith('/articles/'),
       }"
-          class="main-title-dark-blue p-bt-30 title"
+    >
+      <h1
+        v-if="title"
+        v-html="title"
+        :class="{
+          fontSize: fontSize ? 'fontSize' : '',
+          typeColorWhiteText: typeColorWhiteText ? 'typeColorWhiteText' : '',
+        }"
+        class="main-title-dark-blue p-bt-30 title"
       ></h1>
       <p v-if="isCategory" class="title-text-btn-category">
-      <span v-for="(item, index) in category" :key="index">
-        {{ item.attributes.title }}
-      </span>
+        <span v-for="(item, index) in category" :key="index">
+          {{ item.attributes.title }}
+          <span v-if="index !== category.length - 1"> | </span>
+        </span>
       </p>
       <p
-          v-if="!!text"
-          v-text="text"
-          :class="{
-        isButtonBase: !isButtonBase ? 'isButtonBase' : '',
-        typeColorWhiteText: typeColorWhiteText ? 'typeColorWhiteText' : '',
-      }"
-          class="container-text p-bt-30 text"
+        v-if="!!text"
+        v-text="text"
+        :class="{
+          isButtonBase: !isButtonBase ? 'isButtonBase' : '',
+          typeColorWhiteText: typeColorWhiteText ? 'typeColorWhiteText' : '',
+        }"
+        class="container-text p-bt-30 text"
       ></p>
     </div>
     <div v-if="!none_btn" class="title-text-btn-container">
@@ -47,57 +56,57 @@
 const props = defineProps({
   title: {
     type: String,
-    default: ""
+    default: "",
   },
   link: {
     type: String,
-    default: "#"
+    default: "#",
   },
   textButtonBase: {
     type: String,
-    default: ""
+    default: "",
   },
   textLinkWithArrow: {
     type: String,
-    default: ""
+    default: "",
   },
   text: {
     type: String,
-    default: ""
+    default: "",
   },
   fontSize: {
     type: Boolean,
-    default: true
+    default: true,
   },
   isButtonBase: {
     type: Boolean,
-    default: true
+    default: true,
   },
   isLinkWithArrow: {
     type: Boolean,
-    default: false
+    default: false,
   },
   isCategory: {
     type: Boolean,
-    default: false
+    default: false,
   },
   category: {
     type: Array,
-    default: () => []  // Use function for array/object defaults
+    default: () => [], // Use function for array/object defaults
   },
   typeColorWhiteText: {
     type: Boolean,
-    default: false
+    default: false,
   },
   isExternal: {
     type: Boolean,
-    default: false
+    default: false,
   },
   customClick: Function,
   none_btn: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
 console.log(props.category);

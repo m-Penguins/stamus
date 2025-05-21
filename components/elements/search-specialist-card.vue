@@ -6,7 +6,17 @@
       </div>
       <div class="specialists-box">
         <div class="specialists-box__name">{{ spesialistCard?.name }}</div>
-        <div class="specialists-box__spec">{{ spesialistCard?.position }}</div>
+        <!-- <div class="specialists-box__spec" v-for="">{{ spesialistCard?.position }}</div> -->
+        <div
+          class="specialists-box__spec"
+          v-for="(item, index) in spesialistCard?.position.data"
+          :key="index"
+        >
+          {{ item.attributes.title }}
+          <!-- <span v-if="index !== spesialistCard?.position.data.length - 1">
+            |
+          </span> -->
+        </div>
       </div>
     </div>
     <div>
