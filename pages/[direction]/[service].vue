@@ -32,7 +32,7 @@ const { data: serviceData } = await useFetch(`${apiBaseUrl}services`, {
       ",specialists.fotoSpecialist.*,category.napravleniya_uslug_1_col.*,specialists.speczialnosti.*",
   },
 });
-console.log(serviceData);
+// console.log(serviceData);
 
 if (!serviceData?.value?.data?.length) {
   throw createError({
