@@ -30,7 +30,7 @@
           <div>
             <elements-title-text-button
                 :textButtonBase="textButtonBase || 'Записаться онлайн'"
-                :customClick="customClick || redirectToExternalApp"
+                :customClick="redirectToExternalApp"
                 :isButtonBase="isButtonBase"
                 :title="title"
                 :font-size="true"
@@ -62,7 +62,7 @@
         <elements-title-text-button
             v-if="!isMobileView"
             :typeColorWhiteText="typeColorWhiteText"
-            :customClick="customClick || redirectToExternalApp"
+            :customClick="redirectToExternalApp"
             :textButtonBase="textButtonBase || 'Записаться онлайн'"
             :isButtonBase="isButtonBase"
             :title="title"

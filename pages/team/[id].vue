@@ -131,7 +131,7 @@ const heroClick = () => {
             :category="specialist?.data?.attributes?.speczialnosti?.data ?? ''"
             textButtonBase="Записаться онлайн"
             :isButtonBase="true"
-            :customClick="heroClick"
+            :customClick="redirectToExternalApp"
             :title="
               specialist?.data?.attributes?.lastName +
               ' ' +
