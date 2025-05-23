@@ -40,6 +40,8 @@
 
               <NuxtLink
                   class="link-wrapper"
+                  to="https://stoma1c.ru/widget-org/812448440"
+                  target="_blank"
               >
                 <p class="#CFD5E1 text-white">Записаться онлайн</p>
                 <div>

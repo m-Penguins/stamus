@@ -3,10 +3,6 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 
 const props = defineProps(["title", "description", "twoDirections"]);
 const modalStore = useModalStore();
-
-const onRedirectToExternalApp = () => {
-  modalStore.openModal();
-};
 </script>
 
 <template>
@@ -15,7 +11,7 @@ const onRedirectToExternalApp = () => {
       <elements-title-text-button
         :fontSize="false"
         textButtonBase="Записаться онлайн"
-        :customClick="onRedirectToExternalApp"
+        :customClick="redirectToExternalApp"
         :title="title"
         :text="description"
       />

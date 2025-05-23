@@ -38,7 +38,7 @@
         </div>
         <elements-title-text-button
           v-if="!isMobileView"
-          :customClick="heroClick"
+          :customClick="redirectToExternalApp"
           :textButtonBase="buttonText"
           isButtonBase
           :title="title"
