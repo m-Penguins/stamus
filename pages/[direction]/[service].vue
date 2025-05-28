@@ -29,9 +29,10 @@ const { data: serviceData } = await useFetch(`${apiBaseUrl}services`, {
     sort: "specialists.order:asc",
     populate:
       blocksQuey +
-      ",specialists.fotoSpecialist.*,category.napravleniya_uslug_1_col.*",
+      ",specialists.fotoSpecialist.*,category.napravleniya_uslug_1_col.*,specialists.speczialnosti.*",
   },
 });
+console.log(serviceData);
 
 if (!serviceData?.value?.data?.length) {
   throw createError({
