@@ -245,22 +245,24 @@ const testClick = () => {
         </div>
       </div>
       <div v-else :style="{ textAlign: 'center' }">Ничего не найдено</div>
-      <vue-awesome-paginate
-        v-model="currentPage"
-        :total-items="totalItems"
-        :items-per-page="pageSize"
-        :max-pages-shown="3"
-        :on-click="testClick"
-        paginate-buttons-class="btn"
-        active-page-class="btn-active"
-        back-button-class="back-btn"
-        next-button-class="next-btn"
-        :show-breakpoint-buttons="true"
-        :hide-prev-next="true"
-        type="link"
-        link-url="/articles?page=[page]"
-        class="pagination"
-      />
+      <client-only>
+        <vue-awesome-paginate
+          v-model="currentPage"
+          :total-items="totalItems"
+          :items-per-page="pageSize"
+          :max-pages-shown="3"
+          @click="handlePageClick"
+          paginate-buttons-class="btn"
+          active-page-class="btn-active"
+          back-button-class="back-btn"
+          next-button-class="next-btn"
+          :show-breakpoint-buttons="true"
+          :hide-prev-next="true"
+          type="link"
+          link-url="/articles?page=[page]"
+          class="pagination"
+        />
+      </client-only>
       <blocks-main-form />
     </div>
   </div>
