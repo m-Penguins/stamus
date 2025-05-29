@@ -254,6 +254,8 @@ console.log(totalItems.value);
         next-button-class="next-btn"
         :show-breakpoint-buttons="true"
         :hide-prev-next="true"
+        type="link"
+        link-url="/articles?page=[page]"
         class="pagination"
       />
       <blocks-main-form />
