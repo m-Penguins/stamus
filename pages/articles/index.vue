@@ -21,7 +21,7 @@ const totalPages = computed(() =>
 );
 
 const handlePageClick = async (page) => {
-  console.log("Page clicked:", page);
+  // console.log("Page clicked:", page);
   currentPage.value = page;
   let searchQuery = "";
   if (page != 1) {
@@ -190,8 +190,8 @@ useHead({
 });
 
 currentPage.value = parseInt(currentPage.value);
-console.log("Current page:", currentPage.value);
-console.log(totalItems.value);
+// console.log("Current page:", currentPage.value);
+// console.log(totalItems.value);
 </script>
 
 <template>
