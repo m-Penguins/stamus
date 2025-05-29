@@ -192,6 +192,9 @@ useHead({
 currentPage.value = parseInt(currentPage.value);
 // console.log("Current page:", currentPage.value);
 // console.log(totalItems.value);
+const testClick = () => {
+  console.log("Test click");
+};
 </script>
 
 <template>
@@ -247,7 +250,7 @@ currentPage.value = parseInt(currentPage.value);
         :total-items="totalItems"
         :items-per-page="pageSize"
         :max-pages-shown="3"
-        :on-click="handlePageClick"
+        :on-click="testClick"
         paginate-buttons-class="btn"
         active-page-class="btn-active"
         back-button-class="back-btn"
