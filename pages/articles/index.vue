@@ -190,6 +190,8 @@ useHead({
 });
 
 currentPage.value = parseInt(currentPage.value);
+console.log("Current page:", currentPage.value);
+console.log(totalItems.value);
 </script>
 
 <template>
