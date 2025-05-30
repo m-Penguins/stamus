@@ -38,7 +38,7 @@
         </div>
         <elements-title-text-button
           v-if="!isMobileView"
-          :customClick="redirectToExternalApp"
+          :customClick="heroClick"
           :textButtonBase="buttonText"
           isButtonBase
           :title="title"
@@ -52,6 +52,7 @@
 </template>
 
 <script setup>
+
 const props = defineProps([
   "title",
   "text",
@@ -70,7 +71,7 @@ const heroClick = () => {
   if (props?.link) {
     window?.open(props?.link, "_blank");
   } else {
-    modalStore.openModal();
+    redirectToExternalApp()
   }
 };
 

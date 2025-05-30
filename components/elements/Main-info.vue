@@ -62,7 +62,7 @@
         <elements-title-text-button
             v-if="!isMobileView"
             :typeColorWhiteText="typeColorWhiteText"
-            :customClick="redirectToExternalApp"
+            :customClick="customClick || redirectToExternalApp"
             :textButtonBase="textButtonBase || 'Записаться онлайн'"
             :isButtonBase="isButtonBase"
             :title="title"
