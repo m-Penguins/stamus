@@ -69,9 +69,9 @@ const specialists = {
 }
 
 const heroClick = () => {
-  if (specialist?.data?.attributes?.bookingLink) {
-    window.open(specialist?.data?.attributes?.bookingLink, "_blank");
-  }else {
+  if (specialist?.value?.data?.attributes?.bookingLink) {
+    window.open(specialist?.value?.data?.attributes?.bookingLink, "_blank");
+  } else {
     redirectToExternalApp()
   }
 };
