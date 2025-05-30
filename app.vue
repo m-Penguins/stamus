@@ -72,11 +72,25 @@ const [{ data: footerData }] = await Promise.all([
   placeholdersStore.getImagePlaceholders(),
 ]);
 
+const [{ data: mainData }] = await Promise.all([
+  useFetch(`${apiBaseUrl}glavnaya`, {
+    query: {
+      populate: {
+        tech_popup: {
+          populate: '*',
+        },
+      },
+    },
+  }),
+]);
+
 baseDataStore.footerData = footerData.value;
 
-// onMounted(() => {
-//   store.openModalCommunicationInterruptions();
-// });
+onMounted(() => {
+  if (mainData.value?.data?.attributes?.tech_popup) {
+    store.openModalCommunicationInterruptions();
+  }
+});
 
 // useHead({
 //   link: [
