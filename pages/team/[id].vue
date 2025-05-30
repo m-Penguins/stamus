@@ -114,7 +114,7 @@ const heroClick = () => {
   if (specialist?.data?.attributes?.bookingLink) {
     window.open(specialist?.data?.attributes?.bookingLink, "_blank");
   } else {
-    modalStore.openModal();
+    redirectToExternalApp();
   }
 };
 </script>
@@ -131,7 +131,7 @@ const heroClick = () => {
             :category="specialist?.data?.attributes?.speczialnosti?.data ?? ''"
             textButtonBase="Записаться онлайн"
             :isButtonBase="true"
-            :customClick="redirectToExternalApp"
+            :customClick="heroClick"
             :title="
               specialist?.data?.attributes?.lastName +
               ' ' +
