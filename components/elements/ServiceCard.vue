@@ -6,7 +6,7 @@
           <div class="grey-point-container">
             <div
               class="service-card-category grey-point-container"
-              v-for="(item, index) in service?.tags?.split(' | ')"
+              v-for="(item, index) in service?.tags.split(' | ')"
               :key="item"
             >
               <p class="grey-point-text">{{ item }}</p>
