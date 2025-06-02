@@ -47,7 +47,7 @@ const specialists = happyHours?.value?.data?.map((hh) => {
 
   const spec = {
     name: (firstName ?? "") + " " + (lastname ?? ""),
-    position:
+    speczialnosti:
       hh?.attributes?.specialist?.data?.attributes?.speczialnosti.data ?? "",
     img:
       hh?.attributes?.specialist?.data?.attributes?.fotoSpecialist?.data
@@ -64,7 +64,7 @@ const specialists = happyHours?.value?.data?.map((hh) => {
 
   return spec;
 });
-
+console.log(specialists);
 const breadcrumbs = [
   {
     title: "Главная",
