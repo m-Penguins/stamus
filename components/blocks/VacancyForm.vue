@@ -121,7 +121,7 @@ const submit = async () => {
           reader.onload = () =>
             resolve({
               filename: formData.value.cv.name,
-              content: reader.result.split(",")[1], // Получаем base64
+              content: reader.result?.split(",")[1], // Получаем base64
               encoding: "base64",
             });
           reader.onerror = reject;

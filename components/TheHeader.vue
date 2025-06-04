@@ -1520,7 +1520,7 @@ export default {
 }
 
 .header-nav-list {
-  @media screen and (max-width: 1360px) {
+  @media screen and (max-width: 1357px) {
     display: flex;
     // align-items: center;
     flex-direction: column;
