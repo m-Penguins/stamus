@@ -12,6 +12,25 @@
         :class="[store.isModalOpenDiscounts ? 'popup-discounts' : (store.isModalOpenApplicationAccepted || store.isModalCommunicationInterruptions) ? 'popup-alert' : 'popup']"
         @click.stop
       >
+        <div class="popup-close">
+          <svg
+              @click="store.closeModal"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect width="20" height="20" rx="2" fill="#FBFBFB" />
+            <path
+                d="M6 6L14 14M14 6L6 14"
+                class="close-reg"
+                stroke="#33383A"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+          </svg>
+        </div>
         <!-- Акция -->
         <div v-if="store.isModalOpenDiscounts" class="popup-discounts-wrap">
           <div class="popup-discounts-logo">
@@ -72,27 +91,9 @@
             </p>
           </div>
         </div>
-        <div class="popup-close">
-          <svg
-            @click="store.closeModal"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect width="20" height="20" rx="2" fill="#FBFBFB" />
-            <path
-              d="M6 6L14 14M14 6L6 14"
-              class="close-reg"
-              stroke="#33383A"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
+
         <!-- Прайс форма -->
-        <div v-if="store.isModalOpenBid" class="popup-container">
+        <div v-else-if="store.isModalOpenBid" class="popup-container">
           <div class="popup-title">Оставить заявку</div>
           <div class="popup-inner price">
             <div class="popup-input">
@@ -153,14 +154,14 @@
           </div>
         </div>
         <!-- Заявка принята -->
-        <div v-if="store.isModalOpenApplicationAccepted" class="popup-applications-accept">
+        <div v-else-if="store.isModalOpenApplicationAccepted" class="popup-applications-accept">
           <div class="popup-title">
             <p>Ваша заявка принята.</p>
             <p>По готовности с вами свяжется администратор</p>
           </div>
         </div>
         <!-- перебои в работе связи-->
-        <div class="popup-applications-accept popup-communication" v-if="store.isModalCommunicationInterruptions">
+        <div v-else-if="store.isModalCommunicationInterruptions" class="popup-applications-accept popup-communication" >
           <div class="popup-title">
             <p>Из-за перебоев в работе связи просим писать в мессенджеры.</p>
             <p>Звонки могут не проходить на нашу линию.</p>
