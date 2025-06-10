@@ -21,7 +21,7 @@ const specialistSlugs = specialist.value?.data?.attributes?.speczialnosti.data.m
 
 const { data: specialistsByPosition } = await useFetch(`${apiBaseUrl}specialists`, {
   query: {
-    populate: "fotoSpecialist.*",
+    populate: "fotoSpecialist.*,speczialnosti.*",
     "filters[speczialnosti][slug][$in]": specialistSlugs,
     "pagination[limit]": -1
   },

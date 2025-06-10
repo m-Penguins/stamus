@@ -40,6 +40,7 @@ const sortSpecialistsByOrder = (data) => {
 // const newSpec = specialistsData.data;
 
 const sortedData = sortSpecialistsByOrder(props.programs);
+console.log(props.programs)
 // console.log(props.programs);
 // console.log(sortedData);
 const baseUrl = useRuntimeConfig().public.baseUrl;
@@ -81,7 +82,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
                   placeholdersStore?.imagePlaceholders?.specialists,
                 alt: item?.attributes?.fotoSpecialist?.data?.attributes
                   ?.alternativeText,
-                position: item?.attributes?.position,
+                speczialnosti: item?.attributes?.speczialnosti?.data,
                 id: item?.id,
                 achievements: item?.attributes?.achievements,
                 description: item?.attributes?.description,
