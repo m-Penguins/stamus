@@ -40,7 +40,11 @@ const sortSpecialistsByOrder = (data) => {
 // const newSpec = specialistsData.data;
 
 const sortedData = sortSpecialistsByOrder(props.programs);
+<<<<<<< HEAD
 console.log(props.programs);
+=======
+console.log(props.programs)
+>>>>>>> ed2099a (#874)
 // console.log(props.programs);
 // console.log(sortedData);
 const baseUrl = useRuntimeConfig().public.baseUrl;
