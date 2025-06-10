@@ -25,6 +25,7 @@ const specialistSlugs =
     (item) => item.attributes.slug,
   );
 
+<<<<<<< HEAD
 const { data: specialistsByPosition } = await useFetch(
   `${apiBaseUrl}specialists`,
   {
@@ -33,6 +34,13 @@ const { data: specialistsByPosition } = await useFetch(
       "filters[speczialnosti][slug][$in]": specialistSlugs,
       "pagination[limit]": -1,
     },
+=======
+const { data: specialistsByPosition } = await useFetch(`${apiBaseUrl}specialists`, {
+  query: {
+    populate: "fotoSpecialist.*,speczialnosti.*",
+    "filters[speczialnosti][slug][$in]": specialistSlugs,
+    "pagination[limit]": -1
+>>>>>>> ed2099a (#874)
   },
 );
 
