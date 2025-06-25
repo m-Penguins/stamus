@@ -1,6 +1,6 @@
 <template>
   <div class="rating">
-    <div>
+    <div v-if="!isUslugiPage">
       <Swiper
           :autoHeight="true"
           class="swiper"
@@ -86,6 +86,10 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
+const route = useRoute();
+
+const isUslugiPage = computed(() => route.fullPath.includes('/uslugi'));
+console.log(isUslugiPage)
 const pagination = {
   clickable: false,
 };
