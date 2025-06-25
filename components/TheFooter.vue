@@ -94,17 +94,23 @@
         <NuxtLink
           :to="licenseStamus"
           target="_blank"
-          class="footer-text display-block"
+          class="footer-text display-block license"
         >
           Лицензия Стамус
+          <span>
+            Л041-01126-23/00370271
+          </span>
         </NuxtLink>
         <div>
           <NuxtLink
             :to="licenseStamusMed"
             target="_blank"
-            class="footer-text display-block"
+            class="footer-text display-block license"
           >
             Лицензия СтамусМед
+            <span>
+              Л041-01126-23/00621467
+            </span>
           </NuxtLink>
         </div>
         <a href="#" class="bvi-open footer-text display-block" data-bvi="close"
@@ -121,16 +127,22 @@
 
         <!-- <a href="#" class="bvi-open">Включить режим доступности</a> -->
         <div class="display">
-          <NuxtLink :to="licenseStamus" target="_blank" class="footer-text">
+          <NuxtLink :to="licenseStamus" target="_blank" class="footer-text license">
             Лицензия Стамус
+            <span>
+            Л041-01126-23/00370271
+          </span>
           </NuxtLink>
           <div class="footer-text">
             <NuxtLink
               :to="licenseStamusMed"
               target="_blank"
-              class="footer-text"
+              class="footer-text license"
             >
               Лицензия СтамусМед
+              <span>
+                Л041-01126-23/00621467
+              </span>
             </NuxtLink>
           </div>
 
@@ -379,6 +391,11 @@ onMounted(() => {
 
 .address {
   padding-top: 45px;
+}
+
+.license {
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 1200px) {
