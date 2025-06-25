@@ -172,13 +172,13 @@
           <div class="popup-title">Перезвоните мне</div>
           <div class="popup-inner">
             <div class="popup-input">
-              <elements-input-base
-                tag-type="input"
-                label="Введите имя"
-                class="popup-form-input"
-                v-model="store.nameField"
-                :error-message="store.isNameValid ? '' : '*Минимум 2 символа'"
-              />
+<!--              <elements-input-base-->
+<!--                tag-type="input"-->
+<!--                label="Введите имя"-->
+<!--                class="popup-form-input"-->
+<!--                v-model="store.nameField"-->
+<!--                :error-message="store.isNameValid ? '' : '*Минимум 2 символа'"-->
+<!--              />-->
               <elements-input-base
                 tag-type="phoneMask"
                 label="Укажите номер телефона"
@@ -187,24 +187,24 @@
                 :error-message="store.isPhoneValid ? '' : '*Неверный формат'"
               />
             </div>
-            <elements-select
-              :options="dynamicClinics"
-              :default="'Выберите клинику'"
-              class="select"
-              :dopText="true"
-              @input="(v) => (store.clinicSelect = v)"
-            />
-            <!-- <elements-textarea
-              placeholder="Опишите проблему"
-              class="popup-textarea"
-            /> -->
-            <elements-input-base
-              tag-type="textarea"
-              placeholder="Опишите проблему"
-              class="popup-form-input"
-              v-model="store.commentField"
-              dopText="Не обязательно для заполнения"
-            />
+<!--            <elements-select-->
+<!--              :options="dynamicClinics"-->
+<!--              :default="'Выберите клинику'"-->
+<!--              class="select"-->
+<!--              :dopText="true"-->
+<!--              @input="(v) => (store.clinicSelect = v)"-->
+<!--            />-->
+<!--            &lt;!&ndash; <elements-textarea-->
+<!--              placeholder="Опишите проблему"-->
+<!--              class="popup-textarea"-->
+<!--            /> &ndash;&gt;-->
+<!--            <elements-input-base-->
+<!--              tag-type="textarea"-->
+<!--              placeholder="Опишите проблему"-->
+<!--              class="popup-form-input"-->
+<!--              v-model="store.commentField"-->
+<!--              dopText="Не обязательно для заполнения"-->
+<!--            />-->
             <!-- <p>Не обязательно для заполнения</p> -->
           </div>
           <div
@@ -442,7 +442,7 @@ function setIsOpen() {
   width: 100%;
   z-index: 902;
 
-  height: 100%;
+  height: fit-content;
   max-height: 700px;
 
   overflow: auto;
