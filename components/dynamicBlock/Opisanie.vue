@@ -7,12 +7,12 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 const videoStore = useModalVideoStore();
 
 let videoLink = props.block?.videoLink;
-if (typeof videoLink === 'string' && videoLink.length > 0) {
+if (typeof videoLink === "string" && videoLink.length > 0) {
   videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
-    return match.includes('js_api=1') ? match : match + '&js_api=1';
+    return match.includes("js_api=1") ? match : match + "&js_api=1";
   });
 } else {
-  videoLink = '';
+  videoLink = "";
 }
 
 // let videoLink = props.block.videoLink || '';
@@ -20,13 +20,13 @@ if (typeof videoLink === 'string' && videoLink.length > 0) {
 //   return match.includes('js_api=1') ? match : match + '&js_api=1';
 // });
 const handleVideoClick = (link) => {
-  videoStore.openModal(link)
-}
+  videoStore.openModal(link);
+};
 
-const vk = ref(null)
+const vk = ref(null);
 
 const videoContainer = ref(null);
-const showVideo = ref(false)
+const showVideo = ref(false);
 const handleIntersection = (entries) => {
   entries.forEach((entry) => {
     const iframe = videoContainer.value?.querySelector("iframe");
@@ -56,24 +56,26 @@ const handleIntersection = (entries) => {
 };
 
 onMounted(() => {
-  if(videoLink) {
-    const observer = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
+  if (videoLink) {
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.5,
+    });
 
+    if (videoContainer.value) observer.observe(videoContainer.value);
 
-  if (videoContainer.value) observer.observe(videoContainer.value);
-
-  const script = document.createElement('script')
-  const iframe = videoContainer.value?.querySelector("iframe")
-  if(iframe) {
-    vk.value = window.VK
-    const player = vk.value.VideoPlayer(iframe);
-    player.mute()
+    const script = document.createElement("script");
+    const iframe = videoContainer.value?.querySelector("iframe");
+    if (iframe) {
+      vk.value = window.VK;
+      const player = vk.value.VideoPlayer(iframe);
+      player.mute();
+    }
+    document.head.appendChild(script);
+    console.log(videoLink);
   }
-  document.head.appendChild(script)
-  console.log(videoLink)
-}})
+});
 onUnmounted(() => {
-  if (videoContainer.value) observer.unobserve(videoContainer.value);np
+  if (videoContainer.value) observer.unobserve(videoContainer.value);
 });
 </script>
 
@@ -92,18 +94,22 @@ onUnmounted(() => {
     </div>
     <div class="video-block-inner" v-if="videoLink">
       <div
-          v-if="videoLink"
-          class="video-block-rectangle-video"
-          ref="videoContainer"
-          @click="handleVideoClick(videoLink)"
+        v-if="videoLink"
+        class="video-block-rectangle-video"
+        ref="videoContainer"
+        @click="handleVideoClick(videoLink)"
       >
         <img
-            v-show="!showVideo"
-            :src="`${baseUrl}${block?.image?.data?.attributes?.url}`"
-            alt="Video"
-            class="problems__image"
+          v-show="!showVideo"
+          :src="`${baseUrl}${block?.image?.data?.attributes?.url}`"
+          alt="Video"
+          class="problems__image"
         />
-        <div v-show="showVideo" class="problems__image" v-html="videoLink"></div>
+        <div
+          v-show="showVideo"
+          class="problems__image"
+          v-html="videoLink"
+        ></div>
       </div>
       <NuxtLink
         v-if="block?.link"
