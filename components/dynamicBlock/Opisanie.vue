@@ -71,7 +71,7 @@ onMounted(() => {
       player.mute();
     }
     document.head.appendChild(script);
-    // console.log(videoLink);
+    console.log(videoLink);
   }
 });
 onUnmounted(() => {

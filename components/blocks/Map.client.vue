@@ -45,7 +45,7 @@
                   :src="activeTab === index ? baloon : baloon1"
                   alt="logo"
                   :style="{
-                    minWidth: '50px',
+                    minWidth: '35px',
                     position: 'relative',
                     boxSizing: 'border-box',
                     transform: 'translate(-50%, calc(-50% - 24px))',
