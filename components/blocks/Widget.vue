@@ -1,4 +1,6 @@
 <script setup>
+import EyeBtn from "~/components/elements/EyeBtn.vue";
+
 const baseDataStore = useBaseDataStore();
 
 const baseUrl = useRuntimeConfig()?.public?.baseUrl;
@@ -8,6 +10,7 @@ const widgets = baseDataStore.footerData?.data?.attributes?.widget;
 
 <template>
   <div class="widget-wrapper">
+    <EyeBtn />
     <NuxtLink
       v-for="widget in widgets"
       class="widget"

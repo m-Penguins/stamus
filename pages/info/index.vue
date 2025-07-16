@@ -17,6 +17,23 @@
     ]"
   />
   <div class="info">
+    <DynamicBlockBanner
+      :block="{
+        banner: [
+          {
+            title: 'Налоговый вычет',
+            link_text: 'Подробнее',
+            link: '/nalog-vichet',
+            color: '#1F2957',
+            text_color: 'white',
+            isExternal: false,
+            isPopupCall: false,
+          },
+        ],
+      }"
+    />
+  </div>
+  <div class="info">
     <h2 class="info-title">Об организациях Стамус и СтамусМед</h2>
     <elements-info-accordeon :items="about" />
   </div>

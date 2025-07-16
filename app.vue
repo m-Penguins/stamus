@@ -77,7 +77,7 @@ const [{ data: mainData }] = await Promise.all([
     query: {
       populate: {
         tech_popup: {
-          populate: '*',
+          populate: "*",
         },
       },
     },

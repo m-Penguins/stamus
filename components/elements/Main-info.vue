@@ -2,79 +2,79 @@
   <div class="dentistry-wrapper">
     <div class="dentistry-container" v-bind="$attrs">
       <NuxtImg
-          v-if="imgBg"
-          :src="imgBg"
-          :alt="imgAlt ?? 'image'"
-          :provider="local ? '' : 'strapi'"
-          sizes="lg:1280px xl:1560 xxl:1920px "
-          format="webp"
-          class="banner-img"
-          :class="{ 'bg-dark': isBgDark }"
+        v-if="imgBg"
+        :src="imgBg"
+        :alt="imgAlt ?? 'image'"
+        :provider="local ? '' : 'strapi'"
+        sizes="lg:1280px xl:1560 xxl:1920px "
+        format="webp"
+        class="banner-img"
+        :class="{ 'bg-dark': isBgDark }"
       />
       <div class="dentistry-box">
         <elements-bread-crumbs
-            :breadcrumbs="breadcrumbs"
-            :typeColorWhite="typeColorWhite"
+          :breadcrumbs="breadcrumbs"
+          :typeColorWhite="typeColorWhite"
         />
         <div v-if="isMobileView" class="mob">
           <NuxtImg
-              v-if="imgBg"
-              :src="imgBg"
-              :alt="imgAlt ?? 'image'"
-              :provider="local ? '' : 'strapi'"
-              sizes="xs:600px"
-              format="webp"
-              class="my-image"
-              :class="{ 'img-dital': isDital, img: !isDital }"
+            v-if="imgBg"
+            :src="imgBg"
+            :alt="imgAlt ?? 'image'"
+            :provider="local ? '' : 'strapi'"
+            sizes="xs:600px"
+            format="webp"
+            class="my-image"
+            :class="{ 'img-dital': isDital, img: !isDital }"
           />
           <div>
             <elements-title-text-button
-                :textButtonBase="textButtonBase || 'Записаться онлайн'"
-                :customClick="redirectToExternalApp"
-                :isButtonBase="isButtonBase"
-                :title="title"
-                :font-size="true"
-                :text="text"
-                :class="isTimeAndPriceCard ? 'main-info-width' : ''"
+              :textButtonBase="textButtonBase || 'Записаться онлайн'"
+              :customClick="redirectToExternalApp"
+              :isButtonBase="isButtonBase"
+              :title="title"
+              :font-size="true"
+              :text="text"
+              :class="isTimeAndPriceCard ? 'main-info-width' : ''"
             />
             <elements-analitic-card
-                :time="time"
-                :money="money"
-                v-if="isTimeAndPriceCard"
-                class="elements-analitic-card-mob"
+              :time="time"
+              :money="money"
+              v-if="isTimeAndPriceCard"
+              class="elements-analitic-card-mob"
             />
             <elements-course-info-card
-                v-if="showCourseCard"
-                :time="time"
-                :money="money"
-                :lector="'lector'"
-                class="elements-analitic-card-mob"
+              v-if="showCourseCard"
+              :time="time"
+              :money="money"
+              :lector="'lector'"
+              class="elements-analitic-card-mob"
             />
             <elements-vacancy-info-card
-                v-if="showVacancyCard"
-                :time="time"
-                :money="money"
-                :address="address ? address : 'не указано'"
-                class="elements-analitic-card-mob"
+              v-if="showVacancyCard"
+              :time="time"
+              :money="money"
+              :address="address ? address : 'не указано'"
+              class="elements-analitic-card-mob"
             />
           </div>
         </div>
         <elements-title-text-button
-            v-if="!isMobileView"
-            :typeColorWhiteText="typeColorWhiteText"
-            :customClick="customClick || redirectToExternalApp"
-            :textButtonBase="textButtonBase || 'Записаться онлайн'"
-            :isButtonBase="isButtonBase"
-            :title="title"
-            :text="text"
-            class="height-50 desktop"
+          v-if="!isMobileView"
+          :typeColorWhiteText="false"
+          :customClick="customClick || redirectToExternalApp"
+          :textButtonBase="textButtonBase || 'Записаться онлайн'"
+          :isButtonBase="isButtonBase"
+          :title="title"
+          :text="text"
+          class="height-50 desktop"
         />
       </div>
       <elements-analitic-card
-          :time="time"
-          :money="money"
-          v-if="isTimeAndPriceCard && time && money"
-          class="desktop"
+        :time="time"
+        :money="money"
+        v-if="isTimeAndPriceCard && time && money"
+        class="desktop"
       />
       <elements-course-info-card
         v-if="showCourseCard"
@@ -84,18 +84,18 @@
         class="desktop"
       />
       <elements-vacancy-info-card
-          v-if="showVacancyCard"
-          :time="time"
-          :money="money"
-          :address="address ? address : 'не указано'"
-          class="desktop"
+        v-if="showVacancyCard"
+        :time="time"
+        :money="money"
+        :address="address ? address : 'не указано'"
+        class="desktop"
       />
     </div>
   </div>
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from "vue";
 
 export default {
   props: {
@@ -150,11 +150,11 @@ export default {
     lector: String,
     showCourseCard: {
       type: Boolean,
-      default: false
+      default: false,
     },
     showVacancyCard: {
       type: Boolean,
-      default: false
+      default: false,
     },
     textButtonBase: String,
     address: Array,
@@ -169,11 +169,11 @@ export default {
 
     onMounted(() => {
       checkScreenWidth();
-      window.addEventListener('resize', checkScreenWidth);
+      window.addEventListener("resize", checkScreenWidth);
     });
 
     onUnmounted(() => {
-      window.removeEventListener('resize', checkScreenWidth);
+      window.removeEventListener("resize", checkScreenWidth);
     });
 
     return { isMobileView };

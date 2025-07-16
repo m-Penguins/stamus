@@ -23,6 +23,7 @@
         </div>
         <div class="banner-images">
           <NuxtImg
+            v-if="img"
             :src="`images/img-banner/${img}`"
             alt="image"
             sizes="xs:400px md:800px"
