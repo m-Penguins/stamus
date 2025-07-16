@@ -33,11 +33,12 @@ const showMenuDoctors = ref(false);
 const store = useModalStore();
 
 const closeAllMenu = () => {
-  showMenuPatients.value = false
-  showMenuDoctors.value = false
-}
+  showMenuPatients.value = false;
+  showMenuDoctors.value = false;
+};
 const toggleMenu = () => (showMenuPatients.value = !showMenuPatients.value);
-const toggleMenuDoctors = () => (showMenuDoctors.value = !showMenuDoctors.value);
+const toggleMenuDoctors = () =>
+  (showMenuDoctors.value = !showMenuDoctors.value);
 const closeMenu = () => (showMenuPatients.value = false);
 const closeMenuDoctors = () => (showMenuDoctors.value = false);
 const route = useRoute();
@@ -75,7 +76,7 @@ const [{ data: mainData }] = await Promise.all([
     query: {
       populate: {
         tech_popup: {
-          populate: '*',
+          populate: "*",
         },
       },
     },
@@ -118,7 +119,7 @@ onMounted(() => {
 // });
 useHead({
   script: [
-    { src: 'https://vk.com/js/api/videoplayer.js', async: true, defer: true },
+    { src: "https://vk.com/js/api/videoplayer.js", async: true, defer: true },
     {
       innerHTML: `
         (function(m, e, t, r, i, k, a) {
@@ -137,10 +138,10 @@ useHead({
           webvisor: false
         });
       `,
-      type: 'text/javascript'
-    }
-  ]
-})
+      type: "text/javascript",
+    },
+  ],
+});
 </script>
 
 <style lang="scss">

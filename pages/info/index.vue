@@ -17,6 +17,23 @@
     ]"
   />
   <div class="info">
+    <DynamicBlockBanner
+      :block="{
+        banner: [
+          {
+            title: 'Налоговый вычет',
+            link_text: 'Подробнее',
+            link: '/nalog-vichet',
+            color: '#1F2957',
+            text_color: 'white',
+            isExternal: false,
+            isPopupCall: false,
+          },
+        ],
+      }"
+    />
+  </div>
+  <div class="info">
     <h2 class="info-title">Об организациях Стамус и СтамусМед</h2>
     <elements-info-accordeon :items="about" />
   </div>
@@ -35,7 +52,7 @@
     bigImg="true"
   />
   <blocks-map :block="{ title: 'Информация о клиниках' }" />
-  <BlocksMapper :blocks="blocks"/>
+  <BlocksMapper :blocks="blocks" />
   <BlocksMainBanner
     :title="'Уже были у нас?'"
     :text="'Оставьте отзыв, будем очень вам благодарны'"
@@ -47,7 +64,7 @@
     bigImg="true"
   />
   <blocks-main-form />
-  <elements-review-modal v-model="reviewModal"/>
+  <elements-review-modal v-model="reviewModal" />
 </template>
 
 <script setup>
@@ -55,7 +72,7 @@ const assetsStore = useAssets();
 const bigImage = "images/big-images/info.jpg";
 const route = useRoute();
 const imgAdaptiv = assetsStore.useAsset("images/big-images/info-adaptiv.jpg");
-const reviewModal = ref(false)
+const reviewModal = ref(false);
 
 const toggleModal = () => {
   reviewModal.value = !reviewModal.value;
@@ -69,7 +86,7 @@ const { data: infoData } = await useFetch(`${apiBaseUrl}information`, {
   },
 });
 
-const blocks = infoData.value?.data?.attributes?.blocks
+const blocks = infoData.value?.data?.attributes?.blocks;
 
 const about = infoData.value?.data?.attributes?.about;
 

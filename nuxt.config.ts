@@ -253,6 +253,8 @@ export default defineNuxtConfig({
           type: "text/javascript",
           defer: true,
         },
+        { src: "https://lidrekon.ru/slep/js/jquery.js" },
+        { src: "https://lidrekon.ru/slep/js/uhpv-full.min.js" },
         {
           src: "/roistat.js",
           tagPosition: "bodyClose",
@@ -290,8 +292,8 @@ export default defineNuxtConfig({
           { name: "form", to: process.env.MAIL_TO },
           { name: "ndfl", to: process.env.MAIL_TO_TAXES },
           { name: "review", to: process.env.MAIL_TO_REVIEW },
-          { name: "vacancy", to: process.env.MAIL_TO_VACANCY},
-          { name: "course", to: "stamus.ed@yandex.ru"}
+          { name: "vacancy", to: process.env.MAIL_TO_VACANCY },
+          { name: "course", to: "stamus.ed@yandex.ru" },
         ],
         smtp: {
           host: "smtp.yandex.ru",

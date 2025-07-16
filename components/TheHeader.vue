@@ -256,8 +256,8 @@ export default {
     <div class="header-additional__time">
       <li>Ежедневно 09:00 – 21:00</li>
     </div>
-    <a
-      :href="'tel:' + base.footerData.data.attributes.phone.replace(/-/g, '')"
+    <NuxtLink
+      :to="'tel:' + base.footerData.data.attributes.phone.replace(/-/g, '')"
       class="header-additional__phone"
     >
       <svg
@@ -273,8 +273,9 @@ export default {
         />
       </svg>
       {{ base.footerData.data.attributes.phone }}
-    </a>
+    </NuxtLink>
     <div class="header-additional__links">
+      <ElementsEyeBtn />
       <NuxtLink
         v-for="widget in base.footerData?.data?.attributes?.header_widget"
         :to="widget.link"
@@ -1300,6 +1301,10 @@ export default {
   &__links {
     display: flex;
     gap: 5px;
+    button {
+      font-size: 12px;
+      padding: 0 7px;
+    }
     @media screen and (max-width: 1360px) {
       display: none;
     }

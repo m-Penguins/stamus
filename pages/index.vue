@@ -33,7 +33,6 @@ const fourthBanner = mainData.value?.data?.attributes?.fourth_banner;
 const reviews = mainData.value?.data?.attributes;
 const portfolios = mainData.value?.data?.attributes?.portfolio?.data;
 
-
 const mainSpecialists =
   mainData.value?.data?.attributes?.specialists?.data?.map((sp) => {
     return {
