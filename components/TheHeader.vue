@@ -213,6 +213,7 @@ export default {
       { title: "Коллегам", path: "" },
       { title: "Контакты", path: "/contacts" },
     ];
+    console.log("zxc", storeServices.getStateService);
     return {
       assetsStore,
       navigation,
@@ -1097,10 +1098,9 @@ export default {
                                 showMenuMob = false;
                                 thirdBlockMobMenu = false;
                                 firstBlockMobMenu = true;
-                                $router.push(item.path + service.path);
                               "
                               class="header-services-menu-box-link"
-                              to="#"
+                              :to="item.path + service.path"
                             >
                               {{ service.title }}
                             </NuxtLink>

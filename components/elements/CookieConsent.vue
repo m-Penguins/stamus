@@ -38,7 +38,7 @@ export default {
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 5px 5px 45px -5px rgba(30, 32, 40, 0.08);
-  z-index: 100;
+  z-index: 99999;
   padding: 20px;
   max-width: 405px;
 }
