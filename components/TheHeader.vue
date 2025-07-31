@@ -331,6 +331,7 @@ export default {
             <!--            />-->
           </NuxtLink>
         </div>
+        <ElementsEyeBtn />
         <div class="header-nav">
           <nav>
             <ul class="header-nav-list">
@@ -1522,6 +1523,15 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
+  .visually-button {
+    display: none;
+  }
+  @media (max-width: 1360px) {
+    .visually-button {
+      display: block;
+    }
+  }
 }
 
 .active-directions {
@@ -1585,7 +1595,6 @@ export default {
     }
   }
   .header-logo {
-    margin-right: 45px;
     display: flex;
     align-items: center;
   }

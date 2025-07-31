@@ -24,12 +24,10 @@ function triggerAccessibility() {
 <style scoped lang="scss">
 .visually-button {
   @media (max-width: 1360px) {
-    right: 50%;
-    transform: translateX(50%);
-    display: block;
-    position: fixed;
-    z-index: 99999;
-    bottom: 15px;
+    .specialists-btn-base {
+      max-height: 60px;
+      padding: 4px 16px;
+    }
   }
 }
 </style>
