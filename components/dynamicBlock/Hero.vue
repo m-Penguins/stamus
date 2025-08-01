@@ -52,7 +52,6 @@
 </template>
 
 <script setup>
-
 const props = defineProps([
   "title",
   "text",
@@ -61,7 +60,7 @@ const props = defineProps([
   "breadcrumbs",
   "link",
   "link_text",
-  "noneBtn"
+  "noneBtn",
 ]);
 
 const modalStore = useModalStore();
@@ -71,7 +70,7 @@ const heroClick = () => {
   if (props?.link) {
     window?.open(props?.link, "_blank");
   } else {
-    redirectToExternalApp()
+    redirectToExternalApp();
   }
 };
 
@@ -83,11 +82,11 @@ const checkScreenWidth = () => {
 
 onMounted(() => {
   checkScreenWidth();
-  window.addEventListener('resize', checkScreenWidth);
+  window.addEventListener("resize", checkScreenWidth);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', checkScreenWidth);
+  window.removeEventListener("resize", checkScreenWidth);
 });
 </script>
 
@@ -132,6 +131,7 @@ onUnmounted(() => {
 
 .mob {
   display: none;
+  padding-top: 60px;
 }
 
 .elements-analitic-card-mob {
@@ -203,7 +203,6 @@ onUnmounted(() => {
     width: 100%;
     gap: 34px;
     align-items: center;
-
   }
   .dentistry-container {
     height: 100%;
