@@ -11,8 +11,13 @@ const tagFilter = ref(
   Array.isArray(route.query.tag)
     ? route.query.tag
     : route.query.tag
+<<<<<<< HEAD
     ? [route.query.tag]
     : [],
+=======
+      ? [route.query.tag]
+      : [],
+>>>>>>> 36491a0 (#1115)
 );
 const totalItems = ref(0);
 
