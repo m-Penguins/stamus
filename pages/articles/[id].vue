@@ -11,11 +11,14 @@ const { data: articleData } = await useFetch(
     query: {
       populate:
         blocksQuey +
-          ",meta.metaImage.*,napravleniya_uslug_1.*,other_articles.fotoArticles.*,blocks.*,blocks.expert.*,blocks.items.*,fotoArticles.*",
+        ",meta.metaImage.*,napravleniya_uslug_1.*,other_articles.fotoArticles.*,blocks.*,blocks.expert.*,blocks.items.*,fotoArticles.*",
     },
   },
 );
-if (!articleData.value?.data || articleData.value?.data?.attributes?.publishedAt == null) {
+if (
+  !articleData.value?.data ||
+  articleData.value?.data?.attributes?.publishedAt == null
+) {
   throw createError({
     statusCode: 404,
     statusMessage: "Page Not Found",
@@ -39,10 +42,11 @@ const imgAlt =
 const otherArticles = articleData.value?.data?.attributes?.other_articles;
 // console.log(otherArticles)
 const filterArticles = {
-  data: otherArticles.data.filter(item => item.attributes.publishedAt !== null)
-}
+  data: otherArticles.data.filter(
+    (item) => item.attributes.publishedAt !== null,
+  ),
+};
 // console.log(filterArticles)
-
 
 const shouldShowBlock = (block) => {
   const excludedComponents = [
@@ -127,9 +131,9 @@ useHead(getMetaObject(metaData, baseUrl));
         </div>
       </div>
       <div class="share">
-        <BlocksShare/>
+        <BlocksShare />
       </div>
-      <div style="width: 100%;">
+      <div style="width: 100%">
         <div class="articles-dital-box__item">{{ date }}</div>
         <NuxtLink class="back-btn" to="/articles">
           <svg
