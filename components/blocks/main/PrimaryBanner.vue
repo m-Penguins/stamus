@@ -25,7 +25,8 @@ const modalStore = useModalStore();
                   :src="item?.attributes?.photoBanner?.data?.attributes?.url"
                   provider="strapi"
                   :alt="
-                    item?.attributes?.photoBanner?.data?.attributes?.alternativeText ?? 'image'
+                    item?.attributes?.photoBanner?.data?.attributes
+                      ?.alternativeText ?? 'image'
                   "
                   sizes="xs:260px md:400px xl:1000px"
                   loading="lazy"
