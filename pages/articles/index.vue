@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <script setup>
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 
@@ -424,7 +423,7 @@ const testClick = () => {
   }
 }
 </style>
-=======
+======= ======= >>>>>>> 36491a0 (#1115)
 <script setup>
 const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 
@@ -438,8 +437,8 @@ const tagFilter = ref(
   Array.isArray(route.query.tag)
     ? route.query.tag
     : route.query.tag
-      ? [route.query.tag]
-      : [],
+    ? [route.query.tag]
+    : [],
 );
 const totalItems = ref(0);
 
@@ -842,4 +841,3 @@ currentPage.value = parseInt(currentPage.value);
   }
 }
 </style>
->>>>>>> 36491a0 (#1115)
