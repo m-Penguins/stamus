@@ -210,6 +210,9 @@ main {
 
 .main {
   margin: 0 auto;
+  @media (max-width: 1110px) {
+    padding-top: 125px;
+  }
 }
 
 @media (max-width: 1328px) {

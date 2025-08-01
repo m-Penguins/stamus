@@ -70,10 +70,4 @@ const breadcrumbs = [
   letter-spacing: -0.015em;
   margin-bottom: 25px;
 }
-
-@media (max-width: 1110px) {
-  .about-page-content {
-    padding-top: 60px;
-  }
-}
 </style>

@@ -8,7 +8,11 @@ const route = useRoute();
 const pageSize = ref(12);
 const currentPage = ref(route.query.page ?? 1);
 const tagFilter = ref(
-    Array.isArray(route.query.tag) ? route.query.tag : route.query.tag ? [route.query.tag] : []
+  Array.isArray(route.query.tag)
+    ? route.query.tag
+    : route.query.tag
+      ? [route.query.tag]
+      : [],
 );
 const totalItems = ref(0);
 
@@ -82,7 +86,7 @@ const getArticlesData = async () => {
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
     "filters[tag_category][$in]": tagFilter.value,
-    "sort": "createdAt:desc"
+    sort: "createdAt:desc",
   };
 
   clearObjectFields(strapiQuery);
@@ -92,7 +96,8 @@ const getArticlesData = async () => {
       ...strapiQuery,
     },
   });
-  placeholdersStore.artiTotalPages = articlesData?.value?.meta?.pagination?.pageCount;
+  placeholdersStore.artiTotalPages =
+    articlesData?.value?.meta?.pagination?.pageCount;
   totalItems.value = articlesData?.value?.meta?.pagination?.total ?? 0;
 
   return articlesData;
@@ -100,16 +105,12 @@ const getArticlesData = async () => {
 
 const articlesData = await getArticlesData();
 
-const { data: tags } = await useFetch(
-    `${apiBaseUrl}articles`,
-    {
-      query: {
-        populate: "tag_category",
-        "pagination[pageSize]": 1000,
-      },
-    },
-);
-
+const { data: tags } = await useFetch(`${apiBaseUrl}articles`, {
+  query: {
+    populate: "tag_category",
+    "pagination[pageSize]": 1000,
+  },
+});
 
 const filteredArticles = computed(() =>
   articlesData.value?.data?.map((art) => {

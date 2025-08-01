@@ -229,7 +229,6 @@ export default {
 
 .mob {
   display: none;
-  padding-top: 60px;
 }
 
 .elements-analitic-card-mob {
@@ -311,9 +310,6 @@ export default {
   }
   .dentistry-box {
     margin-left: 0;
-  }
-  .breadcrumbs {
-    margin-top: 138px;
   }
 }
 
