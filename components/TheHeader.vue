@@ -49,6 +49,7 @@ export default {
       navigationColleagues: [
         { id: 1, title: "Вакансии", path: "/vacancies" },
         { id: 2, title: "Корпоративным клиентам", path: "/business" },
+        { id: 3, title: "Учебный центр", path: "/education" },
       ],
       isHidden: false,
     };
@@ -317,6 +318,7 @@ export default {
               showSearch = false;
               showMenuPatients = false;
               showMenuMob = false;
+              showMenuColleagues = false;
             "
           >
             <img
@@ -451,7 +453,7 @@ export default {
                   <div
                     v-if="item.title === 'Коллегам'"
                     class="header-arrow-icon"
-                    @click="
+                    @click.stop="
                       showSearch = false;
                       showServices = false;
                       toggleDropDown(item.title);
@@ -459,7 +461,15 @@ export default {
                   >
                     <div>{{ item.title }}</div>
                     <div v-if="item.title === 'Коллегам'" class="arrow-icon">
-                      <div v-if="!showMenuColleagues" class="timeline-svg">
+                      <div
+                        @click.stop="
+                          showSearch = false;
+                          showServices = false;
+                          toggleDropDown(item.title);
+                        "
+                        v-if="!showMenuColleagues"
+                        class="timeline-svg"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="20"
@@ -475,7 +485,15 @@ export default {
                           />
                         </svg>
                       </div>
-                      <div v-else class="timeline-svg">
+                      <div
+                        @click.stop="
+                          showSearch = false;
+                          showServices = false;
+                          toggleDropDown(item.title);
+                        "
+                        v-else
+                        class="timeline-svg"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="20"
@@ -499,7 +517,7 @@ export default {
                           :key="elem"
                           :to="elem.path"
                           class="menu-patients-items"
-                          @click="showMenuColleagues = false"
+                          @click.stop="showMenuColleagues = false"
                         >
                           <li class="menu-patients-items-link">
                             <div>
@@ -859,6 +877,7 @@ export default {
                     showMenuPatients = false;
                     showMenuMob = false;
                     showMenuDoctors = false;
+                    showMenuColleagues = false;
                   "
                 >
                   {{ item.title }}
@@ -1007,6 +1026,85 @@ export default {
                     </ul>
                   </div>
                 </div>
+                <div
+                  v-if="item.title === 'Коллегам'"
+                  @click.stop="
+                    toggleDropDown(item.title);
+                    showSearch = false;
+                    showServices = false;
+                  "
+                  class="menu-mob-first-block"
+                >
+                  <div class="menu-patients-container">
+                    <div class="p-bt-14">{{ item.title }}</div>
+                    <div v-if="item.title === 'Коллегам'" class="arrow-icon">
+                      <div
+                        @click.stop="
+                          toggleDropDown(item.title);
+                          showSearch = false;
+                          showServices = false;
+                        "
+                        v-if="!showMenuColleagues"
+                        class="timeline-svg"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                        >
+                          <path
+                            d="M6 8L10 12L14 8"
+                            stroke="#7F838C"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </div>
+                      <div
+                        @click.stop="
+                          toggleDropDown(item.title);
+                          showSearch = false;
+                          showServices = false;
+                        "
+                        v-else
+                        class="timeline-svg"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                        >
+                          <path
+                            d="M6 12L10 8L14 12"
+                            stroke="#232D5B"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="showMenuColleagues">
+                    <ul class="menu-patients-list-mob">
+                      <NuxtLink
+                        v-for="elem in navigationColleagues"
+                        @click.stop="showMenuMob = false"
+                        :to="elem.path"
+                        :key="elem.id"
+                        class="menu-patients-items-mob"
+                      >
+                        <li>
+                          <div>{{ elem.title }}</div>
+                          <!-- <hr class="menu-patients-line" v-if="index < navigationPatients.length - 1"/> -->
+                        </li>
+                      </NuxtLink>
+                    </ul>
+                  </div>
+                </div>
               </NuxtLink>
             </li>
           </div>
@@ -1121,6 +1219,7 @@ export default {
                 showSearch = false;
                 showServices = false;
                 showMenuPatients = false;
+                showMenuColleagues = false;
                 modalStore.openModal();
               "
               title="Перезвоните мне"
