@@ -49,6 +49,7 @@ export default {
       navigationColleagues: [
         { id: 1, title: "Вакансии", path: "/vacancies" },
         { id: 2, title: "Корпоративным клиентам", path: "/business" },
+        { id: 3, title: "Учебный центр", path: "/education" },
       ],
       isHidden: false,
     };
@@ -316,6 +317,7 @@ export default {
               showSearch = false;
               showMenuPatients = false;
               showMenuMob = false;
+              showMenuColleagues = false;
             "
           >
             <img
@@ -451,7 +453,7 @@ export default {
                   <div
                     v-if="item.title === 'Коллегам'"
                     class="header-arrow-icon"
-                    @click="
+                    @click.stop="
                       showSearch = false;
                       showServices = false;
                       toggleDropDown(item.title);
@@ -459,7 +461,15 @@ export default {
                   >
                     <div>{{ item.title }}</div>
                     <div v-if="item.title === 'Коллегам'" class="arrow-icon">
-                      <div v-if="!showMenuColleagues" class="timeline-svg">
+                      <div
+                        @click.stop="
+                          showSearch = false;
+                          showServices = false;
+                          toggleDropDown(item.title);
+                        "
+                        v-if="!showMenuColleagues"
+                        class="timeline-svg"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="20"
@@ -475,7 +485,15 @@ export default {
                           />
                         </svg>
                       </div>
-                      <div v-else class="timeline-svg">
+                      <div
+                        @click.stop="
+                          showSearch = false;
+                          showServices = false;
+                          toggleDropDown(item.title);
+                        "
+                        v-else
+                        class="timeline-svg"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="20"
@@ -499,7 +517,7 @@ export default {
                           :key="elem"
                           :to="elem.path"
                           class="menu-patients-items"
-                          @click="showMenuColleagues = false"
+                          @click.stop="showMenuColleagues = false"
                         >
                           <li class="menu-patients-items-link">
                             <div>
@@ -866,6 +884,7 @@ export default {
                     showMenuPatients = false;
                     showMenuMob = false;
                     showMenuDoctors = false;
+                    showMenuColleagues = false;
                   "
                 >
                   {{ item.title }}
@@ -1016,7 +1035,7 @@ export default {
                 </div>
                 <div
                   v-if="item.title === 'Коллегам'"
-                  @click="
+                  @click.stop="
                     toggleDropDown(item.title);
                     showSearch = false;
                     showServices = false;
@@ -1080,8 +1099,8 @@ export default {
                     <ul class="menu-patients-list-mob">
                       <NuxtLink
                         v-for="elem in navigationColleagues"
-                        @click="showMenuMob = false"
-                        :to="`/team?position=${elem.slug}`"
+                        @click.stop="showMenuMob = false"
+                        :to="elem.path"
                         :key="elem.id"
                         class="menu-patients-items-mob"
                       >
@@ -1207,6 +1226,7 @@ export default {
                 showSearch = false;
                 showServices = false;
                 showMenuPatients = false;
+                showMenuColleagues = false;
                 modalStore.openModal();
               "
               title="Перезвоните мне"
