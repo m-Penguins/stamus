@@ -23,13 +23,19 @@ function triggerAccessibility() {
 
 <style scoped lang="scss">
 .visually-button {
+  display: none;
   @media (max-width: 1360px) {
-    right: 50%;
-    transform: translateX(50%);
+    /* right: 50%; */
+    /* transform: translateX(50%); */
     display: block;
-    position: fixed;
-    z-index: 99999;
+    /* position: fixed; */
+    /* z-index: 99999; */
     bottom: 15px;
+    font-size: 14px;
+    & button {
+      font-size: 12px;
+      padding: 5px 10px;
+    }
   }
 }
 </style>

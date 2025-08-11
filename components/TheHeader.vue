@@ -654,6 +654,7 @@ export default {
             />
           </div>
         </div>
+        <elements-EyeBtn />
         <div class="header-menu">
           <div
             class="header-search-img"
@@ -1622,9 +1623,7 @@ export default {
     padding: 6px 8px;
     @include body-14-regular;
     color: $gray-text;
-    transition:
-      all 0.3s ease-in-out,
-      opacity 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out, opacity 0.3s ease-in-out;
     cursor: pointer;
 
     img {

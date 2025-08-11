@@ -10,7 +10,7 @@ const widgets = baseDataStore.footerData?.data?.attributes?.widget;
 
 <template>
   <div class="widget-wrapper">
-    <EyeBtn />
+    <!-- <EyeBtn /> -->
     <NuxtLink
       v-for="widget in widgets"
       class="widget"
