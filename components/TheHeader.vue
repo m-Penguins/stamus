@@ -872,7 +872,11 @@ export default {
                 :to="item.path"
               >
                 <div
-                  v-if="item.title !== 'Пациентам' && item.title !== 'Врачи'"
+                  v-if="
+                    item.title !== 'Пациентам' &&
+                    item.title !== 'Врачи' &&
+                    item.title !== 'Коллегам'
+                  "
                   @click="
                     showMenuPatients = false;
                     showMenuMob = false;
@@ -1036,7 +1040,7 @@ export default {
                   class="menu-mob-first-block"
                 >
                   <div class="menu-patients-container">
-                    <div class="p-bt-14">{{ item.title }}</div>
+                    <div class="p-bt-14 popa">{{ item.title }}</div>
                     <div v-if="item.title === 'Коллегам'" class="arrow-icon">
                       <div
                         @click.stop="

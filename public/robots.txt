@@ -6,8 +6,11 @@ Allow: /*.css
 Allow: *.woff
 Allow: *.ttf
 Disallow: /wp-admin/
+Disallow: */admin
+Disallow: /*%
 Disallow: *.html
-Clean-param: p&yandex-source&from&utm&clckid&clid&text&yclid&erid&gclid&ref&term&utm_source&utm_campaign&utm_medium&utm_content&etext&hhtmFrom
+Clean-param: p&yandex-source&from&utm&clckid&clid&text&yclid&?block&ctime&?position&erid&gclid&ref&term&utm_source&utm_campaign&utm_medium&utm_content&etext&hhtmFrom
+
 
 User-agent: Googlebot
 Disallow: */search
@@ -22,6 +25,7 @@ Allow: *?page
 Disallow: *?p
 Disallow: *?yandex-source
 Disallow: *?from
+Disallow: */admin
 Disallow: *?utm
 Disallow: *?clckid
 Disallow: *?clid
@@ -31,6 +35,10 @@ Disallow: *?ysclid
 Disallow: *?erid
 Disallow: *?gclid
 Disallow: *?ref
+Disallow: *%
+Disallow: *block
+Disallow: *ctime
+Disallow: *?position
 Disallow: *?term
 Disallow: *?etext
 Disallow: *?hhtmFrom
@@ -48,6 +56,7 @@ Allow: *?page
 Disallow: *?p
 Disallow: *?yandex-source
 Disallow: *?from
+Disallow: */admin
 Disallow: *?utm
 Disallow: *?clckid
 Disallow: *?clid
@@ -59,6 +68,10 @@ Disallow: *?gclid
 Disallow: *?ref
 Disallow: *?term
 Disallow: *?etext
+Disallow: /*%
+Disallow: /*block
+Disallow: /*ctime
+Disallow: /*?position
 Disallow: *?hhtmFrom
 Disallow: /*?*page=*
 Disallow: /*?*dir=*
