@@ -21,6 +21,7 @@ const totalPages = computed(() =>
 );
 
 const handlePageClick = async (page) => {
+  console.log("handlePageClick", page);
   currentPage.value = page;
   let searchQuery = "";
   if (page != 1) {
