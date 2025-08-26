@@ -76,6 +76,7 @@ const specialists = {
     data: specialistsByPosition?.value?.data,
   },
 };
+<<<<<<< HEAD
 // console.log(specialists);
 
 const medicalPhysicianData = {
@@ -109,6 +110,8 @@ useHead({
     },
   ],
 });
+=======
+>>>>>>> 06a4353 (#1370)
 
 const heroClick = () => {
   if (specialist?.value?.data?.attributes?.bookingLink) {
@@ -189,7 +192,7 @@ const heroClick = () => {
           />
           <img
             v-else
-            :src="assetsStore.useAsset('images/icons/logo.svg')"
+            :src="assetsStore.useAsset('images/icons/logo.png')"
             alt="logo"
             class="stamus-app-img-box-picture"
           />

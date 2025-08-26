@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="footer-wrap">
       <div class="footer__box">
-        <img src="@/assets/images/icons/logo.svg" alt="logo" class="logo" />
+        <img src="@/assets/images/icons/logo.png" alt="logo" class="logo" />
       </div>
       <div class="footer__box">
         <div class="footer-menu">
@@ -97,9 +97,7 @@
           class="footer-text display-block license"
         >
           Лицензия Стамус
-          <span>
-            Л041-01126-23/00370271
-          </span>
+          <span> Л041-01126-23/00370271 </span>
         </NuxtLink>
         <div>
           <NuxtLink
@@ -108,9 +106,7 @@
             class="footer-text display-block license"
           >
             Лицензия СтамусМед
-            <span>
-              Л041-01126-23/00621467
-            </span>
+            <span> Л041-01126-23/00621467 </span>
           </NuxtLink>
         </div>
         <a href="#" class="bvi-open footer-text display-block" data-bvi="close"
@@ -127,11 +123,13 @@
 
         <!-- <a href="#" class="bvi-open">Включить режим доступности</a> -->
         <div class="display">
-          <NuxtLink :to="licenseStamus" target="_blank" class="footer-text license">
+          <NuxtLink
+            :to="licenseStamus"
+            target="_blank"
+            class="footer-text license"
+          >
             Лицензия Стамус
-            <span>
-            Л041-01126-23/00370271
-          </span>
+            <span> Л041-01126-23/00370271 </span>
           </NuxtLink>
           <div class="footer-text">
             <NuxtLink
@@ -140,9 +138,7 @@
               class="footer-text license"
             >
               Лицензия СтамусМед
-              <span>
-                Л041-01126-23/00621467
-              </span>
+              <span> Л041-01126-23/00621467 </span>
             </NuxtLink>
           </div>
 
@@ -284,7 +280,8 @@ onMounted(() => {
 
 .logo {
   margin-bottom: 60px;
-  height: 45px;
+  height: auto;
+  width: 60px;
 }
 
 .footer-contacts {
