@@ -8,7 +8,9 @@ import "swiper/css/navigation";
 const props = defineProps(["block", "serviceId"]);
 
 const placeholdersStore = usePlaceholdersStore();
-const portfolios = props?.block?.portofolios?.data?.filter(item => item?.attributes?.publishedAt !== null)
+const portfolios = props?.block?.portofolios?.data?.filter(
+  (item) => item?.attributes?.publishedAt !== null,
+);
 const prev = ref(null);
 const next = ref(null);
 const allCasesLink = props?.serviceId
@@ -46,50 +48,50 @@ const allCasesLink = props?.serviceId
           :key="index"
           class="swiper-slide"
         >
-            <div class="card-photo-name">
-              <div class="card-photo-name-img">
-                <NuxtLink :to="`/portfolio/${portfolio?.id}`">
-                  <NuxtImg
-                      v-if="
-                  portfolio?.attributes?.photoBanner?.data?.attributes?.url ??
-                  placeholdersStore?.imagePlaceholders?.portfoliosSmall
-                "
-                      :src="
-                  portfolio?.attributes?.photoBanner?.data?.attributes?.url ??
-                  placeholdersStore?.imagePlaceholders?.portfoliosSmall
-                "
-                      provider="strapi"
-                      :alt="
-                  portfolio?.attributes?.photoBanner?.data?.attributes
-                    ?.alternativeText ?? 'image'
-                "
-                      sizes="xs:400px md:600px"
-                      format="webp"
-                      class="banner-img"
-                      loading="lazy"
-                  />
-                </NuxtLink>
-              </div>
-              <div class="card-photo-name-container">
-                <div>
-                  <div class="card-photo-name-title">
-                    {{ portfolio?.attributes?.heading }}
-                  </div>
-                  <div class="card-photo-name-text">
-                    {{ portfolio?.attributes?.direction?.directions }}
-                  </div>
+          <div class="card-photo-name">
+            <div class="card-photo-name-img">
+              <NuxtLink :to="`/portfolio/${portfolio?.id}`">
+                <NuxtImg
+                  v-if="
+                    portfolio?.attributes?.photoBanner?.data?.attributes?.url ??
+                    placeholdersStore?.imagePlaceholders?.portfoliosSmall
+                  "
+                  :src="
+                    portfolio?.attributes?.photoBanner?.data?.attributes?.url ??
+                    placeholdersStore?.imagePlaceholders?.portfoliosSmall
+                  "
+                  provider="strapi"
+                  :alt="
+                    portfolio?.attributes?.photoBanner?.data?.attributes
+                      ?.alternativeText ?? 'image'
+                  "
+                  sizes="xs:400px md:600px"
+                  format="webp"
+                  class="banner-img"
+                  loading="lazy"
+                />
+              </NuxtLink>
+            </div>
+            <div class="card-photo-name-container">
+              <div>
+                <div class="card-photo-name-title">
+                  {{ portfolio?.attributes?.heading }}
+                </div>
+                <div class="card-photo-name-text">
+                  {{ portfolio?.attributes?.direction?.directions }}
                 </div>
               </div>
-              <div class="card-photo-name-description">
-                {{ portfolio?.attributes?.description }}
-              </div>
-
-              <elements-link-with-arrow
-                  type
-                  title="Смотреть кейс"
-                  :link="`/portfolio/${portfolio?.id}`"
-              />
             </div>
+            <div class="card-photo-name-description">
+              {{ portfolio?.attributes?.description }}
+            </div>
+
+            <elements-link-with-arrow
+              type
+              title="Смотреть кейс"
+              :link="`/portfolio/${portfolio?.id}`"
+            />
+          </div>
         </swiper-slide>
       </Swiper>
       <div class="wrapper-btn">
@@ -256,12 +258,6 @@ const allCasesLink = props?.serviceId
   }
 }
 
-@media (max-width: 600px) {
-  .swiper-slide {
-    width: 330px !important;
-  }
-}
-
 .card-photo-name-box-image {
   padding-bottom: 30px;
 }
@@ -270,7 +266,7 @@ const allCasesLink = props?.serviceId
   width: 100%;
   object-fit: cover;
   border-radius: 20px;
-  /* height: 308px; */
+  height: 376px;
 
   aspect-ratio: 1;
 
@@ -333,6 +329,15 @@ const allCasesLink = props?.serviceId
     .card-photo-name-box-image {
       width: 100%;
     }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .swiper-slide {
+    width: 343px !important;
+  }
+  .card-photo-name-img {
+    height: 411px;
   }
 }
 </style>
