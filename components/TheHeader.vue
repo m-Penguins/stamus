@@ -321,8 +321,8 @@ export default {
             "
           >
             <img
-              style="width: 59px; height: 34px"
-              :src="assetsStore.useAsset('images/icons/logo.svg')"
+              style="width: 60px; height: auto"
+              :src="assetsStore.useAsset('images/icons/logo.png')"
               alt="Logo"
             />
             <!--            <img-->

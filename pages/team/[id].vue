@@ -16,16 +16,25 @@ const { data: specialist } = await useFetch(
     },
   },
 );
-const specialistCategories = specialist.value?.data?.attributes?.speczialnosti.data.map((item) => item.attributes.title);
-const specialistSlugs = specialist.value?.data?.attributes?.speczialnosti.data.map((item) => item.attributes.slug);
+const specialistCategories =
+  specialist.value?.data?.attributes?.speczialnosti.data.map(
+    (item) => item.attributes.title,
+  );
+const specialistSlugs =
+  specialist.value?.data?.attributes?.speczialnosti.data.map(
+    (item) => item.attributes.slug,
+  );
 
-const { data: specialistsByPosition } = await useFetch(`${apiBaseUrl}specialists`, {
-  query: {
-    populate: "fotoSpecialist.*,speczialnosti.*",
-    "filters[speczialnosti][slug][$in]": specialistSlugs,
-    "pagination[limit]": -1
+const { data: specialistsByPosition } = await useFetch(
+  `${apiBaseUrl}specialists`,
+  {
+    query: {
+      populate: "fotoSpecialist.*,speczialnosti.*",
+      "filters[speczialnosti][slug][$in]": specialistSlugs,
+      "pagination[limit]": -1,
+    },
   },
-});
+);
 
 if (!specialist.value?.data) {
   throw createError({
@@ -62,17 +71,17 @@ useHead(getMetaObject(metaData, baseUrl));
 
 const blocks = specialist.value?.data?.attributes?.blocks;
 const specialists = {
-    title: "Наши специалисты",
-    specialists: {
-      data: specialistsByPosition?.value?.data
-    }
-}
+  title: "Наши специалисты",
+  specialists: {
+    data: specialistsByPosition?.value?.data,
+  },
+};
 
 const heroClick = () => {
   if (specialist?.value?.data?.attributes?.bookingLink) {
     window.open(specialist?.value?.data?.attributes?.bookingLink, "_blank");
   } else {
-    redirectToExternalApp()
+    redirectToExternalApp();
   }
 };
 </script>
@@ -147,7 +156,7 @@ const heroClick = () => {
           />
           <img
             v-else
-            :src="assetsStore.useAsset('images/icons/logo.svg')"
+            :src="assetsStore.useAsset('images/icons/logo.png')"
             alt="logo"
             class="stamus-app-img-box-picture"
           />
@@ -179,10 +188,13 @@ const heroClick = () => {
   </div>
   <BlocksMapper :blocks="blocks" />
   <section class="service-section-block">
-    <DynamicBlockContactForm :block="null"/>
+    <DynamicBlockContactForm :block="null" />
   </section>
   <section class="service-section-block">
-   <DynamicBlockSliderSpecialists v-if="specialistsByPosition?.data?.length" :block="specialists"/>
+    <DynamicBlockSliderSpecialists
+      v-if="specialistsByPosition?.data?.length"
+      :block="specialists"
+    />
   </section>
 </template>
 
