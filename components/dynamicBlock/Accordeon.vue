@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps(["block", 'isOpened', 'openingIcon', 'closingIcon']);
+const props = defineProps(["block", "isOpened", "openingIcon", "closingIcon"]);
 const { block, isOpened, openingIcon, closingIcon } = props;
 const openItem = ref(isOpened);
 const shouldMap = !props.block?.content;
@@ -35,12 +35,12 @@ const toggleOpenItem = (itemId) => {
             {{ closingIcon }}
           </div>
           <svg
-              v-else
-              width="44"
-              height="44"
-              viewBox="0 0 44 44"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            v-else
+            width="44"
+            height="44"
+            viewBox="0 0 44 44"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               class="card-img-fill"
@@ -64,12 +64,12 @@ const toggleOpenItem = (itemId) => {
             {{ openingIcon }}
           </div>
           <svg
-              v-else
-              width="44"
-              height="44"
-              viewBox="0 0 44 44"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            v-else
+            width="44"
+            height="44"
+            viewBox="0 0 44 44"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               class="card-img-fill"
@@ -91,7 +91,11 @@ const toggleOpenItem = (itemId) => {
       </div>
 
       <transition name="dop-info">
-        <div class='info-card__slot' v-show="openItem" v-if="Object.keys(slots).length > 0">
+        <div
+          class="info-card__slot"
+          v-show="openItem"
+          v-if="Object.keys(slots).length > 0"
+        >
           <slot name="content" />
         </div>
         <div v-else v-show="openItem" v-html="block.content"></div>
@@ -99,7 +103,7 @@ const toggleOpenItem = (itemId) => {
     </div>
     <div
       v-else
-      v-for="(item) in block.items"
+      v-for="item in block.items"
       :key="item?.id"
       class="info-card"
       :class="{
@@ -260,7 +264,9 @@ const toggleOpenItem = (itemId) => {
   .accordion-content {
     max-height: 0;
     opacity: 0;
-    transition: max-height 0.4s ease-in-out, opacity 0.6s ease-in-out,
+    transition:
+      max-height 0.4s ease-in-out,
+      opacity 0.6s ease-in-out,
       margin-top 0.3s ease-in-out;
   }
   &.open {
@@ -320,7 +326,9 @@ const toggleOpenItem = (itemId) => {
   & .accordion-content {
     max-height: 0;
     opacity: 0;
-    transition: max-height 0.4s ease-in-out, opacity 0.6s ease-in-out,
+    transition:
+      max-height 0.4s ease-in-out,
+      opacity 0.6s ease-in-out,
       margin-top 0.3s ease-in-out;
     /* overflow-y: auto; */
     width: 100%;

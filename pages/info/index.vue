@@ -16,7 +16,7 @@
       },
     ]"
   />
-  <div class="info">
+  <div class="info info-banner">
     <DynamicBlockBanner
       :block="{
         banner: [
@@ -136,6 +136,10 @@ useHead({
   width: 1280px;
   max-width: 100%;
   margin: 0 auto 100px;
+}
+
+.info-banner {
+  margin-bottom: 40px;
 }
 
 .info-title {
