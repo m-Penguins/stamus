@@ -12,20 +12,20 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
       <div class="solution-block-container">
         <div class="solution-block-container__img">
           <NuxtImg
-              v-if="block.image?.data?.attributes?.url"
-              :src="block.image?.data?.attributes?.url"
-              provider="strapi"
-              :alt="block.image?.data?.attributes?.alternativeText ?? 'image'"
-              sizes="xs:400px md:600px"
-              format="webp"
-              class="banner-img"
+            v-if="block.image?.data?.attributes?.url"
+            :src="block.image?.data?.attributes?.url"
+            provider="strapi"
+            :alt="block.image?.data?.attributes?.alternativeText ?? 'image'"
+            sizes="xs:400px md:600px"
+            format="webp"
+            class="banner-img"
           />
         </div>
         <div class="solution-block-container__text">
           <elements-solution-card
-              v-for="card in block.content"
-              :key="card.id"
-              :card="card"
+            v-for="card in block.content"
+            :key="card.id"
+            :card="card"
           />
         </div>
       </div>
@@ -86,6 +86,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 
   &__text {
     width: 67%;
+    overflow-y: scroll;
   }
 }
 
