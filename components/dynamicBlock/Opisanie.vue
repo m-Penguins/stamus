@@ -454,11 +454,11 @@ onUnmounted(() => {
 
 .problems__image {
   border-radius: 15px;
-  height: 100%;
   width: 100%;
   max-width: 100%;
   pointer-events: none;
-
+  height: 348px;
+  object-fit: cover;
   & :deep(iframe) {
     width: 100%;
     height: 100%;
