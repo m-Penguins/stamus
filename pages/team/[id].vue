@@ -76,42 +76,6 @@ const specialists = {
     data: specialistsByPosition?.value?.data,
   },
 };
-<<<<<<< HEAD
-// console.log(specialists);
-
-const medicalPhysicianData = {
-  "@context": "https://schema.org",
-  "@type": "Physician",
-  name:
-    specialist?.value?.data?.attributes?.lastName +
-    " " +
-    specialist?.value?.data?.attributes?.firstName,
-  url: `${baseUrl}${route.fullPath}`,
-  description: specialist?.data?.attributes?.description ?? "",
-  medicalSpecialty: "Pediatric Dentistry",
-  affiliation: {
-    "@type": "MedicalOrganization",
-    name: "Стамус",
-    url: "https://stamus.ru/",
-  },
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: "+7-861-205-92-38",
-    contactType: "customer service",
-    availableLanguage: ["Russian"],
-  },
-};
-
-useHead({
-  script: [
-    {
-      type: "application/ld+json",
-      children: medicalPhysicianData,
-    },
-  ],
-});
-=======
->>>>>>> 06a4353 (#1370)
 
 const heroClick = () => {
   if (specialist?.value?.data?.attributes?.bookingLink) {
