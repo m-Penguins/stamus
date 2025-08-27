@@ -9,7 +9,7 @@ Disallow: /wp-admin/
 Disallow: */admin
 Disallow: /*%
 Disallow: *.html
-Clean-param: p&yandex-source&from&utm&clckid&clid&text&yclid&?block&ctime&?position&erid&gclid&ref&term&utm_source&utm_campaign&utm_medium&utm_content&etext&hhtmFrom
+Clean-param: p&yandex-source&from&utm&clckid&clid&text&yclid&block&ctime&position&erid&gclid&ref&term&utm_source&utm_campaign&utm_medium&utm_content&etext&hhtmFrom
 
 
 User-agent: Googlebot
