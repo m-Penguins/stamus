@@ -10,7 +10,7 @@
               :settings="{
                 location: {
                   center: [38.982473, 45.081031],
-                  zoom: 11.09,
+                  zoom: 12,
                   duration: 1000,
                 },
               }"
@@ -115,7 +115,7 @@ const tabs = baseDataStore.clinics?.data
 .map-container {
   background-color: #f0f0f0;
   width: 100%;
-  height: 500px;
+  height: 650px;
 }
 .ymap-container {
   height: 100%;
@@ -189,7 +189,7 @@ const tabs = baseDataStore.clinics?.data
   background-position: center;
   background-size: cover;
   max-width: 1280px;
-  height: 500px;
+  height: 650px;
   border-radius: 20px;
   position: relative;
 }
