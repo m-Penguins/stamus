@@ -3,18 +3,16 @@
     <button class="link" @click="store.openModal">
       <div class="service-card">
         <div class="service-card-container">
-          <div class="grey-point-container">
+          <div
+            class="service-card-category grey-point-container"
+            v-for="(item, index) in service?.tags?.split(' | ')"
+            :key="item"
+          >
+            <p class="grey-point-text">{{ item }}</p>
             <div
-              class="service-card-category grey-point-container"
-              v-for="(item, index) in service?.tags?.split(' | ')"
-              :key="item"
-            >
-              <p class="grey-point-text">{{ item }}</p>
-              <div
-                class="grey-point"
-                v-if="index < service?.tags?.split(' | ')?.length - 1"
-              ></div>
-            </div>
+              class="grey-point"
+              v-if="index < service?.tags?.split(' | ')?.length - 1"
+            ></div>
           </div>
           <div class="service-card-title">{{ service?.heading }}</div>
         </div>
