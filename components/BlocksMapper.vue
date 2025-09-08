@@ -21,6 +21,6 @@ defineProps(["blocks", "serviceId", "blockServices", "blockSpecialists"]);
   max-width: 1280px;
   margin: 0 auto;
 
-  margin-bottom: 100px;
+  margin-bottom: 32px;
 }
 </style>

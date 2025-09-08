@@ -250,12 +250,13 @@ onUnmounted(() => {
     width: 100%;
   }
   .dentistry-container {
-    margin-bottom: 80px;
+    margin-bottom: 32px;
   }
   .mob {
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: flex-start;
+    margin-top: 32px;
   }
 
   .mob {

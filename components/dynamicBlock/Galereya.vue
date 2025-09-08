@@ -4,21 +4,24 @@
 
     <div v-if="arrayImg?.length === 1" class="gallery-two-img-container">
       <template v-for="item in arrayImg" :key="item?.id">
-        <div class="gall-img-solo" @click="handleVideoClick(item?.attributes?.caption)">
+        <div
+          class="gall-img-solo"
+          @click="handleVideoClick(item?.attributes?.caption)"
+        >
           <NuxtImg
-              v-if="item?.attributes?.url"
-              :src="item?.attributes?.url"
-              provider="strapi"
-              :alt="item?.attributes?.alternativeText ?? 'галерея'"
-              sizes="xs:400px sm:600px md:1200px lg:1920px"
-              format="webp"
-              class="gallery-img"
+            v-if="item?.attributes?.url"
+            :src="item?.attributes?.url"
+            provider="strapi"
+            :alt="item?.attributes?.alternativeText ?? 'галерея'"
+            sizes="xs:400px sm:600px md:1200px lg:1920px"
+            format="webp"
+            class="gallery-img"
           />
           <img
-              v-if="item?.attributes?.caption"
-              class="utube"
-              :src="assetsStore.useAsset('images/icons/play.svg')"
-              alt="Play"
+            v-if="item?.attributes?.caption"
+            class="utube"
+            :src="assetsStore.useAsset('images/icons/play.svg')"
+            alt="Play"
           />
         </div>
       </template>
@@ -29,21 +32,24 @@
       class="gallery-two-img-container"
     >
       <template v-for="item in arrayImg" :key="item?.id">
-        <div class="gall-img" @click="handleVideoClick(item?.attributes?.caption)">
+        <div
+          class="gall-img"
+          @click="handleVideoClick(item?.attributes?.caption)"
+        >
           <NuxtImg
-              v-if="item?.attributes?.url"
-              :src="item?.attributes?.url"
-              provider="strapi"
-              :alt="item?.attributes?.alternativeText ?? 'галерея'"
-              sizes="xs:400px md:600px"
-              format="webp"
-              class="gallery-img"
+            v-if="item?.attributes?.url"
+            :src="item?.attributes?.url"
+            provider="strapi"
+            :alt="item?.attributes?.alternativeText ?? 'галерея'"
+            sizes="xs:400px md:600px"
+            format="webp"
+            class="gallery-img"
           />
           <img
-              v-if="item?.attributes?.caption"
-              class="utube"
-              :src="assetsStore.useAsset('images/icons/play.svg')"
-              alt="Play"
+            v-if="item?.attributes?.caption"
+            class="utube"
+            :src="assetsStore.useAsset('images/icons/play.svg')"
+            alt="Play"
           />
         </div>
       </template>
@@ -54,21 +60,24 @@
       class="gallery-three-img-container"
     >
       <template v-for="item in arrayImg" :key="item?.id">
-        <div class="gall-img-three" @click="handleVideoClick(item?.attributes?.caption)">
+        <div
+          class="gall-img-three"
+          @click="handleVideoClick(item?.attributes?.caption)"
+        >
           <NuxtImg
-              v-if="item?.attributes?.url"
-              :src="item?.attributes?.url"
-              provider="strapi"
-              :alt="item?.attributes?.alternativeText ?? 'галерея'"
-              sizes="xs:400px md:600px"
-              format="webp"
-              class="gallery-img"
+            v-if="item?.attributes?.url"
+            :src="item?.attributes?.url"
+            provider="strapi"
+            :alt="item?.attributes?.alternativeText ?? 'галерея'"
+            sizes="xs:400px md:600px"
+            format="webp"
+            class="gallery-img"
           />
           <img
-              v-if="item?.attributes?.caption"
-              class="utube"
-              :src="assetsStore.useAsset('images/icons/play.svg')"
-              alt="Play"
+            v-if="item?.attributes?.caption"
+            class="utube"
+            :src="assetsStore.useAsset('images/icons/play.svg')"
+            alt="Play"
           />
         </div>
       </template>
@@ -76,21 +85,25 @@
 
     <div class="container" v-else-if="arrayImg?.length === 6">
       <template v-for="(item, index) in arrayImg" :key="item?.id">
-        <div class="img-array-6" :class="'img-' + index" @click="handleVideoClick(item?.attributes?.caption)">
+        <div
+          class="img-array-6"
+          :class="'img-' + index"
+          @click="handleVideoClick(item?.attributes?.caption)"
+        >
           <NuxtImg
-              v-if="item?.attributes?.url"
-              :src="item?.attributes?.url"
-              provider="strapi"
-              :alt="item?.attributes?.alternativeText ?? 'галерея'"
-              sizes="xs:400px md:600px"
-              format="webp"
-              class="gallery-img"
+            v-if="item?.attributes?.url"
+            :src="item?.attributes?.url"
+            provider="strapi"
+            :alt="item?.attributes?.alternativeText ?? 'галерея'"
+            sizes="xs:400px md:600px"
+            format="webp"
+            class="gallery-img"
           />
           <img
-              v-if="item?.attributes?.caption"
-              class="utube"
-              :src="assetsStore.useAsset('images/icons/play.svg')"
-              alt="Play"
+            v-if="item?.attributes?.caption"
+            class="utube"
+            :src="assetsStore.useAsset('images/icons/play.svg')"
+            alt="Play"
           />
         </div>
       </template>
@@ -107,10 +120,10 @@ const videoStore = useModalVideoStore();
 
 const handleVideoClick = (link) => {
   if (!link) {
-    return
+    return;
   }
-  videoStore.openModal(link)
-}
+  videoStore.openModal(link);
+};
 </script>
 
 <style scoped lang="scss">
@@ -142,7 +155,6 @@ const handleVideoClick = (link) => {
 }
 .img-array-6 {
   position: relative;
-
 }
 .img-0 {
   grid-area: img-0;
@@ -207,7 +219,8 @@ const handleVideoClick = (link) => {
   }
 }
 
-.img-2, .img-3 {
+.img-2,
+.img-3 {
   img {
     height: 180px !important;
   }
@@ -323,7 +336,7 @@ const handleVideoClick = (link) => {
 
 @media (max-width: 589px) {
   .gallery {
-    margin: 0 auto 80px;
+    margin: 0 auto 32px;
   }
 }
 
