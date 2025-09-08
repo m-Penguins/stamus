@@ -12,10 +12,15 @@ const mappedPriceList = mapPriceList(props?.block?.price_lists?.data);
       <h2 class="popular-service__title">Услуги</h2>
     </div>
     <div v-for="service in mappedPriceList" class="popular-service__list">
-      <dynamic-block-accordeon closingIcon="Показать все цены" openingIcon="Скрыть цены" v-if="props?.block?.is_accordeon" :block="{
-        title: service.title,
-        content: [],
-      }">
+      <dynamic-block-accordeon
+        closingIcon="Показать"
+        openingIcon="Скрыть"
+        v-if="props?.block?.is_accordeon"
+        :block="{
+          title: service.title,
+          content: [],
+        }"
+      >
         <template #content>
           <div v-for="(item, index) in service.services" :key="index">
             <elements-service-card :service="item" />
@@ -26,7 +31,7 @@ const mappedPriceList = mapPriceList(props?.block?.price_lists?.data);
         <elements-service-card :service="item" />
       </div>
     </div>
-    <elements-button-base type link="/prices" title="Все цены" />
+    <elements-button-base type link="/prices" title="Полный прейскурант" />
   </div>
 </template>
 
