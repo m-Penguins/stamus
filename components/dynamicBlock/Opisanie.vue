@@ -346,6 +346,8 @@ onUnmounted(() => {
     margin: 0;
     justify-content: space-between;
     width: 100%;
+    padding-bottom: 30px;
+    position: relative;
   }
   .video-block-contacts {
     padding-bottom: 30px;
@@ -376,14 +378,13 @@ onUnmounted(() => {
 
   .video-block-logo {
     width: 30px;
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 
   .video-block-text {
     padding-bottom: 30px;
-  }
-
-  .video-block-info {
-    width: 90%;
   }
 }
 
@@ -396,6 +397,9 @@ onUnmounted(() => {
   .video-block-text {
     font-size: 16px;
     padding-bottom: 30px;
+    :global(.table) {
+      width: 100% !important;
+    }
   }
 }
 
