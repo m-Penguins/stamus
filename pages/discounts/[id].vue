@@ -64,7 +64,7 @@ const specialists = happyHours?.value?.data?.map((hh) => {
 
   return spec;
 });
-console.log(specialists);
+// console.log(specialists);
 const breadcrumbs = [
   {
     title: "Главная",

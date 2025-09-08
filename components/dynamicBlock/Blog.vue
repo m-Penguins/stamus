@@ -7,7 +7,9 @@ import "swiper/css/navigation";
 
 const props = defineProps(["block"]);
 
-const filteredAtr = props.block.articles?.data.filter(item => item.attributes.publishedAt !== null)
+const filteredAtr = props.block.articles?.data.filter(
+  (item) => item?.attributes?.publishedAt !== null,
+);
 // console.log(filteredAtr)
 
 const prev = ref(null);
@@ -17,10 +19,7 @@ const placeholdersStore = usePlaceholdersStore();
 </script>
 
 <template>
-  <div
-    class="container-size container-article"
-    v-if="filteredAtr.length"
-  >
+  <div class="container-size container-article" v-if="filteredAtr.length">
     <div class="main-events-block">
       <div class="slider-title">
         <div class="slider-title__box">
@@ -54,23 +53,23 @@ const placeholdersStore = usePlaceholdersStore();
               <div class="article-card__box">
                 <NuxtLink :to="`/articles/${article?.id}`">
                   <NuxtImg
-                      v-if="
-                    article?.attributes?.fotoArticles?.data?.attributes?.url ??
-                    placeholdersStore?.imagePlaceholders?.articles
-                  "
-                      :src="
-                    article?.attributes?.fotoArticles?.data?.attributes?.url ??
-                    placeholdersStore?.imagePlaceholders?.articles
-                  "
-                      provider="strapi"
-                      :alt="
-                    article?.attributes?.fotoArticles?.data?.attributes
-                      ?.alternativeText ?? 'Статья'
-                  "
-                      sizes="xs:400px md:600px"
-                      format="webp"
-                      class="article-card__box-img"
-                      loading="lazy"
+                    v-if="
+                      article?.attributes?.fotoArticles?.data?.attributes
+                        ?.url ?? placeholdersStore?.imagePlaceholders?.articles
+                    "
+                    :src="
+                      article?.attributes?.fotoArticles?.data?.attributes
+                        ?.url ?? placeholdersStore?.imagePlaceholders?.articles
+                    "
+                    provider="strapi"
+                    :alt="
+                      article?.attributes?.fotoArticles?.data?.attributes
+                        ?.alternativeText ?? 'Статья'
+                    "
+                    sizes="xs:400px md:600px"
+                    format="webp"
+                    class="article-card__box-img"
+                    loading="lazy"
                   />
                 </NuxtLink>
               </div>

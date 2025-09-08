@@ -111,7 +111,7 @@ export default {
       const observer = new IntersectionObserver(
         ([entry]) => {
           this.isHidden = !entry.isIntersecting;
-          console.log(this.isHidden);
+          // console.log(this.isHidden);
         },
         { threshold: 0 },
       );
@@ -214,7 +214,7 @@ export default {
       { title: "Коллегам", path: "" },
       { title: "Контакты", path: "/contacts" },
     ];
-    console.log("zxc", storeServices.getStateService);
+    // console.log("zxc", storeServices.getStateService);
     return {
       assetsStore,
       navigation,

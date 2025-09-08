@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-defineProps(["error"]);
+const props = defineProps(["error"]);
 
 const goToMainPage = () => clearError({ redirect: "/" });
 
@@ -79,6 +79,33 @@ const [{ data: footerData }] = await Promise.all([
 ]);
 
 baseDataStore.footerData = footerData.value;
+
+const mail = useMail();
+onMounted(async () => {
+  try {
+    console.log(props.error);
+    if (!mail) return;
+
+    const msg = `Время: ${new Date().toISOString()}
+    Путь: ${route.fullPath}
+    Статус: ${props.error.statusCode}
+    Сообщение: ${props.error.message ?? ""}
+    User-Agent: ${process.client ? navigator.userAgent : "server"}
+    Referrer: ${process.client ? document.referrer || "-" : "server"}
+    Stack:
+    ${props.error && props.error.stack ? props.error.stack : "-"}`;
+
+    await mail.send({
+      config: "form",
+      from: "dev@sloy.design",
+      to: "dev@sloy.design",
+      subject: `[ERROR ${props.error.statusCode}] ${route.fullPath}`,
+      text: msg,
+    });
+  } catch (e) {
+    console.error("[error.vue mail failed]", e);
+  }
+});
 </script>
 
 <style lang="scss" scoped>

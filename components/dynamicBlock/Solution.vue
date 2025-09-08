@@ -7,15 +7,15 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
   <div class="solution-block">
     <div>
       <div class="solution-block-box">
-        <h3 class="solution-block-title" v-html="block.title"></h3>
+        <h3 class="solution-block-title" v-html="block?.title"></h3>
       </div>
       <div class="solution-block-container">
         <div class="solution-block-container__img">
           <NuxtImg
-            v-if="block.image?.data?.attributes?.url"
-            :src="block.image?.data?.attributes?.url"
+            v-if="block?.image?.data?.attributes?.url"
+            :src="block?.image?.data?.attributes?.url"
             provider="strapi"
-            :alt="block.image?.data?.attributes?.alternativeText ?? 'image'"
+            :alt="block?.image?.data?.attributes?.alternativeText ?? 'image'"
             sizes="xs:400px md:600px"
             format="webp"
             class="banner-img"
@@ -23,7 +23,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
         </div>
         <div class="solution-block-container__text">
           <elements-solution-card
-            v-for="card in block.content"
+            v-for="card in block?.content"
             :key="card.id"
             :card="card"
           />

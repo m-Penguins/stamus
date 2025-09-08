@@ -6,7 +6,7 @@ const propsType = defineProps({
     required: true,
   },
 });
-console.log(propsType.review);
+// console.log(propsType.review);
 </script>
 
 <template>

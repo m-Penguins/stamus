@@ -26,9 +26,9 @@ const sendData = () => {
     <p class="form-wrapper__text text-gray-opacity p-bt-14 p-t-14">
       Нажимая кнопку отправить, вы соглашаетесь с
       <a
-          :href="`${baseUrl}/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf`"
-          target="_blank"
-      >Политикой обработки персональных данных</a
+        :href="`${baseUrl}/uploads/Polozhenie_o_rabote_s_P_Dn_16153b3659.pdf`"
+        target="_blank"
+        >Политикой обработки персональных данных</a
       >
     </p>
     <div class="form-wrapper__box">
@@ -78,7 +78,6 @@ const sendData = () => {
   }
 
   &__text {
-
     & a {
       color: inherit;
       font-size: inherit;

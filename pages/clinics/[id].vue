@@ -141,7 +141,7 @@ const breadcrumbs = [
 ];
 const metaData = clinicData.value?.data?.attributes?.meta;
 useHead(getMetaObject(metaData, baseUrl));
-console.log(clinicData);
+// console.log(clinicData);
 const medicalPlaceData = {
   "@context": "https://schema.org",
   "@type": "Place",
