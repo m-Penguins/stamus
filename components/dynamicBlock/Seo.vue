@@ -132,7 +132,7 @@ const baseUrl = useRuntimeConfig().public?.baseUrl;
   .seo-block {
     display: flex;
     flex-direction: column;
-    margin-bottom: 80px;
+    margin-bottom: 32px;
 
     .image {
       margin-bottom: 10px;

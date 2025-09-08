@@ -20,8 +20,8 @@
       ></h1>
       <p v-if="isCategory" class="title-text-btn-category">
         <span v-for="(item, index) in category" :key="index">
-          {{ item.attributes.title }}
-          <span v-if="index !== category.length - 1"> | </span>
+          {{ item.attributes.title
+          }}<span v-if="index < category.length - 1">, </span>
         </span>
       </p>
       <p
@@ -148,8 +148,7 @@ const props = defineProps({
 .container-bg {
   background: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 20px 20px 0 20px;
   margin-right: 20px;
   width: fit-content;
   &.no-bg {

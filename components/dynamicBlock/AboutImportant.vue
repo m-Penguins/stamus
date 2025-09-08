@@ -78,7 +78,7 @@ defineProps(["block"]);
 
 @media screen and (max-width: 717px) {
   .about-important {
-    margin: 0 auto 80px auto;
+    margin: 0 auto 32px auto;
   }
 
   .about-important-container {

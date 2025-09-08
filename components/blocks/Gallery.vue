@@ -231,7 +231,7 @@ export default {
 
 @media (max-width: 589px) {
   .gallery {
-    margin: 0 auto 80px;
+    margin: 0 auto 0;
   }
 }
 
