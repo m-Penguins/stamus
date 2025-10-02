@@ -537,10 +537,8 @@ function setIsOpen() {
   }
   .popup,
   .popup-discounts {
-    height: 100%;
-    max-width: none;
+    height: fit-content;
     padding: 16px 31px;
-    border-radius: 0;
     overflow-y: scroll;
     flex-wrap: wrap;
   }

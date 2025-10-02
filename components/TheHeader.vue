@@ -291,6 +291,7 @@ export default {
         />
       </NuxtLink>
     </div>
+    <ElementsEyeBtn />
   </div>
   <header
     :class="showServices || showSearch ? 'showServicesHeader' : ''"
@@ -332,7 +333,6 @@ export default {
             <!--            />-->
           </NuxtLink>
         </div>
-        <ElementsEyeBtn />
         <div class="header-nav">
           <nav>
             <ul class="header-nav-list">
