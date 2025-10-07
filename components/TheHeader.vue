@@ -291,7 +291,9 @@ export default {
         />
       </NuxtLink>
     </div>
-    <ElementsEyeBtn />
+    <div class="header-additional__mobile_eye_btn">
+      <ElementsEyeBtn />
+    </div>
   </div>
   <header
     :class="showServices || showSearch ? 'showServicesHeader' : ''"
@@ -1414,6 +1416,14 @@ export default {
     }
     @media screen and (max-width: 1360px) {
       display: none;
+    }
+  }
+  &__mobile_eye_btn {
+    display: none;
+  }
+  @media screen and (max-width: 1360px) {
+    &__mobile_eye_btn {
+      display: block;
     }
   }
   @media screen and (max-width: 1355px) {
