@@ -16,7 +16,7 @@ function triggerAccessibility() {
       class="button-base specialists-btn-base"
       v-if="!isAccessibilityActive"
     >
-      Настройки для слабовидящих
+      Слабовидящим
     </button>
   </div>
 </template>

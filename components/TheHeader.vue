@@ -4,6 +4,7 @@ import { useAssets } from "../stores/useAsset";
 import ButtonBase from "./elements/Button-base.vue";
 import { useActuveLink } from "../stores/activeLink";
 import ElementsLinkWithArrow from "./elements/ElementsLinkWithArrow.vue";
+// import { ElementsEyeBtn } from "./elements/EyeBtn.vue";
 export default {
   components: { ButtonBase, ElementsLinkWithArrow },
   props: {
@@ -292,6 +293,7 @@ export default {
         />
       </NuxtLink>
     </div>
+    <ElementsEyeBtn />
   </div>
   <header
     :class="showServices || showSearch ? 'showServicesHeader' : ''"

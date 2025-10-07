@@ -347,7 +347,6 @@ useHead(getMetaObject(metaData, baseUrl));
 
   .articles-dital-title {
     font-size: 22px;
-    width: 50%;
   }
   .articles-dital-img {
     width: 50%;
