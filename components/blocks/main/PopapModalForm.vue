@@ -647,7 +647,6 @@ function setIsOpen() {
   .popup-button-box {
     flex-wrap: wrap;
     gap: 14px;
-    position: absolute;
     bottom: 0;
     left: 0;
     padding: 0 16px 16px;
