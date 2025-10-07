@@ -112,7 +112,8 @@ const getPortfoliosData = async () => {
     query: { ...strapiQuery },
   });
 
-  placeholdersStore.portTotalPages = portfoliosData?.value?.meta?.pagination?.pageCount;
+  placeholdersStore.portTotalPages =
+    portfoliosData?.value?.meta?.pagination?.pageCount;
   totalItems.value = portfoliosData?.value?.meta?.pagination?.total ?? 0;
 
   return portfoliosData;
@@ -160,7 +161,6 @@ watch(
     portfoliosData.value = data.value;
   },
 );
-
 
 const breadcrumbs = [
   {
@@ -254,22 +254,24 @@ currentPage.value = parseInt(currentPage.value);
         </div>
       </div>
       <div v-else :style="{ textAlign: 'center' }">Ничего не найдено</div>
-      <vue-awesome-paginate
-        v-model="currentPage"
-        :total-items="totalItems"
-        :items-per-page="pageSize"
-        :max-pages-shown="3"
-        :on-click="handlePageClick"
-        paginate-buttons-class="btn"
-        active-page-class="btn-active"
-        back-button-class="back-btn"
-        next-button-class="next-btn"
-        :show-breakpoint-buttons="true"
-        :hide-prev-next="true"
-        type="link"
-        link-url="/portfolio?page=[page]"
-        class="pagination"
-      />
+      <client-only>
+        <vue-awesome-paginate
+          v-model="currentPage"
+          :total-items="totalItems"
+          :items-per-page="pageSize"
+          :max-pages-shown="3"
+          @click="handlePageClick"
+          paginate-buttons-class="btn"
+          active-page-class="btn-active"
+          back-button-class="back-btn"
+          next-button-class="next-btn"
+          :show-breakpoint-buttons="true"
+          :hide-prev-next="true"
+          type="link"
+          link-url="/portfolio?page=[page]"
+          class="pagination"
+        />
+      </client-only>
       <blocks-gallery :arrayImg="mockGallery" local />
       <blocks-main-form />
     </div>

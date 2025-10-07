@@ -9,7 +9,7 @@ const { data: portfolioData } = await useFetch(
   {
     query: {
       populate:
-        "infoBlockPort.image.*,infoBlockPort.description.*,galery.*,specialists.fotoSpecialist.*,photoBanner.*,solutionImage.*,services.*, meta.metaImage.*,solution.*,napravleniya_uslug_1.*,same_portfolios.photoBanner.*,cardImage.*",
+        "infoBlockPort.image.*,infoBlockPort.description.*,galery.*,specialists.fotoSpecialist.*,photoBanner.*,solutionImage.*,services.*, meta.metaImage.*,solution.*,napravleniya_uslug_1.*,same_portfolios.photoBanner.*,cardImage.*, specialists.speczialnosti.*",
     },
   },
 );
@@ -56,10 +56,11 @@ const bigImgAlt =
 const specialists = portfolioData.value?.data?.attributes?.specialists?.data
   ?.filter((sp) => sp?.attributes?.publishedAt != null)
   ?.map((sp) => {
+    // console.log(sp);
     return {
       id: sp?.id,
       name: `${sp?.attributes?.firstName} ${sp?.attributes?.lastName}`,
-      position: sp?.attributes?.position,
+      position: sp?.attributes?.speczialnosti.data,
       img:
         sp?.attributes?.fotoSpecialist?.data?.attributes?.url ??
         placeholdersStore?.imagePlaceholders?.specialists,

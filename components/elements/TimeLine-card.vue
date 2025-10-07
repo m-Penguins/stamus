@@ -1,12 +1,14 @@
 <template>
   <div class="timeline">
     <div
-        class="timeline-item"
-        v-for="(event, index) in displayedEvents"
-        :key="event?.id"
+      class="timeline-item"
+      v-for="(event, index) in displayedEvents"
+      :key="event?.id"
     >
       <div class="cards">
-        <div class="timeline-date">{{ formatDate(event.years) }}</div>
+        <div class="timeline-date">
+          {{ event.years ? formatDate(event.years) : "" }}
+        </div>
         <div class="timeline-title">{{ event.educationalInstitution }}</div>
       </div>
     </div>
@@ -14,13 +16,35 @@
       <button class="timeline-btn" @click="toggleShowMore">
         {{ showMoreText }}
         <div v-if="!showAll" class="timeline-svg">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M6 8L10 12L14 8" stroke="#7F838C" stroke-linecap="round" stroke-linejoin="round" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+          >
+            <path
+              d="M6 8L10 12L14 8"
+              stroke="#7F838C"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </div>
         <div v-else class="timeline-svg">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M6 12L10 8L14 12" stroke="#232D5B" stroke-linecap="round" stroke-linejoin="round" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+          >
+            <path
+              d="M6 12L10 8L14 12"
+              stroke="#232D5B"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </div>
       </button>
@@ -32,23 +56,27 @@
 const props = defineProps({
   events: Array,
 });
-
+// console.log(props.events);
 const showAll = ref(false);
 const displayedEvents = ref(props.events.slice(0, 4));
 
-const showMoreText = computed(() => (showAll.value ? "Скрыть" : "Показать ещё"));
+const showMoreText = computed(() =>
+  showAll.value ? "Скрыть" : "Показать ещё",
+);
 
 const toggleShowMore = () => {
   showAll.value = !showAll.value;
-  displayedEvents.value = showAll.value ? props.events : props.events.slice(0, 4);
+  displayedEvents.value = showAll.value
+    ? props.events
+    : props.events.slice(0, 4);
 };
 
 const formatDate = (dateString) => {
   if (dateString) {
-    const [year, month, day] = dateString.split('-');
+    const [year, month, day] = dateString?.split("-");
     return `${day}-${month}-${year}`;
   } else {
-    return
+    return;
   }
 };
 </script>

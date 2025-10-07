@@ -25,7 +25,8 @@ const placeholdersStore = usePlaceholdersStore();
 const [{ data: happyHours }, { data: headerData }] = await Promise.all([
   useFetch(`${apiBaseUrl}lucky-times`, {
     query: {
-      populate: "specialist.fotoSpecialist.*,specialist.clinics.*,time.*, specialist.speczialnosti.*",
+      populate:
+        "specialist.fotoSpecialist.*,specialist.clinics.*,time.*,specialist.speczialnosti.*",
     },
   }),
   useFetch(`${apiBaseUrl}happy-hour`, {
@@ -40,30 +41,30 @@ const specialists = happyHours?.value?.data?.map((hh) => {
   const firstName = hh?.attributes?.specialist?.data?.attributes?.firstName;
   const lastname = hh?.attributes?.specialist?.data?.attributes?.lastName;
   const addressData =
-      hh?.attributes?.specialist?.data?.attributes?.clinics?.data?.map(
-          (el) => el?.attributes?.address,
-      );
+    hh?.attributes?.specialist?.data?.attributes?.clinics?.data?.map(
+      (el) => el?.attributes?.address,
+    );
 
   const spec = {
     name: (firstName ?? "") + " " + (lastname ?? ""),
-    position: hh?.attributes?.specialist?.data?.attributes?.position ?? "",
+    speczialnosti:
+      hh?.attributes?.specialist?.data?.attributes?.speczialnosti.data ?? "",
     img:
-        hh?.attributes?.specialist?.data?.attributes?.fotoSpecialist?.data
-            ?.attributes?.url ?? placeholdersStore?.imagePlaceholders?.specialists,
+      hh?.attributes?.specialist?.data?.attributes?.fotoSpecialist?.data
+        ?.attributes?.url ?? placeholdersStore?.imagePlaceholders?.specialists,
     alt: hh?.attributes?.specialist?.data?.attributes?.fotoSpecialist?.data
-        ?.attributes?.alternativeText,
+      ?.attributes?.alternativeText,
     time: hh?.attributes?.time ?? [],
     address: addressData?.length ? `Прием на ${addressData?.join(", ")}` : "",
     description: hh?.attributes?.description ?? "",
     link: hh?.attributes?.link,
     sale: hh?.attributes?.sale,
     id: hh?.attributes?.specialist?.data?.id,
-    speczialnosti: hh?.attributes?.specialist?.data?.attributes?.speczialnosti?.data
   };
 
   return spec;
 });
-
+// console.log(specialists);
 const breadcrumbs = [
   {
     title: "Главная",

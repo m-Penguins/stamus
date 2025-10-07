@@ -11,8 +11,8 @@ const tagFilter = ref(
   Array.isArray(route.query.tag)
     ? route.query.tag
     : route.query.tag
-      ? [route.query.tag]
-      : [],
+    ? [route.query.tag]
+    : [],
 );
 const totalItems = ref(0);
 
@@ -21,6 +21,7 @@ const totalPages = computed(() =>
 );
 
 const handlePageClick = async (page) => {
+  // console.log("handlePageClick", page);
   currentPage.value = page;
   let searchQuery = "";
   if (page != 1) {
@@ -244,7 +245,7 @@ currentPage.value = parseInt(currentPage.value);
         :total-items="totalItems"
         :items-per-page="pageSize"
         :max-pages-shown="3"
-        :on-click="handlePageClick"
+        @click="handlePageClick"
         paginate-buttons-class="btn"
         active-page-class="btn-active"
         back-button-class="back-btn"

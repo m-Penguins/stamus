@@ -32,7 +32,6 @@ const [{ data: clinicsData }, { data: clinicData }] = await Promise.all([
   }),
 ]);
 
-
 if (!clinicsData.value) {
   throw createError({
     statusCode: 404,
@@ -142,6 +141,40 @@ const breadcrumbs = [
 ];
 const metaData = clinicData.value?.data?.attributes?.meta;
 useHead(getMetaObject(metaData, baseUrl));
+// console.log(clinicData);
+const medicalPlaceData = {
+  "@context": "https://schema.org",
+  "@type": "Place",
+  name: title,
+  url: `${baseUrl}${route.fullPath}`,
+  description:
+    "Современная стоматологическая клиника, предоставляющая широкий спектр услуг по лечению и профилактике заболеваний полости рта.",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: address,
+    addressLocality: "Краснодар",
+    addressCountry: "RU",
+    postalCode: clinicData.value?.data?.attributes?.post_code,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: clinicData.value?.data?.attributes?.coordy,
+    longitude: clinicData.value?.data?.attributes?.coordx,
+  },
+  telephone: clinicData.value?.data?.attributes?.phone,
+  openingHours: clinicData.value?.data?.attributes?.working_time,
+  image:
+    clinicData.value?.data?.attributes?.photoBanner?.data?.attributes?.url ??
+    "",
+};
+useHead({
+  script: [
+    {
+      type: "application/ld+json",
+      children: medicalPlaceData,
+    },
+  ],
+});
 </script>
 
 <template>
@@ -192,7 +225,7 @@ useHead(getMetaObject(metaData, baseUrl));
     :handleLinkClick="openBidModal"
   />
   <blocks-main-feedback :reviews="reviews" />
-  <dynamic-block-certificaty v-if="certificates" :block="certificates"/>
+  <dynamic-block-certificaty v-if="certificates" :block="certificates" />
   <blocks-clinics-adress
     v-if="otherClinics"
     text="Другие клиники"

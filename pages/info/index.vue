@@ -82,7 +82,8 @@ const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 
 const { data: infoData } = await useFetch(`${apiBaseUrl}information`, {
   query: {
-    populate: "*,about.*,additional.*,blocks.articles.*",
+    populate:
+      "*,about.*,additional.*,blocks.articles.*,blocks.articles.fotoArticles.*",
   },
 });
 

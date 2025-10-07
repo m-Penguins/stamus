@@ -29,9 +29,10 @@ const { data: serviceData } = await useFetch(`${apiBaseUrl}services`, {
     sort: "specialists.order:asc",
     populate:
       blocksQuey +
-      ",specialists.fotoSpecialist.*,category.napravleniya_uslug_1_col.*",
+      ",specialists.fotoSpecialist.*,category.napravleniya_uslug_1_col.*,specialists.speczialnosti.*",
   },
 });
+// console.log(serviceData);
 
 if (!serviceData?.value?.data?.length) {
   throw createError({
@@ -64,7 +65,10 @@ const mainImg =
 const mainImgAlt = mainInfo?.photoBanner?.data?.attributes?.alternativeText;
 
 const serviceBlocks = mainInfo?.blocks.map((block) => {
-  if (block.__component === "blocks-story.booking-doctor" && block.spec?.data?.attributes) {
+  if (
+    block.__component === "blocks-story.booking-doctor" &&
+    block.spec?.data?.attributes
+  ) {
     return {
       ...block,
       spec: {
@@ -73,11 +77,11 @@ const serviceBlocks = mainInfo?.blocks.map((block) => {
           ...block.spec.data,
           attributes: {
             ...block.spec.data.attributes,
-            uslugi: true
-          }
-        }
-      }
-    }
+            uslugi: true,
+          },
+        },
+      },
+    };
   }
   return block;
 });
@@ -108,6 +112,37 @@ const breadcrumbs = [
 
 const metaData = mainInfo?.meta;
 useHead(getMetaObject(metaData, baseUrl));
+
+const medicalProcedureData = {
+  "@context": "https://schema.org",
+  "@type": "MedicalProcedure",
+  name: mainInfo?.heading,
+  url: `${baseUrl}${route.fullPath}`,
+  description: mainInfo?.description,
+  procedureType: "Surgical",
+  medicalSpecialty: "Dentistry",
+  provider: {
+    "@type": "MedicalOrganization",
+    name: "Сеть стоматологических клиник «Стамус»",
+    url: "https://stamus.ru/",
+    logo: "https://stamus.ru/_nuxt/logo.-lH8lLee.svg",
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+7-861-205-92-38",
+      contactType: "customer service",
+      availableLanguage: ["Russian"],
+    },
+  },
+};
+
+useHead({
+  script: [
+    {
+      type: "application/ld+json",
+      children: medicalProcedureData,
+    },
+  ],
+});
 </script>
 
 <template>

@@ -20,7 +20,7 @@ const toggleOpenItem = (itemId) => {
 
 <template>
   <div class="info">
-    <h3 v-if="shouldMap" class="info-title">{{ block.title }}</h3>
+    <h3 v-if="shouldMap" class="info-title">{{ block?.title }}</h3>
     <div
       v-if="!shouldMap"
       class="info-card"
@@ -29,7 +29,7 @@ const toggleOpenItem = (itemId) => {
       }"
     >
       <div class="info-card__box" @click="toggleOpenItem">
-        <h3 class="accordion-title">{{ block.title }}</h3>
+        <h3 class="accordion-title">{{ block?.title }}</h3>
         <div v-if="!openItem">
           <div v-if="closingIcon">
             {{ closingIcon }}
@@ -98,12 +98,12 @@ const toggleOpenItem = (itemId) => {
         >
           <slot name="content" />
         </div>
-        <div v-else v-show="openItem" v-html="block.content"></div>
+        <div v-else v-show="openItem" v-html="block?.content"></div>
       </transition>
     </div>
     <div
       v-else
-      v-for="item in block.items"
+      v-for="item in block?.items"
       :key="item?.id"
       class="info-card"
       :class="{
@@ -111,7 +111,7 @@ const toggleOpenItem = (itemId) => {
       }"
     >
       <div class="info-card__box" @click="toggleOpenItem(item?.id)">
-        <h3 class="accordion-title">{{ item.title }}</h3>
+        <h3 class="accordion-title">{{ item?.title }}</h3>
         <div v-if="openItem !== item?.id">
           <svg
             width="44"
@@ -264,9 +264,7 @@ const toggleOpenItem = (itemId) => {
   .accordion-content {
     max-height: 0;
     opacity: 0;
-    transition:
-      max-height 0.4s ease-in-out,
-      opacity 0.6s ease-in-out,
+    transition: max-height 0.4s ease-in-out, opacity 0.6s ease-in-out,
       margin-top 0.3s ease-in-out;
   }
   &.open {
@@ -326,9 +324,7 @@ const toggleOpenItem = (itemId) => {
   & .accordion-content {
     max-height: 0;
     opacity: 0;
-    transition:
-      max-height 0.4s ease-in-out,
-      opacity 0.6s ease-in-out,
+    transition: max-height 0.4s ease-in-out, opacity 0.6s ease-in-out,
       margin-top 0.3s ease-in-out;
     /* overflow-y: auto; */
     width: 100%;

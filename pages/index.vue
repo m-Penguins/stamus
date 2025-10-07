@@ -12,7 +12,7 @@ const [{ data: mainData }, { data: directionsData }] = await Promise.all([
   useFetch(`${apiBaseUrl}glavnaya`, {
     query: {
       populate:
-        "two_directions.photoBanner.*,first_banner.banner.image.*,second_banner.banner.image.*,third_banner.banner.image.*,fourth_banner.banner.image.*,meta.metaImage.*,articles.fotoArticles.*,reviews.*,specialists.fotoSpecialist.*,seo_block.image.*,portfolio.*,portfolio.photoBanner.* ",
+        "two_directions.photoBanner.*,first_banner.banner.image.*,second_banner.banner.image.*,third_banner.banner.image.*,fourth_banner.banner.image.*,meta.metaImage.*,articles.fotoArticles.*,reviews.*,specialists.fotoSpecialist.*,seo_block.image.*,portfolio.*,portfolio.photoBanner.*,speczialnosti.* ",
     },
   }),
   useFetch(`${apiBaseUrl}main-derections`, {

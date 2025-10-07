@@ -31,7 +31,7 @@ const allPositions = newPositions.value?.data?.map((el) => ({
 
 if (positionFilter.value) {
   const currentPosition = allPositions?.find(
-      (position) => position.slug === positionFilter.value
+    (position) => position.slug === positionFilter.value,
   );
   if (currentPosition) {
     positionMeta.value = currentPosition.meta;
@@ -39,7 +39,7 @@ if (positionFilter.value) {
 }
 const getSpecialistsData = async () => {
   const positionQ = allPositions?.find(
-      (el) => el?.id === Number(positionFilter.value)
+    (el) => el?.id === Number(positionFilter.value),
   )?.name;
 
   const strapiQuery = {
@@ -49,13 +49,15 @@ const getSpecialistsData = async () => {
     "pagination[page]": currentPage.value,
     "pagination[pageSize]": pageSize.value,
     "filters[clinics][id]": clinicFilter.value,
-    "filters[speczialnosti][slug][$in]": positionFilter.value ? [positionFilter.value] : null,
+    "filters[speczialnosti][slug][$in]": positionFilter.value
+      ? [positionFilter.value]
+      : null,
     "filters[directions][id][$eq]": dirFilter.value,
     "filters[fullName][$contains][0]": searchFilter.value?.toUpperCase(),
     "filters[fullName][$contains][1]": searchFilter.value?.toLowerCase(),
     "filters[fullName][$contains][2]":
-        searchFilter.value?.charAt(0)?.toUpperCase() +
-        searchFilter.value?.slice(1)?.toLowerCase(),
+      searchFilter.value?.charAt(0)?.toUpperCase() +
+      searchFilter.value?.slice(1)?.toLowerCase(),
   };
 
   clearObjectFields(strapiQuery);
@@ -63,7 +65,8 @@ const getSpecialistsData = async () => {
   const { data: specialistsData } = await useFetch(`${apiBaseUrl}specialists`, {
     query: { ...strapiQuery },
   });
-  placeholdersStore.teamTotalPages = specialistsData?.value?.meta?.pagination?.pageCount;
+  placeholdersStore.teamTotalPages =
+    specialistsData?.value?.meta?.pagination?.pageCount;
   totalItems.value = specialistsData?.value?.meta?.pagination?.total ?? 0;
 
   return specialistsData;
@@ -78,37 +81,38 @@ const allClinics = baseDataStore.clinics?.data?.map((cl) => ({
 }));
 
 const allDirections = baseDataStore.directions?.data
-    ?.map((dir) => ({
-      id: dir?.id,
-      name: dir?.attributes?.heading,
-    }))
-    .filter((el) => el.name && el?.id !== 4);
+  ?.map((dir) => ({
+    id: dir?.id,
+    name: dir?.attributes?.heading,
+  }))
+  .filter((el) => el.name && el?.id !== 4);
 
 watch(
-    () => route.query,
-    async () => {
-      const data = await getSpecialistsData();
-      specialists.value = data.value;
-    }
+  () => route.query,
+  async () => {
+    const data = await getSpecialistsData();
+    specialists.value = data.value;
+  },
 );
 
 const totalPages = computed(() =>
-    Math.ceil(specialists.value?.meta?.pagination?.total / pageSize.value)
+  Math.ceil(specialists.value?.meta?.pagination?.total / pageSize.value),
 );
 
 const handlePageClick = async (page) => {
   currentPage.value = page;
-  const searchQuery = page !== 1
+  const searchQuery =
+    page !== 1
       ? {
-        page,
-        dir: dirFilter.value,
-        clinic: clinicFilter.value,
-        search: searchFilter.value,
-        position: positionFilter.value,
-      }
+          page,
+          dir: dirFilter.value,
+          clinic: clinicFilter.value,
+          search: searchFilter.value,
+          position: positionFilter.value,
+        }
       : {
-        position: positionFilter.value
-      };
+          position: positionFilter.value,
+        };
 
   clearObjectFields(searchQuery);
 
@@ -211,7 +215,6 @@ const handleDirChange = async (dir) => {
   });
 };
 
-
 const resetFilter = async () => {
   clinicFilter.value = null;
   dirFilter.value = null;
@@ -235,66 +238,69 @@ const generateMeta = (positionMeta) => ({
   meta: [
     {
       name: "twitter:title",
-      content: positionMeta?.metaTitle || "Врачи стоматологи Стамус в Краснодаре",
+      content:
+        positionMeta?.metaTitle || "Врачи стоматологи Стамус в Краснодаре",
     },
     {
       property: "og:title",
-      content: positionMeta?.metaTitle || "Врачи стоматологи Стамус в Краснодаре",
+      content:
+        positionMeta?.metaTitle || "Врачи стоматологи Стамус в Краснодаре",
     },
     {
       name: "description",
       content:
-          positionMeta?.metaDescription ||
-          "Врачи стоматологи Стамус в Краснодаре: все сотрудники стоматологической клиники.",
+        positionMeta?.metaDescription ||
+        "Врачи стоматологи Стамус в Краснодаре: все сотрудники стоматологической клиники.",
     },
     {
       name: "twitter:description",
       content:
-          positionMeta?.metaDescription ||
-          "Врачи стоматологи Стамус в Краснодаре: все сотрудники стоматологической клиники.",
+        positionMeta?.metaDescription ||
+        "Врачи стоматологи Стамус в Краснодаре: все сотрудники стоматологической клиники.",
     },
     {
       property: "og:description",
       content:
-          positionMeta?.metaDescription ||
-          "Врачи стоматологи Стамус в Краснодаре: все сотрудники стоматологической клиники.",
+        positionMeta?.metaDescription ||
+        "Врачи стоматологи Стамус в Краснодаре: все сотрудники стоматологической клиники.",
     },
   ],
   link: [{ rel: "canonical", href: baseUrl + route.path }],
 });
 
 watch(
-    positionMeta,
-    (newMeta) => {
-      if (newMeta) {
-        useHead(generateMeta(newMeta));
-      }
-    },
-    { immediate: true }
+  positionMeta,
+  (newMeta) => {
+    if (newMeta) {
+      useHead(generateMeta(newMeta));
+    }
+  },
+  { immediate: true },
 );
 
 watch(
-    () => route.query.position,
-    async (newPosition, oldPosition) => {
-      if (newPosition !== oldPosition) {
-        currentPage.value = 1;
-        positionFilter.value = route.query.position
-        const data = await getSpecialistsData();
-        specialists.value = data.value;
-      }
+  () => route.query.position,
+  async (newPosition, oldPosition) => {
+    if (newPosition !== oldPosition) {
+      currentPage.value = 1;
+      positionFilter.value = route.query.position;
+      const data = await getSpecialistsData();
+      specialists.value = data.value;
     }
+  },
 );
 
 useHead(generateMeta(positionMeta.value));
 </script>
-
 
 <template>
   <div class="spicialists-page">
     <div class="spicialists-page-wrap">
       <elements-bread-crumbs :breadcrumbs="breadcrumbs" />
       <h1 class="spicialists-page-title">Наши Врачи</h1>
-      <button @click="resetFilter" class="spicialists-page-reset">Все врачи</button>
+      <button @click="resetFilter" class="spicialists-page-reset">
+        Все врачи
+      </button>
       <div class="specialist-form">
         <div class="specialist-box">
           <!-- <elements-custom-select
@@ -313,12 +319,12 @@ useHead(generateMeta(positionMeta.value));
             :selectedId="clinicFilter"
           />
           <elements-custom-select
-              :options="allPositions"
-              label="Специальность"
-              class="select"
-              @select="handlePositionChange"
-              :selectedId="positionFilter"
-              key-field="slug"
+            :options="allPositions"
+            label="Специальность"
+            class="select"
+            @select="handlePositionChange"
+            :selectedId="positionFilter"
+            key-field="slug"
           />
         </div>
         <div class="specialist-box width-style">
@@ -365,22 +371,24 @@ useHead(generateMeta(positionMeta.value));
         </template>
         <div v-else :style="{ textAlign: 'center' }">Никого не найдено</div>
       </div>
-      <vue-awesome-paginate
-        v-model="currentPage"
-        :total-items="totalItems"
-        :items-per-page="pageSize"
-        :max-pages-shown="3"
-        :on-click="handlePageClick"
-        paginate-buttons-class="btn"
-        active-page-class="btn-active"
-        back-button-class="back-btn"
-        next-button-class="next-btn"
-        :show-breakpoint-buttons="true"
-        :hide-prev-next="true"
-        type="link"
-        link-url="/team?page=[page]"
-        class="pagination"
-      />
+      <client-only>
+        <vue-awesome-paginate
+          v-model="currentPage"
+          :total-items="totalItems"
+          :items-per-page="pageSize"
+          :max-pages-shown="3"
+          @click="handlePageClick"
+          paginate-buttons-class="btn"
+          active-page-class="btn-active"
+          back-button-class="back-btn"
+          next-button-class="next-btn"
+          :show-breakpoint-buttons="true"
+          :hide-prev-next="true"
+          type="link"
+          link-url="/team?page=[page]"
+          class="pagination"
+        />
+      </client-only>
       <blocks-main-popular-services />
       <blocks-main-form />
     </div>
@@ -446,9 +454,8 @@ useHead(generateMeta(positionMeta.value));
 .spicialists-page-title {
   @include body-60-medium;
   color: $dark-blue-subtitle;
-  padding:100px 0 20px;
+  padding: 100px 0 20px;
 }
-
 
 .spicialists-page-reset {
   margin: 0 0 50px 5px;
@@ -457,11 +464,10 @@ useHead(generateMeta(positionMeta.value));
   color: #525660;
   cursor: pointer;
   font-size: 16px;
-  transition: .2s;
+  transition: 0.2s;
   &:hover {
     text-decoration: underline;
   }
-
 }
 
 .specialist-form {

@@ -11,8 +11,8 @@ const nothingFound = ref(false);
 const specialists = ref(null);
 const services = ref(null);
 const articles = ref(null);
-const specialistsMobile = ref(null)
-const isMobile = useMediaQuery('(max-width: 590px)');
+const specialistsMobile = ref(null);
+const isMobile = useMediaQuery("(max-width: 590px)");
 const totalResults = ref(0);
 
 const getServiceLink = (item) => {
@@ -51,7 +51,8 @@ const getSearchData = async () => {
         "filters[$or][42][position][$contains]": capitalSearch,
         "filters[$or][43][position][$contains]": upperSearch,
         "sort[0]": "order:asc",
-        populate: "fotoSpecialist.*,achievements.*,position.*, achievements.icon.*, blocks.item.*,blocks.item.icon.*",
+        populate:
+          "fotoSpecialist.*,achievements.*,position.*, achievements.icon.*, blocks.item.*,blocks.item.icon.*, speczialnosti.*",
       },
     }),
     useFetch(`${apiBaseUrl}services`, {
@@ -78,38 +79,38 @@ const getSearchData = async () => {
     }),
   ]);
 
-  specialists.value = specialistsData?.value?.data?.map((sp) => ({
-    id: sp?.id,
-    name: sp?.attributes?.firstName + " " + sp?.attributes?.lastName,
-    img: sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.thumbnail
-      ?.url
-      ? baseUrl +
-        sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.thumbnail
-          ?.url
-      : baseUrl + placeholdersStore?.imagePlaceholders?.specialists,
-    position: sp?.attributes?.position,
-    achievements: sp?.attributes?.achievements,
-    link: `/team/${sp?.id}`,
-  }));
+  specialists.value = specialistsData?.value?.data?.map(
+    (sp) => (
+      console.log(sp),
+      {
+        id: sp?.id,
+        name: sp?.attributes?.firstName + " " + sp?.attributes?.lastName,
+        img: sp?.attributes?.fotoSpecialist?.data?.attributes?.formats
+          ?.thumbnail?.url
+          ? baseUrl +
+            sp?.attributes?.fotoSpecialist?.data?.attributes?.formats?.thumbnail
+              ?.url
+          : baseUrl + placeholdersStore?.imagePlaceholders?.specialists,
+        position: sp?.attributes?.speczialnosti,
+        achievements: sp?.attributes?.achievements,
+        link: `/team/${sp?.id}`,
+      }
+    ),
+  );
 
   specialistsMobile.value = specialistsData?.value?.data.map((sp) => ({
     id: sp?.id,
-    name:
-        sp?.attributes?.firstName +
-        ' ' +
-        sp?.attributes?.lastName,
+    name: sp?.attributes?.firstName + " " + sp?.attributes?.lastName,
     img:
-        sp?.attributes?.fotoSpecialist?.data?.attributes
-            ?.url ?? placeholdersStore?.imagePlaceholders?.specialists,
-    alt: sp?.attributes?.fotoSpecialist?.data?.attributes
-        ?.alternativeText,
-    position: sp?.attributes?.position,
+      sp?.attributes?.fotoSpecialist?.data?.attributes?.url ??
+      placeholdersStore?.imagePlaceholders?.specialists,
+    alt: sp?.attributes?.fotoSpecialist?.data?.attributes?.alternativeText,
+    position: sp?.attributes?.speczialnosti.data,
     achievements: sp?.attributes?.blocks?.find(
-        (component) =>
-            component.__component === 'blocks-story.achievements',
+      (component) => component.__component === "blocks-story.achievements",
     ),
-  }))
-  console.log(specialistsMobile)
+  }));
+  // console.log(specialistsMobile);
 
   services.value = servicesData?.value?.data?.map((singleService) => ({
     id: singleService?.id,
@@ -182,6 +183,7 @@ useHead({
   ],
   link: [{ rel: "canonical", href: "https://stamus.ru" + route.path }],
 });
+// console.log(specialists.value);
 </script>
 
 <template>
@@ -250,11 +252,15 @@ useHead({
             </div>
           </template>
           <template v-else>
-            <div v-for="item in specialistsMobile" :key="item" class="search-inner">
+            <div
+              v-for="item in specialistsMobile"
+              :key="item"
+              class="search-inner"
+            >
               <elements-name-specialty-photo-card
-                  :is-link="true"
-                  :specialists="item"
-                  :isTooltip="true"
+                :is-link="true"
+                :specialists="item"
+                :isTooltip="true"
               />
             </div>
           </template>

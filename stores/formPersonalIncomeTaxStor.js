@@ -28,13 +28,13 @@ export const useFormStore = defineStore("form-store", () => {
 
   const digitRegex = /^[0-9]+$/;
 
-  function selectOnChange (which, value) {
-    if (which === 'forWho') {
-      whoIsGettingDocument.value = value
-    } else if (which === 'howToGet') {
-      address.value = value
-    } else if (which === 'year'){
-      selectedYear.value = value
+  function selectOnChange(which, value) {
+    if (which === "forWho") {
+      whoIsGettingDocument.value = value;
+    } else if (which === "howToGet") {
+      address.value = value;
+    } else if (which === "year") {
+      selectedYear.value = value;
     }
   }
 
@@ -44,8 +44,8 @@ export const useFormStore = defineStore("form-store", () => {
 
   const isDigitValidInfo = computed(() => {
     return (
-       !startValidation.value ||
-       (digitRegex.test(digitField.value) && digitField.value.length >= 10)
+      !startValidation.value ||
+      (digitRegex.test(digitField.value) && digitField.value.length >= 10)
     );
   });
 
@@ -83,23 +83,26 @@ export const useFormStore = defineStore("form-store", () => {
 
   const isPatientINNValid = computed(() => {
     return (
-       !startValidation.value ||
-       (digitRegex.test(patientINN.value) && patientINN.value.length >= 10)
+      !startValidation.value ||
+      (digitRegex.test(patientINN.value) && patientINN.value.length >= 10)
     );
   });
 
   const isSubmitActivePersonalIncomeTax = computed(() => {
     return (
-       getterNameField.value.length > 0 &&
-       phoneField.value.length > 0 &&
-       digitField.value.length > 0 &&
-       patientNameField.value.length > 0 &&
-       birthDate.value &&
-       dateOfIssue.value &&
-       passportSeries.value.length > 0 &&
-       patientBirthDate.value &&
-       patientPassportSeries.value.length > 0 &&
-       patientDateOfIssue.value && selectedYear.value && address.value && whoIsGettingDocument.value
+      getterNameField.value.length > 0 &&
+      phoneField.value.length > 0 &&
+      digitField.value.length > 0 &&
+      patientNameField.value.length > 0 &&
+      birthDate.value &&
+      dateOfIssue.value &&
+      passportSeries.value.length > 0 &&
+      patientBirthDate.value &&
+      patientPassportSeries.value.length > 0 &&
+      patientDateOfIssue.value &&
+      selectedYear.value &&
+      address.value &&
+      whoIsGettingDocument.value
     );
   });
 
@@ -133,13 +136,13 @@ export const useFormStore = defineStore("form-store", () => {
   async function submitModal() {
     startValidation.value = true;
     if (
-       isSubmitActivePersonalIncomeTax.value &&
-       isPhoneValidInfo.value &&
-       isDigitValidInfo.value &&
-       isNamePatientFieldValid.value &&
-       isNameInfoValid.value &&
-       isDateBirthValidInfo.value &&
-       isDateOfIssueValidInfo.value
+      isSubmitActivePersonalIncomeTax.value &&
+      isPhoneValidInfo.value &&
+      isDigitValidInfo.value &&
+      isNamePatientFieldValid.value &&
+      isNameInfoValid.value &&
+      isDateBirthValidInfo.value &&
+      isDateOfIssueValidInfo.value
     ) {
       isLoading.value = true;
 
@@ -160,10 +163,10 @@ export const useFormStore = defineStore("form-store", () => {
         `Для кого получает справку: ${whoIsGettingDocument.value}`,
         `Как хочет получить справку: ${address.value}`,
       ]
-         .filter(Boolean)
-         .join("\n");
+        .filter(Boolean)
+        .join("\n");
 
-      console.log(msg)
+      console.log(msg);
 
       try {
         await mail.send({
@@ -174,7 +177,7 @@ export const useFormStore = defineStore("form-store", () => {
         });
 
         resetForm();
-        modalStore.openModalApplicationAccepted()
+        modalStore.openModalApplicationAccepted();
         isSuccess.value = true;
       } catch (error) {
         isError.value = true;
@@ -219,6 +222,6 @@ export const useFormStore = defineStore("form-store", () => {
     isLoading,
     isError,
     isSuccess,
-    selectOnChange
+    selectOnChange,
   };
 });

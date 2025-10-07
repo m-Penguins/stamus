@@ -23,10 +23,18 @@ function triggerAccessibility() {
 
 <style scoped lang="scss">
 .visually-button {
+  display: none;
   @media (max-width: 1360px) {
-    .specialists-btn-base {
-      max-height: 60px;
-      padding: 4px 16px;
+    /* right: 50%; */
+    /* transform: translateX(50%); */
+    display: block;
+    /* position: fixed; */
+    /* z-index: 99999; */
+    bottom: 15px;
+    font-size: 14px;
+    & button {
+      font-size: 12px;
+      padding: 5px 10px;
     }
   }
 }

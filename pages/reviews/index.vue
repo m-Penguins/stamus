@@ -94,7 +94,8 @@ const getReviewsData = async () => {
       ...strapiQuery,
     },
   });
-  baseDataStore.reviTotalPages = reviewsData?.value?.meta?.pagination?.pageCount;
+  baseDataStore.reviTotalPages =
+    reviewsData?.value?.meta?.pagination?.pageCount;
   totalItems.value = reviewsData?.value?.meta?.pagination?.total ?? 0;
 
   return reviewsData;
@@ -108,7 +109,6 @@ const [{ data: specialistsData }, reviewsData] = await Promise.all([
   }),
   getReviewsData(),
 ]);
-
 
 const servicesData = baseDataStore.allServices;
 
@@ -225,22 +225,24 @@ currentPage.value = parseInt(currentPage.value);
       </div>
     </template>
     <div v-else :style="{ textAlign: 'center' }">Ничего не найдено</div>
-    <vue-awesome-paginate
-      v-model="currentPage"
-      :total-items="totalItems"
-      :items-per-page="pageSize"
-      :max-pages-shown="3"
-      :on-click="handlePageClick"
-      paginate-buttons-class="btn"
-      active-page-class="btn-active"
-      back-button-class="back-btn"
-      next-button-class="next-btn"
-      :show-breakpoint-buttons="true"
-      :hide-prev-next="true"
-      type="link"
-      link-url="/reviews?page=[page]"
-      class="pagination"
-    />
+    <client-only>
+      <vue-awesome-paginate
+        v-model="currentPage"
+        :total-items="totalItems"
+        :items-per-page="pageSize"
+        :max-pages-shown="3"
+        @click="handlePageClick"
+        paginate-buttons-class="btn"
+        active-page-class="btn-active"
+        back-button-class="back-btn"
+        next-button-class="next-btn"
+        :show-breakpoint-buttons="true"
+        :hide-prev-next="true"
+        type="link"
+        link-url="/reviews?page=[page]"
+        class="pagination"
+      />
+    </client-only>
 
     <blocks-main-form />
   </div>

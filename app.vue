@@ -1,5 +1,6 @@
 <template>
   <div class="wrap">
+    <Schema />
     <TheHeader
       :showMenuPatients="showMenuPatients"
       :showMenuDoctors="showMenuDoctors"

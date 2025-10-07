@@ -131,6 +131,7 @@ onUnmounted(() => {
 
 .mob {
   display: none;
+  padding-top: 60px;
 }
 
 .elements-analitic-card-mob {

@@ -2,32 +2,43 @@
   <transition name="modal">
     <div
       v-if="
-        store.isModalOpen || store.isModalOpenDiscounts || store.isModalOpenBid || store.isModalOpenApplicationAccepted || store.isModalCommunicationInterruptions
+        store.isModalOpen ||
+        store.isModalOpenDiscounts ||
+        store.isModalOpenBid ||
+        store.isModalOpenApplicationAccepted ||
+        store.isModalCommunicationInterruptions
       "
       @click="store.closeModal"
       class="popup-wrap"
       @keydown="handleEscapePress"
     >
       <div
-        :class="[store.isModalOpenDiscounts ? 'popup-discounts' : (store.isModalOpenApplicationAccepted || store.isModalCommunicationInterruptions) ? 'popup-alert' : 'popup']"
+        :class="[
+          store.isModalOpenDiscounts
+            ? 'popup-discounts'
+            : store.isModalOpenApplicationAccepted ||
+              store.isModalCommunicationInterruptions
+            ? 'popup-alert'
+            : 'popup',
+        ]"
         @click.stop
       >
         <div class="popup-close">
           <svg
-              @click="store.closeModal"
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            @click="store.closeModal"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <rect width="20" height="20" rx="2" fill="#FBFBFB" />
             <path
-                d="M6 6L14 14M14 6L6 14"
-                class="close-reg"
-                stroke="#33383A"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+              d="M6 6L14 14M14 6L6 14"
+              class="close-reg"
+              stroke="#33383A"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             />
           </svg>
         </div>
@@ -154,14 +165,20 @@
           </div>
         </div>
         <!-- Заявка принята -->
-        <div v-else-if="store.isModalOpenApplicationAccepted" class="popup-applications-accept">
+        <div
+          v-else-if="store.isModalOpenApplicationAccepted"
+          class="popup-applications-accept"
+        >
           <div class="popup-title">
             <p>Ваша заявка принята.</p>
             <p>По готовности с вами свяжется администратор</p>
           </div>
         </div>
         <!-- перебои в работе связи-->
-        <div v-else-if="store.isModalCommunicationInterruptions" class="popup-applications-accept popup-communication" >
+        <div
+          v-else-if="store.isModalCommunicationInterruptions"
+          class="popup-applications-accept popup-communication"
+        >
           <div class="popup-title">
             <p>Из-за перебоев в работе связи просим писать в мессенджеры.</p>
             <p>Звонки могут не проходить на нашу линию.</p>
@@ -172,13 +189,13 @@
           <div class="popup-title">Перезвоните мне</div>
           <div class="popup-inner">
             <div class="popup-input">
-<!--              <elements-input-base-->
-<!--                tag-type="input"-->
-<!--                label="Введите имя"-->
-<!--                class="popup-form-input"-->
-<!--                v-model="store.nameField"-->
-<!--                :error-message="store.isNameValid ? '' : '*Минимум 2 символа'"-->
-<!--              />-->
+              <!--              <elements-input-base-->
+              <!--                tag-type="input"-->
+              <!--                label="Введите имя"-->
+              <!--                class="popup-form-input"-->
+              <!--                v-model="store.nameField"-->
+              <!--                :error-message="store.isNameValid ? '' : '*Минимум 2 символа'"-->
+              <!--              />-->
               <elements-input-base
                 tag-type="phoneMask"
                 label="Укажите номер телефона"
@@ -187,24 +204,24 @@
                 :error-message="store.isPhoneValid ? '' : '*Неверный формат'"
               />
             </div>
-<!--            <elements-select-->
-<!--              :options="dynamicClinics"-->
-<!--              :default="'Выберите клинику'"-->
-<!--              class="select"-->
-<!--              :dopText="true"-->
-<!--              @input="(v) => (store.clinicSelect = v)"-->
-<!--            />-->
-<!--            &lt;!&ndash; <elements-textarea-->
-<!--              placeholder="Опишите проблему"-->
-<!--              class="popup-textarea"-->
-<!--            /> &ndash;&gt;-->
-<!--            <elements-input-base-->
-<!--              tag-type="textarea"-->
-<!--              placeholder="Опишите проблему"-->
-<!--              class="popup-form-input"-->
-<!--              v-model="store.commentField"-->
-<!--              dopText="Не обязательно для заполнения"-->
-<!--            />-->
+            <!--            <elements-select-->
+            <!--              :options="dynamicClinics"-->
+            <!--              :default="'Выберите клинику'"-->
+            <!--              class="select"-->
+            <!--              :dopText="true"-->
+            <!--              @input="(v) => (store.clinicSelect = v)"-->
+            <!--            />-->
+            <!--            &lt;!&ndash; <elements-textarea-->
+            <!--              placeholder="Опишите проблему"-->
+            <!--              class="popup-textarea"-->
+            <!--            /> &ndash;&gt;-->
+            <!--            <elements-input-base-->
+            <!--              tag-type="textarea"-->
+            <!--              placeholder="Опишите проблему"-->
+            <!--              class="popup-form-input"-->
+            <!--              v-model="store.commentField"-->
+            <!--              dopText="Не обязательно для заполнения"-->
+            <!--            />-->
             <!-- <p>Не обязательно для заполнения</p> -->
           </div>
           <div
@@ -217,7 +234,7 @@
             <div class="popup-text">
               Нажимая кнопку отправить, вы соглашаетесь с
               <a class="popup-text-link" :href="privacyLink" target="_blank"
-              >Политикой обработки персональных данных</a
+                >Политикой обработки персональных данных</a
               >
             </div>
             <elements-button-base
@@ -289,7 +306,7 @@ const store = useModalStore();
 
 const sendData = () => {
   if (window.ym) {
-    window.ym(49742548, "reachGoal", 'popup-form-send');
+    window.ym(49742548, "reachGoal", "popup-form-send");
   }
   store.submitModal();
 };
@@ -393,7 +410,7 @@ function setIsOpen() {
   padding: 20px;
 }
 
-.popup-applications-accept{
+.popup-applications-accept {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -538,7 +555,9 @@ function setIsOpen() {
   .popup,
   .popup-discounts {
     height: fit-content;
+    /* max-width: none; */
     padding: 16px 31px;
+    /* border-radius: 0; */
     overflow-y: scroll;
     flex-wrap: wrap;
   }
@@ -628,6 +647,7 @@ function setIsOpen() {
   .popup-button-box {
     flex-wrap: wrap;
     gap: 14px;
+    position: absolute;
     bottom: 0;
     left: 0;
     padding: 0 16px 16px;

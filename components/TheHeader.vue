@@ -4,6 +4,7 @@ import { useAssets } from "../stores/useAsset";
 import ButtonBase from "./elements/Button-base.vue";
 import { useActuveLink } from "../stores/activeLink";
 import ElementsLinkWithArrow from "./elements/ElementsLinkWithArrow.vue";
+// import { ElementsEyeBtn } from "./elements/EyeBtn.vue";
 export default {
   components: { ButtonBase, ElementsLinkWithArrow },
   props: {
@@ -111,7 +112,7 @@ export default {
       const observer = new IntersectionObserver(
         ([entry]) => {
           this.isHidden = !entry.isIntersecting;
-          console.log(this.isHidden);
+          // console.log(this.isHidden);
         },
         { threshold: 0 },
       );
@@ -214,6 +215,7 @@ export default {
       { title: "Коллегам", path: "" },
       { title: "Контакты", path: "/contacts" },
     ];
+    // console.log("zxc", storeServices.getStateService);
     return {
       assetsStore,
       navigation,
@@ -291,9 +293,7 @@ export default {
         />
       </NuxtLink>
     </div>
-    <div class="header-additional__mobile_eye_btn">
-      <ElementsEyeBtn />
-    </div>
+    <ElementsEyeBtn />
   </div>
   <header
     :class="showServices || showSearch ? 'showServicesHeader' : ''"
@@ -674,6 +674,7 @@ export default {
             />
           </div>
         </div>
+        <elements-EyeBtn />
         <div class="header-menu">
           <div
             class="header-search-img"
@@ -860,11 +861,7 @@ export default {
           <!--            {{ phone }}-->
           <!--          </NuxtLink>-->
           <div
-            :class="
-              showMenuPatients || showMenuColleagues || showMenuDoctors
-                ? 'menu-mob-modal-flex'
-                : 'menu-mob-modal'
-            "
+            :class="showMenuPatients ? 'menu-mob-modal-flex' : 'menu-mob-modal'"
           >
             <li v-for="item in navigation" :key="item.title">
               <NuxtLink
@@ -1045,7 +1042,7 @@ export default {
                   class="menu-mob-first-block"
                 >
                   <div class="menu-patients-container">
-                    <div class="p-bt-14">{{ item.title }}</div>
+                    <div class="p-bt-14 popa">{{ item.title }}</div>
                     <div v-if="item.title === 'Коллегам'" class="arrow-icon">
                       <div
                         @click.stop="
@@ -1418,14 +1415,6 @@ export default {
       display: none;
     }
   }
-  &__mobile_eye_btn {
-    display: none;
-  }
-  @media screen and (max-width: 1360px) {
-    &__mobile_eye_btn {
-      display: block;
-    }
-  }
   @media screen and (max-width: 1355px) {
     top: 0;
     left: 0;
@@ -1447,7 +1436,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  height: 380px;
+  height: 281px;
   flex-wrap: wrap;
   padding: 20px 0 60px;
 }
@@ -1639,15 +1628,6 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
-  .visually-button {
-    display: none;
-  }
-  @media (max-width: 1360px) {
-    .visually-button {
-      display: block;
-    }
-  }
 }
 
 .active-directions {
@@ -1711,6 +1691,7 @@ export default {
     }
   }
   .header-logo {
+    margin-right: 45px;
     display: flex;
     align-items: center;
   }
@@ -1747,9 +1728,7 @@ export default {
     padding: 6px 8px;
     @include body-14-regular;
     color: $gray-text;
-    transition:
-      all 0.3s ease-in-out,
-      opacity 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out, opacity 0.3s ease-in-out;
     cursor: pointer;
 
     img {

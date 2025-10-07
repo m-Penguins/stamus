@@ -109,7 +109,7 @@ const props = defineProps({
   },
 });
 
-console.log(props.category);
+// console.log(props.category);
 </script>
 
 <style scoped lang="scss">
