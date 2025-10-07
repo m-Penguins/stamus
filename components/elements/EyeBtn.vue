@@ -10,10 +10,9 @@ function triggerAccessibility() {
 <template>
   <div class="visually-button">
     <button id="specialButton" style="display: none"></button>
-
     <button
       @click="triggerAccessibility"
-      class="button-base specialists-btn-base"
+      class="button-base"
       v-if="!isAccessibilityActive"
     >
       Слабовидящим
@@ -23,7 +22,10 @@ function triggerAccessibility() {
 
 <style scoped lang="scss">
 .visually-button {
-  display: none;
+  & button {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
   @media (max-width: 1360px) {
     /* right: 50%; */
     /* transform: translateX(50%); */
@@ -32,10 +34,6 @@ function triggerAccessibility() {
     /* z-index: 99999; */
     bottom: 15px;
     font-size: 14px;
-    & button {
-      font-size: 12px;
-      padding: 5px 10px;
-    }
   }
 }
 </style>

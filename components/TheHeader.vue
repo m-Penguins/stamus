@@ -4,7 +4,6 @@ import { useAssets } from "../stores/useAsset";
 import ButtonBase from "./elements/Button-base.vue";
 import { useActuveLink } from "../stores/activeLink";
 import ElementsLinkWithArrow from "./elements/ElementsLinkWithArrow.vue";
-// import { ElementsEyeBtn } from "./elements/EyeBtn.vue";
 export default {
   components: { ButtonBase, ElementsLinkWithArrow },
   props: {
@@ -278,7 +277,6 @@ export default {
       {{ base.footerData.data.attributes.phone }}
     </NuxtLink>
     <div class="header-additional__links">
-      <ElementsEyeBtn />
       <NuxtLink
         v-for="widget in base.footerData?.data?.attributes?.header_widget"
         :to="widget.link"
@@ -292,8 +290,11 @@ export default {
           :alt="widget?.icon?.data?.attributes?.alternativeText ?? 'Icon'"
         />
       </NuxtLink>
+      <ElementsEyeBtn />
     </div>
-    <ElementsEyeBtn />
+    <div class="header-additional__mobile_eye_btn">
+      <ElementsEyeBtn />
+    </div>
   </div>
   <header
     :class="showServices || showSearch ? 'showServicesHeader' : ''"
@@ -674,7 +675,6 @@ export default {
             />
           </div>
         </div>
-        <elements-EyeBtn />
         <div class="header-menu">
           <div
             class="header-search-img"
@@ -861,7 +861,11 @@ export default {
           <!--            {{ phone }}-->
           <!--          </NuxtLink>-->
           <div
-            :class="showMenuPatients ? 'menu-mob-modal-flex' : 'menu-mob-modal'"
+            :class="
+              showMenuPatients || showMenuColleagues || showMenuDoctors
+                ? 'menu-mob-modal-flex'
+                : 'menu-mob-modal'
+            "
           >
             <li v-for="item in navigation" :key="item.title">
               <NuxtLink
@@ -1042,6 +1046,7 @@ export default {
                   class="menu-mob-first-block"
                 >
                   <div class="menu-patients-container">
+                    <div class="p-bt-14">{{ item.title }}</div>
                     <div class="p-bt-14 popa">{{ item.title }}</div>
                     <div v-if="item.title === 'Коллегам'" class="arrow-icon">
                       <div
@@ -1407,12 +1412,21 @@ export default {
   &__links {
     display: flex;
     gap: 5px;
+    align-items: center;
     button {
       font-size: 12px;
       padding: 0 7px;
     }
     @media screen and (max-width: 1360px) {
       display: none;
+    }
+  }
+  &__mobile_eye_btn {
+    display: none;
+  }
+  @media screen and (max-width: 1360px) {
+    &__mobile_eye_btn {
+      display: block;
     }
   }
   @media screen and (max-width: 1355px) {
@@ -1422,7 +1436,6 @@ export default {
     width: 100%;
   }
 }
-
 .menu-mob-modal {
   display: grid;
   grid-gap: 18px;
@@ -1436,7 +1449,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  height: 281px;
+  height: 380px;
   flex-wrap: wrap;
   padding: 20px 0 60px;
 }
@@ -1628,6 +1641,15 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
+  .visually-button {
+    display: none;
+  }
+  @media (max-width: 1360px) {
+    .visually-button {
+      display: block;
+    }
+  }
 }
 
 .active-directions {
@@ -1691,7 +1713,6 @@ export default {
     }
   }
   .header-logo {
-    margin-right: 45px;
     display: flex;
     align-items: center;
   }
@@ -1728,7 +1749,9 @@ export default {
     padding: 6px 8px;
     @include body-14-regular;
     color: $gray-text;
-    transition: all 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    transition:
+      all 0.3s ease-in-out,
+      opacity 0.3s ease-in-out;
     cursor: pointer;
 
     img {
