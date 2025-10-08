@@ -79,7 +79,7 @@ const [{ data: footerData }] = await Promise.all([
 ]);
 
 baseDataStore.footerData = footerData.value;
-
+/*
 const mail = useMail();
 onMounted(async () => {
   try {
@@ -106,6 +106,7 @@ onMounted(async () => {
     console.error("[error.vue mail failed]", e);
   }
 });
+*/
 </script>
 
 <style lang="scss" scoped>
