@@ -120,7 +120,7 @@ onMounted(() => {
 // });
 useHead({
   script: [
-    { src: "https://vk.com/js/api/videoplayer.js", async: true, defer: true },
+    { src: "https://vk.com/js/api/videoplayer.js", async: true },
     {
       innerHTML: `
         (function(m, e, t, r, i, k, a) {

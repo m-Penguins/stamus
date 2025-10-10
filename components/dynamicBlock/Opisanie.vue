@@ -55,7 +55,7 @@ const handleIntersection = (entries) => {
   });
 };
 
-onMounted(() => {
+onMounted( async () => {
   if (videoLink) {
     const observer = new IntersectionObserver(handleIntersection, {
       threshold: 0.5,
@@ -67,7 +67,7 @@ onMounted(() => {
     const iframe = videoContainer.value?.querySelector("iframe");
     if (iframe) {
       vk.value = window.VK;
-      const player = vk.value.VideoPlayer(iframe);
+      const player = await await vk.value?.VideoPlayer?.(iframe);
       player.mute();
     }
     document.head.appendChild(script);

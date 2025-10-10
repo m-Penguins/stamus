@@ -294,6 +294,7 @@ export default defineNuxtConfig({
           { name: "review", to: process.env.MAIL_TO_REVIEW },
           { name: "vacancy", to: process.env.MAIL_TO_VACANCY },
           { name: "course", to: "stamus.ed@yandex.ru" },
+          { name: "dev", to: "dev@sloy.design"}
         ],
         smtp: {
           host: "smtp.yandex.ru",
