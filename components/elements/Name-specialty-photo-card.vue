@@ -29,7 +29,7 @@
         <div>
           <div class="card-photo-name-title">{{ specialists?.name ?? "" }}</div>
           <div class="card-photo-name-text">
-            <p v-for="spec in specialists.speczialnosti">
+            <p v-for="spec in specialists.position">
               {{ spec?.attributes.title }}
             </p>
           </div>
@@ -112,7 +112,7 @@ const props = defineProps([
   "handleLinkClick",
   "sale",
 ]);
-// console.log(props.specialists);
+console.log(props.specialists);
 const baseUrl = useRuntimeConfig().public.baseUrl;
 </script>
 
