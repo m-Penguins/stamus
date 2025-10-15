@@ -29,7 +29,7 @@
         <div>
           <div class="card-photo-name-title">{{ specialists?.name ?? "" }}</div>
           <div class="card-photo-name-text">
-            <p v-for="spec in specialists.position">
+            <p v-for="spec in specialists.position ? specialists.position : specialists.speczialnosti" :key="spec.id">
               {{ spec?.attributes.title }}
             </p>
           </div>
