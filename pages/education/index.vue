@@ -1,8 +1,8 @@
 <template>
   <div class="vacancy-page">
     <DynamicBlockHero
-        title="Учебный центр"
-        text="Небольшое описание в несколько строчек"
+        :title="mainInfo.title"
+        :text="mainInfo.description"
         :imgBg="mainImg"
         :imgAlt="mainImgAlt"
         :breadcrumbs="breadcrumbs"
@@ -100,7 +100,7 @@ const mainImg =
     placeholdersStore?.imagePlaceholders?.services;
 const mainImgAlt = mainInfo?.image?.data?.attributes?.alternativeText;
 const descriptionBlock = mainInfo.about
-
+console.log(mainInfo)
 const getCourses = async () => {
   const strapiQuery = {
       populate: blocksQuey,
