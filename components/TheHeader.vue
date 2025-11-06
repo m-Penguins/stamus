@@ -1391,6 +1391,9 @@ export default {
     display: flex;
     align-items: center;
     @include body-12-bold;
+    @media screen and (max-width: 777px) {
+      @include body-10-bold;
+    }
   }
   &__time {
     @include body-12-regular;

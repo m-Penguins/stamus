@@ -83,7 +83,7 @@
       </template>
     </div>
 
-    <div class="container" v-else-if="arrayImg?.length === 6">
+    <div class="container" v-else-if="arrayImg?.length <= 8">
       <template v-for="(item, index) in arrayImg" :key="item?.id">
         <div
           class="img-array-6"
