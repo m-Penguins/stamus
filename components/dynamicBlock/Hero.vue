@@ -216,10 +216,6 @@ onUnmounted(() => {
   .dentistry-box {
     margin-left: 0;
   }
-
-  .breadcrumbs {
-    margin-top: 165px;
-  }
 }
 
 @media (max-width: 1080px) {

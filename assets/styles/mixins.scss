@@ -8,6 +8,15 @@
   line-height: 16.5px;
 }
 
+@mixin body-10-bold {
+  font-family: Manrope;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16.2px;
+}
+
+
 @mixin body-12-regular {
   font-family: Manrope;
   font-size: 12px;

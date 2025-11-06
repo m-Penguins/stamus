@@ -102,7 +102,7 @@ onBeforeUnmount(() => {
   // width: 100%;
   text-align: left;
   outline: none;
-  height: 27px;
+  max-height: 27px;
 }
 
 .select-box {
@@ -156,7 +156,7 @@ hr {
   user-select: none;
   @include body-14-regular;
   color: $placeholder;
-  height: 57px;
+  max-height: 57px;
   &::before,
   &::after {
     content: "";
@@ -242,6 +242,7 @@ hr {
     text-overflow: ellipsis;
     max-width: 300px;
     margin-right: 15px;
+    font-size: 10px;
   }
 }
 </style>
