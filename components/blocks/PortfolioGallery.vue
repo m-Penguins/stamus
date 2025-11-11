@@ -301,8 +301,8 @@ const closeCert = () => {
 
 .swiper-slide-other {
   margin-bottom: 40px;
-  width: 416px;
-  height: auto;
+  width: 308px;
+  height: 376px;
   max-height: 420px;
 }
 

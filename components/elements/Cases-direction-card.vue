@@ -69,7 +69,7 @@ export default {
   width: 100%;
   object-fit: cover;
   border-radius: 20px;
-  /* height: 308px; */
+  height: 376px;
 
   aspect-ratio: 1;
 
