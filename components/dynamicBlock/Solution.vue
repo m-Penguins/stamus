@@ -62,15 +62,6 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
   max-width: 334px;
   border-radius: 20px;
 
-  aspect-ratio: 1/1;
-
-  @supports not (aspect-ratio: 1/1) {
-    padding-top: 100%;
-    height: 0;
-    position: relative;
-    overflow: hidden;
-  }
-
   & img {
     width: 100%;
 
@@ -96,7 +87,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
   }
 
   .solution-block-container {
-    flex-wrap: wrap;
+    flex-direction: column;
 
     &__text {
       width: 100%;
