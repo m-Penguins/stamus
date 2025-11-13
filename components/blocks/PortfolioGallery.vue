@@ -301,11 +301,10 @@ const closeCert = () => {
 
 .swiper-slide-other {
   margin-bottom: 40px;
-<<<<<<< HEAD
   width: 416px;
   height: auto;
   max-height: 420px;
-=======
+
   width: 308px;
   aspect-ratio: 3 / 4;
 
@@ -315,7 +314,6 @@ const closeCert = () => {
     position: relative;
     overflow: hidden;
   }
->>>>>>> 88b83ed (fixes)
 }
 
 .swiper-popup {

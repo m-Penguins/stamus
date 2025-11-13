@@ -69,13 +69,8 @@ export default {
   width: 100%;
   object-fit: cover;
   border-radius: 20px;
-<<<<<<< HEAD
-  /* height: 308px; */
-
   aspect-ratio: 1;
-=======
   aspect-ratio: 3 / 4;
->>>>>>> 88b83ed (fixes)
 
   @supports not (aspect-ratio: 1/1) {
     padding-top: 100%;
