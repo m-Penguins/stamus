@@ -336,7 +336,11 @@ useHead(getMetaObject(metaData, baseUrl));
     padding-top: 40px;
   }
 }
-
+@media screen and (max-width: 1357px) {
+  .articles-digital-right {
+    display: none;
+  }
+}
 @media (max-width: 900px) {
   .articles-dital-inner {
     flex-direction: row-reverse;
