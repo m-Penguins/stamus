@@ -102,6 +102,7 @@ defineProps(["title", "cards", "image"]);
   }
 
   .solution-block-container__img {
+    max-width: 100%;
     margin: 0 auto;
   }
 }

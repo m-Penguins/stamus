@@ -134,4 +134,10 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .card-photo-name-img {
+    height: 411px;
+  }
+}
 </style>
