@@ -69,7 +69,6 @@ export default {
   width: 100%;
   object-fit: cover;
   border-radius: 20px;
-  aspect-ratio: 1;
   aspect-ratio: 3 / 4;
 
   @supports not (aspect-ratio: 1/1) {
