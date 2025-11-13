@@ -69,9 +69,7 @@ export default {
   width: 100%;
   object-fit: cover;
   border-radius: 20px;
-  height: 376px;
-
-  aspect-ratio: 1;
+  aspect-ratio: 3 / 4;
 
   @supports not (aspect-ratio: 1/1) {
     padding-top: 100%;
@@ -132,12 +130,6 @@ export default {
     .card-photo-name-box-image {
       width: 100%;
     }
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .card-photo-name-img {
-    height: 411px;
   }
 }
 </style>

@@ -302,8 +302,14 @@ const closeCert = () => {
 .swiper-slide-other {
   margin-bottom: 40px;
   width: 308px;
-  height: 376px;
-  max-height: 420px;
+  aspect-ratio: 3 / 4;
+
+  @supports not (aspect-ratio: 1/1) {
+    padding-top: 100%;
+    height: 0;
+    position: relative;
+    overflow: hidden;
+  }
 }
 
 .swiper-popup {
@@ -472,10 +478,6 @@ const closeCert = () => {
   .slider-base-btn {
     padding-bottom: 0;
   }
-
-  .swiper-slide-other {
-    width: 334px !important;
-  }
 }
 
 @media (max-width: 650px) {
@@ -484,9 +486,4 @@ const closeCert = () => {
   }
 }
 
-@media (max-width: 600px) {
-  .swiper-slide-other {
-    width: 330px !important;
-  }
-}
 </style>
