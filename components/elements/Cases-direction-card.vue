@@ -71,7 +71,7 @@ export default {
   border-radius: 20px;
   aspect-ratio: 3 / 4;
 
-  @supports not (aspect-ratio: 1/1) {
+  @supports not (aspect-ratio: 3/4) {
     padding-top: 100%;
     height: 0;
     position: relative;
