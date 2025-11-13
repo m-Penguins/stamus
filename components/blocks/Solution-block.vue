@@ -60,10 +60,9 @@ defineProps(["title", "cards", "image"]);
   width: 100%;
   max-width: 334px;
   border-radius: 20px;
+  aspect-ratio: 3/4;
 
-  aspect-ratio: 1/1;
-
-  @supports not (aspect-ratio: 1/1) {
+  @supports not (aspect-ratio: 3/4) {
     padding-top: 100%;
     height: 0;
     position: relative;
@@ -94,7 +93,7 @@ defineProps(["title", "cards", "image"]);
   }
 
   .solution-block-container {
-    flex-wrap: wrap;
+    flex-direction: column;
 
     &__text {
       width: 100%;
