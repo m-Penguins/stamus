@@ -30,11 +30,12 @@
           <div>
             <elements-title-text-button
               :textButtonBase="textButtonBase || 'Записаться онлайн'"
-              :customClick="redirectToExternalApp"
+              :customClick="customClick || redirectToExternalApp"
               :isButtonBase="isButtonBase"
               :title="title"
               :font-size="true"
               :text="text"
+              style="margin-bottom: 20px"
               :class="isTimeAndPriceCard ? 'main-info-width' : ''"
             />
             <elements-analitic-card
