@@ -130,6 +130,7 @@ const props = defineProps({
 .title-text-btn-container {
   display: flex;
   gap: 20px;
+  margin-top: 20px;
 }
 
 .container {
