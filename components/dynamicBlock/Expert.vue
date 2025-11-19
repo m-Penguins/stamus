@@ -5,7 +5,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 </script>
 
 <template>
-  <div v-if="showBlock" class="expert-wrapper">
+  <div v-if="showBlock && block?.spec?.data?.attributes?.publishedAt" class="expert-wrapper">
     <div class="expert-container">
       <div class="expert-content">
         <h2>
