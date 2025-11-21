@@ -6,7 +6,6 @@ const props = defineProps < { block: any } > ();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const videoStore = useModalVideoStore();
 
-// Готовим HTML с iframe и нужными параметрами один раз
 const rawVideoLink: string = props.block?.videoLink || "";
 let videoLink = "";
 
@@ -14,17 +13,14 @@ if (typeof rawVideoLink === "string" && rawVideoLink.length > 0) {
   videoLink = rawVideoLink.replace(/(src="[^"]+)/, (match) => {
     let m = match;
 
-    // js_api (если нужен)
     if (!m.includes("js_api=1")) {
       m += (m.includes("?") ? "&" : "?") + "js_api=1";
     }
 
-    // autoplay
     if (!m.includes("autoplay=")) {
       m += "&autoplay=1";
     }
 
-    // muted
     if (!m.includes("muted=")) {
       m += "&muted=1";
     }
@@ -62,7 +58,6 @@ onMounted(() => {
   if (!videoLink) return;
   if (typeof window === "undefined") return;
 
-  // Если IntersectionObserver не поддерживается — просто показываем видео
   if (!("IntersectionObserver" in window)) {
     showVideo.value = true;
     return;
