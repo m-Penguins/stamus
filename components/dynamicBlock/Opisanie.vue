@@ -1,81 +1,85 @@
-<script setup>
-const props = defineProps(["block"]);
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from "vue";
 
-const assetsStore = useAssets();
+const props = defineProps < { block: any } > ();
+
 const baseUrl = useRuntimeConfig().public.baseUrl;
-
 const videoStore = useModalVideoStore();
 
-let videoLink = props.block?.videoLink;
-if (typeof videoLink === "string" && videoLink.length > 0) {
-  videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
-    return match.includes("js_api=1") ? match : match + "&js_api=1";
+// Готовим HTML с iframe и нужными параметрами один раз
+const rawVideoLink: string = props.block?.videoLink || "";
+let videoLink = "";
+
+if (typeof rawVideoLink === "string" && rawVideoLink.length > 0) {
+  videoLink = rawVideoLink.replace(/(src="[^"]+)/, (match) => {
+    let m = match;
+
+    // js_api (если нужен)
+    if (!m.includes("js_api=1")) {
+      m += (m.includes("?") ? "&" : "?") + "js_api=1";
+    }
+
+    // autoplay
+    if (!m.includes("autoplay=")) {
+      m += "&autoplay=1";
+    }
+
+    // muted
+    if (!m.includes("muted=")) {
+      m += "&muted=1";
+    }
+
+    return m;
   });
-} else {
-  videoLink = "";
 }
 
-// let videoLink = props.block.videoLink || '';
-// videoLink = videoLink.replace(/(src="[^"]+)/, (match) => {
-//   return match.includes('js_api=1') ? match : match + '&js_api=1';
-// });
-const handleVideoClick = (link) => {
-  videoStore.openModal(link);
+const handleVideoClick = () => {
+  if (videoLink) {
+    videoStore.openModal(videoLink);
+  }
 };
 
-const vk = ref(null);
-
-const videoContainer = ref(null);
+const videoContainer = ref < HTMLElement | null > (null);
 const showVideo = ref(false);
-const handleIntersection = (entries) => {
+
+let observer: IntersectionObserver | null = null;
+
+const handleIntersection = (entries: IntersectionObserverEntry[]) => {
   entries.forEach((entry) => {
-    const iframe = videoContainer.value?.querySelector("iframe");
-    if (iframe) {
-      let src = iframe.getAttribute("src") || "";
+    if (entry.isIntersecting) {
+      showVideo.value = true;
 
-      if (entry.isIntersecting) {
-        if (!src.includes("&autoplay=")) {
-          src += "&autoplay=1";
-        } else {
-          src = src.replace("&autoplay=0", "&autoplay=1");
-        }
-
-        if (!src.includes("&muted=")) {
-          src += "&muted=1";
-        } else {
-          src = src.replace("&muted=0", "&muted=1");
-        }
-        showVideo.value = true;
-      } else {
-        src = src.replace("&autoplay=1", "&autoplay=0");
-        showVideo.value = false;
+      if (observer && videoContainer.value) {
+        observer.unobserve(videoContainer.value);
+        observer.disconnect();
+        observer = null;
       }
-      iframe.setAttribute("src", src);
     }
   });
 };
 
-onMounted( async () => {
-  if (videoLink) {
-    const observer = new IntersectionObserver(handleIntersection, {
-      threshold: 0.5,
-    });
+onMounted(() => {
+  if (!videoLink) return;
+  if (typeof window === "undefined") return;
 
-    if (videoContainer.value) observer.observe(videoContainer.value);
+  // Если IntersectionObserver не поддерживается — просто показываем видео
+  if (!("IntersectionObserver" in window)) {
+    showVideo.value = true;
+    return;
+  }
 
-    const script = document.createElement("script");
-    const iframe = videoContainer.value?.querySelector("iframe");
-    if (iframe) {
-      vk.value = window.VK;
-      const player = await await vk.value?.VideoPlayer?.(iframe);
-      player.mute();
-    }
-    document.head.appendChild(script);
-    // console.log(videoLink);
+  observer = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
+
+  if (videoContainer.value) {
+    observer.observe(videoContainer.value);
   }
 });
+
 onUnmounted(() => {
-  if (videoContainer.value) observer.unobserve(videoContainer.value);
+  if (observer) {
+    observer.disconnect();
+    observer = null;
+  }
 });
 </script>
 
@@ -92,81 +96,43 @@ onUnmounted(() => {
         <img src="@/assets/images/icons/video-logo-block.svg" alt="icon" />
       </div>
     </div>
+
     <div class="video-block-inner" v-if="videoLink">
-      <div
-        v-if="videoLink"
-        class="video-block-rectangle-video"
-        ref="videoContainer"
-        @click="handleVideoClick(videoLink)"
-      >
-        <img
-          v-show="!showVideo"
-          :src="`${baseUrl}${block?.image?.data?.attributes?.url}`"
-          alt="Video"
-          class="problems__image"
-        />
-        <div
-          v-show="showVideo"
-          class="problems__image"
-          v-html="videoLink"
-        ></div>
+      <div class="video-block-rectangle-video" ref="videoContainer" @click="handleVideoClick">
+        <img v-show="!showVideo" :src="`${baseUrl}${block?.image?.data?.attributes?.url}`" alt="Video"
+          class="problems__image" />
+
+        <div v-show="showVideo" class="problems__image" v-html="videoLink"></div>
       </div>
-      <NuxtLink
-        v-if="block?.link"
-        class="video-block-rectangle"
-        target="_blank"
-        :to="block?.link"
-      >
+
+      <NuxtLink v-if="block?.link" class="video-block-rectangle" target="_blank" :to="block?.link">
         <div class="desktop">
-          <svg
-            width="64"
-            height="64"
-            viewBox="0 0 64 64"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M24.5761 38.7168C24.3809 38.912 24.3809 39.2286 24.5761 39.4239C24.7714 39.6191 25.088 39.6191 25.2832 39.4239L24.5761 38.7168ZM39.5718 24.9282C39.5718 24.652 39.348 24.4282 39.0718 24.4282L34.5718 24.4282C34.2957 24.4282 34.0718 24.652 34.0718 24.9282C34.0718 25.2043 34.2957 25.4282 34.5718 25.4282L38.5718 25.4282L38.5718 29.4282C38.5718 29.7043 38.7957 29.9282 39.0718 29.9282C39.348 29.9282 39.5718 29.7043 39.5718 29.4282L39.5718 24.9282ZM25.2832 39.4239L39.4254 25.2817L38.7183 24.5746L24.5761 38.7168L25.2832 39.4239Z"
-              fill="white"
-            />
-            <rect
-              x="1.5948"
-              y="32"
-              width="43"
-              height="43"
-              rx="21.5"
-              transform="rotate(-45 1.5948 32)"
-              stroke="#7F838C"
-            />
+              fill="white" />
+            <rect x="1.5948" y="32" width="43" height="43" rx="21.5" transform="rotate(-45 1.5948 32)"
+              stroke="#7F838C" />
           </svg>
         </div>
+
         <div class="mob">
-          <svg
-            width="44"
-            height="44"
-            viewBox="0 0 44 44"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M12.0005 21.5C11.7243 21.5 11.5005 21.7239 11.5005 22C11.5005 22.2761 11.7243 22.5 12.0005 22.5L12.0005 21.5ZM32.354 22.3536C32.5493 22.1583 32.5493 21.8417 32.354 21.6464L29.1721 18.4645C28.9768 18.2692 28.6602 18.2692 28.465 18.4645C28.2697 18.6597 28.2697 18.9763 28.465 19.1716L31.2934 22L28.465 24.8284C28.2697 25.0237 28.2697 25.3403 28.465 25.5355C28.6602 25.7308 28.9768 25.7308 29.1721 25.5355L32.354 22.3536ZM12.0005 22.5H32.0005L32.0005 21.5H12.0005L12.0005 22.5Z"
-              fill="white"
-            />
-            <rect
-              x="0.500488"
-              y="0.5"
-              width="43"
-              height="43"
-              rx="21.5"
-              stroke="#7F838C"
-            />
+              fill="white" />
+            <rect x="0.500488" y="0.5" width="43" height="43" rx="21.5" stroke="#7F838C" />
           </svg>
         </div>
-        <div class="video-block-feedback">{{ block?.link_text }}</div>
+
+        <div class="video-block-feedback">
+          {{ block?.link_text }}
+        </div>
       </NuxtLink>
     </div>
   </div>
 </template>
+
 
 <style scoped lang="scss">
 @import "/assets/styles/style.scss";

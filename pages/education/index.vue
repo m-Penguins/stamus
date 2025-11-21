@@ -100,7 +100,7 @@ const mainImg =
     placeholdersStore?.imagePlaceholders?.services;
 const mainImgAlt = mainInfo?.image?.data?.attributes?.alternativeText;
 const descriptionBlock = mainInfo.about
-console.log(mainInfo)
+// console.log(mainInfo)
 const getCourses = async () => {
   const strapiQuery = {
       populate: blocksQuey,
