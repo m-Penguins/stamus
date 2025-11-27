@@ -13,12 +13,28 @@ export default {
     };
   },
   mounted() {
-    this.cookieConsentAccepted =
-      localStorage.getItem("cookieConsentAccepted") === "true";
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        this.cookieConsentAccepted =
+          window.localStorage.getItem("cookieConsentAccepted") === "true";
+      } else {
+        this.cookieConsentAccepted = false;
+      }
+    } catch (e) {
+      // In some browsers (or when storage is disabled) accessing localStorage can throw
+      // Fallback to hiding the banner (assume consent not given)
+      this.cookieConsentAccepted = false;
+    }
   },
   methods: {
     acceptCookieConsent() {
-      localStorage.setItem("cookieConsentAccepted", "true");
+      try {
+        if (typeof window !== "undefined" && window.localStorage) {
+          window.localStorage.setItem("cookieConsentAccepted", "true");
+        }
+      } catch (e) {
+        console.error("Could not store cookie consent:", e);
+      }
       this.cookieConsentAccepted = true;
     },
   },
