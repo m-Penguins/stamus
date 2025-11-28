@@ -21,8 +21,6 @@ export default {
         this.cookieConsentAccepted = false;
       }
     } catch (e) {
-      // In some browsers (or when storage is disabled) accessing localStorage can throw
-      // Fallback to hiding the banner (assume consent not given)
       this.cookieConsentAccepted = false;
     }
   },
