@@ -288,7 +288,7 @@ useHead({
           <div class="input-search">
             <elements-input-search-components
               class="input-search"
-              placeholder="Найти"
+              placeholder="Найти врача"
               :modelValue="searchFilter"
               @update:modelValue="handleInputChange"
               @submit="handleInputChange"
